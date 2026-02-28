@@ -7,7 +7,11 @@ import { mapBillingAccount, mapBillingAccounts } from './billing-accounts.mapper
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class BillingAccountService implements BillingAccounts.Service {
+export class BillingAccountService extends BillingAccounts.Service {
+    constructor() {
+        super();
+    }
+
     getBillingAccount(
         params: BillingAccounts.Request.GetBillingAccountParams,
     ): Observable<BillingAccounts.Model.BillingAccount> {

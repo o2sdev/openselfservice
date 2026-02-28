@@ -108,7 +108,7 @@ When a request from the frontend app (no matter whether for a page or a componen
 3. The calls to the integration happen, which can be handled by various packages (either internal ones, or installed as dependencies). Inside such integrations different modules can be created in order to fetch the data from other external APIs.
 
     ```typescript title="fetching ticket list from an external API"
-    export class TicketService implements Tickets.Service {
+    export class TicketService extends Tickets.Service {
         getTicketList(options) {
             const tickets = this.httpClient.get(TICKETS_API_URL, { params: options });
 

@@ -345,7 +345,7 @@ There are too many queries to list here, but you can always take a look at [our 
 Data fetching happens through NestJS, where we've introduced a dedicated service for CMS content that exposes methods for each CMS block:
 
 ```typescript
-export class CmsService implements CMS.Service {
+export class CmsService extends CMS.Service {
     constructor(private readonly graphqlService: GraphqlService) {}
 
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {

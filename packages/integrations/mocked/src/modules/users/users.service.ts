@@ -8,7 +8,11 @@ import { mapUser, mapUsers } from './users.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class UserService implements Users.Service {
+export class UserService extends Users.Service {
+    constructor() {
+        super();
+    }
+
     getCurrentUser(_authentication?: string): Observable<Users.Model.User | undefined> {
         return of(mapUser()).pipe(responseDelay());
     }

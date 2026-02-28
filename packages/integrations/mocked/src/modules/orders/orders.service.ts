@@ -7,8 +7,10 @@ import { mapOrder, mapOrders } from './orders.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class OrdersService implements Orders.Service {
-    constructor(private readonly authService: Auth.Service) {}
+export class OrdersService extends Orders.Service {
+    constructor(private readonly authService: Auth.Service) {
+        super();
+    }
 
     getOrderList(
         query: Orders.Request.GetOrderListQuery,

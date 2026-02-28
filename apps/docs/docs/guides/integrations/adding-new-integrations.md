@@ -55,10 +55,10 @@ export * as Tickets from './tickets';
 
 Within each module you need to create at least three files:
 
-1. A service that implements all required methods, where you will place your logic related to API communication:
+1. A service that extends the module base service and implements all required methods, where you will place your logic related to API communication:
     ```typescript title="./src/modules/notifications/notifications.service.ts"
     @Injectable()
-    export class NotificationsService implements Notifications.Service  {
+    export class NotificationsService extends Notifications.Service  {
         getNotification (options: Notifications.Request.GetNotificationParams) {
             ...
         }
@@ -106,7 +106,7 @@ You can achieve that by following a few steps:
     import { CMS, Cache } from '@o2s/framework/modules';
 
     @Injectable()
-    export class CmsService implements CMS.Service {
+    export class CmsService extends CMS.Service {
         constructor(
             private readonly cacheService: Cache.Service,
         ) {}

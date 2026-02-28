@@ -7,7 +7,11 @@ import { mapTicket, mapTickets } from './tickets.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class TicketService implements Tickets.Service {
+export class TicketService extends Tickets.Service {
+    constructor() {
+        super();
+    }
+
     getTicket(options: Tickets.Request.GetTicketParams) {
         return of(mapTicket(options.id, options.locale)).pipe(responseDelay());
     }

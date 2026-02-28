@@ -13,10 +13,12 @@ import { getMockAddresses } from './mocks/addresses.mock';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class CustomersService implements Customers.Service {
+export class CustomersService extends Customers.Service {
     private addresses: Customers.Model.CustomerAddress[] = [...getMockAddresses()];
 
-    constructor(private readonly authService: Auth.Service) {}
+    constructor(private readonly authService: Auth.Service) {
+        super();
+    }
 
     getAddresses(authorization: string | undefined): Observable<Customers.Model.CustomerAddresses> {
         if (!authorization) {

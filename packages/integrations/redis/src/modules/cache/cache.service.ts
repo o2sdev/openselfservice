@@ -7,7 +7,7 @@ import { LoggerService } from '@o2s/utils.logger';
 import { Cache } from '@o2s/framework/modules';
 
 @Injectable()
-export class RedisCacheService implements Cache.Service {
+export class RedisCacheService extends Cache.Service {
     private readonly isEnabled: boolean = false;
     private readonly expires: number = 300;
     private client!: RedisClientType;
@@ -16,6 +16,7 @@ export class RedisCacheService implements Cache.Service {
         @Inject(LoggerService) private readonly logger: LoggerService,
         private readonly configService: ConfigService,
     ) {
+        super();
         this.isEnabled = this.configService.get('CACHE_ENABLED') === 'true';
         this.expires = this.configService.get('CACHE_TTL') || 300;
 

@@ -9,7 +9,7 @@ import { CMS, Cache } from '@o2s/framework/modules';
 
 import { PageFragment } from '@/generated/strapi';
 
-import { Service as GraphqlService } from '@/modules/graphql';
+import { GraphqlService } from '@/modules/graphql/graphql.service';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
@@ -49,7 +49,7 @@ import { mapPage } from './mappers/cms.page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
 
 @Injectable()
-export class CmsService implements CMS.Service {
+export class CmsService extends CMS.Service {
     baseUrl: string;
 
     constructor(
@@ -57,6 +57,7 @@ export class CmsService implements CMS.Service {
         private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
     ) {
+        super();
         this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
     }
 

@@ -14,7 +14,11 @@ import {
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class ResourcesService implements Resources.Service {
+export class ResourcesService extends Resources.Service {
+    constructor() {
+        super();
+    }
+
     purchaseOrActivateService(_params: Resources.Request.GetServiceParams): Observable<void> {
         throw new Error('Method not implemented.');
     }

@@ -8,8 +8,12 @@ import { createPaymentSession, mapPaymentProviders, mapPaymentSession, updatePay
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class PaymentsService implements Payments.Service {
+export class PaymentsService extends Payments.Service {
     private sessions: Payments.Model.PaymentSession[] = [];
+
+    constructor() {
+        super();
+    }
 
     getProviders(
         params: Payments.Request.GetProvidersParams,

@@ -21,11 +21,13 @@ import {
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class CartsService implements Carts.Service {
+export class CartsService extends Carts.Service {
     constructor(
         private readonly authService: Auth.Service,
         private readonly customersService: Customers.Service,
-    ) {}
+    ) {
+        super();
+    }
 
     getCart(
         params: Carts.Request.GetCartParams,
