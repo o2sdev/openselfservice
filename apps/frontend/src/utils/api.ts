@@ -1,5 +1,7 @@
+import { Models } from '@o2s/utils.api-harmonization';
+
 export const getApiHeaders = () => {
     return {
-        'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+        [Models.Headers.HeaderName.ClientTimezone]: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
 };

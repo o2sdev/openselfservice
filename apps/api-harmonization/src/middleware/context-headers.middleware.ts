@@ -2,6 +2,10 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NextFunction, Request, Response } from 'express';
 
+import { Models } from '@o2s/utils.api-harmonization';
+
+const H = Models.Headers.HeaderName;
+
 @Injectable()
 export class ContextHeadersMiddleware implements NestMiddleware {
     private readonly defaultCurrency: string;
@@ -26,8 +30,8 @@ export class ContextHeadersMiddleware implements NestMiddleware {
     }
 
     use(req: Request, res: Response, next: NextFunction) {
-        const currency = (req.headers['x-currency'] as string) || this.defaultCurrency;
-        const locale = (req.headers['x-locale'] as string) || this.defaultLocale;
+        const currency = (req.headers[H.Currency] as string) || this.defaultCurrency;
+        const locale = (req.headers[H.Locale] as string) || this.defaultLocale;
 
         if (!this.isValidCurrency(currency)) {
             return res.status(400).json({
@@ -43,9 +47,9 @@ export class ContextHeadersMiddleware implements NestMiddleware {
             });
         }
 
-        res.setHeader('Access-Control-Expose-Headers', 'x-currency, x-locale');
-        res.setHeader('x-currency', currency);
-        res.setHeader('x-locale', locale);
+        res.setHeader('Access-Control-Expose-Headers', `${H.Currency}, ${H.Locale}`);
+        res.setHeader(H.Currency, currency);
+        res.setHeader(H.Locale, locale);
 
         next();
     }

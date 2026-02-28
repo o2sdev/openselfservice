@@ -7,12 +7,14 @@ import { Models } from '@o2s/utils.api-harmonization';
 import { mapLoginPage } from './login-page.mapper';
 import { LoginPage } from './login-page.model';
 
+const H = Models.Headers.HeaderName;
+
 @Injectable()
 export class LoginPageService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getLoginPage(headers: Models.Headers.AppHeaders): Observable<LoginPage> {
-        const loginPage = this.cmsService.getLoginPage({ locale: headers['x-locale'] });
+        const loginPage = this.cmsService.getLoginPage({ locale: headers[H.Locale] });
 
         return forkJoin([loginPage]).pipe(
             map(([loginPage]) => {

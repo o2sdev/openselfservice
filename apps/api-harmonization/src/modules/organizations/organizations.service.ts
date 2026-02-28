@@ -8,6 +8,8 @@ import { mapCustomerList } from './organizations.mapper';
 import { CustomerList } from './organizations.model';
 import { GetCustomersQuery } from './organizations.request';
 
+const H = Models.Headers.HeaderName;
+
 @Injectable()
 export class OrganizationsService {
     constructor(
@@ -16,7 +18,7 @@ export class OrganizationsService {
     ) {}
 
     getCustomers(query: GetCustomersQuery, headers: Models.Headers.AppHeaders): Observable<CustomerList> {
-        const cms = this.cmsService.getOrganizationList({ locale: headers['x-locale'] });
+        const cms = this.cmsService.getOrganizationList({ locale: headers[H.Locale] });
         // Pass authorization token to filter organizations by current user
         const organizations = this.organizationsService.getOrganizationList(
             {
@@ -24,7 +26,7 @@ export class OrganizationsService {
                 limit: query.limit || 1000,
                 offset: query.offset || 0,
             },
-            headers.authorization,
+            headers[H.Authorization],
         );
 
         return forkJoin([organizations, cms]).pipe(
@@ -33,7 +35,7 @@ export class OrganizationsService {
                     throw new NotFoundException();
                 }
 
-                return mapCustomerList(organizations, cms, headers['x-locale']);
+                return mapCustomerList(organizations, cms, headers[H.Locale]);
             }),
         );
     }
