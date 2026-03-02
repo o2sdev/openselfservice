@@ -43,7 +43,7 @@ const updateConfigsPackageJson = async (
     const pkg = await fs.readJson(pkgPath);
 
     // Remove integration deps that were not selected
-    for (const key of Object.keys(pkg.dependencies as Record<string, string>)) {
+    for (const key of Object.keys((pkg.dependencies || {}) as Record<string, string>)) {
         if (key.startsWith('@o2s/integrations.')) {
             const name = key.replace('@o2s/integrations.', '');
             if (!selectedIntegrations.includes(name)) {
@@ -86,7 +86,7 @@ export const transformIntegrationConfigs = async (
         if (!(await fs.pathExists(filePath))) continue;
 
         const content = await fs.readFile(filePath, 'utf-8');
-        const updatedContent = content.replace(MOCKED_IMPORT, `@o2s/integrations.${integration}/integration`);
+        const updatedContent = content.replaceAll(MOCKED_IMPORT, `@o2s/integrations.${integration}/integration`);
 
         await fs.writeFile(filePath, updatedContent, 'utf-8');
     }

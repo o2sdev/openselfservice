@@ -16,8 +16,6 @@ export const ALWAYS_REMOVE_DIRS: string[] = [
     '.changeset',
     'apps/docs',
     'packages/framework',
-    'packages/integrations',
-    'packages/blocks',
     'packages/modules',
     'packages/utils',
     'packages/cli',

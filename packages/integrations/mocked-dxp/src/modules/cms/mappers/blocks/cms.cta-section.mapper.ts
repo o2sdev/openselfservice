@@ -147,14 +147,22 @@ export const mapCtaSectionBlock = ({
     locale,
     id,
 }: CMS.Request.GetCmsEntryParams): CMS.Model.CtaSectionBlock.CtaSectionBlock => {
+    let block: CMS.Model.CtaSectionBlock.CtaSectionBlock | undefined;
+
     switch (locale) {
         case 'de':
-            return FEATURE_SECTION_BLOCKS_DE.find((block) => block.id === id)!;
+            block = FEATURE_SECTION_BLOCKS_DE.find((b) => b.id === id);
+            break;
         case 'pl':
-            return FEATURE_SECTION_BLOCKS_PL.find((block) => block.id === id)!;
+            block = FEATURE_SECTION_BLOCKS_PL.find((b) => b.id === id);
+            break;
         case 'en':
-            return FEATURE_SECTION_BLOCKS_EN.find((block) => block.id === id)!;
+            block = FEATURE_SECTION_BLOCKS_EN.find((b) => b.id === id);
+            break;
         default:
             throw new NotFoundException();
     }
+
+    if (!block) throw new NotFoundException();
+    return block;
 };
