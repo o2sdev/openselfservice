@@ -63,7 +63,7 @@ npx create-o2s-app@latest my-custom \
 
 ## What It Creates
 
-```
+```text
 my-app/
 ├── apps/
 │   ├── frontend/          # Next.js application
