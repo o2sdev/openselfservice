@@ -1,0 +1,36 @@
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+
+import readme from '../../README.md?raw';
+
+import { {{pascalCase name}}Pure } from './{{pascalCase name}}.client';
+
+const meta = {
+    title: 'Blocks/{{pascalCase name}}',
+    component: {{pascalCase name}}Pure,
+    tags: ['autodocs'],
+    parameters: { readme },
+} satisfies Meta<typeof {{pascalCase name}}Pure>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+    args: {
+        __typename: '{{pascalCase name}}Block',
+        id: '{{kebabCase name}}-1',
+        accessToken: '',
+        locale: 'en',
+        routing: {
+            locales: ['en', 'de', 'pl'],
+            defaultLocale: 'en',
+            pathnames: {
+                '/login': {
+                    en: '/sign-in',
+                    de: '/einloggen',
+                    pl: '/logowanie',
+                },
+            },
+        },
+    },
+};

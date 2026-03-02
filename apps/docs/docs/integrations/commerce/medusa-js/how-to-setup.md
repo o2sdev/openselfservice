@@ -285,4 +285,7 @@ After completing the setup:
 | Missing region when creating cart              | Provide `regionId` in cart creation; create regions in Medusa Admin                |
 | Payment providers not found                    | Configure payment providers in Medusa; ensure region has payment providers         |
 | `getCartList` / `getCurrentCart` not supported | These are Store API limitations; use `getCart` with known cart ID                  |
-````
+
+```
+
+```

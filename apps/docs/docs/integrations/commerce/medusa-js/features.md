@@ -15,7 +15,7 @@ This document provides an overview of features supported by the Medusa.js integr
 | [Cart Management](#cart-management)                 | ✅     | Cart creation, line items, addresses, shipping (Store API)                       |
 | [Checkout Flow](#checkout-flow)                     | ✅     | Multi-step checkout, payment sessions, order placement                           |
 | [Order Management](#order-management)               | ✅     | Complete order history and details                                               |
-| [Product Catalog](#product-catalog)                 | ✅     | Product browsing with variants (Store API)                                        |
+| [Product Catalog](#product-catalog)                 | ✅     | Product browsing with variants (Store API)                                       |
 | [Product Recommendations](#product-recommendations) | ✅     | Related products ([requires plugin](#plugin-architecture))                       |
 | [Asset Management](#asset-management)               | ✅     | Customer assets with warranty tracking ([requires plugin](#plugin-architecture)) |
 | [Service Subscriptions](#service-subscriptions)     | ✅     | Service contracts and billing ([requires plugin](#plugin-architecture))          |
@@ -162,6 +162,7 @@ The integration primarily uses Medusa's Store API for customer-facing operations
 A basic example plugin demonstrating SSO token handling is available at [openselfservice-resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/third-party/medusajs/plugins/mocked-auth). The example plugin handles tokens from the mocked integration to find matching customers in Medusa (or create new customers if not found).
 
 **Admin API is only used for:**
+
 - Related products endpoint (`/admin/products/{id}/variants/{variantId}/references`) - custom endpoint not available in Store API
 - Resources plugin endpoints (Assets, Services) - custom endpoints provided by the Assets & Services plugin
 

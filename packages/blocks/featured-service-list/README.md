@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch featured services:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.featured-service-list/sdk';
+import { sdk } from '@o2s/blocks.featured-service-list/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const featuredServices = await sdk.blocks.getFeaturedServiceList(
     { id: 'block-id' },
     { 'x-locale': 'en' },

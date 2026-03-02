@@ -318,6 +318,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             },
             {
                 type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.stories.tsx',
+                templateFile: 'templates/block/frontend/stories.hbs',
+            },
+            {
+                type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.types.ts',
                 templateFile: 'templates/block/frontend/types.hbs',
             },

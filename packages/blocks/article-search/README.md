@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to search articles:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.article-search/sdk';
+import { sdk } from '@o2s/blocks.article-search/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const searchResults = await sdk.blocks.searchArticles(
     { query: 'search term', id: 'block-id' },
     { 'x-locale': 'en' },

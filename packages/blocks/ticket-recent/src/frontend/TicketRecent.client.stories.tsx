@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { TicketRecentPure } from './TicketRecent.client';
 
 const meta = {
     title: 'Blocks/TicketRecent',
     component: TicketRecentPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof TicketRecentPure>;
 
 export default meta;

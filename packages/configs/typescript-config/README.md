@@ -27,14 +27,14 @@ For general TypeScript packages:
 }
 ```
 
-### React Configuration
+### Frontend Configuration
 
 For React/Next.js packages:
 
 ```jsonc
 // tsconfig.json
 {
-    "extends": "@o2s/typescript-config/react.json",
+    "extends": "@o2s/typescript-config/frontend.json",
     "compilerOptions": {
         "outDir": "./dist",
         "rootDir": "./src",

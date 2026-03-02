@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { UserAccountPure } from './UserAccount.client';
 
 const meta = {
     title: 'Blocks/UserAccount',
     component: UserAccountPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof UserAccountPure>;
 
 export default meta;

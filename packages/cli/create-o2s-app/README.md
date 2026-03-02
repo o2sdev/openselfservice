@@ -5,7 +5,7 @@ CLI tool to scaffold new O2S applications with an interactive setup wizard.
 ## Usage
 
 ```bash
-npx create-o2s-app@latest my-app
+npx create-o2s-app my-app
 ```
 
 ## Interactive Wizard

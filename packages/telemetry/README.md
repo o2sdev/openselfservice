@@ -13,23 +13,13 @@ npm install @o2s/telemetry
 ### In CLI Tools
 
 ```typescript
-import { Telemetry } from '@o2s/telemetry';
+import { sendEvent, flushEvents } from '@o2s/telemetry';
 
-const telemetry = new Telemetry({
-    name: 'my-cli-tool',
-    version: '1.0.0',
-});
+// Track events (appName, moduleName, eventName, optionalData)
+await sendEvent('o2s', 'create-o2s-app', 'create-project');
 
-// Track events
-telemetry.track('command_executed', {
-    command: 'create',
-    template: 'default',
-});
-
-// Track errors
-telemetry.track('error', {
-    error: error.message,
-});
+// Flush events before process exit
+await flushEvents();
 ```
 
 ### Opting Out
@@ -37,10 +27,8 @@ telemetry.track('error', {
 Users can opt out of telemetry by setting:
 
 ```bash
-export O2S_TELEMETRY_DISABLED=1
+export TELEMETRY_DISABLED=true
 ```
-
-Or by answering "No" when prompted during CLI tool execution.
 
 ## What Data Is Collected
 

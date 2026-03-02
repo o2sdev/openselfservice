@@ -13,25 +13,25 @@ npm install @o2s/utils.api-harmonization
 ### JWT Utilities
 
 ```typescript
-import { decodeJwt, getUserIdFromToken } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.api-harmonization';
 
-// Decode JWT token
-const decoded = decodeJwt(token);
+// Decode JWT token (authorization header string)
+const decoded = Utils.Auth.decodeToken(authorization);
 
-// Extract user ID from token
-const userId = getUserIdFromToken(token);
+// Extract user roles from decoded JWT
+const roles = Utils.Auth.extractUserRolesFromJwt(decoded);
 ```
 
 ### Date Utilities
 
 ```typescript
-import { formatDate, parseDate } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.api-harmonization';
 
-// Format date
-const formatted = formatDate(date, 'YYYY-MM-DD');
+// Format date relative to today (e.g. "2:30 PM Today", "Yesterday")
+const formatted = Utils.Date.formatDateRelative(date, locale, todayLabel, yesterdayLabel, timezone);
 
-// Parse date string
-const parsed = parseDate(dateString);
+// Format time
+const time = Utils.Date.formatTime(date, locale, timezone);
 ```
 
 ## Peer Dependencies

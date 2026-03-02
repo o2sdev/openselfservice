@@ -33,11 +33,11 @@ Use the SDK for type-safe API clients:
 ```typescript
 import { getSdk } from '@o2s/framework/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
+const sdk = getSdk({ apiUrl: 'https://your-api-url.com' });
 
 // Fetch data
-const tickets = await sdk.tickets.getTickets({}, { 'x-locale': 'en' }, accessToken);
-const article = await sdk.articles.getArticle({ slug: 'my-article' }, { 'x-locale': 'en' });
+const tickets = await sdk.tickets.getTickets({}, accessToken);
+const invoices = await sdk.invoices.getInvoiceList({}, accessToken);
 ```
 
 ### ApiConfig

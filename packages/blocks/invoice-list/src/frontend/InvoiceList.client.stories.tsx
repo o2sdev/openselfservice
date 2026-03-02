@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { InvoiceListPure } from './InvoiceList.client';
 
 const meta = {
     title: 'Blocks/InvoiceList',
     component: InvoiceListPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof InvoiceListPure>;
 
 export default meta;
