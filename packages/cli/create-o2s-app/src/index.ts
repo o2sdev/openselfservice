@@ -23,6 +23,7 @@ program
         await telemetry.flushEvents();
 
         let tempDir: string | undefined;
+        let phase: 'clone' | 'wizard' | 'scaffold' = 'clone';
 
         try {
             const cliTemplate = parseTemplate(options.template);
@@ -30,12 +31,15 @@ program
             const cliIntegrations = parseCommaSeparated(options.integrations);
 
             // Step 1: Clone repository to temp directory
+            phase = 'clone';
             tempDir = await cloneRepository();
 
             // Step 2: Run wizard (interactive or non-interactive)
+            phase = 'wizard';
             const answers = await runWizard(tempDir, name, cliTemplate, cliBlocks, cliIntegrations);
 
             // Step 3: Scaffold project
+            phase = 'scaffold';
             const { targetDir, uncoveredModules } = await scaffold(tempDir, answers, options.skipInstall);
 
             // Step 4: Print summary
@@ -57,6 +61,11 @@ program
                 console.log();
                 console.log('Setup cancelled.');
             } else {
+                telemetry.sendEvent('o2s', 'create-o2s-app', 'create-project-error', {
+                    phase,
+                    errorMessage: error instanceof Error ? error.message : 'unknown error',
+                });
+                await telemetry.flushEvents();
                 printError('Failed to create project', error);
             }
 
