@@ -30,7 +30,7 @@ The `custom` template launches an **interactive CLI wizard** that lets you pick 
 
 | Option | Description |
 |--------|-------------|
-| `--template o2s` | Select the O2S Customer Portal template (pre-selects recommended blocks) |
+| `--template dxp\|o2s\|custom` | Select a template: `o2s` (pre-selects Customer Portal blocks), `dxp` (pre-selects DXP blocks), or `custom` (interactive wizard to hand-pick blocks and integrations from scratch) |
 | `--blocks <list>` | Comma-separated block names to skip the block selection prompt |
 | `--integrations <list>` | Comma-separated integration names to skip the integration selection prompt |
 | `--skip-install` | Skip the `npm install` step |

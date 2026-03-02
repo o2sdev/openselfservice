@@ -32,7 +32,7 @@ The `custom` template launches an **interactive CLI wizard** that lets you pick 
 
 | Option | Description |
 |--------|-------------|
-| `--template dxp` | Select the DXP Frontend Starter template (pre-selects recommended blocks) |
+| `--template dxp\|o2s\|custom` | Select a template: `dxp` (pre-selects DXP blocks), `o2s` (pre-selects Customer Portal blocks), or `custom` (interactive wizard to hand-pick blocks and integrations from scratch) |
 | `--blocks <list>` | Comma-separated block names to skip the block selection prompt |
 | `--integrations <list>` | Comma-separated integration names to skip the integration selection prompt |
 | `--skip-install` | Skip the `npm install` step |
