@@ -13,15 +13,39 @@ Its features can be extended with Blocks or integrations O2S provides or your ow
 To create a new DXP application:
 
 ```shell
-npx create-dxp-app@latest my-dxp-portal
+npx create-o2s-app@latest my-dxp-portal --template dxp
 ```
 
-This command will:
+This command automatically scaffolds the DXP starter with its default blocks and integrations — no interactive prompts needed.
 
-- Download the latest DXP Frontend Starter
-- Install all dependencies
-- Set up the project structure optimized for content management
-- Initialize content-focused integrations and UI blocks
+Running without `--template` will show a prompt asking you to choose between `o2s`, `dxp`, or `custom`.
+
+If you want to customize which blocks and integrations are included, use the `custom` template instead:
+
+```shell
+npx create-o2s-app@latest my-dxp-portal --template custom
+```
+
+The `custom` template launches an **interactive CLI wizard** that lets you pick blocks, integrations, and configure environment variables step by step. Use it when the DXP preset doesn't fully match your use case — for example, when you only need a subset of blocks, want to swap integrations, or are building something that doesn't neatly fit either the `dxp` or `o2s` starter. You start from a blank slate and hand-pick exactly what goes into your project.
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `--template dxp` | Select the DXP Frontend Starter template (pre-selects recommended blocks) |
+| `--blocks <list>` | Comma-separated block names to skip the block selection prompt |
+| `--integrations <list>` | Comma-separated integration names to skip the integration selection prompt |
+| `--skip-install` | Skip the `npm install` step |
+
+**Non-interactive example:**
+
+```shell
+npx create-o2s-app@latest my-dxp \
+  --template dxp \
+  --blocks article-list,article-details \
+  --integrations strapi-cms \
+  --skip-install
+```
 
 ## What's included
 
