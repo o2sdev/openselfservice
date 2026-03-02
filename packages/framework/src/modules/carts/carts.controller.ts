@@ -6,6 +6,9 @@ import { Request } from './';
 import { CartService } from './carts.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for carts. Base path: `/carts`. All methods delegate to {@link CartService}.
+ */
 @Controller('/carts')
 @UseInterceptors(LoggerService)
 export class CartsController {

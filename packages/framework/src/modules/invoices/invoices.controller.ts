@@ -9,6 +9,9 @@ import { GetInvoiceListQuery, GetInvoiceParams } from './invoices.request';
 import { InvoiceService } from './invoices.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for invoices. Base path: `/invoices`. All methods delegate to {@link InvoiceService}.
+ */
 @Controller('/invoices')
 @UseInterceptors(LoggerService)
 export class InvoiceController {

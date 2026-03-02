@@ -6,6 +6,9 @@ import { Request } from './';
 import { OrganizationService } from './organizations.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for organizations. Base path: `organizations`. All methods delegate to {@link OrganizationService}.
+ */
 @Controller('organizations')
 @UseInterceptors(LoggerService)
 export class OrganizationController {

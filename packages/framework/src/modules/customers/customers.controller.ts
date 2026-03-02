@@ -6,6 +6,9 @@ import { Request } from './';
 import { CustomerService } from './customers.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for customer addresses. Base path: `/customers/addresses`. All methods delegate to {@link CustomerService}.
+ */
 @Controller('/customers/addresses')
 @UseInterceptors(LoggerService)
 export class CustomersController {

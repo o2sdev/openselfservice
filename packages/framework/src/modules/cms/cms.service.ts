@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 
 import * as CMS from './';
 
+/**
+ * Abstract CMS service. Implementation is provided by API Harmonization (integration with headless CMS).
+ * All methods return RxJS {@link Observable}. Handles pages, entries, header/footer, app config, and block types.
+ */
 @Injectable()
 export abstract class CmsService {
     protected constructor(..._services: unknown[]) {}

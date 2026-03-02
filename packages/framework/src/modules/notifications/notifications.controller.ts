@@ -6,6 +6,9 @@ import { Request } from './';
 import { NotificationService } from './notifications.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for notifications. Base path: `/notifications`. All methods delegate to {@link NotificationService}.
+ */
 @Controller('/notifications')
 @UseInterceptors(LoggerService)
 export class NotificationsController {

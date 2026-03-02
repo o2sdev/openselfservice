@@ -7,7 +7,7 @@ import tailwindPlugin from './plugins/tailwind-config';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-let hideDocs = false;
+const hideDocs = false;
 
 const config: Config = {
     title: 'Open Self Service',
@@ -257,6 +257,17 @@ const config: Config = {
         },
     },
     plugins: [
+        [
+            'docusaurus-plugin-typedoc',
+            {
+                entryPoints: ['../../packages/framework/src/index.ts', '../../packages/framework/src/sdk.ts'],
+                tsconfig: '../../packages/framework/tsconfig.json',
+                out: 'docs/api',
+                name: '@o2s/framework API',
+                excludePrivate: true,
+                readme: 'none',
+            },
+        ],
         tailwindPlugin,
         '@docusaurus/theme-mermaid',
         'docusaurus-plugin-image-zoom',

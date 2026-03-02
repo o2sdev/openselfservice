@@ -1,5 +1,6 @@
 import { Media, Pagination } from '@/utils/models';
 
+/** Article category: id, slug, title, description, icon, parent (nested structure). */
 export class Category {
     id!: string;
     slug!: string;
@@ -22,8 +23,10 @@ export class Category {
     };
 }
 
+/** Paginated category list. */
 export type Categories = Pagination.Paginated<Category>;
 
+/** Article: title, lead, tags, image, thumbnail, category, author, sections (Text/Image), roles, theme. */
 export class Article {
     id!: string;
     slug!: string;
@@ -45,6 +48,7 @@ export class Article {
     theme?: string;
 }
 
+/** Article section: text (title, content) or image (image, caption). */
 export type ArticleSection = ArticleSectionText | ArticleSectionImage;
 
 class ArticleSectionCommon {
@@ -53,19 +57,24 @@ class ArticleSectionCommon {
     updatedAt!: string;
 }
 
+/** Text section of an article. */
 export class ArticleSectionText extends ArticleSectionCommon {
     __typename!: 'ArticleSectionText';
     title?: string;
     content!: string;
 }
 
+/** Image section of an article. */
 export class ArticleSectionImage extends ArticleSectionCommon {
     __typename!: 'ArticleSectionImage';
     image!: Media.Media;
     caption?: string;
 }
 
+/** Paginated article list (without full sections). */
 export type Articles = Pagination.Paginated<Omit<Article, 'sections'>>;
+
+/** Article author: name, position, email, avatar. */
 export class Author {
     name!: string;
     position?: string;

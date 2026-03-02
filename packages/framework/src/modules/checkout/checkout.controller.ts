@@ -6,6 +6,9 @@ import { Request } from './';
 import { CheckoutService } from './checkout.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for checkout. Base path: `/checkout`. All methods delegate to {@link CheckoutService}.
+ */
 @Controller('/checkout')
 @UseInterceptors(LoggerService)
 export class CheckoutController {

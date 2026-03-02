@@ -8,6 +8,9 @@ import { GetBillingAccountParams, GetBillingAccountsListQuery } from './billing-
 import { BillingAccountService } from './billing-accounts.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for billing accounts. Base path: `/billing-accounts`. All methods delegate to {@link BillingAccountService}.
+ */
 @Controller('/billing-accounts')
 @UseInterceptors(LoggerService)
 export class BillingAccountController {

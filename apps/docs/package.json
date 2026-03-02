@@ -39,6 +39,9 @@
     },
     "devDependencies": {
         "@docusaurus/module-type-aliases": "3.9.2",
+        "docusaurus-plugin-typedoc": "^1.4.0",
+        "typedoc": "^0.28.17",
+        "typedoc-plugin-markdown": "^4.10.0",
         "@docusaurus/tsconfig": "3.9.2",
         "@docusaurus/types": "3.9.2",
         "@o2s/eslint-config": "*",

@@ -5,6 +5,10 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { ArticlesService } from './articles.service';
 
+/**
+ * HTTP controller for articles and categories. Base path: `/articles`.
+ * All methods delegate to {@link ArticlesService}.
+ */
 @Controller('/articles')
 @UseInterceptors(LoggerService)
 export class ArticleController {

@@ -6,6 +6,9 @@ import { Request } from './';
 import { UserService } from './users.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for users. Base path: `/users`. All methods delegate to {@link UserService}.
+ */
 @Controller('/users')
 @UseInterceptors(LoggerService)
 export class UserController {

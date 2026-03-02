@@ -5,6 +5,9 @@ import * as Payments from '../payments';
 
 import * as Checkout from './';
 
+/**
+ * Abstract checkout service. Implementation is provided by API Harmonization. All methods return RxJS {@link Observable}.
+ */
 export abstract class CheckoutService {
     protected constructor(..._services: unknown[]) {}
 

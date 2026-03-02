@@ -8,6 +8,9 @@ import { GetProductListQuery, GetProductParams, GetRelatedProductListParams } fr
 import { ProductService } from './products.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for products. Base path: `/products`. All methods delegate to {@link ProductService}.
+ */
 @Controller('/products')
 @UseInterceptors(LoggerService)
 export class ProductsController {

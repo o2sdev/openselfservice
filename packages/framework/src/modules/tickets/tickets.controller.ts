@@ -6,6 +6,9 @@ import { Request } from './';
 import { TicketService } from './tickets.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for tickets. Base path: `/tickets`. All methods delegate to {@link TicketService}.
+ */
 @Controller('/tickets')
 @UseInterceptors(LoggerService)
 export class TicketsController {

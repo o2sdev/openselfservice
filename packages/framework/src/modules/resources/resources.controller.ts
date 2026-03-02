@@ -16,6 +16,9 @@ import {
 import { ResourceService } from './resources.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for resources, services, and assets. Base path: `/resources`. All methods delegate to {@link ResourceService}.
+ */
 @Controller('/resources')
 @UseInterceptors(LoggerService)
 export class ResourceController {

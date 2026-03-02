@@ -5,6 +5,11 @@ import { LoggerService } from '@o2s/utils.logger';
 import { Request } from './';
 import { CmsService } from './cms.service';
 
+/**
+ * HTTP controller for CMS content. Base path: `/cms`. Endpoints: get-entry, get-entries, page, pages,
+ * login-page, not-found-page, header, footer, app-config, and block endpoints (e.g. /blocks/faq, /blocks/article-list).
+ * All methods delegate to {@link CmsService}.
+ */
 @Controller('/cms')
 @UseInterceptors(LoggerService)
 export class CmsController {

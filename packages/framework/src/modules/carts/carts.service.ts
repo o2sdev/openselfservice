@@ -22,6 +22,9 @@ import {
     UpdateCartParams,
 } from './carts.request';
 
+/**
+ * Abstract cart service. Implementation is provided by API Harmonization. All methods return RxJS {@link Observable}.
+ */
 export abstract class CartService {
     protected constructor(..._services: unknown[]) {}
 

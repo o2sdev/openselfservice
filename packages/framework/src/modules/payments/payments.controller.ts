@@ -6,6 +6,9 @@ import { Request } from './';
 import { PaymentService } from './payments.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for payments. Base path: `/payments`. All methods delegate to {@link PaymentService}.
+ */
 @Controller('/payments')
 @UseInterceptors(LoggerService)
 export class PaymentsController {

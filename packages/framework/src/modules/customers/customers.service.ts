@@ -2,6 +2,9 @@ import { Observable } from 'rxjs';
 
 import * as Customers from './';
 
+/**
+ * Abstract customer (address) service. Implementation is provided by API Harmonization. All methods return RxJS {@link Observable}.
+ */
 export abstract class CustomerService {
     protected constructor(..._services: unknown[]) {}
 

@@ -2,6 +2,9 @@ import { Observable } from 'rxjs';
 
 import * as Payments from './';
 
+/**
+ * Abstract payment service. Implementation is provided by API Harmonization. All methods return RxJS {@link Observable}.
+ */
 export abstract class PaymentService {
     protected constructor(..._services: unknown[]) {}
 

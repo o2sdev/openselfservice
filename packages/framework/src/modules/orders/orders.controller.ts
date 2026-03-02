@@ -6,6 +6,9 @@ import { Request } from './';
 import { OrderService } from './orders.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for orders. Base path: `/orders`. All methods delegate to {@link OrderService}.
+ */
 @Controller('/orders')
 @UseInterceptors(LoggerService)
 export class OrdersController {
