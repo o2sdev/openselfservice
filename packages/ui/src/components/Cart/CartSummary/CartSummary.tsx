@@ -71,42 +71,42 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
 
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between gap-4">
                         <Typography variant="small" className="text-muted-foreground">
                             {labels.subtotalLabel}
                         </Typography>
-                        <Typography variant="body">
+                        <Typography variant="body" className="whitespace-nowrap shrink-0">
                             <Price price={subtotal} />
                         </Typography>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between gap-4">
                         <Typography variant="small" className="text-muted-foreground">
                             {labels.taxLabel}
                         </Typography>
-                        <Typography variant="body">
+                        <Typography variant="body" className="whitespace-nowrap shrink-0">
                             <Price price={tax} />
                         </Typography>
                     </div>
 
                     {hasDiscount && (
-                        <div className="flex items-center justify-between">
+                        <div className="flex justify-between gap-4">
                             <Typography variant="small" className="text-muted-foreground">
                                 {labels.discountLabel}
                             </Typography>
-                            <Typography variant="body" className="text-green-600">
+                            <Typography variant="body" className="text-green-600 whitespace-nowrap shrink-0">
                                 -<Price price={discountTotal} />
                             </Typography>
                         </div>
                     )}
 
                     {hasShipping && (
-                        <div className="flex items-center justify-between">
+                        <div className="flex justify-between gap-4">
                             <Typography variant="small" className="text-muted-foreground">
                                 {labels.shippingLabel}
                                 {shippingMethod.name && <span className="ml-1">({shippingMethod.name})</span>}
                             </Typography>
-                            <Typography variant="body">
+                            <Typography variant="body" className="whitespace-nowrap shrink-0">
                                 {isFreeShipping ? (
                                     <span className="text-green-600">{labels.freeLabel}</span>
                                 ) : (
@@ -119,9 +119,9 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
 
                 <Separator />
 
-                <div className="flex items-center justify-between">
+                <div className="flex justify-between gap-4">
                     <Typography variant="h3">{labels.totalLabel}</Typography>
-                    <Typography variant="h2" className="text-primary">
+                    <Typography variant="h2" className="text-primary whitespace-nowrap shrink-0">
                         <Price price={total} />
                     </Typography>
                 </div>
