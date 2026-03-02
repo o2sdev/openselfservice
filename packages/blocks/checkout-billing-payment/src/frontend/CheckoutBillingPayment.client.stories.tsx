@@ -37,6 +37,7 @@ const baseBlock = {
     },
     errors: {
         required: 'This field is required',
+        cartNotFound: 'Cart not found',
     },
     summaryLabels: {
         title: 'Summary',

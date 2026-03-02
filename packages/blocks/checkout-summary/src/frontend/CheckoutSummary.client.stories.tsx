@@ -58,6 +58,9 @@ const baseBlock = {
         back: { label: 'Back', path: '#' },
         confirm: { label: 'Place order', path: '#' },
     },
+    errors: {
+        cartNotFound: 'Cart not found',
+    },
     loading: { confirming: 'Placing order...' },
     placeholders: {
         companyData: 'Company details not provided',

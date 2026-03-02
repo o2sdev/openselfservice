@@ -76,6 +76,7 @@ const baseBlock = {
         required: 'This field is required',
         invalidTaxId: 'Invalid tax ID',
         invalidPostalCode: 'Invalid postal code',
+        cartNotFound: 'Cart not found',
     },
     summaryLabels: {
         title: 'Summary',

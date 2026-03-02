@@ -73,6 +73,7 @@ const baseBlock = {
     errors: {
         required: 'This field is required',
         invalidPostalCode: 'Invalid postal code',
+        cartNotFound: 'Cart not found',
     },
     summaryLabels: {
         title: 'Summary',
