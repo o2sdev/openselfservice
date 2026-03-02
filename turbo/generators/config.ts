@@ -1,6 +1,8 @@
 import type { PlopTypes } from '@turbo/gen';
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
+    // Register custom Handlebars helper for conditional checks
+    plop.setHelper('eq', (a: string, b: string) => a === b);
     plop.setGenerator('integration', {
         description: 'Adds a new API integration',
         prompts: [
@@ -80,11 +82,16 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
                     template: '// MODULE_EXPORTS',
                 },
-                {
-                    type: 'add',
-                    path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
-                    templateFile: 'templates/integrations/vitestConfig.hbs',
-                },
+            {
+                type: 'add',
+                path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
+                templateFile: 'templates/integration/vitestConfig.hbs',
+            },
+            {
+                type: 'add',
+                path: 'packages/integrations/{{kebabCase name}}/README.md',
+                templateFile: 'templates/integration/README.hbs',
+            },
             ];
 
             const modules = data?.modules as string[];
@@ -311,6 +318,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             },
             {
                 type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.stories.tsx',
+                templateFile: 'templates/block/frontend/stories.hbs',
+            },
+            {
+                type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.types.ts',
                 templateFile: 'templates/block/frontend/types.hbs',
             },
@@ -389,6 +401,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/tsconfig.sdk.json',
                 templateFile: 'templates/block/tsconfigSdk.hbs',
+            },
+            {
+                type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/README.md',
+                templateFile: 'templates/block/README.hbs',
             },
 
             // FRAMEWORK

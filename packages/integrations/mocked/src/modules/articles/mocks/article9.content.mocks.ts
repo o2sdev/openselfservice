@@ -591,7 +591,7 @@ Aby uzyskać dodatkowe wsparcie, skontaktuj się z naszym zespołem obsługi kli
 export const MOCK_ARTICLE9_EN: Articles.Model.Article[] = [
     {
         id: 'art-009',
-        slug: '/help-and-support/safety/safety-and-maintenance-guide-for-powerpro-tools',
+        slug: 'safety/safety-and-maintenance-guide-for-powerpro-tools',
         roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',
@@ -656,7 +656,7 @@ export const MOCK_ARTICLE9_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLE9_DE: Articles.Model.Article[] = [
     {
         id: 'art-009',
-        slug: '/hilfe-und-support/sicherheit/sicherheits-und-wartungsleitfaden-fur-powerpro-werkzeuge',
+        slug: 'sicherheit/sicherheits-und-wartungsleitfaden-fur-powerpro-werkzeuge',
         roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',
@@ -722,7 +722,7 @@ export const MOCK_ARTICLE9_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLE9_PL: Articles.Model.Article[] = [
     {
         id: 'art-009',
-        slug: '/pomoc-i-wsparcie/bezpieczenstwo/przewodnik-bezpieczenstwa-i-konserwacji-narzedzi-powerpro',
+        slug: 'bezpieczenstwo/przewodnik-bezpieczenstwa-i-konserwacji-narzedzi-powerpro',
         roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',

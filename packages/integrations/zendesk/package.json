@@ -3,6 +3,23 @@
   "version": "3.0.0",
   "private": false,
   "license": "MIT",
+  "description": "Zendesk integration for O2S, providing ticket management and support functionality.",
+  "keywords": [
+    "o2s",
+    "integration",
+    "zendesk",
+    "support",
+    "tickets"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/o2sdev/openselfservice.git",
+    "directory": "packages/integrations/zendesk"
+  },
+  "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/zendesk#readme",
+  "bugs": {
+    "url": "https://github.com/o2sdev/openselfservice/issues"
+  },
   "exports": {
     "./integration": "./dist/src/integration.js"
   },
@@ -28,14 +45,14 @@
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.92.4",
+    "@hey-api/openapi-ts": "^0.93.0",
     "@o2s/eslint-config": "*",
     "@o2s/vitest-config": "*",
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
     "@types/html-to-text": "^9.0.4",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.2",
+    "eslint": "^9.39.3",
     "prettier": "^3.8.1",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",

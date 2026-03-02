@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { FeatureSectionPure } from './FeatureSection.client';
 
 const meta = {
     title: 'Blocks/FeatureSection',
     component: FeatureSectionPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof FeatureSectionPure>;
 
 export default meta;

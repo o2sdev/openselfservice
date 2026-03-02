@@ -3,6 +3,23 @@
     "version": "2.11.0",
     "private": false,
     "license": "MIT",
+    "description": "Strapi CMS integration for O2S, providing content management functionality via GraphQL.",
+    "keywords": [
+        "o2s",
+        "integration",
+        "strapi",
+        "cms",
+        "content"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/integrations/strapi-cms"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/strapi-cms#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./integration": "./dist/src/integration.js",
         "./live-preview": "./dist/src/modules/cms/live-preview/index.js"
@@ -21,25 +38,25 @@
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "flatted": "^3.3.3",
-        "graphql": "16.12.0",
+        "graphql": "16.13.0",
         "graphql-request": "7.4.0",
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
         "@graphql-codegen/add": "^6.0.0",
-        "@graphql-codegen/cli": "^6.1.1",
+        "@graphql-codegen/cli": "^6.1.2",
         "@graphql-codegen/introspection": "^5.0.0",
-        "@graphql-codegen/typescript": "^5.0.7",
+        "@graphql-codegen/typescript": "^5.0.8",
         "@graphql-codegen/typescript-graphql-request": "^6.4.0",
-        "@graphql-codegen/typescript-operations": "^5.0.7",
-        "@graphql-codegen/typescript-resolvers": "^5.1.5",
+        "@graphql-codegen/typescript-operations": "^5.0.8",
+        "@graphql-codegen/typescript-resolvers": "^5.1.6",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",

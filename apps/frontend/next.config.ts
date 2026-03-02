@@ -38,6 +38,10 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'composable-css-public.s3.eu-central-1.amazonaws.com',
             },
+            {
+                protocol: 'https',
+                hostname: '*.zendesk.com',
+            },
         ],
     },
     sassOptions: {

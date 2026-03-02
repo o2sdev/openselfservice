@@ -1,11 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import React from 'react';
 
+import readme from '../../README.md?raw';
+
 import { CategoryPure } from './Category.client';
 
 const meta = {
     title: 'Blocks/Category',
     component: CategoryPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof CategoryPure>;
 
 export default meta;

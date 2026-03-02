@@ -29,8 +29,6 @@ const typographyVariants = cva('', {
             tableRow: 'border-b border-border transition-colors last:border-b-0',
             tableCell: 'px-4 py-2 align-middle border-r last:border-r-0',
             tableCellHighlighted: 'px-4 py-2 align-middle bg-muted/50 border-r last:border-r-0',
-            image: 'relative overflow-hidden mx-auto',
-            imageCaption: 'text-sm text-muted-foreground text-center mt-2',
             list: 'text-sm md:text-base mt-6 pl-7 md:pl-8 list-disc [&>li]:mt-2 md:[&>li]:mt-3 [&>li::marker]:text-foreground [&>li::marker]:size-1 md:[&>li::marker]:size-[5px]',
             listOrdered:
                 'text-sm md:text-base mt-6 pl-7 md:pl-8 list-decimal [&>li]:mt-2 md:[&>li]:mt-3 [&>li::marker]:text-foreground',

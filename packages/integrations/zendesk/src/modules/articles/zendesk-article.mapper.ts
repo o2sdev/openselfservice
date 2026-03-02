@@ -87,6 +87,17 @@ function extractCategorySlugFromUrl(htmlUrl?: string, id?: number): string {
     return id?.toString() || '';
 }
 
+/**
+ * Replace Zendesk article URLs in HTML body with relative article slugs.
+ * Converts: https://company.zendesk.com/hc/en-us/articles/12345-Article-Title
+ * To: 12345-article-title
+ */
+function replaceZendeskArticleLinks(body: string): string {
+    return body.replace(/https?:\/\/[^"'\s<>]*?\.zendesk\.com\/hc\/[^"'\s<>]*?\/articles\/[^"'\s<>]*/gi, (match) => {
+        return extractSlugFromUrl(match) || match;
+    });
+}
+
 function extractLeadFromBody(body: string | undefined, maxLength = 300): string {
     if (!body) {
         return '';
@@ -121,7 +132,7 @@ function parseBodyIntoSections(
             __typename: 'ArticleSectionText',
             createdAt,
             updatedAt,
-            content: body,
+            content: replaceZendeskArticleLinks(body),
         },
     ];
 }

@@ -3,6 +3,13 @@
     "version": "0.5.0",
     "private": true,
     "license": "MIT",
+    "description": "Integration configuration package for O2S, providing centralized integration configs and type re-exports.",
+    "keywords": [
+        "o2s",
+        "config",
+        "integrations",
+        "configuration"
+    ],
     "exports": {
         ".": "./dist/src/models/index.js",
         "./live-preview": "./dist/src/models/live-preview.js"
@@ -25,7 +32,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

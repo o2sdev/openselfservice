@@ -43,30 +43,30 @@ Medusa expects lowercase currency codes (e.g., `eur`), while O2S typically uses 
 
 The O2S `Cart` model maps to Medusa's `StoreCart`:
 
-| O2S Field        | Medusa Field      | Notes                                              |
-| ---------------- | ----------------- | -------------------------------------------------- |
-| `id`             | `id`              | Cart identifier                                    |
-| `customerId`     | `customer_id`     | Present when cart is linked to a customer          |
-| `regionId`       | `region_id`       | Required for Medusa                                |
-| `currency`       | `currency_code`   | Normalized to uppercase in O2S                     |
-| `items`          | `items`           | Line items with variant references                 |
-| `subtotal`, `total`, etc. | Calculated by Medusa | Mapped to O2S `Price` objects              |
-| `shippingAddress`| `shipping_address`| Set via checkout addresses                         |
-| `billingAddress`| `billing_address` | Set via checkout addresses                         |
-| `shippingMethod` | `shipping_methods[0]` | Single shipping method supported               |
-| `paymentMethod`  | `metadata.paymentMethod` | Stored in cart metadata after setPayment   |
-| `metadata`       | `metadata`        | Notes stored in `metadata.notes`; payment session ID in `metadata.paymentSessionId` |
+| O2S Field                 | Medusa Field             | Notes                                                                               |
+| ------------------------- | ------------------------ | ----------------------------------------------------------------------------------- |
+| `id`                      | `id`                     | Cart identifier                                                                     |
+| `customerId`              | `customer_id`            | Present when cart is linked to a customer                                           |
+| `regionId`                | `region_id`              | Required for Medusa                                                                 |
+| `currency`                | `currency_code`          | Normalized to uppercase in O2S                                                      |
+| `items`                   | `items`                  | Line items with variant references                                                  |
+| `subtotal`, `total`, etc. | Calculated by Medusa     | Mapped to O2S `Price` objects                                                       |
+| `shippingAddress`         | `shipping_address`       | Set via checkout addresses                                                          |
+| `billingAddress`          | `billing_address`        | Set via checkout addresses                                                          |
+| `shippingMethod`          | `shipping_methods[0]`    | Single shipping method supported                                                    |
+| `paymentMethod`           | `metadata.paymentMethod` | Stored in cart metadata after setPayment                                            |
+| `metadata`                | `metadata`               | Notes stored in `metadata.notes`; payment session ID in `metadata.paymentSessionId` |
 
 ### Checkout Flow Mapping
 
 Each O2S checkout step maps to a Medusa operation:
 
-| O2S Step          | Medusa Operation                                      |
-| ----------------- | ----------------------------------------------------- |
-| `setAddresses`    | `sdk.store.cart.update()` with `shipping_address`, `billing_address` |
-| `setShippingMethod` | `sdk.store.cart.addShippingMethod()` with `option_id` |
-| `setPayment`      | `sdk.store.payment.initiatePaymentSession()` then store session ID and payment method in cart metadata |
-| `placeOrder`      | `sdk.store.cart.complete()` — single call creates the order; no separate order creation endpoint |
+| O2S Step            | Medusa Operation                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------ |
+| `setAddresses`      | `sdk.store.cart.update()` with `shipping_address`, `billing_address`                                   |
+| `setShippingMethod` | `sdk.store.cart.addShippingMethod()` with `option_id`                                                  |
+| `setPayment`        | `sdk.store.payment.initiatePaymentSession()` then store session ID and payment method in cart metadata |
+| `placeOrder`        | `sdk.store.cart.complete()` — single call creates the order; no separate order creation endpoint       |
 
 ### Payment Session Storage
 
@@ -85,13 +85,13 @@ These are used by `getCheckoutSummary` and validated before `placeOrder`.
 
 ## Important Caveats
 
-| Caveat | Details |
-| ------ | ------- |
-| **Region required** | `regionId` is required for cart creation. It affects pricing, shipping options, and tax calculation. |
-| **Variant ID required** | Use variant ID (from product catalog), not product ID. O2S `sku` expects the variant ID. |
-| **Payment session storage** | Payment session ID and payment method are stored in `cart.metadata`. Do not clear metadata when updating cart. |
-| **Guest checkout** | Email is required for guest order placement. Provide it in `setAddresses`, `placeOrder`, or `completeCheckout`. |
+| Caveat                         | Details                                                                                                                                         |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Region required**            | `regionId` is required for cart creation. It affects pricing, shipping options, and tax calculation.                                            |
+| **Variant ID required**        | Use variant ID (from product catalog), not product ID. O2S `sku` expects the variant ID.                                                        |
+| **Payment session storage**    | Payment session ID and payment method are stored in `cart.metadata`. Do not clear metadata when updating cart.                                  |
+| **Guest checkout**             | Email is required for guest order placement. Provide it in `setAddresses`, `placeOrder`, or `completeCheckout`.                                 |
 | **Shipping price calculation** | Options with `price_type=calculated` require a separate API call to `sdk.store.fulfillment.calculate()`. Flat-price options are returned as-is. |
-| **Order creation** | Single operation (`cart.complete()`) — no separate order creation endpoint. The order is returned directly from the response. |
-| **Cart ownership** | Customer carts verify ownership via SSO token. Unauthorized access throws `UnauthorizedException`. |
-| **Unimplemented methods** | `getCartList`, `getCurrentCart`, `deleteCart` are not available due to Store API limitations. |
+| **Order creation**             | Single operation (`cart.complete()`) — no separate order creation endpoint. The order is returned directly from the response.                   |
+| **Cart ownership**             | Customer carts verify ownership via SSO token. Unauthorized access throws `UnauthorizedException`.                                              |
+| **Unimplemented methods**      | `getCartList`, `getCurrentCart`, `deleteCart` are not available due to Store API limitations.                                                   |

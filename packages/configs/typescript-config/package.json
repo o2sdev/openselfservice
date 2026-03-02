@@ -2,5 +2,12 @@
     "name": "@o2s/typescript-config",
     "version": "1.2.0",
     "private": true,
-    "license": "MIT"
+    "license": "MIT",
+    "description": "Shared TypeScript configuration for O2S packages, including base, React, and API configurations.",
+    "keywords": [
+        "o2s",
+        "config",
+        "typescript",
+        "tsconfig"
+    ]
 }

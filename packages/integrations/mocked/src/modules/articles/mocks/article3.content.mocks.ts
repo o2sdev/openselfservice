@@ -3,7 +3,7 @@ import { Articles } from '@o2s/framework/modules';
 export const MOCK_ARTICLE3_EN: Articles.Model.Article[] = [
     {
         id: 'art-004',
-        slug: '/help-and-support/accessories/essential-powerpro-tool-accessories',
+        slug: 'accessories/essential-powerpro-tool-accessories',
         roles: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
@@ -312,7 +312,7 @@ For personalized accessory recommendations based on your specific tools and proj
 export const MOCK_ARTICLE3_DE: Articles.Model.Article[] = [
     {
         id: 'art-004',
-        slug: '/hilfe-und-support/zubehor/wesentliches-powerpro-werkzeugzubehor',
+        slug: 'zubehor/wesentliches-powerpro-werkzeugzubehor',
         roles: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
@@ -621,7 +621,7 @@ Für personalisierte Zubehörempfehlungen basierend auf Ihren spezifischen Werkz
 export const MOCK_ARTICLE3_PL: Articles.Model.Article[] = [
     {
         id: 'art-004',
-        slug: '/pomoc-i-wsparcie/akcesoria/niezbedne-akcesoria-do-narzedzi-powerpro',
+        slug: 'akcesoria/niezbedne-akcesoria-do-narzedzi-powerpro',
         roles: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',

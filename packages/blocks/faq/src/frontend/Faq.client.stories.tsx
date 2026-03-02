@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { FaqPure } from './Faq.client';
 
 const meta = {
     title: 'Blocks/Faq',
     component: FaqPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof FaqPure>;
 
 export default meta;

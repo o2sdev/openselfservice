@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { ArticlePure } from './Article.client';
 
 const meta = {
     title: 'Blocks/Article',
     component: ArticlePure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof ArticlePure>;
 
 export default meta;

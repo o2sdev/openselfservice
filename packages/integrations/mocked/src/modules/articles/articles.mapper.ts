@@ -51,7 +51,7 @@ export const mapCategories = (
 
 export const mapArticle = (locale: string, slug: string): Articles.Model.Article | undefined => {
     const articles = locale === 'pl' ? MOCK_ARTICLES_PL : locale === 'de' ? MOCK_ARTICLES_DE : MOCK_ARTICLES_EN;
-    return articles.find((article) => article.slug === slug);
+    return articles.find((article) => slug.endsWith(article.slug));
 };
 
 export const mapArticles = (locale: string, options: Articles.Request.GetArticleListQuery): Articles.Model.Articles => {

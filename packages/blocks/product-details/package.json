@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A block for displaying comprehensive product information including title, images, price, description.",
+    "keywords": [
+        "o2s",
+        "block",
+        "products",
+        "ecommerce",
+        "product-details"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/product-details"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/product-details#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
@@ -36,9 +52,9 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "prettier": "^3.8.1",
-        "react-hook-form": "^7.71.1",
+        "react-hook-form": "^7.71.2",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

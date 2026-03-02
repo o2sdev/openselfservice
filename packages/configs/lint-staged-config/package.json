@@ -3,6 +3,13 @@
     "version": "0.1.0",
     "private": true,
     "license": "MIT",
+    "description": "Shared lint-staged configuration for O2S packages to run linters on git staged files.",
+    "keywords": [
+        "o2s",
+        "config",
+        "lint-staged",
+        "git-hooks"
+    ],
     "exports": {
         "./base": "./base.mjs"
     }

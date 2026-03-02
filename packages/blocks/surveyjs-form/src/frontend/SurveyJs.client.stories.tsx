@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { SurveyJsPure } from './SurveyJs.client';
 
 const meta = {
     title: 'Blocks/SurveyJsForm',
     component: SurveyJsPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof SurveyJsPure>;
 
 export default meta;
