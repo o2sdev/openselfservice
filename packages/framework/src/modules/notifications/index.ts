@@ -10,7 +10,7 @@
  * |--------|------|-------------|
  * | GET | `/notifications` | Notification list (pagination, filters). |
  * | GET | `/notifications/:id` | Single notification. |
- * | POST | `/notifications` | Mark notification as (e.g. read). |
+ * | POST | `/notifications` | Update notification state (e.g., mark as read). |
  *
  * ## ApiConfig
  *

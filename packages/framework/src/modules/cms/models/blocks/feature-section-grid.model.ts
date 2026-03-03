@@ -1,5 +1,6 @@
 import { Block } from '@/utils/models';
 
+/** CMS block configuration for grid-based feature section. */
 export class FeatureSectionGridBlock extends Block.Block {
     preTitle?: string;
     title?: string;
@@ -9,6 +10,7 @@ export class FeatureSectionGridBlock extends Block.Block {
     iconBorder?: boolean;
 }
 
+/** Single feature item rendered in feature grid block. */
 export class FeatureItem {
     title?: string;
     description?: string;

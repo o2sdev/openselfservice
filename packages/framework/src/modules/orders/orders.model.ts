@@ -2,6 +2,7 @@ import { Product } from '../products/products.model';
 
 import { Address, Pagination, Price, Unit } from '@/utils/models';
 
+/** Order lifecycle status. */
 export type OrderStatus =
     | 'PENDING'
     | 'COMPLETED'
@@ -10,6 +11,7 @@ export type OrderStatus =
     | 'ARCHIVED'
     | 'REQUIRES_ACTION'
     | 'UNKNOWN';
+/** Payment lifecycle status. */
 export type PaymentStatus =
     | 'PENDING'
     | 'PAID'
@@ -21,6 +23,7 @@ export type PaymentStatus =
     | 'REQUIRES_ACTION'
     | 'UNKNOWN';
 
+/** Customer order aggregate with totals, items, and fulfillment/payment state. */
 export class Order {
     id!: string;
     customerId?: string;
@@ -46,9 +49,11 @@ export class Order {
     shippingMethods!: ShippingMethod[];
     customerComment?: string;
     documents?: Document[];
-    email?: string; // For guest orders (order confirmation)
+    /** Customer email for guest order confirmation. */
+    email?: string;
 }
 
+/** Single item line within an order. */
 export class OrderItem {
     id!: string;
     productId!: string;
@@ -62,6 +67,7 @@ export class OrderItem {
     product!: Product;
 }
 
+/** Shipping method selected for order fulfillment. */
 export class ShippingMethod {
     id!: string;
     name!: string;
@@ -70,6 +76,7 @@ export class ShippingMethod {
     subtotal?: Price.Price;
 }
 
+/** Billing/payment document associated with an order. */
 export class Document {
     id!: string;
     createdAt!: string;
@@ -82,4 +89,5 @@ export class Document {
     total!: Price.Price;
 }
 
+/** Paginated order list. */
 export type Orders = Pagination.Paginated<Order>;

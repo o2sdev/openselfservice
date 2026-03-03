@@ -15,17 +15,26 @@ export class NotificationsController {
     constructor(protected readonly notificationService: NotificationService) {}
 
     @Get(':id')
-    getNotification(@Param() params: Request.GetNotificationParams, @Headers() headers: AppHeaders) {
+    getNotification(
+        @Param() params: Request.GetNotificationParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<NotificationService['getNotification']> {
         return this.notificationService.getNotification(params, headers.authorization);
     }
 
     @Get()
-    getNotificationList(@Query() query: Request.GetNotificationListQuery, @Headers() headers: AppHeaders) {
+    getNotificationList(
+        @Query() query: Request.GetNotificationListQuery,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<NotificationService['getNotificationList']> {
         return this.notificationService.getNotificationList(query, headers.authorization);
     }
 
     @Post()
-    markNotificationAs(@Body() request: Request.MarkNotificationAsRequest, @Headers() headers: AppHeaders) {
+    markNotificationAs(
+        @Body() request: Request.MarkNotificationAsRequest,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<NotificationService['markAs']> {
         return this.notificationService.markAs(request, headers.authorization);
     }
 }

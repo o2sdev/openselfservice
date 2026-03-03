@@ -2,6 +2,7 @@ import { NotificationPriority } from '@/modules/notifications/notifications.mode
 
 import { Block } from '@/utils/models';
 
+/** Summary info card item used in notification summary block. */
 export class NotificationSummaryInfoCard {
     title!: string;
     icon?: string;
@@ -10,6 +11,7 @@ export class NotificationSummaryInfoCard {
     variant!: NotificationPriority;
 }
 
+/** CMS block configuration for notification summary cards. */
 export class NotificationSummaryBlock extends Block.Block {
     layout?: 'vertical' | 'horizontal';
     infoCards!: NotificationSummaryInfoCard[];

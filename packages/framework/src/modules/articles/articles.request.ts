@@ -26,8 +26,8 @@ export class GetArticleListQuery extends PaginationQuery {
     locale!: string;
     ids?: string[];
     category?: string;
-    dateFrom?: Date;
-    dateTo?: Date;
+    dateFrom?: string;
+    dateTo?: string;
     sortBy?: string;
     sortOrder?: 'asc' | 'desc';
 }

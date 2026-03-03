@@ -1,5 +1,6 @@
 import { Block, Link, Media, RichText } from '@/utils/models';
 
+/** CMS block configuration for feature section with media and links. */
 export class FeatureSectionBlock extends Block.Block {
     preTitle?: string;
     title?: string;

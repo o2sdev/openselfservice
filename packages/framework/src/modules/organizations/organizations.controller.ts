@@ -15,17 +15,26 @@ export class OrganizationController {
     constructor(private readonly organizationService: OrganizationService) {}
 
     @Get(':id')
-    getOrganization(@Param() params: Request.GetOrganizationParams, @Headers() headers: AppHeaders) {
+    getOrganization(
+        @Param() params: Request.GetOrganizationParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<OrganizationService['getOrganization']> {
         return this.organizationService.getOrganization(params, headers.authorization);
     }
 
     @Get()
-    getOrganizations(@Query() options: Request.OrganizationsListQuery, @Headers() headers: AppHeaders) {
+    getOrganizations(
+        @Query() options: Request.OrganizationsListQuery,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<OrganizationService['getOrganizationList']> {
         return this.organizationService.getOrganizationList(options, headers.authorization);
     }
 
     @Get('/membership/:orgId/:userId')
-    checkMembership(@Param() params: Request.CheckMembershipParams, @Headers() headers: AppHeaders) {
+    checkMembership(
+        @Param() params: Request.CheckMembershipParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<OrganizationService['checkMembership']> {
         return this.organizationService.checkMembership(params, headers.authorization);
     }
 }

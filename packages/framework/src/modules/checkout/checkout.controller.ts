@@ -19,7 +19,7 @@ export class CheckoutController {
         @Param() params: Request.SetAddressesParams,
         @Body() body: Request.SetAddressesBody,
         @Headers() headers: AppHeaders,
-    ) {
+    ): ReturnType<CheckoutService['setAddresses']> {
         return this.checkoutService.setAddresses(params, body, headers.authorization);
     }
 
@@ -28,7 +28,7 @@ export class CheckoutController {
         @Param() params: Request.SetShippingMethodParams,
         @Body() body: Request.SetShippingMethodBody,
         @Headers() headers: AppHeaders,
-    ) {
+    ): ReturnType<CheckoutService['setShippingMethod']> {
         return this.checkoutService.setShippingMethod(params, body, headers.authorization);
     }
 
@@ -37,12 +37,15 @@ export class CheckoutController {
         @Param() params: Request.SetPaymentParams,
         @Body() body: Request.SetPaymentBody,
         @Headers() headers: AppHeaders,
-    ) {
+    ): ReturnType<CheckoutService['setPayment']> {
         return this.checkoutService.setPayment(params, body, headers.authorization);
     }
 
     @Get(':cartId/shipping-options')
-    getShippingOptions(@Param() params: Request.GetShippingOptionsParams, @Headers() headers: AppHeaders) {
+    getShippingOptions(
+        @Param() params: Request.GetShippingOptionsParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<CheckoutService['getShippingOptions']> {
         return this.checkoutService.getShippingOptions(
             { ...params, locale: headers['x-locale'] },
             headers.authorization,
@@ -50,7 +53,10 @@ export class CheckoutController {
     }
 
     @Get(':cartId/summary')
-    getCheckoutSummary(@Param() params: Request.GetCheckoutSummaryParams, @Headers() headers: AppHeaders) {
+    getCheckoutSummary(
+        @Param() params: Request.GetCheckoutSummaryParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<CheckoutService['getCheckoutSummary']> {
         return this.checkoutService.getCheckoutSummary(
             { ...params, locale: headers['x-locale'] },
             headers.authorization,
@@ -62,7 +68,7 @@ export class CheckoutController {
         @Param() params: Request.PlaceOrderParams,
         @Body() body: Request.PlaceOrderBody,
         @Headers() headers: AppHeaders,
-    ) {
+    ): ReturnType<CheckoutService['placeOrder']> {
         return this.checkoutService.placeOrder(params, body, headers.authorization);
     }
 
@@ -71,7 +77,7 @@ export class CheckoutController {
         @Param() params: Request.CompleteCheckoutParams,
         @Body() body: Request.CompleteCheckoutBody,
         @Headers() headers: AppHeaders,
-    ) {
+    ): ReturnType<CheckoutService['completeCheckout']> {
         return this.checkoutService.completeCheckout(params, body, headers.authorization);
     }
 }

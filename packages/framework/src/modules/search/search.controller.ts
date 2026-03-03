@@ -11,7 +11,7 @@ export class SearchController {
     constructor(protected readonly searchService: SearchService) {}
 
     @Get()
-    search(@Query('index') index: string, @Body() searchPayload: SearchPayload) {
+    search(@Query('index') index: string, @Body() searchPayload: SearchPayload): ReturnType<SearchService['search']> {
         return this.searchService.search(index, searchPayload);
     }
 }

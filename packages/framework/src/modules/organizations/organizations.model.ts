@@ -2,6 +2,7 @@ import { Pagination } from '@/utils/models';
 import { Customer } from '@/utils/models/customer';
 import { Party } from '@/utils/models/party';
 
+/** Organization entity with hierarchy and customer relations. */
 export class Organization extends Party {
     isActive!: boolean;
     taxId!: string;
@@ -9,4 +10,5 @@ export class Organization extends Party {
     customers!: Customer[];
 }
 
+/** Paginated organization list. */
 export type Organizations = Pagination.Paginated<Organization>;

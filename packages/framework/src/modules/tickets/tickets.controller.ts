@@ -15,17 +15,26 @@ export class TicketsController {
     constructor(protected readonly ticketService: TicketService) {}
 
     @Get(':id')
-    getTicket(@Param() params: Request.GetTicketParams, @Headers() headers: AppHeaders) {
+    getTicket(
+        @Param() params: Request.GetTicketParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<TicketService['getTicket']> {
         return this.ticketService.getTicket(params, headers.authorization);
     }
 
     @Get()
-    getTicketList(@Query() query: Request.GetTicketListQuery, @Headers() headers: AppHeaders) {
+    getTicketList(
+        @Query() query: Request.GetTicketListQuery,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<TicketService['getTicketList']> {
         return this.ticketService.getTicketList(query, headers.authorization);
     }
 
     @Post()
-    createTicket(@Body() body: Request.PostTicketBody, @Headers() headers: AppHeaders) {
+    createTicket(
+        @Body() body: Request.PostTicketBody,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<TicketService['createTicket']> {
         return this.ticketService.createTicket(body, headers.authorization);
     }
 }

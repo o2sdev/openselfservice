@@ -26,6 +26,7 @@ type ResourceFilters = Omit<Filters.Filters<Resource>, 'items'> & {
     items: ResourceFilterItem[];
 };
 
+/** CMS block configuration for resources list view. */
 export class ResourceListBlock extends Block.Block {
     title!: string;
     subtitle?: string;

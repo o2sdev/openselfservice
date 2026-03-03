@@ -15,17 +15,23 @@ export class CustomersController {
     constructor(protected readonly customerService: CustomerService) {}
 
     @Get()
-    getAddresses(@Headers() headers: AppHeaders) {
+    getAddresses(@Headers() headers: AppHeaders): ReturnType<CustomerService['getAddresses']> {
         return this.customerService.getAddresses(headers.authorization);
     }
 
     @Get(':id')
-    getAddress(@Param() params: Request.GetAddressParams, @Headers() headers: AppHeaders) {
+    getAddress(
+        @Param() params: Request.GetAddressParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<CustomerService['getAddress']> {
         return this.customerService.getAddress(params, headers.authorization);
     }
 
     @Post()
-    createAddress(@Body() body: Request.CreateAddressBody, @Headers() headers: AppHeaders) {
+    createAddress(
+        @Body() body: Request.CreateAddressBody,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<CustomerService['createAddress']> {
         return this.customerService.createAddress(body, headers.authorization);
     }
 
@@ -34,17 +40,23 @@ export class CustomersController {
         @Param() params: Request.UpdateAddressParams,
         @Body() body: Request.UpdateAddressBody,
         @Headers() headers: AppHeaders,
-    ) {
+    ): ReturnType<CustomerService['updateAddress']> {
         return this.customerService.updateAddress(params, body, headers.authorization);
     }
 
     @Delete(':id')
-    deleteAddress(@Param() params: Request.DeleteAddressParams, @Headers() headers: AppHeaders) {
+    deleteAddress(
+        @Param() params: Request.DeleteAddressParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<CustomerService['deleteAddress']> {
         return this.customerService.deleteAddress(params, headers.authorization);
     }
 
     @Post(':id/default')
-    setDefaultAddress(@Param() params: Request.SetDefaultAddressParams, @Headers() headers: AppHeaders) {
+    setDefaultAddress(
+        @Param() params: Request.SetDefaultAddressParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<CustomerService['setDefaultAddress']> {
         return this.customerService.setDefaultAddress(params, headers.authorization);
     }
 }

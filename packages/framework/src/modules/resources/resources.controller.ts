@@ -25,7 +25,10 @@ export class ResourceController {
     constructor(protected readonly resourceService: ResourceService) {}
 
     @Post(':id/purchase')
-    purchaseResource(@Param() params: GetResourceParams, @Headers() headers: AppHeaders) {
+    purchaseResource(
+        @Param() params: GetResourceParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<ResourceService['purchaseOrActivateResource']> {
         return this.resourceService.purchaseOrActivateResource(params, headers.authorization);
     }
 

@@ -15,27 +15,27 @@ export class ArticleController {
     constructor(protected readonly articleService: ArticlesService) {}
 
     @Get('/categories')
-    getCategoryList(@Query() query: Request.GetCategoryListQuery) {
+    getCategoryList(@Query() query: Request.GetCategoryListQuery): ReturnType<ArticlesService['getCategoryList']> {
         return this.articleService.getCategoryList(query);
     }
 
     @Get('/categories/:id')
-    getCategory(@Param('id') id: string, @Query('locale') locale: string) {
+    getCategory(@Param('id') id: string, @Query('locale') locale: string): ReturnType<ArticlesService['getCategory']> {
         return this.articleService.getCategory({ id, locale });
     }
 
     @Get('/search')
-    searchArticles(@Query() query: Request.SearchArticlesBody) {
+    searchArticles(@Query() query: Request.SearchArticlesBody): ReturnType<ArticlesService['searchArticles']> {
         return this.articleService.searchArticles(query);
     }
 
     @Get(':id')
-    getArticle(@Param('id') id: string, @Query('locale') locale: string) {
+    getArticle(@Param('id') id: string, @Query('locale') locale: string): ReturnType<ArticlesService['getArticle']> {
         return this.articleService.getArticle({ slug: id, locale });
     }
 
     @Get()
-    getArticleList(@Query() query: Request.GetArticleListQuery) {
+    getArticleList(@Query() query: Request.GetArticleListQuery): ReturnType<ArticlesService['getArticleList']> {
         return this.articleService.getArticleList(query);
     }
 }

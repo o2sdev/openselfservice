@@ -15,17 +15,26 @@ export class PaymentsController {
     constructor(protected readonly paymentService: PaymentService) {}
 
     @Get('providers')
-    getProviders(@Query() params: Request.GetProvidersParams, @Headers() headers: AppHeaders) {
+    getProviders(
+        @Query() params: Request.GetProvidersParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<PaymentService['getProviders']> {
         return this.paymentService.getProviders({ ...params, locale: headers['x-locale'] }, headers.authorization);
     }
 
     @Post('sessions')
-    createSession(@Body() body: Request.CreateSessionBody, @Headers() headers: AppHeaders) {
+    createSession(
+        @Body() body: Request.CreateSessionBody,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<PaymentService['createSession']> {
         return this.paymentService.createSession(body, headers.authorization);
     }
 
     @Get('sessions/:id')
-    getSession(@Param() params: Request.GetSessionParams, @Headers() headers: AppHeaders) {
+    getSession(
+        @Param() params: Request.GetSessionParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<PaymentService['getSession']> {
         return this.paymentService.getSession(params, headers.authorization);
     }
 
@@ -34,12 +43,15 @@ export class PaymentsController {
         @Param() params: Request.UpdateSessionParams,
         @Body() body: Request.UpdateSessionBody,
         @Headers() headers: AppHeaders,
-    ) {
+    ): ReturnType<PaymentService['updateSession']> {
         return this.paymentService.updateSession(params, body, headers.authorization);
     }
 
     @Delete('sessions/:id')
-    cancelSession(@Param() params: Request.CancelSessionParams, @Headers() headers: AppHeaders) {
+    cancelSession(
+        @Param() params: Request.CancelSessionParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<PaymentService['cancelSession']> {
         return this.paymentService.cancelSession(params, headers.authorization);
     }
 }

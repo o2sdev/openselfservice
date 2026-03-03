@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 
 import * as CMS from './';
 
+export type CmsEntryData = Record<string, unknown>;
+export type CmsEntriesData = Record<string, unknown>;
+
 /**
  * Abstract CMS service. Implementation is provided by API Harmonization (integration with headless CMS).
  * All methods return RxJS {@link Observable}. Handles pages, entries, header/footer, app config, and block types.
@@ -13,9 +16,9 @@ export abstract class CmsService {
 
     abstract getAppConfig(options: CMS.Request.GetCmsAppConfigParams): Observable<CMS.Model.AppConfig.AppConfig>;
 
-    abstract getEntry(options: CMS.Request.GetCmsEntryParams): Observable<unknown>;
+    abstract getEntry<T = CmsEntryData>(options: CMS.Request.GetCmsEntryParams): Observable<T | undefined>;
 
-    abstract getEntries(options: CMS.Request.GetCmsEntriesParams): Observable<unknown>;
+    abstract getEntries<T = CmsEntriesData>(options: CMS.Request.GetCmsEntriesParams): Observable<T>;
 
     abstract getPage(options: CMS.Request.GetCmsPageParams): Observable<CMS.Model.Page.Page | undefined>;
 

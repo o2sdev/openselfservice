@@ -9,9 +9,21 @@ import { GetBillingAccountParams, GetBillingAccountsListQuery } from './billing-
 export abstract class BillingAccountService {
     protected constructor(..._services: unknown[]) {}
 
+    /**
+     * Retrieve a list of billing accounts.
+     * @param query Request query containing paging and optional filters.
+     * @param authorization Optional bearer token value.
+     * @returns Observable stream with billing account list data.
+     */
     abstract getBillingAccounts(
         query: GetBillingAccountsListQuery,
         authorization?: string,
     ): Observable<BillingAccounts>;
+    /**
+     * Retrieve a single billing account by params.
+     * @param params Request params identifying the billing account.
+     * @param authorization Optional bearer token value.
+     * @returns Observable stream with one billing account.
+     */
     abstract getBillingAccount(params: GetBillingAccountParams, authorization?: string): Observable<BillingAccount>;
 }

@@ -15,12 +15,18 @@ export class OrdersController {
     constructor(private readonly orderService: OrderService) {}
 
     @Get(':id')
-    getOrder(@Param() params: Request.GetOrderParams, @Headers() headers: AppHeaders) {
+    getOrder(
+        @Param() params: Request.GetOrderParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<OrderService['getOrder']> {
         return this.orderService.getOrder(params, headers.authorization);
     }
 
     @Get()
-    getOrderList(@Query() query: Request.GetOrderListQuery, @Headers() headers: AppHeaders) {
+    getOrderList(
+        @Query() query: Request.GetOrderListQuery,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<OrderService['getOrderList']> {
         return this.orderService.getOrderList(query, headers.authorization);
     }
 }

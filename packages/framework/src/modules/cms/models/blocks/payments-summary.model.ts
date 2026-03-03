@@ -1,5 +1,6 @@
 import { Block, InfoCard } from '@/utils/models';
 
+/** Chart configuration used by payments summary block. */
 export class PaymentsSummaryChart {
     title?: string;
     topSegment!: string;
@@ -10,6 +11,7 @@ export class PaymentsSummaryChart {
     monthsToShow?: number;
 }
 
+/** CMS block configuration for payments summary cards and chart. */
 export class PaymentsSummaryBlock extends Block.Block {
     overdue?: InfoCard.InfoCard;
     toBePaid?: InfoCard.InfoCard;
