@@ -34,10 +34,22 @@ You can obtain this value from your Strapi instance settings - it should be the 
 
 ## Content model import
 
-To start, go to our resource repository where you can find the instructions on how to import the content model into your own Strapi instance:
+For Strapi we ship a **predefined content model and sample data** that matches how O2S expects pages, templates and blocks to be structured.  
+These resources live in a separate companion repository:
 
 - [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/o2s)
 - [**DXP Starter Kit** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/dxp)
+
+The `openselfservice-resources` repo is intentionally separate from the main `openselfservice` codebase – it only contains exports and example data for external tools (like Strapi), so that your application repository stays focused on framework code and integrations.
+In practice this includes things like CMS configurations (content models, plugins, sample content), initial products and assets for commerce engines, and CI/CD pipeline templates for deploying O2S.
+
+To import the content model into your own Strapi instance:
+
+1. Choose the folder that matches your starter (`o2s` or `dxp`) in the resources repo.
+2. Follow the README in that folder to import the Strapi export (content types and optional data).
+3. Start your Strapi instance with the imported model.
+
+For a detailed, step‑by‑step guide (including rationale, repository layout and troubleshooting), see **[How to set up](./how-to-setup.md)**.
 
 ## Code generation
 
