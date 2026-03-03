@@ -15,4 +15,5 @@ export interface AddressFieldsProps {
     };
     /** Prefix for element ids (e.g. 'billing' -> billingStreetName, billingCity...) */
     idPrefix?: string;
+    locale: string;
 }

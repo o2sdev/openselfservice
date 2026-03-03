@@ -268,7 +268,9 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                         )}
                                     </Field>
 
-                                    {!values.sameAsBillingAddress && <AddressFields fields={fields.address} />}
+                                    {!values.sameAsBillingAddress && (
+                                        <AddressFields fields={fields.address} locale={locale} />
+                                    )}
                                 </div>
 
                                 <Separator />

@@ -3,11 +3,15 @@ import React from 'react';
 
 import { Input } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import type { AddressFieldsProps } from './AddressFields.types';
 
-export const AddressFields: React.FC<Readonly<AddressFieldsProps>> = ({ fields, idPrefix = '' }) => {
+const COUNTRY_CODES = ['PL', 'DE', 'GB'] as const;
+
+export const AddressFields: React.FC<Readonly<AddressFieldsProps>> = ({ fields, idPrefix = '', locale }) => {
+    const countryNames = new Intl.DisplayNames([locale], { type: 'region' });
     const id = (name: string) => (idPrefix ? `${idPrefix}${name.charAt(0).toUpperCase() + name.slice(1)}` : name);
 
     return (
@@ -160,14 +164,20 @@ export const AddressFields: React.FC<Readonly<AddressFieldsProps>> = ({ fields, 
                     {fields.country.required && <span className="text-destructive"> *</span>}
                 </Label>
                 <Field name="country">
-                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                    {({ field, form: { touched, errors, setFieldValue } }: FieldProps<string>) => (
                         <>
-                            <Input
-                                id={id('country')}
-                                {...field}
-                                placeholder={fields.country.placeholder}
-                                className={touched.country && errors.country ? 'border-destructive' : ''}
-                            />
+                            <Select value={field.value} onValueChange={(value) => setFieldValue('country', value)}>
+                                <SelectTrigger id={id('country')} hasError={!!(touched.country && errors.country)}>
+                                    <SelectValue placeholder={fields.country.placeholder} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {COUNTRY_CODES.map((code) => (
+                                        <SelectItem key={code} value={code}>
+                                            {countryNames.of(code)}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                             <ErrorMessage name="country">
                                 {(msg) => (
                                     <Typography variant="small" className="text-destructive">

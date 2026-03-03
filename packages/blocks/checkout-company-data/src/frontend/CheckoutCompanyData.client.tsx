@@ -263,7 +263,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                                     </div>
 
                                     <div className="md:col-span-2 w-full">
-                                        <AddressFields fields={fields.address} />
+                                        <AddressFields fields={fields.address} locale={locale} />
                                     </div>
                                 </div>
 

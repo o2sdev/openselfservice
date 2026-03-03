@@ -69,5 +69,6 @@ type Story = StoryObj<typeof AddressFields>;
 export const Default: Story = {
     args: {
         fields: mockFields,
+        locale: 'en',
     },
 };
