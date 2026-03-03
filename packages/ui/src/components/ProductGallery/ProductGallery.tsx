@@ -28,7 +28,6 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
     speed = 300,
     shouldPreloadGallery = false,
     keyboardControlMode = 'managed',
-    defaultKeyboardActive = false,
     keyboardCarouselId,
     ...swiperProps
 }) => {
@@ -75,7 +74,6 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
         keyboardControlMode,
         carouselId: mainCarouselId,
         swiper: mainSwiper,
-        defaultKeyboardActive,
         shouldEnable: (activeCarouselId) => activeCarouselId === mainCarouselId && !isLightboxOpen,
     });
 

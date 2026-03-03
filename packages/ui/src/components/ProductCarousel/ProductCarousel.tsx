@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useId } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -22,9 +22,11 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
     linkDetailsLabel,
     carouselClassName,
     keyboardControlMode,
-    defaultKeyboardActive,
     keyboardCarouselId,
 }) => {
+    const generatedCarouselId = useId().replaceAll(':', '');
+    const resolvedKeyboardCarouselId = keyboardCarouselId ?? `product-carousel-${generatedCarouselId}`;
+
     if (!products || products.length === 0) {
         return null;
     }
@@ -89,8 +91,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                     },
                 }}
                 keyboardControlMode={keyboardControlMode}
-                defaultKeyboardActive={defaultKeyboardActive}
-                keyboardCarouselId={keyboardCarouselId}
+                keyboardCarouselId={resolvedKeyboardCarouselId}
                 {...carouselConfig}
             />
         </div>

@@ -11,7 +11,6 @@ export interface CarouselProps extends Omit<SwiperProps, 'children'> {
     startingSlideIndex?: number;
     noSwipingSelector?: string;
     keyboardControlMode?: KeyboardControlMode;
-    defaultKeyboardActive?: boolean;
     keyboardCarouselId?: string;
     labels?: {
         previous?: string;

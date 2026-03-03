@@ -7,4 +7,5 @@
 fix: prevent multiple carousels from responding to arrow keys at the same time
 
 Added managed keyboard control for Swiper-based carousels so only the active carousel handles left/right arrows.
-On product pages, the ProductDetails gallery is now the default active carousel, and focus/pointer interaction switches control predictably (including lightbox state).
+Keyboard control is activated by focus/pointer interaction on a carousel, without any default active carousel that captures arrow keys before interaction.
+Introduced automatic `keyboardCarouselId` resolution when it is not provided in props.

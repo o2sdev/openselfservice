@@ -25,7 +25,6 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     startingSlideIndex = 0,
     noSwipingSelector,
     keyboardControlMode = 'swiper-native',
-    defaultKeyboardActive = false,
     keyboardCarouselId,
     labels = {
         previous: 'Previous slide',
@@ -54,7 +53,6 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
         keyboardControlMode,
         carouselId,
         swiper: managedSwiper,
-        defaultKeyboardActive,
     });
 
     return (

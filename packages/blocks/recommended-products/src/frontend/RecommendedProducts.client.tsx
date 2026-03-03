@@ -22,7 +22,6 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
             LinkComponent={LinkComponent}
             linkDetailsLabel={labels.detailsLabel}
             keyboardControlMode="managed"
-            keyboardCarouselId="recommended-products-carousel"
             carouselConfig={{ loop: true }}
         />
     );

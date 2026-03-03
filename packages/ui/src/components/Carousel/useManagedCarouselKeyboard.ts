@@ -15,7 +15,6 @@ interface UseManagedCarouselKeyboardParams {
     keyboardControlMode: KeyboardControlMode;
     carouselId: string;
     swiper: SwiperType | null;
-    defaultKeyboardActive?: boolean;
     shouldEnable?: (activeCarouselId: string | null) => boolean;
 }
 
@@ -23,7 +22,6 @@ export const useManagedCarouselKeyboard = ({
     keyboardControlMode,
     carouselId,
     swiper,
-    defaultKeyboardActive = false,
     shouldEnable,
 }: UseManagedCarouselKeyboardParams) => {
     const [activeCarouselId, setCurrentActiveCarouselId] = useState<string | null>(
@@ -35,13 +33,6 @@ export const useManagedCarouselKeyboard = ({
 
         return subscribeActiveCarousel(setCurrentActiveCarouselId);
     }, [keyboardControlMode]);
-
-    useEffect(() => {
-        if (keyboardControlMode !== 'managed' || !defaultKeyboardActive) return;
-        if (getActiveCarouselId()) return;
-
-        setActiveCarouselId(carouselId);
-    }, [keyboardControlMode, defaultKeyboardActive, carouselId]);
 
     useEffect(() => {
         if (keyboardControlMode !== 'managed') return;

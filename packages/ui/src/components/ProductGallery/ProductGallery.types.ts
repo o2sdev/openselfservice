@@ -16,6 +16,5 @@ export interface ProductGalleryProps extends Omit<SwiperProps, 'children'> {
     speed?: number;
     shouldPreloadGallery?: boolean;
     keyboardControlMode?: KeyboardControlMode;
-    defaultKeyboardActive?: boolean;
     keyboardCarouselId?: string;
 }

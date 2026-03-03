@@ -136,7 +136,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         showThumbnails={false}
                         shouldPreloadGallery={hasPriority}
                         keyboardControlMode="managed"
-                        defaultKeyboardActive={true}
                     />
                     <div className="flex flex-col gap-4 lg:hidden">
                         <ProductInfo name={product.name} subtitle={product.subtitle} badges={product.badges} />
