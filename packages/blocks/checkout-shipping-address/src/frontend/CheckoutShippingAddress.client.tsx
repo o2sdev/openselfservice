@@ -115,12 +115,9 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         : {}),
                     ...(cart.shippingMethod ? { shippingMethod: cart.shippingMethod.id } : {}),
                 }));
-            } catch (error) {
-                const status = (error as { status?: number }).status;
-                if (status === 401 || status === 404) {
-                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
-                    router.replace(cartPath ?? '/');
-                }
+            } catch {
+                toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                router.replace(cartPath ?? '/');
             } finally {
                 setIsLoading(false);
             }

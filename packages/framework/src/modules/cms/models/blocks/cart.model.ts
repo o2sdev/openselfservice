@@ -8,7 +8,11 @@ export class CartBlock extends Block.Block {
     labels?: {
         itemTotal: string;
         unknownProductName: string;
-        errorMessage: string;
+    };
+    errors?: {
+        loadError: string;
+        updateError: string;
+        promoError: string;
     };
     actions?: {
         increaseQuantity: string;

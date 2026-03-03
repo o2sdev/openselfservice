@@ -58,12 +58,13 @@ export class CartsService extends Carts.Service {
                 const cart = mapCart(response.cart, this.defaultCurrency);
 
                 // Verify ownership for customer carts
-                if (
-                    cart.customerId &&
-                    authorization &&
-                    cart.customerId !== this.authService.getCustomerId(authorization)
-                ) {
-                    throw new UnauthorizedException('Unauthorized to access this cart');
+                if (cart.customerId) {
+                    if (!authorization) {
+                        throw new UnauthorizedException('Authentication required to access this cart');
+                    }
+                    if (cart.customerId !== this.authService.getCustomerId(authorization)) {
+                        throw new UnauthorizedException('Unauthorized to access this cart');
+                    }
                 }
 
                 return cart;
@@ -164,8 +165,15 @@ export class CartsService extends Carts.Service {
                 switchMap((response: HttpTypes.StoreCartResponse) => {
                     const cart = mapCart(response.cart, this.defaultCurrency);
 
-                    if (cart.customerId && authorization && cart.customerId !== customerId) {
-                        return throwError(() => new UnauthorizedException('Unauthorized to access this cart'));
+                    if (cart.customerId) {
+                        if (!authorization) {
+                            return throwError(
+                                () => new UnauthorizedException('Authentication required to access this cart'),
+                            );
+                        }
+                        if (cart.customerId !== customerId) {
+                            return throwError(() => new UnauthorizedException('Unauthorized to access this cart'));
+                        }
                     }
 
                     return from(

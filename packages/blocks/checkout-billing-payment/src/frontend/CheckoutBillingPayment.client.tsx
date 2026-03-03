@@ -96,12 +96,9 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                 if (cart.paymentMethod) {
                     setInitialFormValues({ paymentMethod: cart.paymentMethod.id });
                 }
-            } catch (error) {
-                const status = (error as { status?: number }).status;
-                if (status === 401 || status === 404) {
-                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
-                    router.replace(cartPath ?? '/');
-                }
+            } catch {
+                toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                router.replace(cartPath ?? '/');
             } finally {
                 setIsLoading(false);
             }

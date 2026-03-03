@@ -102,12 +102,9 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         notes: cart.notes ?? '',
                     });
                 }
-            } catch (error) {
-                const status = (error as { status?: number }).status;
-                if (status === 401 || status === 404) {
-                    toast({ description: errors.cartNotFound, variant: 'destructive' });
-                    router.replace(cartPath ?? '/');
-                }
+            } catch {
+                toast({ description: errors.cartNotFound, variant: 'destructive' });
+                router.replace(cartPath ?? '/');
             } finally {
                 setIsTotalsLoading(false);
             }
