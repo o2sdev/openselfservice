@@ -50,43 +50,6 @@ const baseBlock = {
             path: '#',
         },
     },
-    items: [
-        {
-            id: 'cart-item-001',
-            productId: 'PRIM-001',
-            quantity: 2,
-            price: { value: 89.99, currency: 'PLN' as const },
-            total: { value: 179.98, currency: 'PLN' as const },
-            product: {
-                name: 'CLARIS S Filter Cartridge',
-                subtitle: 'Filters • JURA',
-                image: {
-                    url: 'https://picsum.photos/200/200',
-                    alt: 'CLARIS S filter cartridge',
-                },
-            },
-        },
-        {
-            id: 'cart-item-002',
-            productId: 'PRIM-002',
-            quantity: 1,
-            price: { value: 24.99, currency: 'PLN' as const },
-            total: { value: 24.99, currency: 'PLN' as const },
-            product: {
-                name: 'Cleaning solution',
-                subtitle: 'Maintenance',
-                image: {
-                    url: 'https://picsum.photos/200/201',
-                    alt: 'Cleaning solution',
-                },
-            },
-        },
-    ],
-    totals: {
-        subtotal: { value: 204.97, currency: 'PLN' as const },
-        tax: { value: 47.14, currency: 'PLN' as const },
-        total: { value: 252.11, currency: 'PLN' as const },
-    },
 };
 
 const meta = {
@@ -113,11 +76,5 @@ export const EmptyCart: Story = {
         id: 'cart-1',
         locale: 'en',
         routing,
-        items: [],
-        totals: {
-            subtotal: { value: 0, currency: 'PLN' as const },
-            tax: { value: 0, currency: 'PLN' as const },
-            total: { value: 0, currency: 'PLN' as const },
-        },
     },
 };

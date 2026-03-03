@@ -3,6 +3,8 @@
 import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 
+import { Carts } from '@o2s/framework/modules';
+
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { CartItem } from '@o2s/ui/components/Cart/CartItem';
@@ -14,7 +16,6 @@ import { Button } from '@o2s/ui/elements/button';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import type { Model } from '../api-harmonization/cart.client';
 import { sdk } from '../sdk';
 
 import { CartPureProps } from './Cart.types';
@@ -35,35 +36,16 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     checkoutButton,
     continueShopping,
     empty,
-    items: initialItems,
-    totals: initialTotals,
-    promotions: initialPromotions,
-    discountTotal: initialDiscountTotal,
-    shippingMethod: initialShippingMethod,
     promoCodeLabels,
     id,
     __typename,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
-    const [cartItems, setCartItems] = useState<Model.CartBlockItem[]>(initialItems ?? []);
-    const [cartTotals, setCartTotals] = useState<Model.CartBlockTotals>(initialTotals);
-    const [cartPromotions, setCartPromotions] = useState<Model.CartBlock['promotions']>(initialPromotions);
-    const [cartDiscountTotal, setCartDiscountTotal] = useState<Model.CartBlock['discountTotal']>(initialDiscountTotal);
-    const [cartShippingMethod, setCartShippingMethod] =
-        useState<Model.CartBlock['shippingMethod']>(initialShippingMethod);
+    const [cart, setCart] = useState<Carts.Model.Cart | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isPromoLoading, setIsPromoLoading] = useState(false);
     const [isPending, startTransition] = useTransition();
-
-    const refreshCart = async (cartId: string): Promise<void> => {
-        const data = await sdk.blocks.getCart({ id, cartId }, { 'x-locale': locale }, accessToken);
-        setCartItems(data.items ?? []);
-        setCartTotals(data.totals);
-        setCartPromotions(data.promotions);
-        setCartDiscountTotal(data.discountTotal);
-        setCartShippingMethod(data.shippingMethod);
-    };
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
@@ -72,7 +54,8 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         setIsLoading(true);
         (async () => {
             try {
-                await refreshCart(cartId);
+                const data = await sdk.cart.getCart(cartId, { 'x-locale': locale }, accessToken);
+                setCart(data);
             } catch (error) {
                 const status = (error as { status?: number }).status;
                 if (status === 404 || status === 401) {
@@ -82,7 +65,6 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 setIsLoading(false);
             }
         })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, locale, accessToken]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
@@ -91,14 +73,14 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
         startTransition(async () => {
             try {
-                await sdk.cart.updateCartItem(
+                const updated = await sdk.cart.updateCartItem(
                     cartId,
                     itemId,
                     { quantity: newQuantity },
                     { 'x-locale': locale },
                     accessToken,
                 );
-                await refreshCart(cartId);
+                setCart(updated);
             } catch {
                 toast({ variant: 'destructive', title: labels.errorMessage });
             }
@@ -111,8 +93,8 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
         setIsPromoLoading(true);
         try {
-            await sdk.cart.applyPromotion(cartId, { code }, { 'x-locale': locale }, accessToken);
-            await refreshCart(cartId);
+            const updated = await sdk.cart.applyPromotion(cartId, { code }, { 'x-locale': locale }, accessToken);
+            setCart(updated);
         } finally {
             setIsPromoLoading(false);
         }
@@ -124,8 +106,8 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
         setIsPromoLoading(true);
         try {
-            await sdk.cart.removePromotion(cartId, code, { 'x-locale': locale }, accessToken);
-            await refreshCart(cartId);
+            const updated = await sdk.cart.removePromotion(cartId, code, { 'x-locale': locale }, accessToken);
+            setCart(updated);
         } finally {
             setIsPromoLoading(false);
         }
@@ -137,8 +119,8 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
         startTransition(async () => {
             try {
-                await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
-                await refreshCart(cartId);
+                const updated = await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
+                setCart(updated);
             } catch {
                 toast({ variant: 'destructive', title: labels.errorMessage });
             }
@@ -178,7 +160,9 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         );
     }
 
-    if (cartItems.length === 0 && !isPending) {
+    const zero = { value: 0, currency: defaultCurrency };
+
+    if ((cart?.items.data.length ?? 0) === 0 && !isPending) {
         return (
             <div className="w-full flex flex-col gap-8 md:gap-12 items-center justify-center py-12">
                 <DynamicIcon name="ShoppingCart" size={64} className="text-muted-foreground" />
@@ -216,46 +200,42 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                             <DynamicIcon name="Loader2" size={32} className="animate-spin text-primary" />
                         </div>
                     )}
-                    {cartItems.map((item) => {
-                        const product = item.product ?? {
-                            name: labels.unknownProductName,
-                            subtitle: undefined,
-                            image: undefined,
-                        };
-
-                        return (
-                            <CartItem
-                                key={item.id}
-                                id={item.id}
-                                productId={item.productId}
-                                productUrl={product.link}
-                                name={product.name}
-                                subtitle={product.subtitle}
-                                image={product.image}
-                                quantity={item.quantity}
-                                price={item.price}
-                                total={item.total}
-                                labels={{
-                                    itemTotal: labels.itemTotal,
-                                    ...actions,
-                                }}
-                                onRemove={removeItem}
-                                onQuantityChange={updateQuantity}
-                                LinkComponent={LinkComponent}
-                            />
-                        );
-                    })}
+                    {cart?.items.data.map((item) => (
+                        <CartItem
+                            key={item.id}
+                            id={item.id}
+                            productId={item.product.id}
+                            productUrl={item.product.link}
+                            name={item.product.name}
+                            subtitle={item.product.shortDescription}
+                            image={item.product.image}
+                            quantity={item.quantity}
+                            price={item.price}
+                            total={item.total}
+                            labels={{
+                                itemTotal: labels.itemTotal,
+                                ...actions,
+                            }}
+                            onRemove={removeItem}
+                            onQuantityChange={updateQuantity}
+                            LinkComponent={LinkComponent}
+                        />
+                    ))}
                 </div>
 
                 {/* Cart Summary + Promo Code */}
                 <div className="lg:col-span-1 flex flex-col-reverse lg:flex-col gap-4">
                     <CartSummary
-                        subtotal={cartTotals.subtotal}
-                        tax={cartTotals.tax}
-                        total={cartTotals.total}
-                        discountTotal={cartDiscountTotal}
-                        shippingMethod={cartShippingMethod}
-                        promotions={cartPromotions}
+                        subtotal={cart?.subtotal ?? zero}
+                        tax={cart?.taxTotal ?? zero}
+                        total={cart?.total ?? zero}
+                        discountTotal={cart?.discountTotal}
+                        shippingMethod={
+                            cart?.shippingMethod && cart.shippingTotal
+                                ? { name: cart.shippingMethod.name, total: cart.shippingTotal }
+                                : undefined
+                        }
+                        promotions={cart?.promotions}
                         labels={summaryLabels}
                         LinkComponent={LinkComponent}
                         primaryButton={
@@ -278,7 +258,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                     />
                     {promoCodeLabels && (
                         <CartPromoCode
-                            promotions={cartPromotions}
+                            promotions={cart?.promotions}
                             labels={promoCodeLabels}
                             isLoading={isPromoLoading}
                             onApply={applyPromotion}

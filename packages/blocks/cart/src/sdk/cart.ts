@@ -1,6 +1,7 @@
 import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { Carts } from '@o2s/framework/modules';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/cart.client';
@@ -31,13 +32,28 @@ export const cart = (sdk: Sdk) => ({
             }),
     },
     cart: {
+        getCart: (
+            cartId: string,
+            headers: Models.Headers.AppHeaders,
+            authorization?: string,
+        ): Promise<Carts.Model.Cart> =>
+            sdk.makeRequest({
+                method: 'get',
+                url: `${CARTS_API_URL}/${cartId}`,
+                headers: {
+                    ...Utils.Headers.getApiHeaders(),
+                    ...headers,
+                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
+                },
+            }),
+
         updateCartItem: (
             cartId: string,
             itemId: string,
             body: { quantity?: number; metadata?: Record<string, unknown>; locale?: string },
             headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<void> =>
+        ): Promise<Carts.Model.Cart> =>
             sdk.makeRequest({
                 method: 'patch',
                 url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
@@ -54,7 +70,7 @@ export const cart = (sdk: Sdk) => ({
             itemId: string,
             headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<void> =>
+        ): Promise<Carts.Model.Cart> =>
             sdk.makeRequest({
                 method: 'delete',
                 url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
@@ -70,7 +86,7 @@ export const cart = (sdk: Sdk) => ({
             body: { code: string; locale?: string },
             headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<void> =>
+        ): Promise<Carts.Model.Cart> =>
             sdk.makeRequest({
                 method: 'post',
                 url: `${CARTS_API_URL}/${cartId}/promotions`,
@@ -87,7 +103,7 @@ export const cart = (sdk: Sdk) => ({
             code: string,
             headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<void> =>
+        ): Promise<Carts.Model.Cart> =>
             sdk.makeRequest({
                 method: 'delete',
                 url: `${CARTS_API_URL}/${cartId}/promotions/${code}`,
