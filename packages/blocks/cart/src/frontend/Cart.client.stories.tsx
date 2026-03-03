@@ -19,7 +19,11 @@ const baseBlock = {
     labels: {
         itemTotal: 'Total',
         unknownProductName: 'Product',
-        errorMessage: 'Something went wrong. Please try again.',
+    },
+    errors: {
+        loadError: 'Failed to load cart. Please try again.',
+        updateError: 'Failed to update cart. Please try again.',
+        promoError: 'Failed to apply promo code. Please try again.',
     },
     actions: {
         increaseQuantity: 'Increase quantity',

@@ -17,6 +17,7 @@ export class CheckoutBillingPaymentBlock extends Block.Block {
     errors!: {
         required: string;
         cartNotFound: string;
+        submitError: string;
     };
     summaryLabels!: {
         title: string;

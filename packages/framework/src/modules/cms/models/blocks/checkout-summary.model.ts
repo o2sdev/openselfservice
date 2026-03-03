@@ -41,6 +41,8 @@ export class CheckoutSummaryBlock extends Block.Block {
     };
     errors!: {
         cartNotFound: string;
+        placeOrderError: string;
+        loadError: string;
     };
     loading!: {
         confirming: string;

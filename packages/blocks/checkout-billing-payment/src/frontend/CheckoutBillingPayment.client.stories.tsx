@@ -38,6 +38,7 @@ const baseBlock = {
     errors: {
         required: 'This field is required',
         cartNotFound: 'Cart not found',
+        submitError: 'Something went wrong. Please try again.',
     },
     summaryLabels: {
         title: 'Summary',

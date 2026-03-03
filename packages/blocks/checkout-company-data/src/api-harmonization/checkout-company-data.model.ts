@@ -44,6 +44,7 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
         invalidTaxId: string;
         invalidPostalCode: string;
         cartNotFound: string;
+        submitError: string;
     };
     summaryLabels!: CheckoutCompanyDataSummaryLabels;
     totals?: {

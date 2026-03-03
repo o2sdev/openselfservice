@@ -31,6 +31,7 @@ export class CheckoutCompanyDataBlock extends Block.Block {
         invalidTaxId: string;
         invalidPostalCode: string;
         cartNotFound: string;
+        submitError: string;
     };
     summaryLabels!: {
         title: string;

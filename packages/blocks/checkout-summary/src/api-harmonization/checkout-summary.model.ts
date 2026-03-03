@@ -32,7 +32,7 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
         back: { label: string; path: string };
         confirm: { label: string; path: string };
     };
-    errors!: { cartNotFound: string };
+    errors!: { cartNotFound: string; placeOrderError: string; loadError: string };
     loading!: { confirming: string };
     placeholders!: {
         companyData: string;

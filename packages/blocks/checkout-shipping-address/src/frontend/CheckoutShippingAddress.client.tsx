@@ -118,7 +118,6 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
             } catch (error) {
                 const status = (error as { status?: number }).status;
                 if (status === 401 || status === 404) {
-                    localStorage.removeItem(CART_ID_KEY);
                     toast({ description: errors?.cartNotFound, variant: 'destructive' });
                     router.replace(cartPath ?? '/');
                 }
@@ -188,50 +187,53 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         onSubmit={async (values, { setSubmitting }) => {
                             setIsFormSubmitting(true);
                             const cartId = localStorage.getItem(CART_ID_KEY);
-                            if (cartId) {
-                                try {
-                                    await sdk.checkout.setAddresses(
-                                        cartId,
-                                        {
-                                            sameAsBillingAddress: values.sameAsBillingAddress,
-                                            ...(!values.sameAsBillingAddress && {
-                                                shippingAddress: {
-                                                    streetName: values.streetName,
-                                                    streetNumber: values.streetNumber || undefined,
-                                                    apartment: values.apartment || undefined,
-                                                    city: values.city,
-                                                    postalCode: values.postalCode,
-                                                    country: values.country,
-                                                },
-                                            }),
-                                        },
-                                        { 'x-locale': locale },
-                                        accessToken,
-                                    );
-                                    const selectedOption = shippingOptions.find((o) => o.id === values.shippingMethod);
-                                    await sdk.checkout.setShippingMethod(
-                                        cartId,
-                                        { shippingOptionId: values.shippingMethod },
-                                        { 'x-locale': locale },
-                                        accessToken,
-                                    );
-                                    if (selectedOption) {
-                                        setCartShippingMethod({
-                                            name: selectedOption.name,
-                                            total: selectedOption.total ?? {
-                                                value: 0,
-                                                currency: 'EUR' as Models.Price.Currency,
-                                            },
-                                        });
-                                    }
-                                } catch {
-                                    // proceed to next step
-                                } finally {
-                                    setSubmitting(false);
-                                    setIsFormSubmitting(false);
-                                }
+                            if (!cartId) {
+                                setSubmitting(false);
+                                setIsFormSubmitting(false);
+                                return;
                             }
-                            router.push(buttons.next.path);
+                            try {
+                                await sdk.checkout.setAddresses(
+                                    cartId,
+                                    {
+                                        sameAsBillingAddress: values.sameAsBillingAddress,
+                                        ...(!values.sameAsBillingAddress && {
+                                            shippingAddress: {
+                                                streetName: values.streetName,
+                                                streetNumber: values.streetNumber || undefined,
+                                                apartment: values.apartment || undefined,
+                                                city: values.city,
+                                                postalCode: values.postalCode,
+                                                country: values.country,
+                                            },
+                                        }),
+                                    },
+                                    { 'x-locale': locale },
+                                    accessToken,
+                                );
+                                const selectedOption = shippingOptions.find((o) => o.id === values.shippingMethod);
+                                await sdk.checkout.setShippingMethod(
+                                    cartId,
+                                    { shippingOptionId: values.shippingMethod },
+                                    { 'x-locale': locale },
+                                    accessToken,
+                                );
+                                if (selectedOption) {
+                                    setCartShippingMethod({
+                                        name: selectedOption.name,
+                                        total: selectedOption.total ?? {
+                                            value: 0,
+                                            currency: 'EUR' as Models.Price.Currency,
+                                        },
+                                    });
+                                }
+                                router.push(buttons.next.path);
+                            } catch {
+                                toast({ variant: 'destructive', description: errors.submitError });
+                            } finally {
+                                setSubmitting(false);
+                                setIsFormSubmitting(false);
+                            }
                         }}
                         validateOnBlur={true}
                         validateOnMount={false}

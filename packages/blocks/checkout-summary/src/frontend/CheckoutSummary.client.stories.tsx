@@ -60,6 +60,8 @@ const baseBlock = {
     },
     errors: {
         cartNotFound: 'Cart not found',
+        placeOrderError: 'Something went wrong while placing your order. Please try again.',
+        loadError: 'Something went wrong while loading the summary. Please complete the previous steps and try again.',
     },
     loading: { confirming: 'Placing order...' },
     placeholders: {

@@ -62,6 +62,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
         invalidTaxId: 'Invalid tax ID',
         invalidPostalCode: 'Invalid postal code',
         cartNotFound: 'Your cart is no longer available.',
+        submitError: 'Something went wrong. Please try again.',
     },
     summaryLabels: {
         title: 'Summary',
@@ -145,6 +146,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
         invalidTaxId: 'Ungültige Steuer-ID',
         invalidPostalCode: 'Ungültige Postleitzahl',
         cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
+        submitError: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
     },
     summaryLabels: {
         title: 'Zusammenfassung',
@@ -228,6 +230,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
         invalidTaxId: 'Nieprawidłowy NIP',
         invalidPostalCode: 'Nieprawidłowy kod pocztowy',
         cartNotFound: 'Twój koszyk jest niedostępny.',
+        submitError: 'Wystąpił błąd. Spróbuj ponownie.',
     },
     summaryLabels: {
         title: 'Podsumowanie',

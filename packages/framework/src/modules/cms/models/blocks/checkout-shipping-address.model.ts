@@ -33,6 +33,7 @@ export class CheckoutShippingAddressBlock extends Block.Block {
         required: string;
         invalidPostalCode: string;
         cartNotFound: string;
+        submitError: string;
     };
     summaryLabels!: {
         title: string;

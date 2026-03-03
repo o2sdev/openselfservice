@@ -9,7 +9,11 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
     labels: {
         itemTotal: 'Total',
         unknownProductName: 'Product',
-        errorMessage: 'An error occurred. Please try again.',
+    },
+    errors: {
+        loadError: 'Failed to load cart. Please try again.',
+        updateError: 'Failed to update cart. Please try again.',
+        promoError: 'Failed to apply promo code. Please try again.',
     },
     actions: {
         increaseQuantity: 'Increase quantity',
@@ -61,7 +65,11 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
     labels: {
         itemTotal: 'Summe',
         unknownProductName: 'Produkt',
-        errorMessage: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
+    },
+    errors: {
+        loadError: 'Der Warenkorb konnte nicht geladen werden. Bitte versuchen Sie es erneut.',
+        updateError: 'Der Warenkorb konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.',
+        promoError: 'Der Rabattcode konnte nicht angewendet werden. Bitte versuchen Sie es erneut.',
     },
     actions: {
         increaseQuantity: 'Menge erhöhen',
@@ -113,7 +121,11 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
     labels: {
         itemTotal: 'Suma',
         unknownProductName: 'Produkt',
-        errorMessage: 'Wystąpił błąd. Spróbuj ponownie.',
+    },
+    errors: {
+        loadError: 'Nie udało się załadować koszyka. Spróbuj ponownie.',
+        updateError: 'Nie udało się zaktualizować koszyka. Spróbuj ponownie.',
+        promoError: 'Nie udało się zastosować kodu promocyjnego. Spróbuj ponownie.',
     },
     actions: {
         increaseQuantity: 'Zwiększ ilość',

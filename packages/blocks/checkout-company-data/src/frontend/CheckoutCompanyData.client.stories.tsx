@@ -77,6 +77,7 @@ const baseBlock = {
         invalidTaxId: 'Invalid tax ID',
         invalidPostalCode: 'Invalid postal code',
         cartNotFound: 'Cart not found',
+        submitError: 'Something went wrong. Please try again.',
     },
     summaryLabels: {
         title: 'Summary',

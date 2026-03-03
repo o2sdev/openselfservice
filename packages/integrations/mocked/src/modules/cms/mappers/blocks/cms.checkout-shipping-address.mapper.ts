@@ -54,6 +54,7 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_EN: CMS.Model.CheckoutShippingAddressBlock.
         required: 'This field is required',
         invalidPostalCode: 'Invalid postal code',
         cartNotFound: 'Your cart is no longer available.',
+        submitError: 'Something went wrong. Please try again.',
     },
     summaryLabels: {
         title: 'Summary',
@@ -125,6 +126,7 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_DE: CMS.Model.CheckoutShippingAddressBlock.
         required: 'Dieses Feld ist erforderlich',
         invalidPostalCode: 'Ungültige Postleitzahl',
         cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
+        submitError: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
     },
     summaryLabels: {
         title: 'Zusammenfassung',
@@ -196,6 +198,7 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_PL: CMS.Model.CheckoutShippingAddressBlock.
         required: 'To pole jest wymagane',
         invalidPostalCode: 'Nieprawidłowy kod pocztowy',
         cartNotFound: 'Twój koszyk jest niedostępny.',
+        submitError: 'Wystąpił błąd. Spróbuj ponownie.',
     },
     summaryLabels: {
         title: 'Podsumowanie',

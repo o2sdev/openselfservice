@@ -70,7 +70,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) {
-            toast({ description: errors?.cartNotFound, variant: 'destructive' });
+            toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath ?? '/');
             return;
         }
@@ -105,8 +105,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
             } catch (error) {
                 const status = (error as { status?: number }).status;
                 if (status === 401 || status === 404) {
-                    localStorage.removeItem(CART_ID_KEY);
-                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                    toast({ description: errors.cartNotFound, variant: 'destructive' });
                     router.replace(cartPath ?? '/');
                 }
             } finally {
@@ -166,34 +165,37 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         onSubmit={async (values, { setSubmitting }) => {
                             setIsFormSubmitting(true);
                             const cartId = localStorage.getItem(CART_ID_KEY);
-                            if (cartId) {
-                                try {
-                                    await sdk.checkout.setAddresses(
-                                        cartId,
-                                        {
-                                            billingAddress: {
-                                                companyName: values.companyName,
-                                                taxId: values.taxId,
-                                                streetName: values.streetName,
-                                                streetNumber: values.streetNumber || undefined,
-                                                apartment: values.apartment || undefined,
-                                                city: values.city,
-                                                postalCode: values.postalCode,
-                                                country: values.country,
-                                            },
-                                            notes: values.notes || undefined,
-                                        },
-                                        { 'x-locale': locale },
-                                        accessToken,
-                                    );
-                                } catch {
-                                    // proceed to next step even if call fails
-                                } finally {
-                                    setSubmitting(false);
-                                    setIsFormSubmitting(false);
-                                }
+                            if (!cartId) {
+                                setSubmitting(false);
+                                setIsFormSubmitting(false);
+                                return;
                             }
-                            router.push(buttons.next.path);
+                            try {
+                                await sdk.checkout.setAddresses(
+                                    cartId,
+                                    {
+                                        billingAddress: {
+                                            companyName: values.companyName,
+                                            taxId: values.taxId,
+                                            streetName: values.streetName,
+                                            streetNumber: values.streetNumber || undefined,
+                                            apartment: values.apartment || undefined,
+                                            city: values.city,
+                                            postalCode: values.postalCode,
+                                            country: values.country,
+                                        },
+                                        notes: values.notes || undefined,
+                                    },
+                                    { 'x-locale': locale },
+                                    accessToken,
+                                );
+                                router.push(buttons.next.path);
+                            } catch {
+                                toast({ variant: 'destructive', description: errors.submitError });
+                            } finally {
+                                setSubmitting(false);
+                                setIsFormSubmitting(false);
+                            }
                         }}
                         validateOnBlur={true}
                         validateOnMount={false}

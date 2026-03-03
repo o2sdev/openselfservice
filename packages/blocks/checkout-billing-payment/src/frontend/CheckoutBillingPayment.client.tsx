@@ -99,7 +99,6 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
             } catch (error) {
                 const status = (error as { status?: number }).status;
                 if (status === 401 || status === 404) {
-                    localStorage.removeItem(CART_ID_KEY);
                     toast({ description: errors?.cartNotFound, variant: 'destructive' });
                     router.replace(cartPath ?? '/');
                 }
@@ -139,28 +138,31 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         onSubmit={async (values, { setSubmitting }) => {
                             setIsFormSubmitting(true);
                             const cartId = localStorage.getItem(CART_ID_KEY);
-                            if (cartId) {
-                                try {
-                                    const returnUrl = `${window.location.origin}${buttons.next.path}`;
-                                    const cancelUrl = window.location.href;
-                                    await sdk.checkout.setPayment(
-                                        cartId,
-                                        {
-                                            providerId: values.paymentMethod,
-                                            returnUrl,
-                                            cancelUrl,
-                                        },
-                                        { 'x-locale': locale },
-                                        accessToken,
-                                    );
-                                } catch {
-                                    // proceed to next step
-                                } finally {
-                                    setSubmitting(false);
-                                    setIsFormSubmitting(false);
-                                }
+                            if (!cartId) {
+                                setSubmitting(false);
+                                setIsFormSubmitting(false);
+                                return;
                             }
-                            router.push(buttons.next.path);
+                            try {
+                                const returnUrl = `${window.location.origin}${buttons.next.path}`;
+                                const cancelUrl = window.location.href;
+                                await sdk.checkout.setPayment(
+                                    cartId,
+                                    {
+                                        providerId: values.paymentMethod,
+                                        returnUrl,
+                                        cancelUrl,
+                                    },
+                                    { 'x-locale': locale },
+                                    accessToken,
+                                );
+                                router.push(buttons.next.path);
+                            } catch {
+                                toast({ variant: 'destructive', description: errors.submitError });
+                            } finally {
+                                setSubmitting(false);
+                                setIsFormSubmitting(false);
+                            }
                         }}
                         validateOnBlur={true}
                         validateOnMount={false}

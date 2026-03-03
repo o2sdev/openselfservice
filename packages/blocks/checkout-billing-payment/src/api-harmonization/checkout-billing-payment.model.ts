@@ -29,6 +29,7 @@ export class CheckoutBillingPaymentBlock extends ApiModels.Block.Block {
     errors!: {
         required: string;
         cartNotFound: string;
+        submitError: string;
     };
     summaryLabels!: CheckoutBillingPaymentSummaryLabels;
     stepIndicator?: { steps: string[]; currentStep: number };

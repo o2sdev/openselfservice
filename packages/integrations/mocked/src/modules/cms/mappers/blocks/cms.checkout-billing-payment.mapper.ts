@@ -18,6 +18,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_EN: CMS.Model.CheckoutBillingPaymentBlock.Ch
     errors: {
         required: 'This field is required',
         cartNotFound: 'Your cart is no longer available.',
+        submitError: 'Something went wrong. Please try again.',
     },
     summaryLabels: {
         title: 'Summary',
@@ -53,6 +54,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_DE: CMS.Model.CheckoutBillingPaymentBlock.Ch
     errors: {
         required: 'Dieses Feld ist erforderlich',
         cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
+        submitError: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
     },
     summaryLabels: {
         title: 'Zusammenfassung',
@@ -88,6 +90,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_PL: CMS.Model.CheckoutBillingPaymentBlock.Ch
     errors: {
         required: 'To pole jest wymagane',
         cartNotFound: 'Twój koszyk jest niedostępny.',
+        submitError: 'Wystąpił błąd. Spróbuj ponownie.',
     },
     summaryLabels: {
         title: 'Podsumowanie',

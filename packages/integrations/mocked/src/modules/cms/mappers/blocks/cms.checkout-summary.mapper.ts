@@ -37,6 +37,8 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
     },
     errors: {
         cartNotFound: 'Your cart is no longer available.',
+        placeOrderError: 'Something went wrong while placing your order. Please try again.',
+        loadError: 'Something went wrong while loading the summary. Please complete the previous steps and try again.',
     },
     buttons: {
         confirm: { label: 'Place order', path: '/order-confirmation' },
@@ -95,6 +97,9 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
     },
     errors: {
         cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
+        placeOrderError: 'Beim Aufgeben der Bestellung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        loadError:
+            'Beim Laden der Zusammenfassung ist ein Fehler aufgetreten. Bitte schließen Sie die vorherigen Schritte ab und versuchen Sie es erneut.',
     },
     buttons: {
         confirm: { label: 'Bestellung aufgeben', path: '/bestellbestaetigung' },
@@ -153,6 +158,8 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
     },
     errors: {
         cartNotFound: 'Twój koszyk jest niedostępny.',
+        placeOrderError: 'Wystąpił błąd podczas składania zamówienia. Spróbuj ponownie.',
+        loadError: 'Wystąpił błąd podczas ładowania podsumowania. Uzupełnij poprzednie kroki i spróbuj ponownie.',
     },
     buttons: {
         confirm: { label: 'Złóż zamówienie', path: '/potwierdzenie-zamowienia' },

@@ -59,18 +59,19 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 const data = await sdk.checkout.getCheckoutSummary(cartId, { 'x-locale': locale }, accessToken);
                 setSummaryData(data);
             } catch (error) {
-                const status = (error as { status?: number }).status;
+                const err = error as { status?: number; response?: { status?: number } };
+                const status = err.status ?? err.response?.status;
                 if (status === 401 || status === 404) {
-                    localStorage.removeItem(CART_ID_KEY);
                     toast({ description: errors?.cartNotFound, variant: 'destructive' });
                     router.replace(cartPath ?? '/');
+                } else {
+                    toast({ description: errors?.loadError, variant: 'destructive' });
                 }
             } finally {
                 setIsLoading(false);
             }
         })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [locale, accessToken]);
+    }, [locale, accessToken, toast, errors?.cartNotFound, errors?.loadError, router, cartPath]);
 
     if (!title || !sections || !buttons) {
         return null;
@@ -93,11 +94,10 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 window.location.href = redirectUrl;
                 return;
             }
-        } catch (error) {
+        } catch {
             toast({
                 variant: 'destructive',
-                title: 'Error',
-                description: error instanceof Error ? error.message : undefined,
+                description: errors?.placeOrderError,
             });
         } finally {
             setIsSubmitting(false);

@@ -22,6 +22,11 @@ import { CartPureProps } from './Cart.types';
 
 const CART_ID_KEY = 'cartId';
 
+function getHttpStatus(err: unknown): number | undefined {
+    const e = err as { status?: number; response?: { status?: number } };
+    return e?.status ?? e?.response?.status;
+}
+
 export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     locale,
     accessToken,
@@ -31,6 +36,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     taxRate,
     defaultCurrency,
     labels,
+    errors,
     actions,
     summaryLabels,
     checkoutButton,
@@ -56,16 +62,13 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
             try {
                 const data = await sdk.cart.getCart(cartId, { 'x-locale': locale }, accessToken);
                 setCart(data);
-            } catch (error) {
-                const status = (error as { status?: number }).status;
-                if (status === 404 || status === 401) {
-                    localStorage.removeItem(CART_ID_KEY);
-                }
+            } catch {
+                toast({ variant: 'destructive', description: errors?.loadError });
             } finally {
                 setIsLoading(false);
             }
         })();
-    }, [id, locale, accessToken]);
+    }, [locale, accessToken, errors?.loadError]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
         const cartId = localStorage.getItem(CART_ID_KEY);
@@ -82,19 +85,25 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 );
                 setCart(updated);
             } catch {
-                toast({ variant: 'destructive', title: labels.errorMessage });
+                toast({ variant: 'destructive', description: errors?.updateError });
             }
         });
     };
 
     const applyPromotion = async (code: string): Promise<void> => {
         const cartId = localStorage.getItem(CART_ID_KEY);
-        if (!cartId) throw new Error('No cart');
+        if (!cartId) return;
 
         setIsPromoLoading(true);
         try {
             const updated = await sdk.cart.applyPromotion(cartId, { code }, { 'x-locale': locale }, accessToken);
             setCart(updated);
+        } catch (err) {
+            const status = getHttpStatus(err);
+            if (status === 400 || status === 404) {
+                throw err;
+            }
+            toast({ variant: 'destructive', description: errors?.promoError });
         } finally {
             setIsPromoLoading(false);
         }
@@ -108,6 +117,8 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         try {
             const updated = await sdk.cart.removePromotion(cartId, code, { 'x-locale': locale }, accessToken);
             setCart(updated);
+        } catch {
+            toast({ variant: 'destructive', description: errors?.promoError });
         } finally {
             setIsPromoLoading(false);
         }
@@ -122,12 +133,12 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 const updated = await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
                 setCart(updated);
             } catch {
-                toast({ variant: 'destructive', title: labels.errorMessage });
+                toast({ variant: 'destructive', description: errors?.updateError });
             }
         });
     };
 
-    if (!title || taxRate == null || !defaultCurrency || !labels || !actions || !summaryLabels || !empty) {
+    if (!title || taxRate == null || !defaultCurrency || !labels || !errors || !actions || !summaryLabels || !empty) {
         return (
             <div className="w-full flex flex-col gap-4">
                 {__typename}: {id}
