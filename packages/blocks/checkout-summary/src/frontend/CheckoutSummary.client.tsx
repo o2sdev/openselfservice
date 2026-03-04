@@ -94,6 +94,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
             if (result.order?.id) {
                 const redirectUrl = result.paymentRedirectUrl || `${buttons.confirm.path}/${result.order.id}`;
                 window.location.href = redirectUrl;
+                localStorage.removeItem(CART_ID_KEY);
                 return;
             }
         } catch {
@@ -116,7 +117,8 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const paymentMethod = summaryData?.paymentMethod;
     const items = summaryData?.cart.items?.data ?? [];
     const totals = summaryData?.totals;
-    const isFreeShipping = summaryData?.cart.promotions?.some((p) => p.type === 'FREE_SHIPPING');
+    const promotions = summaryData?.cart.promotions ?? [];
+    const isFreeShipping = promotions.some((p) => p.type === 'FREE_SHIPPING');
 
     const formatStreetAddress = (addr: { streetName: string; streetNumber?: string; apartment?: string }) => {
         let street = addr.streetName;
@@ -354,6 +356,29 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 </div>
                             </div>
                         ) : null}
+
+                        {promotions.length > 0 && sections.summary.activePromoCodesTitle && (
+                            <>
+                                <Separator />
+                                <div className="flex flex-col gap-2">
+                                    <Typography variant="h3">{sections.summary.activePromoCodesTitle}</Typography>
+                                    <div className="flex flex-col gap-2">
+                                        {promotions.map((promo) => (
+                                            <div
+                                                key={promo.code}
+                                                className="flex items-center gap-2 rounded-md bg-green-50 px-3 py-2 dark:bg-green-950/20"
+                                            >
+                                                <DynamicIcon name="Tag" size={14} className="shrink-0 text-green-600" />
+                                                <Typography variant="small" className="text-green-600">
+                                                    {promo.code}
+                                                    {promo.name && ` — ${promo.name}`}
+                                                </Typography>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </>
+                        )}
 
                         {sections.summary.notesTitle && summaryData?.notes && (
                             <>

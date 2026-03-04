@@ -44,6 +44,7 @@ const baseBlock = {
             taxLabel: 'VAT (23%)',
             shippingLabel: 'Shipping',
             totalLabel: 'Total',
+            activePromoCodesTitle: 'Active discount codes',
         },
         notes: {
             title: 'Notes',

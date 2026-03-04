@@ -25,6 +25,7 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
             shippingLabel: string;
             freeLabel?: string;
             totalLabel: string;
+            activePromoCodesTitle?: string;
             notesTitle?: string;
         };
     };

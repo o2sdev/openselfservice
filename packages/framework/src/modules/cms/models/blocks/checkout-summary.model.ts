@@ -32,6 +32,7 @@ export class CheckoutSummaryBlock extends Block.Block {
             shippingLabel: string;
             freeLabel?: string;
             totalLabel: string;
+            activePromoCodesTitle?: string;
             notesTitle?: string;
         };
     };
