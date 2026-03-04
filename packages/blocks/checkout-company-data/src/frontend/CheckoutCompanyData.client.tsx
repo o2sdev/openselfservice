@@ -88,20 +88,22 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                     });
                 }
                 setCartPromotions(cart.promotions);
-                if (cart.billingAddress) {
-                    const addr = cart.billingAddress;
-                    setInitialFormValues({
-                        companyName: addr.companyName ?? '',
-                        taxId: addr.taxId ?? '',
-                        streetName: addr.streetName ?? '',
-                        streetNumber: addr.streetNumber ?? '',
-                        apartment: addr.apartment ?? '',
-                        city: addr.city ?? '',
-                        postalCode: addr.postalCode ?? '',
-                        country: addr.country ?? '',
-                        notes: cart.notes ?? '',
-                    });
-                }
+                setInitialFormValues((prev) => ({
+                    ...prev,
+                    notes: cart.notes ?? '',
+                    ...(cart.billingAddress
+                        ? {
+                              companyName: cart.billingAddress.companyName ?? '',
+                              taxId: cart.billingAddress.taxId ?? '',
+                              streetName: cart.billingAddress.streetName ?? '',
+                              streetNumber: cart.billingAddress.streetNumber ?? '',
+                              apartment: cart.billingAddress.apartment ?? '',
+                              city: cart.billingAddress.city ?? '',
+                              postalCode: cart.billingAddress.postalCode ?? '',
+                              country: cart.billingAddress.country ?? '',
+                          }
+                        : {}),
+                }));
             } catch {
                 toast({ description: errors.cartNotFound, variant: 'destructive' });
                 router.replace(cartPath ?? '/');

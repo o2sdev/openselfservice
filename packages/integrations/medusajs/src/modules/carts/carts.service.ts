@@ -412,8 +412,19 @@ export class CartsService extends Carts.Service {
                 // Resolve both addresses in parallel
                 return forkJoin([shippingAddress$, billingAddress$]).pipe(
                     switchMap(([shippingAddress, billingAddress]) => {
+                        // Handle sameAsBillingAddress: copy billing address to shipping
+                        let resolvedShipping = shippingAddress;
+                        if (data.sameAsBillingAddress && !resolvedShipping) {
+                            // Prefer the new billing address from request; fall back to cart's existing billing
+                            resolvedShipping = billingAddress
+                                ? billingAddress
+                                : cart.billingAddress
+                                  ? mapAddressToMedusa(cart.billingAddress)
+                                  : null;
+                        }
+
                         // At least one address must be provided
-                        if (!shippingAddress && !billingAddress) {
+                        if (!resolvedShipping && !billingAddress) {
                             return throwError(
                                 () => new BadRequestException('At least one address (shipping or billing) is required'),
                             );
@@ -432,13 +443,11 @@ export class CartsService extends Carts.Service {
                             cartUpdate.email = data.email;
                         }
 
-                        // Set addresses (use shipping as billing if billing not provided)
-                        if (shippingAddress) {
-                            cartUpdate.shipping_address = shippingAddress;
-                            cartUpdate.billing_address = billingAddress ?? shippingAddress;
-                        } else if (billingAddress) {
-                            // If only billing provided, use it for both
-                            cartUpdate.shipping_address = billingAddress;
+                        // Set addresses independently — each only updates its own field
+                        if (resolvedShipping) {
+                            cartUpdate.shipping_address = resolvedShipping;
+                        }
+                        if (billingAddress) {
                             cartUpdate.billing_address = billingAddress;
                         }
 

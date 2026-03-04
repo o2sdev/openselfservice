@@ -14,7 +14,7 @@ export function mapCustomerAddress(
         address: {
             firstName: medusaAddress.first_name ?? undefined,
             lastName: medusaAddress.last_name ?? undefined,
-            country: medusaAddress.country_code || '',
+            country: medusaAddress.country_code?.toUpperCase() || '',
             streetName: medusaAddress.address_1 || '',
             streetNumber: medusaAddress.address_2 ?? undefined,
             city: medusaAddress.city || '',
@@ -45,6 +45,7 @@ export function mapAddressToMedusa(address: Models.Address.Address): HttpTypes.S
     return {
         first_name: (address.firstName || '').trim(),
         last_name: (address.lastName || '').trim(),
+        company: address.companyName?.trim() || undefined,
         address_1: (address.streetName || '').trim(),
         address_2: (address.streetNumber || address.apartment || '').trim() || undefined,
         city: (address.city || '').trim(),
