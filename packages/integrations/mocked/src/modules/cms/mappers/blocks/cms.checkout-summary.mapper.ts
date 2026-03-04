@@ -27,7 +27,7 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         summary: {
             title: 'Summary',
             subtotalLabel: 'Subtotal',
-            taxLabel: 'VAT (23%)',
+            taxLabel: 'VAT',
             discountLabel: 'Discount',
             shippingLabel: 'Shipping',
             freeLabel: 'Free',
@@ -88,7 +88,7 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         summary: {
             title: 'Zusammenfassung',
             subtotalLabel: 'Nettosumme',
-            taxLabel: 'MwSt. (23%)',
+            taxLabel: 'MwSt.',
             discountLabel: 'Rabatt',
             shippingLabel: 'Versand',
             freeLabel: 'Kostenlos',
@@ -150,7 +150,7 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         summary: {
             title: 'Podsumowanie',
             subtotalLabel: 'Wartość netto',
-            taxLabel: 'VAT (23%)',
+            taxLabel: 'VAT',
             discountLabel: 'Rabat',
             shippingLabel: 'Dostawa',
             freeLabel: 'Gratis',

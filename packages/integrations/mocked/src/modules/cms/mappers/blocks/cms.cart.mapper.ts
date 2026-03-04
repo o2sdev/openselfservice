@@ -24,7 +24,7 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
     summaryLabels: {
         title: 'Summary',
         subtotalLabel: 'Subtotal',
-        taxLabel: 'VAT (23%)',
+        taxLabel: 'VAT',
         totalLabel: 'Total',
         discountLabel: 'Discount',
         shippingLabel: 'Shipping',
@@ -80,7 +80,7 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
     summaryLabels: {
         title: 'Zusammenfassung',
         subtotalLabel: 'Nettosumme',
-        taxLabel: 'MwSt. (23%)',
+        taxLabel: 'MwSt.',
         totalLabel: 'Bruttosumme',
         discountLabel: 'Rabatt',
         shippingLabel: 'Versand',
@@ -136,7 +136,7 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
     summaryLabels: {
         title: 'Podsumowanie',
         subtotalLabel: 'Suma netto',
-        taxLabel: 'VAT (23%)',
+        taxLabel: 'VAT',
         totalLabel: 'Suma brutto',
         discountLabel: 'Rabat',
         shippingLabel: 'Dostawa',
