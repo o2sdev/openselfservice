@@ -14,13 +14,14 @@ const MOCK_ORDER_CONFIRMATION_EN: CMS.Model.OrderConfirmationBlock.OrderConfirma
     shippingLabel: 'Shipping:',
     totalLabel: 'Total:',
     shippingSection: {
-        title: 'Shipping address',
+        title: 'Shipping',
         addressLabel: 'Address',
         methodLabel: 'Method',
     },
     billingSection: {
-        title: 'Billing address',
+        title: 'Payment',
         addressLabel: 'Address',
+        taxIdLabel: 'Tax ID',
     },
     message: 'Order confirmation has been sent to your email address.',
     buttons: {
@@ -29,6 +30,15 @@ const MOCK_ORDER_CONFIRMATION_EN: CMS.Model.OrderConfirmationBlock.OrderConfirma
     },
     viewOrdersPath: '/orders',
     continueShoppingPath: '/products',
+    statusLabels: {
+        PENDING: 'Pending',
+        COMPLETED: 'Completed',
+        SHIPPED: 'Shipped',
+        CANCELLED: 'Cancelled',
+        ARCHIVED: 'Archived',
+        REQUIRES_ACTION: 'Requires action',
+        UNKNOWN: 'Unknown',
+    },
     errors: {
         loadError: 'Failed to load order. Please try again.',
         orderNotFound: 'Order not found or unavailable.',
@@ -49,13 +59,14 @@ const MOCK_ORDER_CONFIRMATION_DE: CMS.Model.OrderConfirmationBlock.OrderConfirma
     shippingLabel: 'Versand:',
     totalLabel: 'Bruttosumme:',
     shippingSection: {
-        title: 'Lieferadresse',
+        title: 'Lieferung',
         addressLabel: 'Adresse',
         methodLabel: 'Methode',
     },
     billingSection: {
-        title: 'Rechnungsadresse',
+        title: 'Zahlung',
         addressLabel: 'Adresse',
+        taxIdLabel: 'Steuer-ID',
     },
     message: 'Die Bestellbestätigung wurde an Ihre E-Mail-Adresse gesendet.',
     buttons: {
@@ -64,6 +75,15 @@ const MOCK_ORDER_CONFIRMATION_DE: CMS.Model.OrderConfirmationBlock.OrderConfirma
     },
     viewOrdersPath: '/bestellungen',
     continueShoppingPath: '/produkte',
+    statusLabels: {
+        PENDING: 'Ausstehend',
+        COMPLETED: 'Abgeschlossen',
+        SHIPPED: 'Versandt',
+        CANCELLED: 'Storniert',
+        ARCHIVED: 'Archiviert',
+        REQUIRES_ACTION: 'Aktion erforderlich',
+        UNKNOWN: 'Unbekannt',
+    },
     errors: {
         loadError: 'Bestellung konnte nicht geladen werden. Bitte versuchen Sie es erneut.',
         orderNotFound: 'Bestellung nicht gefunden oder nicht verfügbar.',
@@ -84,13 +104,14 @@ const MOCK_ORDER_CONFIRMATION_PL: CMS.Model.OrderConfirmationBlock.OrderConfirma
     shippingLabel: 'Dostawa:',
     totalLabel: 'Wartość brutto:',
     shippingSection: {
-        title: 'Adres dostawy',
+        title: 'Dostawa',
         addressLabel: 'Adres',
         methodLabel: 'Metoda',
     },
     billingSection: {
-        title: 'Adres rozliczeniowy',
+        title: 'Płatność',
         addressLabel: 'Adres',
+        taxIdLabel: 'NIP',
     },
     message: 'Potwierdzenie zamówienia zostało wysłane na Twój adres email.',
     buttons: {
@@ -99,6 +120,15 @@ const MOCK_ORDER_CONFIRMATION_PL: CMS.Model.OrderConfirmationBlock.OrderConfirma
     },
     viewOrdersPath: '/zamowienia',
     continueShoppingPath: '/produkty',
+    statusLabels: {
+        PENDING: 'Oczekujące',
+        COMPLETED: 'Zrealizowane',
+        SHIPPED: 'Wysłane',
+        CANCELLED: 'Anulowane',
+        ARCHIVED: 'Zarchiwizowane',
+        REQUIRES_ACTION: 'Wymaga działania',
+        UNKNOWN: 'Nieznany',
+    },
     errors: {
         loadError: 'Nie udało się załadować zamówienia. Spróbuj ponownie.',
         orderNotFound: 'Zamówienie nie zostało znalezione lub jest niedostępne.',

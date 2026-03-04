@@ -33,8 +33,9 @@ const baseBlock = {
         methodLabel: 'Method',
     },
     billingSection: {
-        title: 'Billing address',
+        title: 'Payment',
         addressLabel: 'Address',
+        taxIdLabel: 'Tax ID',
     },
     message: 'Order confirmation has been sent to your email address.',
     buttons: {
@@ -43,8 +44,18 @@ const baseBlock = {
     },
     viewOrdersPath: '#',
     continueShoppingPath: '#',
+    statusLabels: {
+        PENDING: 'Pending',
+        COMPLETED: 'Completed',
+        SHIPPED: 'Shipped',
+        CANCELLED: 'Cancelled',
+        ARCHIVED: 'Archived',
+        REQUIRES_ACTION: 'Requires action',
+        UNKNOWN: 'Unknown',
+    },
     order: {
         id: 'ORD-12345',
+        status: 'PENDING',
         items: {
             data: [
                 {

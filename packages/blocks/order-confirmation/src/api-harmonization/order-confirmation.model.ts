@@ -51,6 +51,7 @@ export class OrderConfirmationBlock extends ApiModels.Block.Block {
     billingSection?: {
         title: string;
         addressLabel?: string;
+        taxIdLabel?: string;
     };
     message?: string;
     buttons!: {
@@ -59,6 +60,7 @@ export class OrderConfirmationBlock extends ApiModels.Block.Block {
     };
     viewOrdersPath!: string;
     continueShoppingPath!: string;
+    statusLabels?: Record<string, string>;
     errors!: {
         loadError: string;
         orderNotFound: string;

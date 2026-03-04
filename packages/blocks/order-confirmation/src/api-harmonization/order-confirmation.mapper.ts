@@ -53,6 +53,7 @@ export const mapOrderConfirmation = (
         buttons: cms.buttons,
         viewOrdersPath: cms.viewOrdersPath,
         continueShoppingPath: cms.continueShoppingPath,
+        statusLabels: cms.statusLabels,
         errors: cms.errors ?? { loadError: '', orderNotFound: '' },
         order: {
             id: order.id,
