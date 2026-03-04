@@ -157,36 +157,39 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                     return (
                                         <div
                                             key={item.id}
-                                            className="flex flex-col sm:flex-row gap-4 p-4 bg-card rounded-lg border border-border"
+                                            className="flex flex-row gap-4 p-4 bg-card rounded-lg border border-border"
                                         >
                                             {product?.image && (
-                                                <div className="relative w-full sm:w-24 h-24 shrink-0 rounded-md overflow-hidden">
+                                                <div className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 rounded-md overflow-hidden bg-muted">
                                                     <Image
                                                         src={product.image.url}
                                                         alt={product.image.alt ?? product.name}
                                                         fill
-                                                        sizes="96px"
+                                                        sizes="(max-width: 640px) 96px, 128px"
                                                         className="object-cover object-center"
                                                     />
                                                 </div>
                                             )}
-                                            <div className="flex-1 flex flex-col gap-2">
+                                            <div className="min-w-0 flex-1 flex flex-col gap-2">
                                                 <Typography variant="h3">{product?.name}</Typography>
-                                                <div className="flex items-end justify-between gap-4 h-full">
+                                                <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2 h-full">
                                                     <div className="flex flex-col gap-1 text-sm text-muted-foreground">
                                                         <span>
                                                             {sections.products.labels.quantity}: {item.quantity}
                                                         </span>
-                                                        <span>
+                                                        <span className="whitespace-nowrap">
                                                             {sections.products.labels.price}:{' '}
                                                             <Price price={item.price} />
                                                         </span>
                                                     </div>
-                                                    <div className="flex flex-col items-end">
+                                                    <div className="ml-auto flex flex-col items-end shrink-0">
                                                         <Typography variant="small" className="text-muted-foreground">
                                                             {sections.products.labels.total}
                                                         </Typography>
-                                                        <Typography variant="h3" className="text-primary">
+                                                        <Typography
+                                                            variant="h3"
+                                                            className="text-primary whitespace-nowrap"
+                                                        >
                                                             <Price price={itemTotal} />
                                                         </Typography>
                                                     </div>
