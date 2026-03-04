@@ -3,6 +3,8 @@
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Price } from '@o2s/ui/components/Price';
 
@@ -12,8 +14,15 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { OrderConfirmationPureProps } from './OrderConfirmation.types';
 
+const formatStreetAddress = (addr: { streetName: string; streetNumber?: string; apartment?: string }) => {
+    let street = addr.streetName;
+    if (addr.streetNumber) street += ` ${addr.streetNumber}`;
+    if (addr.apartment) street += `, ${addr.apartment}`;
+    return street;
+};
+
 export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps>> = ({
-    locale: _locale,
+    locale,
     accessToken: _accessToken,
     routing,
     orderId: _orderId,
@@ -25,7 +34,11 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
     summaryTitle,
     subtotalLabel,
     taxLabel,
+    discountLabel,
+    shippingLabel,
     totalLabel,
+    shippingSection,
+    billingSection,
     message,
     buttons,
     viewOrdersPath,
@@ -37,6 +50,10 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
     if (!title || !order) {
         return null;
     }
+
+    const shippingAddress = order.shippingAddress;
+    const billingAddress = order.billingAddress;
+    const shippingMethods = order.shippingMethods;
 
     return (
         <div className="w-full max-w-2xl mx-auto flex flex-col gap-8">
@@ -78,6 +95,76 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                     </div>
                 </div>
 
+                {shippingSection && (shippingAddress || (shippingMethods && shippingMethods.length > 0)) && (
+                    <>
+                        <Separator />
+                        <div className="flex flex-col gap-2">
+                            <Typography variant="h2">{shippingSection.title}</Typography>
+                            {shippingAddress && (
+                                <div className="flex flex-col gap-1">
+                                    {shippingSection.addressLabel && (
+                                        <Typography variant="small" className="font-bold text-muted-foreground">
+                                            {shippingSection.addressLabel}
+                                        </Typography>
+                                    )}
+                                    <Typography variant="small">{formatStreetAddress(shippingAddress)}</Typography>
+                                    <Typography variant="small">
+                                        {shippingAddress.postalCode} {shippingAddress.city}
+                                    </Typography>
+                                    <Typography variant="small">
+                                        {Utils.FormatCountry.formatCountryCode(shippingAddress.country, locale)}
+                                    </Typography>
+                                </div>
+                            )}
+                            {shippingMethods && shippingMethods.length > 0 && (
+                                <div className={shippingAddress ? 'mt-2 pt-2 border-t border-border' : ''}>
+                                    <Typography variant="small">
+                                        <strong>{shippingSection.methodLabel}</strong>{' '}
+                                        {shippingMethods.map((m) => m.name).join(', ')}
+                                        {shippingMethods[0]?.total && (
+                                            <>
+                                                {' — '}
+                                                <Price price={shippingMethods[0].total} />
+                                            </>
+                                        )}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+
+                {billingSection && billingAddress && (
+                    <>
+                        <Separator />
+                        <div className="flex flex-col gap-2">
+                            <Typography variant="h2">{billingSection.title}</Typography>
+                            {billingSection.addressLabel && (
+                                <Typography variant="small" className="font-bold text-muted-foreground">
+                                    {billingSection.addressLabel}
+                                </Typography>
+                            )}
+                            {billingAddress.companyName && (
+                                <Typography variant="small">
+                                    <strong>{billingAddress.companyName}</strong>
+                                </Typography>
+                            )}
+                            {billingAddress.taxId && (
+                                <Typography variant="small" className="text-muted-foreground">
+                                    {billingAddress.taxId}
+                                </Typography>
+                            )}
+                            <Typography variant="small">{formatStreetAddress(billingAddress)}</Typography>
+                            <Typography variant="small">
+                                {billingAddress.postalCode} {billingAddress.city}
+                            </Typography>
+                            <Typography variant="small">
+                                {Utils.FormatCountry.formatCountryCode(billingAddress.country, locale)}
+                            </Typography>
+                        </div>
+                    </>
+                )}
+
                 <Separator />
 
                 {/* Summary Section */}
@@ -99,6 +186,26 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                                 </Typography>
                                 <Typography variant="body">
                                     <Price price={order.tax} />
+                                </Typography>
+                            </div>
+                        )}
+                        {discountLabel && order.discountTotal && order.discountTotal.value > 0 && (
+                            <div className="flex items-center justify-between">
+                                <Typography variant="small" className="text-muted-foreground">
+                                    {discountLabel}
+                                </Typography>
+                                <Typography variant="body">
+                                    <Price price={order.discountTotal} />
+                                </Typography>
+                            </div>
+                        )}
+                        {shippingLabel && order.shippingTotal && order.shippingTotal.value > 0 && (
+                            <div className="flex items-center justify-between">
+                                <Typography variant="small" className="text-muted-foreground">
+                                    {shippingLabel}
+                                </Typography>
+                                <Typography variant="body">
+                                    <Price price={order.shippingTotal} />
                                 </Typography>
                             </div>
                         )}

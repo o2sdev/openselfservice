@@ -9,7 +9,18 @@ export class OrderConfirmationBlock extends Block.Block {
     summaryTitle!: string;
     subtotalLabel!: string;
     taxLabel!: string;
+    discountLabel?: string;
+    shippingLabel?: string;
     totalLabel!: string;
+    shippingSection?: {
+        title: string;
+        addressLabel?: string;
+        methodLabel?: string;
+    };
+    billingSection?: {
+        title: string;
+        addressLabel?: string;
+    };
     message?: string;
     buttons!: {
         viewOrders: string;
@@ -17,4 +28,8 @@ export class OrderConfirmationBlock extends Block.Block {
     };
     viewOrdersPath!: string;
     continueShoppingPath!: string;
+    errors?: {
+        loadError: string;
+        orderNotFound: string;
+    };
 }

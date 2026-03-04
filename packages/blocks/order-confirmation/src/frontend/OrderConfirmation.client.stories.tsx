@@ -20,7 +20,22 @@ const baseBlock = {
     summaryTitle: 'Order summary',
     subtotalLabel: 'Subtotal:',
     taxLabel: 'VAT:',
+    discountLabel: 'Discount:',
+    shippingLabel: 'Shipping:',
     totalLabel: 'Total:',
+    errors: {
+        loadError: 'Failed to load order. Please try again.',
+        orderNotFound: 'Order not found or unavailable.',
+    },
+    shippingSection: {
+        title: 'Shipping address',
+        addressLabel: 'Address',
+        methodLabel: 'Method',
+    },
+    billingSection: {
+        title: 'Billing address',
+        addressLabel: 'Address',
+    },
     message: 'Order confirmation has been sent to your email address.',
     buttons: {
         viewOrders: 'View orders',
@@ -53,7 +68,26 @@ const baseBlock = {
         },
         subtotal: { value: 204.97, currency: 'PLN' as const },
         tax: { value: 47.14, currency: 'PLN' as const },
+        discountTotal: { value: 20.5, currency: 'PLN' as const },
+        shippingTotal: { value: 15, currency: 'PLN' as const },
         total: { value: 252.11, currency: 'PLN' as const },
+        shippingAddress: {
+            streetName: 'Main St',
+            streetNumber: '123',
+            postalCode: '00-001',
+            city: 'Warsaw',
+            country: 'Poland',
+        },
+        billingAddress: {
+            streetName: 'Main St',
+            streetNumber: '123',
+            companyName: 'Acme Corp',
+            taxId: 'PL1234567890',
+            postalCode: '00-001',
+            city: 'Warsaw',
+            country: 'Poland',
+        },
+        shippingMethods: [{ name: 'Standard Shipping', total: { value: 15, currency: 'PLN' as const } }],
     },
 };
 

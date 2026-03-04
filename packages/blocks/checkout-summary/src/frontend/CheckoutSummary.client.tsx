@@ -3,6 +3,8 @@
 import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState } from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Checkout } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
@@ -239,7 +241,9 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                     <Typography variant="small">
                                         {shippingAddress.postalCode} {shippingAddress.city}
                                     </Typography>
-                                    <Typography variant="small">{shippingAddress.country}</Typography>
+                                    <Typography variant="small">
+                                        {Utils.FormatCountry.formatCountryCode(shippingAddress.country, locale)}
+                                    </Typography>
                                 </div>
                                 {shippingMethod && (
                                     <div className="mt-2 pt-2 border-t border-border">
@@ -272,7 +276,9 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                         <Typography variant="small">
                                             {billingAddress.postalCode} {billingAddress.city}
                                         </Typography>
-                                        <Typography variant="small">{billingAddress.country}</Typography>
+                                        <Typography variant="small">
+                                            {Utils.FormatCountry.formatCountryCode(billingAddress.country, locale)}
+                                        </Typography>
                                     </div>
                                 )}
                                 {paymentMethod && (

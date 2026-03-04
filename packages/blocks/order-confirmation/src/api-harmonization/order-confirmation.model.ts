@@ -12,6 +12,24 @@ export interface OrderConfirmationItem {
     productName?: string;
 }
 
+/** Address for order confirmation display */
+export interface OrderConfirmationAddress {
+    streetName: string;
+    streetNumber?: string;
+    apartment?: string;
+    postalCode: string;
+    city: string;
+    country: string;
+    companyName?: string;
+    taxId?: string;
+}
+
+/** Shipping method for order confirmation display */
+export interface OrderConfirmationShippingMethod {
+    name: string;
+    total?: Models.Price.Price;
+}
+
 export class OrderConfirmationBlock extends ApiModels.Block.Block {
     __typename!: 'OrderConfirmationBlock';
     title!: string;
@@ -22,7 +40,18 @@ export class OrderConfirmationBlock extends ApiModels.Block.Block {
     summaryTitle!: string;
     subtotalLabel!: string;
     taxLabel!: string;
+    discountLabel?: string;
+    shippingLabel?: string;
     totalLabel!: string;
+    shippingSection?: {
+        title: string;
+        addressLabel?: string;
+        methodLabel?: string;
+    };
+    billingSection?: {
+        title: string;
+        addressLabel?: string;
+    };
     message?: string;
     buttons!: {
         viewOrders: string;
@@ -30,15 +59,27 @@ export class OrderConfirmationBlock extends ApiModels.Block.Block {
     };
     viewOrdersPath!: string;
     continueShoppingPath!: string;
-    /** Order data - from API by orderId, mock for now */
+    errors!: {
+        loadError: string;
+        orderNotFound: string;
+    };
+    /** Order data - from API by orderId */
     order!: {
         id: string;
+        createdAt?: string;
+        status?: string;
+        paymentStatus?: string;
         items: {
             data: OrderConfirmationItem[];
             total: number;
         };
         subtotal: Models.Price.Price;
         tax?: Models.Price.Price;
+        discountTotal?: Models.Price.Price;
+        shippingTotal?: Models.Price.Price;
         total: Models.Price.Price;
+        shippingAddress?: OrderConfirmationAddress;
+        billingAddress?: OrderConfirmationAddress;
+        shippingMethods?: OrderConfirmationShippingMethod[];
     };
 }
