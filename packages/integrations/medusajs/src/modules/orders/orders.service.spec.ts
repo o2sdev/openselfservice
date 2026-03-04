@@ -29,6 +29,8 @@ const minimalOrder = {
     shipping_methods: [],
 };
 
+const guestOrder = { ...minimalOrder, id: 'order_guest', customer_id: null };
+
 describe('OrdersService', () => {
     let service: OrdersService;
     let mockSdk: { store: { order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> } } };
@@ -82,29 +84,62 @@ describe('OrdersService', () => {
     });
 
     describe('getOrder', () => {
-        it('should throw UnauthorizedException when authorization is missing', () => {
-            expect(() => service.getOrder({ id: 'order_1' }, undefined)).toThrow(UnauthorizedException);
-            expect(mockLogger.debug).toHaveBeenCalledWith('Authorization token not found');
-        });
+        it('should return guest order for guest (no authorization)', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: guestOrder });
 
-        it('should call sdk.store.order.retrieve and return mapped order', async () => {
-            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
-
-            const result = await firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'));
+            const result = await firstValueFrom(service.getOrder({ id: 'order_guest' }, undefined));
 
             expect(mockSdk.store.order.retrieve).toHaveBeenCalledWith(
-                'order_1',
+                'order_guest',
                 expect.objectContaining({ fields: expect.any(String) }),
                 expect.any(Object),
             );
+            expect(result).toBeDefined();
+            expect(result?.id).toBe('order_guest');
+            expect(result?.customerId).toBeUndefined();
+        });
+
+        it('should return guest order for authenticated user', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: guestOrder });
+
+            const result = await firstValueFrom(service.getOrder({ id: 'order_guest' }, 'Bearer token'));
+
+            expect(result).toBeDefined();
+            expect(result?.id).toBe('order_guest');
+        });
+
+        it('should throw UnauthorizedException when guest tries to get customer order', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
+
+            await expect(firstValueFrom(service.getOrder({ id: 'order_1' }, undefined))).rejects.toThrow(
+                UnauthorizedException,
+            );
+        });
+
+        it('should return customer order when authenticated user matches customerId', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+
+            const result = await firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'));
+
             expect(result).toBeDefined();
             expect(result?.id).toBe('order_1');
             expect(result?.status).toBe('COMPLETED');
             expect(result?.paymentStatus).toBe('CAPTURED');
         });
 
+        it('should throw UnauthorizedException when authenticated user tries to get another customer order', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
+            mockAuthService.getCustomerId.mockReturnValue('cust_other');
+
+            await expect(firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'))).rejects.toThrow(
+                UnauthorizedException,
+            );
+        });
+
         it('should throw NotFoundException when SDK returns 404', async () => {
             mockSdk.store.order.retrieve.mockRejectedValue({ status: 404 });
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
 
             await expect(firstValueFrom(service.getOrder({ id: 'missing' }, 'Bearer token'))).rejects.toThrow(
                 NotFoundException,
