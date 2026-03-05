@@ -56,6 +56,10 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     const [isTotalsLoading, setIsTotalsLoading] = useState(false);
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const [initialFormValues, setInitialFormValues] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
         companyName: '',
         taxId: '',
         streetName: '',
@@ -91,8 +95,13 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                 setInitialFormValues((prev) => ({
                     ...prev,
                     notes: cart.notes ?? '',
+                    email: cart.email ?? prev.email,
                     ...(cart.billingAddress
                         ? {
+                              firstName: cart.billingAddress.firstName ?? '',
+                              lastName: cart.billingAddress.lastName ?? '',
+                              email: cart.billingAddress.email ?? cart.email ?? '',
+                              phone: cart.billingAddress.phone ?? '',
                               companyName: cart.billingAddress.companyName ?? '',
                               taxId: cart.billingAddress.taxId ?? '',
                               streetName: cart.billingAddress.streetName ?? '',
@@ -119,6 +128,14 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     }
 
     const validationSchema = YupObject().shape({
+        firstName: fields.firstName?.required ? YupString().required(errors.required) : YupString(),
+        lastName: fields.lastName?.required ? YupString().required(errors.required) : YupString(),
+        email: !accessToken
+            ? YupString().required(errors.required).email(errors.invalidEmail)
+            : fields.email?.required
+              ? YupString().required(errors.required).email(errors.invalidEmail)
+              : YupString().email(errors.invalidEmail).optional(),
+        phone: fields.phone?.required ? YupString().required(errors.required) : YupString(),
         companyName: fields.companyName.required ? YupString().required(errors.required) : YupString(),
         taxId: fields.taxId.required
             ? YupString()
@@ -174,6 +191,10 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                                     cartId,
                                     {
                                         billingAddress: {
+                                            firstName: values.firstName || undefined,
+                                            lastName: values.lastName || undefined,
+                                            email: values.email || undefined,
+                                            phone: values.phone || undefined,
                                             companyName: values.companyName,
                                             taxId: values.taxId,
                                             streetName: values.streetName,
@@ -184,6 +205,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                                             country: values.country,
                                         },
                                         notes: values.notes || undefined,
+                                        email: values.email || undefined,
                                     },
                                     { 'x-locale': locale },
                                     accessToken,
@@ -203,6 +225,130 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         {() => (
                             <Form id={FORM_ID} className="w-full flex flex-col gap-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="flex flex-col gap-2">
+                                        <Label htmlFor="firstName">
+                                            {fields.firstName?.label}
+                                            {fields.firstName?.required && <span className="text-destructive"> *</span>}
+                                        </Label>
+                                        <Field name="firstName">
+                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
+                                                <>
+                                                    <Input
+                                                        id="firstName"
+                                                        {...field}
+                                                        placeholder={fields.firstName?.placeholder}
+                                                        className={
+                                                            touched.firstName && formErrors.firstName
+                                                                ? 'border-destructive'
+                                                                : ''
+                                                        }
+                                                    />
+                                                    <ErrorMessage name="firstName">
+                                                        {(msg) => (
+                                                            <Typography variant="small" className="text-destructive">
+                                                                {msg}
+                                                            </Typography>
+                                                        )}
+                                                    </ErrorMessage>
+                                                </>
+                                            )}
+                                        </Field>
+                                    </div>
+
+                                    <div className="flex flex-col gap-2">
+                                        <Label htmlFor="lastName">
+                                            {fields.lastName?.label}
+                                            {fields.lastName?.required && <span className="text-destructive"> *</span>}
+                                        </Label>
+                                        <Field name="lastName">
+                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
+                                                <>
+                                                    <Input
+                                                        id="lastName"
+                                                        {...field}
+                                                        placeholder={fields.lastName?.placeholder}
+                                                        className={
+                                                            touched.lastName && formErrors.lastName
+                                                                ? 'border-destructive'
+                                                                : ''
+                                                        }
+                                                    />
+                                                    <ErrorMessage name="lastName">
+                                                        {(msg) => (
+                                                            <Typography variant="small" className="text-destructive">
+                                                                {msg}
+                                                            </Typography>
+                                                        )}
+                                                    </ErrorMessage>
+                                                </>
+                                            )}
+                                        </Field>
+                                    </div>
+
+                                    <div className="flex flex-col gap-2">
+                                        <Label htmlFor="email">
+                                            {fields.email?.label}
+                                            {(fields.email?.required || !accessToken) && (
+                                                <span className="text-destructive"> *</span>
+                                            )}
+                                        </Label>
+                                        <Field name="email">
+                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
+                                                <>
+                                                    <Input
+                                                        id="email"
+                                                        type="email"
+                                                        {...field}
+                                                        placeholder={fields.email?.placeholder}
+                                                        className={
+                                                            touched.email && formErrors.email
+                                                                ? 'border-destructive'
+                                                                : ''
+                                                        }
+                                                    />
+                                                    <ErrorMessage name="email">
+                                                        {(msg) => (
+                                                            <Typography variant="small" className="text-destructive">
+                                                                {msg}
+                                                            </Typography>
+                                                        )}
+                                                    </ErrorMessage>
+                                                </>
+                                            )}
+                                        </Field>
+                                    </div>
+
+                                    <div className="flex flex-col gap-2">
+                                        <Label htmlFor="phone">
+                                            {fields.phone?.label}
+                                            {fields.phone?.required && <span className="text-destructive"> *</span>}
+                                        </Label>
+                                        <Field name="phone">
+                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
+                                                <>
+                                                    <Input
+                                                        id="phone"
+                                                        type="tel"
+                                                        {...field}
+                                                        placeholder={fields.phone?.placeholder}
+                                                        className={
+                                                            touched.phone && formErrors.phone
+                                                                ? 'border-destructive'
+                                                                : ''
+                                                        }
+                                                    />
+                                                    <ErrorMessage name="phone">
+                                                        {(msg) => (
+                                                            <Typography variant="small" className="text-destructive">
+                                                                {msg}
+                                                            </Typography>
+                                                        )}
+                                                    </ErrorMessage>
+                                                </>
+                                            )}
+                                        </Field>
+                                    </div>
+
                                     <div className="md:col-span-2 flex flex-col gap-2">
                                         <Label htmlFor="companyName">
                                             {fields.companyName.label}

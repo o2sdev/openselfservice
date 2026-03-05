@@ -8,6 +8,21 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_EN: CMS.Model.CheckoutShippingAddressBlock.
         sameAsBillingAddress: {
             label: 'Same as billing address',
         },
+        firstName: {
+            label: 'First name',
+            placeholder: 'e.g. John',
+            required: false,
+        },
+        lastName: {
+            label: 'Last name',
+            placeholder: 'e.g. Doe',
+            required: false,
+        },
+        phone: {
+            label: 'Phone',
+            placeholder: 'e.g. +48 123 456 789',
+            required: false,
+        },
         address: {
             streetName: {
                 label: 'Street name',
@@ -80,6 +95,21 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_DE: CMS.Model.CheckoutShippingAddressBlock.
         sameAsBillingAddress: {
             label: 'Gleich wie Rechnungsadresse',
         },
+        firstName: {
+            label: 'Vorname',
+            placeholder: 'z.B. Max',
+            required: false,
+        },
+        lastName: {
+            label: 'Nachname',
+            placeholder: 'z.B. Mustermann',
+            required: false,
+        },
+        phone: {
+            label: 'Telefon',
+            placeholder: 'z.B. +49 123 456 789',
+            required: false,
+        },
         address: {
             streetName: {
                 label: 'Straße',
@@ -151,6 +181,21 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_PL: CMS.Model.CheckoutShippingAddressBlock.
     fields: {
         sameAsBillingAddress: {
             label: 'Ten sam adres co adres rozliczeniowy',
+        },
+        firstName: {
+            label: 'Imię',
+            placeholder: 'np. Jan',
+            required: false,
+        },
+        lastName: {
+            label: 'Nazwisko',
+            placeholder: 'np. Kowalski',
+            required: false,
+        },
+        phone: {
+            label: 'Telefon',
+            placeholder: 'np. +48 123 456 789',
+            required: false,
         },
         address: {
             streetName: {

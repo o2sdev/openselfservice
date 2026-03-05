@@ -9,6 +9,10 @@ import type {
 const mapAddress = (addr: Orders.Model.Order['shippingAddress']): OrderConfirmationAddress | undefined => {
     if (!addr) return undefined;
     return {
+        firstName: addr.firstName,
+        lastName: addr.lastName,
+        email: addr.email,
+        phone: addr.phone,
         streetName: addr.streetName,
         streetNumber: addr.streetNumber,
         apartment: addr.apartment,
@@ -79,6 +83,7 @@ export const mapOrderConfirmation = (
             shippingAddress: mapAddress(order.shippingAddress),
             billingAddress: mapAddress(order.billingAddress),
             shippingMethods: order.shippingMethods?.map(mapShippingMethod),
+            email: order.email,
         },
     };
 };

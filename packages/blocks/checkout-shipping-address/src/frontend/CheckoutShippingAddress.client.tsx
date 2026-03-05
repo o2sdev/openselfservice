@@ -16,6 +16,7 @@ import { Price } from '@o2s/ui/components/Price';
 import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
 
 import { Checkbox } from '@o2s/ui/elements/checkbox';
+import { Input } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
@@ -59,6 +60,9 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     const [isLoading, setIsLoading] = useState(false);
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const [initialFormValues, setInitialFormValues] = useState({
+        firstName: '',
+        lastName: '',
+        phone: '',
         streetName: '',
         streetNumber: '',
         apartment: '',
@@ -100,17 +104,22 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         total: cart.shippingMethod.total ?? { value: 0, currency: cart.currency },
                     });
                 }
+                const sameAsBilling = cart.metadata?.sameAsBillingAddress === true;
+                const sourceAddress = sameAsBilling ? cart.billingAddress : cart.shippingAddress;
                 setInitialFormValues((prev) => ({
                     ...prev,
-                    sameAsBillingAddress: cart.metadata?.sameAsBillingAddress === true,
-                    ...(cart.shippingAddress
+                    sameAsBillingAddress: sameAsBilling,
+                    ...(sourceAddress
                         ? {
-                              streetName: cart.shippingAddress.streetName ?? '',
-                              streetNumber: cart.shippingAddress.streetNumber ?? '',
-                              apartment: cart.shippingAddress.apartment ?? '',
-                              city: cart.shippingAddress.city ?? '',
-                              postalCode: cart.shippingAddress.postalCode ?? '',
-                              country: cart.shippingAddress.country ?? '',
+                              firstName: sourceAddress.firstName ?? '',
+                              lastName: sourceAddress.lastName ?? '',
+                              phone: sourceAddress.phone ?? '',
+                              streetName: sourceAddress.streetName ?? '',
+                              streetNumber: sourceAddress.streetNumber ?? '',
+                              apartment: sourceAddress.apartment ?? '',
+                              city: sourceAddress.city ?? '',
+                              postalCode: sourceAddress.postalCode ?? '',
+                              country: sourceAddress.country ?? '',
                           }
                         : {}),
                     ...(cart.shippingMethod ? { shippingMethod: cart.shippingMethod.id } : {}),
@@ -130,6 +139,18 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     }
 
     const validationSchema = YupObject().shape({
+        firstName: YupString().when('sameAsBillingAddress', {
+            is: false,
+            then: (schema) => (fields.firstName?.required ? schema.required(errors.required) : schema),
+        }),
+        lastName: YupString().when('sameAsBillingAddress', {
+            is: false,
+            then: (schema) => (fields.lastName?.required ? schema.required(errors.required) : schema),
+        }),
+        phone: YupString().when('sameAsBillingAddress', {
+            is: false,
+            then: (schema) => (fields.phone?.required ? schema.required(errors.required) : schema),
+        }),
         streetName: YupString().when('sameAsBillingAddress', {
             is: false,
             then: (schema) => (fields.address.streetName.required ? schema.required(errors.required) : schema),
@@ -196,6 +217,9 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                         sameAsBillingAddress: values.sameAsBillingAddress,
                                         ...(!values.sameAsBillingAddress && {
                                             shippingAddress: {
+                                                firstName: values.firstName || undefined,
+                                                lastName: values.lastName || undefined,
+                                                phone: values.phone || undefined,
                                                 streetName: values.streetName,
                                                 streetNumber: values.streetNumber || undefined,
                                                 apartment: values.apartment || undefined,
@@ -251,6 +275,9 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                                         const isChecked = checked === true;
                                                         setFieldValue('sameAsBillingAddress', isChecked);
                                                         if (!isChecked) {
+                                                            setFieldValue('firstName', '');
+                                                            setFieldValue('lastName', '');
+                                                            setFieldValue('phone', '');
                                                             setFieldValue('streetName', '');
                                                             setFieldValue('streetNumber', '');
                                                             setFieldValue('apartment', '');
@@ -268,7 +295,123 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                     </Field>
 
                                     {!values.sameAsBillingAddress && (
-                                        <AddressFields fields={fields.address} locale={locale} />
+                                        <>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="flex flex-col gap-2">
+                                                    <Label htmlFor="firstName">
+                                                        {fields.firstName?.label}
+                                                        {fields.firstName?.required && (
+                                                            <span className="text-destructive"> *</span>
+                                                        )}
+                                                    </Label>
+                                                    <Field name="firstName">
+                                                        {({
+                                                            field,
+                                                            form: { touched, errors: formErrors },
+                                                        }: FieldProps<string>) => (
+                                                            <>
+                                                                <Input
+                                                                    id="firstName"
+                                                                    {...field}
+                                                                    placeholder={fields.firstName?.placeholder}
+                                                                    className={
+                                                                        touched.firstName && formErrors.firstName
+                                                                            ? 'border-destructive'
+                                                                            : ''
+                                                                    }
+                                                                />
+                                                                <ErrorMessage name="firstName">
+                                                                    {(msg) => (
+                                                                        <Typography
+                                                                            variant="small"
+                                                                            className="text-destructive"
+                                                                        >
+                                                                            {msg}
+                                                                        </Typography>
+                                                                    )}
+                                                                </ErrorMessage>
+                                                            </>
+                                                        )}
+                                                    </Field>
+                                                </div>
+                                                <div className="flex flex-col gap-2">
+                                                    <Label htmlFor="lastName">
+                                                        {fields.lastName?.label}
+                                                        {fields.lastName?.required && (
+                                                            <span className="text-destructive"> *</span>
+                                                        )}
+                                                    </Label>
+                                                    <Field name="lastName">
+                                                        {({
+                                                            field,
+                                                            form: { touched, errors: formErrors },
+                                                        }: FieldProps<string>) => (
+                                                            <>
+                                                                <Input
+                                                                    id="lastName"
+                                                                    {...field}
+                                                                    placeholder={fields.lastName?.placeholder}
+                                                                    className={
+                                                                        touched.lastName && formErrors.lastName
+                                                                            ? 'border-destructive'
+                                                                            : ''
+                                                                    }
+                                                                />
+                                                                <ErrorMessage name="lastName">
+                                                                    {(msg) => (
+                                                                        <Typography
+                                                                            variant="small"
+                                                                            className="text-destructive"
+                                                                        >
+                                                                            {msg}
+                                                                        </Typography>
+                                                                    )}
+                                                                </ErrorMessage>
+                                                            </>
+                                                        )}
+                                                    </Field>
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <Label htmlFor="phone">
+                                                    {fields.phone?.label}
+                                                    {fields.phone?.required && (
+                                                        <span className="text-destructive"> *</span>
+                                                    )}
+                                                </Label>
+                                                <Field name="phone">
+                                                    {({
+                                                        field,
+                                                        form: { touched, errors: formErrors },
+                                                    }: FieldProps<string>) => (
+                                                        <>
+                                                            <Input
+                                                                id="phone"
+                                                                type="tel"
+                                                                {...field}
+                                                                placeholder={fields.phone?.placeholder}
+                                                                className={
+                                                                    touched.phone && formErrors.phone
+                                                                        ? 'border-destructive'
+                                                                        : ''
+                                                                }
+                                                            />
+                                                            <ErrorMessage name="phone">
+                                                                {(msg) => (
+                                                                    <Typography
+                                                                        variant="small"
+                                                                        className="text-destructive"
+                                                                    >
+                                                                        {msg}
+                                                                    </Typography>
+                                                                )}
+                                                            </ErrorMessage>
+                                                        </>
+                                                    )}
+                                                </Field>
+                                            </div>
+                                            <AddressFields fields={fields.address} locale={locale} />
+                                        </>
                                     )}
                                 </div>
 

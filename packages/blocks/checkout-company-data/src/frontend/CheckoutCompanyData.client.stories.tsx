@@ -19,6 +19,26 @@ const baseBlock = {
     title: 'Company details',
     subtitle: 'Fill in your company details',
     fields: {
+        firstName: {
+            label: 'First name',
+            placeholder: 'e.g. John',
+            required: false,
+        },
+        lastName: {
+            label: 'Last name',
+            placeholder: 'e.g. Doe',
+            required: false,
+        },
+        email: {
+            label: 'Email',
+            placeholder: 'e.g. john@example.com',
+            required: true,
+        },
+        phone: {
+            label: 'Phone',
+            placeholder: 'e.g. +48 123 456 789',
+            required: false,
+        },
         companyName: {
             label: 'Company name',
             placeholder: 'e.g. ACME Inc.',
@@ -76,6 +96,7 @@ const baseBlock = {
         required: 'This field is required',
         invalidTaxId: 'Invalid tax ID',
         invalidPostalCode: 'Invalid postal code',
+        invalidEmail: 'Invalid email address',
         cartNotFound: 'Cart not found',
         submitError: 'Something went wrong. Please try again.',
     },

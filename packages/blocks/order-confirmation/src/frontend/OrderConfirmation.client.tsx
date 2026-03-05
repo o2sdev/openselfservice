@@ -130,10 +130,20 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                                         <Typography variant="small">
                                             {Utils.FormatCountry.formatCountryCode(shippingAddress.country, locale)}
                                         </Typography>
+                                        {(shippingAddress.firstName || shippingAddress.lastName) && (
+                                            <Typography variant="small" className="mt-2">
+                                                {[shippingAddress.firstName, shippingAddress.lastName]
+                                                    .filter(Boolean)
+                                                    .join(' ')}
+                                            </Typography>
+                                        )}
+                                        {shippingAddress.phone && (
+                                            <Typography variant="small">{shippingAddress.phone}</Typography>
+                                        )}
                                     </>
                                 )}
                                 {shippingMethods && shippingMethods.length > 0 && (
-                                    <Typography variant="small">
+                                    <Typography variant="small" className="mt-2">
                                         <strong>{shippingSection.methodLabel}</strong>{' '}
                                         {shippingMethods.map((m) => m.name).join(', ')}
                                     </Typography>
@@ -170,6 +180,17 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                                 <Typography variant="small">
                                     {Utils.FormatCountry.formatCountryCode(billingAddress.country, locale)}
                                 </Typography>
+                                {(billingAddress.firstName || billingAddress.lastName) && (
+                                    <Typography variant="small" className="mt-2">
+                                        {[billingAddress.firstName, billingAddress.lastName].filter(Boolean).join(' ')}
+                                    </Typography>
+                                )}
+                                {(billingAddress.email || order.email) && (
+                                    <Typography variant="small">{billingAddress.email || order.email}</Typography>
+                                )}
+                                {billingAddress.phone && (
+                                    <Typography variant="small">{billingAddress.phone}</Typography>
+                                )}
                             </div>
                         </div>
                     </>
@@ -235,6 +256,12 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                     <DynamicIcon name="Info" size={20} className="text-muted-foreground shrink-0 mt-0.5" />
                     <Typography variant="small" className="text-muted-foreground">
                         {message}
+                        {(order.email || billingAddress?.email) && (
+                            <>
+                                {' '}
+                                <strong>{order.email || billingAddress?.email}</strong>
+                            </>
+                        )}
                     </Typography>
                 </div>
             )}

@@ -23,6 +23,10 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
     title!: string;
     subtitle?: string;
     fields!: {
+        firstName: CheckoutCompanyDataField;
+        lastName: CheckoutCompanyDataField;
+        email: CheckoutCompanyDataField;
+        phone: CheckoutCompanyDataField;
         companyName: CheckoutCompanyDataField;
         taxId: CheckoutCompanyDataField;
         notes?: CheckoutCompanyDataField;
@@ -43,6 +47,7 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
         required: string;
         invalidTaxId: string;
         invalidPostalCode: string;
+        invalidEmail: string;
         cartNotFound: string;
         submitError: string;
     };

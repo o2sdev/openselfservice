@@ -34,6 +34,9 @@ export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {
     subtitle?: string;
     fields!: {
         sameAsBillingAddress: { label: string };
+        firstName: CheckoutShippingAddressField;
+        lastName: CheckoutShippingAddressField;
+        phone: CheckoutShippingAddressField;
         address: {
             streetName: CheckoutShippingAddressField;
             streetNumber?: CheckoutShippingAddressField;

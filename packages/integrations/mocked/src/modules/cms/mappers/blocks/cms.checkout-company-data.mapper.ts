@@ -5,6 +5,26 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
     title: 'Company details',
     subtitle: 'Fill in your company details',
     fields: {
+        firstName: {
+            label: 'First name',
+            placeholder: 'e.g. John',
+            required: false,
+        },
+        lastName: {
+            label: 'Last name',
+            placeholder: 'e.g. Doe',
+            required: false,
+        },
+        email: {
+            label: 'Email',
+            placeholder: 'e.g. john@example.com',
+            required: true,
+        },
+        phone: {
+            label: 'Phone',
+            placeholder: 'e.g. +48 123 456 789',
+            required: false,
+        },
         companyName: {
             label: 'Company name',
             placeholder: 'e.g. ACME Inc.',
@@ -61,6 +81,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
         required: 'This field is required',
         invalidTaxId: 'Invalid tax ID',
         invalidPostalCode: 'Invalid postal code',
+        invalidEmail: 'Invalid email address',
         cartNotFound: 'Your cart is no longer available.',
         submitError: 'Something went wrong. Please try again.',
     },
@@ -89,6 +110,26 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
     title: 'Firmendaten',
     subtitle: 'Geben Sie Ihre Firmendaten ein',
     fields: {
+        firstName: {
+            label: 'Vorname',
+            placeholder: 'z.B. Max',
+            required: false,
+        },
+        lastName: {
+            label: 'Nachname',
+            placeholder: 'z.B. Mustermann',
+            required: false,
+        },
+        email: {
+            label: 'E-Mail',
+            placeholder: 'z.B. max@beispiel.de',
+            required: true,
+        },
+        phone: {
+            label: 'Telefon',
+            placeholder: 'z.B. +49 123 456 789',
+            required: false,
+        },
         companyName: {
             label: 'Firmenname',
             placeholder: 'z.B. ACME GmbH',
@@ -145,6 +186,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
         required: 'Dieses Feld ist erforderlich',
         invalidTaxId: 'Ungültige Steuer-ID',
         invalidPostalCode: 'Ungültige Postleitzahl',
+        invalidEmail: 'Ungültige E-Mail-Adresse',
         cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
         submitError: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
     },
@@ -173,6 +215,26 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
     title: 'Dane firmy',
     subtitle: 'Wypełnij dane firmowe',
     fields: {
+        firstName: {
+            label: 'Imię',
+            placeholder: 'np. Jan',
+            required: false,
+        },
+        lastName: {
+            label: 'Nazwisko',
+            placeholder: 'np. Kowalski',
+            required: false,
+        },
+        email: {
+            label: 'Email',
+            placeholder: 'np. jan@example.com',
+            required: true,
+        },
+        phone: {
+            label: 'Telefon',
+            placeholder: 'np. +48 123 456 789',
+            required: false,
+        },
         companyName: {
             label: 'Nazwa firmy',
             placeholder: 'np. ACME Sp. z o.o.',
@@ -229,6 +291,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
         required: 'To pole jest wymagane',
         invalidTaxId: 'Nieprawidłowy NIP',
         invalidPostalCode: 'Nieprawidłowy kod pocztowy',
+        invalidEmail: 'Nieprawidłowy adres email',
         cartNotFound: 'Twój koszyk jest niedostępny.',
         submitError: 'Wystąpił błąd. Spróbuj ponownie.',
     },

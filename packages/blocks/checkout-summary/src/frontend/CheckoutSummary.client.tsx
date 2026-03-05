@@ -210,12 +210,22 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         {isLoading ? (
                             <Skeleton className="h-24 w-full" />
                         ) : billingAddress ? (
-                            <div className="flex flex-col p-4 bg-card rounded-lg border border-border">
-                                {billingAddress.companyName && (
+                            <div className="flex flex-col gap-1 p-4 bg-card rounded-lg border border-border">
+                                {(billingAddress.firstName || billingAddress.lastName) && (
                                     <Typography variant="small">
-                                        <strong>{sections.company.companyNameLabel}: </strong>
-                                        {billingAddress.companyName}
+                                        {[billingAddress.firstName, billingAddress.lastName].filter(Boolean).join(' ')}
                                     </Typography>
+                                )}
+                                {(billingAddress.email || summaryData?.email) && (
+                                    <Typography variant="small">
+                                        {billingAddress.email || summaryData?.email}
+                                    </Typography>
+                                )}
+                                {billingAddress.phone && (
+                                    <Typography variant="small">{billingAddress.phone}</Typography>
+                                )}
+                                {billingAddress.companyName && (
+                                    <Typography variant="small">{billingAddress.companyName}</Typography>
                                 )}
                                 {billingAddress.taxId && (
                                     <Typography variant="small">
@@ -249,6 +259,16 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                     <Typography variant="small">
                                         {Utils.FormatCountry.formatCountryCode(shippingAddress.country, locale)}
                                     </Typography>
+                                    {(shippingAddress.firstName || shippingAddress.lastName) && (
+                                        <Typography variant="small" className="mt-2">
+                                            {[shippingAddress.firstName, shippingAddress.lastName]
+                                                .filter(Boolean)
+                                                .join(' ')}
+                                        </Typography>
+                                    )}
+                                    {shippingAddress.phone && (
+                                        <Typography variant="small">{shippingAddress.phone}</Typography>
+                                    )}
                                 </div>
                                 {shippingMethod && (
                                     <div className="mt-2 pt-2 border-t border-border">

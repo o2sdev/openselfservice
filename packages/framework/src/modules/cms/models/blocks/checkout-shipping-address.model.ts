@@ -11,6 +11,9 @@ export class CheckoutShippingAddressBlock extends Block.Block {
     subtitle?: string;
     fields!: {
         sameAsBillingAddress: { label: string };
+        firstName: CheckoutFieldConfig;
+        lastName: CheckoutFieldConfig;
+        phone: CheckoutFieldConfig;
         address: {
             streetName: CheckoutFieldConfig;
             streetNumber?: CheckoutFieldConfig;

@@ -22,6 +22,21 @@ const baseBlock = {
         sameAsBillingAddress: {
             label: 'Same as billing address',
         },
+        firstName: {
+            label: 'First name',
+            placeholder: 'e.g. John',
+            required: false,
+        },
+        lastName: {
+            label: 'Last name',
+            placeholder: 'e.g. Doe',
+            required: false,
+        },
+        phone: {
+            label: 'Phone',
+            placeholder: 'e.g. +48 123 456 789',
+            required: false,
+        },
         address: {
             streetName: {
                 label: 'Street name',

@@ -10,6 +10,10 @@ export class CheckoutCompanyDataBlock extends Block.Block {
     title!: string;
     subtitle?: string;
     fields!: {
+        firstName: CheckoutFieldConfig;
+        lastName: CheckoutFieldConfig;
+        email: CheckoutFieldConfig;
+        phone: CheckoutFieldConfig;
         companyName: CheckoutFieldConfig;
         taxId: CheckoutFieldConfig;
         notes?: CheckoutFieldConfig;
@@ -30,6 +34,7 @@ export class CheckoutCompanyDataBlock extends Block.Block {
         required: string;
         invalidTaxId: string;
         invalidPostalCode: string;
+        invalidEmail: string;
         cartNotFound: string;
         submitError: string;
     };

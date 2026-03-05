@@ -14,6 +14,10 @@ export interface OrderConfirmationItem {
 
 /** Address for order confirmation display */
 export interface OrderConfirmationAddress {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
     streetName: string;
     streetNumber?: string;
     apartment?: string;
@@ -83,5 +87,6 @@ export class OrderConfirmationBlock extends ApiModels.Block.Block {
         shippingAddress?: OrderConfirmationAddress;
         billingAddress?: OrderConfirmationAddress;
         shippingMethods?: OrderConfirmationShippingMethod[];
+        email?: string;
     };
 }
