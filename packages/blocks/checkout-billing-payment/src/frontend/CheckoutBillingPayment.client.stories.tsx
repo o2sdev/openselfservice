@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { defineRouting } from 'next-intl/routing';
 
+import readme from '../../README.md?raw';
+
 import { CheckoutBillingPaymentPure } from './CheckoutBillingPayment.client';
 
 const routing = defineRouting({
@@ -59,6 +61,8 @@ const baseBlock = {
 const meta = {
     title: 'Blocks/CheckoutBillingPayment',
     component: CheckoutBillingPaymentPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof CheckoutBillingPaymentPure>;
 
 export default meta;

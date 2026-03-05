@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { defineRouting } from 'next-intl/routing';
+import React from 'react';
+
+import readme from '../../README.md?raw';
 
 import { CartPure } from './Cart.client';
 
@@ -54,11 +57,20 @@ const baseBlock = {
             path: '#',
         },
     },
+    promoCodeLabels: {
+        title: 'Promo Code',
+        inputPlaceholder: 'Enter promo code',
+        applyButton: 'Apply',
+        removeLabel: 'Remove promo code',
+        invalidCodeError: 'Invalid or expired promo code',
+    },
 };
 
 const meta = {
     title: 'Blocks/Cart',
     component: CartPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof CartPure>;
 
 export default meta;
@@ -74,6 +86,8 @@ export const Default: Story = {
     },
 };
 
+const EMPTY_CART_ID = 'storybook-cart-empty';
+
 export const EmptyCart: Story = {
     args: {
         ...baseBlock,
@@ -81,4 +95,12 @@ export const EmptyCart: Story = {
         locale: 'en',
         routing,
     },
+    decorators: [
+        (Story) => {
+            if (typeof window !== 'undefined') {
+                window.localStorage.setItem('cartId', EMPTY_CART_ID);
+            }
+            return <Story />;
+        },
+    ],
 };

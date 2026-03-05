@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { defineRouting } from 'next-intl/routing';
 
+import readme from '../../README.md?raw';
+
 import { CheckoutShippingAddressPure } from './CheckoutShippingAddress.client';
 
 const routing = defineRouting({
@@ -105,6 +107,8 @@ const baseBlock = {
 const meta = {
     title: 'Blocks/CheckoutShippingAddress',
     component: CheckoutShippingAddressPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof CheckoutShippingAddressPure>;
 
 export default meta;

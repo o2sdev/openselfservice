@@ -65,6 +65,8 @@
         "fs-extra": "^11.3.3",
         "husky": "^9.1.7",
         "lint-staged": "^16.2.7",
+        "msw": "^2.12.10",
+        "msw-storybook-addon": "^2.0.6",
         "npm-check-updates": "^19.6.2",
         "playwright": "^1.58.2",
         "prettier": "^3.8.1",
