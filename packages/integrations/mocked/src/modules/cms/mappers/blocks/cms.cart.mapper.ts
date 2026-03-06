@@ -13,7 +13,6 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
     errors: {
         loadError: 'Failed to load cart. Please try again.',
         updateError: 'Failed to update cart. Please try again.',
-        promoError: 'Failed to apply promo code. Please try again.',
     },
     actions: {
         increaseQuantity: 'Increase quantity',
@@ -47,13 +46,6 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
             path: '/products',
         },
     },
-    promoCodeLabels: {
-        title: 'Promo Code',
-        inputPlaceholder: 'Enter promo code',
-        applyButton: 'Apply',
-        removeLabel: 'Remove promo code',
-        invalidCodeError: 'Invalid or expired promo code',
-    },
 };
 
 const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
@@ -69,7 +61,6 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
     errors: {
         loadError: 'Der Warenkorb konnte nicht geladen werden. Bitte versuchen Sie es erneut.',
         updateError: 'Der Warenkorb konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.',
-        promoError: 'Der Rabattcode konnte nicht angewendet werden. Bitte versuchen Sie es erneut.',
     },
     actions: {
         increaseQuantity: 'Menge erhöhen',
@@ -103,13 +94,6 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
             path: '/produkte',
         },
     },
-    promoCodeLabels: {
-        title: 'Rabattcode',
-        inputPlaceholder: 'Rabattcode eingeben',
-        applyButton: 'Einlösen',
-        removeLabel: 'Rabattcode entfernen',
-        invalidCodeError: 'Ungültiger oder abgelaufener Rabattcode',
-    },
 };
 
 const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
@@ -125,7 +109,6 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
     errors: {
         loadError: 'Nie udało się załadować koszyka. Spróbuj ponownie.',
         updateError: 'Nie udało się zaktualizować koszyka. Spróbuj ponownie.',
-        promoError: 'Nie udało się zastosować kodu promocyjnego. Spróbuj ponownie.',
     },
     actions: {
         increaseQuantity: 'Zwiększ ilość',
@@ -158,13 +141,6 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
             label: 'Przejdź do sklepu',
             path: '/produkty',
         },
-    },
-    promoCodeLabels: {
-        title: 'Kod rabatowy',
-        inputPlaceholder: 'Wpisz kod rabatowy',
-        applyButton: 'Zastosuj',
-        removeLabel: 'Usuń kod rabatowy',
-        invalidCodeError: 'Nieprawidłowy lub wygasły kod rabatowy',
     },
 };
 

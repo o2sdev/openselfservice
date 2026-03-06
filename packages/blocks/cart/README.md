@@ -2,11 +2,10 @@
 
 Block for displaying and managing the shopping cart.
 
-The cart block shows the current cart contents with items, quantities, prices, and summary. Users can update quantities, remove items, apply promo codes, and proceed to checkout. Cart data is fetched client-side using `cartId` from localStorage. Ideal for e-commerce checkout flows.
+The cart block shows the current cart contents with items, quantities, prices, and summary. Users can update quantities, remove items, and proceed to checkout. Cart data is fetched client-side using `cartId` from localStorage. Ideal for e-commerce checkout flows.
 
 - **Cart display** – Items, quantities, prices, subtotal, tax, total
 - **Quantity updates** – Increase/decrease item quantities
-- **Promo codes** – Apply and remove discount codes
 - **Empty state** – Message when cart has no items
 
 Content editors place the block via CMS. Developers connect Carts and Checkout integrations (e.g. mocked, Medusa.js).

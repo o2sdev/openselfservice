@@ -26,7 +26,6 @@ const baseBlock = {
     errors: {
         loadError: 'Failed to load cart. Please try again.',
         updateError: 'Failed to update cart. Please try again.',
-        promoError: 'Failed to apply promo code. Please try again.',
     },
     actions: {
         increaseQuantity: 'Increase quantity',
@@ -56,13 +55,6 @@ const baseBlock = {
             label: 'Go to shop',
             path: '#',
         },
-    },
-    promoCodeLabels: {
-        title: 'Promo Code',
-        inputPlaceholder: 'Enter promo code',
-        applyButton: 'Apply',
-        removeLabel: 'Remove promo code',
-        invalidCodeError: 'Invalid or expired promo code',
     },
 };
 

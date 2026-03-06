@@ -80,38 +80,5 @@ export const cart = (sdk: Sdk) => ({
                     ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
                 },
             }),
-
-        applyPromotion: (
-            cartId: string,
-            body: { code: string; locale?: string },
-            headers: Models.Headers.AppHeaders,
-            authorization?: string,
-        ): Promise<Carts.Model.Cart> =>
-            sdk.makeRequest({
-                method: 'post',
-                url: `${CARTS_API_URL}/${cartId}/promotions`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-                data: body,
-            }),
-
-        removePromotion: (
-            cartId: string,
-            code: string,
-            headers: Models.Headers.AppHeaders,
-            authorization?: string,
-        ): Promise<Carts.Model.Cart> =>
-            sdk.makeRequest({
-                method: 'delete',
-                url: `${CARTS_API_URL}/${cartId}/promotions/${code}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-            }),
     },
 });

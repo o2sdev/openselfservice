@@ -61,7 +61,6 @@ export class CartBlock extends ApiModels.Block.Block {
     errors!: {
         loadError: string;
         updateError: string;
-        promoError: string;
     };
     actions!: {
         increaseQuantity: string;
@@ -73,11 +72,4 @@ export class CartBlock extends ApiModels.Block.Block {
     checkoutButton?: { label: string; path: string; icon?: string };
     continueShopping?: { label: string; path: string };
     empty!: CartBlockEmpty;
-    promoCodeLabels?: {
-        title: string;
-        inputPlaceholder: string;
-        applyButton: string;
-        removeLabel: string;
-        invalidCodeError: string;
-    };
 }

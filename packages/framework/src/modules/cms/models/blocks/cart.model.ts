@@ -12,7 +12,6 @@ export class CartBlock extends Block.Block {
     errors?: {
         loadError: string;
         updateError: string;
-        promoError: string;
     };
     actions?: {
         increaseQuantity: string;
@@ -45,12 +44,5 @@ export class CartBlock extends Block.Block {
             label: string;
             path: string;
         };
-    };
-    promoCodeLabels?: {
-        title: string;
-        inputPlaceholder: string;
-        applyButton: string;
-        removeLabel: string;
-        invalidCodeError: string;
     };
 }
