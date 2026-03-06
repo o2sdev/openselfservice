@@ -220,16 +220,6 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                                 </Typography>
                             </div>
                         )}
-                        {discountLabel && order.discountTotal && order.discountTotal.value > 0 && (
-                            <div className="flex items-center justify-between">
-                                <Typography variant="small" className="text-muted-foreground">
-                                    {discountLabel}
-                                </Typography>
-                                <Typography variant="small">
-                                    <Price price={order.discountTotal} />
-                                </Typography>
-                            </div>
-                        )}
                         {shippingLabel && order.shippingTotal && order.shippingTotal.value > 0 && (
                             <div className="flex items-center justify-between">
                                 <Typography variant="small" className="text-muted-foreground">
@@ -237,6 +227,16 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                                 </Typography>
                                 <Typography variant="small">
                                     <Price price={order.shippingTotal} />
+                                </Typography>
+                            </div>
+                        )}
+                        {discountLabel && order.discountTotal && order.discountTotal.value > 0 && (
+                            <div className="flex items-center justify-between">
+                                <Typography variant="small" className="text-muted-foreground">
+                                    {discountLabel}
+                                </Typography>
+                                <Typography variant="small" className="text-green-600">
+                                    -<Price price={order.discountTotal} />
                                 </Typography>
                             </div>
                         )}

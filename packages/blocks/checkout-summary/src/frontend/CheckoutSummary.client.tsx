@@ -210,7 +210,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         {isLoading ? (
                             <Skeleton className="h-24 w-full" />
                         ) : billingAddress ? (
-                            <div className="flex flex-col gap-1 p-4 bg-card rounded-lg border border-border">
+                            <div className="flex flex-col p-4 bg-card rounded-lg border border-border">
                                 {(billingAddress.firstName || billingAddress.lastName) && (
                                     <Typography variant="small">
                                         {[billingAddress.firstName, billingAddress.lastName].filter(Boolean).join(' ')}
@@ -333,7 +333,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                             </div>
                         ) : totals ? (
                             <div className="flex flex-col gap-4">
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col">
                                     <div className="flex items-center justify-between">
                                         <Typography variant="small">{sections.summary.subtotalLabel}</Typography>
                                         <Typography variant="body">

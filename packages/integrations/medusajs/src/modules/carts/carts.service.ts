@@ -28,7 +28,7 @@ export class CartsService extends Carts.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
-    private readonly cartItemsFields = '*items,*shipping_methods';
+    private readonly cartItemsFields = '*items,*shipping_methods,*billing_address,*shipping_address';
 
     constructor(
         private readonly config: ConfigService,

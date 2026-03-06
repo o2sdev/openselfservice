@@ -41,17 +41,28 @@ export function mapCustomerAddresses(
     };
 }
 
-export function mapAddressToMedusa(address: Models.Address.Address): HttpTypes.StoreCreateCustomerAddress {
+/**
+ * Maps O2S Address to Medusa format.
+ * address_1 = streetName, address_2 = streetNumber, metadata = { taxId, apartment }
+ */
+export function mapAddressToMedusa(address: Models.Address.Address): HttpTypes.StoreCreateCustomerAddress & {
+    metadata?: Record<string, string>;
+} {
+    const metadata: Record<string, string> = {};
+    if (address.taxId?.trim()) metadata.taxId = address.taxId.trim();
+    if (address.apartment?.trim()) metadata.apartment = address.apartment.trim();
+
     return {
         first_name: (address.firstName || '').trim(),
         last_name: (address.lastName || '').trim(),
         company: address.companyName?.trim() || undefined,
         address_1: (address.streetName || '').trim(),
-        address_2: (address.streetNumber || address.apartment || '').trim() || undefined,
+        address_2: address.streetNumber?.trim() || undefined,
         city: (address.city || '').trim(),
         country_code: (address.country || '').toLowerCase().trim(), // Medusa.js requires lowercase ISO country codes
         postal_code: (address.postalCode || '').trim(),
         province: address.region?.trim() || undefined,
         phone: address.phone?.trim() || undefined,
+        ...(Object.keys(metadata).length > 0 ? { metadata } : {}),
     };
 }
