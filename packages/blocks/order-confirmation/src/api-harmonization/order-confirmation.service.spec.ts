@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CMS } from '@o2s/configs.integrations';
+import { CMS, Orders } from '@o2s/configs.integrations';
+import { of } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { OrderConfirmationService } from './order-confirmation.service';
@@ -15,9 +16,13 @@ describe('OrderConfirmationService', () => {
                 {
                     provide: CMS.Service,
                     useValue: {
-                        getOrderConfirmationBlock: vi.fn().mockReturnValue({
-                            title: 'Test Block',
-                        }),
+                        getOrderConfirmationBlock: vi.fn().mockReturnValue(of({ title: 'Test Block' })),
+                    },
+                },
+                {
+                    provide: Orders.Service,
+                    useValue: {
+                        getOrder: vi.fn().mockReturnValue(of(undefined)),
                     },
                 },
             ],

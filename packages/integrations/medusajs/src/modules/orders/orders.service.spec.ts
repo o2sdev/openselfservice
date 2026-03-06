@@ -15,6 +15,7 @@ const minimalOrder = {
     customer_id: 'cust_1',
     currency_code: 'eur',
     total: 10000,
+    item_subtotal: 9000,
     subtotal: 9000,
     tax_total: 1000,
     discount_total: 0,
