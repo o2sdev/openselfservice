@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS, Invoices } from '@o2s/configs.integrations';
+import dayjs from 'dayjs';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
@@ -33,6 +34,8 @@ export class InvoiceListService {
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,
                         locale: headers['x-locale'],
+                        dateFrom: query.dateFrom ? dayjs(query.dateFrom).toISOString() : undefined,
+                        dateTo: query.dateTo ? dayjs(query.dateTo).toISOString() : undefined,
                     })
                     .pipe(
                         map((invoices) => {
