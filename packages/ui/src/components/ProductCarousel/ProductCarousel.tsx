@@ -90,9 +90,9 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                         spaceBetween: 24,
                     },
                 }}
+                {...carouselConfig}
                 keyboardControlMode={keyboardControlMode}
                 keyboardCarouselId={resolvedKeyboardCarouselId}
-                {...carouselConfig}
             />
         </div>
     );
