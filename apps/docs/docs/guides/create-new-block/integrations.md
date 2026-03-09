@@ -72,11 +72,13 @@ import { CMS } from '@o2s/framework/modules';
 
 import { extendCmsModel } from './extend-cms-model';
 
-export * as TicketsSummaryBlock from './models/blocks/tickets-summary.model';
+import * as TicketsSummaryBlock from './models/blocks/tickets-summary.model';
 
 export const Model = extendCmsModel({
     TicketsSummaryBlock,
 });
+
+export { TicketsSummaryBlock };
 ```
 
 :::info

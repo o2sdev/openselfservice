@@ -242,6 +242,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'input',
                 name: 'name',
                 message: 'What is the name of the block?',
+                validate: (value) => (value && value.trim().length > 0 ? true : 'Please enter a block name'),
             },
         ],
         actions: (data) => {

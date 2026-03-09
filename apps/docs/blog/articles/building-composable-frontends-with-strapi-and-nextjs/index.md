@@ -346,7 +346,9 @@ Data fetching happens through NestJS, where we've introduced a dedicated service
 
 ```typescript
 export class CmsService extends CMS.Service {
-    constructor(private readonly graphqlService: GraphqlService) {}
+    constructor(private readonly graphqlService: GraphqlService) {
+        super();
+    }
 
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
         const component = this.graphqlService.getComponent({

@@ -125,7 +125,7 @@ const BLOCK_REGISTRY = {
 } satisfies Record<Modules.Page.Model.Blocks, BlockRenderer>;
 
 const isRegisteredBlock = (typename: string): typename is Modules.Page.Model.Blocks => {
-    return typename in BLOCK_REGISTRY;
+    return Object.hasOwn(BLOCK_REGISTRY, typename);
 };
 
 const renderBlock = (typename: string, blockProps: BlockProps) => {

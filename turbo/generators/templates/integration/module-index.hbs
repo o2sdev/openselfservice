@@ -10,7 +10,8 @@ export {
 {{pascalCase module}}Service as Service } from './{{kebabCase module}}.service';
 
 {{#if (eq module 'cms')}}
-    export import Request = CMS.Request; export import Model = CMS.Model;
+    export import Request = CMS.Request;
+    export { Model } from './cms.model';
 {{else}}
     export import Request =
     {{pascalCase module}}.Request; export import Model =

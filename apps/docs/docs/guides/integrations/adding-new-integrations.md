@@ -109,7 +109,9 @@ You can achieve that by following a few steps:
     export class CmsService extends CMS.Service {
         constructor(
             private readonly cacheService: Cache.Service,
-        ) {}
+        ) {
+            super();
+        }
     }
     ```
 
