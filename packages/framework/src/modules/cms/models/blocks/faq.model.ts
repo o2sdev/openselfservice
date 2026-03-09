@@ -21,20 +21,26 @@ export class FaqBoxWithButton {
     button?: Link.Link;
 }
 
+/** Single FAQ item in CMS metadata (editor fields). */
+export interface FaqMetaItem {
+    __id: string;
+    title: string;
+    content: string;
+}
+
+/** FAQ banner in CMS metadata (editor fields). */
+export interface FaqMetaBanner {
+    __id: string;
+    title: string;
+    description: string;
+    button: string;
+}
+
 /** CMS metadata map for FAQ block editor fields. */
 export class Meta {
     __id!: string;
     title!: string;
     subtitle!: string;
-    items?: {
-        __id: string;
-        title: string;
-        content: string;
-    }[];
-    banner?: {
-        __id: string;
-        title: string;
-        description: string;
-        button: string;
-    };
+    items?: FaqMetaItem[];
+    banner?: FaqMetaBanner;
 }

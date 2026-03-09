@@ -13,7 +13,7 @@ export class GetCartListQuery extends PaginationQuery {
     customerId?: string;
     /** Sort expression from query string, e.g. `createdAt_DESC`. */
     sort?: string;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }
 
@@ -29,7 +29,7 @@ export class CreateCartBody {
     currency!: Price.Currency;
     /** Integration-specific cart metadata payload. */
     metadata?: Record<string, unknown>;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }
 
@@ -59,7 +59,7 @@ export class UpdateCartBody {
     notes?: string;
     /** Integration-specific cart metadata payload. */
     metadata?: Record<string, unknown>;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }
 
@@ -83,7 +83,7 @@ export class AddCartItemBody {
     regionId?: string;
     /** Integration-specific item metadata payload. */
     metadata?: Record<string, unknown>;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }
 
@@ -101,7 +101,7 @@ export class UpdateCartItemBody {
     quantity?: number;
     /** Integration-specific item metadata payload. */
     metadata?: Record<string, unknown>;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }
 
@@ -123,7 +123,7 @@ export class ApplyPromotionParams {
 export class ApplyPromotionBody {
     /** Promotion/coupon code. */
     code!: string;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }
 
@@ -161,7 +161,7 @@ export class UpdateCartAddressesBody {
     notes?: string;
     /** Customer email, typically required for guest checkout. */
     email?: string;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }
 
@@ -175,6 +175,6 @@ export class AddShippingMethodParams {
 export class AddShippingMethodBody {
     /** Shipping option identifier (from shipping options endpoint). */
     shippingOptionId!: string;
-    /** Optional locale passed via query string/header (kept as string). */
+    /** Optional locale provided in the request body (kept as string). */
     locale?: string;
 }

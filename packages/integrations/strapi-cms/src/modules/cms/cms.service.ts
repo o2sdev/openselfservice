@@ -115,14 +115,13 @@ export class CmsService implements CMS.Service {
         });
     }
 
-    getEntry<T>(options: CMS.Request.GetCmsEntryParams) {
-        const key = `entry-${options.id}-${options.locale}`;
-        return this.getCachedBlock<T | undefined>(key, () => of(undefined));
+    getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
+        return of(undefined as T | undefined);
     }
 
     getEntries<T>(options: CMS.Request.GetCmsEntriesParams) {
         const key = `entries-${options.type}-${options.locale}-${JSON.stringify(options.filters || {})}`;
-        return this.getCachedBlock<T>(key, () => of(undefined as T));
+        return this.getCachedBlock<T>(key, () => of({} as T));
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {

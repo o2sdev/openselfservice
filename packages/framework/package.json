@@ -43,6 +43,7 @@
     },
     "dependencies": {
         "@o2s/utils.logger": "*",
+        "class-validator": "^0.14.1",
         "logform": "2.7.0",
         "ofetch": "^1.5.1",
         "qs": "^6.15.0",

@@ -108,8 +108,6 @@ export class ArticlesService implements Articles.Service {
                       category: options.category,
                   }
                 : undefined,
-            hitsPerPage: options.limit,
-            page: options.offset,
             sort: options.sortBy
                 ? [
                       {

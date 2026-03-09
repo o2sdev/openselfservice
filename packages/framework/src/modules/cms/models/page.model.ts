@@ -52,7 +52,7 @@ export class OneColumnTemplate implements Template {
     };
 }
 
-/** Two-column template variant with top/bottom sections. */
+/** Two-column template variant with top, left, right and bottom slot regions. */
 export class TwoColumnTemplate implements Template {
     __typename!: 'TwoColumnTemplate';
     slots!: {

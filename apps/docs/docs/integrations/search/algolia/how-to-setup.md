@@ -131,7 +131,7 @@ After completing the installation and configuration steps:
 
 3. **Verify the installation** by:
     - Checking server logs for successful integration registration (should show Algolia service initialization)
-    - Testing the endpoint: `GET /search?index={your-index-name}` (should return results or error if not configured)
+    - Testing the endpoint: `POST /search?index={your-index-name}` (should return results or error if not configured)
     - Verifying that environment variables are correctly loaded (check for any errors about missing `ALGOLIA_APP_ID` or `ALGOLIA_API_KEY`)
 
 ## Troubleshooting

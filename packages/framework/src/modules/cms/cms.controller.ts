@@ -1,4 +1,5 @@
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Query, UseInterceptors } from '@nestjs/common';
+import { of, switchMap, throwError } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -36,7 +37,7 @@ export class CmsController {
     }
 
     @Get('/login-page')
-    getLoginPage(@Query() params: Request.GetCmsPageParams): ReturnType<CmsService['getLoginPage']> {
+    getLoginPage(@Query() params: Request.GetCmsLoginPageParams): ReturnType<CmsService['getLoginPage']> {
         return this.cms.getLoginPage(params);
     }
 
@@ -96,7 +97,13 @@ export class CmsController {
 
     @Get('/blocks/article-details')
     getArticleDetailsBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getEntry']> {
-        return this.cms.getEntry(params);
+        return this.cms
+            .getEntry(params)
+            .pipe(
+                switchMap((entry) =>
+                    entry === undefined ? throwError(() => new NotFoundException('Article not found')) : of(entry),
+                ),
+            );
     }
 
     @Get('/blocks/invoice-list')
