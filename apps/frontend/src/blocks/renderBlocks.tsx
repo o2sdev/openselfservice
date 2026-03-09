@@ -134,5 +134,5 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
         return null;
     }
 
-    return BLOCK_REGISTRY[typename](blockProps);
+    return BLOCK_REGISTRY[typename as keyof typeof BLOCK_REGISTRY](blockProps);
 };

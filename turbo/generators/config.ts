@@ -359,7 +359,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     type: 'modify',
                     path: 'apps/frontend/src/blocks/renderBlocks.tsx',
                     pattern: /(\/\/ BLOCK REGISTER)/g,
-                    template: `case '{{pascalCase name}}Block':\n            return <{{pascalCase name}}.Renderer {...blockProps} />;\n        // BLOCK REGISTER`,
+                    template: `{{pascalCase name}}Block: (blockProps) => <{{pascalCase name}}.Renderer {...blockProps} />,\n        // BLOCK REGISTER`,
                 },
 
                 // SDK
