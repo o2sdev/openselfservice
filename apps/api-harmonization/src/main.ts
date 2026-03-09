@@ -1,4 +1,4 @@
-import { LogLevel, ValidationPipe } from '@nestjs/common';
+import { LogLevel } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as telemetry from '@o2s/telemetry';
@@ -26,8 +26,6 @@ async function bootstrap() {
     if (process.env.API_PREFIX) {
         app.setGlobalPrefix(process.env.API_PREFIX);
     }
-
-    app.useGlobalPipes(new ValidationPipe());
 
     const origins = process.env.FRONT_BASE_URLS!.split(',');
 
