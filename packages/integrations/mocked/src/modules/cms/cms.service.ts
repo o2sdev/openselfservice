@@ -52,7 +52,11 @@ import { mapSurvey } from './mappers/cms.survey.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class CmsService implements CMS.Service {
+export class CmsService extends CMS.Service {
+    constructor() {
+        super();
+    }
+
     getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
         return of<T>({} as T);
     }

@@ -9,6 +9,8 @@ import { mapArticle, mapInit, mapPage } from './page.mapper';
 import { Init, NotFound, Page } from './page.model';
 import { GetInitQuery, GetPageQuery } from './page.request';
 
+const H = Models.Headers.HeaderName;
+
 @Injectable()
 export class PageService {
     private readonly SUPPORTED_LOCALES: string[];
@@ -45,18 +47,18 @@ export class PageService {
     }
 
     getInit(query: GetInitQuery, headers: Models.Headers.AppHeaders): Observable<Init> {
-        const userRoles = this.authService.getRoles(headers['authorization']);
+        const userRoles = this.authService.getRoles(headers[H.Authorization]);
 
-        return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
+        return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers[H.Locale] }).pipe(
             switchMap((appConfig) => {
                 const header = this.cmsService.getHeader({
                     id: appConfig.header || '',
-                    locale: headers['x-locale'],
+                    locale: headers[H.Locale],
                 });
 
                 const footer = this.cmsService.getFooter({
                     id: appConfig.footer || '',
-                    locale: headers['x-locale'],
+                    locale: headers[H.Locale],
                 });
 
                 return forkJoin([header, footer]).pipe(
@@ -76,13 +78,13 @@ export class PageService {
     }
 
     getPage(query: GetPageQuery, headers: Models.Headers.AppHeaders): Observable<Page | NotFound> {
-        const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
-        const userRoles = this.authService.getRoles(headers['authorization']);
+        const page = this.cmsService.getPage({ slug: query.slug, locale: headers[H.Locale] });
+        const userRoles = this.authService.getRoles(headers[H.Authorization]);
 
         return forkJoin([page]).pipe(
             concatMap(([page]) => {
                 if (!page) {
-                    return this.articlesService.getArticle({ slug: query.slug, locale: headers['x-locale'] }).pipe(
+                    return this.articlesService.getArticle({ slug: query.slug, locale: headers[H.Locale] }).pipe(
                         concatMap((article) => {
                             if (!article) {
                                 throw new NotFoundException();
@@ -104,13 +106,13 @@ export class PageService {
 
     private processPage = (page: CMS.Model.Page.Page, query: GetPageQuery, headers: Models.Headers.AppHeaders) => {
         const alternatePages = this.cmsService
-            .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
+            .getAlternativePages({ id: page.id, slug: query.slug, locale: headers[H.Locale] })
             .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
 
         return forkJoin([of(page), alternatePages]).pipe(
             map(([page, alternatePages]) => {
                 const alternates = alternatePages?.filter((p) => p?.id === page.id);
-                return mapPage(page, headers['x-locale'], alternates);
+                return mapPage(page, headers[H.Locale], alternates);
             }),
         );
     };
@@ -124,7 +126,7 @@ export class PageService {
             throw new NotFoundException();
         }
 
-        const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
+        const category = this.articlesService.getCategory({ id: article.category.id, locale: headers[H.Locale] });
 
         return forkJoin([category]).pipe(
             map(([category]) => {
@@ -133,7 +135,7 @@ export class PageService {
                 // Remove article slug (last segment) and category slug (second to last)
                 const basePath = slugParts.length > 2 ? '/' + slugParts.slice(0, -2).join('/') : '/';
 
-                return mapArticle(article, category, headers['x-locale'], basePath);
+                return mapArticle(article, category, headers[H.Locale], basePath);
             }),
         );
     };

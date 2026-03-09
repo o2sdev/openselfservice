@@ -10,11 +10,13 @@ import { mapCheckoutSummary, mapPlaceOrderResponse, mapShippingOptions } from '.
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class CheckoutService implements Checkout.Service {
+export class CheckoutService extends Checkout.Service {
     constructor(
         private readonly cartsService: Carts.Service,
         private readonly paymentsService: Payments.Service,
-    ) {}
+    ) {
+        super();
+    }
 
     setAddresses(
         params: Checkout.Request.SetAddressesParams,

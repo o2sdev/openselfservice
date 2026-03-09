@@ -7,7 +7,11 @@ import { checkMembership, mapOrganization, mapOrganizationsForUser } from './org
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class OrganizationsService implements Organizations.Service {
+export class OrganizationsService extends Organizations.Service {
+    constructor() {
+        super();
+    }
+
     getOrganizationList(
         options: Organizations.Request.OrganizationsListQuery,
         authorization?: string,

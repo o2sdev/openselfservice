@@ -7,12 +7,14 @@ import { Models } from '@o2s/utils.api-harmonization';
 import { mapNotFoundPage } from './not-found-page.mapper';
 import { NotFoundPage } from './not-found-page.model';
 
+const H = Models.Headers.HeaderName;
+
 @Injectable()
 export class NotFoundPageService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getNotFoundPage(headers: Models.Headers.AppHeaders): Observable<NotFoundPage> {
-        return this.cmsService.getNotFoundPage({ locale: headers['x-locale'] }).pipe(
+        return this.cmsService.getNotFoundPage({ locale: headers[H.Locale] }).pipe(
             map((notFoundPage) => {
                 if (!notFoundPage) {
                     throw new NotFoundException();

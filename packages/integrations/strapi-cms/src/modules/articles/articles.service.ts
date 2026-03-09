@@ -4,12 +4,12 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Articles, CMS, Search } from '@o2s/framework/modules';
 
-import { Service as GraphqlService } from '@/modules/graphql';
+import { GraphqlService } from '@/modules/graphql/graphql.service';
 
 import { mapArticle, mapArticles, mapCategories, mapCategory } from './articles.mapper';
 
 @Injectable()
-export class ArticlesService implements Articles.Service {
+export class ArticlesService extends Articles.Service {
     baseUrl: string;
     searchIndexName: string;
     constructor(
@@ -18,6 +18,7 @@ export class ArticlesService implements Articles.Service {
         private readonly searchService: Search.Service,
         private readonly cmsService: CMS.Service,
     ) {
+        super();
         this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
         this.searchIndexName = this.config.get('SEARCH_ARTICLES_INDEX_NAME')!;
 

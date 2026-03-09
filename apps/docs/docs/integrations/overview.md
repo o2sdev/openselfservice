@@ -14,6 +14,22 @@ For each integration we have prepared a description about:
 - what data sources and libraries are used,
 - what models and endpoints it extends (if any).
 
+## Installation commands
+
+Most integration packages should be installed in `@o2s/configs.integrations`, because this workspace imports and exposes selected integration implementations for the rest of the app.
+
+| Integration package                | Install command                                                                      |
+| ---------------------------------- | ------------------------------------------------------------------------------------ |
+| `@o2s/integrations.strapi-cms`     | `npm install @o2s/integrations.strapi-cms --workspace=@o2s/configs.integrations`     |
+| `@o2s/integrations.contentful-cms` | `npm install @o2s/integrations.contentful-cms --workspace=@o2s/configs.integrations` |
+| `@o2s/integrations.zendesk`        | `npm install @o2s/integrations.zendesk --workspace=@o2s/configs.integrations`        |
+| `@o2s/integrations.redis`          | `npm install @o2s/integrations.redis --workspace=@o2s/configs.integrations`          |
+| `@o2s/integrations.medusajs`       | `npm install @o2s/integrations.medusajs --workspace=@o2s/configs.integrations`       |
+| `@o2s/integrations.algolia`        | `npm install @o2s/integrations.algolia --workspace=@o2s/configs.integrations`        |
+| `@o2s/integrations.mocked`         | `npm install @o2s/integrations.mocked --workspace=@o2s/configs.integrations`         |
+
+`@o2s/modules.surveyjs` is a module package (not an integration package), so it has different installation requirements.
+
 import DocLinkTiles from '@site/src/components/DocLinkTiles';
 
 ## Available integrations

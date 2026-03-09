@@ -13,10 +13,10 @@ The first step is to install the Strapi integration package in your workspace. T
 Install the package using npm with the following command:
 
 ```shell
-npm install @o2s/integrations.strapi-cms --workspace=@o2s/api
+npm install @o2s/integrations.strapi-cms --workspace=@o2s/configs.integrations
 ```
 
-This command installs the integration package in the API workspace, ensuring that all necessary dependencies are available where they're needed.
+This command installs the integration package in the integrations config workspace, where integration packages are configured and resolved.
 
 ## Configuration
 
@@ -100,16 +100,49 @@ The content model includes predefined content types that are compatible with the
 - Template content types for defining page layouts
 - Block content types for reusable content components
 
-To help you get straight to building, we have prepared an export of both the content model and example content from Strapi. This will significantly simplify the process of setting up your own CMS server by providing you with a predefined structure and sample data to kickstart your project.
+To help you get straight to building, we provide **ready-made exports of the content model and example content** in a separate companion repository.
 
-With this export, you receive a ready-to-use content model that mirrors O2S's structure, ensuring everything is organized and optimized from the start. From there, you can fully customize both the content model and data to suit your specific needs.
+### About the `openselfservice-resources` repository
 
-To import the content model, go to our resource repository where you can find detailed instructions. Depending on which starter you use, this is one of:
+We intentionally keep content model exports and example data **outside of the main `openselfservice` repo**:
 
-- [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/o2s)
-- [**DXP Starter Kit** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/dxp)
+- the main repo focuses on **application code, framework and integrations**,
+- the [`openselfservice-resources`](https://github.com/o2sdev/openselfservice-resources) repo acts as a base of **resources for external tools** integrated with O2S – for example CMS configuration (content models, plugins, sample content), initial products and assets for commerce engines, or CI/CD templates for deploying O2S.
 
-Follow the instructions in the repository to import the content model into your Strapi instance. This will set up all the necessary content types and their relationships that the integration expects to work with.
+This separation keeps the main codebase lightweight while still giving you a convenient, ready-to-use starting point for your own CMS setup. You are free to fork or copy the resources and adapt them to your own project.
+
+### Choosing the right content model export
+
+Depending on which starter you use, you should pick one of the following folders in the resources repo:
+
+- [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/o2s) – default O2S demo / starter setup,
+- [**DXP Starter Kit** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/dxp) – extended DXP starter variant.
+
+Each folder includes:
+
+- Strapi export of the **content model** (content types and relations),
+- optional **example content** to quickly get a working demo.
+
+### Step-by-step: importing the content model
+
+1. **Clone the resources repository (optional but recommended)**  
+   ```bash
+   git clone https://github.com/o2sdev/openselfservice-resources.git
+   cd openselfservice-resources
+   ```
+2. **Locate the Strapi export for your starter**  
+   - for the default O2S setup: `packages/cms/strapi/o2s`,  
+   - for the DXP starter: `packages/cms/strapi/dxp`.
+3. **Follow the README in that folder**  
+   The folder contains instructions specific to the given export (e.g. how to use Strapi’s import/export capabilities for content types and data).
+4. **Import the content model into your Strapi instance**  
+   After following the export-specific steps, your Strapi instance should have all required content types (pages, templates, blocks) and relationships expected by the O2S integration.
+5. **(Optional) Customize the model and content**  
+   Treat the imported model as a starting point. You can adjust fields, add new types or modify sample content to match your use case – just remember that some changes may require updating queries or types on the O2S side.
+
+We provide **content models and example data**, but we **do not manage the full configuration** of your Strapi server (deployment, auth, plugins, backups, etc.). Those aspects stay in your control.
+
+Once the content model is imported and your Strapi instance is running, you can proceed to generate TypeScript types.
 
 ## Generate TS types
 
