@@ -30,8 +30,8 @@ export class OrdersSummaryService {
                 ...query,
                 limit: 1000,
                 locale: headers['x-locale'],
-                dateFrom: dayjs(query.dateFrom).toDate(),
-                dateTo: dayjs(query.dateTo).toDate(),
+                dateFrom: dayjs(query.dateFrom).toISOString(),
+                dateTo: dayjs(query.dateTo).toISOString(),
             },
             headers['authorization'],
         );
@@ -41,8 +41,8 @@ export class OrdersSummaryService {
                 ...query,
                 limit: 1000,
                 locale: headers['x-locale'],
-                dateFrom: dayjs(query.dateFrom).subtract(1, 'year').toDate(),
-                dateTo: dayjs(query.dateTo).subtract(1, 'year').toDate(),
+                dateFrom: dayjs(query.dateFrom).subtract(1, 'year').toISOString(),
+                dateTo: dayjs(query.dateTo).subtract(1, 'year').toISOString(),
             },
             headers['authorization'],
         );

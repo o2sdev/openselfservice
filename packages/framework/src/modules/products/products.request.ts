@@ -43,10 +43,10 @@ export class GetProductParams {
 export class GetRelatedProductListParams extends PaginationQuery {
     /** Relation type to resolve (spare part, replacement, compatible service). */
     type!: ProductReferenceType;
-    /** Source product identifier. */
-    productId!: string;
-    /** Optional source product variant identifier. */
-    productVariantId?: string;
+    /** Source product identifier (bound from route :id). */
+    id!: string;
+    /** Optional source product variant identifier (bound from route :variantId). */
+    variantId?: string;
     /** Optional locale passed via query string (kept as string). */
     locale?: string;
     /** Sort expression from query string, e.g. `createdAt_DESC`. */

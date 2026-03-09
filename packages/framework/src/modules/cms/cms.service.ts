@@ -46,7 +46,7 @@ export abstract class CmsService {
     abstract getHeader(options: CMS.Request.GetCmsHeaderParams): Observable<CMS.Model.Header.Header>;
 
     /** Fetches footer content and links. */
-    abstract getFooter(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.Footer.Footer>;
+    abstract getFooter(options: CMS.Request.GetCmsFooterParams): Observable<CMS.Model.Footer.Footer>;
 
     /** Fetches FAQ block (accordion items). */
     abstract getFaqBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.FaqBlock.FaqBlock>;

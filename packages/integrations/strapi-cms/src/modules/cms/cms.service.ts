@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
 import { parse, stringify } from 'flatted';
-import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
+import { Observable, catchError, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
 import { CMS, Cache } from '@o2s/framework/modules';
 
@@ -115,8 +115,11 @@ export class CmsService implements CMS.Service {
         });
     }
 
-    getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
-        return of(undefined as T | undefined);
+    getEntry<T>(options: CMS.Request.GetCmsEntryParams): Observable<T | undefined> {
+        return this.getBlock(options).pipe(
+            map((data) => data as T),
+            catchError(() => of(undefined)),
+        );
     }
 
     getEntries<T>(options: CMS.Request.GetCmsEntriesParams) {

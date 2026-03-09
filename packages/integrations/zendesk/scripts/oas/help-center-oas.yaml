@@ -6671,6 +6671,7 @@ components:
                 enum:
                   - article
                   - community_post
+                  - external_content
                   - external_content_record
               url:
                 type: string
@@ -6740,7 +6741,9 @@ components:
                 type: string
                 enum:
                   - article
+                  - community_post
                   - external_content
+                  - external_content_record
         query:
           type: string
           description: The search query from the agent.
@@ -6785,6 +6788,7 @@ components:
                 enum:
                   - article
                   - community_post
+                  - external_content
                   - external_content_record
               url:
                 type: string
@@ -6837,7 +6841,9 @@ components:
                 type: string
                 enum:
                   - article
+                  - community_post
                   - external_content
+                  - external_content_record
         query:
           type: string
           description: The search query for finding relevant knowledge suggestions.
@@ -6870,6 +6876,7 @@ components:
                 enum:
                   - article
                   - community_post
+                  - external_content
                   - external_content_record
               url:
                 type: string
