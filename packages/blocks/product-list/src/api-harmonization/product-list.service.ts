@@ -22,7 +22,11 @@ export class ProductListService {
         query: GetProductListBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<ProductListBlock> {
-        const cms = this.cmsService.getProductListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.ProductListBlock.ProductListBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'ProductListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

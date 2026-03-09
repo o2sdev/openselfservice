@@ -57,3 +57,48 @@ export class GetCmsOrganizationListParams extends GetCmsParams {
 export class GetCmsSurveyParams extends GetCmsParams {
     code!: string;
 }
+
+export type CmsBlockType =
+    | 'FaqBlock'
+    | 'TicketListBlock'
+    | 'TicketDetailsBlock'
+    | 'TicketRecentBlock'
+    | 'TicketSummaryBlock'
+    | 'NotificationListBlock'
+    | 'NotificationDetailsBlock'
+    | 'NotificationSummaryBlock'
+    | 'InvoiceListBlock'
+    | 'InvoiceDetailsBlock'
+    | 'OrderListBlock'
+    | 'OrderDetailsBlock'
+    | 'OrdersSummaryBlock'
+    | 'PaymentsSummaryBlock'
+    | 'PaymentsHistoryBlock'
+    | 'ProductListBlock'
+    | 'ProductDetailsBlock'
+    | 'RecommendedProductsBlock'
+    | 'ServiceListBlock'
+    | 'FeaturedServiceListBlock'
+    | 'ServiceDetailsBlock'
+    | 'ResourceListBlock'
+    | 'ResourceDetailsBlock'
+    | 'UserAccountBlock'
+    | 'OrganizationList'
+    | 'SurveyJsBlock'
+    | 'QuickLinksBlock'
+    | 'ArticleListBlock'
+    | 'ArticleSearchBlock'
+    | 'CategoryBlock'
+    | 'CategoryListBlock'
+    | 'BentoGridBlock'
+    | 'CtaSectionBlock'
+    | 'DocumentListBlock'
+    | 'FeatureSectionBlock'
+    | 'FeatureSectionGridBlock'
+    | 'HeroSectionBlock'
+    | 'MediaSectionBlock'
+    | 'PricingSectionBlock';
+
+export class GetCmsBlockConfigParams extends GetCmsEntryParams {
+    blockType!: CmsBlockType;
+}

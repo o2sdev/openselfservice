@@ -13,7 +13,11 @@ export class SurveyjsService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getSurveyjsBlock(query: GetSurveyjsBlockQuery, headers: ApiModels.Headers.AppHeaders): Observable<SurveyjsBlock> {
-        const cms = this.cmsService.getSurveyJsBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.SurveyJsBlock.SurveyJsBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'SurveyJsBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapSurveyjs(cms, headers['x-locale'])));
     }

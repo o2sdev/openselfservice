@@ -22,7 +22,11 @@ export class NotificationSummaryService {
         query: GetNotificationSummaryBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<NotificationSummaryBlock> {
-        const cms = this.cmsService.getNotificationSummaryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'NotificationSummaryBlock',
+        });
         const notifications = this.notificationService.getNotificationList({
             limit: 1000,
             offset: 0,

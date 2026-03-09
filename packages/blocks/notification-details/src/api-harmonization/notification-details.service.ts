@@ -27,7 +27,11 @@ export class NotificationDetailsService {
         query: GetNotificationDetailsBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<NotificationDetailsBlock> {
-        const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'NotificationDetailsBlock',
+        });
         const notification = this.notificationService.getNotification({ ...params, locale: headers['x-locale'] });
 
         return forkJoin([notification, cms]).pipe(
