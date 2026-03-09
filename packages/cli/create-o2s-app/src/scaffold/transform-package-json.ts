@@ -2,13 +2,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 
 // Workspace globs to remove (their parent directories are deleted during cleanup)
-const REMOVED_WORKSPACE_GLOBS = [
-    'packages/cli/*',
-    'packages/integrations/*',
-    'packages/blocks/*',
-    'packages/modules/*',
-    'packages/utils/*',
-];
+const REMOVED_WORKSPACE_GLOBS = ['packages/cli/*', 'packages/modules/*', 'packages/utils/*'];
 
 export const transformRootPackageJson = async (projectDir: string): Promise<void> => {
     const filePath = path.join(projectDir, 'package.json');

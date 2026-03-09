@@ -51,7 +51,8 @@ const readIntegrationPackageJson = async (
         }
 
         return {};
-    } catch {
+    } catch (error) {
+        console.warn(`Warning: Could not read package.json for integration "${integrationName}":`, error);
         return {};
     }
 };

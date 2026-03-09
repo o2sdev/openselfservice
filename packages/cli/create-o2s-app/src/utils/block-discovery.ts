@@ -47,7 +47,8 @@ const readBlockPackageJson = async (repoDir: string, blockName: string): Promise
         }
 
         return {};
-    } catch {
+    } catch (error) {
+        console.warn(`Warning: Could not read package.json for block "${blockName}":`, error);
         return {};
     }
 };

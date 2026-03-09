@@ -40,7 +40,12 @@ program
 
             // Step 3: Scaffold project
             phase = 'scaffold';
-            const { targetDir, uncoveredModules } = await scaffold(tempDir, answers, options.skipInstall);
+            const { targetDir, uncoveredModules } = await scaffold(
+                tempDir,
+                answers,
+                options.skipInstall,
+                options.directory,
+            );
 
             // Step 4: Print summary
             printSummary(
@@ -58,8 +63,8 @@ program
 
             if (error instanceof Error && error.message.includes('is required')) {
                 // User cancelled a prompt
-                console.log();
-                console.log('Setup cancelled.');
+                console.error();
+                console.error('Setup cancelled.');
             } else {
                 telemetry.sendEvent('o2s', 'create-o2s-app', 'create-project-error', {
                     phase,

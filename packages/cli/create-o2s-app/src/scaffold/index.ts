@@ -16,8 +16,9 @@ export const scaffold = async (
     tempDir: string,
     answers: WizardAnswers,
     skipInstall = false,
+    directory?: string,
 ): Promise<{ targetDir: string; uncoveredModules: string[] }> => {
-    const targetDir = path.resolve(answers.projectName);
+    const targetDir = path.resolve(directory || '.', answers.projectName);
 
     if (await fs.pathExists(targetDir)) {
         throw new Error(

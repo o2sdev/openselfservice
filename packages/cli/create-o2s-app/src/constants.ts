@@ -1,7 +1,7 @@
 import type { EnvVar } from './types';
 
 export const GITHUB_REPO_URL = 'https://github.com/o2sdev/openselfservice';
-export const GITHUB_BRANCH = 'feature/Interactive-CLI-wizard-for-project-bootstrapping';
+export const GITHUB_BRANCH = 'create-o2s-app/base';
 export const PROJECT_PREFIX = 'o2s';
 export const STORYBOOK_URL = 'https://storybook-o2s.openselfservice.com/';
 export const DOCS_URL = 'https://docs.openselfservice.com/getting-started';

@@ -1,6 +1,6 @@
 import { INTEGRATION_ENV_VARS } from '../constants';
-import fs from 'fs-extra';
-import path from 'path';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
 // Updates existing .env.local by replacing KEY= placeholders with user-provided values.
 // The base branch already contains .env.local with all required variables and defaults.
