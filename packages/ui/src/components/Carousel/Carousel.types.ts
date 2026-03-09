@@ -1,6 +1,8 @@
 import React from 'react';
 import { SwiperProps } from 'swiper/react';
 
+export type KeyboardControlMode = 'swiper-native' | 'managed' | 'off';
+
 export interface CarouselProps extends Omit<SwiperProps, 'children'> {
     slides: React.ReactNode[];
     className?: string;
@@ -8,6 +10,8 @@ export interface CarouselProps extends Omit<SwiperProps, 'children'> {
     showPagination?: boolean;
     startingSlideIndex?: number;
     noSwipingSelector?: string;
+    keyboardControlMode?: KeyboardControlMode;
+    keyboardCarouselId?: string;
     labels?: {
         previous?: string;
         next?: string;

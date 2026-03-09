@@ -14,6 +14,8 @@ export interface ProductCarouselProps {
     carouselConfig?: Partial<CarouselProps>;
     linkDetailsLabel?: string;
     carouselClassName?: string;
+    keyboardControlMode?: CarouselProps['keyboardControlMode'];
+    keyboardCarouselId?: string;
 }
 
 export interface ProductSummaryItem {
