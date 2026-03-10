@@ -1,9 +1,18 @@
 {
     "name": "@o2s/integrations.medusajs",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "private": false,
     "license": "MIT",
     "description": "MedusaJS integration for O2S, providing ecommerce functionality including products, orders, and carts.",
+    "o2sModules": [
+        "orders",
+        "resources",
+        "products",
+        "carts",
+        "customers",
+        "payments",
+        "checkout"
+    ],
     "keywords": [
         "o2s",
         "integration",

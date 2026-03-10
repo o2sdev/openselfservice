@@ -1,5 +1,11 @@
 # @o2s/prettier-config
 
+## 1.2.1
+
+### Patch Changes
+
+- 8c01be4: added README
+
 ## 1.2.0
 
 ### Minor Changes

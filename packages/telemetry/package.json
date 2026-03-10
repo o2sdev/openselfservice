@@ -1,6 +1,6 @@
 {
     "name": "@o2s/telemetry",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "private": false,
     "license": "MIT",
     "description": "Optional telemetry package for O2S CLI tools to collect anonymous usage data.",

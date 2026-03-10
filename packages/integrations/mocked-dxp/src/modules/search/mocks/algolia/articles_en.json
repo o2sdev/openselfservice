@@ -1,0 +1,623 @@
+[
+    {
+        "id": "art-001",
+        "createdAt": "2023-05-12T08:30:00Z",
+        "updatedAt": "2023-06-15T14:25:00Z",
+        "createdAt_timestamp": 1683879000,
+        "updatedAt_timestamp": 1686838500,
+        "title": "Managing Your PowerPro Tools Online??????",
+        "lead": "Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.",
+        "image": "https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/o2s-social-card-1.jpg",
+        "thumbnail": "https://example.com/images/tool-management-thumb.jpg",
+        "category": "SELF_SERVICE",
+        "sections": [
+            {
+                "id": "sect-001-1",
+                "createdAt": "2023-05-12T08:30:00Z",
+                "updatedAt": "2023-06-15T14:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Getting Started",
+                "content": "To begin managing your PowerPro tools online, log into your account at powerprotools.com and navigate to the 'My Tools' section."
+            },
+            {
+                "id": "sect-001-2",
+                "createdAt": "2023-05-12T09:15:00Z",
+                "updatedAt": "2023-06-15T14:25:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/dashboard-view.jpg",
+                "alt": "PowerPro dashboard view",
+                "caption": "The PowerPro tool management dashboard provides a comprehensive overview of your registered tools."
+            }
+        ]
+    },
+    {
+        "id": "art-002",
+        "createdAt": "2023-04-18T09:45:00Z",
+        "updatedAt": "2023-07-02T11:15:00Z",
+        "createdAt_timestamp": 1681810500,
+        "updatedAt_timestamp": 1688298900,
+        "title": "How to Schedule Tool Repairs Online",
+        "lead": "Schedule repairs for your PowerPro tools quickly and efficiently through our online portal.",
+        "image": "https://example.com/images/tool-repair.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-002-1",
+                "createdAt": "2023-04-18T09:45:00Z",
+                "updatedAt": "2023-07-02T11:15:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Scheduling a Repair",
+                "content": "Visit the 'Service & Repair' section of your account to begin the repair scheduling process. Select the tool requiring service from your registered inventory."
+            }
+        ]
+    },
+    {
+        "id": "art-003",
+        "createdAt": "2023-03-10T14:22:00Z",
+        "updatedAt": "2023-03-10T14:22:00Z",
+        "createdAt_timestamp": 1678457320,
+        "updatedAt_timestamp": 1678457320,
+        "title": "Tool Park Management: Getting Started",
+        "lead": "Learn the basics of PowerPro's tool park management system to optimize your equipment usage.",
+        "thumbnail": "https://example.com/images/tpm-getting-started-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-003-1",
+                "createdAt": "2023-03-10T14:22:00Z",
+                "updatedAt": "2023-03-10T14:22:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "What is Tool Park Management?",
+                "content": "Tool Park Management is PowerPro's comprehensive system for tracking, maintaining, and optimizing your entire tool inventory across locations and projects."
+            },
+            {
+                "id": "sect-003-2",
+                "createdAt": "2023-03-10T14:22:00Z",
+                "updatedAt": "2023-03-10T14:22:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Setting Up Your Tool Park",
+                "content": "Begin by inventorying all your PowerPro tools and entering them into the system. You can import existing inventory lists or add tools individually."
+            },
+            {
+                "id": "sect-003-3",
+                "createdAt": "2023-03-10T15:30:00Z",
+                "updatedAt": "2023-03-10T15:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/tool-park-dashboard.jpg",
+                "alt": "Tool park management dashboard",
+                "caption": "The intuitive dashboard gives you a bird's-eye view of your entire tool inventory."
+            }
+        ]
+    },
+    {
+        "id": "art-004",
+        "createdAt": "2023-06-24T10:15:00Z",
+        "updatedAt": "2023-08-15T16:40:00Z",
+        "createdAt_timestamp": 1687600500,
+        "updatedAt_timestamp": 1692118800,
+        "title": "Understanding Your PowerPro Warranty",
+        "lead": "Everything you need to know about PowerPro's warranty coverage for your professional tools.",
+        "image": "https://example.com/images/warranty-coverage.jpg",
+        "thumbnail": "https://example.com/images/warranty-coverage-thumb.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-004-1",
+                "createdAt": "2023-06-24T10:15:00Z",
+                "updatedAt": "2023-08-15T16:40:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/warranty-card.jpg",
+                "alt": "PowerPro warranty card",
+                "caption": "Your warranty card contains important information about your coverage terms."
+            },
+            {
+                "id": "sect-004-2",
+                "createdAt": "2023-06-24T10:15:00Z",
+                "updatedAt": "2023-08-15T16:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Standard Warranty Coverage",
+                "content": "All PowerPro professional tools come with a 3-year standard warranty that covers manufacturing defects and failures during normal use."
+            },
+            {
+                "id": "sect-004-3",
+                "createdAt": "2023-06-24T10:15:00Z",
+                "updatedAt": "2023-08-15T16:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Extended Warranty Options",
+                "content": "For additional protection, consider our PowerPro+ extended warranty program, which adds up to 2 additional years of coverage and includes accidental damage protection."
+            }
+        ]
+    },
+    {
+        "id": "art-005",
+        "createdAt": "2023-01-30T11:20:00Z",
+        "updatedAt": "2023-05-22T09:10:00Z",
+        "createdAt_timestamp": 1675077600,
+        "updatedAt_timestamp": 1684746600,
+        "title": "Step-by-Step Guide to Tool Registration",
+        "lead": "Register your PowerPro tools to activate warranty and access premium support services.",
+        "category": "HOW_TO_GUIDES",
+        "sections": [
+            {
+                "id": "sect-005-1",
+                "createdAt": "2023-01-30T11:20:00Z",
+                "updatedAt": "2023-05-22T09:10:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Registration Process",
+                "content": "Create a PowerPro account if you don't already have one. Then, navigate to 'Register Tool' and enter the serial number found on your tool's information plate."
+            }
+        ]
+    },
+    {
+        "id": "art-006",
+        "createdAt": "2023-02-14T13:45:00Z",
+        "updatedAt": "2023-07-28T15:30:00Z",
+        "createdAt_timestamp": 1676382300,
+        "updatedAt_timestamp": 1690559400,
+        "title": "Tracking Tool Repairs and Maintenance History",
+        "lead": "How to view and monitor the complete repair and maintenance history of your PowerPro tools.",
+        "image": "https://example.com/images/repair-history.jpg",
+        "thumbnail": "https://example.com/images/repair-history-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-006-1",
+                "createdAt": "2023-02-14T13:45:00Z",
+                "updatedAt": "2023-07-28T15:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Accessing Repair History",
+                "content": "To view a complete history of repairs and maintenance for any registered tool, navigate to the 'Tool History' section of your account and select the specific tool."
+            },
+            {
+                "id": "sect-006-2",
+                "createdAt": "2023-02-14T13:45:00Z",
+                "updatedAt": "2023-07-28T15:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/history-report.jpg",
+                "alt": "Tool history report",
+                "caption": "The detailed history report shows all service events, parts replaced, and maintenance records."
+            }
+        ]
+    },
+    {
+        "id": "art-007",
+        "createdAt": "2023-07-05T08:30:00Z",
+        "updatedAt": "2023-07-05T08:30:00Z",
+        "createdAt_timestamp": 1688546400,
+        "updatedAt_timestamp": 1688546400,
+        "title": "Maximizing Tool Lifespan with Proper Maintenance",
+        "lead": "Practical maintenance tips to extend the lifespan of your PowerPro power tools.",
+        "image": "https://example.com/images/tool-maintenance.jpg",
+        "category": "MAINTENANCE_TIPS",
+        "sections": [
+            {
+                "id": "sect-007-1",
+                "createdAt": "2023-07-05T08:30:00Z",
+                "updatedAt": "2023-07-05T08:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Regular Cleaning",
+                "content": "After each use, clean your tools to remove dust, debris, and moisture. Pay special attention to ventilation slots and moving parts."
+            },
+            {
+                "id": "sect-007-2",
+                "createdAt": "2023-07-05T08:30:00Z",
+                "updatedAt": "2023-07-05T08:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/cleaning-tools.jpg",
+                "alt": "Proper tool cleaning technique",
+                "caption": "Using compressed air can help remove debris from hard-to-reach areas."
+            }
+        ]
+    },
+    {
+        "id": "art-008",
+        "createdAt": "2023-08-17T16:20:00Z",
+        "updatedAt": "2023-09-01T10:15:00Z",
+        "createdAt_timestamp": 1692289200,
+        "updatedAt_timestamp": 1693565700,
+        "title": "Fleet Management Solutions for Construction Companies",
+        "lead": "How PowerPro's fleet management system can help construction companies optimize tool utilization.",
+        "thumbnail": "https://example.com/images/fleet-management-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-008-1",
+                "createdAt": "2023-08-17T16:20:00Z",
+                "updatedAt": "2023-09-01T10:15:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Benefits of Fleet Management",
+                "content": "Implementing PowerPro's fleet management solution can reduce tool loss, decrease downtime, and provide valuable insights into tool usage patterns across projects."
+            }
+        ]
+    },
+    {
+        "id": "art-009",
+        "createdAt": "2023-05-19T09:10:00Z",
+        "updatedAt": "2023-06-30T14:25:00Z",
+        "createdAt_timestamp": 1684486200,
+        "updatedAt_timestamp": 1688134500,
+        "title": "Repair or Replace? Making the Right Decision",
+        "lead": "Guidelines to help you decide whether to repair your PowerPro tool or invest in a replacement.",
+        "image": "https://example.com/images/repair-or-replace.jpg",
+        "thumbnail": "https://example.com/images/repair-or-replace-thumb.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-009-1",
+                "createdAt": "2023-05-19T09:10:00Z",
+                "updatedAt": "2023-06-30T14:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Age and Condition Assessment",
+                "content": "Consider the age of your tool and its overall condition. Tools nearing the end of their expected lifespan may be better candidates for replacement."
+            },
+            {
+                "id": "sect-009-2",
+                "createdAt": "2023-05-19T09:10:00Z",
+                "updatedAt": "2023-06-30T14:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Cost Analysis",
+                "content": "Compare the repair cost against the price of a new tool. As a general rule, if repairs exceed 50% of the replacement cost, upgrading may be more economical."
+            },
+            {
+                "id": "sect-009-3",
+                "createdAt": "2023-05-19T09:10:00Z",
+                "updatedAt": "2023-06-30T14:25:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/decision-flowchart.jpg",
+                "alt": "Repair or replace decision flowchart",
+                "caption": "This flowchart can help guide your decision-making process when evaluating a damaged tool."
+            }
+        ]
+    },
+    {
+        "id": "art-010",
+        "createdAt": "2023-04-02T11:30:00Z",
+        "updatedAt": "2023-08-10T13:45:00Z",
+        "createdAt_timestamp": 1680434400,
+        "updatedAt_timestamp": 1691673900,
+        "title": "How to Update Tool Firmware Online",
+        "lead": "Keep your PowerPro smart tools up-to-date with the latest firmware for optimal performance.",
+        "category": "HOW_TO_GUIDES",
+        "sections": [
+            {
+                "id": "sect-010-1",
+                "createdAt": "2023-04-02T11:30:00Z",
+                "updatedAt": "2023-08-10T13:45:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Why Update Firmware?",
+                "content": "Regular firmware updates improve tool performance, add new features, and fix potential issues. Keeping your tools updated ensures you get the most out of your PowerPro investment."
+            },
+            {
+                "id": "sect-010-2",
+                "createdAt": "2023-04-02T11:30:00Z",
+                "updatedAt": "2023-08-10T13:45:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Update Process",
+                "content": "Connect your tool to the PowerPro mobile app via Bluetooth. Navigate to Settings > Tool Management > Firmware Update. The app will automatically check for available updates."
+            }
+        ]
+    },
+    {
+        "id": "art-011",
+        "createdAt": "2023-09-12T14:50:00Z",
+        "updatedAt": "2023-09-12T14:50:00Z",
+        "createdAt_timestamp": 1694527800,
+        "updatedAt_timestamp": 1694527800,
+        "title": "PowerPro Tool Certification Program",
+        "lead": "Learn about our certification program ensuring your tools meet industry safety standards.",
+        "image": "https://example.com/images/certification-program.jpg",
+        "thumbnail": "https://example.com/images/certification-program-thumb.jpg",
+        "category": "GENERAL",
+        "sections": [
+            {
+                "id": "sect-011-1",
+                "createdAt": "2023-09-12T14:50:00Z",
+                "updatedAt": "2023-09-12T14:50:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Certification Benefits",
+                "content": "Certified tools undergo rigorous testing to ensure they meet safety and performance standards. Certification can be required for certain job sites and helps maintain tool value."
+            },
+            {
+                "id": "sect-011-2",
+                "createdAt": "2023-09-12T14:50:00Z",
+                "updatedAt": "2023-09-12T14:50:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/certification-badge.jpg",
+                "alt": "PowerPro certification badge",
+                "caption": "Look for this certification badge on your tool and documentation to verify its certified status."
+            },
+            {
+                "id": "sect-011-3",
+                "createdAt": "2023-09-12T14:50:00Z",
+                "updatedAt": "2023-09-12T14:50:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Certification Process",
+                "content": "Schedule a certification appointment through your PowerPro account. Bring your tools to an authorized service center where they will be tested according to industry standards."
+            }
+        ]
+    },
+    {
+        "id": "art-012",
+        "createdAt": "2023-03-27T10:20:00Z",
+        "updatedAt": "2023-07-18T09:35:00Z",
+        "createdAt_timestamp": 1679911200,
+        "updatedAt_timestamp": 1689673500,
+        "title": "Tool Inventory Management Best Practices",
+        "lead": "Strategies and tips for effectively managing your PowerPro tool inventory across multiple sites.",
+        "image": "https://example.com/images/inventory-management.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-012-1",
+                "createdAt": "2023-03-27T10:20:00Z",
+                "updatedAt": "2023-07-18T09:35:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Regular Audits",
+                "content": "Conduct regular inventory audits to account for all tools. This helps identify missing items early and maintain accurate records for project planning."
+            },
+            {
+                "id": "sect-012-2",
+                "createdAt": "2023-03-27T10:20:00Z",
+                "updatedAt": "2023-07-18T09:35:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Tool Check-Out System",
+                "content": "Implement a formal check-out system where workers must sign for tools they borrow. This creates accountability and helps track tool location."
+            }
+        ]
+    },
+    {
+        "id": "art-013",
+        "createdAt": "2023-06-08T15:40:00Z",
+        "updatedAt": "2023-08-22T11:25:00Z",
+        "createdAt_timestamp": 1686238800,
+        "updatedAt_timestamp": 1692704700,
+        "title": "Troubleshooting Common Power Tool Issues",
+        "lead": "Quick fixes and troubleshooting tips for common issues with PowerPro power tools.",
+        "thumbnail": "https://example.com/images/troubleshooting-thumb.jpg",
+        "category": "HOW_TO_GUIDES",
+        "sections": [
+            {
+                "id": "sect-013-1",
+                "createdAt": "2023-06-08T15:40:00Z",
+                "updatedAt": "2023-08-22T11:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Tool Won't Start",
+                "content": "First, check the power source - ensure batteries are charged or power cords are properly connected. Next, inspect the power switch for damage or debris. If the tool still won't start, check the user manual for model-specific troubleshooting."
+            },
+            {
+                "id": "sect-013-2",
+                "createdAt": "2023-06-08T15:40:00Z",
+                "updatedAt": "2023-08-22T11:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Unusual Noises",
+                "content": "Grinding, squealing, or rattling noises often indicate mechanical issues. Stop using the tool immediately, as continued operation could cause further damage. Check for loose parts or foreign objects inside the housing."
+            },
+            {
+                "id": "sect-013-3",
+                "createdAt": "2023-06-08T15:40:00Z",
+                "updatedAt": "2023-08-22T11:25:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/battery-check.jpg",
+                "alt": "Checking battery connections",
+                "caption": "Ensure battery contacts are clean and free of corrosion for proper electrical connection."
+            }
+        ]
+    },
+    {
+        "id": "art-014",
+        "createdAt": "2023-02-05T09:15:00Z",
+        "updatedAt": "2023-05-12T16:30:00Z",
+        "createdAt_timestamp": 1675589700,
+        "updatedAt_timestamp": 1683909000,
+        "title": "Understanding Tool Usage Analytics",
+        "lead": "How to interpret and act on the usage data collected from your PowerPro smart tools.",
+        "image": "https://example.com/images/usage-analytics.jpg",
+        "thumbnail": "https://example.com/images/usage-analytics-thumb.jpg",
+        "category": "SELF_SERVICE",
+        "sections": [
+            {
+                "id": "sect-014-1",
+                "createdAt": "2023-02-05T09:15:00Z",
+                "updatedAt": "2023-05-12T16:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Accessing Your Analytics",
+                "content": "Log into your PowerPro account and navigate to the 'Analytics' dashboard to view comprehensive usage data for all your connected tools."
+            },
+            {
+                "id": "sect-014-2",
+                "createdAt": "2023-02-05T09:15:00Z",
+                "updatedAt": "2023-05-12T16:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/analytics-dashboard.jpg",
+                "alt": "Tool usage analytics dashboard",
+                "caption": "The analytics dashboard provides visualizations of usage patterns, helping identify optimization opportunities."
+            }
+        ]
+    },
+    {
+        "id": "art-015",
+        "createdAt": "2023-07-30T12:10:00Z",
+        "updatedAt": "2023-07-30T12:10:00Z",
+        "createdAt_timestamp": 1690721400,
+        "updatedAt_timestamp": 1690721400,
+        "title": "Expedited Repair Service Options",
+        "lead": "Learn about PowerPro's expedited repair services to minimize downtime on critical projects.",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-015-1",
+                "createdAt": "2023-07-30T12:10:00Z",
+                "updatedAt": "2023-07-30T12:10:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Priority Service Plans",
+                "content": "PowerPro offers several levels of priority service plans that guarantee faster turnaround times for tool repairs, from same-day service to 48-hour guaranteed completion."
+            }
+        ]
+    },
+    {
+        "id": "art-016",
+        "createdAt": "2023-08-09T08:45:00Z",
+        "updatedAt": "2023-09-14T10:20:00Z",
+        "createdAt_timestamp": 1691571900,
+        "updatedAt_timestamp": 1694686800,
+        "title": "Tool Safety Inspection Checklist",
+        "lead": "Essential safety checks to perform before using your PowerPro power tools on the job site.",
+        "image": "https://example.com/images/safety-inspection.jpg",
+        "thumbnail": "https://example.com/images/safety-inspection-thumb.jpg",
+        "category": "GENERAL",
+        "sections": [
+            {
+                "id": "sect-016-1",
+                "createdAt": "2023-08-09T08:45:00Z",
+                "updatedAt": "2023-09-14T10:20:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Physical Inspection",
+                "content": "Check for cracks, damage, or unusual wear on the tool body, cord, and plug. Ensure all guards and safety features are in place and functioning properly."
+            },
+            {
+                "id": "sect-016-2",
+                "createdAt": "2023-08-09T08:45:00Z",
+                "updatedAt": "2023-09-14T10:20:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/cord-inspection.jpg",
+                "alt": "Proper cord inspection technique",
+                "caption": "Always inspect the entire length of the power cord for cuts, cracks, or exposed wiring."
+            },
+            {
+                "id": "sect-016-3",
+                "createdAt": "2023-08-09T08:45:00Z",
+                "updatedAt": "2023-09-14T10:20:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Operational Test",
+                "content": "Before beginning work, perform a brief operational test in a safe environment to ensure the tool runs smoothly without unusual noises, vibrations, or heating."
+            }
+        ]
+    },
+    {
+        "id": "art-017",
+        "createdAt": "2023-01-15T13:30:00Z",
+        "updatedAt": "2023-04-22T15:45:00Z",
+        "createdAt_timestamp": 1673790600,
+        "updatedAt_timestamp": 1682177100,
+        "title": "Benefits of PowerPro's Repair Tracking System",
+        "lead": "How our advanced repair tracking system keeps you informed throughout the repair process.",
+        "image": "https://example.com/images/repair-tracking.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-017-1",
+                "createdAt": "2023-01-15T13:30:00Z",
+                "updatedAt": "2023-04-22T15:45:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Real-Time Status Updates",
+                "content": "Receive automated notifications at each stage of the repair process, from initial receipt to final quality testing and shipping."
+            },
+            {
+                "id": "sect-017-2",
+                "createdAt": "2023-01-15T13:30:00Z",
+                "updatedAt": "2023-04-22T15:45:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/tracking-mobile.jpg",
+                "alt": "Repair tracking on mobile app",
+                "caption": "The PowerPro mobile app provides convenient access to repair status information anytime, anywhere."
+            }
+        ]
+    },
+    {
+        "id": "art-018",
+        "createdAt": "2023-05-03T11:55:00Z",
+        "updatedAt": "2023-06-18T09:40:00Z",
+        "createdAt_timestamp": 1683115500,
+        "updatedAt_timestamp": 1687082400,
+        "title": "Seasonal Tool Maintenance Guide",
+        "lead": "Prepare your PowerPro tools for optimal performance in different seasonal conditions.",
+        "thumbnail": "https://example.com/images/seasonal-maintenance-thumb.jpg",
+        "category": "MAINTENANCE_TIPS",
+        "sections": [
+            {
+                "id": "sect-018-1",
+                "createdAt": "2023-05-03T11:55:00Z",
+                "updatedAt": "2023-06-18T09:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Winter Preparation",
+                "content": "Before cold weather arrives, apply appropriate lubricants to prevent freezing of moving parts and store batteries in climate-controlled environments to maintain capacity."
+            },
+            {
+                "id": "sect-018-2",
+                "createdAt": "2023-05-03T11:55:00Z",
+                "updatedAt": "2023-06-18T09:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Summer Care",
+                "content": "During hot weather, prevent overheating by ensuring proper ventilation, taking more frequent breaks, and keeping tools out of direct sunlight when not in use."
+            }
+        ]
+    },
+    {
+        "id": "art-019",
+        "createdAt": "2023-09-05T10:30:00Z",
+        "updatedAt": "2023-09-05T10:30:00Z",
+        "createdAt_timestamp": 1693909800,
+        "updatedAt_timestamp": 1693909800,
+        "title": "Digital Tool Management for Enterprise Customers",
+        "lead": "Advanced tool management solutions designed specifically for enterprise-level PowerPro customers.",
+        "image": "https://example.com/images/enterprise-management.jpg",
+        "thumbnail": "https://example.com/images/enterprise-management-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-019-1",
+                "createdAt": "2023-09-05T10:30:00Z",
+                "updatedAt": "2023-09-05T10:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Multi-User Access Control",
+                "content": "Assign different permission levels to team members based on their roles, allowing appropriate access to inventory management, service scheduling, and reporting features."
+            },
+            {
+                "id": "sect-019-2",
+                "createdAt": "2023-09-05T10:30:00Z",
+                "updatedAt": "2023-09-05T10:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Custom Reporting",
+                "content": "Generate detailed reports on tool utilization, maintenance costs, and downtime metrics to inform purchasing decisions and identify opportunities for optimization."
+            },
+            {
+                "id": "sect-019-3",
+                "createdAt": "2023-09-05T10:30:00Z",
+                "updatedAt": "2023-09-05T10:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/enterprise-dashboard.jpg",
+                "alt": "Enterprise management dashboard",
+                "caption": "The enterprise dashboard provides comprehensive oversight of all tool assets across multiple locations."
+            }
+        ]
+    },
+    {
+        "id": "art-020",
+        "createdAt": "2023-04-11T14:15:00Z",
+        "updatedAt": "2023-08-30T16:50:00Z",
+        "createdAt_timestamp": 1681221300,
+        "updatedAt_timestamp": 1693415400,
+        "title": "How to Register for PowerPro Service Notifications",
+        "lead": "Stay informed about your tool maintenance and repair status through our notification system.",
+        "category": "SELF_SERVICE",
+        "sections": [
+            {
+                "id": "sect-020-1",
+                "createdAt": "2023-04-11T14:15:00Z",
+                "updatedAt": "2023-08-30T16:50:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Setting Up Notifications",
+                "content": "Log into your PowerPro account and navigate to 'Account Settings' > 'Notifications'. Select your preferred notification methods (email, SMS, push notifications) and the types of updates you want to receive."
+            },
+            {
+                "id": "sect-020-2",
+                "createdAt": "2023-04-11T14:15:00Z",
+                "updatedAt": "2023-08-30T16:50:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/notification-settings.jpg",
+                "alt": "Notification settings screen",
+                "caption": "The notification settings screen allows you to customize exactly which updates you receive and how."
+            }
+        ]
+    }
+]

@@ -61,7 +61,7 @@ export default function DXPStarter(): ReactNode {
                                         'Start small and scale with composable architecture, ready-to-use integrations and our API composition server.',
                                         "It's open-source. Use our starter, build your own, extend it however you need.",
                                     ]}
-                                    cliCommand="npx create-dxp-app"
+                                    cliCommand="npx create-o2s-app --template dxp"
                                     mainLink={{
                                         text: 'See DXP demo app',
                                         url: 'https://demo-dxp.openselfservice.com',
