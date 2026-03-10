@@ -31,11 +31,7 @@ const buildModuleIntegrationMap = (
     return moduleMap;
 };
 
-const updateConfigsPackageJson = async (
-    projectDir: string,
-    selectedIntegrations: string[],
-    integrationModules: Record<string, string[]>,
-): Promise<void> => {
+const updateConfigsPackageJson = async (projectDir: string, selectedIntegrations: string[]): Promise<void> => {
     const pkgPath = path.join(projectDir, CONFIGS_PACKAGE_JSON_PATH);
 
     if (!(await fs.pathExists(pkgPath))) return;
@@ -49,13 +45,6 @@ const updateConfigsPackageJson = async (
             if (!selectedIntegrations.includes(name)) {
                 delete pkg.dependencies[key];
             }
-        }
-    }
-
-    // Add deps for selected integrations that have module mappings
-    for (const integration of selectedIntegrations) {
-        if (integrationModules[integration]?.length) {
-            pkg.dependencies[`@o2s/integrations.${integration}`] = '*';
         }
     }
 
@@ -91,7 +80,7 @@ export const transformIntegrationConfigs = async (
         await fs.writeFile(filePath, updatedContent, 'utf-8');
     }
 
-    await updateConfigsPackageJson(projectDir, selectedIntegrations, integrationModules);
+    await updateConfigsPackageJson(projectDir, selectedIntegrations);
 
     // Detect model files that still import mocked but mocked is not selected.
     // Skip only when 'mocked' (full) is selected — it covers all modules.
