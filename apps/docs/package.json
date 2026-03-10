@@ -17,6 +17,8 @@
         "format": "prettier --write \"{src,docs,blog}/**/*.{js,jsx,ts,tsx,css,scss,json,md}\""
     },
     "dependencies": {
+        "@o2s/framework": "*",
+        "@o2s/utils.logger": "*",
         "@docusaurus/core": "3.9.2",
         "@docusaurus/plugin-google-gtag": "^3.9.2",
         "@docusaurus/plugin-google-tag-manager": "^3.9.2",
@@ -39,8 +41,6 @@
     },
     "devDependencies": {
         "@docusaurus/module-type-aliases": "3.9.2",
-        "@o2s/framework": "*",
-        "@o2s/utils.logger": "*",
         "docusaurus-plugin-typedoc": "^1.4.0",
         "typedoc": "^0.28.17",
         "typedoc-plugin-markdown": "^4.10.0",
