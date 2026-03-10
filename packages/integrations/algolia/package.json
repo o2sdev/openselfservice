@@ -4,6 +4,9 @@
     "private": false,
     "license": "MIT",
     "description": "Algolia integration for O2S, providing search functionality.",
+    "o2sModules": [
+        "search"
+    ],
     "keywords": [
         "o2s",
         "integration",

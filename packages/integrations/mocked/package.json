@@ -22,6 +22,7 @@
     },
     "exports": {
         "./integration": "./dist/integration.js",
+        "./modules": "./dist/modules/index.js",
         "./sdk": "./dist/sdk/index.js",
         "./auth": "./dist/auth/index.js",
         "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js",
@@ -85,5 +86,6 @@
         "react-dom": "^19",
         "rxjs": "^7",
         "zod": "^3.25.4 || ^4.0.0"
-    }
+    },
+    "o2sTemplate": ["o2s", "dxp"]
 }

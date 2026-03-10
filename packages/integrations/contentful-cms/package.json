@@ -4,6 +4,9 @@
     "private": false,
     "license": "MIT",
     "description": "Contentful CMS integration for O2S, providing content management functionality via GraphQL.",
+    "o2sModules": [
+        "cms"
+    ],
     "keywords": [
         "o2s",
         "integration",
