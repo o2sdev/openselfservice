@@ -117,7 +117,7 @@ export class PageService {
 
     private processArticle = (
         article: Articles.Model.Article,
-        _query: GetPageQuery,
+        query: GetPageQuery,
         headers: Models.Headers.AppHeaders,
     ) => {
         if (!article.category) {
@@ -126,6 +126,15 @@ export class PageService {
 
         const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
 
-        return forkJoin([category]).pipe(map(([category]) => mapArticle(article, category, headers['x-locale'])));
+        return forkJoin([category]).pipe(
+            map(([category]) => {
+                // Extract base path from URL: /basePath/categorySlug/articleSlug -> /basePath
+                const slugParts = query.slug.split('/').filter(Boolean);
+                // Remove article slug (last segment) and category slug (second to last)
+                const basePath = slugParts.length > 2 ? '/' + slugParts.slice(0, -2).join('/') : '/';
+
+                return mapArticle(article, category, headers['x-locale'], basePath);
+            }),
+        );
     };
 }

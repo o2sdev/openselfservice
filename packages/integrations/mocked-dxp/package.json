@@ -1,0 +1,70 @@
+{
+    "name": "@o2s/integrations.mocked-dxp",
+    "version": "1.0.0",
+    "private": false,
+    "license": "MIT",
+    "description": "Mocked DXP integration for O2S, providing in-memory data for DXP demo flows.",
+    "o2sModules": [
+        "cms",
+        "articles",
+        "search"
+    ],
+    "keywords": [
+        "o2s",
+        "integration",
+        "mocked",
+        "dxp",
+        "mock",
+        "development"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/integrations/mocked-dxp"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/mocked-dxp#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
+    "exports": {
+        "./integration": "./dist/integration.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "test": "vitest run",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
+    },
+    "dependencies": {
+        "@o2s/framework": "*",
+        "@o2s/integrations.mocked": "*",
+        "@o2s/utils.logger": "*"
+    },
+    "devDependencies": {
+        "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
+        "@o2s/prettier-config": "*",
+        "@o2s/typescript-config": "*",
+        "@o2s/vitest-config": "*",
+        "@o2s/telemetry": "*",
+        "concurrently": "^9.2.1",
+        "eslint": "^9.39.2",
+        "prettier": "^3.8.1",
+        "tsc-alias": "^1.8.16",
+        "typescript": "^5.9.3"
+    },
+    "peerDependencies": {
+        "@nestjs/axios": "^4.0.1",
+        "@nestjs/common": "^11.0.16",
+        "@nestjs/config": "^4.0.2",
+        "@nestjs/core": "^11",
+        "rxjs": "^7",
+        "zod": "^3.25.4 || ^4.0.0"
+    },
+    "o2sTemplate": [
+        "dxp"
+    ]
+}

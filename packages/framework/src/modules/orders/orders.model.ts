@@ -46,6 +46,7 @@ export class Order {
     shippingMethods!: ShippingMethod[];
     customerComment?: string;
     documents?: Document[];
+    email?: string; // For guest orders (order confirmation)
 }
 
 export class OrderItem {

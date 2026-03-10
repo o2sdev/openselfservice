@@ -41,4 +41,16 @@ yarn-error.log*
 *storybook.log
 storybook-static
 
+# Dist folders
 dist
+
+# AI rules
+.ai
+.claude
+.ai
+AGENTS.md
+CLAUDE.md
+agent-os
+
+# Generated files
+O2S-API.postman_collection.json

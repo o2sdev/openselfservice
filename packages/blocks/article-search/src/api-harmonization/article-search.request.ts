@@ -9,4 +9,5 @@ export class SearchArticlesQuery implements Omit<Articles.Request.SearchArticles
     limit!: number;
     offset!: number;
     category?: string;
+    basePath?: string;
 }

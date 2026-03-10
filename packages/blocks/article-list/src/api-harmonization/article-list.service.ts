@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Articles, CMS } from '@o2s/configs.integrations';
-import { Observable, concatMap, forkJoin, map, of } from 'rxjs';
+import { Observable, catchError, concatMap, forkJoin, map, of } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
@@ -30,7 +30,9 @@ export class ArticleListService {
                     category: cms.categoryId,
                 });
                 const category = cms.categoryId
-                    ? this.articlesService.getCategory({ id: cms.categoryId, locale: headers['x-locale'] })
+                    ? this.articlesService.getCategory({ id: cms.categoryId, locale: headers['x-locale'] }).pipe(
+                          catchError(() => of(undefined as Articles.Model.Category | undefined)), // If category not found, continue without it
+                      )
                     : of(undefined);
 
                 return forkJoin([articles, category]).pipe(

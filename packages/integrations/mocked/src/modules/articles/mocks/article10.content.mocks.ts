@@ -411,7 +411,7 @@ Aby uzyskać dodatkowe wsparcie, skontaktuj się z naszym zespołem obsługi kli
 export const MOCK_ARTICLE10_EN: Articles.Model.Article[] = [
     {
         id: 'art-010',
-        slug: '/help-and-support/troubleshooting/troubleshooting-guide-for-powerpro-tools',
+        slug: 'troubleshooting/troubleshooting-guide-for-powerpro-tools',
         roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',
@@ -476,7 +476,7 @@ export const MOCK_ARTICLE10_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLE10_DE: Articles.Model.Article[] = [
     {
         id: 'art-010',
-        slug: '/hilfe-und-support/fehlerbehebung/fehlerbehebung-fur-powerpro-werkzeuge',
+        slug: 'fehlerbehebung/fehlerbehebung-fur-powerpro-werkzeuge',
         roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',
@@ -542,7 +542,7 @@ export const MOCK_ARTICLE10_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLE10_PL: Articles.Model.Article[] = [
     {
         id: 'art-010',
-        slug: '/pomoc-i-wsparcie/rozwiazywanie-problemow/przewodnik-rozwiazywania-problemow-z-narzedziami-powerpro',
+        slug: 'rozwiazywanie-problemow/przewodnik-rozwiazywania-problemow-z-narzedziami-powerpro',
         roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',

@@ -1,0 +1,177 @@
+name: Create Dependency Changeset
+
+description: 'Automatically creates changeset files for dependency update PRs'
+
+inputs:
+    base-sha:
+        description: 'Base SHA for pull requests (github.event.pull_request.base.sha)'
+        required: true
+    pr-branch:
+        description: 'PR branch name to commit changeset to (github.event.pull_request.head.ref)'
+        required: true
+    repo-token:
+        description: 'GitHub token with write permissions'
+        required: true
+    fetch-depth:
+        description: 'Git fetch depth for checkout'
+        required: false
+        default: '0'
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v6
+          with:
+              fetch-depth: ${{ inputs.fetch-depth }}
+              token: ${{ inputs.repo-token }}
+              ref: ${{ inputs.pr-branch }}
+
+        - name: Detect modified package.json files and create changesets
+          shell: bash
+          env:
+              BASE_SHA: ${{ inputs.base-sha }}
+              PR_BRANCH: ${{ inputs.pr-branch }}
+          run: |
+              # Array to store packages that need changesets
+              declare -a PACKAGES_TO_CHANGESET
+
+              # Function to process a package.json file
+              process_package_json() {
+                  local package_json=$1
+
+                  if [ -z "$package_json" ] || [ ! -f "$package_json" ]; then
+                      return 1
+                  fi
+
+                  # Extract package name and check if it's publishable
+                  local PACKAGE_NAME=$(jq -r '.name // empty' "$package_json")
+                  local IS_PRIVATE=$(jq -r '.private // false' "$package_json")
+
+                  if [ -z "$PACKAGE_NAME" ]; then
+                      echo "Skipping $package_json: no package name found"
+                      return 1
+                  fi
+
+                  # Skip private packages and apps (they don't need changesets)
+                  if [ "$IS_PRIVATE" = "true" ]; then
+                      echo "Skipping private package: $PACKAGE_NAME"
+                      return 1
+                  fi
+
+                  # Check if dependencies actually changed (not just formatting)
+                  # Get the diff output
+                  local DIFF_OUTPUT=$(git diff $BASE_SHA -- "$package_json" || true)
+
+                  if [ -z "$DIFF_OUTPUT" ]; then
+                      echo "Warning: No diff output for $package_json (file may not exist in base commit)"
+                      return 1
+                  fi
+
+                  # Check for changes to dependency field names (dependencies, devDependencies, etc.)
+                  # Pattern matches lines starting with + or - that contain dependency field names
+                  local DEPENDENCIES_CHANGED=$(echo "$DIFF_OUTPUT" | grep -E "^[\+\-].*\"(dependencies|devDependencies|peerDependencies|optionalDependencies|bundledDependencies)" || true)
+
+                  # If no field name changes, check for changes to individual dependency entries
+                  # Look for added/removed lines that look like dependency entries:
+                  # - Start with + or - (git diff markers)
+                  # - Contain a quoted string followed by colon (package name: version)
+                  # This matches lines like: -        "package-name": "^1.0.0",
+                  if [ -z "$DEPENDENCIES_CHANGED" ]; then
+                      # More flexible pattern: any line with + or - that has quotes, colon, and looks like a dependency entry
+                      DEPENDENCIES_CHANGED=$(echo "$DIFF_OUTPUT" | grep -E "^[\+\-].*\"[^\"]+\"[[:space:]]*:[[:space:]]*" || true)
+                  fi
+
+                  if [ -z "$DEPENDENCIES_CHANGED" ]; then
+                      echo "Skipping $PACKAGE_NAME: no dependency changes detected"
+                      return 1
+                  fi
+
+                  echo "Package $PACKAGE_NAME needs a changeset"
+                  PACKAGES_TO_CHANGESET+=("$PACKAGE_NAME")
+                  return 0
+              }
+
+              # Find all modified package.json files (excluding root)
+              MODIFIED_PACKAGE_JSONS=$(git diff --name-only $BASE_SHA | grep -E "^packages/.*/package\.json$|^apps/.*/package\.json$" || true)
+
+              if [ -z "$MODIFIED_PACKAGE_JSONS" ]; then
+                  echo "No package.json files modified in packages or apps directories."
+                  exit 0
+              fi
+
+              echo "Found modified package.json files:"
+              echo "$MODIFIED_PACKAGE_JSONS"
+
+              # Process each modified package.json
+              while IFS= read -r package_json; do
+                  if [ -z "$package_json" ]; then
+                      continue
+                  fi
+
+                  # Skip if package.json doesn't exist (was deleted)
+                  if [ ! -f "$package_json" ]; then
+                      echo "Skipping deleted file: $package_json"
+                      continue
+                  fi
+
+                  # Process the package.json (ignore return code - function returns 1 for skipped packages)
+                  process_package_json "$package_json" || true
+
+              done <<< "$MODIFIED_PACKAGE_JSONS"
+
+              if [ ${#PACKAGES_TO_CHANGESET[@]} -eq 0 ]; then
+                  echo "No publishable packages with dependency updates found."
+                  exit 0
+              fi
+
+              # Generate changeset filename (adjective-noun format)
+              ADJECTIVES=("breezy" "swift" "calm" "bright" "gentle" "quick" "smooth" "clear" "fresh" "bold" "sharp" "keen" "fast" "neat" "cool" "warm" "crisp" "solid" "firm" "soft" "hard" "light" "dark" "deep" "wide" "thin" "thick" "round" "flat" "tall" "short" "big" "small" "huge" "tiny" "vast" "narrow" "broad" "steep" "quiet" "loud" "silent" "noisy" "sweet" "sour" "bitter" "salty" "spicy" "mild" "hot" "cold" "icy" "frozen" "melted" "wet" "dry" "damp" "moist" "arid" "humid")
+              NOUNS=("humans" "robots" "tigers" "eagles" "wolves" "bears" "lions" "sharks" "hawks" "foxes" "cats" "dogs" "birds" "fish" "deer" "rabbits" "mice" "snakes" "frogs" "ducks" "geese" "swans" "owls" "crows" "ravens" "sparrows" "finches" "wrens" "jays" "cardinals" "penguins" "seals" "whales" "dolphins" "otters" "beavers" "squirrels" "chipmunks" "raccoons" "opossums" "hedgehogs" "badgers" "ferrets" "weasels" "moles" "voles" "hamsters" "guineapigs" "gerbils" "chinchillas" "pandas" "koalas" "kangaroos" "wallabies" "wombats" "platypuses" "echidnas" "possums" "lemurs" "monkeys")
+
+              RANDOM_ADJ=${ADJECTIVES[$RANDOM % ${#ADJECTIVES[@]}]}
+              RANDOM_NOUN=${NOUNS[$RANDOM % ${#NOUNS[@]}]}
+              CHANGESET_FILENAME=".changeset/${RANDOM_ADJ}-${RANDOM_NOUN}.md"
+
+              # Check if changeset already exists, generate new name if needed
+              while [ -f "$CHANGESET_FILENAME" ]; do
+                  RANDOM_ADJ=${ADJECTIVES[$RANDOM % ${#ADJECTIVES[@]}]}
+                  RANDOM_NOUN=${NOUNS[$RANDOM % ${#NOUNS[@]}]}
+                  CHANGESET_FILENAME=".changeset/${RANDOM_ADJ}-${RANDOM_NOUN}.md"
+              done
+
+              # Create changeset file with all affected packages
+              {
+                  echo "---"
+                  for pkg in "${PACKAGES_TO_CHANGESET[@]}"; do
+                      echo "'$pkg': patch"
+                  done
+                  echo "---"
+                  echo ""
+                  echo "chore(deps): update dependencies"
+              } > "$CHANGESET_FILENAME"
+
+              echo "Created changeset: $CHANGESET_FILENAME"
+              echo "Packages included:"
+              for pkg in "${PACKAGES_TO_CHANGESET[@]}"; do
+                  echo "  - $pkg"
+              done
+
+              # Configure git
+              git config user.name "github-actions[bot]"
+              git config user.email "github-actions[bot]@users.noreply.github.com"
+
+              # Stage the changeset file
+              git add "$CHANGESET_FILENAME"
+
+              # Check if there are changes to commit
+              if git diff --cached --quiet; then
+                  echo "No changes to commit (changeset may already exist)."
+                  exit 0
+              fi
+
+              # Commit and push changeset
+              git commit -m "chore(changeset): add changeset for dependency updates"
+              git push origin "$PR_BRANCH"
+
+              echo "Successfully created and pushed changeset for dependency updates"

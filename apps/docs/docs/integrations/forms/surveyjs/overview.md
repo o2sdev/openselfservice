@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # SurveyJS
 
-This integration provides a full integration with [SurveyJS](https://surveyjs.io/), a powerful JavaScript library for creating dynamic forms and surveys. Unlike other integrations located in `packages/integrations`, SurveyJS is implemented as a separate module that can be added to the API Harmonization server.
+this package provides a full integration with [SurveyJS](https://surveyjs.io/), a powerful JavaScript library for creating dynamic forms and surveys. Unlike other integrations located in `packages/integrations`, SurveyJS is implemented as a separate module that can be added to the API Harmonization server.
 
 ## In this section
 

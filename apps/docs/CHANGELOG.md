@@ -1,5 +1,26 @@
 # @o2s/docs
 
+## 2.0.0
+
+### Major Changes
+
+- 600d5ac: feat: add interactive CLI wizard with template selection, block/integration picker, and environment variable configuration
+
+### Minor Changes
+
+- 600d5ac: chore: add create-o2s-app flag to package.json in all blocks and integrations
+
+### Patch Changes
+
+- 8c01be4: added README
+
+## 1.8.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
 ## 1.7.0
 
 ### Minor Changes

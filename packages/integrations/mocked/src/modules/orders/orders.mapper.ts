@@ -1,4 +1,6 @@
-import { Models, Orders, Products } from '@o2s/framework/modules';
+import { BadRequestException } from '@nestjs/common';
+
+import { Carts, Models, Orders, Products } from '@o2s/framework/modules';
 
 // Product data for generating random orders
 const PRODUCT_DATA = [
@@ -407,7 +409,7 @@ const generateOrders = (count: number, getRandomDate: () => Date): Orders.Model.
 };
 
 // Generate 1000 orders spanning the past 2 years
-const MOCKED_ORDERS = [
+export const MOCKED_ORDERS: Orders.Model.Order[] = [
     ...generateOrders(100, getRandomDatePastYear),
     ...generateOrders(50, getRandomDatePastMonth),
     ...generateOrders(400, getRandomDateYearBefore),
@@ -501,3 +503,56 @@ export const mapOrders = (options: Orders.Request.GetOrderListQuery, customerId:
         total: filteredOrders.length,
     };
 };
+
+export function mapOrderFromCart(cart: Carts.Model.Cart, email?: string): Orders.Model.Order {
+    const now = new Date();
+    const orderId = `ORD-${Date.now()}`;
+
+    // Convert cart items to order items
+    const orderItems: Orders.Model.OrderItem[] = cart.items.data.map((item, index) => ({
+        id: `ITEM-${index.toString().padStart(3, '0')}`,
+        productId: item.product.id,
+        quantity: item.quantity,
+        price: item.price,
+        total: item.total,
+        subtotal: item.subtotal,
+        discountTotal: item.discountTotal,
+        unit: item.unit,
+        currency: item.currency,
+        product: item.product,
+    }));
+
+    if (!cart.shippingMethod) {
+        throw new BadRequestException('Shipping method is required to create order from cart');
+    }
+
+    if (!cart.shippingTotal) {
+        throw new BadRequestException('Shipping total is required to create order from cart');
+    }
+
+    return {
+        id: orderId,
+        customerId: cart.customerId,
+        createdAt: now.toISOString(),
+        updatedAt: now.toISOString(),
+        paymentDueDate: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days from now
+        total: cart.total,
+        subtotal: cart.subtotal,
+        shippingTotal: cart.shippingTotal,
+        shippingSubtotal: cart.shippingTotal,
+        discountTotal: cart.discountTotal,
+        tax: cart.taxTotal,
+        currency: cart.currency,
+        paymentStatus: 'PENDING',
+        status: 'PENDING',
+        items: {
+            data: orderItems,
+            total: orderItems.length,
+        },
+        shippingAddress: cart.shippingAddress,
+        billingAddress: cart.billingAddress,
+        shippingMethods: [cart.shippingMethod],
+        customerComment: cart.notes,
+        email: email ?? cart.email,
+    };
+}

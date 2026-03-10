@@ -23,6 +23,7 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
     inputLabel,
     noResults,
     category,
+    parent,
     accessToken,
     locale,
     routing,
@@ -38,7 +39,7 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
         startTransition(async () => {
             try {
                 const result = await sdk.blocks.searchArticles(
-                    { query: value, limit: 5, offset: 0, category },
+                    { query: value, limit: 5, offset: 0, category, basePath: parent?.slug },
                     { 'x-locale': locale },
                     accessToken,
                 );

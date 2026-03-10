@@ -3,6 +3,21 @@
     "version": "0.0.1",
     "private": false,
     "license": "MIT",
+    "description": "{{pascalCase name}} integration for O2S.",
+    "keywords": [
+        "o2s",
+        "integration",
+        "{{kebabCase name}}"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/integrations/{{kebabCase name}}"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/{{kebabCase name}}#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./integration": "./dist/integration.js",
         "./sdk": "./dist/sdk/index.js"
@@ -32,6 +47,7 @@
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
     },
+    "o2sTemplate": [{{#each templates}}"{{this}}"{{#unless @last}}, {{/unless}}{{/each}}],
     "peerDependencies": {
         "@nestjs/axios": "^4",
         "@nestjs/common": "^11",

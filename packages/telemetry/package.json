@@ -1,8 +1,24 @@
 {
     "name": "@o2s/telemetry",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "private": false,
     "license": "MIT",
+    "description": "Optional telemetry package for O2S CLI tools to collect anonymous usage data.",
+    "keywords": [
+        "o2s",
+        "telemetry",
+        "analytics",
+        "cli"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/telemetry"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/telemetry#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "main": "./dist/index.js",
     "files": [
         "dist"
@@ -14,7 +30,7 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "ci-info": "^4.3.1",
+        "ci-info": "^4.4.0",
         "configstore": "^8.0.0",
         "boxen": "^8.0.1",
         "is-docker": "^4.0.0",
@@ -27,7 +43,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@types/configstore": "^6.0.2",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

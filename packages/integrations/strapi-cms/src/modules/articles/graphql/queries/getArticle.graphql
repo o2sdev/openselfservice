@@ -1,5 +1,5 @@
 query getArticle($slug: String!, $locale: I18NLocaleCode!) {
-    articles(locale: $locale, filters: { slug: { eq: $slug } }) {
+    articles(locale: $locale, filters: { slug: { endsWith: $slug } }) {
         ...Article
     }
 }

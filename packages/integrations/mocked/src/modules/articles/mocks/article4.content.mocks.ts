@@ -519,7 +519,7 @@ Aby uzyskać dodatkową pomoc, skontaktuj się z naszym zespołem obsługi klien
 export const MOCK_ARTICLE4_EN: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
+        slug: 'warranty-and-repair/managing-your-powerpro-tools-online',
         roles: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
@@ -585,7 +585,7 @@ export const MOCK_ARTICLE4_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLE4_DE: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
+        slug: 'garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
         roles: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
@@ -651,7 +651,7 @@ export const MOCK_ARTICLE4_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLE4_PL: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
+        slug: 'gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
         roles: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',

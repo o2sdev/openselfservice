@@ -1,5 +1,46 @@
 # @o2s/ui
 
+## 1.11.0
+
+### Minor Changes
+
+- 1804016: update article slugs to be relative and adjust mapping logic
+
+### Patch Changes
+
+- 8c01be4: added README
+- cc2e932: fix: prevent multiple carousels from responding to arrow keys at the same time
+
+    Added managed keyboard control for Swiper-based carousels so only the active carousel handles left/right arrows.
+    Keyboard control is activated by focus/pointer interaction on a carousel, without any default active carousel that captures arrow keys before interaction.
+    Introduced automatic `keyboardCarouselId` resolution when it is not provided in props.
+
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/framework@1.18.0
+
+## 1.10.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+
+### Patch Changes
+
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+    - @o2s/framework@1.17.0
+
 ## 1.9.0
 
 ### Minor Changes

@@ -3,7 +3,7 @@ import { Articles } from '@o2s/framework/modules';
 export const MOCK_ARTICLE12_EN: Articles.Model.Article[] = [
     {
         id: 'art-004',
-        slug: '/help-and-support/warranty-and-repair/understanding-powerpro-warranty',
+        slug: 'warranty-and-repair/understanding-powerpro-warranty',
         roles: [],
         createdAt: '2023-06-24T10:15:00Z',
         updatedAt: '2023-08-15T16:40:00Z',
@@ -66,7 +66,7 @@ export const MOCK_ARTICLE12_EN: Articles.Model.Article[] = [
     },
     {
         id: 'art-009',
-        slug: '/help-and-support/warranty/repair-or-replace-decision-guide',
+        slug: 'warranty/repair-or-replace-decision-guide',
         roles: [],
         createdAt: '2023-05-19T09:10:00Z',
         updatedAt: '2023-06-30T14:25:00Z',
@@ -132,7 +132,7 @@ export const MOCK_ARTICLE12_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLE12_DE: Articles.Model.Article[] = [
     {
         id: 'art-004',
-        slug: '/hilfe-und-support/garantie/powerpro-garantie-verstehen',
+        slug: 'garantie/powerpro-garantie-verstehen',
         roles: [],
         createdAt: '2023-06-24T10:15:00Z',
         updatedAt: '2023-08-15T16:40:00Z',
@@ -198,7 +198,7 @@ export const MOCK_ARTICLE12_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLE12_PL: Articles.Model.Article[] = [
     {
         id: 'art-004',
-        slug: '/pomoc-i-wsparcie/gwarancja/rozumienie-gwarancji-powerpro',
+        slug: 'gwarancja/rozumienie-gwarancji-powerpro',
         roles: [],
         createdAt: '2023-06-24T10:15:00Z',
         updatedAt: '2023-08-15T16:40:00Z',

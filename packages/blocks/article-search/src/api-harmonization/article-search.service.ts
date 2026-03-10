@@ -26,6 +26,6 @@ export class ArticleSearchService {
     searchArticles(query: SearchArticlesQuery, headers: ApiModels.Headers.AppHeaders): Observable<ArticleList> {
         return this.articlesService
             .searchArticles({ ...query, locale: headers['x-locale'] })
-            .pipe(map((articles) => mapArticles(articles)));
+            .pipe(map((articles) => mapArticles(articles, query.basePath)));
     }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 export type DocLinkItem = {
     title: string;
     description: string;
@@ -14,12 +16,12 @@ export default function DocLinkTiles({ items }: DocLinkTilesProps) {
     return (
         <div className="docLinkTiles-grid">
             {items.map((item) => (
-                <a key={item.href} href={item.href} className="docLinkTiles-item">
+                <Link key={item.href} href={item.href} className="docLinkTiles-item">
                     <div className="label">
                         <div className="docLinkTiles-title">{item.title}</div>
                         <div className="docLinkTiles-description">{item.description}</div>
                     </div>
-                </a>
+                </Link>
             ))}
         </div>
     );

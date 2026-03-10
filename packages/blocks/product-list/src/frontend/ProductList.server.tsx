@@ -24,10 +24,5 @@ export const ProductList: React.FC<ProductListProps> = async ({ id, accessToken,
         return null;
     }
 
-    // Check view permission - if not allowed, don't render
-    if (!data.permissions?.view) {
-        return null;
-    }
-
     return <ProductListDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };

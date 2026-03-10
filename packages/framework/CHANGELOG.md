@@ -1,5 +1,47 @@
 # @o2s/framework
 
+## 1.18.0
+
+### Minor Changes
+
+- c6ae8e6: Added the normalized data model for a cart/checkout system with full CRUD operations for items and promotions:
+    - Checkout flow supporting address, shipping, and payment setup
+    - Customer address management for authenticated users
+    - Payment provider integration and session handling
+
+### Patch Changes
+
+- 46d4077: chore(deps): update dependencies
+- a288b11: chore(deps): update dependencies
+- 09d7b17: chore(deps): update dependencies
+- bbb3b89: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 88d180a: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+- Updated dependencies [a288b11]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/utils.logger@1.2.2
+
+## 1.17.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
+### Patch Changes
+
+- dadd9ba: chore(deps): update dependencies
+- 7305d03: chore(deps): update dependencies
+- 002ff11: chore(deps): update dependencies
+- Updated dependencies [3934c6e]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+    - @o2s/utils.logger@1.2.1
+
 ## 1.16.0
 
 ### Minor Changes

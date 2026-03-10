@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS, Products } from '@o2s/configs.integrations';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -20,40 +20,46 @@ export class RecommendedProductsService {
         headers: Models.Headers.AppHeaders,
     ): Observable<Model.RecommendedProductsBlock> {
         const locale = headers['x-locale'] || 'en';
-
-        const cms = this.cmsService.getRecommendedProductsBlock({
+        const cmsBlock$ = this.cmsService.getRecommendedProductsBlock({
             id: query.id,
             locale,
         });
-        const products = this.productsService.getProductList({
-            offset: 0,
-            locale,
-        });
 
-        return forkJoin([cms, products]).pipe(
-            map(([cms, products]) => {
-                // Filter out excluded product and products without images
-                const filteredProducts: Model.ProductSummary[] = products.data
-                    .filter((product: Products.Model.Product) => {
-                        if (query.excludeProductId && product.id === query.excludeProductId) {
-                            return false;
-                        }
-                        return product.image;
+        return cmsBlock$.pipe(
+            switchMap((cmsBlock) => {
+                return this.productsService
+                    .getProductList({
+                        basePath: cmsBlock.basePath || '',
+                        offset: 0,
+                        limit: 7, // Fetch 7 to have 6 after excluding current product
+                        locale,
                     })
-                    .map((product: Products.Model.Product) => ({
-                        id: product.id,
-                        name: product.name,
-                        description: product.shortDescription,
-                        image: product.image!,
-                        price: product.price,
-                        link: product.link,
-                        badges: product.tags?.map((tag: Products.Model.Product['tags'][number]) => ({
-                            label: tag.label,
-                            variant: tag.variant as Model.Badge['variant'],
-                        })),
-                    }));
+                    .pipe(
+                        map((products) => {
+                            // Filter out excluded product and products without images
+                            const filteredProducts: Model.ProductSummary[] = products.data
+                                .filter((product: Products.Model.Product) => {
+                                    if (query.excludeProductId && product.id === query.excludeProductId) {
+                                        return false;
+                                    }
+                                    return product.image;
+                                })
+                                .map((product: Products.Model.Product) => ({
+                                    id: product.id,
+                                    name: product.name,
+                                    description: product.shortDescription,
+                                    image: product.image!,
+                                    price: product.price,
+                                    link: product.link,
+                                    badges: product.tags?.map((tag: Products.Model.Product['tags'][number]) => ({
+                                        label: tag.label,
+                                        variant: tag.variant as Model.Badge['variant'],
+                                    })),
+                                }));
 
-                return mapRecommendedProducts(cms, filteredProducts, locale);
+                            return mapRecommendedProducts(cmsBlock, filteredProducts, locale);
+                        }),
+                    );
             }),
         );
     }

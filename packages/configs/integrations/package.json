@@ -1,8 +1,15 @@
 {
     "name": "@o2s/configs.integrations",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "private": true,
     "license": "MIT",
+    "description": "Integration configuration package for O2S, providing centralized integration configs and type re-exports.",
+    "keywords": [
+        "o2s",
+        "config",
+        "integrations",
+        "configuration"
+    ],
     "exports": {
         ".": "./dist/src/models/index.js",
         "./live-preview": "./dist/src/models/live-preview.js"
@@ -16,16 +23,16 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/framework": "^1.16.0",
-        "@o2s/integrations.mocked": "^1.17.0"
+        "@o2s/framework": "^1.18.0",
+        "@o2s/integrations.mocked": "^1.19.0"
     },
     "devDependencies": {
-        "@o2s/eslint-config": "*",
-        "@o2s/lint-staged-config": "*",
-        "@o2s/prettier-config": "*",
-        "@o2s/typescript-config": "*",
+        "@o2s/eslint-config": "^1.1.1",
+        "@o2s/lint-staged-config": "^0.1.1",
+        "@o2s/prettier-config": "^1.2.1",
+        "@o2s/typescript-config": "^1.3.0",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

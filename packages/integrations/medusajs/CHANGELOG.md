@@ -1,5 +1,63 @@
 # @o2s/integrations.medusajs
 
+## 1.9.0
+
+### Minor Changes
+
+- c6ae8e6: Medusa.js integration implementations for carts, checkout, customers, and payments.
+- 1f2965c: feat(products): Medusa integration for product catalog
+    - Add product list and product detail pages powered by Medusa Admin SDK
+    - Support SEO-friendly URLs using product handles and variant slugs (e.g. `/products/sweatpants/s-blue`)
+    - Add variant selection with option-based navigation between product variants
+    - Map Medusa product data (prices, categories, tags, images, specs) to the unified product model
+    - Extract key specs and detailed specs from Medusa variant metadata and attributes
+    - Add related products support via custom Medusa product references API
+    - Implement lazy initialization for MedusaJS service to improve startup performance
+    - Add localized mocked product data (EN, DE, PL) with variant overrides for testing
+
+- 600d5ac: chore: add create-o2s-app flag to package.json in all blocks and integrations
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 4cf1139: chore(deps): update dependencies
+- 4c390a3: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/framework@1.18.0
+    - @o2s/utils.logger@1.2.2
+
+## 1.8.0
+
+### Minor Changes
+
+- 20a5bdd: Across the integrations (Contentful, Strapi, Algolia, Medusa, Redis, Zendesk) tests cover primarily the service and mapper layers (including error handling), verifying configuration, request shaping and delegation to SDK/clients.
+
+### Patch Changes
+
+- 3e14803: chore(deps): update dependencies
+- 94a24b9: chore(deps): update dependencies
+- Updated dependencies [3934c6e]
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+    - @o2s/utils.logger@1.2.1
+    - @o2s/framework@1.17.0
+
 ## 1.7.0
 
 ### Minor Changes

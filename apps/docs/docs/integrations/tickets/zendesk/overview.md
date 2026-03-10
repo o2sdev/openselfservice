@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # Zendesk
 
-This integration provides the integration with [Zendesk Ticketing module](https://developer.zendesk.com/api-reference/ticketing/introduction/), allowing users to view and manage their support tickets within your application.
+this package provides the integration with [Zendesk Ticketing module](https://developer.zendesk.com/api-reference/ticketing/introduction/), allowing users to view and manage their support tickets within your application.
 
 ## In this section
 

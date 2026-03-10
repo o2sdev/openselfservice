@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Observable, map, of } from 'rxjs';
+import { Observable, defer, map, of } from 'rxjs';
 
 import { Articles, Search } from '@o2s/framework/modules';
 
@@ -10,7 +10,7 @@ export class ArticlesService implements Articles.Service {
     constructor(private readonly searchService: Search.Service) {}
 
     getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
-        return of(mapCategory(options.locale, options.id));
+        return defer(() => of(mapCategory(options.locale, options.id)));
     }
 
     getCategoryList(options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories> {
@@ -54,6 +54,7 @@ export class ArticlesService implements Articles.Service {
 
     searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles> {
         const searchPayload: Search.Model.SearchPayload = {
+            locale: options.locale,
             query: options.query,
             exact: options.category
                 ? {
@@ -76,7 +77,7 @@ export class ArticlesService implements Articles.Service {
             },
         };
 
-        return this.searchService.searchArticles(options.locale, searchPayload).pipe(
+        return this.searchService.searchArticles('articles', searchPayload).pipe(
             map((result) => {
                 return result;
             }),

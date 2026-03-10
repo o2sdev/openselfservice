@@ -4,7 +4,7 @@ sidebar_position: 300
 
 # Products
 
-The products model represents the structure of product catalog items and their related information in the system. This model enables management of product listings, variants, specifications, and related product relationships.
+The products model represents the structure of product catalog items and their related information in the system. This model enables management of product listings, variants, specifications, and related product relationships. The Product type is referenced by [Carts](./core-model-carts.md) (CartItem) and [Orders](./core-model-orders.md) (OrderItem).
 
 ## Product Service
 

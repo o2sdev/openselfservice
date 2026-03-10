@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # Strapi CMS
 
-This integration provides a full integration with [Strapi CMS](https://strapi.io/), enabling comprehensive content management capabilities for your application. The integration supports content management, page management, and content localization, allowing you to create and manage multilingual content with ease.
+this package provides a full integration with [Strapi CMS](https://strapi.io/), enabling comprehensive content management capabilities for your application. The integration supports content management, page management, and content localization, allowing you to create and manage multilingual content with ease.
 
 ## In this section
 

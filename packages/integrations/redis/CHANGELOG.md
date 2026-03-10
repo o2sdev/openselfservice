@@ -1,5 +1,51 @@
 # @o2s/integrations.redis
 
+## 1.4.0
+
+### Minor Changes
+
+- 600d5ac: chore: add create-o2s-app flag to package.json in all blocks and integrations
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+- 209b4bf: chore(deps): update dependencies
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/framework@1.18.0
+    - @o2s/utils.logger@1.2.2
+
+## 1.3.0
+
+### Minor Changes
+
+- 20a5bdd: Across the integrations (Contentful, Strapi, Algolia, Medusa, Redis, Zendesk) tests cover primarily the service and mapper layers (including error handling), verifying configuration, request shaping and delegation to SDK/clients.
+
+### Patch Changes
+
+- 3e14803: chore(deps): update dependencies
+- 94a24b9: chore(deps): update dependencies
+- Updated dependencies [3934c6e]
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+    - @o2s/utils.logger@1.2.1
+    - @o2s/framework@1.17.0
+
 ## 1.2.0
 
 ### Minor Changes

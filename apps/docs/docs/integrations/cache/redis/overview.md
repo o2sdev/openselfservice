@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # Redis Cache
 
-This integration provides caching capabilities using [Redis](https://redis.io/). It implements the framework's `Cache.Service` interface and is used by CMS integrations (Strapi, Contentful) to cache pages, components, and configuration.
+this package provides caching capabilities using [Redis](https://redis.io/). It implements the framework's `Cache.Service` interface and is used by CMS integrations (Strapi, Contentful) to cache pages, components, and configuration.
 
 ## In this section
 

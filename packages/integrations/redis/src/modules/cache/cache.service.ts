@@ -77,7 +77,7 @@ export class RedisCacheService implements Cache.Service {
     async get(key: string): Promise<string | undefined> {
         if (this.isEnabled && this.client.isReady) {
             const result = await this.client.get(key);
-            return result as string | undefined;
+            return result ?? undefined;
         }
         return undefined;
     }

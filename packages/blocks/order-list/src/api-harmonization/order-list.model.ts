@@ -56,10 +56,7 @@ export class Order {
         value: Orders.Model.Order['status'];
         label: string;
     };
-    subtotal!: {
-        value: Orders.Model.Order['subtotal'];
-        label: string;
-    };
+    subtotal!: Orders.Model.Order['subtotal'];
     currency!: Orders.Model.Order['currency'];
     detailsUrl!: string;
 }

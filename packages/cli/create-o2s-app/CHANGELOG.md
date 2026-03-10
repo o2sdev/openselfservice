@@ -1,5 +1,32 @@
 # create-o2s-app
 
+## 2.0.0
+
+### Major Changes
+
+- 600d5ac: feat: add interactive CLI wizard with template selection, block/integration picker, and environment variable configuration
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- b234a1f: chore(deps): update dependencies
+- fefc45d: chore(deps): update dependencies
+- ea200fc: chore(deps): update dependencies
+- ed74c8f: chore(deps): update dependencies
+- Updated dependencies [a288b11]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/telemetry@1.2.1
+
+## 1.2.1
+
+### Patch Changes
+
+- 4a9b047: chore(deps): update dependencies
+
 ## 1.2.0
 
 ### Minor Changes

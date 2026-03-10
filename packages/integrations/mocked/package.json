@@ -1,10 +1,28 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.17.0",
+    "version": "1.19.0",
     "private": false,
     "license": "MIT",
+    "description": "Mocked integration for O2S development and testing, providing in-memory data with Prisma.",
+    "keywords": [
+        "o2s",
+        "integration",
+        "mocked",
+        "mock",
+        "development"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/integrations/mocked"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/mocked#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./integration": "./dist/integration.js",
+        "./modules": "./dist/modules/index.js",
         "./sdk": "./dist/sdk/index.js",
         "./auth": "./dist/auth/index.js",
         "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js",
@@ -48,7 +66,7 @@
         "@o2s/telemetry": "*",
         "@types/jsonwebtoken": "^9.0.10",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "express": "5.2.1",
         "prettier": "^3.8.1",
         "shx": "^0.4.0",
@@ -68,5 +86,9 @@
         "react-dom": "^19",
         "rxjs": "^7",
         "zod": "^3.25.4 || ^4.0.0"
-    }
+    },
+    "o2sTemplate": [
+        "o2s",
+        "dxp"
+    ]
 }

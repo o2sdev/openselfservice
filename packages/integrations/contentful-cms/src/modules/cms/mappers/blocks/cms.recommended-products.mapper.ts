@@ -1,12 +1,17 @@
 import { CMS } from '@o2s/framework/modules';
 
 export const mapRecommendedProductsBlock = (
-    _locale: string,
+    locale: string,
 ): CMS.Model.RecommendedProductsBlock.RecommendedProductsBlock => {
-    // TODO: Implement proper mapping from Contentful
-    // For now, return a basic structure with labels
+    const basePathMap: Record<string, string> = {
+        en: '/products',
+        de: '/produkte',
+        pl: '/produkty',
+    };
+
     return {
         id: 'recommended-products-1',
+        basePath: basePathMap[locale] || basePathMap.en,
         labels: {
             title: 'Recommended Products',
             detailsLabel: 'Details',

@@ -6,5 +6,6 @@ export type Labels = {
 };
 
 export class RecommendedProductsBlock extends Block.Block {
+    basePath?: string;
     labels!: Labels;
 }

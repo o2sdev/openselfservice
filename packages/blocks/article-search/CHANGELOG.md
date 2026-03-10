@@ -1,5 +1,58 @@
 # @o2s/blocks.article-search
 
+## 1.6.0
+
+### Minor Changes
+
+- fcf14d2: Configure Storybook to use package README.md as documentation source
+- 600d5ac: chore: add create-o2s-app flag to package.json in all blocks and integrations
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [1f2965c]
+- Updated dependencies [88d180a]
+- Updated dependencies [1804016]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+- Updated dependencies [cc2e932]
+  - @o2s/framework@1.18.0
+  - @o2s/utils.api-harmonization@0.3.1
+  - @o2s/utils.frontend@0.4.1
+  - @o2s/utils.logger@1.2.2
+  - @o2s/configs.integrations@0.6.0
+  - @o2s/ui@1.11.0
+
+## 1.5.0
+
+### Minor Changes
+
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
+### Patch Changes
+
+- Updated dependencies [3934c6e]
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+  - @o2s/utils.logger@1.2.1
+  - @o2s/framework@1.17.0
+  - @o2s/configs.integrations@0.5.0
+  - @o2s/ui@1.10.0
+
 ## 1.4.0
 
 ### Minor Changes

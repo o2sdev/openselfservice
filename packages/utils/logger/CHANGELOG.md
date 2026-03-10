@@ -1,5 +1,22 @@
 # @o2s/utils.logger
 
+## 1.2.2
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+
+## 1.2.1
+
+### Patch Changes
+
+- 3934c6e: chore(deps): update dependencies
+- 78ea1f7: chore(deps): update dependencies
+- 241ab52: chore(deps): update dependencies
+
 ## 1.2.0
 
 ### Minor Changes

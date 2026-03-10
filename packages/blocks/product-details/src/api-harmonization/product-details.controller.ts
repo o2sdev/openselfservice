@@ -18,6 +18,16 @@ export class ProductDetailsController {
         @Query() query: GetProductDetailsBlockQuery,
         @Headers() headers: Models.Headers.AppHeaders,
     ) {
-        return this.service.getProductDetails(id, query, headers);
+        return this.service.getProductDetails(id, undefined, query, headers);
+    }
+
+    @Get(':id/:variantSlug')
+    getProductDetailsWithVariant(
+        @Param('id') id: string,
+        @Param('variantSlug') variantSlug: string,
+        @Query() query: GetProductDetailsBlockQuery,
+        @Headers() headers: Models.Headers.AppHeaders,
+    ) {
+        return this.service.getProductDetails(id, variantSlug, query, headers);
     }
 }

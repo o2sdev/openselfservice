@@ -4,6 +4,8 @@ import React, { FC, ReactNode } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Image } from '@o2s/ui/components/Image';
+
 import { Link } from '@o2s/ui/elements/link';
 import { Typography, TypographyProps } from '@o2s/ui/elements/typography';
 
@@ -20,11 +22,13 @@ const LinkComp: FC<Readonly<LinkProps & { children: ReactNode; className?: strin
 
 const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: string }>> = ({
     children,
+    tag = 'p',
+    variant,
     ...props
 }) => {
-    const Tag = props.tag || 'p';
+    const Tag = tag || 'p';
     return (
-        <Typography variant={props.variant} asChild>
+        <Typography variant={variant} asChild>
             <Tag {...props}>{children}</Tag>
         </Typography>
     );
@@ -32,16 +36,36 @@ const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: 
 
 const TdComp: FC<Readonly<TypographyProps & { children: ReactNode }>> = ({
     children,
+    'data-highlighted': isHighlighted,
     ...props
 }: {
     children: ReactNode;
     'data-highlighted'?: boolean;
 }) => {
-    const variant = props['data-highlighted'] ? 'tableCellHighlighted' : 'tableCell';
+    const variant = isHighlighted ? 'tableCellHighlighted' : 'tableCell';
     return (
         <TypographyComp variant={variant} tag="td" {...props}>
             {children}
         </TypographyComp>
+    );
+};
+
+const ImgComp: FC<Readonly<React.ImgHTMLAttributes<HTMLImageElement> & { children?: ReactNode }>> = ({
+    children: _children,
+    className,
+    src,
+    alt,
+}) => {
+    return (
+        <div className={cn('relative', className)}>
+            <Image
+                src={(src as string) || ''}
+                alt={alt || ''}
+                fill
+                sizes="(max-width: 48rem) 100vw, 48rem"
+                className="relative! h-auto! object-contain"
+            />
+        </div>
     );
 };
 
@@ -186,10 +210,8 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
             },
         },
         img: {
-            component: TypographyComp,
+            component: ImgComp,
             props: {
-                variant: 'image',
-                tag: 'img',
                 className: cn('mt-6 first:mt-0', className),
             },
         },
@@ -234,6 +256,14 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
         },
         td: {
             component: TdComp,
+        },
+        figure: {
+            component: TypographyComp,
+            props: {
+                variant: 'figure',
+                tag: 'figure',
+                className: cn('mt-6 first:mt-0', className),
+            },
         },
     };
 

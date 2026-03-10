@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # Contentful CMS
 
-This integration provides a full integration with [Contentful CMS](https://www.contentful.com/), enabling comprehensive content management capabilities for your application. The integration supports content management, page management, and content localization, allowing you to create and manage multilingual content with ease. Additionally, Contentful integration includes built-in support for Live Preview, enabling content editors to see their changes in real-time as they edit content in the Contentful web app.
+this package provides a full integration with [Contentful CMS](https://www.contentful.com/), enabling comprehensive content management capabilities for your application. The integration supports content management, page management, and content localization, allowing you to create and manage multilingual content with ease. Additionally, Contentful integration includes built-in support for Live Preview, enabling content editors to see their changes in real-time as they edit content in the Contentful web app.
 
 ## In this section
 

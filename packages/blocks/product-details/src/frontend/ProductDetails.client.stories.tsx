@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { ProductDetailsPure } from './ProductDetails.client';
 
 const meta = {
     title: 'Blocks/ProductDetails',
     component: ProductDetailsPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof ProductDetailsPure>;
 
 export default meta;
@@ -110,11 +114,11 @@ export const Default: Story = {
             icon: 'MessageCircle',
         },
         labels: {
-            specificationsTitle: 'Specifications',
-            descriptionTitle: 'Description',
-            downloadLabel: 'Download Brochure',
-            priceLabel: 'Price',
-            offerLabel: 'Offer',
+            specifications: 'Specifications',
+            description: 'Description',
+            download: 'Download Brochure',
+            price: 'Price',
+            offer: 'Offer',
         },
         hasPriority: false,
     },

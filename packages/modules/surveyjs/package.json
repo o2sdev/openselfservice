@@ -1,9 +1,25 @@
 {
     "name": "@o2s/modules.surveyjs",
-    "version": "0.4.0",
+    "version": "0.4.2",
     "private": false,
     "license": "MIT",
     "description": "A module that handles fetching, rendering ans submitting SurveyJS-based forms.",
+    "keywords": [
+        "o2s",
+        "module",
+        "surveyjs",
+        "forms",
+        "surveys"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/modules/surveyjs"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/modules/surveyjs#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
@@ -25,8 +41,8 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*",
-        "survey-core": "^2.5.8",
-        "survey-react-ui": "^2.5.8"
+        "survey-core": "^2.5.12",
+        "survey-react-ui": "^2.5.12"
     },
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
@@ -35,7 +51,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

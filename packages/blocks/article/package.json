@@ -1,9 +1,25 @@
 {
     "name": "@o2s/blocks.article",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "private": false,
     "license": "MIT",
     "description": "A block displaying a single article.",
+    "keywords": [
+        "o2s",
+        "block",
+        "article",
+        "cms",
+        "content"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/article"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/article#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
@@ -35,7 +51,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
@@ -53,5 +69,9 @@
         "rxjs": "^7",
         "next": "^16.0.5",
         "next-intl": "^4.1.0"
-    }
+    },
+    "o2sTemplate": [
+        "o2s",
+        "dxp"
+    ]
 }

@@ -1,6 +1,8 @@
 import type { PlopTypes } from '@turbo/gen';
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
+    // Register custom Handlebars helper for conditional checks
+    plop.setHelper('eq', (a: string, b: string) => a === b);
     plop.setGenerator('integration', {
         description: 'Adds a new API integration',
         prompts: [
@@ -27,8 +29,14 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 message: 'Choose which modules you want to be included in the integration.',
                 validate: (input: string[]) => !!input.length,
             },
+            {
+                type: 'checkbox',
+                name: 'templates',
+                choices: ['o2s', 'dxp'],
+                message: 'Which project templates should include this integration? (leave empty for custom-only)',
+            },
         ],
-        actions: (data) => {
+        actions: (data: Record<string, unknown> | undefined) => {
             const actions: PlopTypes.ActionType[] = [
                 {
                     type: 'add',
@@ -83,7 +91,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 {
                     type: 'add',
                     path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
-                    templateFile: 'templates/integrations/vitestConfig.hbs',
+                    templateFile: 'templates/integration/vitestConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/integrations/{{kebabCase name}}/README.md',
+                    templateFile: 'templates/integration/README.hbs',
                 },
             ];
 
@@ -215,6 +228,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 name: 'name',
                 message: 'What is the name of the block?',
             },
+            {
+                type: 'checkbox',
+                name: 'templates',
+                choices: ['o2s', 'dxp'],
+                message: 'Which project templates should include this block? (leave empty for custom-only)',
+            },
         ],
         actions: [
             // API-HARMONIZATION
@@ -311,6 +330,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             },
             {
                 type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.stories.tsx',
+                templateFile: 'templates/block/frontend/stories.hbs',
+            },
+            {
+                type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.types.ts',
                 templateFile: 'templates/block/frontend/types.hbs',
             },
@@ -389,6 +413,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/tsconfig.sdk.json',
                 templateFile: 'templates/block/tsconfigSdk.hbs',
+            },
+            {
+                type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/README.md',
+                templateFile: 'templates/block/README.hbs',
             },
 
             // FRAMEWORK

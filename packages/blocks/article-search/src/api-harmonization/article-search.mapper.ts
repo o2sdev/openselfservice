@@ -12,15 +12,16 @@ export const mapArticleSearch = (
         title: cms.title,
         inputLabel: cms.inputLabel,
         category: cms.category,
+        parent: cms.parent,
         noResults: cms.noResults,
     };
 };
 
-export const mapArticles = (articles: Articles.Model.Articles): ArticleList => {
+export const mapArticles = (articles: Articles.Model.Articles, basePath?: string): ArticleList => {
     return {
         articles: articles.data.map((article) => ({
             label: article.title,
-            url: article.slug,
+            url: basePath ? `${basePath}/${article.slug}`.replace(/\/+/g, '/') : article.slug,
         })),
     };
 };
