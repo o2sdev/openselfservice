@@ -33,8 +33,12 @@ export class CartsService implements Carts.Service {
     ): Observable<Carts.Model.Cart | undefined> {
         const cart = mapCart(params);
 
+        if (!cart) {
+            throw new NotFoundException('Cart not found');
+        }
+
         // Customer carts require authorization
-        if (cart?.customerId) {
+        if (cart.customerId) {
             if (!authorization) {
                 throw new UnauthorizedException('Authentication required to access this cart');
             }

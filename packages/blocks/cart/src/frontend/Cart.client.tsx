@@ -131,7 +131,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
     const zero = { value: 0, currency: defaultCurrency };
 
-    if ((cart?.items.data.length ?? 0) === 0 && !isPending) {
+    if ((cart?.items?.data?.length ?? 0) === 0 && !isPending) {
         return (
             <div className="w-full flex flex-col gap-8 md:gap-12 items-center justify-center py-12">
                 <DynamicIcon name="ShoppingCart" size={64} className="text-muted-foreground" />
@@ -169,7 +169,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                             <DynamicIcon name="Loader2" size={32} className="animate-spin text-primary" />
                         </div>
                     )}
-                    {cart?.items.data.map((item) => (
+                    {cart?.items?.data?.map((item) => (
                         <CartItem
                             key={item.id}
                             id={item.id}
