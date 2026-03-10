@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked-dxp
 
+## 1.0.0
+
+### Major Changes
+
+- a803940: Initial release of @o2s/integrations.mocked-dxp
+
 ## 1.19.0
 
 ### Minor Changes
