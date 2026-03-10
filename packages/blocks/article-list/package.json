@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.article-list",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "private": false,
     "license": "MIT",
     "description": "Block for displaying a list of articles.",
@@ -70,5 +70,8 @@
         "next": "^16.0.5",
         "next-intl": "^4.1.0"
     },
-    "o2sTemplate": ["o2s", "dxp"]
+    "o2sTemplate": [
+        "o2s",
+        "dxp"
+    ]
 }

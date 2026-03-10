@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.18.0",
+    "version": "1.19.0",
     "private": false,
     "license": "MIT",
     "description": "Mocked integration for O2S development and testing, providing in-memory data with Prisma.",
@@ -87,5 +87,8 @@
         "rxjs": "^7",
         "zod": "^3.25.4 || ^4.0.0"
     },
-    "o2sTemplate": ["o2s", "dxp"]
+    "o2sTemplate": [
+        "o2s",
+        "dxp"
+    ]
 }

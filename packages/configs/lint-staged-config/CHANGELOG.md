@@ -1,5 +1,11 @@
 # @o2s/lint-staged-config
 
+## 0.1.1
+
+### Patch Changes
+
+- 8c01be4: added README
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked-dxp",
-    "version": "1.18.0",
+    "version": "1.19.0",
     "private": false,
     "license": "MIT",
     "description": "Mocked DXP integration for O2S, providing in-memory data for DXP demo flows.",
