@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.orders-summary",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "private": false,
     "license": "MIT",
     "description": "A block displaying a summary of orders, including statistics and recent activity.",
@@ -70,5 +70,7 @@
         "next": "^16.0.5",
         "next-intl": "^4.1.0"
     },
-    "o2sTemplate": ["o2s"]
+    "o2sTemplate": [
+        "o2s"
+    ]
 }
