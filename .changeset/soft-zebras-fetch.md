@@ -37,7 +37,6 @@
 '@o2s/blocks.cta-section': minor
 '@o2s/blocks.quick-links': minor
 '@o2s/blocks.ticket-list': minor
-'create-o2s-app': minor
 '@o2s/integrations.redis': minor
 '@o2s/blocks.bento-grid': minor
 '@o2s/blocks.order-list': minor

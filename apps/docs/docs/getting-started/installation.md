@@ -16,7 +16,7 @@ To create a new project, run:
 npx create-o2s-app
 ```
 
-The CLI will prompt you to choose between `o2s`, `dxp` starters or a fully custom configuration, and then automatically scaffold the project with the matching blocks and integrations.
+The CLI will prompt you to choose between `o2s`, `dxp` starters or a `fully custom configuration`, and then automatically scaffold the project with the matching blocks and integrations.
 
 You can also specify a template directly:
 
@@ -30,12 +30,12 @@ The `custom` template launches an **interactive CLI wizard** that lets you pick 
 
 ### CLI options
 
-| Option | Description |
-|--------|-------------|
+| Option                        | Description                                                                                                                                  |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--template dxp\|o2s\|custom` | Select a template: `o2s` (Customer Portal blocks), `dxp` (DXP blocks), or `custom` (interactive wizard to hand-pick blocks and integrations) |
-| `--blocks <list>` | Comma-separated block names to skip the block selection prompt |
-| `--integrations <list>` | Comma-separated integration names to skip the integration selection prompt |
-| `--skip-install` | Skip the `npm install` step |
+| `--blocks <list>`             | Comma-separated block names to skip the block selection prompt                                                                               |
+| `--integrations <list>`       | Comma-separated integration names to skip the integration selection prompt                                                                   |
+| `--skip-install`              | Skip the `npm install` step                                                                                                                  |
 
 **Non-interactive example:**
 
