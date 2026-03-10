@@ -1,13 +1,10 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/quick-links.client';
 
-export interface QuickLinksProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
+export interface QuickLinksProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     isDraftModeEnabled?: boolean;
 }
 

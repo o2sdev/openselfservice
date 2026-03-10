@@ -1,16 +1,13 @@
 import { VariantProps } from 'class-variance-authority';
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import { baseVariant } from '@o2s/ui/lib/utils';
 
 import type { Model } from '../api-harmonization/ticket-list.client';
 
-export interface TicketListProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
+export interface TicketListProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     isDraftModeEnabled?: boolean;
     enableRowSelection?: boolean;
 }

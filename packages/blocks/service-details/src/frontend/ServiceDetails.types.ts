@@ -1,14 +1,11 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/service-details.client';
 
-export interface ServiceDetailsProps {
-    id: string;
+export interface ServiceDetailsProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     serviceId: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
 }
 
 export type ServiceDetailsPureProps = ServiceDetailsProps & Model.ServiceDetailsBlock;

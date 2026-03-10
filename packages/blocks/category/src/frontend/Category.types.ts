@@ -1,17 +1,13 @@
 import { defineRouting } from 'next-intl/routing';
 import React from 'react';
 
+import type { Models } from '@o2s/framework/modules';
 import { CMS } from '@o2s/framework/modules';
 
 import type { Model } from '../api-harmonization/category.client';
 
-export interface CategoryProps {
-    id: string;
+export interface CategoryProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     slug: string[];
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
     renderBlocks: (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => React.ReactNode;
 }
 

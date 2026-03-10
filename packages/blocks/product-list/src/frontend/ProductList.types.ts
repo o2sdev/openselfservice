@@ -1,12 +1,10 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/product-list.client';
 
-export interface ProductListProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
+export interface ProductListProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     enableRowSelection?: boolean;
 }
 

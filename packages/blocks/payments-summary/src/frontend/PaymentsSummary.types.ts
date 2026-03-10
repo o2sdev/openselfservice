@@ -1,14 +1,10 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/payments-summary.client';
 
-export interface PaymentsSummaryProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
-}
+export type PaymentsSummaryProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>>;
 
 export type PaymentsSummaryPureProps = PaymentsSummaryProps & Model.PaymentsSummaryBlock;
 

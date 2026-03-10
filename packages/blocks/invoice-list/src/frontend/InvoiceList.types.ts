@@ -1,14 +1,10 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/invoice-list.client';
 
-export interface InvoiceListProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
-}
+export type InvoiceListProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>>;
 
 export type InvoiceListPureProps = InvoiceListProps & Model.InvoiceListBlock;
 

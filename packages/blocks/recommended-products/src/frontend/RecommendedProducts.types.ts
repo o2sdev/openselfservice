@@ -1,13 +1,12 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import { Model } from '../api-harmonization/recommended-products.client';
 
-export interface RecommendedProductsProps {
-    id: string;
+export interface RecommendedProductsProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     excludeProductId?: string;
     limit?: number;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
 }
 
 export type RecommendedProductsPureProps = RecommendedProductsProps & Model.RecommendedProductsBlock;

@@ -1,14 +1,10 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/pricing-section.client';
 
-export interface PricingSectionProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
-}
+export type PricingSectionProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>>;
 
 export type PricingSectionPureProps = PricingSectionProps & Model.PricingSectionBlock;
 
