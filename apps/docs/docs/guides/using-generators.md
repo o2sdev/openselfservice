@@ -20,8 +20,10 @@ at the root level of the project, after which you will be asked which generator 
 
 You can create a new block within the `api-harmonization` app by using `block` generator. It will:
 
-1. Create a new package in the `packages/blocks` directory.
-2. Inside this new folder, it will create all the necessary files that compose a block:
+1. Ask you for the block name.
+2. Ask which project templates should include this block (`o2s`, `dxp`, or leave empty for custom-only). This sets the `o2sTemplate` field in `package.json`, used by the `create-o2s-app` CLI wizard to determine which blocks belong to each template.
+3. Create a new package in the `packages/blocks` directory.
+4. Inside this new folder, it will create all the necessary files that compose a block:
     1. API Harmonization part with
         - module,
         - controller,
@@ -51,7 +53,8 @@ To create a new container within the `ui` package, you can choose the `ui-compon
 You can also create a whole new integration by using the `integration` generator, which will:
 
 1. Ask you which modules you want included in the integration.
-2. Create a new folder in the `packages/integrations` directory.
+2. Ask which project templates should include this integration (`o2s`, `dxp`, or leave empty for custom-only). This sets the `o2sTemplate` field in `package.json`, used by the `create-o2s-app` CLI wizard.
+3. Create a new folder in the `packages/integrations` directory.
 3. Initialize a new project for this new integration, with all the necessary files (like `package.json`, linter and prettier configs, and so on).
 4. For each module you chose, it will create appropriate folder within the `packages/api/integrations/src/module` directory.
 5. Inside those folders it will create the necessary files that compose a module:
