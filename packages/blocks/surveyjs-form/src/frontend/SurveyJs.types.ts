@@ -8,6 +8,4 @@ export type SurveyJsFormProps = Models.BlockProps.BaseBlockProps<ReturnType<type
 
 export type SurveyJsFormPureProps = SurveyJsFormProps & Model.SurveyjsBlock;
 
-export interface SurveyJsFormRendererProps extends Omit<SurveyJsFormProps, ''> {
-    slug: string[];
-}
+export type SurveyJsFormRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

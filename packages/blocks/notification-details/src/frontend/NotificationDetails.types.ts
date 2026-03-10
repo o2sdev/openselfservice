@@ -10,6 +10,4 @@ export interface NotificationDetailsProps extends Models.BlockProps.BaseBlockPro
 
 export type NotificationDetailsPureProps = NotificationDetailsProps & Model.NotificationDetailsBlock;
 
-export type FaqRendererProps = Omit<NotificationDetailsProps, 'notificationId'> & {
-    slug: string[];
-};
+export type FaqRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

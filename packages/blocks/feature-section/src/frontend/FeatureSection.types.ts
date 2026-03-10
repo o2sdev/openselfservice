@@ -8,6 +8,4 @@ export type FeatureSectionProps = Models.BlockProps.BaseBlockProps<ReturnType<ty
 
 export type FeatureSectionPureProps = FeatureSectionProps & Model.FeatureSectionBlock;
 
-export type FeatureSectionRendererProps = Omit<FeatureSectionProps, ''> & {
-    slug: string[];
-};
+export type FeatureSectionRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

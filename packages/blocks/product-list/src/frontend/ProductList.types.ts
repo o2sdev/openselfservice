@@ -10,6 +10,5 @@ export interface ProductListProps extends Models.BlockProps.BaseBlockProps<Retur
 
 export type ProductListPureProps = ProductListProps & Model.ProductListBlock;
 
-export type ProductListRendererProps = Omit<ProductListProps, ''> & {
-    slug: string[];
-};
+export type ProductListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
+    Pick<ProductListProps, 'enableRowSelection'>;

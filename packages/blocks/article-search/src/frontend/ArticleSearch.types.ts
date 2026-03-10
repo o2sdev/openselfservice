@@ -8,6 +8,4 @@ export type ArticleSearchProps = Models.BlockProps.BaseBlockProps<ReturnType<typ
 
 export type ArticleSearchPureProps = ArticleSearchProps & Model.ArticleSearchBlock;
 
-export type ArticleSearchRendererProps = Omit<ArticleSearchProps, ''> & {
-    slug: string[];
-};
+export type ArticleSearchRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

@@ -4,12 +4,8 @@ import type { Models } from '@o2s/framework/modules';
 
 import type { Model } from '../api-harmonization/article-list.client';
 
-export interface ArticleListProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
-    isDraftModeEnabled?: boolean;
-}
+export type ArticleListProps = Models.BlockProps.BlockWithDraftModeProps<ReturnType<typeof defineRouting>>;
 
 export type ArticleListPureProps = ArticleListProps & Model.ArticleListBlock;
 
-export interface ArticleListRendererProps extends Omit<ArticleListProps, ''> {
-    slug: string[];
-}
+export type ArticleListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

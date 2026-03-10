@@ -10,6 +10,4 @@ export interface ServiceDetailsProps extends Models.BlockProps.BaseBlockProps<Re
 
 export type ServiceDetailsPureProps = ServiceDetailsProps & Model.ServiceDetailsBlock;
 
-export type ServiceDetailsRendererProps = Omit<ServiceDetailsProps, 'serviceId'> & {
-    slug: string[];
-};
+export type ServiceDetailsRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

@@ -10,6 +10,5 @@ export interface NotificationListProps extends Models.BlockProps.BaseBlockProps<
 
 export type NotificationListPureProps = NotificationListProps & Model.NotificationListBlock;
 
-export type NotificationListRendererProps = Omit<NotificationListProps, ''> & {
-    slug: string[];
-};
+export type NotificationListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
+    Pick<NotificationListProps, 'enableRowSelection'>;

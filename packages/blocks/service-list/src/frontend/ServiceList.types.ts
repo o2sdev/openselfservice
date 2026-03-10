@@ -8,6 +8,4 @@ export type ServiceListProps = Models.BlockProps.BaseBlockProps<ReturnType<typeo
 
 export type ServiceListPureProps = ServiceListProps & Model.ServiceListBlock;
 
-export interface ServiceListRendererProps extends Omit<ServiceListProps, ''> {
-    slug: string[];
-}
+export type ServiceListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

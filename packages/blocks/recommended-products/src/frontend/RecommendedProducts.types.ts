@@ -11,7 +11,10 @@ export interface RecommendedProductsProps extends Models.BlockProps.BaseBlockPro
 
 export type RecommendedProductsPureProps = RecommendedProductsProps & Model.RecommendedProductsBlock;
 
-export type RecommendedProductsRendererProps = Omit<RecommendedProductsProps, 'locale'> & {
-    slug: string[];
-    locale?: string;
-};
+export type RecommendedProductsRendererProps = Omit<
+    Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>,
+    'locale'
+> &
+    Pick<RecommendedProductsProps, 'excludeProductId' | 'limit'> & {
+        locale?: string;
+    };

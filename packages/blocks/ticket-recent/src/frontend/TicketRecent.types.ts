@@ -8,6 +8,4 @@ export type TicketRecentProps = Models.BlockProps.BaseBlockProps<ReturnType<type
 
 export type TicketRecentPureProps = TicketRecentProps & Model.TicketRecentBlock;
 
-export type TicketRecentRendererProps = Omit<TicketRecentProps, ''> & {
-    slug: string[];
-};
+export type TicketRecentRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

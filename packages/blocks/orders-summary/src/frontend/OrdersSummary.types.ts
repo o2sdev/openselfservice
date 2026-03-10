@@ -8,6 +8,4 @@ export type OrdersSummaryProps = Models.BlockProps.BaseBlockProps<ReturnType<typ
 
 export type OrdersSummaryPureProps = OrdersSummaryProps & Model.OrdersSummaryBlock;
 
-export interface OrdersSummaryRendererProps extends Omit<OrdersSummaryProps, ''> {
-    slug: string[];
-}
+export type OrdersSummaryRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

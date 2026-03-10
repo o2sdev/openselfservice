@@ -38,5 +38,7 @@
 '@o2s/blocks.user-account': patch
 ---
 
-Extract shared block prop types into framework models and refactor block frontend prop definitions to extend common base interfaces.
+Extract shared block prop types into framework models and migrate block frontend props to the common `BlockWith*` helpers.
+
+This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
 

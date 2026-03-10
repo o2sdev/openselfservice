@@ -8,6 +8,4 @@ export type CtaSectionProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof
 
 export type CtaSectionPureProps = CtaSectionProps & Model.CtaSectionBlock;
 
-export type CtaSectionRendererProps = Omit<CtaSectionProps, ''> & {
-    slug: string[];
-};
+export type CtaSectionRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

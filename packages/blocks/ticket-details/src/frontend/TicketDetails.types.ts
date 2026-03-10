@@ -10,6 +10,4 @@ export interface TicketDetailsProps extends Models.BlockProps.BaseBlockProps<Ret
 
 export type TicketDetailsPureProps = TicketDetailsProps & Model.TicketDetailsBlock;
 
-export type TicketDetailsRendererProps = Omit<TicketDetailsProps, 'ticketId'> & {
-    slug: string[];
-};
+export type TicketDetailsRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

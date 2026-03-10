@@ -8,6 +8,4 @@ export type DocumentListProps = Models.BlockProps.BaseBlockProps<ReturnType<type
 
 export type DocumentListPureProps = DocumentListProps & Model.DocumentListBlock;
 
-export type DocumentListRendererProps = Omit<DocumentListProps, ''> & {
-    slug: string[];
-};
+export type DocumentListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

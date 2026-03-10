@@ -4,12 +4,8 @@ import type { Models } from '@o2s/framework/modules';
 
 import type { Model } from '../api-harmonization/faq.client';
 
-export interface FaqProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
-    isDraftModeEnabled?: boolean;
-}
+export type FaqProps = Models.BlockProps.BlockWithDraftModeProps<ReturnType<typeof defineRouting>>;
 
 export type FaqPureProps = FaqProps & Model.FaqBlock;
 
-export type FaqRendererProps = Omit<FaqProps, ''> & {
-    slug: string[];
-};
+export type FaqRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

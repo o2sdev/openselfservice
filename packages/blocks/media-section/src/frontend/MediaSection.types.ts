@@ -8,6 +8,4 @@ export type MediaSectionProps = Models.BlockProps.BaseBlockProps<ReturnType<type
 
 export type MediaSectionPureProps = MediaSectionProps & Model.MediaSectionBlock;
 
-export type MediaSectionRendererProps = Omit<MediaSectionProps, ''> & {
-    slug: string[];
-};
+export type MediaSectionRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

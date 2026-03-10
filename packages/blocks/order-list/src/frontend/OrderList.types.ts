@@ -8,8 +8,7 @@ export interface OrderListProps extends Models.BlockProps.BaseBlockProps<ReturnT
     enableRowSelection?: boolean;
 }
 
-export interface OrderListRendererProps extends Omit<OrderListProps, ''> {
-    slug: string[];
-}
+export type OrderListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
+    Pick<OrderListProps, 'enableRowSelection'>;
 
 export type OrderListPureProps = OrderListProps & Model.OrderListBlock;

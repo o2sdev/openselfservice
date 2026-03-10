@@ -8,6 +8,4 @@ export type NotificationSummaryProps = Models.BlockProps.BaseBlockProps<ReturnTy
 
 export type NotificationSummaryPureProps = NotificationSummaryProps & Model.NotificationSummaryBlock;
 
-export type NotificationSummaryRendererProps = Omit<NotificationSummaryProps, ''> & {
-    slug: string[];
-};
+export type NotificationSummaryRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

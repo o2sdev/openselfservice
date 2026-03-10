@@ -8,6 +8,4 @@ export type PricingSectionProps = Models.BlockProps.BaseBlockProps<ReturnType<ty
 
 export type PricingSectionPureProps = PricingSectionProps & Model.PricingSectionBlock;
 
-export type PricingSectionRendererProps = Omit<PricingSectionProps, ''> & {
-    slug: string[];
-};
+export type PricingSectionRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

@@ -11,6 +11,5 @@ export interface ProductDetailsProps extends Models.BlockProps.BaseBlockProps<Re
 
 export type ProductDetailsPureProps = ProductDetailsProps & Client.Model.ProductDetailsBlock;
 
-export type ProductDetailsRendererProps = Omit<ProductDetailsProps, 'productId'> & {
-    slug: string[];
-};
+export type ProductDetailsRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
+    Pick<ProductDetailsProps, 'variantSlug'>;

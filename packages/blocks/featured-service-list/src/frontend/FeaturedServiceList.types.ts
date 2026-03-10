@@ -8,6 +8,4 @@ export type FeaturedServiceListProps = Models.BlockProps.BaseBlockProps<ReturnTy
 
 export type FeaturedServiceListPureProps = FeaturedServiceListProps & Model.FeaturedServiceListBlock;
 
-export interface FeaturedServiceListRendererProps extends Omit<FeaturedServiceListProps, ''> {
-    slug: string[];
-}
+export type FeaturedServiceListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

@@ -8,6 +8,4 @@ export type InvoiceListProps = Models.BlockProps.BaseBlockProps<ReturnType<typeo
 
 export type InvoiceListPureProps = InvoiceListProps & Model.InvoiceListBlock;
 
-export type InvoiceListRendererProps = Omit<InvoiceListProps, ''> & {
-    slug: string[];
-};
+export type InvoiceListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

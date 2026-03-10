@@ -8,6 +8,4 @@ export type FeatureSectionGridProps = Models.BlockProps.BaseBlockProps<ReturnTyp
 
 export type FeatureSectionGridPureProps = FeatureSectionGridProps & Model.FeatureSectionGridBlock;
 
-export type FeatureSectionGridRendererProps = Omit<FeatureSectionGridProps, ''> & {
-    slug: string[];
-};
+export type FeatureSectionGridRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

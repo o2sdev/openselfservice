@@ -8,6 +8,4 @@ export type HeroSectionProps = Models.BlockProps.BaseBlockProps<ReturnType<typeo
 
 export type HeroSectionPureProps = HeroSectionProps & Model.HeroSectionBlock;
 
-export type HeroSectionRendererProps = Omit<HeroSectionProps, ''> & {
-    slug: string[];
-};
+export type HeroSectionRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

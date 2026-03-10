@@ -8,6 +8,4 @@ export type BentoGridProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof 
 
 export type BentoGridPureProps = BentoGridProps & Model.BentoGridBlock;
 
-export type BentoGridRendererProps = Omit<BentoGridProps, ''> & {
-    slug: string[];
-};
+export type BentoGridRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

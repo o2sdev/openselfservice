@@ -13,9 +13,7 @@ export interface OrderDetailsProps extends Models.BlockProps.BaseBlockProps<Retu
 
 export type OrderDetailsPureProps = OrderDetailsProps & Model.OrderDetailsBlock;
 
-export interface OrderDetailsRendererProps extends Omit<OrderDetailsProps, 'orderId'> {
-    slug: string[];
-}
+export type OrderDetailsRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;
 
 export type Action = {
     variant: VariantProps<typeof baseVariant>['variant'];

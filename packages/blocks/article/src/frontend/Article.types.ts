@@ -10,6 +10,4 @@ export interface ArticleProps extends Models.BlockProps.BaseBlockProps<ReturnTyp
 
 export type ArticlePureProps = ArticleProps & Model.ArticleBlock;
 
-export interface ArticleRendererProps extends Omit<ArticleProps, 'slug'> {
-    slug: string[];
-}
+export type ArticleRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

@@ -8,6 +8,4 @@ export type TicketSummaryProps = Models.BlockProps.BaseBlockProps<ReturnType<typ
 
 export type TicketSummaryPureProps = TicketSummaryProps & Model.TicketSummaryBlock;
 
-export type TicketSummaryRendererProps = Omit<TicketSummaryProps, ''> & {
-    slug: string[];
-};
+export type TicketSummaryRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

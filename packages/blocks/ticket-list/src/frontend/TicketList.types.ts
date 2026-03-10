@@ -7,16 +7,14 @@ import { baseVariant } from '@o2s/ui/lib/utils';
 
 import type { Model } from '../api-harmonization/ticket-list.client';
 
-export interface TicketListProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
-    isDraftModeEnabled?: boolean;
+export interface TicketListProps extends Models.BlockProps.BlockWithDraftModeProps<ReturnType<typeof defineRouting>> {
     enableRowSelection?: boolean;
 }
 
 export type TicketListPureProps = TicketListProps & Model.TicketListBlock;
 
-export type TicketListRendererProps = Omit<TicketListProps, ''> & {
-    slug: string[];
-};
+export type TicketListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
+    Pick<TicketListProps, 'enableRowSelection'>;
 
 export type Action = {
     url: string;

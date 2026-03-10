@@ -6,8 +6,7 @@ import { CMS } from '@o2s/framework/modules';
 
 import type { Model } from '../api-harmonization/category.client';
 
-export interface CategoryProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
-    slug: string[];
+export interface CategoryProps extends Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> {
     renderBlocks: (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => React.ReactNode;
 }
 
