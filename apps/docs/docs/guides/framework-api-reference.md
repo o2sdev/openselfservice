@@ -10,7 +10,7 @@ The `@o2s/framework` package provides types, modules, models, and SDK for buildi
 
 The detailed reference (all types, classes, methods) is generated automatically from the source at docs build time ([TypeDoc](https://typedoc.org/) + [typedoc-plugin-markdown](https://github.com/typedoc2md/typedoc-plugin-markdown)).
 
-**[Open full @o2s/framework API reference →](/docs/api)**
+**[Open full @o2s/framework API reference →](/docs/api/index)**
 
 ## How it is updated
 
