@@ -64,6 +64,7 @@ export class Metadata {
     seo!: Models.SEO.Page;
     locales!: string[];
     theme?: string;
+    redirect?: string;
 }
 
 export class Breadcrumb {

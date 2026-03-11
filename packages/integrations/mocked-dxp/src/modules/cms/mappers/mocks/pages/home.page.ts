@@ -41,6 +41,7 @@ export const PAGE_HOME_EN: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: true,
+    redirect: '/personal',
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -92,6 +93,7 @@ export const PAGE_HOME_DE: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
+    redirect: '/personlich',
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -143,6 +145,7 @@ export const PAGE_HOME_PL: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
+    redirect: '/indywidualny',
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
