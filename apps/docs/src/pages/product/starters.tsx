@@ -60,7 +60,7 @@ const digitalPortalStarter: StarterInfoSectionProps = {
             self-service-oriented.
         </>
     ),
-    cliCommand: 'npx create-o2s-app@latest my-dxp-app --template dxp',
+    cliCommand: 'npx create-o2s-app my-dxp-app --template dxp',
     accordionItems: [
         {
             title: 'Feature list',
@@ -185,7 +185,7 @@ const customerPortalStarter: StarterInfoSectionProps = {
             content, and billing.
         </>
     ),
-    cliCommand: 'npx create-o2s-app@latest my-portal --template o2s',
+    cliCommand: 'npx create-o2s-app my-portal --template o2s',
     accordionItems: [
         {
             title: 'Feature list',

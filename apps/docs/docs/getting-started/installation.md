@@ -21,9 +21,9 @@ The CLI will prompt you to choose between `o2s`, `dxp` starters or a `fully cust
 You can also specify a template directly:
 
 ```shell
-npx create-o2s-app@latest my-project --template o2s
-npx create-o2s-app@latest my-project --template dxp
-npx create-o2s-app@latest my-project --template custom
+npx create-o2s-app my-project --template o2s
+npx create-o2s-app my-project --template dxp
+npx create-o2s-app my-project --template custom
 ```
 
 The `custom` template launches an **interactive CLI wizard** that lets you pick blocks, integrations, and configure environment variables step by step. Use it when neither the `o2s` nor `dxp` preset fully matches your use case — for example, when you only need a subset of blocks, want to swap integrations, or are building something custom. You start from a blank slate and hand-pick exactly what goes into your project.
@@ -40,7 +40,7 @@ The `custom` template launches an **interactive CLI wizard** that lets you pick 
 **Non-interactive example:**
 
 ```shell
-npx create-o2s-app@latest my-portal \
+npx create-o2s-app my-portal \
   --template o2s \
   --blocks ticket-list,invoice-list \
   --integrations zendesk,strapi-cms \

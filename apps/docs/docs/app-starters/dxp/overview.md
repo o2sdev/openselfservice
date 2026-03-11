@@ -13,7 +13,7 @@ Its features can be extended with Blocks or integrations O2S provides or your ow
 To create a new DXP application:
 
 ```shell
-npx create-o2s-app@latest my-dxp-portal --template dxp
+npx create-o2s-app my-dxp-portal --template dxp
 ```
 
 This command automatically scaffolds the DXP starter with its default blocks and integrations — no interactive prompts needed.
