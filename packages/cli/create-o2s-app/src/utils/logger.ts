@@ -38,7 +38,7 @@ export const printSummary = (
         console.log(`  cd ${targetDir}`);
         console.log(kleur.dim('  # 1. Configure the modules listed above'));
         console.log(kleur.dim('  # 2. Add the required env vars to apps/api-harmonization/.env.local'));
-        console.log(kleur.dim('  # 3. npm run dev'));
+        console.log(kleur.dim('  # 3. npm run watch:deps & npm run watch:apps'));
     } else {
         console.log(kleur.bold('Next steps:'));
         console.log();
@@ -47,7 +47,7 @@ export const printSummary = (
             console.log(kleur.dim('  # Install dependencies (npm install was skipped)'));
             console.log('  npm install');
         }
-        console.log('  npm run dev');
+        console.log('  npm run watch:deps & npm run watch:apps');
     }
 
     console.log();
