@@ -31,7 +31,7 @@ export const RadioTileGroup: React.FC<Readonly<RadioTileGroupProps>> = ({
                     <div
                         key={option.id}
                         className={cn(
-                            'rounded-lg border-2 p-4 transition-colors',
+                            'rounded-lg border-2 transition-colors',
                             isSelected
                                 ? 'border-primary bg-primary/5'
                                 : 'border-border bg-background hover:border-primary/50',
@@ -39,7 +39,7 @@ export const RadioTileGroup: React.FC<Readonly<RadioTileGroupProps>> = ({
                             disabled && 'opacity-50 cursor-not-allowed',
                         )}
                     >
-                        <Label htmlFor={itemId} className="flex items-start gap-3 cursor-pointer w-full">
+                        <Label htmlFor={itemId} className="flex items-start gap-3 cursor-pointer w-full p-4">
                             <RadioGroupPrimitive.Item
                                 id={itemId}
                                 value={option.id}

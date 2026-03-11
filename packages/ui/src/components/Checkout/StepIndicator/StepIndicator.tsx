@@ -64,11 +64,12 @@ export const StepIndicator: React.FC<Readonly<StepIndicatorProps>> = ({ steps, c
     return (
         <div className="w-full">
             {/* Desktop: flex with justify-between, connector lines via ::after */}
-            <div className="hidden md:flex flex-col gap-4">
+            <ol aria-label="Checkout progress" className="hidden md:flex flex-col gap-4">
                 <div className="flex justify-between">
                     {stepsWithState.map(({ label, stepNumber, isActive, isCompleted, isLast, isFilled }) => (
-                        <div
+                        <li
                             key={stepNumber}
+                            aria-current={isActive ? 'step' : undefined}
                             className={cn(
                                 'flex-1 flex flex-col items-center min-w-0 relative',
                                 !isLast &&
@@ -91,15 +92,19 @@ export const StepIndicator: React.FC<Readonly<StepIndicatorProps>> = ({ steps, c
                             >
                                 {label}
                             </Typography>
-                        </div>
+                        </li>
                     ))}
                 </div>
-            </div>
+            </ol>
 
             {/* Mobile: vertical layout */}
-            <div className="flex flex-col md:hidden gap-0">
+            <ol aria-label="Checkout progress" className="flex flex-col md:hidden gap-0">
                 {stepsWithState.map(({ label, stepNumber, isActive, isCompleted, isLast, isFilled }) => (
-                    <div key={stepNumber} className="flex items-start gap-3">
+                    <li
+                        key={stepNumber}
+                        aria-current={isActive ? 'step' : undefined}
+                        className="flex items-start gap-3"
+                    >
                         <div className="flex flex-col items-center shrink-0">
                             <StepCircle stepNumber={stepNumber} isCompleted={isCompleted} isFilled={isFilled} />
                             {!isLast && (
@@ -114,9 +119,9 @@ export const StepIndicator: React.FC<Readonly<StepIndicatorProps>> = ({ steps, c
                                 {label}
                             </Typography>
                         </div>
-                    </div>
+                    </li>
                 ))}
-            </div>
+            </ol>
         </div>
     );
 };

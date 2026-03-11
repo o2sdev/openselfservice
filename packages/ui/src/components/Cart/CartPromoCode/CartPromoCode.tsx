@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
-import { Input } from '@o2s/ui/elements/input';
+import { InputWithLabel } from '@o2s/ui/elements/input';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -48,7 +48,9 @@ export const CartPromoCode: React.FC<Readonly<CartPromoCodeProps>> = ({
 
             <div className="flex gap-2">
                 <div className="flex-1">
-                    <Input
+                    <InputWithLabel
+                        label={labels.inputPlaceholder}
+                        isLabelHidden
                         type="text"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
