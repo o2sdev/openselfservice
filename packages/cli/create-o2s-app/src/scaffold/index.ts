@@ -33,8 +33,8 @@ export const scaffold = async (
     console.log(`Creating project in "${targetDir}"...`);
     await fs.move(tempDir, targetDir);
 
-    // Step 2: Remove unneeded directories
-    await cleanupProject(targetDir, selectedBlocks, selectedIntegrations);
+    // Step 2: Remove unneeded directories (all packages/* are removed; deps come from npm registry)
+    await cleanupProject(targetDir);
 
     // Step 3: Remove unselected block/integration references from app source files
     console.log('Configuring project for selected blocks...');
