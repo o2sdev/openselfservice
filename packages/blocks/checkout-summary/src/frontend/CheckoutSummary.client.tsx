@@ -89,7 +89,8 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
         setIsSubmitting(true);
         try {
-            const result = await sdk.checkout.placeOrder(cartId, {}, { 'x-locale': locale }, accessToken);
+            const email = summaryData?.billingAddress?.email || summaryData?.email;
+            const result = await sdk.checkout.placeOrder(cartId, { email }, { 'x-locale': locale }, accessToken);
 
             if (result.order?.id) {
                 const redirectUrl = result.paymentRedirectUrl || `${buttons.confirm.path}/${result.order.id}`;
