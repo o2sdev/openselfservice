@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Orders } from '@o2s/configs.integrations';
-import { Observable, map, switchMap, throwError } from 'rxjs';
+import { Observable, forkJoin, map, throwError } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -23,39 +23,20 @@ export class OrderConfirmationService {
         query: GetOrderConfirmationBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<OrderConfirmationBlock> {
-        const cms$ = this.cmsService.getOrderConfirmationBlock({ ...query, locale: headers['x-locale'] });
+        if (!query.orderId) {
+            return throwError(() => new NotFoundException('Order ID is required'));
+        }
 
-        return cms$.pipe(
-            switchMap((cms) => {
-                const orderId = query.orderId ?? cms.id;
-
-                if (!orderId) {
-                    return throwError(() => new NotFoundException('Order ID is required'));
+        return forkJoin([
+            this.cmsService.getOrderConfirmationBlock({ ...query, locale: headers['x-locale'] }),
+            this.ordersService.getOrder({ id: query.orderId }, headers.authorization),
+        ]).pipe(
+            map(([cms, order]) => {
+                if (!order) {
+                    throw new NotFoundException(`Order with ID ${query.orderId} not found`);
                 }
 
-                return this.ordersService.getOrder({ id: orderId }, headers.authorization).pipe(
-                    map((order) => {
-                        if (!order) {
-                            throw new NotFoundException(`Order with ID ${orderId} not found`);
-                        }
-
-                        const result = mapOrderConfirmation(cms, order, headers['x-locale']);
-
-                        // Optional: Add permission flags to the response
-                        // if (headers.authorization) {
-                        //     const permissions = this.authService.canPerformActions(headers.authorization, 'resource-name', [
-                        //         'view',
-                        //         'edit',
-                        //     ]);
-                        //     result.permissions = {
-                        //         view: permissions.view ?? false,
-                        //         edit: permissions.edit ?? false,
-                        //     };
-                        // }
-
-                        return result;
-                    }),
-                );
+                return mapOrderConfirmation(cms, order, headers['x-locale']);
             }),
         );
     }
