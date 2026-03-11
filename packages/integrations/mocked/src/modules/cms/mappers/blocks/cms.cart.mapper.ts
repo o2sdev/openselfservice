@@ -4,7 +4,6 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
     id: 'cart-1',
     title: 'Cart',
     subtitle: 'Review and edit your order',
-    taxRate: 0.23,
     defaultCurrency: 'PLN',
     labels: {
         itemTotal: 'Total',
@@ -52,7 +51,6 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
     id: 'cart-1',
     title: 'Warenkorb',
     subtitle: 'Überprüfen und bearbeiten Sie Ihre Bestellung',
-    taxRate: 0.23,
     defaultCurrency: 'PLN',
     labels: {
         itemTotal: 'Summe',
@@ -100,7 +98,6 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
     id: 'cart-1',
     title: 'Koszyk',
     subtitle: 'Przejrzyj i edytuj swoje zamówienie',
-    taxRate: 0.23,
     defaultCurrency: 'PLN',
     labels: {
         itemTotal: 'Suma',

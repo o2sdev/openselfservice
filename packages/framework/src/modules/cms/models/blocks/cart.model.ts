@@ -1,25 +1,24 @@
 import { Block } from '@/utils/models';
 
 export class CartBlock extends Block.Block {
-    title?: string;
+    title!: string;
     subtitle?: string;
-    taxRate?: number;
-    defaultCurrency?: string;
-    labels?: {
+    defaultCurrency!: string;
+    labels!: {
         itemTotal: string;
         unknownProductName: string;
     };
-    errors?: {
+    errors!: {
         loadError: string;
         updateError: string;
     };
-    actions?: {
+    actions!: {
         increaseQuantity: string;
         decreaseQuantity: string;
         quantity: string;
         remove: string;
     };
-    summaryLabels?: {
+    summaryLabels!: {
         title: string;
         subtotalLabel: string;
         taxLabel: string;
@@ -37,7 +36,7 @@ export class CartBlock extends Block.Block {
         label: string;
         path: string;
     };
-    empty?: {
+    empty!: {
         title: string;
         description: string;
         continueShopping?: {

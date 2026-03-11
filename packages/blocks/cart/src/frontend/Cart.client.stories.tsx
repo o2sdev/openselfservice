@@ -17,7 +17,6 @@ const baseBlock = {
     id: 'cart-1',
     title: 'Cart',
     subtitle: 'Review and edit your order',
-    taxRate: 0.23,
     defaultCurrency: 'PLN' as const,
     labels: {
         itemTotal: 'Total',
@@ -36,7 +35,7 @@ const baseBlock = {
     summaryLabels: {
         title: 'Summary',
         subtotalLabel: 'Subtotal',
-        taxLabel: 'VAT (23%)',
+        taxLabel: 'VAT',
         totalLabel: 'Total',
     },
     checkoutButton: {

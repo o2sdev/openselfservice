@@ -1,6 +1,20 @@
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { Models } from '@o2s/framework/modules';
+import { CMS, Models } from '@o2s/framework/modules';
+
+export class CartBlock extends ApiModels.Block.Block {
+    __typename!: 'CartBlock';
+    title!: string;
+    subtitle?: string;
+    defaultCurrency!: Models.Price.Currency;
+    labels!: CMS.Model.CartBlock.CartBlock['labels'];
+    errors!: CMS.Model.CartBlock.CartBlock['errors'];
+    actions!: CMS.Model.CartBlock.CartBlock['actions'];
+    summaryLabels!: CMS.Model.CartBlock.CartBlock['summaryLabels'];
+    checkoutButton?: CMS.Model.CartBlock.CartBlock['checkoutButton'];
+    continueShopping?: CMS.Model.CartBlock.CartBlock['continueShopping'];
+    empty!: CMS.Model.CartBlock.CartBlock['empty'];
+}
 
 /** Product info embedded in cart item for display */
 export interface CartBlockItemProduct {
@@ -25,51 +39,4 @@ export interface CartBlockTotals {
     subtotal: Models.Price.Price;
     tax: Models.Price.Price;
     total: Models.Price.Price;
-}
-
-/** Labels for summary section */
-export interface CartBlockSummaryLabels {
-    title: string;
-    subtotalLabel: string;
-    taxLabel: string;
-    totalLabel: string;
-    discountLabel?: string;
-    shippingLabel?: string;
-    freeLabel?: string;
-}
-
-/** Empty cart state labels */
-export interface CartBlockEmpty {
-    title: string;
-    description: string;
-    continueShopping?: { label: string; path: string };
-}
-
-export class CartBlock extends ApiModels.Block.Block {
-    __typename!: 'CartBlock';
-    title!: string;
-    subtitle?: string;
-    /** Tax rate (e.g. 0.23 for 23% VAT) - used when recalculating summary. Required for cart to function. */
-    taxRate!: number;
-    /** Default currency when cart is empty. Required for cart to function. */
-    defaultCurrency!: Models.Price.Currency;
-    labels!: {
-        itemTotal: string;
-        /** Label shown when product data is missing from cart item */
-        unknownProductName: string;
-    };
-    errors!: {
-        loadError: string;
-        updateError: string;
-    };
-    actions!: {
-        increaseQuantity: string;
-        decreaseQuantity: string;
-        quantity: string;
-        remove: string;
-    };
-    summaryLabels!: CartBlockSummaryLabels;
-    checkoutButton?: { label: string; path: string; icon?: string };
-    continueShopping?: { label: string; path: string };
-    empty!: CartBlockEmpty;
 }

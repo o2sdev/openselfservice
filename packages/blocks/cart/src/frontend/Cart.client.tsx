@@ -27,7 +27,6 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     routing,
     title,
     subtitle,
-    taxRate,
     defaultCurrency,
     labels,
     errors,
@@ -36,37 +35,32 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     checkoutButton,
     continueShopping,
     empty,
-    id,
-    __typename,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
-    const [cart, setCart] = useState<Carts.Model.Cart | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isPending, startTransition] = useTransition();
+    const [cart, setCart] = useState<Carts.Model.Cart | undefined>();
+    const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
+    const [isMutationPending, startMutationTransition] = useTransition();
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) return;
 
-        setIsLoading(true);
-        (async () => {
+        startInitialLoadTransition(async () => {
             try {
                 const data = await sdk.cart.getCart(cartId, { 'x-locale': locale }, accessToken);
                 setCart(data);
             } catch {
                 toast({ variant: 'destructive', description: errors?.loadError });
-            } finally {
-                setIsLoading(false);
             }
-        })();
+        });
     }, [locale, accessToken, errors?.loadError]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) return;
 
-        startTransition(async () => {
+        startMutationTransition(async () => {
             try {
                 const updated = await sdk.cart.updateCartItem(
                     cartId,
@@ -86,7 +80,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) return;
 
-        startTransition(async () => {
+        startMutationTransition(async () => {
             try {
                 const updated = await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
                 setCart(updated);
@@ -96,15 +90,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         });
     };
 
-    if (!title || taxRate == null || !defaultCurrency || !labels || !errors || !actions || !summaryLabels || !empty) {
-        return (
-            <div className="w-full flex flex-col gap-4">
-                {__typename}: {id}
-            </div>
-        );
-    }
-
-    if (isLoading) {
+    if (isInitialLoadPending) {
         return (
             <div className="w-full flex flex-col gap-8 md:gap-12">
                 <div className="flex flex-col gap-2">
@@ -131,7 +117,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
     const zero = { value: 0, currency: defaultCurrency };
 
-    if ((cart?.items?.data?.length ?? 0) === 0 && !isPending) {
+    if ((cart?.items?.data?.length ?? 0) === 0 && !isMutationPending) {
         return (
             <div className="w-full flex flex-col gap-8 md:gap-12 items-center justify-center py-12">
                 <DynamicIcon name="ShoppingCart" size={64} className="text-muted-foreground" />
@@ -163,33 +149,36 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Cart Items */}
-                <div className="lg:col-span-2 flex flex-col gap-4 relative">
-                    {isPending && (
+                <div className="lg:col-span-2 relative">
+                    {isMutationPending && (
                         <div className="absolute inset-0 bg-background/50 flex items-center justify-center z-10 rounded-lg">
                             <DynamicIcon name="Loader2" size={32} className="animate-spin text-primary" />
                         </div>
                     )}
-                    {cart?.items?.data?.map((item) => (
-                        <CartItem
-                            key={item.id}
-                            id={item.id}
-                            productId={item.product.id}
-                            productUrl={item.product.link}
-                            name={item.product.name}
-                            subtitle={item.product.shortDescription}
-                            image={item.product.image}
-                            quantity={item.quantity}
-                            price={item.price}
-                            total={item.total}
-                            labels={{
-                                itemTotal: labels.itemTotal,
-                                ...actions,
-                            }}
-                            onRemove={removeItem}
-                            onQuantityChange={updateQuantity}
-                            LinkComponent={LinkComponent}
-                        />
-                    ))}
+                    <ul className="flex flex-col gap-4">
+                        {cart?.items?.data?.map((item) => (
+                            <li key={item.id}>
+                                <CartItem
+                                    id={item.id}
+                                    productId={item.product.id}
+                                    productUrl={item.product.link}
+                                    name={item.product.name}
+                                    subtitle={item.product.shortDescription}
+                                    image={item.product.image}
+                                    quantity={item.quantity}
+                                    price={item.price}
+                                    total={item.total}
+                                    labels={{
+                                        itemTotal: labels.itemTotal,
+                                        ...actions,
+                                    }}
+                                    onRemove={removeItem}
+                                    onQuantityChange={updateQuantity}
+                                    LinkComponent={LinkComponent}
+                                />
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
                 {/* Cart Summary */}

@@ -6,16 +6,15 @@ export const mapCart = (cms: CMS.Model.CartBlock.CartBlock): CartBlock => {
     return {
         __typename: 'CartBlock',
         id: cms.id,
-        title: cms.title ?? '',
+        title: cms.title,
         subtitle: cms.subtitle,
-        taxRate: cms.taxRate ?? 0,
-        defaultCurrency: (cms.defaultCurrency as Models.Price.Currency) ?? 'PLN',
-        labels: cms.labels ?? { itemTotal: '', unknownProductName: '' },
-        errors: cms.errors ?? { loadError: '', updateError: '' },
-        actions: cms.actions ?? { increaseQuantity: '', decreaseQuantity: '', quantity: '', remove: '' },
-        summaryLabels: cms.summaryLabels ?? { title: '', subtotalLabel: '', taxLabel: '', totalLabel: '' },
+        defaultCurrency: cms.defaultCurrency as Models.Price.Currency,
+        labels: cms.labels,
+        errors: cms.errors,
+        actions: cms.actions,
+        summaryLabels: cms.summaryLabels,
         checkoutButton: cms.checkoutButton,
         continueShopping: cms.continueShopping,
-        empty: cms.empty ?? { title: '', description: '' },
+        empty: cms.empty,
     };
 };
