@@ -34,7 +34,7 @@ export interface CartSummaryProps {
         shippingLabel?: string;
         freeLabel?: string;
     };
-    LinkComponent?: FrontendModels.Link.LinkComponent;
+    LinkComponent: FrontendModels.Link.LinkComponent;
     primaryButton?: CartSummaryButton;
     secondaryButton?: CartSummaryButton;
 }

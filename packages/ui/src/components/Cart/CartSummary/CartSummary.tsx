@@ -34,17 +34,10 @@ const renderButton = (
 
     return (
         <Button variant={variant} size="lg" className="w-full" asChild disabled={btn.disabled}>
-            {LinkComponent ? (
-                <LinkComponent href={btn.action.url} className="w-full">
-                    {btn.icon && <DynamicIcon name={btn.icon} size={20} className="mr-2" />}
-                    {btn.label}
-                </LinkComponent>
-            ) : (
-                <a href={btn.action.url}>
-                    {btn.icon && <DynamicIcon name={btn.icon} size={20} className="mr-2" />}
-                    {btn.label}
-                </a>
-            )}
+            <LinkComponent href={btn.action.url} className="w-full">
+                {btn.icon && <DynamicIcon name={btn.icon} size={20} className="mr-2" />}
+                {btn.label}
+            </LinkComponent>
         </Button>
     );
 };
