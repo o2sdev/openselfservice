@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": false,
     "license": "MIT",
-    "description": "A simple block displaying static content in the form of an CheckoutBillingPayment.",
+    "description": "Checkout step for selecting a payment method with cart summary preview.",
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
