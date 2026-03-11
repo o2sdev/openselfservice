@@ -23,112 +23,115 @@ import {
 
 export interface ApiConfig {
     integrations: {
+        // Core — always required
         cms: {
             name: string;
             service: typeof CMS.Service;
             controller?: typeof CMS.Controller;
             imports?: Type[];
         };
-        tickets: {
+        auth: {
+            name: string;
+            service: typeof Auth.Service;
+            imports?: Type[];
+        };
+
+        // Optional — provide only what you use
+        tickets?: {
             name: string;
             service: typeof Tickets.Service;
             controller?: typeof Tickets.Controller;
             imports?: Type[];
         };
-        notifications: {
+        notifications?: {
             name: string;
             service: typeof Notifications.Service;
             controller?: typeof Notifications.Controller;
             imports?: Type[];
         };
-        articles: {
+        articles?: {
             name: string;
             service: typeof Articles.Service;
             controller?: typeof Articles.Controller;
             imports?: Type[];
         };
-        organizations: {
+        organizations?: {
             name: string;
             service: typeof Organizations.Service;
             controller?: typeof Organizations.Controller;
             imports?: Type[];
             providers?: Type[];
         };
-        users: {
+        users?: {
             name: string;
             service: typeof Users.Service;
             controller?: typeof Users.Controller;
             imports?: Type[];
             providers?: Type[];
         };
-        resources: {
+        resources?: {
             name: string;
             service: typeof Resources.Service;
             controller?: typeof Resources.Controller;
             imports?: Type[];
         };
-        invoices: {
+        invoices?: {
             name: string;
             service: typeof Invoices.Service;
             controller?: typeof Invoices.Controller;
             imports?: Type[];
         };
-        cache: {
+        cache?: {
             name: string;
             service: typeof Cache.Service;
             imports?: Type[];
         };
-        billingAccounts: {
+        billingAccounts?: {
             name: string;
             service: typeof BillingAccounts.Service;
             controller?: typeof BillingAccounts.Controller;
             imports?: Type[];
         };
-        search: {
+        search?: {
             name: string;
             service?: typeof Search.Service;
             controller?: typeof Search.Controller;
             imports?: Type[];
         };
-        products: {
+        products?: {
             name: string;
             service: typeof Products.Service;
             controller?: typeof Products.Controller;
             imports?: Type[];
         };
-        orders: {
+        orders?: {
             name: string;
             service: typeof Orders.Service;
             controller?: typeof Orders.Controller;
             imports?: Type[];
         };
-        carts: {
+        carts?: {
             name: string;
             service: typeof Carts.Service;
             controller?: typeof Carts.Controller;
             imports?: Type[];
         };
-        customers: {
+        customers?: {
             name: string;
             service: typeof Customers.Service;
             controller?: typeof Customers.Controller;
             imports?: Type[];
         };
-        payments: {
+        payments?: {
             name: string;
             service: typeof Payments.Service;
             controller?: typeof Payments.Controller;
             imports?: Type[];
         };
-        checkout: {
+        checkout?: {
             name: string;
             service: typeof Checkout.Service;
             controller?: typeof Checkout.Controller;
-            imports?: Type[];
-        };
-        auth: {
-            name: string;
-            service: typeof Auth.Service;
             imports?: Type[];
         };
     };

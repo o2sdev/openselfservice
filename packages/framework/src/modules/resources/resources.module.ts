@@ -12,6 +12,11 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class ResourceModule {
     static register(config: ApiConfig): DynamicModule {
+        if (!config.integrations.resources || !config.integrations.products) {
+            const provider = { provide: ResourceService, useValue: undefined };
+            return { module: ResourceModule, providers: [provider], exports: [provider] };
+        }
+
         const service = config.integrations.resources.service;
         const productService = config.integrations.products.service;
         const controller = config.integrations.resources.controller || ResourceController;

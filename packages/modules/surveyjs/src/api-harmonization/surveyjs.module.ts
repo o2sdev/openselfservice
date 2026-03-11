@@ -11,6 +11,10 @@ import { SurveyjsService } from './surveyjs.service';
 @Module({})
 export class SurveyjsModule {
     static register(config: ApiConfig): DynamicModule {
+        if (!config.integrations.tickets) {
+            return { module: SurveyjsModule };
+        }
+
         const cmsService = config.integrations.cms.service;
         const ticketsService = config.integrations.tickets.service;
         return {

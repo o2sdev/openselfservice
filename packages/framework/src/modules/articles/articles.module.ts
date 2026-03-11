@@ -10,6 +10,11 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class ArticlesModule {
     static register(config: ApiConfig): DynamicModule {
+        if (!config.integrations.articles) {
+            const provider = { provide: ArticlesService, useValue: undefined };
+            return { module: ArticlesModule, providers: [provider], exports: [provider] };
+        }
+
         const service = config.integrations.articles.service;
         const controller = config.integrations.articles.controller || ArticleController;
         const imports = config.integrations.articles.imports || [];

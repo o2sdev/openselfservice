@@ -10,6 +10,11 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class InvoiceModule {
     static register(config: ApiConfig): DynamicModule {
+        if (!config.integrations.invoices) {
+            const provider = { provide: InvoiceService, useValue: undefined };
+            return { module: InvoiceModule, providers: [provider], exports: [provider] };
+        }
+
         const service = config.integrations.invoices.service;
         const controller = config.integrations.invoices.controller || InvoiceController;
         const imports = config.integrations.invoices.imports || [];

@@ -10,6 +10,11 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class BillingAccountModule {
     static register(config: ApiConfig): DynamicModule {
+        if (!config.integrations.billingAccounts) {
+            const provider = { provide: BillingAccountService, useValue: undefined };
+            return { module: BillingAccountModule, providers: [provider], exports: [provider] };
+        }
+
         const service = config.integrations.billingAccounts.service;
         const controller = config.integrations.billingAccounts.controller || BillingAccountController;
         const imports = config.integrations.billingAccounts.imports || [];

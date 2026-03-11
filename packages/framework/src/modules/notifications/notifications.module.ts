@@ -10,6 +10,11 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class NotificationsModule {
     static register(config: ApiConfig): DynamicModule {
+        if (!config.integrations.notifications) {
+            const provider = { provide: NotificationService, useValue: undefined };
+            return { module: NotificationsModule, providers: [provider], exports: [provider] };
+        }
+
         const service = config.integrations.notifications.service;
         const controller = config.integrations.notifications.controller || NotificationsController;
         const imports = config.integrations.notifications.imports || [];

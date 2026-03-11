@@ -9,6 +9,11 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class CacheModule {
     static register(config: ApiConfig): DynamicModule {
+        if (!config.integrations.cache) {
+            const provider = { provide: CacheService, useValue: undefined };
+            return { module: CacheModule, providers: [provider], exports: [provider] };
+        }
+
         const service = config.integrations.cache.service;
         const imports = config.integrations.cache.imports || [];
         const provider = {

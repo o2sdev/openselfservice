@@ -1,4 +1,6 @@
 export type { ApiConfig } from './api-config';
+export { validateApiConfig } from './api-config.validation';
+export { registerIf, filterModules } from './api-config.helpers';
 
 export * as Models from './utils/models';
 

@@ -27,6 +27,7 @@ import {
     Tickets,
     Users,
 } from '@o2s/framework/modules';
+import { filterModules, registerIf, validateApiConfig } from '@o2s/framework/modules';
 
 import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
 import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
@@ -77,24 +78,62 @@ import { OrganizationsModule } from './modules/organizations/organizations.modul
 import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
 
-export const CMSBaseModule = CMS.Module.register(AppConfig);
-export const TicketsBaseModule = Tickets.Module.register(AppConfig);
-export const NotificationsBaseModule = Notifications.Module.register(AppConfig);
-export const UsersBaseModule = Users.Module.register(AppConfig);
-export const OrganizationsBaseModule = Organizations.Module.register(AppConfig);
-export const CacheBaseModule = Cache.Module.register(AppConfig);
-export const BillingAccountsBaseModule = BillingAccounts.Module.register(AppConfig);
-export const ResourcesBaseModule = Resources.Module.register(AppConfig);
-export const InvoicesBaseModule = Invoices.Module.register(AppConfig);
-export const ArticlesBaseModule = Articles.Module.register(AppConfig);
-export const SearchBaseModule = Search.Module.register(AppConfig);
-export const ProductsBaseModule = Products.Module.register(AppConfig);
-export const OrdersBaseModule = Orders.Module.register(AppConfig);
-export const CartsBaseModule = Carts.Module.register(AppConfig);
-export const CustomersBaseModule = Customers.Module.register(AppConfig);
-export const PaymentsBaseModule = Payments.Module.register(AppConfig);
-export const CheckoutBaseModule = Checkout.Module.register(AppConfig);
-export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
+validateApiConfig(AppConfig);
+
+// Core modules (always registered)
+const coreModules = [CMS.Module.register(AppConfig), AuthModule.Module.register(AppConfig)];
+
+// Optional base modules (registered only when their slot is configured)
+const optionalBaseModules = filterModules([
+    registerIf(AppConfig, 'tickets', (c) => Tickets.Module.register(c)),
+    registerIf(AppConfig, 'notifications', (c) => Notifications.Module.register(c)),
+    registerIf(AppConfig, 'users', (c) => Users.Module.register(c)),
+    registerIf(AppConfig, 'organizations', (c) => Organizations.Module.register(c)),
+    registerIf(AppConfig, 'cache', (c) => Cache.Module.register(c)),
+    registerIf(AppConfig, 'billingAccounts', (c) => BillingAccounts.Module.register(c)),
+    registerIf(AppConfig, ['resources', 'products'], (c) => Resources.Module.register(c)),
+    registerIf(AppConfig, 'invoices', (c) => Invoices.Module.register(c)),
+    registerIf(AppConfig, 'articles', (c) => Articles.Module.register(c)),
+    registerIf(AppConfig, 'search', (c) => Search.Module.register(c)),
+    registerIf(AppConfig, 'products', (c) => Products.Module.register(c)),
+    registerIf(AppConfig, 'orders', (c) => Orders.Module.register(c)),
+    registerIf(AppConfig, 'carts', (c) => Carts.Module.register(c)),
+    registerIf(AppConfig, 'customers', (c) => Customers.Module.register(c)),
+    registerIf(AppConfig, 'payments', (c) => Payments.Module.register(c)),
+    registerIf(AppConfig, 'checkout', (c) => Checkout.Module.register(c)),
+]);
+
+// Optional block modules (registered only when their integration dependencies are configured)
+const blockModules = filterModules([
+    registerIf(AppConfig, 'tickets', (c) => TicketList.Module.register(c)),
+    registerIf(AppConfig, 'tickets', (c) => TicketDetails.Module.register(c)),
+    registerIf(AppConfig, 'tickets', (c) => TicketRecent.Module.register(c)),
+    registerIf(AppConfig, 'tickets', (c) => TicketSummary.Module.register(c)),
+    registerIf(AppConfig, 'tickets', (c) => SurveyJs.Module.register(c)),
+    registerIf(AppConfig, 'tickets', (c) => SurveyJsForm.Module.register(c)),
+    registerIf(AppConfig, 'notifications', (c) => NotificationList.Module.register(c)),
+    registerIf(AppConfig, 'notifications', (c) => NotificationDetails.Module.register(c)),
+    registerIf(AppConfig, 'notifications', (c) => NotificationSummary.Module.register(c)),
+    registerIf(AppConfig, 'invoices', (c) => InvoiceList.Module.register(c)),
+    registerIf(AppConfig, 'invoices', (c) => PaymentsSummary.Module.register(c)),
+    registerIf(AppConfig, 'invoices', (c) => PaymentsHistory.Module.register(c)),
+    registerIf(AppConfig, 'users', (c) => UserAccount.Module.register(c)),
+    registerIf(AppConfig, 'resources', (c) => ServiceList.Module.register(c)),
+    registerIf(AppConfig, 'resources', (c) => ServiceDetails.Module.register(c)),
+    registerIf(AppConfig, 'resources', (c) => FeaturedServiceList.Module.register(c)),
+    registerIf(AppConfig, 'orders', (c) => OrderList.Module.register(c)),
+    registerIf(AppConfig, 'orders', (c) => OrdersSummary.Module.register(c)),
+    registerIf(AppConfig, 'orders', (c) => OrderDetails.Module.register(c)),
+    registerIf(AppConfig, 'products', (c) => ProductList.Module.register(c)),
+    registerIf(AppConfig, 'products', (c) => ProductDetails.Module.register(c)),
+    registerIf(AppConfig, 'products', (c) => RecommendedProducts.Module.register(c)),
+    registerIf(AppConfig, 'articles', (c) => Article.Module.register(c)),
+    registerIf(AppConfig, 'articles', (c) => ArticleSearch.Module.register(c)),
+    registerIf(AppConfig, 'articles', (c) => ArticleList.Module.register(c)),
+    registerIf(AppConfig, 'articles', (c) => Category.Module.register(c)),
+    registerIf(AppConfig, 'articles', (c) => CategoryList.Module.register(c)),
+    registerIf(AppConfig, 'organizations', (c) => OrganizationsModule.register(c)),
+]);
 
 @Module({
     imports: [
@@ -108,60 +147,17 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         }),
         HealthModule,
 
-        CMSBaseModule,
-        TicketsBaseModule,
-        NotificationsBaseModule,
-        UsersBaseModule,
-        OrganizationsBaseModule,
-        CacheBaseModule,
-        BillingAccountsBaseModule,
-        ResourcesBaseModule,
-        InvoicesBaseModule,
-        ArticlesBaseModule,
-        SearchBaseModule,
-        ProductsBaseModule,
-        OrdersBaseModule,
-        CartsBaseModule,
-        CustomersBaseModule,
-        PaymentsBaseModule,
-        CheckoutBaseModule,
-        AuthModuleBaseModule,
+        ...coreModules,
+        ...optionalBaseModules,
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
         LoginPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
-        OrganizationsModule.register(AppConfig),
-        SurveyJs.Module.register(AppConfig),
 
-        TicketList.Module.register(AppConfig),
-        TicketDetails.Module.register(AppConfig),
-        NotificationList.Module.register(AppConfig),
-        NotificationDetails.Module.register(AppConfig),
+        // CMS-only blocks (always available)
         Faq.Module.register(AppConfig),
-        InvoiceList.Module.register(AppConfig),
-        PaymentsSummary.Module.register(AppConfig),
-        PaymentsHistory.Module.register(AppConfig),
-        UserAccount.Module.register(AppConfig),
-        TicketRecent.Module.register(AppConfig),
-        ServiceList.Module.register(AppConfig),
-        ServiceDetails.Module.register(AppConfig),
-        SurveyJsForm.Module.register(AppConfig),
-        OrderList.Module.register(AppConfig),
-        OrdersSummary.Module.register(AppConfig),
-        OrderDetails.Module.register(AppConfig),
         QuickLinks.Module.register(AppConfig),
-        Category.Module.register(AppConfig),
-        CategoryList.Module.register(AppConfig),
-        Article.Module.register(AppConfig),
-        ArticleSearch.Module.register(AppConfig),
-        FeaturedServiceList.Module.register(AppConfig),
-        ArticleList.Module.register(AppConfig),
-        ProductList.Module.register(AppConfig),
-        NotificationSummary.Module.register(AppConfig),
-        TicketSummary.Module.register(AppConfig),
-        ProductDetails.Module.register(AppConfig),
-        RecommendedProducts.Module.register(AppConfig),
         HeroSection.Module.register(AppConfig),
         BentoGrid.Module.register(AppConfig),
         FeatureSection.Module.register(AppConfig),
@@ -169,6 +165,9 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         MediaSection.Module.register(AppConfig),
         PricingSection.Module.register(AppConfig),
         FeatureSectionGrid.Module.register(AppConfig),
+
+        // Optional block modules
+        ...blockModules,
         // BLOCK REGISTER
     ],
     providers: [
