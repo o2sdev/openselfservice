@@ -4,6 +4,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 import { Carts, Checkout, Payments } from '@o2s/framework/modules';
 
+import { deleteCart } from '../carts/carts.mapper';
 import { MOCKED_ORDERS, mapOrderFromCart } from '../orders/orders.mapper';
 
 import { mapCheckoutSummary, mapPlaceOrderResponse, mapShippingOptions } from './checkout.mapper';
@@ -172,9 +173,10 @@ export class CheckoutService implements Checkout.Service {
                 // Get email (from request body or cart)
                 const email = data?.email || cart.email;
 
-                // Create order from cart
+                // Create order from cart and remove it from in-memory store
                 const order = mapOrderFromCart(cart, email);
                 MOCKED_ORDERS.push(order);
+                deleteCart({ id: params.cartId });
 
                 // Get payment session for redirect URL
                 return this.paymentsService
