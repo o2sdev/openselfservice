@@ -98,16 +98,16 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                         {productsTitle}
                         {productsCountLabel && ` (${order.items.total})`}
                     </Typography>
-                    <div className="flex flex-col gap-1">
+                    <ul className="flex flex-col gap-1">
                         {order.items.data.map((item) => (
-                            <div key={item.id} className="flex items-center justify-between text-sm">
+                            <li key={item.id} className="flex items-center justify-between text-sm">
                                 <span>
                                     {item.productName ?? item.productId} × {item.quantity}
                                 </span>
                                 <Price price={item.total} />
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
 
                 {shippingSection && (shippingAddress || (shippingMethods && shippingMethods.length > 0)) && (
