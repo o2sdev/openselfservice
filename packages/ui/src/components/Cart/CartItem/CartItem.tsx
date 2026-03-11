@@ -5,9 +5,9 @@ import React from 'react';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Image } from '@o2s/ui/components/Image';
 import { Price } from '@o2s/ui/components/Price';
+import { QuantityInput } from '@o2s/ui/components/QuantityInput';
 
 import { Button } from '@o2s/ui/elements/button';
-import { Input } from '@o2s/ui/elements/input';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { CartItemProps } from './CartItem.types';
@@ -27,11 +27,6 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
     onQuantityChange,
     LinkComponent,
 }) => {
-    const handleQuantityInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newQuantity = parseInt(e.target.value, 10) || 1;
-        onQuantityChange(id, newQuantity);
-    };
-
     const imageContent = image && (
         <div className="relative w-32 h-32 shrink-0 rounded-md overflow-hidden bg-muted">
             <Image src={image.url} alt={image.alt || name} fill sizes="128px" className="object-cover object-center" />
@@ -77,34 +72,15 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
                 </div>
 
                 <div className="flex flex-wrap gap-x-4 gap-y-2">
-                    {/* Quantity Controls */}
-                    <div className="flex items-end gap-2">
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => onQuantityChange(id, quantity - 1)}
-                            disabled={quantity <= 1}
-                            aria-label={labels.decreaseQuantity}
-                        >
-                            <DynamicIcon name="Minus" size={16} />
-                        </Button>
-                        <Input
-                            type="number"
-                            min={1}
-                            value={quantity}
-                            onChange={handleQuantityInputChange}
-                            className="w-16 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            aria-label={labels.quantity}
-                        />
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => onQuantityChange(id, quantity + 1)}
-                            aria-label={labels.increaseQuantity}
-                        >
-                            <DynamicIcon name="Plus" size={16} />
-                        </Button>
-                    </div>
+                    <QuantityInput
+                        value={quantity}
+                        onChange={(newQuantity) => onQuantityChange(id, newQuantity)}
+                        labels={{
+                            increase: labels.increaseQuantity,
+                            decrease: labels.decreaseQuantity,
+                            quantity: labels.quantity,
+                        }}
+                    />
 
                     {/* Item Total */}
                     <div className="ml-auto flex min-w-0 flex-col items-end">
