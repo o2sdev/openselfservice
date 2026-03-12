@@ -22,6 +22,8 @@ import { ProductListPureProps } from './ProductList.types';
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const initialProducts = component.products?.data ?? [];
+    const canRender = !!component.table?.columns && !!component.noResults && !!component.labels;
 
     const initialFilters = {
         id: component.id,
@@ -29,7 +31,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         limit: component.pagination?.limit || 12,
     };
 
-    const initialData = component.products.data;
+    const initialData = initialProducts;
 
     const initialViewMode =
         component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'grid';
@@ -61,7 +63,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     };
 
     // Define table columns configuration
-    const columns = data.table.columns.map((column) => {
+    const columns = (data.table?.columns ?? []).map((column) => {
         switch (column.id) {
             case 'name':
                 return {
@@ -74,12 +76,6 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                     ...column,
                     type: 'price',
                 };
-            case 'type':
-            case 'category':
-                return {
-                    ...column,
-                    type: 'text',
-                };
             default:
                 return {
                     ...column,
@@ -88,19 +84,23 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         }
     }) as DataListColumnConfig<Model.Product>[];
 
-    const actions = data.table.actions
+    const actions = data.table?.actions
         ? {
               ...data.table.actions,
               render: (product: Model.Product) => (
                   <Button asChild variant="link">
                       <LinkComponent href={product.link} className="flex items-center justify-end gap-2">
                           <ArrowRight className="h-4 w-4" />
-                          {data.detailsLabel || data.table.actions!.label}
+                          {data.detailsLabel || data.table.actions.label}
                       </LinkComponent>
                   </Button>
               ),
           }
         : undefined;
+
+    if (!canRender) {
+        return null;
+    }
 
     return (
         <div className="w-full">
@@ -139,12 +139,12 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                     />
 
                     <LoadingOverlay isActive={isPending}>
-                        {data.products.data.length ? (
+                        {data.products?.data?.length ? (
                             <div className="flex flex-col gap-6">
                                 {viewMode === 'list' ? (
                                     <div className="w-full overflow-x-auto">
                                         <DataList
-                                            data={data.products.data}
+                                            data={data.products?.data ?? []}
                                             columns={columns}
                                             actions={actions}
                                             getRowKey={(item) => item.id}
@@ -155,7 +155,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                     </div>
                                 ) : (
                                     <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                                        {data.products.data.map((product) => (
+                                        {(data.products?.data ?? []).map((product) => (
                                             <li key={product.id}>
                                                 <ProductCard
                                                     key={product.id}
@@ -178,7 +178,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                 {data.pagination && (
                                     <Pagination
                                         disabled={isPending}
-                                        total={data.products.total}
+                                        total={data.products?.total ?? 0}
                                         offset={filters.offset || 0}
                                         limit={data.pagination.limit}
                                         legend={data.pagination.legend}

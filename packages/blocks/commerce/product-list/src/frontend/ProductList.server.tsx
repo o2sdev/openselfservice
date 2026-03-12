@@ -20,7 +20,14 @@ export const ProductList: React.FC<ProductListProps> = async ({ id, accessToken,
             { 'x-locale': locale },
             accessToken,
         );
-    } catch (_error) {
+    } catch (error) {
+        if (process.env.NODE_ENV !== 'production') {
+            console.error('Failed to fetch ProductList block data:', error);
+        }
+        return null;
+    }
+
+    if (!data?.products?.data || !data?.table?.columns || !data?.noResults || !data?.labels) {
         return null;
     }
 

@@ -1,4 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { Auth, CMS, Invoices } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
@@ -11,6 +12,7 @@ export class PaymentsSummaryBlockModule {
     static register(_config: Framework.ApiConfig): DynamicModule {
         return {
             module: PaymentsSummaryBlockModule,
+            imports: [ConfigModule],
             providers: [
                 PaymentsSummaryService,
                 {

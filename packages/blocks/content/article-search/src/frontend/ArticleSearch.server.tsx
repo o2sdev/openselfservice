@@ -26,7 +26,14 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-    } catch (_error) {
+    } catch (error) {
+        if (process.env.NODE_ENV !== 'production') {
+            console.error('Failed to fetch ArticleSearch block data:', error);
+        }
+        return null;
+    }
+
+    if (!data?.inputLabel || !data?.noResults) {
         return null;
     }
 

@@ -1,5 +1,6 @@
 import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { Auth, CMS, Orders } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
@@ -29,7 +30,7 @@ export class OrderDetailsBlockModule {
             ],
             controllers: [OrderDetailsController],
             exports: [OrderDetailsService],
-            imports: [HttpModule],
+            imports: [HttpModule, ConfigModule],
         };
     }
 }

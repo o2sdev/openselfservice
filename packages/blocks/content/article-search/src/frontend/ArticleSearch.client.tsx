@@ -31,6 +31,7 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
     const { useRouter } = createNavigation(routing);
     const router = useRouter();
     const { labels } = useGlobalContext();
+    const noResultsMessage = noResults?.title || '';
 
     const [suggestions, setSuggestions] = useState<Model.ArticleList['articles']>([]);
     const [isPending, startTransition] = useTransition();
@@ -48,7 +49,10 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
                 } else {
                     setSuggestions([]);
                 }
-            } catch (_error) {
+            } catch (error) {
+                if (process.env.NODE_ENV !== 'production') {
+                    console.error('Failed to fetch article suggestions:', error);
+                }
                 toast({
                     variant: 'destructive',
                     title: labels.errors.requestError.title,
@@ -73,7 +77,7 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
                     labelHidden={true}
                     placeholder={inputLabel}
                     label={inputLabel}
-                    emptyMessage={noResults.title}
+                    emptyMessage={noResultsMessage}
                     minLength={3}
                     onValueChange={getSuggestions}
                     onSelected={(suggestion) => {

@@ -19,6 +19,7 @@ export const QuickLinksPure: React.FC<Readonly<QuickLinksPureProps>> = ({
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
+    const items = component.items ?? [];
 
     return (
         <ContentSection
@@ -28,7 +29,7 @@ export const QuickLinksPure: React.FC<Readonly<QuickLinksPureProps>> = ({
             meta={meta}
         >
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
-                {component.items.map((item, index) => (
+                {items.map((item, index) => (
                     <li key={item.label} className="flex w-full h-full" {...inspector(meta?.items?.[index], 'label')}>
                         <InformativeCard
                             title={item.label}
