@@ -1,0 +1,1 @@
+{"parameters":[{"name":"taxId","required":false,"in":"query","schema":{"type":"string"}},{"name":"query","required":false,"in":"query","schema":{"type":"string"}}]}

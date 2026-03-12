@@ -1,5 +1,6 @@
 import * as Invoices from '.';
 import { Controller, Get, Headers, Param, Query, Res, UseInterceptors } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Response } from 'express';
 import { Observable, map } from 'rxjs';
 
@@ -14,10 +15,19 @@ import { AppHeaders } from '@/utils/models/headers';
  */
 @Controller('/invoices')
 @UseInterceptors(LoggerService)
+@ApiTags('invoices')
 export class InvoiceController {
     constructor(protected readonly invoiceService: InvoiceService) {}
 
     @Get()
+    @ApiOperation({ summary: 'List invoices' })
+    @ApiQuery({
+        name: 'query',
+        required: false,
+        type: String,
+        description: 'Invoice list filters and pagination query.',
+    })
+    @ApiResponse({ status: 200, description: 'Returns invoices list.' })
     getInvoiceList(
         @Query() query: GetInvoiceListQuery,
         @Headers() headers: AppHeaders,
@@ -26,11 +36,17 @@ export class InvoiceController {
     }
 
     @Get(':id')
+    @ApiOperation({ summary: 'Get invoice by id' })
+    @ApiParam({ name: 'id', type: String, description: 'Invoice identifier.' })
+    @ApiResponse({ status: 200, description: 'Returns invoice details.' })
     getInvoice(@Param() params: GetInvoiceParams, @Headers() headers: AppHeaders): Observable<Invoices.Model.Invoice> {
         return this.invoiceService.getInvoice(params, headers.authorization);
     }
 
     @Get(':id/pdf')
+    @ApiOperation({ summary: 'Download invoice PDF' })
+    @ApiParam({ name: 'id', type: String, description: 'Invoice identifier.' })
+    @ApiResponse({ status: 200, description: 'Returns invoice PDF file.' })
     getInvoicePdf(
         @Param() params: GetInvoiceParams,
         @Headers() headers: AppHeaders,

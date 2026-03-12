@@ -1,4 +1,5 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -11,10 +12,14 @@ import { AppHeaders } from '@/utils/models/headers';
  */
 @Controller('/orders')
 @UseInterceptors(LoggerService)
+@ApiTags('orders')
 export class OrdersController {
     constructor(private readonly orderService: OrderService) {}
 
     @Get(':id')
+    @ApiOperation({ summary: 'Get order by id' })
+    @ApiParam({ name: 'id', type: String, description: 'Order identifier.' })
+    @ApiResponse({ status: 200, description: 'Returns order details.' })
     getOrder(
         @Param() params: Request.GetOrderParams,
         @Headers() headers: AppHeaders,
@@ -23,6 +28,9 @@ export class OrdersController {
     }
 
     @Get()
+    @ApiOperation({ summary: 'List orders' })
+    @ApiQuery({ name: 'query', required: false, type: String, description: 'Order list filters and pagination query.' })
+    @ApiResponse({ status: 200, description: 'Returns order list.' })
     getOrderList(
         @Query() query: Request.GetOrderListQuery,
         @Headers() headers: AppHeaders,

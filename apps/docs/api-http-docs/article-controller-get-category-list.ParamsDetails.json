@@ -1,0 +1,1 @@
+{"parameters":[{"name":"locale","required":true,"in":"query","schema":{"type":"string"}},{"name":"sort","required":false,"in":"query","schema":{"type":"object","properties":{},"title":"Object"}},{"name":"query","required":false,"in":"query","schema":{"type":"string"}}]}

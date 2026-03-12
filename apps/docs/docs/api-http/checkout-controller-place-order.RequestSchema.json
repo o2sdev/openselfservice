@@ -1,0 +1,1 @@
+{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"email":{"type":"string","description":"Customer email, required for guest checkout when not set earlier."}},"title":"PlaceOrderBody"}}}}}

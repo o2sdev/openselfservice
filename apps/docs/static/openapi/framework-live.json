@@ -1,0 +1,4450 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/cms/get-entry": {
+      "get": {
+        "operationId": "CmsController_getEntry",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS entry."
+          }
+        },
+        "summary": "Get CMS entry",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/get-entries": {
+      "get": {
+        "operationId": "CmsController_getEntries",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": true,
+            "in": "query",
+            "description": "CMS content type key (for example `page`, `article`).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "required": false,
+            "in": "query",
+            "description": "Optional map of integration-specific filters.",
+            "schema": {
+              "$ref": "#/components/schemas/Object"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS entries."
+          }
+        },
+        "summary": "Get CMS entries",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/page": {
+      "get": {
+        "operationId": "CmsController_getPage",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "slug",
+            "required": true,
+            "in": "query",
+            "description": "Page slug identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS page."
+          }
+        },
+        "summary": "Get CMS page",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/pages": {
+      "get": {
+        "operationId": "CmsController_getPages",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS pages."
+          }
+        },
+        "summary": "Get CMS pages",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/login-page": {
+      "get": {
+        "operationId": "CmsController_getLoginPage",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS login page."
+          }
+        },
+        "summary": "Get CMS login page",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/not-found-page": {
+      "get": {
+        "operationId": "CmsController_getNotFoundPage",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS not-found page."
+          }
+        },
+        "summary": "Get CMS not-found page",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/header": {
+      "get": {
+        "operationId": "CmsController_getHeader",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "Header content identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS header."
+          }
+        },
+        "summary": "Get CMS header",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/footer": {
+      "get": {
+        "operationId": "CmsController_getFooter",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "Footer content identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS footer."
+          }
+        },
+        "summary": "Get CMS footer",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/app-config": {
+      "get": {
+        "operationId": "CmsController_getAppConfig",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "referrer",
+            "required": false,
+            "in": "query",
+            "description": "Optional referrer URL or route used for context-aware app config.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns CMS app config."
+          }
+        },
+        "summary": "Get CMS app config",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/faq": {
+      "get": {
+        "operationId": "CmsController_getFaqBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns FAQ block."
+          }
+        },
+        "summary": "Get FAQ block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/ticket-list": {
+      "get": {
+        "operationId": "CmsController_getTicketListBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ticket-list block."
+          }
+        },
+        "summary": "Get ticket-list block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/ticket-details": {
+      "get": {
+        "operationId": "CmsController_getTicketDetailsBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ticket-details block."
+          }
+        },
+        "summary": "Get ticket-details block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/notification-list": {
+      "get": {
+        "operationId": "CmsController_getNotificationListBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns notification-list block."
+          }
+        },
+        "summary": "Get notification-list block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/notification-details": {
+      "get": {
+        "operationId": "CmsController_getNotificationDetailsBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns notification-details block."
+          }
+        },
+        "summary": "Get notification-details block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/article-list": {
+      "get": {
+        "operationId": "CmsController_getArticleListBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns article-list block."
+          }
+        },
+        "summary": "Get article-list block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/article-details": {
+      "get": {
+        "operationId": "CmsController_getArticleDetailsBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns article-details block."
+          }
+        },
+        "summary": "Get article-details block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/invoice-list": {
+      "get": {
+        "operationId": "CmsController_getInvoiceListBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns invoice-list block."
+          }
+        },
+        "summary": "Get invoice-list block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/invoice-details": {
+      "get": {
+        "operationId": "CmsController_getInvoiceDetailsBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns invoice-details block."
+          }
+        },
+        "summary": "Get invoice-details block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/resource-list": {
+      "get": {
+        "operationId": "CmsController_getResourceListBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns resource-list block."
+          }
+        },
+        "summary": "Get resource-list block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/resource-details": {
+      "get": {
+        "operationId": "CmsController_getResourceDetailsBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns resource-details block."
+          }
+        },
+        "summary": "Get resource-details block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/user-account": {
+      "get": {
+        "operationId": "CmsController_getUserAccountBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns user-account block."
+          }
+        },
+        "summary": "Get user-account block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/service-list": {
+      "get": {
+        "operationId": "CmsController_getServiceListBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns service-list block."
+          }
+        },
+        "summary": "Get service-list block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/service-details": {
+      "get": {
+        "operationId": "CmsController_getServiceDetailsBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns service-details block."
+          }
+        },
+        "summary": "Get service-details block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/cms/blocks/featured-service-list": {
+      "get": {
+        "operationId": "CmsController_getFeaturedServiceListBlock",
+        "parameters": [
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "CMS entry identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns featured-service-list block."
+          }
+        },
+        "summary": "Get featured-service-list block",
+        "tags": [
+          "cms"
+        ]
+      }
+    },
+    "/api/tickets/{id}": {
+      "get": {
+        "operationId": "TicketsController_getTicket",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Ticket identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ticket details."
+          }
+        },
+        "summary": "Get ticket by id",
+        "tags": [
+          "tickets"
+        ]
+      }
+    },
+    "/api/tickets": {
+      "get": {
+        "operationId": "TicketsController_getTicketList",
+        "parameters": [
+          {
+            "name": "topic",
+            "required": false,
+            "in": "query",
+            "description": "Ticket topic filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Ticket type filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "One or more ticket statuses to filter by.",
+            "schema": {
+              "$ref": "#/components/schemas/Object"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Date range start as ISO string.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "description": "Date range end as ISO string.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Free-text search phrase.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "priority",
+            "required": false,
+            "in": "query",
+            "description": "Ticket priority filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ticket list."
+          }
+        },
+        "summary": "List tickets",
+        "tags": [
+          "tickets"
+        ]
+      },
+      "post": {
+        "operationId": "TicketsController_createTicket",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTicketBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ticket created."
+          }
+        },
+        "summary": "Create ticket",
+        "tags": [
+          "tickets"
+        ]
+      }
+    },
+    "/api/notifications/{id}": {
+      "get": {
+        "operationId": "NotificationsController_getNotification",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Notification identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns notification details."
+          }
+        },
+        "summary": "Get notification by id",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/api/notifications": {
+      "get": {
+        "operationId": "NotificationsController_getNotificationList",
+        "parameters": [
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Notification type filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "priority",
+            "required": false,
+            "in": "query",
+            "description": "Notification priority filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Notification status filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Date range start as ISO string.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "description": "Date range end as ISO string.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns notifications list."
+          }
+        },
+        "summary": "List notifications",
+        "tags": [
+          "notifications"
+        ]
+      },
+      "post": {
+        "operationId": "NotificationsController_markNotificationAs",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkNotificationAsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notification status updated."
+          }
+        },
+        "summary": "Update notification status",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/api/users/me": {
+      "get": {
+        "operationId": "UserController_getCurrentUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns current user profile."
+          }
+        },
+        "summary": "Get current user",
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "operationId": "UserController_updateCurrentUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUserBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Current user updated."
+          }
+        },
+        "summary": "Update current user",
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "operationId": "UserController_deleteCurrentUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Current user deleted."
+          }
+        },
+        "summary": "Delete current user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "operationId": "UserController_getUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "User identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns user details."
+          }
+        },
+        "summary": "Get user by id",
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "operationId": "UserController_updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "User identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUserBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated."
+          }
+        },
+        "summary": "Update user by id",
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "operationId": "UserController_deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "User identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted."
+          }
+        },
+        "summary": "Delete user by id",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/users/me/customers": {
+      "get": {
+        "operationId": "UserController_getCustomersForCurrentUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns customers linked to current user."
+          }
+        },
+        "summary": "Get customers for current user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/users/me/customers/{id}": {
+      "get": {
+        "operationId": "UserController_getCustomerForCurrentUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Customer identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns customer details for current user."
+          }
+        },
+        "summary": "Get current user customer by id",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/organizations/{id}": {
+      "get": {
+        "operationId": "OrganizationController_getOrganization",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Organization identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns organization details."
+          }
+        },
+        "summary": "Get organization by id",
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/organizations": {
+      "get": {
+        "operationId": "OrganizationController_getOrganizations",
+        "parameters": [
+          {
+            "name": "taxId",
+            "required": false,
+            "in": "query",
+            "description": "Optional tax identifier filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns organizations list."
+          }
+        },
+        "summary": "List organizations",
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/organizations/membership/{orgId}/{userId}": {
+      "get": {
+        "operationId": "OrganizationController_checkMembership",
+        "parameters": [
+          {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "description": "Organization identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "description": "User identifier to check membership for.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns membership check result."
+          }
+        },
+        "summary": "Check organization membership",
+        "tags": [
+          "organizations"
+        ]
+      }
+    },
+    "/api/billing-accounts": {
+      "get": {
+        "operationId": "BillingAccountController_getBillingAccounts",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Billing account status filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "number",
+            "required": false,
+            "in": "query",
+            "description": "Billing account number filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns billing accounts list."
+          }
+        },
+        "summary": "List billing accounts",
+        "tags": [
+          "billing-accounts"
+        ]
+      }
+    },
+    "/api/billing-accounts/{id}": {
+      "get": {
+        "operationId": "BillingAccountController_getBillingAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Billing account identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns billing account details."
+          }
+        },
+        "summary": "Get billing account by id",
+        "tags": [
+          "billing-accounts"
+        ]
+      }
+    },
+    "/api/resources/{id}/purchase": {
+      "post": {
+        "operationId": "ResourceController_purchaseResource",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource purchase/activation triggered."
+          }
+        },
+        "summary": "Purchase or activate resource",
+        "tags": [
+          "resources"
+        ]
+      }
+    },
+    "/api/resources/services": {
+      "get": {
+        "operationId": "ResourceController_getServiceList",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "billingAccountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns services list."
+          }
+        },
+        "summary": "List services",
+        "tags": [
+          "resources"
+        ]
+      }
+    },
+    "/api/resources/services/{id}": {
+      "get": {
+        "operationId": "ResourceController_getService",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns service details."
+          }
+        },
+        "summary": "Get service by id",
+        "tags": [
+          "resources"
+        ]
+      }
+    },
+    "/api/resources/services/featured": {
+      "get": {
+        "operationId": "ResourceController_getFeaturedServiceList",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns featured services list."
+          }
+        },
+        "summary": "List featured services",
+        "tags": [
+          "resources"
+        ]
+      }
+    },
+    "/api/resources/assets": {
+      "get": {
+        "operationId": "ResourceController_getAssetList",
+        "parameters": [
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "billingAccountId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns assets list."
+          }
+        },
+        "summary": "List assets",
+        "tags": [
+          "resources"
+        ]
+      }
+    },
+    "/api/resources/assets/{id}": {
+      "get": {
+        "operationId": "ResourceController_getAsset",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns asset details."
+          }
+        },
+        "summary": "Get asset by id",
+        "tags": [
+          "resources"
+        ]
+      }
+    },
+    "/api/resources/assets/{id}/compatible-services": {
+      "get": {
+        "operationId": "ResourceController_getCompatibleServiceList",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns compatible services."
+          }
+        },
+        "summary": "List compatible services for asset",
+        "tags": [
+          "resources"
+        ]
+      }
+    },
+    "/api/invoices": {
+      "get": {
+        "operationId": "InvoiceController_getInvoiceList",
+        "parameters": [
+          {
+            "name": "paymentStatus",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns invoices list."
+          }
+        },
+        "summary": "List invoices",
+        "tags": [
+          "invoices"
+        ]
+      }
+    },
+    "/api/invoices/{id}": {
+      "get": {
+        "operationId": "InvoiceController_getInvoice",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns invoice details."
+          }
+        },
+        "summary": "Get invoice by id",
+        "tags": [
+          "invoices"
+        ]
+      }
+    },
+    "/api/invoices/{id}/pdf": {
+      "get": {
+        "operationId": "InvoiceController_getInvoicePdf",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns invoice PDF file."
+          }
+        },
+        "summary": "Download invoice PDF",
+        "tags": [
+          "invoices"
+        ]
+      }
+    },
+    "/api/articles/categories": {
+      "get": {
+        "operationId": "ArticleController_getCategoryList",
+        "parameters": [
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Optional sort configuration for category list results.",
+            "schema": {
+              "$ref": "#/components/schemas/Object"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns article categories list."
+          }
+        },
+        "summary": "List article categories",
+        "tags": [
+          "articles"
+        ]
+      }
+    },
+    "/api/articles/categories/{id}": {
+      "get": {
+        "operationId": "ArticleController_getCategory",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns article category details."
+          }
+        },
+        "summary": "Get article category by id",
+        "tags": [
+          "articles"
+        ]
+      }
+    },
+    "/api/articles/search": {
+      "get": {
+        "operationId": "ArticleController_searchArticles",
+        "parameters": [
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ids",
+            "required": false,
+            "in": "query",
+            "description": "Optional list of article identifiers to include.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "description": "Optional category identifier filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Filter articles created/updated from this date (ISO string).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "description": "Filter articles created/updated up to this date (ISO string).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Sort field name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "in": "query",
+            "description": "Sort direction.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "description": "Free-text search phrase.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns article search results."
+          }
+        },
+        "summary": "Search articles",
+        "tags": [
+          "articles"
+        ]
+      }
+    },
+    "/api/articles/{id}": {
+      "get": {
+        "operationId": "ArticleController_getArticle",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns article details."
+          }
+        },
+        "summary": "Get article by id",
+        "tags": [
+          "articles"
+        ]
+      }
+    },
+    "/api/articles": {
+      "get": {
+        "operationId": "ArticleController_getArticleList",
+        "parameters": [
+          {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ids",
+            "required": false,
+            "in": "query",
+            "description": "Optional list of article identifiers to include.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "description": "Optional category identifier filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Filter articles created/updated from this date (ISO string).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "description": "Filter articles created/updated up to this date (ISO string).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Sort field name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "in": "query",
+            "description": "Sort direction.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns article list."
+          }
+        },
+        "summary": "List articles",
+        "tags": [
+          "articles"
+        ]
+      }
+    },
+    "/api/search": {
+      "post": {
+        "operationId": "SearchController_search",
+        "parameters": [
+          {
+            "name": "index",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Search"
+        ]
+      }
+    },
+    "/api/products": {
+      "get": {
+        "operationId": "ProductsController_getProductList",
+        "parameters": [
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Product type filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "description": "Product category filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression from query string, for example `name_ASC`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "basePath",
+            "required": false,
+            "in": "query",
+            "description": "Optional base path override used by integration routing.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns product list."
+          }
+        },
+        "summary": "List products",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/api/products/{id}": {
+      "get": {
+        "operationId": "ProductsController_getProduct",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Product identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variantId",
+            "required": false,
+            "in": "path",
+            "description": "Optional variant identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "basePath",
+            "required": false,
+            "in": "path",
+            "description": "Optional base path override used by integration routing.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variantOptionGroups",
+            "required": false,
+            "in": "path",
+            "description": "Configuration of variant option groups used by product details views.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns product details."
+          }
+        },
+        "summary": "Get product by id",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/api/products/{id}/variants/{variantId}/related-products": {
+      "get": {
+        "operationId": "ProductsController_getRelatedProductList",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "description": "Relation type to resolve (spare part, replacement, compatible service).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Source product identifier (bound from route `:id`).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variantId",
+            "required": true,
+            "in": "path",
+            "description": "Optional source product variant identifier (bound from route `:variantId`).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "path",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "basePath",
+            "required": false,
+            "in": "path",
+            "description": "Optional base path override used by integration routing.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns related product list."
+          }
+        },
+        "summary": "List related products",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/api/orders/{id}": {
+      "get": {
+        "operationId": "OrdersController_getOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Order identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "path",
+            "description": "Optional page size for embedded list views.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "path",
+            "description": "Optional page offset for embedded list views.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "path",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns order details."
+          }
+        },
+        "summary": "Get order by id",
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "operationId": "OrdersController_getOrderList",
+        "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "Optional order identifier filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerId",
+            "required": false,
+            "in": "query",
+            "description": "Customer identifier filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Order status filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paymentStatus",
+            "required": false,
+            "in": "query",
+            "description": "Payment status filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Date range start as ISO string.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "description": "Date range end as ISO string.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns order list."
+          }
+        },
+        "summary": "List orders",
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/api/carts/current": {
+      "get": {
+        "operationId": "CartsController_getCurrentCart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns active cart for current user/session."
+          }
+        },
+        "summary": "Get current cart",
+        "tags": [
+          "carts"
+        ]
+      }
+    },
+    "/api/carts/{id}": {
+      "get": {
+        "operationId": "CartsController_getCart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns cart details."
+          },
+          "404": {
+            "description": "Cart was not found."
+          }
+        },
+        "summary": "Get cart by id",
+        "tags": [
+          "carts"
+        ]
+      },
+      "patch": {
+        "operationId": "CartsController_updateCart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCartBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cart updated successfully."
+          },
+          "404": {
+            "description": "Cart was not found."
+          }
+        },
+        "summary": "Update cart",
+        "tags": [
+          "carts"
+        ]
+      },
+      "delete": {
+        "operationId": "CartsController_deleteCart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cart deleted successfully."
+          },
+          "404": {
+            "description": "Cart was not found."
+          }
+        },
+        "summary": "Delete cart",
+        "tags": [
+          "carts"
+        ]
+      }
+    },
+    "/api/carts": {
+      "get": {
+        "operationId": "CartsController_getCartList",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerId",
+            "required": false,
+            "in": "query",
+            "description": "Customer identifier filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression from query string, e.g. `createdAt_DESC`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale provided in the request body (kept as string).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns paginated carts list."
+          }
+        },
+        "summary": "List carts",
+        "tags": [
+          "carts"
+        ]
+      },
+      "post": {
+        "operationId": "CartsController_createCart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCartBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cart created successfully."
+          },
+          "400": {
+            "description": "Invalid cart payload."
+          }
+        },
+        "summary": "Create cart",
+        "tags": [
+          "carts"
+        ]
+      }
+    },
+    "/api/carts/items": {
+      "post": {
+        "operationId": "CartsController_addCartItem",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCartItemBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item added to cart."
+          },
+          "400": {
+            "description": "Invalid cart item payload."
+          }
+        },
+        "summary": "Add item to cart",
+        "tags": [
+          "carts"
+        ]
+      }
+    },
+    "/api/carts/{cartId}/items/{itemId}": {
+      "patch": {
+        "operationId": "CartsController_updateCartItem",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "description": "Cart item identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCartItemBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cart item updated."
+          },
+          "404": {
+            "description": "Cart or item was not found."
+          }
+        },
+        "summary": "Update cart item",
+        "tags": [
+          "carts"
+        ]
+      },
+      "delete": {
+        "operationId": "CartsController_removeCartItem",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "description": "Cart item identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cart item removed."
+          },
+          "404": {
+            "description": "Cart or item was not found."
+          }
+        },
+        "summary": "Remove cart item",
+        "tags": [
+          "carts"
+        ]
+      }
+    },
+    "/api/carts/{cartId}/promotions": {
+      "post": {
+        "operationId": "CartsController_applyPromotion",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyPromotionBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promotion applied."
+          },
+          "404": {
+            "description": "Cart was not found."
+          }
+        },
+        "summary": "Apply promotion code",
+        "tags": [
+          "carts"
+        ]
+      }
+    },
+    "/api/carts/{cartId}/promotions/{code}": {
+      "delete": {
+        "operationId": "CartsController_removePromotion",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "required": true,
+            "in": "path",
+            "description": "Promotion/coupon code.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Promotion removed."
+          },
+          "404": {
+            "description": "Cart or promotion was not found."
+          }
+        },
+        "summary": "Remove promotion code",
+        "tags": [
+          "carts"
+        ]
+      }
+    },
+    "/api/customers/addresses": {
+      "get": {
+        "operationId": "CustomersController_getAddresses",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns customer addresses list."
+          }
+        },
+        "summary": "List customer addresses",
+        "tags": [
+          "customers"
+        ]
+      },
+      "post": {
+        "operationId": "CustomersController_createAddress",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAddressBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Customer address created."
+          }
+        },
+        "summary": "Create customer address",
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/api/customers/addresses/{id}": {
+      "get": {
+        "operationId": "CustomersController_getAddress",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Customer address identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns customer address details."
+          }
+        },
+        "summary": "Get customer address by id",
+        "tags": [
+          "customers"
+        ]
+      },
+      "patch": {
+        "operationId": "CustomersController_updateAddress",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Customer address identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAddressBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Customer address updated."
+          }
+        },
+        "summary": "Update customer address",
+        "tags": [
+          "customers"
+        ]
+      },
+      "delete": {
+        "operationId": "CustomersController_deleteAddress",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Customer address identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer address deleted."
+          }
+        },
+        "summary": "Delete customer address",
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/api/customers/addresses/{id}/default": {
+      "post": {
+        "operationId": "CustomersController_setDefaultAddress",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Customer address identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default customer address updated."
+          }
+        },
+        "summary": "Set default customer address",
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/api/payments/providers": {
+      "get": {
+        "operationId": "PaymentsController_getProviders",
+        "parameters": [
+          {
+            "name": "regionId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns available payment providers."
+          }
+        },
+        "summary": "List payment providers",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/payments/sessions": {
+      "post": {
+        "operationId": "PaymentsController_createSession",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Payment session created."
+          }
+        },
+        "summary": "Create payment session",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/payments/sessions/{id}": {
+      "get": {
+        "operationId": "PaymentsController_getSession",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns payment session details."
+          }
+        },
+        "summary": "Get payment session by id",
+        "tags": [
+          "payments"
+        ]
+      },
+      "patch": {
+        "operationId": "PaymentsController_updateSession",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSessionBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment session updated."
+          }
+        },
+        "summary": "Update payment session",
+        "tags": [
+          "payments"
+        ]
+      },
+      "delete": {
+        "operationId": "PaymentsController_cancelSession",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment session canceled."
+          }
+        },
+        "summary": "Cancel payment session",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/checkout/{cartId}/addresses": {
+      "post": {
+        "operationId": "CheckoutController_setAddresses",
+        "parameters": [
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAddressesBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Checkout addresses set."
+          }
+        },
+        "summary": "Set checkout addresses",
+        "tags": [
+          "checkout"
+        ]
+      }
+    },
+    "/api/checkout/{cartId}/shipping-method": {
+      "post": {
+        "operationId": "CheckoutController_setShippingMethod",
+        "parameters": [
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetShippingMethodBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Checkout shipping method set."
+          }
+        },
+        "summary": "Set checkout shipping method",
+        "tags": [
+          "checkout"
+        ]
+      }
+    },
+    "/api/checkout/{cartId}/payment": {
+      "post": {
+        "operationId": "CheckoutController_setPayment",
+        "parameters": [
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPaymentBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Checkout payment set."
+          }
+        },
+        "summary": "Set checkout payment",
+        "tags": [
+          "checkout"
+        ]
+      }
+    },
+    "/api/checkout/{cartId}/shipping-options": {
+      "get": {
+        "operationId": "CheckoutController_getShippingOptions",
+        "parameters": [
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns checkout shipping options."
+          }
+        },
+        "summary": "Get checkout shipping options",
+        "tags": [
+          "checkout"
+        ]
+      }
+    },
+    "/api/checkout/{cartId}/summary": {
+      "get": {
+        "operationId": "CheckoutController_getCheckoutSummary",
+        "parameters": [
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns checkout summary."
+          }
+        },
+        "summary": "Get checkout summary",
+        "tags": [
+          "checkout"
+        ]
+      }
+    },
+    "/api/checkout/{cartId}/place-order": {
+      "post": {
+        "operationId": "CheckoutController_placeOrder",
+        "parameters": [
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlaceOrderBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order placement started."
+          }
+        },
+        "summary": "Place order from cart",
+        "tags": [
+          "checkout"
+        ]
+      }
+    },
+    "/api/checkout/{cartId}/complete": {
+      "post": {
+        "operationId": "CheckoutController_completeCheckout",
+        "parameters": [
+          {
+            "name": "cartId",
+            "required": true,
+            "in": "path",
+            "description": "Cart identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompleteCheckoutBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Checkout completed."
+          }
+        },
+        "summary": "Complete checkout flow",
+        "tags": [
+          "checkout"
+        ]
+      }
+    },
+    "/api/organization-list": {
+      "get": {
+        "operationId": "OrganizationsController_getCustomers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "O2S API Harmonization HTTP API",
+    "description": "Live API documentation generated from current NestJS controllers and DTOs.",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "http://localhost:3001"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "Object": {
+        "type": "object",
+        "properties": {}
+      },
+      "PostTicketBody": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Ticket title."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed ticket description."
+          },
+          "type": {
+            "type": "number",
+            "description": "Ticket type identifier."
+          },
+          "attachments": {
+            "description": "Optional list of ticket attachments.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fields": {
+            "type": "object",
+            "description": "Optional map of additional custom fields.",
+            "additionalProperties": true
+          }
+        }
+      },
+      "MarkNotificationAsRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Notification identifier."
+          },
+          "status": {
+            "type": "string",
+            "description": "Target notification status to set."
+          }
+        },
+        "required": [
+          "id",
+          "status"
+        ]
+      },
+      "PostUserBody": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "User first name."
+          },
+          "lastName": {
+            "type": "string",
+            "description": "User last name."
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ]
+      },
+      "SearchPayload": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateCartBody": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "description": "Optional customer identifier for authenticated user cart binding."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional cart display name."
+          },
+          "regionId": {
+            "type": "string",
+            "description": "Region identifier used by commerce backend."
+          },
+          "currency": {
+            "type": "string",
+            "description": "Cart currency code."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Integration-specific cart metadata payload.",
+            "additionalProperties": true
+          },
+          "locale": {
+            "type": "string",
+            "description": "Optional locale provided in the request body (kept as string)."
+          }
+        },
+        "required": [
+          "currency"
+        ]
+      },
+      "UpdateCartBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Updated cart display name."
+          },
+          "regionId": {
+            "type": "string",
+            "description": "Updated region identifier."
+          },
+          "email": {
+            "type": "string",
+            "description": "Guest customer email."
+          },
+          "shippingAddressId": {
+            "type": "string",
+            "description": "Saved shipping address identifier."
+          },
+          "billingAddressId": {
+            "type": "string",
+            "description": "Saved billing address identifier."
+          },
+          "shippingMethodId": {
+            "type": "string",
+            "description": "Selected shipping method identifier."
+          },
+          "paymentMethodId": {
+            "type": "string",
+            "description": "Selected payment method/session identifier."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional cart notes."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Integration-specific cart metadata payload.",
+            "additionalProperties": true
+          },
+          "locale": {
+            "type": "string",
+            "description": "Optional locale provided in the request body (kept as string)."
+          }
+        }
+      },
+      "AddCartItemBody": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "type": "string",
+            "description": "Existing cart identifier. If omitted, implementation may create/find active cart."
+          },
+          "sku": {
+            "type": "string",
+            "description": "Product SKU identifier."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Item quantity."
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code (typically required when a new cart is created)."
+          },
+          "regionId": {
+            "type": "string",
+            "description": "Region identifier (typically required when a new cart is created)."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Integration-specific item metadata payload.",
+            "additionalProperties": true
+          },
+          "locale": {
+            "type": "string",
+            "description": "Optional locale provided in the request body (kept as string)."
+          }
+        },
+        "required": [
+          "sku",
+          "quantity"
+        ]
+      },
+      "UpdateCartItemBody": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "Updated item quantity."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Integration-specific item metadata payload.",
+            "additionalProperties": true
+          },
+          "locale": {
+            "type": "string",
+            "description": "Optional locale provided in the request body (kept as string)."
+          }
+        }
+      },
+      "ApplyPromotionBody": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Promotion/coupon code."
+          },
+          "locale": {
+            "type": "string",
+            "description": "Optional locale provided in the request body (kept as string)."
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "Address": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateAddressBody": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Optional address label visible in UI (for example `Home`, `Office`)."
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "When true, sets the new address as default."
+          },
+          "address": {
+            "description": "Full address payload.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          }
+        },
+        "required": [
+          "address"
+        ]
+      },
+      "UpdateAddressBody": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Optional address label visible in UI."
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "When true, sets the updated address as default."
+          },
+          "address": {
+            "description": "Updated full address payload.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          }
+        }
+      },
+      "CreateSessionBody": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "returnUrl": {
+            "type": "string"
+          },
+          "cancelUrl": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "cartId",
+          "providerId",
+          "returnUrl"
+        ]
+      },
+      "UpdateSessionBody": {
+        "type": "object",
+        "properties": {
+          "returnUrl": {
+            "type": "string"
+          },
+          "cancelUrl": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      },
+      "SetAddressesBody": {
+        "type": "object",
+        "properties": {
+          "shippingAddressId": {
+            "type": "string",
+            "description": "Saved shipping address identifier for authenticated users."
+          },
+          "shippingAddress": {
+            "description": "Inline shipping address payload.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "billingAddressId": {
+            "type": "string",
+            "description": "Saved billing address identifier for authenticated users."
+          },
+          "billingAddress": {
+            "description": "Inline billing address payload.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional checkout notes."
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email, typically required for guest checkout."
+          }
+        }
+      },
+      "SetShippingMethodBody": {
+        "type": "object",
+        "properties": {
+          "shippingOptionId": {
+            "type": "string",
+            "description": "Shipping option identifier returned by shipping options endpoint."
+          }
+        },
+        "required": [
+          "shippingOptionId"
+        ]
+      },
+      "SetPaymentBody": {
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "description": "Payment provider identifier."
+          },
+          "returnUrl": {
+            "type": "string",
+            "description": "URL used for redirect after successful payment flow."
+          },
+          "cancelUrl": {
+            "type": "string",
+            "description": "Optional URL used for redirect when payment flow is canceled."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Provider-specific metadata payload.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "providerId",
+          "returnUrl"
+        ]
+      },
+      "PlaceOrderBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Customer email, required for guest checkout when not set earlier."
+          }
+        }
+      },
+      "CompleteCheckoutBody": {
+        "type": "object",
+        "properties": {
+          "shippingAddressId": {
+            "type": "string",
+            "description": "Saved shipping address identifier for authenticated users."
+          },
+          "shippingAddress": {
+            "description": "Inline shipping address payload (required for guest checkout).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "billingAddressId": {
+            "type": "string",
+            "description": "Saved billing address identifier for authenticated users."
+          },
+          "billingAddress": {
+            "description": "Inline billing address payload (required for guest checkout).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "shippingMethodId": {
+            "type": "string",
+            "description": "Selected shipping method identifier."
+          },
+          "paymentProviderId": {
+            "type": "string",
+            "description": "Payment provider identifier."
+          },
+          "returnUrl": {
+            "type": "string",
+            "description": "URL used for redirect after successful payment flow."
+          },
+          "cancelUrl": {
+            "type": "string",
+            "description": "Optional URL used for redirect when payment flow is canceled."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional checkout notes."
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email required for guest checkout."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Provider-specific metadata payload.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "paymentProviderId",
+          "returnUrl"
+        ]
+      },
+      "SurveyJsSubmitPayload": {
+        "type": "object",
+        "properties": {}
+      },
+      "MarkNotificationAsBlockBody": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

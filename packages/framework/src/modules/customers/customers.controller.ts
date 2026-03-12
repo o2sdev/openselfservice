@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, UseInterceptors } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -11,15 +12,21 @@ import { AppHeaders } from '@/utils/models/headers';
  */
 @Controller('/customers/addresses')
 @UseInterceptors(LoggerService)
+@ApiTags('customers')
 export class CustomersController {
     constructor(protected readonly customerService: CustomerService) {}
 
     @Get()
+    @ApiOperation({ summary: 'List customer addresses' })
+    @ApiResponse({ status: 200, description: 'Returns customer addresses list.' })
     getAddresses(@Headers() headers: AppHeaders): ReturnType<CustomerService['getAddresses']> {
         return this.customerService.getAddresses(headers.authorization);
     }
 
     @Get(':id')
+    @ApiOperation({ summary: 'Get customer address by id' })
+    @ApiParam({ name: 'id', type: String, description: 'Customer address identifier.' })
+    @ApiResponse({ status: 200, description: 'Returns customer address details.' })
     getAddress(
         @Param() params: Request.GetAddressParams,
         @Headers() headers: AppHeaders,
@@ -28,6 +35,9 @@ export class CustomersController {
     }
 
     @Post()
+    @ApiOperation({ summary: 'Create customer address' })
+    @ApiBody({ type: Request.CreateAddressBody, description: 'Customer address payload to create.' })
+    @ApiResponse({ status: 201, description: 'Customer address created.' })
     createAddress(
         @Body() body: Request.CreateAddressBody,
         @Headers() headers: AppHeaders,
@@ -36,6 +46,10 @@ export class CustomersController {
     }
 
     @Patch(':id')
+    @ApiOperation({ summary: 'Update customer address' })
+    @ApiParam({ name: 'id', type: String, description: 'Customer address identifier.' })
+    @ApiBody({ type: Request.UpdateAddressBody, description: 'Customer address payload to update.' })
+    @ApiResponse({ status: 200, description: 'Customer address updated.' })
     updateAddress(
         @Param() params: Request.UpdateAddressParams,
         @Body() body: Request.UpdateAddressBody,
@@ -45,6 +59,9 @@ export class CustomersController {
     }
 
     @Delete(':id')
+    @ApiOperation({ summary: 'Delete customer address' })
+    @ApiParam({ name: 'id', type: String, description: 'Customer address identifier.' })
+    @ApiResponse({ status: 200, description: 'Customer address deleted.' })
     deleteAddress(
         @Param() params: Request.DeleteAddressParams,
         @Headers() headers: AppHeaders,
@@ -53,6 +70,9 @@ export class CustomersController {
     }
 
     @Post(':id/default')
+    @ApiOperation({ summary: 'Set default customer address' })
+    @ApiParam({ name: 'id', type: String, description: 'Customer address identifier.' })
+    @ApiResponse({ status: 200, description: 'Default customer address updated.' })
     setDefaultAddress(
         @Param() params: Request.SetDefaultAddressParams,
         @Headers() headers: AppHeaders,

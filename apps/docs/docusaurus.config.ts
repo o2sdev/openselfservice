@@ -257,15 +257,34 @@ const config: Config = {
         },
     },
     plugins: [
+        function webpackNodePolyfillsPlugin() {
+            return {
+                name: 'webpack-node-polyfills',
+                configureWebpack() {
+                    return {
+                        resolve: {
+                            fallback: {
+                                path: require.resolve('path-browserify'),
+                            },
+                        },
+                    };
+                },
+            };
+        },
         [
-            'docusaurus-plugin-typedoc',
+            'docusaurus-plugin-openapi-docs',
             {
-                entryPoints: ['../../packages/framework/src/index.ts', '../../packages/framework/src/sdk.ts'],
-                tsconfig: '../../packages/framework/tsconfig.json',
-                out: 'docs/api',
-                name: '@o2s/framework API',
-                excludePrivate: true,
-                readme: 'none',
+                id: 'openapi',
+                docsPluginId: 'classic',
+                config: {
+                    framework: {
+                        specPath: 'static/openapi/framework-live.json',
+                        outputDir: 'docs/api-http',
+                        sidebarOptions: {
+                            groupPathsBy: 'tag',
+                        },
+                    },
+                },
             },
         ],
         tailwindPlugin,
@@ -288,6 +307,7 @@ const config: Config = {
                     : {
                           sidebarPath: './sidebars.ts',
                           routeBasePath: '/docs',
+                          docItemComponent: '@theme/ApiItem',
                           // Please change this to your repo.
                           // Remove this to remove the "edit this page" links.
                           // editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
@@ -587,6 +607,7 @@ const config: Config = {
     } satisfies Preset.ThemeConfig,
 
     themes: [
+        'docusaurus-theme-openapi-docs',
         ...(hideDocs
             ? []
             : [
