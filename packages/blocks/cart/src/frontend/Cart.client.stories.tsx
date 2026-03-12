@@ -17,7 +17,7 @@ const baseBlock = {
     id: 'cart-1',
     title: 'Cart',
     subtitle: 'Review and edit your order',
-    defaultCurrency: 'PLN' as const,
+    defaultCurrency: 'EUR' as const,
     labels: {
         itemTotal: 'Total',
         unknownProductName: 'Product',

@@ -52,9 +52,9 @@ const baseBlock = {
         freeLabel: 'Free',
     },
     totals: {
-        subtotal: { value: 204.97, currency: 'PLN' as const },
-        tax: { value: 47.14, currency: 'PLN' as const },
-        total: { value: 252.11, currency: 'PLN' as const },
+        subtotal: { value: 204.97, currency: 'EUR' as const },
+        tax: { value: 47.14, currency: 'EUR' as const },
+        total: { value: 252.11, currency: 'EUR' as const },
     },
     orderConfirmationPath: '/order-confirmation',
 };

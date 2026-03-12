@@ -57,33 +57,33 @@ const baseBlock = {
     },
     order: {
         id: 'ORD-12345',
-        status: 'PENDING',
+        status: 'PENDING' as const,
         items: {
             data: [
                 {
                     id: 'item-1',
                     productId: 'PRIM-001',
                     quantity: 2,
-                    price: { value: 89.99, currency: 'PLN' as const },
-                    total: { value: 179.98, currency: 'PLN' as const },
+                    price: { value: 89.99, currency: 'EUR' as const },
+                    total: { value: 179.98, currency: 'EUR' as const },
                     productName: 'CLARIS S Filter Cartridge',
                 },
                 {
                     id: 'item-2',
                     productId: 'PRIM-002',
                     quantity: 1,
-                    price: { value: 24.99, currency: 'PLN' as const },
-                    total: { value: 24.99, currency: 'PLN' as const },
+                    price: { value: 24.99, currency: 'EUR' as const },
+                    total: { value: 24.99, currency: 'EUR' as const },
                     productName: 'Cleaning solution',
                 },
             ],
             total: 3,
         },
-        subtotal: { value: 204.97, currency: 'PLN' as const },
-        tax: { value: 47.14, currency: 'PLN' as const },
-        discountTotal: { value: 20.5, currency: 'PLN' as const },
-        shippingTotal: { value: 15, currency: 'PLN' as const },
-        total: { value: 252.11, currency: 'PLN' as const },
+        subtotal: { value: 204.97, currency: 'EUR' as const },
+        tax: { value: 47.14, currency: 'EUR' as const },
+        discountTotal: { value: 20.5, currency: 'EUR' as const },
+        shippingTotal: { value: 15, currency: 'EUR' as const },
+        total: { value: 252.11, currency: 'EUR' as const },
         shippingAddress: {
             streetName: 'Main St',
             streetNumber: '123',
@@ -100,7 +100,7 @@ const baseBlock = {
             city: 'Warsaw',
             country: 'Poland',
         },
-        shippingMethods: [{ name: 'Standard Shipping', total: { value: 15, currency: 'PLN' as const } }],
+        shippingMethods: [{ name: 'Standard Shipping', total: { value: 15, currency: 'EUR' as const } }],
     },
 };
 
