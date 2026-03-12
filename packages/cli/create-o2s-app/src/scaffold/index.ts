@@ -22,10 +22,19 @@ const readIntegrationVersions = async (
     for (const name of selectedIntegrations) {
         const pkgPath = path.join(projectDir, INTEGRATIONS_PATH, name, 'package.json');
 
-        if (await fs.pathExists(pkgPath)) {
-            const pkg = await fs.readJson(pkgPath);
-            versions[name] = pkg.version ?? '0.0.0';
+        if (!(await fs.pathExists(pkgPath))) {
+            throw new Error(
+                `Integration "${name}" not found at expected path: ${pkgPath}. Ensure the integration exists in the template.`,
+            );
         }
+
+        const pkg = await fs.readJson(pkgPath);
+
+        if (!pkg.version) {
+            throw new Error(`Integration "${name}" has no version field in ${pkgPath}.`);
+        }
+
+        versions[name] = pkg.version;
     }
 
     return versions;
