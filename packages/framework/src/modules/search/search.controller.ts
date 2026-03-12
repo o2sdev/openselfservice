@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Query, UseInterceptors } from '@nestjs/common';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -10,8 +10,8 @@ import { SearchService } from './search.service';
 export class SearchController {
     constructor(protected readonly searchService: SearchService) {}
 
-    @Get()
-    search(@Query('index') index: string, @Body() searchPayload: SearchPayload) {
+    @Post()
+    search(@Query('index') index: string, @Body() searchPayload: SearchPayload): ReturnType<SearchService['search']> {
         return this.searchService.search(index, searchPayload);
     }
 }

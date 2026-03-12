@@ -1,0 +1,1 @@
+{"parameters":[{"name":"cartId","required":true,"in":"path","description":"Cart identifier.","schema":{"type":"string"}},{"name":"locale","required":false,"in":"path","description":"Optional locale code used to localize response values.","schema":{"type":"string"}}]}

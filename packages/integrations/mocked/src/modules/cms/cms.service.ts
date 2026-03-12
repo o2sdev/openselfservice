@@ -54,7 +54,7 @@ import { responseDelay } from '@/utils/delay';
 @Injectable()
 export class CmsService implements CMS.Service {
     getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
-        return of<T>({} as T);
+        return of<T | undefined>(undefined);
     }
 
     getEntries<T>(_options: CMS.Request.GetCmsEntriesParams) {

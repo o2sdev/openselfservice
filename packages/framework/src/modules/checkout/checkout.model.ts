@@ -3,6 +3,7 @@ import * as Orders from '../orders';
 
 import { Address, Price } from '@/utils/models';
 
+/** Checkout summary snapshot for a cart before placing an order. */
 export class CheckoutSummary {
     cart!: Carts.Model.Cart;
     shippingAddress!: Address.Address;
@@ -17,15 +18,19 @@ export class CheckoutSummary {
         total: Price.Price;
     };
     notes?: string;
-    email?: string; // For guest checkout
+    /** Customer email, typically required for guest checkout. */
+    email?: string;
 }
 
+/** Available shipping options for a checkout cart. */
 export class ShippingOptions {
     data!: Orders.Model.ShippingMethod[];
     total!: number;
 }
 
+/** Order placement result with optional payment redirect handoff. */
 export class PlaceOrderResponse {
     order!: Orders.Model.Order;
-    paymentRedirectUrl?: string; // For redirect-based payment providers
+    /** Redirect target for providers that require external payment flow. */
+    paymentRedirectUrl?: string;
 }

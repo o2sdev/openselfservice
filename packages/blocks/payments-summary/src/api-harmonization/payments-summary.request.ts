@@ -4,6 +4,6 @@ export class GetPaymentsSummaryBlockQuery implements Omit<CMS.Request.GetCmsEntr
     id!: string;
     limit!: number;
     offset!: number;
-    dateFrom?: Date;
-    dateTo?: Date;
+    dateFrom?: string;
+    dateTo?: string;
 }

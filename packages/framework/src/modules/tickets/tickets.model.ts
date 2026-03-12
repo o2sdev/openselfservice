@@ -1,5 +1,6 @@
 import { Pagination } from '@/utils/models';
 
+/** Ticket: id, topic, type, status, properties, attachments, comments. */
 export class Ticket {
     id!: string;
     createdAt!: string;
@@ -25,18 +26,21 @@ export class TicketAttachment {
     ariaLabel!: string;
 }
 
+/** Ticket comment: author, date, content. */
 export class TicketComment {
     author!: Author;
     date!: string;
     content!: string;
 }
 
+/** Author: name, email, avatar. */
 export class Author {
     name!: string;
     email?: string;
     avatar?: string;
 }
 
+/** Ticket property: id, value. */
 export class TicketProperty {
     id!: string;
     value!: string;

@@ -1,0 +1,1 @@
+{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"title":{"type":"string"},"description":{"type":"string"},"type":{"type":"number"},"attachments":{"type":"array","items":{"type":"string"}},"fields":{"type":"object"}},"title":"PostTicketBody"}}}}}

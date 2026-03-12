@@ -2,6 +2,7 @@ import { Ticket } from '@/modules/tickets/tickets.model';
 
 import { Block, Mapping } from '@/utils/models';
 
+/** CMS block configuration for ticket details view. */
 export class TicketDetailsBlock extends Block.Block {
     title?: string;
     commentsTitle?: string;

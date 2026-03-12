@@ -245,7 +245,7 @@ Unified action for deploying to Vercel (supports both production and preview env
     - Only installs if cache miss occurs
 - **Build outputs**: Cached explicitly using `actions/cache` for `dist`, `build`, `.next` directories, and `next-env.d.ts`
     - Cache key: `{os}-build-{commit-sha}`
-    - Restored by `lint` and `test` jobs
+    - Restored by `lint`, `test`, `deploy-docs`, `deploy-docs-preview`, `deploy-storybook`, and `deploy-storybook-preview` jobs
 - **Turbo cache**: Handled automatically by Turborepo
 - **Playwright browsers**: Cached by the Playwright installer
 

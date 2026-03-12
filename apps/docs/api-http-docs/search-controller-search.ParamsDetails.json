@@ -1,0 +1,1 @@
+{"parameters":[{"name":"index","required":true,"in":"query","schema":{"type":"string"}}]}

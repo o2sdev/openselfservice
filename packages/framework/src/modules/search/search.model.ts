@@ -1,10 +1,16 @@
 type RangeValue = string | number | Date | boolean;
 
-type ExactMatchValue = string | number | boolean | null | object;
+type SearchPrimitive = string | number | boolean | null;
+type SearchObject = { [key: string]: SearchValue };
+type SearchValue = SearchPrimitive | SearchObject | SearchValue[];
 
+/** Additional metadata payload attached to search request/result. */
+export type SearchMetadata = Record<string, SearchValue>;
+
+/** Generic search request payload used by integrations (for example Algolia). */
 export class SearchPayload {
     query?: string;
-    exact?: Record<string, ExactMatchValue>;
+    exact?: Record<string, SearchValue | Date>;
     range?: Record<string, { min?: RangeValue; max?: RangeValue }>;
     exists?: string[];
     notExists?: string[];
@@ -12,17 +18,18 @@ export class SearchPayload {
         offset?: number;
         limit?: number;
     };
-    filter?: unknown;
+    filter?: SearchObject;
+    metadata?: SearchMetadata;
     sort?: Array<{
         field: string;
         order: 'asc' | 'desc';
     }>;
-    [key: string]: unknown;
     locale?: string;
 }
 
+/** Generic search result envelope. */
 export class SearchResult<T> {
     hits!: T[];
     total!: number;
-    [key: string]: unknown;
+    metadata?: SearchMetadata;
 }

@@ -1,0 +1,1 @@
+{"parameters":[{"name":"preview","required":false,"in":"query","schema":{"type":"boolean"}},{"name":"referrer","required":false,"in":"query","schema":{"type":"string"}},{"name":"locale","required":true,"in":"query","schema":{"type":"string"}},{"name":"query","required":false,"in":"query","schema":{"type":"string"}}]}

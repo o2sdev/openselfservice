@@ -1,0 +1,1 @@
+{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"providerId":{"type":"string"},"returnUrl":{"type":"string"},"cancelUrl":{"type":"string"},"metadata":{"type":"object"}},"required":["providerId","returnUrl"],"title":"SetPaymentBody"}}}}}

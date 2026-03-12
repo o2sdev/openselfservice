@@ -1,0 +1,1 @@
+{"responses":{"201":{"description":"Item added to cart."},"400":{"description":"Invalid cart item payload."}}}

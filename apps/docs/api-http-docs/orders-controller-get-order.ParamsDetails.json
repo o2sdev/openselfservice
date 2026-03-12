@@ -1,0 +1,1 @@
+{"parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"limit","required":false,"in":"path","schema":{"type":"number"}},{"name":"offset","required":false,"in":"path","schema":{"type":"number"}},{"name":"sort","required":false,"in":"path","schema":{"type":"string"}}]}

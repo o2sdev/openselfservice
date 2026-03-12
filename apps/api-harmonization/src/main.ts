@@ -1,6 +1,7 @@
 import { LogLevel } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as telemetry from '@o2s/telemetry';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
@@ -51,6 +52,19 @@ async function bootstrap() {
     app.use(cookieParser());
     app.use(compression());
     app.set('query parser', 'extended');
+
+    const swaggerConfig = new DocumentBuilder()
+        .setTitle('O2S API Harmonization HTTP API')
+        .setDescription('Live API documentation generated from current NestJS controllers and DTOs.')
+        .setVersion('1.0.0')
+        .addBearerAuth()
+        .build();
+    const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('docs-api', app, swaggerDocument, {
+        jsonDocumentUrl: 'docs-api-json',
+        yamlDocumentUrl: 'docs-api-yaml',
+        useGlobalPrefix: Boolean(process.env.API_PREFIX),
+    });
 
     app.enableShutdownHooks();
 

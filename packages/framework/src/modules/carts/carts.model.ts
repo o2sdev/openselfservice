@@ -3,14 +3,17 @@ import { Product } from '../products/products.model';
 
 import { Address, Pagination, Price, Unit } from '@/utils/models';
 
+/** Promotion behavior type applied to cart totals. */
 export type PromotionType = 'PERCENTAGE' | 'FIXED_AMOUNT' | 'FREE_SHIPPING';
 
+/** Selected payment method for a cart. */
 export class PaymentMethod {
     id!: string;
     name!: string;
     description?: string;
 }
 
+/** Promotion/coupon entry applied to a cart. */
 export class Promotion {
     id!: string;
     code!: string;
@@ -20,6 +23,7 @@ export class Promotion {
     value?: string;
 }
 
+/** Single line item inside a cart. */
 export class CartItem {
     id!: string;
     sku!: string;
@@ -34,6 +38,7 @@ export class CartItem {
     metadata?: Record<string, unknown>;
 }
 
+/** Cart aggregate used across cart and checkout flows. */
 export class Cart {
     id!: string;
     customerId?: string;
@@ -59,8 +64,11 @@ export class Cart {
     promotions?: Promotion[];
     metadata?: Record<string, unknown>;
     notes?: string;
-    email?: string; // For guest checkout
-    paymentSessionId?: string; // Reference to active payment session
+    /** Customer email, typically required for guest checkout. */
+    email?: string;
+    /** Identifier of active payment session linked to cart. */
+    paymentSessionId?: string;
 }
 
+/** Paginated cart list. */
 export type Carts = Pagination.Paginated<Cart>;

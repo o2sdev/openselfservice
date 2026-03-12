@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS, Invoices } from '@o2s/configs.integrations';
+import dayjs from 'dayjs';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
@@ -23,7 +24,13 @@ export class PaymentsHistoryService {
         headers: Models.Headers.AppHeaders,
     ): Observable<PaymentsHistoryBlock> {
         const cms = this.cmsService.getPaymentsHistoryBlock({ ...query, locale: headers['x-locale'] });
-        const invoices = this.invoiceService.getInvoiceList(query);
+        const invoices = this.invoiceService.getInvoiceList({
+            limit: query.limit,
+            offset: query.offset,
+            locale: headers['x-locale'],
+            dateFrom: query.dateFrom ? dayjs(query.dateFrom).toISOString() : undefined,
+            dateTo: query.dateTo ? dayjs(query.dateTo).toISOString() : undefined,
+        });
 
         return forkJoin([cms, invoices]).pipe(
             map(([cms, invoices]) => {

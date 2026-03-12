@@ -1,5 +1,6 @@
 import { Block } from '@/utils/models';
 
+/** CMS block configuration for recently updated tickets list. */
 export class TicketRecentBlock extends Block.Block {
     title?: string;
     noResults?: string;

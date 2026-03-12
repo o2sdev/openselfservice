@@ -1,5 +1,6 @@
 import { Block, Link, Media } from '@/utils/models';
 
+/** CMS block configuration for bento-style card grid section. */
 export class BentoGridBlock extends Block.Block {
     preTitle?: string;
     title?: string;
@@ -7,6 +8,7 @@ export class BentoGridBlock extends Block.Block {
     items?: Card[];
 }
 
+/** Single card item rendered inside bento grid block. */
 export class Card {
     title?: string;
     description?: string;

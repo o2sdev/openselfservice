@@ -3,6 +3,7 @@ import { Product } from '@/modules/products/products.model';
 
 import { Block, DataTable, Filters, InfoCard, Mapping, Pagination } from '@/utils/models';
 
+/** CMS block configuration for order details view. */
 export class OrderDetailsBlock extends Block.Block {
     title?: string;
     fieldMapping!: Mapping.Mapping<Order & OrderItem>;

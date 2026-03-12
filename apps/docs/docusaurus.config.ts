@@ -7,7 +7,7 @@ import tailwindPlugin from './plugins/tailwind-config';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-let hideDocs = false;
+const hideDocs = false;
 
 const config: Config = {
     title: 'Open Self Service',
@@ -257,6 +257,36 @@ const config: Config = {
         },
     },
     plugins: [
+        function webpackNodePolyfillsPlugin() {
+            return {
+                name: 'webpack-node-polyfills',
+                configureWebpack() {
+                    return {
+                        resolve: {
+                            fallback: {
+                                path: require.resolve('path-browserify'),
+                            },
+                        },
+                    };
+                },
+            };
+        },
+        [
+            'docusaurus-plugin-openapi-docs',
+            {
+                id: 'openapi',
+                docsPluginId: 'classic',
+                config: {
+                    framework: {
+                        specPath: 'static/openapi/framework-live.json',
+                        outputDir: 'docs/api-http',
+                        sidebarOptions: {
+                            groupPathsBy: 'tag',
+                        },
+                    },
+                },
+            },
+        ],
         tailwindPlugin,
         '@docusaurus/theme-mermaid',
         'docusaurus-plugin-image-zoom',
@@ -277,6 +307,7 @@ const config: Config = {
                     : {
                           sidebarPath: './sidebars.ts',
                           routeBasePath: '/docs',
+                          docItemComponent: '@theme/ApiItem',
                           // Please change this to your repo.
                           // Remove this to remove the "edit this page" links.
                           // editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
@@ -576,6 +607,7 @@ const config: Config = {
     } satisfies Preset.ThemeConfig,
 
     themes: [
+        'docusaurus-theme-openapi-docs',
         ...(hideDocs
             ? []
             : [

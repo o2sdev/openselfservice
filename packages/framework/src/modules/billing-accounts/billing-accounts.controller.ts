@@ -1,4 +1,5 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
@@ -8,12 +9,24 @@ import { GetBillingAccountParams, GetBillingAccountsListQuery } from './billing-
 import { BillingAccountService } from './billing-accounts.service';
 import { AppHeaders } from '@/utils/models/headers';
 
+/**
+ * HTTP controller for billing accounts. Base path: `/billing-accounts`. All methods delegate to {@link BillingAccountService}.
+ */
 @Controller('/billing-accounts')
 @UseInterceptors(LoggerService)
+@ApiTags('billing-accounts')
 export class BillingAccountController {
     constructor(protected readonly billingAccountService: BillingAccountService) {}
 
     @Get()
+    @ApiOperation({ summary: 'List billing accounts' })
+    @ApiQuery({
+        name: 'query',
+        required: false,
+        type: String,
+        description: 'Billing account list filters and pagination query.',
+    })
+    @ApiResponse({ status: 200, description: 'Returns billing accounts list.' })
     getBillingAccounts(
         @Query() query: GetBillingAccountsListQuery,
         @Headers() headers: AppHeaders,
@@ -22,6 +35,9 @@ export class BillingAccountController {
     }
 
     @Get(':id')
+    @ApiOperation({ summary: 'Get billing account by id' })
+    @ApiParam({ name: 'id', type: String, description: 'Billing account identifier.' })
+    @ApiResponse({ status: 200, description: 'Returns billing account details.' })
     getBillingAccount(
         @Param() params: GetBillingAccountParams,
         @Headers() headers: AppHeaders,
