@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 3.0.0
+
+### Major Changes
+
+- 1df1ec2: added fix related to dxp starter and mocked data
+
 ## 2.0.0
 
 ### Major Changes

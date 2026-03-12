@@ -46,7 +46,7 @@ CLAUDE.md
 storybook-static
 
 # Dist folders
-dist
+/dist
 
 # AI rules
 .ai
