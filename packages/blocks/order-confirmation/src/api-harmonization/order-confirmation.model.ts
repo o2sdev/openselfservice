@@ -1,6 +1,6 @@
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { Models } from '@o2s/framework/modules';
+import { CMS, Models, Orders } from '@o2s/framework/modules';
 
 /** Order item for confirmation display */
 export interface OrderConfirmationItem {
@@ -38,43 +38,29 @@ export class OrderConfirmationBlock extends ApiModels.Block.Block {
     __typename!: 'OrderConfirmationBlock';
     title!: string;
     subtitle?: string;
-    orderNumberLabel!: string;
-    productsTitle!: string;
-    productsCountLabel?: string;
-    summaryTitle!: string;
-    subtotalLabel!: string;
-    taxLabel!: string;
-    discountLabel?: string;
-    shippingLabel?: string;
-    totalLabel!: string;
-    shippingSection?: {
-        title: string;
-        addressLabel?: string;
-        methodLabel?: string;
-    };
-    billingSection?: {
-        title: string;
-        addressLabel?: string;
-        taxIdLabel?: string;
-    };
-    message?: string;
-    buttons!: {
-        viewOrders: string;
-        continueShopping: string;
-    };
-    viewOrdersPath!: string;
-    continueShoppingPath!: string;
-    statusLabels?: Record<string, string>;
-    errors!: {
-        loadError: string;
-        orderNotFound: string;
-    };
+    orderNumberLabel!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['orderNumberLabel'];
+    productsTitle!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['productsTitle'];
+    productsCountLabel!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['productsCountLabel'];
+    summaryTitle!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['summaryTitle'];
+    subtotalLabel!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['subtotalLabel'];
+    taxLabel!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['taxLabel'];
+    discountLabel!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['discountLabel'];
+    shippingLabel!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['shippingLabel'];
+    totalLabel!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['totalLabel'];
+    shippingSection!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['shippingSection'];
+    billingSection!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['billingSection'];
+    message?: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['message'];
+    buttons!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['buttons'];
+    viewOrdersPath!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['viewOrdersPath'];
+    continueShoppingPath!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['continueShoppingPath'];
+    statusLabels!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['statusLabels'];
+    errors!: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock['errors'];
     /** Order data - from API by orderId */
     order!: {
         id: string;
         createdAt?: string;
-        status?: string;
-        paymentStatus?: string;
+        status?: Orders.Model.OrderStatus;
+        paymentStatus?: Orders.Model.PaymentStatus;
         items: {
             data: OrderConfirmationItem[];
             total: number;

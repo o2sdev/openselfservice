@@ -5,22 +5,22 @@ export class OrderConfirmationBlock extends Block.Block {
     subtitle?: string;
     orderNumberLabel!: string;
     productsTitle!: string;
-    productsCountLabel?: string;
+    productsCountLabel!: string;
     summaryTitle!: string;
     subtotalLabel!: string;
     taxLabel!: string;
-    discountLabel?: string;
-    shippingLabel?: string;
+    discountLabel!: string;
+    shippingLabel!: string;
     totalLabel!: string;
-    shippingSection?: {
+    shippingSection!: {
         title: string;
-        addressLabel?: string;
-        methodLabel?: string;
+        addressLabel: string;
+        methodLabel: string;
     };
-    billingSection?: {
+    billingSection!: {
         title: string;
-        addressLabel?: string;
-        taxIdLabel?: string;
+        addressLabel: string;
+        taxIdLabel: string;
     };
     message?: string;
     buttons!: {
@@ -29,8 +29,8 @@ export class OrderConfirmationBlock extends Block.Block {
     };
     viewOrdersPath!: string;
     continueShoppingPath!: string;
-    statusLabels?: Record<string, string>;
-    errors?: {
+    statusLabels!: Record<string, string>;
+    errors!: {
         loadError: string;
         orderNotFound: string;
     };

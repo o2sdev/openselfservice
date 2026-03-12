@@ -15,13 +15,6 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { OrderConfirmationPureProps } from './OrderConfirmation.types';
 
-const formatStreetAddress = (addr: { streetName: string; streetNumber?: string; apartment?: string }) => {
-    let street = addr.streetName;
-    if (addr.streetNumber) street += ` ${addr.streetNumber}`;
-    if (addr.apartment) street += `, ${addr.apartment}`;
-    return street;
-};
-
 export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps>> = ({
     locale,
     accessToken: _accessToken,
@@ -48,8 +41,9 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
     order,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { formatStreetAddress } = Utils.FormatAddress;
 
-    if (!title || !order) {
+    if (!order) {
         return null;
     }
 
@@ -71,14 +65,8 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                                 {orderNumberLabel} <strong>{order.id}</strong>
                             </Typography>
                             {order.status && (
-                                <Badge
-                                    variant={
-                                        Mappings.OrderBadge.orderBadgeVariants[
-                                            order.status as keyof typeof Mappings.OrderBadge.orderBadgeVariants
-                                        ] ?? 'outline'
-                                    }
-                                >
-                                    {statusLabels?.[order.status] ?? order.status}
+                                <Badge variant={Mappings.OrderBadge.orderBadgeVariants[order.status] ?? 'outline'}>
+                                    {statusLabels[order.status] ?? order.status}
                                 </Badge>
                             )}
                         </div>
