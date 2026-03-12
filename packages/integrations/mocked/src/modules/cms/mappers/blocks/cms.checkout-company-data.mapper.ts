@@ -31,7 +31,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
             required: true,
         },
         taxId: {
-            label: 'Tax ID (NIP)',
+            label: 'Tax ID',
             placeholder: 'XXXXXXXXXX',
             required: true,
         },

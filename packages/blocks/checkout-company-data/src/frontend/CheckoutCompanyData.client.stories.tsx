@@ -47,7 +47,7 @@ const baseBlock = {
             required: true,
         },
         taxId: {
-            label: 'Tax ID (NIP)',
+            label: 'Tax ID',
             placeholder: 'XXXXXXXXXX',
             required: true,
         },
