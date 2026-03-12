@@ -7,6 +7,7 @@ import { Price } from '@o2s/ui/components/Price';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
+import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { CartSummaryButton, CartSummaryProps } from './CartSummary.types';
@@ -177,3 +178,12 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
         </div>
     );
 };
+
+export const CartSummarySkeleton: React.FC = () => (
+    <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
+        <Skeleton className="h-6 w-32" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-6 w-full" />
+    </div>
+);

@@ -9,11 +9,10 @@ import { Carts, Models, Payments } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
-import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
+import { CartSummary, CartSummarySkeleton } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
 
-import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '../sdk';
@@ -185,12 +184,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
 
                 <div className="lg:col-span-1">
                     {isInitialLoadPending ? (
-                        <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
-                            <Skeleton className="h-6 w-32" />
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-6 w-full" />
-                        </div>
+                        <CartSummarySkeleton />
                     ) : totals ? (
                         <CartSummary
                             subtotal={totals.subtotal}

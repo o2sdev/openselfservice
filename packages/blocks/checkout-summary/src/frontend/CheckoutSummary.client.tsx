@@ -9,7 +9,7 @@ import { Checkout } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
-import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
+import { CartSummary, CartSummarySkeleton } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { Image } from '@o2s/ui/components/Image';
 import { Price } from '@o2s/ui/components/Price';
@@ -300,11 +300,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 <div className="lg:col-span-1">
                     <div className="sticky top-6">
                         {isInitialLoadPending ? (
-                            <div className="flex flex-col gap-3 p-6 bg-card rounded-lg border border-border">
-                                <Skeleton className="h-4 w-full" />
-                                <Skeleton className="h-4 w-full" />
-                                <Skeleton className="h-6 w-full" />
-                            </div>
+                            <CartSummarySkeleton />
                         ) : totals ? (
                             <CartSummary
                                 subtotal={totals.subtotal}
