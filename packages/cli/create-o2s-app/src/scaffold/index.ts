@@ -1,3 +1,4 @@
+import { INTEGRATIONS_PATH } from '../constants';
 import { WizardAnswers } from '../types';
 import { cleanupProject } from './cleanup';
 import { generateEnvFiles } from './generate-env';
@@ -11,6 +12,33 @@ import { transformPageModel } from './transform-page-model';
 import { transformRenderBlocks } from './transform-render-blocks';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+
+const readIntegrationVersions = async (
+    projectDir: string,
+    selectedIntegrations: string[],
+): Promise<Record<string, string>> => {
+    const versions: Record<string, string> = {};
+
+    for (const name of selectedIntegrations) {
+        const pkgPath = path.join(projectDir, INTEGRATIONS_PATH, name, 'package.json');
+
+        if (!(await fs.pathExists(pkgPath))) {
+            throw new Error(
+                `Integration "${name}" not found at expected path: ${pkgPath}. Ensure the integration exists in the template.`,
+            );
+        }
+
+        const pkg = await fs.readJson(pkgPath);
+
+        if (!pkg.version) {
+            throw new Error(`Integration "${name}" has no version field in ${pkgPath}.`);
+        }
+
+        versions[name] = pkg.version;
+    }
+
+    return versions;
+};
 
 export const scaffold = async (
     tempDir: string,
@@ -33,10 +61,13 @@ export const scaffold = async (
     console.log(`Creating project in "${targetDir}"...`);
     await fs.move(tempDir, targetDir);
 
-    // Step 2: Remove unneeded directories (all packages/* are removed; deps come from npm registry)
+    // Step 2: Read integration versions before cleanup removes the source directories
+    const integrationVersions = await readIntegrationVersions(targetDir, selectedIntegrations);
+
+    // Step 3: Remove unneeded directories (all packages/* are removed; deps come from npm registry)
     await cleanupProject(targetDir);
 
-    // Step 3: Remove unselected block/integration references from app source files
+    // Step 4: Remove unselected block/integration references from app source files
     console.log('Configuring project for selected blocks...');
     await Promise.all([
         transformAppModule(targetDir, selectedBlocks),
@@ -45,24 +76,25 @@ export const scaffold = async (
         transformAppsPackageJson(targetDir, selectedBlocks, selectedIntegrations),
     ]);
 
-    // Step 4: Clean up root package.json (remove workspace entries for deleted dirs)
+    // Step 5: Clean up root package.json (remove workspace entries for deleted dirs)
     await transformRootPackageJson(targetDir);
 
-    // Step 5: Configure integration source files and generate environment
+    // Step 6: Configure integration source files and generate environment
     console.log('Configuring integrations...');
     const uncoveredModules = await transformIntegrationConfigs(
         targetDir,
         selectedIntegrations,
         conflictResolutions,
         integrationModules,
+        integrationVersions,
     );
     await generateEnvFiles(targetDir, envVars, selectedIntegrations);
     warnUnconfiguredModules(uncoveredModules);
 
-    // Step 6: Clean symlinks from package-lock.json and install dependencies
-    await cleanPackageLock(targetDir);
+    // Step 7: Clean symlinks from package-lock.json and install dependencies
+    await cleanPackageLock(targetDir, selectedIntegrations);
     if (!skipInstall) {
-        await installDependencies(targetDir);
+        await installDependencies(targetDir, selectedIntegrations);
     }
 
     return { targetDir, uncoveredModules };
