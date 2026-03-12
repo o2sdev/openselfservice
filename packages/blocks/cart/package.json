@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.cart",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "private": false,
     "license": "MIT",
     "description": "Shopping cart block with item management, quantity controls and order summary.",
