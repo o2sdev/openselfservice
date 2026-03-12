@@ -73,7 +73,6 @@ const baseBlock = {
         },
         shippingMethod: {
             label: 'Shipping method',
-            placeholder: 'Select method',
             required: true,
         },
     },
@@ -102,6 +101,7 @@ const baseBlock = {
         shippingLabel: 'Shipping',
         freeLabel: 'Free',
     },
+    cartPath: '/cart',
 };
 
 const meta = {

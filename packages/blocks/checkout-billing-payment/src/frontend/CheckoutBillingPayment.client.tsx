@@ -5,7 +5,7 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Carts, Models, Payments } from '@o2s/framework/modules';
+import { Carts, Models, Orders, Payments } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
@@ -50,9 +50,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
           }
         | undefined
     >();
-    const [cartShippingMethod, setCartShippingMethod] = useState<
-        { name: string; total: Models.Price.Price } | undefined
-    >();
+    const [cartShippingMethod, setCartShippingMethod] = useState<Orders.Model.ShippingMethod | undefined>();
     const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
     const [paymentProviders, setPaymentProviders] = useState<Payments.Model.PaymentProvider[]>([]);
     const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
@@ -80,12 +78,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         discountTotal: cart.discountTotal,
                     });
                 }
-                if (cart.shippingMethod?.total) {
-                    setCartShippingMethod({
-                        name: cart.shippingMethod.name,
-                        total: cart.shippingMethod.total,
-                    });
-                }
+                setCartShippingMethod(cart.shippingMethod);
                 setCartPromotions(cart.promotions);
                 const providers = await sdk.payments.getProviders(
                     { ...(cart.regionId && { regionId: cart.regionId }) },
@@ -204,7 +197,11 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                             tax={totals.tax}
                             total={totals.total}
                             discountTotal={totals.discountTotal}
-                            shippingMethod={cartShippingMethod}
+                            shippingMethod={
+                                cartShippingMethod?.total
+                                    ? { name: cartShippingMethod.name, total: cartShippingMethod.total }
+                                    : undefined
+                            }
                             promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}

@@ -2,7 +2,7 @@
 
 import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import { boolean as YupBoolean, object as YupObject, string as YupString } from 'yup';
 
 import { Carts, Models, Orders } from '@o2s/framework/modules';
@@ -11,12 +11,12 @@ import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
+import { FormField } from '@o2s/ui/components/Checkout/FormField';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { Price } from '@o2s/ui/components/Price';
 import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
 
 import { Checkbox } from '@o2s/ui/elements/checkbox';
-import { Input } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
@@ -46,19 +46,20 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     const router = useRouter();
     const { toast } = useToast();
 
-    const [totals, setTotals] = useState<{
-        subtotal: Models.Price.Price;
-        tax: Models.Price.Price;
-        total: Models.Price.Price;
-        discountTotal?: Models.Price.Price;
-    } | null>(null);
+    const [totals, setTotals] = useState<
+        | {
+              subtotal: Models.Price.Price;
+              tax: Models.Price.Price;
+              total: Models.Price.Price;
+              discountTotal?: Models.Price.Price;
+          }
+        | undefined
+    >();
     const [shippingOptions, setShippingOptions] = useState<Orders.Model.ShippingMethod[]>([]);
-    const [cartShippingMethod, setCartShippingMethod] = useState<
-        { name: string; total: Models.Price.Price } | undefined
-    >(undefined);
-    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>(undefined);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+    const [cartShippingMethod, setCartShippingMethod] = useState<Orders.Model.ShippingMethod | undefined>();
+    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
+    const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
+    const [isSubmitPending, startSubmitTransition] = useTransition();
     const [initialFormValues, setInitialFormValues] = useState({
         firstName: '',
         lastName: '',
@@ -76,13 +77,12 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) {
-            toast({ description: errors?.cartNotFound, variant: 'destructive' });
-            router.replace(cartPath ?? '/');
+            toast({ description: errors.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath);
             return;
         }
 
-        setIsLoading(true);
-        (async () => {
+        startInitialLoadTransition(async () => {
             try {
                 const [cart, options] = await Promise.all([
                     sdk.carts.getCart(cartId, { 'x-locale': locale }, accessToken),
@@ -98,12 +98,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                 }
                 setShippingOptions(options.data ?? []);
                 setCartPromotions(cart.promotions);
-                if (cart.shippingMethod) {
-                    setCartShippingMethod({
-                        name: cart.shippingMethod.name,
-                        total: cart.shippingMethod.total ?? { value: 0, currency: cart.currency },
-                    });
-                }
+                setCartShippingMethod(cart.shippingMethod);
                 const sameAsBilling = cart.metadata?.sameAsBillingAddress === true;
                 const sourceAddress = sameAsBilling ? cart.billingAddress : cart.shippingAddress;
                 setInitialFormValues((prev) => ({
@@ -125,31 +120,64 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                     ...(cart.shippingMethod ? { shippingMethod: cart.shippingMethod.id } : {}),
                 }));
             } catch {
-                toast({ description: errors?.cartNotFound, variant: 'destructive' });
-                router.replace(cartPath ?? '/');
-            } finally {
-                setIsLoading(false);
+                toast({ description: errors.cartNotFound, variant: 'destructive' });
+                router.replace(cartPath);
             }
-        })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [locale, accessToken]);
+        });
+    }, [locale, accessToken, toast, errors.cartNotFound, router, cartPath]);
 
-    if (!title || !fields || !buttons || !summaryLabels || !errors) {
-        return null;
-    }
+    const handleSubmit = (values: typeof initialFormValues) => {
+        startSubmitTransition(async () => {
+            const cartId = localStorage.getItem(CART_ID_KEY);
+            if (!cartId) return;
+            try {
+                await sdk.checkout.setAddresses(
+                    cartId,
+                    {
+                        sameAsBillingAddress: values.sameAsBillingAddress,
+                        ...(!values.sameAsBillingAddress && {
+                            shippingAddress: {
+                                firstName: values.firstName || undefined,
+                                lastName: values.lastName || undefined,
+                                phone: values.phone || undefined,
+                                streetName: values.streetName,
+                                streetNumber: values.streetNumber || undefined,
+                                apartment: values.apartment || undefined,
+                                city: values.city,
+                                postalCode: values.postalCode,
+                                country: values.country,
+                            },
+                        }),
+                    },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                await sdk.checkout.setShippingMethod(
+                    cartId,
+                    { shippingOptionId: values.shippingMethod },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                setCartShippingMethod(shippingOptions.find((o) => o.id === values.shippingMethod));
+                router.push(buttons.next.path);
+            } catch {
+                toast({ variant: 'destructive', description: errors.submitError });
+            }
+        });
+    };
 
     const validationSchema = YupObject().shape({
         firstName: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) => (fields.firstName?.required ? schema.required(errors.required) : schema),
+            then: (schema) => (fields.firstName.required ? schema.required(errors.required) : schema),
         }),
         lastName: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) => (fields.lastName?.required ? schema.required(errors.required) : schema),
+            then: (schema) => (fields.lastName.required ? schema.required(errors.required) : schema),
         }),
         phone: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) => (fields.phone?.required ? schema.required(errors.required) : schema),
+            then: (schema) => (fields.phone.required ? schema.required(errors.required) : schema),
         }),
         streetName: YupString().when('sameAsBillingAddress', {
             is: false,
@@ -157,7 +185,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
         }),
         streetNumber: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) => (fields.address.streetNumber?.required ? schema.required(errors.required) : schema),
+            then: (schema) => (fields.address.streetNumber.required ? schema.required(errors.required) : schema),
         }),
         apartment: YupString(),
         city: YupString().when('sameAsBillingAddress', {
@@ -166,15 +194,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
         }),
         postalCode: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) =>
-                fields.address.postalCode.required
-                    ? schema
-                          .required(errors.required)
-                          .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                          .matches(/^\d{5}$/, errors.invalidPostalCode)
-                    : schema
-                          .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                          .matches(/^\d{5}$|^$/, errors.invalidPostalCode),
+            then: (schema) => (fields.address.postalCode.required ? schema.required(errors.required) : schema),
         }),
         country: YupString().when('sameAsBillingAddress', {
             is: false,
@@ -186,7 +206,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
 
     return (
         <div className="w-full flex flex-col gap-8">
-            {stepIndicator && <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />}
+            <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />
             <div className="flex flex-col gap-2">
                 <Typography variant="h1">{title}</Typography>
                 {subtitle && (
@@ -202,60 +222,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         initialValues={initialFormValues}
                         enableReinitialize
                         validationSchema={validationSchema}
-                        onSubmit={async (values, { setSubmitting }) => {
-                            setIsFormSubmitting(true);
-                            const cartId = localStorage.getItem(CART_ID_KEY);
-                            if (!cartId) {
-                                setSubmitting(false);
-                                setIsFormSubmitting(false);
-                                return;
-                            }
-                            try {
-                                await sdk.checkout.setAddresses(
-                                    cartId,
-                                    {
-                                        sameAsBillingAddress: values.sameAsBillingAddress,
-                                        ...(!values.sameAsBillingAddress && {
-                                            shippingAddress: {
-                                                firstName: values.firstName || undefined,
-                                                lastName: values.lastName || undefined,
-                                                phone: values.phone || undefined,
-                                                streetName: values.streetName,
-                                                streetNumber: values.streetNumber || undefined,
-                                                apartment: values.apartment || undefined,
-                                                city: values.city,
-                                                postalCode: values.postalCode,
-                                                country: values.country,
-                                            },
-                                        }),
-                                    },
-                                    { 'x-locale': locale },
-                                    accessToken,
-                                );
-                                const selectedOption = shippingOptions.find((o) => o.id === values.shippingMethod);
-                                await sdk.checkout.setShippingMethod(
-                                    cartId,
-                                    { shippingOptionId: values.shippingMethod },
-                                    { 'x-locale': locale },
-                                    accessToken,
-                                );
-                                if (selectedOption) {
-                                    setCartShippingMethod({
-                                        name: selectedOption.name,
-                                        total: selectedOption.total ?? {
-                                            value: 0,
-                                            currency: 'EUR' as Models.Price.Currency,
-                                        },
-                                    });
-                                }
-                                router.push(buttons.next.path);
-                            } catch {
-                                toast({ variant: 'destructive', description: errors.submitError });
-                            } finally {
-                                setSubmitting(false);
-                                setIsFormSubmitting(false);
-                            }
-                        }}
+                        onSubmit={handleSubmit}
                         validateOnBlur={true}
                         validateOnMount={false}
                         validateOnChange={false}
@@ -297,119 +264,10 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                     {!values.sameAsBillingAddress && (
                                         <>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div className="flex flex-col gap-2">
-                                                    <Label htmlFor="firstName">
-                                                        {fields.firstName?.label}
-                                                        {fields.firstName?.required && (
-                                                            <span className="text-destructive"> *</span>
-                                                        )}
-                                                    </Label>
-                                                    <Field name="firstName">
-                                                        {({
-                                                            field,
-                                                            form: { touched, errors: formErrors },
-                                                        }: FieldProps<string>) => (
-                                                            <>
-                                                                <Input
-                                                                    id="firstName"
-                                                                    {...field}
-                                                                    placeholder={fields.firstName?.placeholder}
-                                                                    className={
-                                                                        touched.firstName && formErrors.firstName
-                                                                            ? 'border-destructive'
-                                                                            : ''
-                                                                    }
-                                                                />
-                                                                <ErrorMessage name="firstName">
-                                                                    {(msg) => (
-                                                                        <Typography
-                                                                            variant="small"
-                                                                            className="text-destructive"
-                                                                        >
-                                                                            {msg}
-                                                                        </Typography>
-                                                                    )}
-                                                                </ErrorMessage>
-                                                            </>
-                                                        )}
-                                                    </Field>
-                                                </div>
-                                                <div className="flex flex-col gap-2">
-                                                    <Label htmlFor="lastName">
-                                                        {fields.lastName?.label}
-                                                        {fields.lastName?.required && (
-                                                            <span className="text-destructive"> *</span>
-                                                        )}
-                                                    </Label>
-                                                    <Field name="lastName">
-                                                        {({
-                                                            field,
-                                                            form: { touched, errors: formErrors },
-                                                        }: FieldProps<string>) => (
-                                                            <>
-                                                                <Input
-                                                                    id="lastName"
-                                                                    {...field}
-                                                                    placeholder={fields.lastName?.placeholder}
-                                                                    className={
-                                                                        touched.lastName && formErrors.lastName
-                                                                            ? 'border-destructive'
-                                                                            : ''
-                                                                    }
-                                                                />
-                                                                <ErrorMessage name="lastName">
-                                                                    {(msg) => (
-                                                                        <Typography
-                                                                            variant="small"
-                                                                            className="text-destructive"
-                                                                        >
-                                                                            {msg}
-                                                                        </Typography>
-                                                                    )}
-                                                                </ErrorMessage>
-                                                            </>
-                                                        )}
-                                                    </Field>
-                                                </div>
+                                                <FormField name="firstName" field={fields.firstName} />
+                                                <FormField name="lastName" field={fields.lastName} />
                                             </div>
-                                            <div className="flex flex-col gap-2">
-                                                <Label htmlFor="phone">
-                                                    {fields.phone?.label}
-                                                    {fields.phone?.required && (
-                                                        <span className="text-destructive"> *</span>
-                                                    )}
-                                                </Label>
-                                                <Field name="phone">
-                                                    {({
-                                                        field,
-                                                        form: { touched, errors: formErrors },
-                                                    }: FieldProps<string>) => (
-                                                        <>
-                                                            <Input
-                                                                id="phone"
-                                                                type="tel"
-                                                                {...field}
-                                                                placeholder={fields.phone?.placeholder}
-                                                                className={
-                                                                    touched.phone && formErrors.phone
-                                                                        ? 'border-destructive'
-                                                                        : ''
-                                                                }
-                                                            />
-                                                            <ErrorMessage name="phone">
-                                                                {(msg) => (
-                                                                    <Typography
-                                                                        variant="small"
-                                                                        className="text-destructive"
-                                                                    >
-                                                                        {msg}
-                                                                    </Typography>
-                                                                )}
-                                                            </ErrorMessage>
-                                                        </>
-                                                    )}
-                                                </Field>
-                                            </div>
+                                            <FormField name="phone" type="tel" field={fields.phone} />
                                             <AddressFields fields={fields.address} locale={locale} />
                                         </>
                                     )}
@@ -417,11 +275,11 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
 
                                 <Separator />
 
-                                <div className="flex flex-col gap-2">
-                                    <Label>
+                                <fieldset className="flex flex-col gap-2">
+                                    <legend className="text-sm font-medium leading-none mb-2">
                                         {fields.shippingMethod.label}
                                         {fields.shippingMethod.required && <span className="text-destructive"> *</span>}
-                                    </Label>
+                                    </legend>
                                     <Field name="shippingMethod">
                                         {({
                                             field,
@@ -456,14 +314,14 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                             </>
                                         )}
                                     </Field>
-                                </div>
+                                </fieldset>
                             </Form>
                         )}
                     </Formik>
                 </div>
 
                 <div className="lg:col-span-1">
-                    {isLoading ? (
+                    {isInitialLoadPending ? (
                         <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
                             <Skeleton className="h-6 w-32" />
                             <Skeleton className="h-4 w-full" />
@@ -476,13 +334,17 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                             tax={totals.tax}
                             total={totals.total}
                             discountTotal={totals.discountTotal}
-                            shippingMethod={cartShippingMethod}
+                            shippingMethod={
+                                cartShippingMethod?.total
+                                    ? { name: cartShippingMethod.name, total: cartShippingMethod.total }
+                                    : undefined
+                            }
                             promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}
                             primaryButton={{
                                 label: buttons.next.label,
-                                disabled: isFormSubmitting,
+                                disabled: isSubmitPending,
                                 action: { type: 'submit', form: FORM_ID },
                             }}
                             secondaryButton={{

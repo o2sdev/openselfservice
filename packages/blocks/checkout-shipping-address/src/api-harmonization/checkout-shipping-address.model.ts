@@ -1,72 +1,15 @@
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { Models } from '@o2s/framework/modules';
-
-/** Field config with label, placeholder, required */
-interface CheckoutShippingAddressField {
-    label: string;
-    placeholder?: string;
-    required: boolean;
-}
-
-/** Shipping method option (from API) */
-export interface CheckoutShippingAddressShippingOption {
-    id: string;
-    name: string;
-    description?: string;
-    total?: Models.Price.Price;
-}
-
-/** Labels for cart summary sidebar */
-export interface CheckoutShippingAddressSummaryLabels {
-    title: string;
-    subtotalLabel: string;
-    taxLabel: string;
-    totalLabel: string;
-    discountLabel?: string;
-    shippingLabel?: string;
-    freeLabel?: string;
-}
+import { CMS } from '@o2s/framework/modules';
 
 export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {
     __typename!: 'CheckoutShippingAddressBlock';
     title!: string;
     subtitle?: string;
-    fields!: {
-        sameAsBillingAddress: { label: string };
-        firstName: CheckoutShippingAddressField;
-        lastName: CheckoutShippingAddressField;
-        phone: CheckoutShippingAddressField;
-        address: {
-            streetName: CheckoutShippingAddressField;
-            streetNumber?: CheckoutShippingAddressField;
-            apartment?: CheckoutShippingAddressField;
-            city: CheckoutShippingAddressField;
-            postalCode: CheckoutShippingAddressField;
-            country: CheckoutShippingAddressField;
-        };
-        shippingMethod: {
-            label: string;
-            placeholder?: string;
-            required: boolean;
-        };
-    };
-    buttons!: {
-        back: { label: string; path: string };
-        next: { label: string; path: string };
-    };
-    errors!: {
-        required: string;
-        invalidPostalCode: string;
-        cartNotFound: string;
-        submitError: string;
-    };
-    summaryLabels!: CheckoutShippingAddressSummaryLabels;
-    totals?: {
-        subtotal: Models.Price.Price;
-        tax: Models.Price.Price;
-        total: Models.Price.Price;
-    };
-    stepIndicator?: { steps: string[]; currentStep: number };
-    cartPath?: string;
+    fields!: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock['fields'];
+    buttons!: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock['buttons'];
+    errors!: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock['errors'];
+    summaryLabels!: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock['summaryLabels'];
+    stepIndicator!: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock['stepIndicator'];
+    cartPath!: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock['cartPath'];
 }

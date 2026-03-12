@@ -57,7 +57,6 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_EN: CMS.Model.CheckoutShippingAddressBlock.
         },
         shippingMethod: {
             label: 'Shipping method',
-            placeholder: 'Select method',
             required: true,
         },
     },
@@ -144,7 +143,6 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_DE: CMS.Model.CheckoutShippingAddressBlock.
         },
         shippingMethod: {
             label: 'Versandart',
-            placeholder: 'Methode wählen',
             required: true,
         },
     },
@@ -231,7 +229,6 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_PL: CMS.Model.CheckoutShippingAddressBlock.
         },
         shippingMethod: {
             label: 'Metoda dostawy',
-            placeholder: 'Wybierz metodę',
             required: true,
         },
     },

@@ -5,7 +5,7 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Carts, Models } from '@o2s/framework/modules';
+import { Carts, Models, Orders } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
@@ -55,6 +55,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
           }
         | undefined
     >();
+    const [cartShippingMethod, setCartShippingMethod] = useState<Orders.Model.ShippingMethod | undefined>();
     const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
     const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
     const [isSubmitPending, startSubmitTransition] = useTransition();
@@ -93,6 +94,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         discountTotal: cart.discountTotal,
                     });
                 }
+                setCartShippingMethod(cart.shippingMethod);
                 setCartPromotions(cart.promotions);
                 setInitialFormValues((prev) => ({
                     ...prev,
@@ -274,6 +276,11 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                             tax={totals.tax}
                             total={totals.total}
                             discountTotal={totals.discountTotal}
+                            shippingMethod={
+                                cartShippingMethod?.total
+                                    ? { name: cartShippingMethod.name, total: cartShippingMethod.total }
+                                    : undefined
+                            }
                             promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}

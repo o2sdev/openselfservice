@@ -16,17 +16,13 @@ export class CheckoutShippingAddressBlock extends Block.Block {
         phone: CheckoutFieldConfig;
         address: {
             streetName: CheckoutFieldConfig;
-            streetNumber?: CheckoutFieldConfig;
-            apartment?: CheckoutFieldConfig;
+            streetNumber: CheckoutFieldConfig;
+            apartment: CheckoutFieldConfig;
             city: CheckoutFieldConfig;
             postalCode: CheckoutFieldConfig;
             country: CheckoutFieldConfig;
         };
-        shippingMethod: {
-            label: string;
-            placeholder?: string;
-            required: boolean;
-        };
+        shippingMethod: CheckoutFieldConfig;
     };
     buttons!: {
         back: { label: string; path: string };
@@ -43,10 +39,10 @@ export class CheckoutShippingAddressBlock extends Block.Block {
         subtotalLabel: string;
         taxLabel: string;
         totalLabel: string;
-        discountLabel?: string;
-        shippingLabel?: string;
-        freeLabel?: string;
+        discountLabel: string;
+        shippingLabel: string;
+        freeLabel: string;
     };
-    stepIndicator?: { steps: string[]; currentStep: number };
-    cartPath?: string;
+    stepIndicator!: { steps: string[]; currentStep: number };
+    cartPath!: string;
 }

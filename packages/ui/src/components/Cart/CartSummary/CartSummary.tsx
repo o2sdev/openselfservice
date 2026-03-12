@@ -55,7 +55,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     secondaryButton,
 }) => {
     const hasDiscount = discountTotal && discountTotal.value > 0;
-    const hasShipping = !!shippingMethod;
     const isFreeShipping = promotions?.some((p) => p.type === 'FREE_SHIPPING');
 
     return (
@@ -93,7 +92,7 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                         </div>
                     )}
 
-                    {hasShipping && (
+                    {shippingMethod && (
                         <div className="flex justify-between gap-4">
                             <Typography variant="small" className="text-muted-foreground">
                                 {labels.shippingLabel}
