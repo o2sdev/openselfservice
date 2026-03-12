@@ -5,7 +5,7 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Carts, Models, Orders, Payments } from '@o2s/framework/modules';
+import { Carts, Models, Payments } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
@@ -47,10 +47,10 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
               tax: Models.Price.Price;
               total: Models.Price.Price;
               discountTotal?: Models.Price.Price;
+              shippingTotal?: Models.Price.Price;
           }
         | undefined
     >();
-    const [cartShippingMethod, setCartShippingMethod] = useState<Orders.Model.ShippingMethod | undefined>();
     const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
     const [paymentProviders, setPaymentProviders] = useState<Payments.Model.PaymentProvider[]>([]);
     const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
@@ -76,9 +76,9 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         tax: cart.taxTotal,
                         total: cart.total,
                         discountTotal: cart.discountTotal,
+                        shippingTotal: cart.shippingMethod?.total,
                     });
                 }
-                setCartShippingMethod(cart.shippingMethod);
                 setCartPromotions(cart.promotions);
                 const providers = await sdk.payments.getProviders(
                     { ...(cart.regionId && { regionId: cart.regionId }) },
@@ -197,11 +197,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                             tax={totals.tax}
                             total={totals.total}
                             discountTotal={totals.discountTotal}
-                            shippingMethod={
-                                cartShippingMethod?.total
-                                    ? { name: cartShippingMethod.name, total: cartShippingMethod.total }
-                                    : undefined
-                            }
+                            shippingTotal={totals.shippingTotal}
                             promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}

@@ -188,11 +188,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                         tax={cart?.taxTotal ?? zero}
                         total={cart?.total ?? zero}
                         discountTotal={cart?.discountTotal}
-                        shippingMethod={
-                            cart?.shippingMethod && cart.shippingTotal
-                                ? { name: cart.shippingMethod.name, total: cart.shippingTotal }
-                                : undefined
-                        }
+                        shippingTotal={cart?.shippingTotal}
                         promotions={cart?.promotions}
                         labels={summaryLabels}
                         LinkComponent={LinkComponent}

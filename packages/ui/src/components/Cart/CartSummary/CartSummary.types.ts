@@ -9,7 +9,10 @@ export interface CartSummaryPromotion {
     value?: string;
 }
 
-export type CartSummaryButtonAction = { type: 'link'; url: string } | { type: 'submit'; form?: string };
+export type CartSummaryButtonAction =
+    | { type: 'link'; url: string }
+    | { type: 'submit'; form?: string }
+    | { type: 'click'; onClick: () => void };
 
 export interface CartSummaryButton {
     label: string;
@@ -23,8 +26,12 @@ export interface CartSummaryProps {
     tax: Models.Price.Price;
     total: Models.Price.Price;
     discountTotal?: Models.Price.Price;
-    shippingMethod?: { name: string; total: Models.Price.Price };
+    shippingTotal?: Models.Price.Price;
     promotions?: CartSummaryPromotion[];
+    notes?: {
+        title: string;
+        content: string;
+    };
     labels: {
         title: string;
         subtotalLabel: string;
@@ -33,8 +40,9 @@ export interface CartSummaryProps {
         discountLabel?: string;
         shippingLabel?: string;
         freeLabel?: string;
+        activePromoCodesTitle?: string;
     };
-    LinkComponent: FrontendModels.Link.LinkComponent;
+    LinkComponent?: FrontendModels.Link.LinkComponent;
     primaryButton?: CartSummaryButton;
     secondaryButton?: CartSummaryButton;
 }

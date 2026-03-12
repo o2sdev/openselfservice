@@ -52,11 +52,11 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
               tax: Models.Price.Price;
               total: Models.Price.Price;
               discountTotal?: Models.Price.Price;
+              shippingTotal?: Models.Price.Price;
           }
         | undefined
     >();
     const [shippingOptions, setShippingOptions] = useState<Orders.Model.ShippingMethod[]>([]);
-    const [cartShippingMethod, setCartShippingMethod] = useState<Orders.Model.ShippingMethod | undefined>();
     const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
     const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
     const [isSubmitPending, startSubmitTransition] = useTransition();
@@ -94,11 +94,11 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         tax: cart.taxTotal,
                         total: cart.total,
                         discountTotal: cart.discountTotal,
+                        shippingTotal: cart.shippingMethod?.total,
                     });
                 }
                 setShippingOptions(options.data ?? []);
                 setCartPromotions(cart.promotions);
-                setCartShippingMethod(cart.shippingMethod);
                 const sameAsBilling = cart.metadata?.sameAsBillingAddress === true;
                 const sourceAddress = sameAsBilling ? cart.billingAddress : cart.shippingAddress;
                 setInitialFormValues((prev) => ({
@@ -158,7 +158,13 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                     { 'x-locale': locale },
                     accessToken,
                 );
-                setCartShippingMethod(shippingOptions.find((o) => o.id === values.shippingMethod));
+                setTotals(
+                    (prev) =>
+                        prev && {
+                            ...prev,
+                            shippingTotal: shippingOptions.find((o) => o.id === values.shippingMethod)?.total,
+                        },
+                );
                 router.push(buttons.next.path);
             } catch {
                 toast({ variant: 'destructive', description: errors.submitError });
@@ -334,11 +340,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                             tax={totals.tax}
                             total={totals.total}
                             discountTotal={totals.discountTotal}
-                            shippingMethod={
-                                cartShippingMethod?.total
-                                    ? { name: cartShippingMethod.name, total: cartShippingMethod.total }
-                                    : undefined
-                            }
+                            shippingTotal={totals.shippingTotal}
                             promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}

@@ -5,7 +5,7 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Carts, Models, Orders } from '@o2s/framework/modules';
+import { Carts, Models } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
@@ -52,10 +52,10 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
               tax: Models.Price.Price;
               total: Models.Price.Price;
               discountTotal?: Models.Price.Price;
+              shippingTotal?: Models.Price.Price;
           }
         | undefined
     >();
-    const [cartShippingMethod, setCartShippingMethod] = useState<Orders.Model.ShippingMethod | undefined>();
     const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
     const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
     const [isSubmitPending, startSubmitTransition] = useTransition();
@@ -92,9 +92,9 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         tax: cart.taxTotal,
                         total: cart.total,
                         discountTotal: cart.discountTotal,
+                        shippingTotal: cart.shippingMethod?.total,
                     });
                 }
-                setCartShippingMethod(cart.shippingMethod);
                 setCartPromotions(cart.promotions);
                 setInitialFormValues((prev) => ({
                     ...prev,
@@ -276,11 +276,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                             tax={totals.tax}
                             total={totals.total}
                             discountTotal={totals.discountTotal}
-                            shippingMethod={
-                                cartShippingMethod?.total
-                                    ? { name: cartShippingMethod.name, total: cartShippingMethod.total }
-                                    : undefined
-                            }
+                            shippingTotal={totals.shippingTotal}
                             promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}

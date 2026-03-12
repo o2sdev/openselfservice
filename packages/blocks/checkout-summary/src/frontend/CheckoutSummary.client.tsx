@@ -9,13 +9,11 @@ import { Checkout } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
+import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Image } from '@o2s/ui/components/Image';
 import { Price } from '@o2s/ui/components/Price';
 
-import { Button } from '@o2s/ui/elements/button';
-import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -107,7 +105,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const items = summaryData?.cart.items?.data ?? [];
     const totals = summaryData?.totals;
     const promotions = summaryData?.cart.promotions ?? [];
-    const isFreeShipping = promotions.some((p) => p.type === 'FREE_SHIPPING');
     const { formatStreetAddress } = Utils.FormatAddress;
 
     return (
@@ -301,119 +298,49 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
                 {/* Right column - Summary */}
                 <div className="lg:col-span-1">
-                    <div className="sticky top-6 flex flex-col gap-6 p-6 bg-card rounded-lg border border-border">
-                        <Typography variant="h2">{sections.summary.title}</Typography>
-
+                    <div className="sticky top-6">
                         {isInitialLoadPending ? (
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-3 p-6 bg-card rounded-lg border border-border">
                                 <Skeleton className="h-4 w-full" />
                                 <Skeleton className="h-4 w-full" />
                                 <Skeleton className="h-6 w-full" />
                             </div>
                         ) : totals ? (
-                            <div className="flex flex-col gap-4">
-                                <div className="flex flex-col">
-                                    <div className="flex items-center justify-between">
-                                        <Typography variant="small">{sections.summary.subtotalLabel}</Typography>
-                                        <Typography variant="body">
-                                            <Price price={totals.subtotal} />
-                                        </Typography>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <Typography variant="small">{sections.summary.taxLabel}</Typography>
-                                        <Typography variant="body">
-                                            <Price price={totals.tax} />
-                                        </Typography>
-                                    </div>
-                                    {totals.discount.value > 0 && (
-                                        <div className="flex items-center justify-between">
-                                            <Typography variant="small">{sections.summary.discountLabel}</Typography>
-                                            <Typography variant="body" className="text-green-600">
-                                                -<Price price={totals.discount} />
-                                            </Typography>
-                                        </div>
-                                    )}
-                                    {shippingMethod && (
-                                        <div className="flex items-center justify-between">
-                                            <Typography variant="small">{sections.summary.shippingLabel}</Typography>
-                                            <Typography variant="body">
-                                                {isFreeShipping ? (
-                                                    <span className="text-green-600">{sections.summary.freeLabel}</span>
-                                                ) : (
-                                                    <Price price={totals.shipping} />
-                                                )}
-                                            </Typography>
-                                        </div>
-                                    )}
-                                </div>
-                                <Separator />
-                                <div className="flex items-center justify-between">
-                                    <Typography variant="h3">{sections.summary.totalLabel}</Typography>
-                                    <Typography variant="h2" className="text-primary">
-                                        <Price price={totals.total} />
-                                    </Typography>
-                                </div>
-                            </div>
+                            <CartSummary
+                                subtotal={totals.subtotal}
+                                tax={totals.tax}
+                                total={totals.total}
+                                discountTotal={totals.discount}
+                                shippingTotal={shippingMethod ? totals.shipping : undefined}
+                                promotions={promotions}
+                                notes={
+                                    summaryData?.notes
+                                        ? { title: sections.summary.notesTitle, content: summaryData.notes }
+                                        : undefined
+                                }
+                                labels={{
+                                    title: sections.summary.title,
+                                    subtotalLabel: sections.summary.subtotalLabel,
+                                    taxLabel: sections.summary.taxLabel,
+                                    totalLabel: sections.summary.totalLabel,
+                                    discountLabel: sections.summary.discountLabel,
+                                    shippingLabel: sections.summary.shippingLabel,
+                                    freeLabel: sections.summary.freeLabel,
+                                    activePromoCodesTitle: sections.summary.activePromoCodesTitle,
+                                }}
+                                primaryButton={{
+                                    label: isSubmitPending ? loadingLabels.confirming : buttons.confirm.label,
+                                    icon: isSubmitPending ? 'Loader2' : undefined,
+                                    disabled: isSubmitPending || isInitialLoadPending,
+                                    action: { type: 'click', onClick: handleConfirm },
+                                }}
+                                secondaryButton={{
+                                    label: buttons.back.label,
+                                    action: { type: 'link', url: buttons.back.path },
+                                }}
+                                LinkComponent={LinkComponent}
+                            />
                         ) : null}
-
-                        {promotions.length > 0 && (
-                            <>
-                                <Separator />
-                                <div className="flex flex-col gap-2">
-                                    <Typography variant="h3">{sections.summary.activePromoCodesTitle}</Typography>
-                                    <ul className="flex flex-col gap-2 list-none">
-                                        {promotions.map((promo) => (
-                                            <li
-                                                key={promo.code}
-                                                className="flex items-center gap-2 rounded-md bg-green-50 px-3 py-2 dark:bg-green-950/20"
-                                            >
-                                                <DynamicIcon name="Tag" size={14} className="shrink-0 text-green-600" />
-                                                <Typography variant="small" className="text-green-600">
-                                                    {promo.code}
-                                                    {promo.name && ` — ${promo.name}`}
-                                                </Typography>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </>
-                        )}
-
-                        {summaryData?.notes && (
-                            <>
-                                <Separator />
-                                <div className="flex flex-col gap-2">
-                                    <Typography variant="h3">{sections.summary.notesTitle}</Typography>
-                                    <Typography variant="small" className="text-muted-foreground">
-                                        {summaryData.notes}
-                                    </Typography>
-                                </div>
-                            </>
-                        )}
-
-                        <Separator />
-
-                        <div className="flex flex-col gap-3">
-                            <Button
-                                variant="default"
-                                size="lg"
-                                className="w-full"
-                                onClick={handleConfirm}
-                                disabled={isSubmitPending || isInitialLoadPending}
-                            >
-                                {isSubmitPending ? (
-                                    <>
-                                        <DynamicIcon name="Loader2" size={20} className="mr-2 animate-spin" />
-                                        {loadingLabels.confirming}
-                                    </>
-                                ) : (
-                                    buttons.confirm.label
-                                )}
-                            </Button>
-                            <Button asChild variant="outline" size="lg" className="w-full">
-                                <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
-                            </Button>
-                        </div>
                     </div>
                 </div>
             </div>

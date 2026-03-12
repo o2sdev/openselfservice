@@ -14,7 +14,7 @@ import { CartSummaryButton, CartSummaryProps } from './CartSummary.types';
 const renderButton = (
     btn: CartSummaryButton,
     variant: 'default' | 'outline',
-    LinkComponent: CartSummaryProps['LinkComponent'],
+    LinkComponent?: CartSummaryProps['LinkComponent'],
 ): React.ReactNode => {
     if (btn.action.type === 'submit') {
         return (
@@ -32,6 +32,17 @@ const renderButton = (
         );
     }
 
+    if (btn.action.type === 'click') {
+        return (
+            <Button variant={variant} size="lg" className="w-full" onClick={btn.action.onClick} disabled={btn.disabled}>
+                {btn.icon && <DynamicIcon name={btn.icon} size={20} className="mr-2" />}
+                {btn.label}
+            </Button>
+        );
+    }
+
+    if (!LinkComponent) return null;
+
     return (
         <Button variant={variant} size="lg" className="w-full" asChild disabled={btn.disabled}>
             <LinkComponent href={btn.action.url} className="w-full">
@@ -47,8 +58,9 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     tax,
     total,
     discountTotal,
-    shippingMethod,
+    shippingTotal,
     promotions,
+    notes,
     labels,
     LinkComponent,
     primaryButton,
@@ -92,17 +104,16 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                         </div>
                     )}
 
-                    {shippingMethod && (
+                    {shippingTotal && (
                         <div className="flex justify-between gap-4">
                             <Typography variant="small" className="text-muted-foreground">
                                 {labels.shippingLabel}
-                                {shippingMethod.name && <span className="ml-1">({shippingMethod.name})</span>}
                             </Typography>
                             <Typography variant="body" className="whitespace-nowrap shrink-0">
                                 {isFreeShipping ? (
                                     <span className="text-green-600">{labels.freeLabel}</span>
                                 ) : (
-                                    <Price price={shippingMethod.total} />
+                                    <Price price={shippingTotal} />
                                 )}
                             </Typography>
                         </div>
@@ -118,6 +129,41 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                     </Typography>
                 </div>
             </div>
+
+            {promotions && promotions.length > 0 && labels.activePromoCodesTitle && (
+                <>
+                    <Separator />
+                    <div className="flex flex-col gap-2">
+                        <Typography variant="h3">{labels.activePromoCodesTitle}</Typography>
+                        <ul className="flex flex-col gap-2 list-none">
+                            {promotions.map((promo) => (
+                                <li
+                                    key={promo.code}
+                                    className="flex items-center gap-2 rounded-md bg-green-50 px-3 py-2 dark:bg-green-950/20"
+                                >
+                                    <DynamicIcon name="Tag" size={14} className="shrink-0 text-green-600" />
+                                    <Typography variant="small" className="text-green-600">
+                                        {promo.code}
+                                        {promo.name && ` — ${promo.name}`}
+                                    </Typography>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </>
+            )}
+
+            {notes && (
+                <>
+                    <Separator />
+                    <div className="flex flex-col gap-2">
+                        <Typography variant="h3">{notes.title}</Typography>
+                        <Typography variant="small" className="text-muted-foreground">
+                            {notes.content}
+                        </Typography>
+                    </div>
+                </>
+            )}
 
             {(primaryButton || secondaryButton) && (
                 <>
