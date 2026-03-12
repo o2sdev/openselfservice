@@ -21,6 +21,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
             title={labels.title}
             LinkComponent={LinkComponent}
             linkDetailsLabel={labels.detailsLabel}
+            keyboardControlMode="managed"
             carouselConfig={{ loop: true }}
         />
     );

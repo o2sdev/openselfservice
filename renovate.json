@@ -1,6 +1,11 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": ["config:recommended"],
+    "enabledManagers": ["npm"],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "schedule": ["after 11pm on sunday"]
+    },
     "vulnerabilityAlerts": {
         "enabled": true
     },
@@ -19,6 +24,5 @@
             ],
             "rangeStrategy": "widen"
         }
-    ],
-    "postUpdateOptions": ["npmInstallTwice"]
+    ]
 }

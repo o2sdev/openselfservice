@@ -2,6 +2,11 @@
     "$schema": "https://turbo.build/schema.json",
     "ui": "stream",
     "concurrency": "5",
+    "globalPassThroughEnv": [
+        "AUTH_JWT_SECRET",
+        "NODE_ENV",
+        "MOCKED_INTEGRATION_DELAYS_ENABLED"
+    ],
     "tasks": {
         "dev": {
             "cache": false,

@@ -1,9 +1,12 @@
 {
     "name": "@o2s/integrations.contentful-cms",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "private": false,
     "license": "MIT",
     "description": "Contentful CMS integration for O2S, providing content management functionality via GraphQL.",
+    "o2sModules": [
+        "cms"
+    ],
     "keywords": [
         "o2s",
         "integration",

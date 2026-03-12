@@ -47,6 +47,7 @@
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
     },
+    "o2sTemplate": [{{#each templates}}"{{this}}"{{#unless @last}}, {{/unless}}{{/each}}],
     "peerDependencies": {
         "@nestjs/axios": "^4",
         "@nestjs/common": "^11",
