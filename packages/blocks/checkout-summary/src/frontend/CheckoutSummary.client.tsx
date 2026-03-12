@@ -108,13 +108,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const totals = summaryData?.totals;
     const promotions = summaryData?.cart.promotions ?? [];
     const isFreeShipping = promotions.some((p) => p.type === 'FREE_SHIPPING');
-
-    const formatStreetAddress = (addr: { streetName: string; streetNumber?: string; apartment?: string }) => {
-        let street = addr.streetName;
-        if (addr.streetNumber) street += ` ${addr.streetNumber}`;
-        if (addr.apartment) street += `, ${addr.apartment}`;
-        return street;
-    };
+    const { formatStreetAddress } = Utils.FormatAddress;
 
     return (
         <div className="w-full flex flex-col gap-8">
