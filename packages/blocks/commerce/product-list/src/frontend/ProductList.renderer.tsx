@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/Loading';
+import { Loading } from '@o2s/ui/components/feedback/Loading';
 
 import { ProductList } from './ProductList.server';
 import { ProductListRendererProps } from './ProductList.types';

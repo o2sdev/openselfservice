@@ -3,7 +3,7 @@
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { ProductCarousel } from '@o2s/ui/components/ProductCarousel';
+import { ProductCarousel } from '@o2s/ui/components/commerce/ProductCarousel';
 
 import { RecommendedProductsPureProps } from './RecommendedProducts.types';
 

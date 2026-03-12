@@ -12,8 +12,8 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
-import { Price } from '@o2s/ui/components/Price';
+import { InfoCard } from '@o2s/ui/components/cards/InfoCard';
+import { Price } from '@o2s/ui/components/commerce/Price';
 
 import { Card } from '@o2s/ui/elements/card';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
@@ -26,7 +26,7 @@ import { sdk } from '../sdk';
 import { OrdersSummaryPureProps } from './OrdersSummary.types';
 
 const DoubleLineChart = dynamic(
-    () => import('@o2s/ui/components/Chart/DoubleLineChart').then((module) => module.DoubleLineChart),
+    () => import('@o2s/ui/components/charts/Chart/DoubleLineChart').then((module) => module.DoubleLineChart),
     {},
 );
 

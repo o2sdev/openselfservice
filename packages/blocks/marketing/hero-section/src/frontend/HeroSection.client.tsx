@@ -7,9 +7,9 @@ import { Utils } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Image } from '@o2s/ui/components/Image';
-import { LinkList } from '@o2s/ui/components/LinkList';
-import { RichText } from '@o2s/ui/components/RichText';
+import { RichText } from '@o2s/ui/components/content/RichText';
+import { Image } from '@o2s/ui/components/media/Image';
+import { LinkList } from '@o2s/ui/components/navigation/LinkList';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

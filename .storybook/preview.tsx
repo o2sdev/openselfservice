@@ -1,20 +1,22 @@
-import React from 'react';
-import { NextIntlClientProvider } from 'next-intl';
-import type { Preview } from '@storybook/nextjs-vite';
-import { createRouter } from '@storybook/nextjs-vite/router.mock';
-import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
 import { Markdown, Title, useOf } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
+import type { Preview } from '@storybook/nextjs-vite';
+import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
+import { createRouter } from '@storybook/nextjs-vite/router.mock';
+import { NextIntlClientProvider } from 'next-intl';
+import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
-import { AppSpinner } from '@o2s/ui/components/AppSpinner';
+
+import { AppSpinner } from '@o2s/ui/components/feedback/AppSpinner';
+
 import { Toaster } from '@o2s/ui/elements/toaster';
 import { TooltipProvider } from '@o2s/ui/elements/tooltip';
 
-import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
-
+import messages from '../apps/frontend/src/i18n/messages/en.json';
 import '../apps/frontend/src/styles/global.css';
-import messages from '../apps/frontend/src/i18n/messages/en.json'
+
+import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
 
 createRouter({});
 createNavigation({});
@@ -24,36 +26,35 @@ const ReadmeDocsPage = () => {
     const { preparedMeta } = useOf('meta', ['meta']);
     const readme = story.parameters?.readme ?? preparedMeta.parameters?.readme;
 
-    return (
-        <>
-            <Title />
-            {typeof readme === 'string' ? <Markdown>{readme}</Markdown> : null}
-        </>
+    return React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(Title, null),
+        typeof readme === 'string' ? React.createElement(Markdown, null, readme) : null,
     );
 };
 
 const preview: Preview = {
-  parameters: {
-      docs: {
-          page: ReadmeDocsPage,
-      },
-      nextjs: {
-          appDirectory: true,
-      },
-      controls: {
-        matchers: {
-         color: /(background|color)$/i,
-         date: /Date$/i,
+    parameters: {
+        docs: {
+            page: ReadmeDocsPage,
         },
-      },
-
-      a11y: {
-          // 'todo' - show a11y violations in the test UI only
-          // 'error' - fail CI on a11y violations
-          // 'off' - skip a11y checks entirely
-          test: 'todo'
-      }
-  },
+        nextjs: {
+            appDirectory: true,
+        },
+        controls: {
+            matchers: {
+                color: /(background|color)$/i,
+                date: /Date$/i,
+            },
+        },
+        a11y: {
+            // 'todo' - show a11y violations in the test UI only
+            // 'error' - fail CI on a11y violations
+            // 'off' - skip a11y checks entirely
+            test: 'todo',
+        },
+    },
     decorators: [
         withThemeByClassName({
             themes: {
@@ -62,21 +63,29 @@ const preview: Preview = {
             },
             defaultTheme: 'default',
         }),
-        (Story) => {
-            return(
-                <NextIntlClientProvider locale="en" messages={messages}>
-                    <GlobalProvider config={globalProviderConfig} labels={globalProviderLabels} themes={globalProviderThemes} currentTheme={globalProviderCurrentTheme} locale="en">
-                        <TooltipProvider>
-                            <Story />
-
-                            <Toaster />
-                            <AppSpinner />
-                        </TooltipProvider>
-                    </GlobalProvider>
-                </NextIntlClientProvider>
-            )
-        }
-    ]
+        (Story) =>
+            React.createElement(
+                NextIntlClientProvider,
+                { locale: 'en', messages },
+                React.createElement(
+                    GlobalProvider,
+                    {
+                        config: globalProviderConfig,
+                        labels: globalProviderLabels,
+                        themes: globalProviderThemes,
+                        currentTheme: globalProviderCurrentTheme,
+                        locale: 'en',
+                    },
+                    React.createElement(
+                        TooltipProvider,
+                        null,
+                        React.createElement(Story, null),
+                        React.createElement(Toaster, null),
+                        React.createElement(AppSpinner, null),
+                    ),
+                ),
+            ),
+    ],
 };
 
 export default preview;

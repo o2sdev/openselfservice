@@ -6,11 +6,11 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
-import { Price } from '@o2s/ui/components/Price';
-import { RichText } from '@o2s/ui/components/RichText';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+import { InfoCard } from '@o2s/ui/components/cards/InfoCard';
+import { Price } from '@o2s/ui/components/commerce/Price';
+import { RichText } from '@o2s/ui/components/content/RichText';
+import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
+import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Card } from '@o2s/ui/elements/card';
@@ -19,7 +19,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { PaymentsSummaryPureProps } from './PaymentsSummary.types';
 
 const StackedBarChart = dynamic(() =>
-    import('@o2s/ui/components/Chart/StackedBarChart').then((module) => module.StackedBarChart),
+    import('@o2s/ui/components/charts/Chart/StackedBarChart').then((module) => module.StackedBarChart),
 );
 
 export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routing, ...component }) => {

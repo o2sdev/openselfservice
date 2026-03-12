@@ -5,9 +5,9 @@ import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useMemo } from 'react';
 
-import { Price } from '@o2s/ui/components/Price';
-import { ProductGallery } from '@o2s/ui/components/ProductGallery';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+import { Price } from '@o2s/ui/components/commerce/Price';
+import { ProductGallery } from '@o2s/ui/components/commerce/ProductGallery';
+import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
 
 import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
 import { Button } from '@o2s/ui/elements/button';

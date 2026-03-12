@@ -5,8 +5,8 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { FeatureCard } from '@o2s/ui/components/Cards';
-import { RichText } from '@o2s/ui/components/RichText';
+import { FeatureCard } from '@o2s/ui/components/cards';
+import { RichText } from '@o2s/ui/components/content/RichText';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

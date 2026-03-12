@@ -6,10 +6,10 @@ import React from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
-import { Container } from '@o2s/ui/components/Container';
-import { Price } from '@o2s/ui/components/Price';
-import { RichText } from '@o2s/ui/components/RichText';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+import { Price } from '@o2s/ui/components/commerce/Price';
+import { RichText } from '@o2s/ui/components/content/RichText';
+import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
+import { Container } from '@o2s/ui/components/layout/Container';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';

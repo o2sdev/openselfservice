@@ -8,8 +8,8 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { Container } from '@o2s/ui/components/Container';
-import { RichText } from '@o2s/ui/components/RichText';
+import { RichText } from '@o2s/ui/components/content/RichText';
+import { Container } from '@o2s/ui/components/layout/Container';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Separator } from '@o2s/ui/elements/separator';

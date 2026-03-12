@@ -7,7 +7,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
-import { Loading } from '@o2s/ui/components/Loading';
+import { Loading } from '@o2s/ui/components/feedback/Loading';
 
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 

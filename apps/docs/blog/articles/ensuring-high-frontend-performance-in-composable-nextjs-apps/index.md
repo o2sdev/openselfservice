@@ -202,7 +202,7 @@ import dynamic from 'next/dynamic';
 
 // Dynamically import the chart component to reduce initial bundle size
 const StackedBarChart = dynamic(
-    () => import('@o2s/ui/components/Chart/StackedBarChart').then((module) => module.StackedBarChart),
+    () => import('@o2s/ui/components/charts/Chart/StackedBarChart').then((module) => module.StackedBarChart),
 );
 
 export const PaymentsHistoryClient = ({ title, chartData }) => {

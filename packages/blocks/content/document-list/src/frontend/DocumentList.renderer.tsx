@@ -1,8 +1,8 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@o2s/ui/components/Container';
-import { Loading } from '@o2s/ui/components/Loading';
+import { Loading } from '@o2s/ui/components/feedback/Loading';
+import { Container } from '@o2s/ui/components/layout/Container';
 
 import { DocumentList } from './DocumentList.server';
 import { DocumentListRendererProps } from './DocumentList.types';

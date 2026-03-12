@@ -15,15 +15,15 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { ActionList } from '@o2s/ui/components/ActionList';
-import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
-import { FiltersSection } from '@o2s/ui/components/Filters';
-import { NoResults } from '@o2s/ui/components/NoResults';
-import { Pagination } from '@o2s/ui/components/Pagination';
-import { Price } from '@o2s/ui/components/Price';
-import { RichText } from '@o2s/ui/components/RichText';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+import { ActionList } from '@o2s/ui/components/actions/ActionList';
+import { InfoCard } from '@o2s/ui/components/cards/InfoCard';
+import { Price } from '@o2s/ui/components/commerce/Price';
+import { RichText } from '@o2s/ui/components/content/RichText';
+import { NoResults } from '@o2s/ui/components/feedback/NoResults';
+import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
+import { FiltersSection } from '@o2s/ui/components/forms/Filters';
+import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
+import { Pagination } from '@o2s/ui/components/navigation/Pagination';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';

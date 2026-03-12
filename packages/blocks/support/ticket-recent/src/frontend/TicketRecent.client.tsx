@@ -4,8 +4,8 @@ import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { RichText } from '@o2s/ui/components/RichText';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+import { RichText } from '@o2s/ui/components/content/RichText';
+import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/elements/avatar';
 import { Card, CardContent, CardHeader } from '@o2s/ui/elements/card';

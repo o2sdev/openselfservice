@@ -4,8 +4,8 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
-import { RichText } from '@o2s/ui/components/RichText';
+import { RichText } from '@o2s/ui/components/content/RichText';
+import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

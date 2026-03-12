@@ -4,12 +4,12 @@ import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
 
-import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
-import { DataList } from '@o2s/ui/components/DataList';
-import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
-import { FiltersSection } from '@o2s/ui/components/Filters';
-import { NoResults } from '@o2s/ui/components/NoResults';
-import { Pagination } from '@o2s/ui/components/Pagination';
+import { ProductCard, ProductCardBadge } from '@o2s/ui/components/cards/ProductCard';
+import { DataList } from '@o2s/ui/components/data/DataList';
+import type { DataListColumnConfig } from '@o2s/ui/components/data/DataList';
+import { NoResults } from '@o2s/ui/components/feedback/NoResults';
+import { FiltersSection } from '@o2s/ui/components/forms/Filters';
+import { Pagination } from '@o2s/ui/components/navigation/Pagination';
 
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';

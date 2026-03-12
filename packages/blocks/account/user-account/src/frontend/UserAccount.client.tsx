@@ -3,8 +3,8 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { Container } from '@o2s/ui/components/Container';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
+import { Container } from '@o2s/ui/components/layout/Container';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';

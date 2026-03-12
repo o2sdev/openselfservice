@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/Loading';
+import { Loading } from '@o2s/ui/components/feedback/Loading';
 
 import { FeatureSection } from './FeatureSection.server';
 import { FeatureSectionRendererProps } from './FeatureSection.types';

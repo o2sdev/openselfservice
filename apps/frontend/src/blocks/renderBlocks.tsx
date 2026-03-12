@@ -43,7 +43,7 @@ import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { Container } from '@o2s/ui/components/Container';
+import { Container } from '@o2s/ui/components/layout/Container';
 
 import { auth } from '@/auth';
 

@@ -4,9 +4,9 @@ import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { InformativeCard } from '@o2s/ui/components/Cards/InformativeCard';
-import { ContentSection } from '@o2s/ui/components/ContentSection';
-import { DynamicIconProps } from '@o2s/ui/components/DynamicIcon';
+import { InformativeCard } from '@o2s/ui/components/cards/InformativeCard';
+import { ContentSection } from '@o2s/ui/components/content/ContentSection';
+import { DynamicIconProps } from '@o2s/ui/components/media/DynamicIcon';
 
 import { QuickLinksPureProps } from './QuickLinks.types';
 

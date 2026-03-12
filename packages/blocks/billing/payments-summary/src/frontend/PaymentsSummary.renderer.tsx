@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/Loading';
+import { Loading } from '@o2s/ui/components/feedback/Loading';
 
 import { PaymentsSummary } from './PaymentsSummary.server';
 import { PaymentsSummaryRendererProps } from './PaymentsSummary.types';
