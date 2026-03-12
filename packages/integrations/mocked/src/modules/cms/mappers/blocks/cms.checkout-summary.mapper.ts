@@ -22,6 +22,7 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         },
         billing: {
             title: 'Payment',
+            addressLabel: 'Billing address',
             methodLabel: 'Payment method:',
         },
         summary: {
@@ -83,6 +84,7 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         },
         billing: {
             title: 'Zahlung',
+            addressLabel: 'Rechnungsadresse',
             methodLabel: 'Zahlungsmethode:',
         },
         summary: {
@@ -145,6 +147,7 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         },
         billing: {
             title: 'Płatność',
+            addressLabel: 'Adres rozliczeniowy',
             methodLabel: 'Metoda płatności:',
         },
         summary: {

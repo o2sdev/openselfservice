@@ -1,7 +1,7 @@
 'use client';
 
 import { createNavigation } from 'next-intl/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 
 import { Utils } from '@o2s/utils.frontend';
 
@@ -43,20 +43,19 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const router = useRouter();
     const { toast } = useToast();
 
-    const [summaryData, setSummaryData] = useState<Checkout.Model.CheckoutSummary | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [summaryData, setSummaryData] = useState<Checkout.Model.CheckoutSummary | undefined>();
+    const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
+    const [isSubmitPending, startSubmitTransition] = useTransition();
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) {
-            toast({ description: errors?.cartNotFound, variant: 'destructive' });
-            router.replace(cartPath ?? '/');
+            toast({ description: errors.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath);
             return;
         }
 
-        setIsLoading(true);
-        (async () => {
+        startInitialLoadTransition(async () => {
             try {
                 const data = await sdk.checkout.getCheckoutSummary(cartId, { 'x-locale': locale }, accessToken);
                 setSummaryData(data);
@@ -64,53 +63,42 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 const err = error as { status?: number; response?: { status?: number } };
                 const status = err.status ?? err.response?.status;
                 if (status === 401 || status === 404) {
-                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
-                    router.replace(cartPath ?? '/');
+                    toast({ description: errors.cartNotFound, variant: 'destructive' });
+                    router.replace(cartPath);
                 } else {
-                    toast({ description: errors?.loadError, variant: 'destructive' });
+                    toast({ description: errors.loadError, variant: 'destructive' });
                 }
-            } finally {
-                setIsLoading(false);
             }
-        })();
-    }, [locale, accessToken, toast, errors?.cartNotFound, errors?.loadError, router, cartPath]);
+        });
+    }, [locale, accessToken, toast, errors.cartNotFound, errors.loadError, router, cartPath]);
 
-    if (!title || !sections || !buttons) {
-        return null;
-    }
-
-    const handleConfirm = async () => {
+    const handleConfirm = () => {
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) {
-            toast({ description: errors?.cartNotFound, variant: 'destructive' });
-            router.replace(cartPath ?? '/');
+            toast({ description: errors.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath);
             return;
         }
 
-        setIsSubmitting(true);
-        try {
-            const email = summaryData?.billingAddress?.email || summaryData?.email;
-            const result = await sdk.checkout.placeOrder(cartId, { email }, { 'x-locale': locale }, accessToken);
+        startSubmitTransition(async () => {
+            try {
+                const email = summaryData?.billingAddress?.email || summaryData?.email;
+                const result = await sdk.checkout.placeOrder(cartId, { email }, { 'x-locale': locale }, accessToken);
 
-            if (result.order?.id) {
-                const redirectUrl = result.paymentRedirectUrl || `${buttons.confirm.path}/${result.order.id}`;
-                window.location.href = redirectUrl;
-                localStorage.removeItem(CART_ID_KEY);
-                return;
+                if (result.order?.id) {
+                    const redirectUrl = result.paymentRedirectUrl || `${buttons.confirm.path}/${result.order.id}`;
+                    localStorage.removeItem(CART_ID_KEY);
+                    window.location.href = redirectUrl;
+                    return;
+                }
+            } catch {
+                toast({
+                    variant: 'destructive',
+                    description: errors.placeOrderError,
+                });
             }
-        } catch {
-            toast({
-                variant: 'destructive',
-                description: errors?.placeOrderError,
-            });
-        } finally {
-            setIsSubmitting(false);
-        }
+        });
     };
-
-    if (!title || !sections || !buttons) {
-        return null;
-    }
 
     const billingAddress = summaryData?.billingAddress;
     const shippingAddress = summaryData?.shippingAddress;
@@ -130,7 +118,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
     return (
         <div className="w-full flex flex-col gap-8">
-            {stepIndicator && <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />}
+            <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />
             <div className="flex flex-col gap-2">
                 <Typography variant="h1">{title}</Typography>
                 {subtitle && (
@@ -146,19 +134,19 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                     {/* Products */}
                     <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.products.title}</Typography>
-                        {isLoading ? (
+                        {isInitialLoadPending ? (
                             <div className="flex flex-col gap-3">
                                 <Skeleton className="h-24 w-full" />
                                 <Skeleton className="h-24 w-full" />
                             </div>
                         ) : items.length > 0 ? (
-                            <div className="flex flex-col gap-4">
+                            <ul className="flex flex-col gap-4">
                                 {items.map((item) => {
                                     const product = item.product;
                                     const itemTotal = item.total;
 
                                     return (
-                                        <div
+                                        <li
                                             key={item.id}
                                             className="flex flex-row gap-4 p-4 bg-card rounded-lg border border-border"
                                         >
@@ -198,17 +186,17 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </li>
                                     );
                                 })}
-                            </div>
+                            </ul>
                         ) : null}
                     </div>
 
                     {/* Company data */}
                     <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.company.title}</Typography>
-                        {isLoading ? (
+                        {isInitialLoadPending ? (
                             <Skeleton className="h-24 w-full" />
                         ) : billingAddress ? (
                             <div className="flex flex-col p-4 bg-card rounded-lg border border-border">
@@ -236,23 +224,21 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 )}
                             </div>
                         ) : (
-                            <Typography variant="body">{placeholders?.companyData}</Typography>
+                            <Typography variant="body">{placeholders.companyData}</Typography>
                         )}
                     </div>
 
                     {/* Shipping address */}
                     <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.shipping.title}</Typography>
-                        {isLoading ? (
+                        {isInitialLoadPending ? (
                             <Skeleton className="h-24 w-full" />
                         ) : shippingAddress ? (
                             <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
                                 <div>
-                                    {sections.shipping.addressLabel && (
-                                        <Typography variant="small" className="mb-1 font-bold">
-                                            {sections.shipping.addressLabel}
-                                        </Typography>
-                                    )}
+                                    <Typography variant="small" className="mb-1 font-bold">
+                                        {sections.shipping.addressLabel}
+                                    </Typography>
                                     <Typography variant="small">{formatStreetAddress(shippingAddress)}</Typography>
                                     <Typography variant="small">
                                         {shippingAddress.postalCode} {shippingAddress.city}
@@ -280,24 +266,22 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 )}
                             </div>
                         ) : (
-                            <Typography variant="body">{placeholders?.shippingAddress}</Typography>
+                            <Typography variant="body">{placeholders.shippingAddress}</Typography>
                         )}
                     </div>
 
                     {/* Payment */}
                     <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.billing.title}</Typography>
-                        {isLoading ? (
+                        {isInitialLoadPending ? (
                             <Skeleton className="h-24 w-full" />
                         ) : billingAddress || paymentMethod ? (
                             <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
                                 {billingAddress && (
                                     <div>
-                                        {sections.company.addressLabel && (
-                                            <Typography variant="small" className="mb-1 font-bold">
-                                                {sections.company.addressLabel}
-                                            </Typography>
-                                        )}
+                                        <Typography variant="small" className="mb-1 font-bold">
+                                            {sections.company.addressLabel}
+                                        </Typography>
                                         <Typography variant="small">{formatStreetAddress(billingAddress)}</Typography>
                                         <Typography variant="small">
                                             {billingAddress.postalCode} {billingAddress.city}
@@ -316,7 +300,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 )}
                             </div>
                         ) : (
-                            <Typography variant="body">{placeholders?.billingAddress}</Typography>
+                            <Typography variant="body">{placeholders.billingAddress}</Typography>
                         )}
                     </div>
                 </div>
@@ -326,7 +310,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                     <div className="sticky top-6 flex flex-col gap-6 p-6 bg-card rounded-lg border border-border">
                         <Typography variant="h2">{sections.summary.title}</Typography>
 
-                        {isLoading ? (
+                        {isInitialLoadPending ? (
                             <div className="flex flex-col gap-3">
                                 <Skeleton className="h-4 w-full" />
                                 <Skeleton className="h-4 w-full" />
@@ -347,7 +331,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                             <Price price={totals.tax} />
                                         </Typography>
                                     </div>
-                                    {totals.discount.value > 0 && sections.summary.discountLabel && (
+                                    {totals.discount.value > 0 && (
                                         <div className="flex items-center justify-between">
                                             <Typography variant="small">{sections.summary.discountLabel}</Typography>
                                             <Typography variant="body" className="text-green-600">
@@ -378,7 +362,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                             </div>
                         ) : null}
 
-                        {promotions.length > 0 && sections.summary.activePromoCodesTitle && (
+                        {promotions.length > 0 && (
                             <>
                                 <Separator />
                                 <div className="flex flex-col gap-2">
@@ -401,7 +385,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                             </>
                         )}
 
-                        {sections.summary.notesTitle && summaryData?.notes && (
+                        {summaryData?.notes && (
                             <>
                                 <Separator />
                                 <div className="flex flex-col gap-2">
@@ -421,12 +405,12 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 size="lg"
                                 className="w-full"
                                 onClick={handleConfirm}
-                                disabled={isSubmitting || isLoading}
+                                disabled={isSubmitPending || isInitialLoadPending}
                             >
-                                {isSubmitting ? (
+                                {isSubmitPending ? (
                                     <>
                                         <DynamicIcon name="Loader2" size={20} className="mr-2 animate-spin" />
-                                        {loadingLabels?.confirming}
+                                        {loadingLabels.confirming}
                                     </>
                                 ) : (
                                     buttons.confirm.label

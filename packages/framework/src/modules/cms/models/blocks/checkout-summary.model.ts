@@ -12,28 +12,28 @@ export class CheckoutSummaryBlock extends Block.Block {
             title: string;
             companyNameLabel: string;
             taxIdLabel: string;
-            addressLabel?: string;
+            addressLabel: string;
         };
         shipping: {
             title: string;
-            addressLabel?: string;
+            addressLabel: string;
             methodLabel: string;
         };
         billing: {
             title: string;
-            addressLabel?: string;
+            addressLabel: string;
             methodLabel: string;
         };
         summary: {
             title: string;
             subtotalLabel: string;
             taxLabel: string;
-            discountLabel?: string;
+            discountLabel: string;
             shippingLabel: string;
-            freeLabel?: string;
+            freeLabel: string;
             totalLabel: string;
-            activePromoCodesTitle?: string;
-            notesTitle?: string;
+            activePromoCodesTitle: string;
+            notesTitle: string;
         };
     };
     buttons!: {
@@ -54,6 +54,6 @@ export class CheckoutSummaryBlock extends Block.Block {
         sameAsBillingAddress: string;
         billingAddress: string;
     };
-    stepIndicator?: { steps: string[]; currentStep: number };
-    cartPath?: string;
+    stepIndicator!: { steps: string[]; currentStep: number };
+    cartPath!: string;
 }
