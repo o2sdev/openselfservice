@@ -31,19 +31,38 @@ const buildModuleIntegrationMap = (
     return moduleMap;
 };
 
-const updateConfigsPackageJson = async (projectDir: string, selectedIntegrations: string[]): Promise<void> => {
+const updateConfigsPackageJson = async (
+    projectDir: string,
+    selectedIntegrations: string[],
+    integrationVersions: Record<string, string>,
+): Promise<void> => {
     const pkgPath = path.join(projectDir, CONFIGS_PACKAGE_JSON_PATH);
 
     if (!(await fs.pathExists(pkgPath))) return;
 
     const pkg = await fs.readJson(pkgPath);
 
+    if (!pkg.dependencies) {
+        pkg.dependencies = {};
+    }
+
     // Remove integration deps that were not selected
-    for (const key of Object.keys((pkg.dependencies || {}) as Record<string, string>)) {
+    for (const key of Object.keys(pkg.dependencies as Record<string, string>)) {
         if (key.startsWith('@o2s/integrations.')) {
             const name = key.replace('@o2s/integrations.', '');
             if (!selectedIntegrations.includes(name)) {
                 delete pkg.dependencies[key];
+            }
+        }
+    }
+
+    // Add selected integrations that are not yet in dependencies
+    for (const name of selectedIntegrations) {
+        const packageName = `@o2s/integrations.${name}`;
+        if (!pkg.dependencies[packageName]) {
+            const version = integrationVersions[name];
+            if (version) {
+                pkg.dependencies[packageName] = `^${version}`;
             }
         }
     }
@@ -56,18 +75,19 @@ export const transformIntegrationConfigs = async (
     selectedIntegrations: string[],
     conflictResolutions: ConflictResolution[],
     integrationModules: Record<string, string[]>,
+    integrationVersions: Record<string, string>,
 ): Promise<string[]> => {
-    const moduleMap = buildModuleIntegrationMap(selectedIntegrations, conflictResolutions, integrationModules);
-
-    if (moduleMap.size === 0) {
-        return [];
-    }
+    // Always update configs package.json to add/remove integration dependencies
+    await updateConfigsPackageJson(projectDir, selectedIntegrations, integrationVersions);
 
     const modelsDir = path.join(projectDir, CONFIGS_MODELS_PATH);
 
     if (!(await fs.pathExists(modelsDir))) {
         return [];
     }
+
+    // Replace mocked imports with selected integration imports
+    const moduleMap = buildModuleIntegrationMap(selectedIntegrations, conflictResolutions, integrationModules);
 
     for (const [module, integration] of moduleMap.entries()) {
         const filePath = path.join(modelsDir, `${module}.ts`);
@@ -79,8 +99,6 @@ export const transformIntegrationConfigs = async (
 
         await fs.writeFile(filePath, updatedContent, 'utf-8');
     }
-
-    await updateConfigsPackageJson(projectDir, selectedIntegrations);
 
     // Detect model files that still import mocked but mocked is not selected.
     // Skip only when 'mocked' (full) is selected — it covers all modules.
