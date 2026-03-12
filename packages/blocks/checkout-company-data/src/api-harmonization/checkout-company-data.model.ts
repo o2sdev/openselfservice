@@ -1,63 +1,16 @@
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { Models } from '@o2s/framework/modules';
-
-interface CheckoutCompanyDataField {
-    label: string;
-    placeholder?: string;
-    required: boolean;
-}
-
-export interface CheckoutCompanyDataSummaryLabels {
-    title: string;
-    subtotalLabel: string;
-    taxLabel: string;
-    totalLabel: string;
-    discountLabel?: string;
-    shippingLabel?: string;
-    freeLabel?: string;
-}
+import { CMS } from '@o2s/framework/modules';
 
 export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
     __typename!: 'CheckoutCompanyDataBlock';
     title!: string;
     subtitle?: string;
-    fields!: {
-        firstName: CheckoutCompanyDataField;
-        lastName: CheckoutCompanyDataField;
-        email: CheckoutCompanyDataField;
-        phone: CheckoutCompanyDataField;
-        companyName: CheckoutCompanyDataField;
-        taxId: CheckoutCompanyDataField;
-        notes?: CheckoutCompanyDataField;
-        address: {
-            streetName: CheckoutCompanyDataField;
-            streetNumber?: CheckoutCompanyDataField;
-            apartment?: CheckoutCompanyDataField;
-            city: CheckoutCompanyDataField;
-            postalCode: CheckoutCompanyDataField;
-            country: CheckoutCompanyDataField;
-        };
-    };
-    buttons!: {
-        back: { label: string; path: string };
-        next: { label: string; path: string };
-    };
-    errors!: {
-        required: string;
-        invalidTaxId: string;
-        invalidPostalCode: string;
-        invalidEmail: string;
-        cartNotFound: string;
-        submitError: string;
-    };
-    summaryLabels!: CheckoutCompanyDataSummaryLabels;
-    totals?: {
-        subtotal: Models.Price.Price;
-        tax: Models.Price.Price;
-        total: Models.Price.Price;
-    };
-    stepIndicator?: { steps: string[]; currentStep: number };
-    billingInfoNote?: { icon?: string; text: string };
-    cartPath?: string;
+    fields!: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock['fields'];
+    buttons!: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock['buttons'];
+    errors!: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock['errors'];
+    summaryLabels!: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock['summaryLabels'];
+    stepIndicator!: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock['stepIndicator'];
+    billingInfoNote?: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock['billingInfoNote'];
+    cartPath!: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock['cartPath'];
 }

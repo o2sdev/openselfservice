@@ -1,8 +1,8 @@
 'use client';
 
-import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
+import { Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
 import { Carts, Models } from '@o2s/framework/modules';
@@ -11,10 +11,10 @@ import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
+import { FormField } from '@o2s/ui/components/Checkout/FormField';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
-import { Input } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
@@ -46,15 +46,18 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     const router = useRouter();
     const { toast } = useToast();
 
-    const [totals, setTotals] = useState<{
-        subtotal: Models.Price.Price;
-        tax: Models.Price.Price;
-        total: Models.Price.Price;
-        discountTotal?: Models.Price.Price;
-    } | null>(null);
-    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>(undefined);
-    const [isTotalsLoading, setIsTotalsLoading] = useState(false);
-    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+    const [totals, setTotals] = useState<
+        | {
+              subtotal: Models.Price.Price;
+              tax: Models.Price.Price;
+              total: Models.Price.Price;
+              discountTotal?: Models.Price.Price;
+          }
+        | undefined
+    >();
+    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
+    const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
+    const [isSubmitPending, startSubmitTransition] = useTransition();
     const [initialFormValues, setInitialFormValues] = useState({
         firstName: '',
         lastName: '',
@@ -75,12 +78,11 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
-            router.replace(cartPath ?? '/');
+            router.replace(cartPath);
             return;
         }
 
-        setIsTotalsLoading(true);
-        (async () => {
+        startInitialLoadTransition(async () => {
             try {
                 const cart = await sdk.carts.getCart(cartId, { 'x-locale': locale }, accessToken);
                 if (cart.subtotal && cart.taxTotal && cart.total) {
@@ -115,54 +117,70 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                 }));
             } catch {
                 toast({ description: errors.cartNotFound, variant: 'destructive' });
-                router.replace(cartPath ?? '/');
-            } finally {
-                setIsTotalsLoading(false);
+                router.replace(cartPath);
             }
-        })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [locale, accessToken]);
+        });
+    }, [locale, accessToken, toast, errors.cartNotFound, router, cartPath]);
 
-    if (!title || !fields || !buttons || !summaryLabels || !errors) {
-        return null;
-    }
+    const handleSubmit = (values: typeof initialFormValues) => {
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) {
+            toast({ description: errors.cartNotFound, variant: 'destructive' });
+            return;
+        }
+
+        startSubmitTransition(async () => {
+            try {
+                await sdk.checkout.setAddresses(
+                    cartId,
+                    {
+                        billingAddress: {
+                            firstName: values.firstName || undefined,
+                            lastName: values.lastName || undefined,
+                            email: values.email || undefined,
+                            phone: values.phone || undefined,
+                            companyName: values.companyName,
+                            taxId: values.taxId,
+                            streetName: values.streetName,
+                            streetNumber: values.streetNumber || undefined,
+                            apartment: values.apartment || undefined,
+                            city: values.city,
+                            postalCode: values.postalCode,
+                            country: values.country,
+                        },
+                        notes: values.notes || undefined,
+                        email: values.email || undefined,
+                    },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                router.push(buttons.next.path);
+            } catch {
+                toast({ variant: 'destructive', description: errors.submitError });
+            }
+        });
+    };
 
     const validationSchema = YupObject().shape({
-        firstName: fields.firstName?.required ? YupString().required(errors.required) : YupString(),
-        lastName: fields.lastName?.required ? YupString().required(errors.required) : YupString(),
-        email: !accessToken
+        firstName: fields.firstName.required ? YupString().required(errors.required) : YupString(),
+        lastName: fields.lastName.required ? YupString().required(errors.required) : YupString(),
+        email: fields.email.required
             ? YupString().required(errors.required).email(errors.invalidEmail)
-            : fields.email?.required
-              ? YupString().required(errors.required).email(errors.invalidEmail)
-              : YupString().email(errors.invalidEmail).optional(),
-        phone: fields.phone?.required ? YupString().required(errors.required) : YupString(),
+            : YupString().email(errors.invalidEmail).optional(),
+        phone: fields.phone.required ? YupString().required(errors.required) : YupString(),
         companyName: fields.companyName.required ? YupString().required(errors.required) : YupString(),
-        taxId: fields.taxId.required
-            ? YupString()
-                  .required(errors.required)
-                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                  .matches(/^\d{10}$/, errors.invalidTaxId)
-            : YupString()
-                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                  .matches(/^\d{10}$|^$/, errors.invalidTaxId),
+        taxId: fields.taxId.required ? YupString().required(errors.required) : YupString(),
         streetName: fields.address.streetName.required ? YupString().required(errors.required) : YupString(),
-        streetNumber: fields.address.streetNumber?.required ? YupString().required(errors.required) : YupString(),
+        streetNumber: fields.address.streetNumber.required ? YupString().required(errors.required) : YupString(),
         apartment: YupString(),
         city: fields.address.city.required ? YupString().required(errors.required) : YupString(),
-        postalCode: fields.address.postalCode.required
-            ? YupString()
-                  .required(errors.required)
-                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                  .matches(/^\d{5}$/, errors.invalidPostalCode)
-            : YupString()
-                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                  .matches(/^\d{5}$|^$/, errors.invalidPostalCode),
+        postalCode: fields.address.postalCode.required ? YupString().required(errors.required) : YupString(),
         country: fields.address.country.required ? YupString().required(errors.required) : YupString(),
     });
 
     return (
         <div className="w-full flex flex-col gap-8">
-            {stepIndicator && <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />}
+            <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />
             <div className="flex flex-col gap-2">
                 <Typography variant="h1">{title}</Typography>
                 {subtitle && (
@@ -178,46 +196,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         initialValues={initialFormValues}
                         enableReinitialize
                         validationSchema={validationSchema}
-                        onSubmit={async (values, { setSubmitting }) => {
-                            setIsFormSubmitting(true);
-                            const cartId = localStorage.getItem(CART_ID_KEY);
-                            if (!cartId) {
-                                setSubmitting(false);
-                                setIsFormSubmitting(false);
-                                return;
-                            }
-                            try {
-                                await sdk.checkout.setAddresses(
-                                    cartId,
-                                    {
-                                        billingAddress: {
-                                            firstName: values.firstName || undefined,
-                                            lastName: values.lastName || undefined,
-                                            email: values.email || undefined,
-                                            phone: values.phone || undefined,
-                                            companyName: values.companyName,
-                                            taxId: values.taxId,
-                                            streetName: values.streetName,
-                                            streetNumber: values.streetNumber || undefined,
-                                            apartment: values.apartment || undefined,
-                                            city: values.city,
-                                            postalCode: values.postalCode,
-                                            country: values.country,
-                                        },
-                                        notes: values.notes || undefined,
-                                        email: values.email || undefined,
-                                    },
-                                    { 'x-locale': locale },
-                                    accessToken,
-                                );
-                                router.push(buttons.next.path);
-                            } catch {
-                                toast({ variant: 'destructive', description: errors.submitError });
-                            } finally {
-                                setSubmitting(false);
-                                setIsFormSubmitting(false);
-                            }
-                        }}
+                        onSubmit={handleSubmit}
                         validateOnBlur={true}
                         validateOnMount={false}
                         validateOnChange={false}
@@ -225,190 +204,16 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         {() => (
                             <Form id={FORM_ID} className="w-full flex flex-col gap-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="flex flex-col gap-2">
-                                        <Label htmlFor="firstName">
-                                            {fields.firstName?.label}
-                                            {fields.firstName?.required && <span className="text-destructive"> *</span>}
-                                        </Label>
-                                        <Field name="firstName">
-                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
-                                                <>
-                                                    <Input
-                                                        id="firstName"
-                                                        {...field}
-                                                        placeholder={fields.firstName?.placeholder}
-                                                        className={
-                                                            touched.firstName && formErrors.firstName
-                                                                ? 'border-destructive'
-                                                                : ''
-                                                        }
-                                                    />
-                                                    <ErrorMessage name="firstName">
-                                                        {(msg) => (
-                                                            <Typography variant="small" className="text-destructive">
-                                                                {msg}
-                                                            </Typography>
-                                                        )}
-                                                    </ErrorMessage>
-                                                </>
-                                            )}
-                                        </Field>
+                                    <FormField name="firstName" field={fields.firstName} />
+                                    <FormField name="lastName" field={fields.lastName} />
+                                    <FormField name="email" type="email" field={fields.email} />
+                                    <FormField name="phone" type="tel" field={fields.phone} />
+                                    <div className="md:col-span-2">
+                                        <FormField name="companyName" field={fields.companyName} />
                                     </div>
-
-                                    <div className="flex flex-col gap-2">
-                                        <Label htmlFor="lastName">
-                                            {fields.lastName?.label}
-                                            {fields.lastName?.required && <span className="text-destructive"> *</span>}
-                                        </Label>
-                                        <Field name="lastName">
-                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
-                                                <>
-                                                    <Input
-                                                        id="lastName"
-                                                        {...field}
-                                                        placeholder={fields.lastName?.placeholder}
-                                                        className={
-                                                            touched.lastName && formErrors.lastName
-                                                                ? 'border-destructive'
-                                                                : ''
-                                                        }
-                                                    />
-                                                    <ErrorMessage name="lastName">
-                                                        {(msg) => (
-                                                            <Typography variant="small" className="text-destructive">
-                                                                {msg}
-                                                            </Typography>
-                                                        )}
-                                                    </ErrorMessage>
-                                                </>
-                                            )}
-                                        </Field>
+                                    <div className="md:col-span-2">
+                                        <FormField name="taxId" field={fields.taxId} />
                                     </div>
-
-                                    <div className="flex flex-col gap-2">
-                                        <Label htmlFor="email">
-                                            {fields.email?.label}
-                                            {(fields.email?.required || !accessToken) && (
-                                                <span className="text-destructive"> *</span>
-                                            )}
-                                        </Label>
-                                        <Field name="email">
-                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
-                                                <>
-                                                    <Input
-                                                        id="email"
-                                                        type="email"
-                                                        {...field}
-                                                        placeholder={fields.email?.placeholder}
-                                                        className={
-                                                            touched.email && formErrors.email
-                                                                ? 'border-destructive'
-                                                                : ''
-                                                        }
-                                                    />
-                                                    <ErrorMessage name="email">
-                                                        {(msg) => (
-                                                            <Typography variant="small" className="text-destructive">
-                                                                {msg}
-                                                            </Typography>
-                                                        )}
-                                                    </ErrorMessage>
-                                                </>
-                                            )}
-                                        </Field>
-                                    </div>
-
-                                    <div className="flex flex-col gap-2">
-                                        <Label htmlFor="phone">
-                                            {fields.phone?.label}
-                                            {fields.phone?.required && <span className="text-destructive"> *</span>}
-                                        </Label>
-                                        <Field name="phone">
-                                            {({ field, form: { touched, errors: formErrors } }: FieldProps<string>) => (
-                                                <>
-                                                    <Input
-                                                        id="phone"
-                                                        type="tel"
-                                                        {...field}
-                                                        placeholder={fields.phone?.placeholder}
-                                                        className={
-                                                            touched.phone && formErrors.phone
-                                                                ? 'border-destructive'
-                                                                : ''
-                                                        }
-                                                    />
-                                                    <ErrorMessage name="phone">
-                                                        {(msg) => (
-                                                            <Typography variant="small" className="text-destructive">
-                                                                {msg}
-                                                            </Typography>
-                                                        )}
-                                                    </ErrorMessage>
-                                                </>
-                                            )}
-                                        </Field>
-                                    </div>
-
-                                    <div className="md:col-span-2 flex flex-col gap-2">
-                                        <Label htmlFor="companyName">
-                                            {fields.companyName.label}
-                                            {fields.companyName.required && (
-                                                <span className="text-destructive"> *</span>
-                                            )}
-                                        </Label>
-                                        <Field name="companyName">
-                                            {({ field, form: { touched, errors } }: FieldProps<string>) => (
-                                                <>
-                                                    <Input
-                                                        id="companyName"
-                                                        {...field}
-                                                        placeholder={fields.companyName.placeholder}
-                                                        className={
-                                                            touched.companyName && errors.companyName
-                                                                ? 'border-destructive'
-                                                                : ''
-                                                        }
-                                                    />
-                                                    <ErrorMessage name="companyName">
-                                                        {(msg) => (
-                                                            <Typography variant="small" className="text-destructive">
-                                                                {msg}
-                                                            </Typography>
-                                                        )}
-                                                    </ErrorMessage>
-                                                </>
-                                            )}
-                                        </Field>
-                                    </div>
-
-                                    <div className="md:col-span-2 flex flex-col gap-2">
-                                        <Label htmlFor="taxId">
-                                            {fields.taxId.label}
-                                            {fields.taxId.required && <span className="text-destructive"> *</span>}
-                                        </Label>
-                                        <Field name="taxId">
-                                            {({ field, form: { touched, errors } }: FieldProps<string>) => (
-                                                <>
-                                                    <Input
-                                                        id="taxId"
-                                                        {...field}
-                                                        placeholder={fields.taxId.placeholder}
-                                                        className={
-                                                            touched.taxId && errors.taxId ? 'border-destructive' : ''
-                                                        }
-                                                    />
-                                                    <ErrorMessage name="taxId">
-                                                        {(msg) => (
-                                                            <Typography variant="small" className="text-destructive">
-                                                                {msg}
-                                                            </Typography>
-                                                        )}
-                                                    </ErrorMessage>
-                                                </>
-                                            )}
-                                        </Field>
-                                    </div>
-
                                     <div className="md:col-span-2 w-full">
                                         <AddressFields fields={fields.address} locale={locale} />
                                     </div>
@@ -456,7 +261,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                 </div>
 
                 <div className="lg:col-span-1">
-                    {isTotalsLoading ? (
+                    {isInitialLoadPending ? (
                         <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
                             <Skeleton className="h-6 w-32" />
                             <Skeleton className="h-4 w-full" />
@@ -474,7 +279,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                             LinkComponent={LinkComponent}
                             primaryButton={{
                                 label: buttons.next.label,
-                                disabled: isFormSubmitting,
+                                disabled: isSubmitPending,
                                 action: { type: 'submit', form: FORM_ID },
                             }}
                             secondaryButton={{

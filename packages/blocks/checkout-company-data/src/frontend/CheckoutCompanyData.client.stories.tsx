@@ -115,6 +115,7 @@ const baseBlock = {
         icon: 'Info',
         text: 'This address will appear on your invoice.',
     },
+    cartPath: '/cart',
 };
 
 const meta = {

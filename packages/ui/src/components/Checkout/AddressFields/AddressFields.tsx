@@ -1,8 +1,8 @@
 import { ErrorMessage, Field, FieldProps } from 'formik';
 import React from 'react';
 
-import { Input } from '@o2s/ui/elements/input';
-import { Label } from '@o2s/ui/elements/label';
+import { FormField } from '@o2s/ui/components/Checkout/FormField';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -12,181 +12,59 @@ const COUNTRY_CODES = ['PL', 'DE', 'GB'] as const;
 
 export const AddressFields: React.FC<Readonly<AddressFieldsProps>> = ({ fields, idPrefix = '', locale }) => {
     const countryNames = new Intl.DisplayNames([locale], { type: 'region' });
-    const id = (name: string) => (idPrefix ? `${idPrefix}${name.charAt(0).toUpperCase() + name.slice(1)}` : name);
+    const name = (fieldName: string) =>
+        idPrefix ? `${idPrefix}${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}` : fieldName;
 
     return (
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="md:col-span-2 flex flex-col gap-2">
-                <Label htmlFor={id('streetName')}>
-                    {fields.streetName.label}
-                    {fields.streetName.required && <span className="text-destructive"> *</span>}
-                </Label>
-                <Field name="streetName">
-                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
-                        <>
-                            <Input
-                                id={id('streetName')}
-                                {...field}
-                                placeholder={fields.streetName.placeholder}
-                                className={touched.streetName && errors.streetName ? 'border-destructive' : ''}
-                            />
-                            <ErrorMessage name="streetName">
-                                {(msg) => (
-                                    <Typography variant="small" className="text-destructive">
-                                        {msg}
-                                    </Typography>
-                                )}
-                            </ErrorMessage>
-                        </>
-                    )}
-                </Field>
+            <div className="md:col-span-2">
+                <FormField name={name('streetName')} field={fields.streetName} />
             </div>
 
             {(fields.streetNumber || fields.apartment) && (
                 <>
-                    {fields.streetNumber && (
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor={id('streetNumber')}>
-                                {fields.streetNumber.label}
-                                {fields.streetNumber.required && <span className="text-destructive"> *</span>}
-                            </Label>
-                            <Field name="streetNumber">
-                                {({ field, form: { touched, errors } }: FieldProps<string>) => (
-                                    <>
-                                        <Input
-                                            id={id('streetNumber')}
-                                            {...field}
-                                            placeholder={fields.streetNumber!.placeholder}
-                                            className={
-                                                touched.streetNumber && errors.streetNumber ? 'border-destructive' : ''
-                                            }
-                                        />
-                                        <ErrorMessage name="streetNumber">
-                                            {(msg) => (
-                                                <Typography variant="small" className="text-destructive">
-                                                    {msg}
-                                                </Typography>
-                                            )}
-                                        </ErrorMessage>
-                                    </>
-                                )}
-                            </Field>
-                        </div>
-                    )}
+                    {fields.streetNumber && <FormField name={name('streetNumber')} field={fields.streetNumber} />}
 
-                    {fields.apartment && (
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor={id('apartment')}>
-                                {fields.apartment.label}
-                                {fields.apartment.required && <span className="text-destructive"> *</span>}
-                            </Label>
-                            <Field name="apartment">
-                                {({ field, form: { touched, errors } }: FieldProps<string>) => (
-                                    <>
-                                        <Input
-                                            id={id('apartment')}
-                                            {...field}
-                                            placeholder={fields.apartment!.placeholder}
-                                            className={
-                                                touched.apartment && errors.apartment ? 'border-destructive' : ''
-                                            }
-                                        />
-                                        <ErrorMessage name="apartment">
-                                            {(msg) => (
-                                                <Typography variant="small" className="text-destructive">
-                                                    {msg}
-                                                </Typography>
-                                            )}
-                                        </ErrorMessage>
-                                    </>
-                                )}
-                            </Field>
-                        </div>
-                    )}
+                    {fields.apartment && <FormField name={name('apartment')} field={fields.apartment} />}
                 </>
             )}
 
-            <div className="flex flex-col gap-2">
-                <Label htmlFor={id('city')}>
-                    {fields.city.label}
-                    {fields.city.required && <span className="text-destructive"> *</span>}
-                </Label>
-                <Field name="city">
-                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
-                        <>
-                            <Input
-                                id={id('city')}
-                                {...field}
-                                placeholder={fields.city.placeholder}
-                                className={touched.city && errors.city ? 'border-destructive' : ''}
-                            />
-                            <ErrorMessage name="city">
-                                {(msg) => (
-                                    <Typography variant="small" className="text-destructive">
-                                        {msg}
-                                    </Typography>
-                                )}
-                            </ErrorMessage>
-                        </>
-                    )}
-                </Field>
-            </div>
+            <FormField name={name('city')} field={fields.city} />
 
-            <div className="flex flex-col gap-2">
-                <Label htmlFor={id('postalCode')}>
-                    {fields.postalCode.label}
-                    {fields.postalCode.required && <span className="text-destructive"> *</span>}
-                </Label>
-                <Field name="postalCode">
-                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
-                        <>
-                            <Input
-                                id={id('postalCode')}
-                                {...field}
-                                placeholder={fields.postalCode.placeholder ?? 'XX-XXX'}
-                                className={touched.postalCode && errors.postalCode ? 'border-destructive' : ''}
-                            />
-                            <ErrorMessage name="postalCode">
-                                {(msg) => (
-                                    <Typography variant="small" className="text-destructive">
-                                        {msg}
-                                    </Typography>
-                                )}
-                            </ErrorMessage>
-                        </>
-                    )}
-                </Field>
-            </div>
+            <FormField name={name('postalCode')} field={fields.postalCode} />
 
-            <div className="md:col-span-2 flex flex-col gap-2">
-                <Label htmlFor={id('country')}>
-                    {fields.country.label}
-                    {fields.country.required && <span className="text-destructive"> *</span>}
-                </Label>
-                <Field name="country">
-                    {({ field, form: { touched, errors, setFieldValue } }: FieldProps<string>) => (
-                        <>
-                            <Select value={field.value} onValueChange={(value) => setFieldValue('country', value)}>
-                                <SelectTrigger id={id('country')} hasError={!!(touched.country && errors.country)}>
-                                    <SelectValue placeholder={fields.country.placeholder} />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {COUNTRY_CODES.map((code) => (
-                                        <SelectItem key={code} value={code}>
-                                            {countryNames.of(code)}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <ErrorMessage name="country">
-                                {(msg) => (
-                                    <Typography variant="small" className="text-destructive">
-                                        {msg}
-                                    </Typography>
-                                )}
-                            </ErrorMessage>
-                        </>
-                    )}
+            <div className="md:col-span-2">
+                <Field name={name('country')}>
+                    {({ field, form: { touched, errors, setFieldValue } }: FieldProps<string>) => {
+                        const fieldName = name('country');
+                        const fieldTouched = (touched as Record<string, boolean>)[fieldName];
+                        const fieldError = (errors as Record<string, string>)[fieldName];
+                        const hasError = !!(fieldTouched && fieldError);
+
+                        return (
+                            <div className="grid gap-2">
+                                <Select value={field.value} onValueChange={(value) => setFieldValue(fieldName, value)}>
+                                    <SelectTrigger id={fieldName} hasError={hasError}>
+                                        <SelectValue placeholder={fields.country.placeholder} />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {COUNTRY_CODES.map((code) => (
+                                            <SelectItem key={code} value={code}>
+                                                {countryNames.of(code)}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <ErrorMessage name={fieldName}>
+                                    {(msg) => (
+                                        <Typography variant="small" className="text-destructive">
+                                            {msg}
+                                        </Typography>
+                                    )}
+                                </ErrorMessage>
+                            </div>
+                        );
+                    }}
                 </Field>
             </div>
         </div>

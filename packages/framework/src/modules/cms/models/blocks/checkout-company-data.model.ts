@@ -19,8 +19,8 @@ export class CheckoutCompanyDataBlock extends Block.Block {
         notes?: CheckoutFieldConfig;
         address: {
             streetName: CheckoutFieldConfig;
-            streetNumber?: CheckoutFieldConfig;
-            apartment?: CheckoutFieldConfig;
+            streetNumber: CheckoutFieldConfig;
+            apartment: CheckoutFieldConfig;
             city: CheckoutFieldConfig;
             postalCode: CheckoutFieldConfig;
             country: CheckoutFieldConfig;
@@ -43,11 +43,11 @@ export class CheckoutCompanyDataBlock extends Block.Block {
         subtotalLabel: string;
         taxLabel: string;
         totalLabel: string;
-        discountLabel?: string;
-        shippingLabel?: string;
-        freeLabel?: string;
+        discountLabel: string;
+        shippingLabel: string;
+        freeLabel: string;
     };
-    stepIndicator?: { steps: string[]; currentStep: number };
+    stepIndicator!: { steps: string[]; currentStep: number };
     billingInfoNote?: { icon?: string; text: string };
-    cartPath?: string;
+    cartPath!: string;
 }
