@@ -367,9 +367,9 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 <Separator />
                                 <div className="flex flex-col gap-2">
                                     <Typography variant="h3">{sections.summary.activePromoCodesTitle}</Typography>
-                                    <div className="flex flex-col gap-2">
+                                    <ul className="flex flex-col gap-2 list-none">
                                         {promotions.map((promo) => (
-                                            <div
+                                            <li
                                                 key={promo.code}
                                                 className="flex items-center gap-2 rounded-md bg-green-50 px-3 py-2 dark:bg-green-950/20"
                                             >
@@ -378,9 +378,9 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                                     {promo.code}
                                                     {promo.name && ` — ${promo.name}`}
                                                 </Typography>
-                                            </div>
+                                            </li>
                                         ))}
-                                    </div>
+                                    </ul>
                                 </div>
                             </>
                         )}
