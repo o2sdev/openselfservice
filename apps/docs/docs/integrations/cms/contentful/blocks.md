@@ -33,6 +33,12 @@ The following table shows the implementation status of all blocks available in t
 | orders-summary        | ❌     | -                 | Not implemented   |
 | payments-history      | ❌     | -                 | Not implemented   |
 | payments-summary      | ❌     | -                 | Not implemented   |
+| cart                      | ❌     | -                 | Not implemented   |
+| checkout-billing-payment  | ❌     | -                 | Not implemented   |
+| checkout-company-data     | ❌     | -                 | Not implemented   |
+| checkout-shipping-address | ❌     | -                 | Not implemented   |
+| checkout-summary          | ❌     | -                 | Not implemented   |
+| order-confirmation        | ❌     | -                 | Not implemented   |
 | product-details       | ❌     | -                 | Not implemented   |
 | product-list          | ❌     | -                 | Not implemented   |
 | recommended-products  | ❌     | -                 | Not implemented   |
@@ -71,6 +77,12 @@ The following blocks return static mock data instead of fetching content from Co
 - `orders-summary` - Returns mock orders summary
 - `payments-history` - Returns mock payment history
 - `payments-summary` - Returns mock payments summary
+- `cart` - Returns mock cart block configuration (data comes from carts service)
+- `checkout-billing-payment` - Returns mock checkout billing & payment block configuration
+- `checkout-company-data` - Returns mock checkout company data block configuration
+- `checkout-shipping-address` - Returns mock checkout shipping address block configuration
+- `checkout-summary` - Returns mock checkout summary block configuration
+- `order-confirmation` - Returns mock order confirmation block configuration
 - `product-details` - Returns mock product details
 - `product-list` - Returns mock product list
 - `recommended-products` - Returns mock recommended products

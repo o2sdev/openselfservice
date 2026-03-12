@@ -12,6 +12,7 @@ function minimalCart(overrides: Record<string, unknown> = {}): HttpTypes.StoreCa
         created_at: new Date('2024-01-01'),
         updated_at: new Date('2024-01-02'),
         items: [],
+        item_subtotal: 9000,
         subtotal: 9000,
         total: 10000,
         discount_total: 0,
@@ -82,10 +83,34 @@ describe('carts.mapper', () => {
             expect(result.shippingAddress?.country).toBe('PL');
             expect(result.shippingAddress?.city).toBe('Warsaw');
             expect(result.shippingAddress?.streetName).toBe('Street');
+            expect(result.shippingAddress?.streetNumber).toBe('1');
             expect(result.billingAddress).toBeDefined();
             expect(result.billingAddress?.country).toBe('PL');
             expect(result.billingAddress?.city).toBe('Warsaw');
             expect(result.billingAddress?.streetName).toBe('Billing St');
+        });
+
+        it('should restore streetNumber, taxId, apartment from billing_address (address_2 + metadata)', () => {
+            const cart = minimalCart({
+                billing_address: {
+                    first_name: 'Jane',
+                    last_name: 'Doe',
+                    country_code: 'PL',
+                    address_1: 'Marszałkowska',
+                    address_2: '12',
+                    city: 'Warsaw',
+                    postal_code: '00-002',
+                    metadata: {
+                        taxId: '1234567890',
+                        apartment: 'Apt 3',
+                    },
+                },
+            });
+            const result = mapCart(cart, defaultCurrency);
+            expect(result.billingAddress?.streetName).toBe('Marszałkowska');
+            expect(result.billingAddress?.streetNumber).toBe('12');
+            expect(result.billingAddress?.apartment).toBe('Apt 3');
+            expect(result.billingAddress?.taxId).toBe('1234567890');
         });
 
         it('should map line items with sku from variant_sku, quantity, unit_price', () => {

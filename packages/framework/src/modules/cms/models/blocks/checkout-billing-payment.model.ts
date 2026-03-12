@@ -1,0 +1,34 @@
+import { Block } from '@/utils/models';
+
+export class CheckoutBillingPaymentBlock extends Block.Block {
+    title!: string;
+    subtitle?: string;
+    fields!: {
+        paymentMethod: {
+            label: string;
+            placeholder?: string;
+            required: boolean;
+        };
+    };
+    buttons!: {
+        back: { label: string; path: string };
+        next: { label: string; path: string };
+    };
+    errors!: {
+        required: string;
+        cartNotFound: string;
+        submitError: string;
+    };
+    summaryLabels!: {
+        title: string;
+        subtotalLabel: string;
+        taxLabel: string;
+        totalLabel: string;
+        discountLabel?: string;
+        shippingLabel?: string;
+        freeLabel?: string;
+    };
+    stepIndicator?: { steps: string[]; currentStep: number };
+    cartPath?: string;
+    orderConfirmationPath!: string;
+}

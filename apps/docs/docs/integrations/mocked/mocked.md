@@ -22,6 +22,8 @@ This integration handles the following base modules from the framework:
 - auth
 - billing-accounts
 - cache
+- carts
+- checkout
 - cms
 - invoices
 - notifications

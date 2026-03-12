@@ -28,7 +28,8 @@ export class OrdersService extends Orders.Service {
 
     private readonly additionalOrderListFields =
         '+total,+subtotal,+tax_total,+discount_total,+shipping_total,+shipping_subtotal,+tax_total,+items.product.*';
-    private readonly additionalOrderDetailsFields = 'items.product.*';
+    // customer_id required for authorization check (guest vs customer order access)
+    private readonly additionalOrderDetailsFields = '+customer_id,items.product.*';
 
     constructor(
         private readonly config: ConfigService,
@@ -47,7 +48,8 @@ export class OrdersService extends Orders.Service {
 
     /**
      * Retrieves an order by ID using Medusa Store API.
-     * Store API automatically verifies the order belongs to the authenticated customer.
+     * - Guest orders (no customer_id): accessible to anyone with order ID (order confirmation flow).
+     * - Customer orders: require authorization and order.customerId must match the authenticated customer.
      *
      * @requires Medusa auth plugin must be configured to accept SSO tokens.
      */
@@ -55,11 +57,6 @@ export class OrdersService extends Orders.Service {
         params: Orders.Request.GetOrderParams,
         authorization: string | undefined,
     ): Observable<Orders.Model.Order | undefined> {
-        if (!authorization) {
-            this.logger.debug('Authorization token not found');
-            throw new UnauthorizedException('Unauthorized');
-        }
-
         const query: HttpTypes.SelectParams = {
             fields: this.additionalOrderDetailsFields,
         };
@@ -67,7 +64,22 @@ export class OrdersService extends Orders.Service {
         return from(
             this.sdk.store.order.retrieve(params.id, query, this.medusaJsService.getStoreApiHeaders(authorization)),
         ).pipe(
-            map((response: { order: HttpTypes.StoreOrder }) => mapOrder(response.order, this.defaultCurrency)),
+            map((response: { order: HttpTypes.StoreOrder }) => {
+                const order = mapOrder(response.order, this.defaultCurrency);
+                // Guest orders (no customer_id): accessible to anyone with order ID
+                if (!order.customerId) {
+                    return order;
+                }
+                // Customer orders: require auth and customerId must match
+                if (!authorization) {
+                    throw new UnauthorizedException('Unauthorized');
+                }
+                const customerId = this.authService.getCustomerId(authorization);
+                if (order.customerId !== customerId) {
+                    throw new UnauthorizedException('Unauthorized');
+                }
+                return order;
+            }),
             catchError((error) => {
                 return handleHttpError(error);
             }),
