@@ -16,14 +16,11 @@ type Story = StoryObj<typeof CartSummary>;
 
 export const Default: Story = {
     args: {
-        subtotal: { value: 204.97, currency: 'PLN' as const },
-        tax: { value: 47.14, currency: 'PLN' as const },
-        total: { value: 231.61, currency: 'PLN' as const },
-        discountTotal: { value: 20.5, currency: 'PLN' as const },
-        shippingMethod: {
-            name: 'Standard Delivery',
-            total: { value: 15.0, currency: 'PLN' as const },
-        },
+        subtotal: { value: 204.97, currency: 'EUR' as const },
+        tax: { value: 47.14, currency: 'EUR' as const },
+        total: { value: 231.61, currency: 'EUR' as const },
+        discountTotal: { value: 20.5, currency: 'EUR' as const },
+        shippingTotal: { value: 15.0, currency: 'EUR' as const },
         labels: {
             title: 'Summary',
             subtotalLabel: 'Subtotal',
