@@ -28,6 +28,9 @@ export class ProductListBlock extends ApiModels.Block.Block {
         showMoreFilters: string;
         hideMoreFilters: string;
         noActiveFilters: string;
+        addToCartLabel?: string;
+        addToCartSuccess?: string;
+        addToCartError?: string;
     };
     permissions?: {
         view: boolean;

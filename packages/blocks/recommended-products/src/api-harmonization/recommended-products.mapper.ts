@@ -10,6 +10,9 @@ export const mapRecommendedProducts = (
     const labels: Model.Labels = {
         title: cms.labels?.title,
         detailsLabel: cms.labels?.detailsLabel,
+        addToCartLabel: cms.labels?.addToCartLabel,
+        addToCartSuccess: cms.labels?.addToCartSuccess,
+        addToCartError: cms.labels?.addToCartError,
     };
 
     return {

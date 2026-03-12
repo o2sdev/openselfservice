@@ -55,6 +55,9 @@ export const mapProductDetails = (
         offer: cms.labels.offerLabel,
         variant: cms.labels.variantLabel,
         outOfStock: cms.labels.outOfStockLabel,
+        addToCart: cms.labels.addToCartLabel,
+        addToCartSuccess: cms.labels.addToCartSuccess,
+        addToCartError: cms.labels.addToCartError,
     };
 
     return {

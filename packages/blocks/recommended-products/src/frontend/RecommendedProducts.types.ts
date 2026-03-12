@@ -6,6 +6,7 @@ export interface RecommendedProductsProps {
     id: string;
     excludeProductId?: string;
     limit?: number;
+    accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
 }

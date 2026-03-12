@@ -107,6 +107,9 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
         showMoreFilters: 'Show more filters',
         hideMoreFilters: 'Hide more filters',
         noActiveFilters: 'No active filters',
+        addToCartLabel: 'Add to Cart',
+        addToCartSuccess: 'Product added to cart',
+        addToCartError: 'Failed to add product to cart',
     },
 };
 
@@ -217,6 +220,9 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
         showMoreFilters: 'Mehr Filter anzeigen',
         hideMoreFilters: 'Mehr Filter ausblenden',
         noActiveFilters: 'Keine aktiven Filter',
+        addToCartLabel: 'In den Warenkorb',
+        addToCartSuccess: 'Produkt zum Warenkorb hinzugefügt',
+        addToCartError: 'Fehler beim Hinzufügen zum Warenkorb',
     },
 };
 
@@ -327,6 +333,9 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
         showMoreFilters: 'Pokaż więcej filtrów',
         hideMoreFilters: 'Ukryj więcej filtrów',
         noActiveFilters: 'Brak aktywnych filtrów',
+        addToCartLabel: 'Dodaj do koszyka',
+        addToCartSuccess: 'Produkt dodany do koszyka',
+        addToCartError: 'Nie udało się dodać produktu do koszyka',
     },
 };
 

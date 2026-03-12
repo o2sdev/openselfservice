@@ -46,6 +46,7 @@ export class RecommendedProductsService {
                                 })
                                 .map((product: Products.Model.Product) => ({
                                     id: product.id,
+                                    sku: product.sku,
                                     name: product.name,
                                     description: product.shortDescription,
                                     image: product.image!,

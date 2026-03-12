@@ -6,6 +6,7 @@ export interface ProductDetailsProps {
     id: string;
     productId: string;
     variantSlug?: string;
+    accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;

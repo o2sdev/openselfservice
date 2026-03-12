@@ -11,6 +11,9 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
         offerLabel: 'Offer',
         variantLabel: 'Variant',
         outOfStockLabel: 'Out of Stock',
+        addToCartLabel: 'Add to Cart',
+        addToCartSuccess: 'Product added to cart',
+        addToCartError: 'Failed to add product to cart',
     },
     basePath: '/products',
     attributes: [
@@ -39,6 +42,9 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
         offerLabel: 'Angebot',
         variantLabel: 'Variante',
         outOfStockLabel: 'Nicht auf Lager',
+        addToCartLabel: 'In den Warenkorb',
+        addToCartSuccess: 'Produkt zum Warenkorb hinzugefügt',
+        addToCartError: 'Fehler beim Hinzufügen zum Warenkorb',
     },
     basePath: '/produkte',
     attributes: [
@@ -67,6 +73,9 @@ const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetail
         offerLabel: 'Oferta',
         variantLabel: 'Wariant',
         outOfStockLabel: 'Brak na magazynie',
+        addToCartLabel: 'Dodaj do koszyka',
+        addToCartSuccess: 'Produkt dodany do koszyka',
+        addToCartError: 'Nie udało się dodać produktu do koszyka',
     },
     basePath: '/produkty',
     attributes: [

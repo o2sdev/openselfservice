@@ -31,5 +31,6 @@ export const sdk = extendSdk(internalSdk, {
         getCart: cart(internalSdk).cart.getCart,
         updateCartItem: cart(internalSdk).cart.updateCartItem,
         removeCartItem: cart(internalSdk).cart.removeCartItem,
+        addCartItem: cart(internalSdk).cart.addCartItem,
     },
 });

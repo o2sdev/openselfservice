@@ -49,6 +49,9 @@ export type Labels = {
     offer: string;
     variant?: string;
     outOfStock?: string;
+    addToCart?: string;
+    addToCartSuccess?: string;
+    addToCartError?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {

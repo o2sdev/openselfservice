@@ -19,6 +19,8 @@ interface PriceSectionProps {
         variant?: 'default' | 'secondary' | 'destructive' | 'outline';
         icon?: string;
     };
+    onAddToCart?: () => void;
+    addToCartLabel?: string;
     isOutOfStock?: boolean;
     className?: string;
 }
@@ -27,6 +29,8 @@ export const PriceSection: React.FC<PriceSectionProps> = ({
     price,
     priceLabel,
     actionButton,
+    onAddToCart,
+    addToCartLabel,
     isOutOfStock = false,
     className,
 }) => {
@@ -40,27 +44,39 @@ export const PriceSection: React.FC<PriceSectionProps> = ({
                     <Price price={price} />
                 </Typography>
             </div>
-            {actionButton && (
+            {(actionButton || onAddToCart) && (
                 <>
                     <Separator />
                     <div className="flex flex-col gap-3 mt-6">
-                        <TooltipHover
-                            trigger={(setIsOpen) => (
-                                <Button
-                                    variant={actionButton.variant || 'default'}
-                                    size="lg"
-                                    className="w-full"
-                                    onClick={() => setIsOpen(true)}
-                                    disabled={isOutOfStock}
-                                >
-                                    {actionButton.icon && (
-                                        <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
-                                    )}
-                                    {actionButton.label}
-                                </Button>
-                            )}
-                            content={<p>{t('general.comingSoon')}</p>}
-                        />
+                        {onAddToCart && addToCartLabel ? (
+                            <Button
+                                variant="default"
+                                size="lg"
+                                className="w-full"
+                                onClick={onAddToCart}
+                                disabled={isOutOfStock}
+                            >
+                                {addToCartLabel}
+                            </Button>
+                        ) : actionButton ? (
+                            <TooltipHover
+                                trigger={(setIsOpen) => (
+                                    <Button
+                                        variant={actionButton.variant || 'default'}
+                                        size="lg"
+                                        className="w-full"
+                                        onClick={() => setIsOpen(true)}
+                                        disabled={isOutOfStock}
+                                    >
+                                        {actionButton.icon && (
+                                            <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
+                                        )}
+                                        {actionButton.label}
+                                    </Button>
+                                )}
+                                content={<p>{t('general.comingSoon')}</p>}
+                            />
+                        ) : null}
                     </div>
                 </>
             )}

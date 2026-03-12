@@ -9,6 +9,9 @@ export type Labels = {
     offerLabel: string;
     variantLabel?: string;
     outOfStockLabel?: string;
+    addToCartLabel?: string;
+    addToCartSuccess?: string;
+    addToCartError?: string;
 };
 
 export type AttributeConfig = {

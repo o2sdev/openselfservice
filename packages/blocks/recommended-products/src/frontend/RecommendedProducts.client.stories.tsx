@@ -33,6 +33,7 @@ export const Default: Story = {
         products: [
             {
                 id: 'PRD-005',
+                sku: 'AG-125-A22',
                 name: 'Cordless Angle Grinder',
                 description: 'Cordless angle grinder with 22V battery platform',
                 image: {
@@ -53,6 +54,7 @@ export const Default: Story = {
             },
             {
                 id: 'PRD-006',
+                sku: 'PD-S',
                 name: 'Laser Measurement',
                 description: 'Laser measurement device for distance measurements',
                 image: {
@@ -70,6 +72,7 @@ export const Default: Story = {
             },
             {
                 id: 'PRD-007',
+                sku: 'SFC-22-A',
                 name: 'Cordless Drill Driver',
                 description: 'Cordless drill driver with 22V battery platform',
                 image: {
@@ -87,6 +90,7 @@ export const Default: Story = {
             },
             {
                 id: 'PRD-008',
+                sku: 'CAL-PRO',
                 name: 'Professional Calibration',
                 description: 'Professional calibration service for industrial equipment',
                 image: {
@@ -109,6 +113,9 @@ export const Default: Story = {
         labels: {
             title: 'Recommended Products',
             detailsLabel: 'Details',
+            addToCartLabel: 'Add to Cart',
+            addToCartSuccess: 'Product added to cart',
+            addToCartError: 'Failed to add product to cart',
         },
     },
 };

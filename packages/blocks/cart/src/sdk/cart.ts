@@ -80,5 +80,21 @@ export const cart = (sdk: Sdk) => ({
                     ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
                 },
             }),
+
+        addCartItem: (
+            body: Carts.Request.AddCartItemBody,
+            headers: Models.Headers.AppHeaders,
+            authorization?: string,
+        ): Promise<Carts.Model.Cart> =>
+            sdk.makeRequest({
+                method: 'post',
+                url: `${CARTS_API_URL}/items`,
+                headers: {
+                    ...Utils.Headers.getApiHeaders(),
+                    ...headers,
+                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
+                },
+                data: body,
+            }),
     },
 });
