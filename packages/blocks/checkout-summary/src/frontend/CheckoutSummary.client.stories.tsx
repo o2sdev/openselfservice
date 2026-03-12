@@ -38,25 +38,22 @@ const baseBlock = {
         },
         billing: {
             title: 'Payment',
+            addressLabel: 'Billing address',
             methodLabel: 'Payment method:',
         },
         summary: {
             title: 'Summary',
             subtotalLabel: 'Subtotal',
-            taxLabel: 'VAT (23%)',
+            taxLabel: 'VAT',
+            discountLabel: 'Discount',
             shippingLabel: 'Shipping',
+            freeLabel: 'Free',
             totalLabel: 'Total',
             activePromoCodesTitle: 'Active discount codes',
-        },
-        notes: {
-            title: 'Notes',
-            comment: { label: 'Comment', placeholder: 'Add a comment to your order...' },
-            specialInstructions: {
-                label: 'Special instructions',
-                placeholder: 'Any special delivery instructions?',
-            },
+            notesTitle: 'Notes',
         },
     },
+    cartPath: '/cart',
     buttons: {
         back: { label: 'Back', path: '#' },
         confirm: { label: 'Place order', path: '#' },

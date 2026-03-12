@@ -56,6 +56,7 @@ const baseBlock = {
         tax: { value: 47.14, currency: 'PLN' as const },
         total: { value: 252.11, currency: 'PLN' as const },
     },
+    orderConfirmationPath: '/order-confirmation',
 };
 
 const meta = {
