@@ -30,4 +30,5 @@ export class CheckoutBillingPaymentBlock extends Block.Block {
     };
     stepIndicator?: { steps: string[]; currentStep: number };
     cartPath?: string;
+    orderConfirmationPath!: string;
 }
