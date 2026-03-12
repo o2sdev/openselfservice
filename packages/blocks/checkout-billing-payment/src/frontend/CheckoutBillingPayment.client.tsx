@@ -2,7 +2,7 @@
 
 import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
 import { Carts, Models, Payments } from '@o2s/framework/modules';
@@ -13,7 +13,6 @@ import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
 
-import { Label } from '@o2s/ui/elements/label';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -36,24 +35,28 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     errors,
     summaryLabels,
     cartPath,
+    orderConfirmationPath,
 }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
     const { toast } = useToast();
 
-    const [totals, setTotals] = useState<{
-        subtotal: Models.Price.Price;
-        tax: Models.Price.Price;
-        total: Models.Price.Price;
-        discountTotal?: Models.Price.Price;
-    } | null>(null);
+    const [totals, setTotals] = useState<
+        | {
+              subtotal: Models.Price.Price;
+              tax: Models.Price.Price;
+              total: Models.Price.Price;
+              discountTotal?: Models.Price.Price;
+          }
+        | undefined
+    >();
     const [cartShippingMethod, setCartShippingMethod] = useState<
         { name: string; total: Models.Price.Price } | undefined
-    >(undefined);
-    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>(undefined);
+    >();
+    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>();
     const [paymentProviders, setPaymentProviders] = useState<Payments.Model.PaymentProvider[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+    const [isInitialLoadPending, startInitialLoadTransition] = useTransition();
+    const [isSubmitPending, startSubmitTransition] = useTransition();
     const [initialFormValues, setInitialFormValues] = useState({
         paymentMethod: '',
     });
@@ -66,8 +69,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
             return;
         }
 
-        setIsLoading(true);
-        (async () => {
+        startInitialLoadTransition(async () => {
             try {
                 const cart = await sdk.carts.getCart(cartId, { 'x-locale': locale }, accessToken);
                 if (cart.subtotal && cart.taxTotal && cart.total) {
@@ -97,20 +99,38 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
             } catch {
                 toast({ description: errors?.cartNotFound, variant: 'destructive' });
                 router.replace(cartPath ?? '/');
-            } finally {
-                setIsLoading(false);
             }
-        })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [locale, accessToken]);
-
-    if (!title || !fields || !buttons || !summaryLabels || !errors) {
-        return null;
-    }
+        });
+    }, [locale, accessToken, toast, errors?.cartNotFound, router, cartPath]);
 
     const validationSchema = YupObject().shape({
         paymentMethod: fields.paymentMethod.required ? YupString().required(errors.required) : YupString(),
     });
+
+    const handleSubmit = (values: { paymentMethod: string }) => {
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) return;
+
+        startSubmitTransition(async () => {
+            try {
+                const returnUrl = `${window.location.origin}${orderConfirmationPath}`;
+                const cancelUrl = window.location.href;
+                await sdk.checkout.setPayment(
+                    cartId,
+                    {
+                        providerId: values.paymentMethod,
+                        returnUrl,
+                        cancelUrl,
+                    },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                router.push(buttons.next.path);
+            } catch {
+                toast({ variant: 'destructive', description: errors.submitError });
+            }
+        });
+    };
 
     return (
         <div className="w-full flex flex-col gap-8">
@@ -130,46 +150,18 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         initialValues={initialFormValues}
                         enableReinitialize
                         validationSchema={validationSchema}
-                        onSubmit={async (values, { setSubmitting }) => {
-                            setIsFormSubmitting(true);
-                            const cartId = localStorage.getItem(CART_ID_KEY);
-                            if (!cartId) {
-                                setSubmitting(false);
-                                setIsFormSubmitting(false);
-                                return;
-                            }
-                            try {
-                                const returnUrl = `${window.location.origin}${buttons.next.path}`;
-                                const cancelUrl = window.location.href;
-                                await sdk.checkout.setPayment(
-                                    cartId,
-                                    {
-                                        providerId: values.paymentMethod,
-                                        returnUrl,
-                                        cancelUrl,
-                                    },
-                                    { 'x-locale': locale },
-                                    accessToken,
-                                );
-                                router.push(buttons.next.path);
-                            } catch {
-                                toast({ variant: 'destructive', description: errors.submitError });
-                            } finally {
-                                setSubmitting(false);
-                                setIsFormSubmitting(false);
-                            }
-                        }}
+                        onSubmit={handleSubmit}
                         validateOnBlur={true}
                         validateOnMount={false}
                         validateOnChange={false}
                     >
                         {() => (
                             <Form id={FORM_ID} className="w-full flex flex-col gap-6">
-                                <div className="flex flex-col gap-2">
-                                    <Label>
+                                <fieldset className="flex flex-col gap-2">
+                                    <legend className="text-sm font-medium leading-none mb-2">
                                         {fields.paymentMethod.label}
                                         {fields.paymentMethod.required && <span className="text-destructive"> *</span>}
-                                    </Label>
+                                    </legend>
                                     <Field name="paymentMethod">
                                         {({ field, form: { touched, errors, setFieldValue } }: FieldProps<string>) => (
                                             <>
@@ -192,14 +184,14 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                                             </>
                                         )}
                                     </Field>
-                                </div>
+                                </fieldset>
                             </Form>
                         )}
                     </Formik>
                 </div>
 
                 <div className="lg:col-span-1">
-                    {isLoading ? (
+                    {isInitialLoadPending ? (
                         <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
                             <Skeleton className="h-6 w-32" />
                             <Skeleton className="h-4 w-full" />
@@ -218,7 +210,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                             LinkComponent={LinkComponent}
                             primaryButton={{
                                 label: buttons.next.label,
-                                disabled: isFormSubmitting,
+                                disabled: isSubmitPending,
                                 action: { type: 'submit', form: FORM_ID },
                             }}
                             secondaryButton={{

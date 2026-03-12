@@ -34,6 +34,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_EN: CMS.Model.CheckoutBillingPaymentBlock.Ch
         currentStep: 3,
     },
     cartPath: '/cart',
+    orderConfirmationPath: '/order-confirmation',
 };
 
 const MOCK_CHECKOUT_BILLING_PAYMENT_DE: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock = {
@@ -70,6 +71,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_DE: CMS.Model.CheckoutBillingPaymentBlock.Ch
         currentStep: 3,
     },
     cartPath: '/warenkorb',
+    orderConfirmationPath: '/bestellbestaetigung',
 };
 
 const MOCK_CHECKOUT_BILLING_PAYMENT_PL: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock = {
@@ -106,6 +108,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_PL: CMS.Model.CheckoutBillingPaymentBlock.Ch
         currentStep: 3,
     },
     cartPath: '/koszyk',
+    orderConfirmationPath: '/potwierdzenie-zamowienia',
 };
 
 export const mapCheckoutBillingPaymentBlock = (

@@ -1,37 +1,16 @@
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-/** Labels for cart summary sidebar */
-export interface CheckoutBillingPaymentSummaryLabels {
-    title: string;
-    subtotalLabel: string;
-    taxLabel: string;
-    totalLabel: string;
-    discountLabel?: string;
-    shippingLabel?: string;
-    freeLabel?: string;
-}
+import { CMS } from '@o2s/framework/modules';
 
 export class CheckoutBillingPaymentBlock extends ApiModels.Block.Block {
     __typename!: 'CheckoutBillingPaymentBlock';
     title!: string;
     subtitle?: string;
-    fields!: {
-        paymentMethod: {
-            label: string;
-            placeholder?: string;
-            required: boolean;
-        };
-    };
-    buttons!: {
-        back: { label: string; path: string };
-        next: { label: string; path: string };
-    };
-    errors!: {
-        required: string;
-        cartNotFound: string;
-        submitError: string;
-    };
-    summaryLabels!: CheckoutBillingPaymentSummaryLabels;
-    stepIndicator?: { steps: string[]; currentStep: number };
-    cartPath?: string;
+    fields!: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock['fields'];
+    buttons!: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock['buttons'];
+    errors!: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock['errors'];
+    summaryLabels!: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock['summaryLabels'];
+    stepIndicator?: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock['stepIndicator'];
+    cartPath?: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock['cartPath'];
+    orderConfirmationPath!: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock['orderConfirmationPath'];
 }
