@@ -84,14 +84,16 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         }
     }) as DataListColumnConfig<Model.Product>[];
 
-    const actions = data.table?.actions
+    const tableActions = data.table?.actions;
+
+    const actions = tableActions
         ? {
-              ...data.table.actions,
+              ...tableActions,
               render: (product: Model.Product) => (
                   <Button asChild variant="link">
                       <LinkComponent href={product.link} className="flex items-center justify-end gap-2">
                           <ArrowRight className="h-4 w-4" />
-                          {data.detailsLabel || data.table.actions.label}
+                          {data.detailsLabel || tableActions.label}
                       </LinkComponent>
                   </Button>
               ),
