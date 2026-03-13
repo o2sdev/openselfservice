@@ -42,28 +42,31 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
+    const [isAddingToCart, startAddToCartTransition] = useTransition();
 
     const handleAddToCart = useCallback(
-        async (sku: string, currency: string) => {
-            try {
-                const cartId = localStorage.getItem('cartId');
-                const result = await sdk.cart.addCartItem(
-                    {
-                        cartId: cartId || undefined,
-                        sku,
-                        quantity: 1,
-                        currency: currency as 'USD' | 'EUR' | 'GBP' | 'PLN',
-                    },
-                    { 'x-locale': locale },
-                    accessToken,
-                );
-                if (!cartId && result?.id) {
-                    localStorage.setItem('cartId', result.id);
+        (sku: string, currency: string) => {
+            startAddToCartTransition(async () => {
+                try {
+                    const cartId = localStorage.getItem('cartId');
+                    const result = await sdk.cart.addCartItem(
+                        {
+                            cartId: cartId || undefined,
+                            sku,
+                            quantity: 1,
+                            currency: currency as 'USD' | 'EUR' | 'GBP' | 'PLN',
+                        },
+                        { 'x-locale': locale },
+                        accessToken,
+                    );
+                    if (!cartId && result?.id) {
+                        localStorage.setItem('cartId', result.id);
+                    }
+                    toast({ description: data.labels.addToCartSuccess });
+                } catch {
+                    toast({ variant: 'destructive', description: data.labels.addToCartError });
                 }
-                toast({ description: data.labels.addToCartSuccess });
-            } catch {
-                toast({ variant: 'destructive', description: data.labels.addToCartError });
-            }
+            });
         },
         [locale, accessToken, data.labels.addToCartSuccess, data.labels.addToCartError],
     );
@@ -200,6 +203,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                                             <Button
                                                                 variant="secondary"
                                                                 size="sm"
+                                                                disabled={isAddingToCart}
                                                                 onClick={() =>
                                                                     handleAddToCart(product.sku, product.price.currency)
                                                                 }

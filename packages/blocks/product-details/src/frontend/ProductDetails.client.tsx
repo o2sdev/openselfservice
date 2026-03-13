@@ -3,7 +3,7 @@
 import { CircleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useTransition } from 'react';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
@@ -70,6 +70,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     ...component
 }) => {
     const { product, labels, actionButton } = component;
+    const [isAddingToCart, startAddToCartTransition] = useTransition();
     const t = useTranslations();
     const { useRouter } = createNavigation(routing);
     const router = useRouter();
@@ -131,21 +132,23 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
     const isOutOfStock = !currentVariantInStock;
 
-    const handleAddToCart = useCallback(async () => {
-        try {
-            const cartId = localStorage.getItem('cartId');
-            const result = await sdk.cart.addCartItem(
-                { cartId: cartId || undefined, sku: product.sku, quantity: 1, currency: product.price.currency },
-                { 'x-locale': locale },
-                accessToken,
-            );
-            if (!cartId && result?.id) {
-                localStorage.setItem('cartId', result.id);
+    const handleAddToCart = useCallback(() => {
+        startAddToCartTransition(async () => {
+            try {
+                const cartId = localStorage.getItem('cartId');
+                const result = await sdk.cart.addCartItem(
+                    { cartId: cartId || undefined, sku: product.sku, quantity: 1, currency: product.price.currency },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                if (!cartId && result?.id) {
+                    localStorage.setItem('cartId', result.id);
+                }
+                toast({ description: labels.addToCartSuccess });
+            } catch {
+                toast({ variant: 'destructive', description: labels.addToCartError });
             }
-            toast({ description: labels.addToCartSuccess });
-        } catch {
-            toast({ variant: 'destructive', description: labels.addToCartError });
-        }
+        });
     }, [product.sku, product.price.currency, locale, accessToken, labels.addToCartSuccess, labels.addToCartError]);
 
     return (
@@ -242,6 +245,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             onAddToCart={labels.addToCart ? handleAddToCart : undefined}
                             addToCartLabel={labels.addToCart}
                             isOutOfStock={isOutOfStock}
+                            isAddingToCart={isAddingToCart}
                         />
                     </div>
                 </div>
@@ -263,7 +267,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     size="default"
                                     className="w-full"
                                     onClick={handleAddToCart}
-                                    disabled={isOutOfStock}
+                                    disabled={isOutOfStock || isAddingToCart}
                                 >
                                     {labels.addToCart}
                                 </Button>

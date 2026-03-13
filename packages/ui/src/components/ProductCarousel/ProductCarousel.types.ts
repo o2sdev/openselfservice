@@ -15,6 +15,7 @@ export interface ProductCarouselProps {
     linkDetailsLabel?: string;
     addToCartLabel?: string;
     onAddToCart?: (sku: string, currency: string) => void;
+    isAddingToCart?: boolean;
     carouselClassName?: string;
     keyboardControlMode?: CarouselProps['keyboardControlMode'];
     keyboardCarouselId?: string;

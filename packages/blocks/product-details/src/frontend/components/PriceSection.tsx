@@ -22,6 +22,7 @@ interface PriceSectionProps {
     onAddToCart?: () => void;
     addToCartLabel?: string;
     isOutOfStock?: boolean;
+    isAddingToCart?: boolean;
     className?: string;
 }
 
@@ -32,6 +33,7 @@ export const PriceSection: React.FC<PriceSectionProps> = ({
     onAddToCart,
     addToCartLabel,
     isOutOfStock = false,
+    isAddingToCart = false,
     className,
 }) => {
     const t = useTranslations();
@@ -54,7 +56,7 @@ export const PriceSection: React.FC<PriceSectionProps> = ({
                                 size="lg"
                                 className="w-full"
                                 onClick={onAddToCart}
-                                disabled={isOutOfStock}
+                                disabled={isOutOfStock || isAddingToCart}
                             >
                                 {addToCartLabel}
                             </Button>
