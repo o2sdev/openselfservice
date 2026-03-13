@@ -1,18 +1,21 @@
-export * as Articles from './articles';
-export * as Auth from './auth';
-export * as BillingAccounts from './billing-accounts';
-export * as Cache from './cache';
-export * as Carts from './carts';
-export * as Checkout from './checkout';
-export * as CMS from './cms';
-export * as Customers from './customers';
-export * as Invoices from './invoices';
-export * as Notifications from './notifications';
-export * as Orders from './orders';
-export * as Organizations from './organizations';
-export * as Payments from './payments';
-export * as Products from './products';
-export * as Resources from './resources';
-export * as Search from './search';
-export * as Tickets from './tickets';
-export * as Users from './users';
+export {
+    integrations,
+    Articles,
+    Auth,
+    BillingAccounts,
+    Cache,
+    Carts,
+    Checkout,
+    CMS,
+    Customers,
+    Invoices,
+    Notifications,
+    Orders,
+    Organizations,
+    Payments,
+    Products,
+    Resources,
+    Search,
+    Tickets,
+    Users,
+} from '../config';

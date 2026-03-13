@@ -4548,266 +4548,6 @@ paths:
               examples:
                 default:
                   $ref: '#/components/examples/MissingTranslationsResponseExample'
-  /api/v2/help_center/community/posts:
-    get:
-      operationId: ListPostsInternal
-      tags:
-        - Posts
-      summary: List Posts (legacy)
-      parameters:
-        - name: filter_by
-          in: query
-          description: Filter the results using the provided value
-          schema:
-            type: string
-            enum:
-              - planned
-              - not_planned
-              - completed
-              - answered
-              - none
-        - name: sort_by
-          in: query
-          description: Sorts the results using the provided value
-          schema:
-            type: string
-            enum:
-              - created_at
-              - edited_at
-              - updated_at
-              - recent_activity
-              - votes
-              - comments
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostsResponse'
-              examples:
-                default:
-                  $ref: '#/components/examples/PostsResponseExample'
-  /api/v2/help_center/community/posts/{post_id}:
-    parameters:
-      - $ref: '#/components/parameters/PostId'
-    get:
-      operationId: ShowPostInternal
-      tags:
-        - Posts
-      summary: Show Post (legacy)
-      description: |
-        Gets information about a given post.
-
-        #### Allowed for
-
-        * Anonymous users
-
-        #### Sideloads
-        The following sideloads are supported:
-
-        | Name        | Will sideload
-        |-------------|--------------
-        | users       | authors
-        | topics      | topics
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostResponse'
-              examples:
-                default:
-                  $ref: '#/components/examples/PostResponseExample'
-    put:
-      operationId: UpdatePostInternal
-      tags:
-        - Posts
-      summary: Update Post (legacy)
-      description: |
-        #### Allowed for
-
-        * Agents
-        * The end user who created the post
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostResponse'
-              examples:
-                default:
-                  $ref: '#/components/examples/PostResponseExample'
-    delete:
-      operationId: DeletePostInternal
-      tags:
-        - Posts
-      summary: Delete Post (legacy)
-      description: |
-        #### Allowed for
-
-        * Agents
-        * The end user who created the post
-      responses:
-        "204":
-          description: Default success response
-  /api/v2/help_center/community/posts/{post_id}/comments/{post_comment_id}:
-    parameters:
-      - $ref: '#/components/parameters/PostId'
-      - $ref: '#/components/parameters/PostCommentId'
-    get:
-      operationId: ShowPostCommentInternal
-      tags:
-        - Post Comments
-      summary: Show Post Comment
-      description: |
-        Shows information about the specified comment.
-
-        #### Allowed for
-
-        * End users
-
-        #### Sideloads
-
-        The following sideloads are supported:
-
-        | Name   | Will sideload
-        |--------|--------------
-        | users  | The comment's author
-        | posts  | The comment's post
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostCommentResponse'
-              examples:
-                default:
-                  $ref: '#/components/examples/PostCommentResponseExample'
-    put:
-      operationId: UpdatePostCommentInternal
-      tags:
-        - Post Comments
-      summary: Update Post Comment
-      description: |
-        Updates the specified comment.
-
-        #### Allowed for
-
-        * Agents
-        * The end user who created the comment
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostCommentResponse'
-              examples:
-                default:
-                  $ref: '#/components/examples/PostCommentResponseExample'
-    delete:
-      operationId: DeletePostCommentInternal
-      tags:
-        - Post Comments
-      summary: Delete Post Comment
-      description: |
-        Deletes the specified comment.
-
-        #### Allowed for
-
-        * Agents
-        * The end user who created the comment
-      responses:
-        "204":
-          description: Default success response
-  /api/v2/help_center/community/topics/{topic_id}/posts:
-    parameters:
-      - $ref: '#/components/parameters/TopicId'
-    get:
-      operationId: ListPostsByTopicInternal
-      tags:
-        - Posts
-      summary: List Posts in Topic (legacy)
-      parameters:
-        - name: filter_by
-          in: query
-          description: Filter the results using the provided value
-          schema:
-            type: string
-            enum:
-              - planned
-              - not_planned
-              - completed
-              - answered
-              - none
-        - name: sort_by
-          in: query
-          description: Sorts the results using the provided value
-          schema:
-            type: string
-            enum:
-              - created_at
-              - edited_at
-              - updated_at
-              - recent_activity
-              - votes
-              - comments
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostsResponse'
-              examples:
-                default:
-                  $ref: '#/components/examples/PostsResponseExample'
-  /api/v2/help_center/community/users/{user_id}/posts:
-    parameters:
-      - $ref: '#/components/parameters/UserId'
-    get:
-      operationId: ListPostsByUserInternal
-      tags:
-        - Posts
-      summary: List Posts by User (legacy)
-      parameters:
-        - name: filter_by
-          in: query
-          description: Filter the results using the provided value
-          schema:
-            type: string
-            enum:
-              - planned
-              - not_planned
-              - completed
-              - answered
-              - none
-        - name: sort_by
-          in: query
-          description: Sorts the results using the provided value
-          schema:
-            type: string
-            enum:
-              - created_at
-              - edited_at
-              - updated_at
-              - recent_activity
-              - votes
-              - comments
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostsResponse'
-              examples:
-                default:
-                  $ref: '#/components/examples/PostsResponseExample'
   /api/v2/help_center/community_posts/search:
     get:
       operationId: CommunityPostSearch
@@ -6249,231 +5989,6 @@ paths:
       responses:
         "204":
           description: Default success response
-  /hc/api/internal/generative_answers:
-    post:
-      operationId: GenerativeAnswersHelpCenter
-      tags:
-        - Generative Answers
-      summary: Generate Answer for Help Center
-      description: |
-        Generates an answer for end-user search queries in Help Center. Accepts encrypted content references and returns a generated answer with source attribution.
-
-        The endpoint is accessible to anonymous and authenticated end users. Queries must be at least 2 words (except for certain CJK languages). Returns up to 3 source contents used to generate the answer.
-
-        #### Allowed for
-
-        * Anonymous users
-        * End users
-      parameters:
-        - name: contents_data
-          in: query
-          description: Encrypted contents data.
-          required: true
-          schema:
-            type: string
-          example: BAh7DjoHaWRJIh8wMUo3ME0wRDZRNTAzNFRNNllGMDhQQVJQSgY6BkVUOg9hY2NvdW50X2lkaQSpphUBOgl0eXBlSSIcZXh0ZXJuYWxfY29udGVudF9yZWNvcmQGOwZUOgh1cmxJIn1odHRwczovL3N1cHBvcnQuemVuZGVzay5jb20vaGMvZW4tdXMvY29tbXVuaXR5L3Bvc3RzLzM2MDA0Njc1OTgzNy1Ib3ctdG8tbGVhdmUtZmVlZGJhY2stZm9yLUZlZGVyYXRlZC1IZWxwLUNlbnRlci1zZWFyY2gGOwZUOg5zZWFyY2hfaWRJIik2MDJkNGExMS05ZmRlLTQxZTgtOGM3NC00M2YzNjJjZGRjMjkGOwZGOglyYW5raQY6C2xvY2FsZUkiCmVuLXVzBjsGVDoKcXVlcnlJIhpXaGF0IGlzIGEgaGVscCBjZW50ZXIGOwZUOhJyZXN1bHRzX2NvdW50aQo
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenerativeAnswersHelpCenterResponse'
-              example:
-                answer_found: true
-                generated_answer: To deactivate your Help Center, go to the settings and select 'Deactivate'.
-                generated_answer_formatted: To deactivate your Help Center, go to the settings and select **Deactivate**.
-                llm_confidence_level: HIGH
-                search_id: 51D5084D-5C39-4522-B653-74BEDA56F618
-                source_contents:
-                  - id: "8201616519805"
-                    title: Deactivating your Help Center
-                    url: https://{subdomain}.zendesk-staging.com/hc/de/articles/8201616519805-Deactivating-your-Help-Center
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message describing the issue with the request.
-              example:
-                error: query parameter must be at least 2 words
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message describing the issue with the request.
-              example:
-                error: feature not available
-  /hc/api/internal/generative_answers_feedback:
-    post:
-      operationId: GenerativeAnswersFeedback
-      tags:
-        - Generative Answers
-      summary: Submits feedback for a generated answer
-      description: |
-        Submits feedback for a generated answer. This feedback can be used to improve the quality of future answers generated by the system.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerativeAnswersFeedbackRequest'
-            example:
-              channel: HELP_CENTER
-              feedback_category: OTHER
-              is_helpful: false
-              search_id: 28cac105-aea1-407c-b485-c0f16c8ced0c
-              text_feedback: The answer was not relevant to my query.
-      responses:
-        "204":
-          description: Feedback submitted successfully
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestErrorResponse'
-              example:
-                errors:
-                  feedback_category: is invalid
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message describing the issue with the request.
-              example:
-                error: feature not available
-  /hc/api/internal/generative_answers_knowledge:
-    post:
-      operationId: GenerativeAnswersKnowledge
-      tags:
-        - Generative Answers
-      summary: Generate Answer for Knowledge
-      description: |
-        Generates an answer for agents using Knowledge in the ticket workspace. Accepts a structured request with ticket context and content references, returning an answer localized to the ticket requester's language.
-
-        The endpoint validates content references and returns only the cited source content. Used by the Agent Workspace for knowledge-assisted ticket responses.
-
-        #### Allowed for
-
-        * Agents
-        * Help Center managers
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerativeAnswersKnowledgeRequest'
-            example:
-              contents:
-                - id: "8201616519805"
-                  locale: en-us
-                  search_id: 51D5084D-5C39-4522-B653-74BEDA56F618
-                  type: article
-                  url: https://{subdomain}.zendesk-staging.com/hc/de/articles/8201616519805-Deactivating-your-Help-Center
-              query: How to deactivate help center
-              ticket_id: 1
-      responses:
-        "200":
-          description: OK Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenerativeAnswersKnowledgeResponse'
-              example:
-                answer: To deactivate your Help Center, go to the settings and select 'Deactivate'.
-                llm_confidence_level: HIGH
-                solved: true
-                source_contents:
-                  - id: "8201616519805"
-                    locale: en-us
-                    search_id: 51D5084D-5C39-4522-B653-74BEDA56F618
-                    title: Deactivating your Help Center
-                    type: article
-                    url: https://{subdomain}.zendesk-staging.com/hc/de/articles/8201616519805-Deactivating-your-Help-Center
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message describing the issue with the request.
-              example:
-                error: contents must be an array
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message describing the issue with permissions.
-              example:
-                error: feature not available
-  /hc/api/internal/generative_answers_knowledge/actions:
-    post:
-      operationId: GenerativeAnswersKnowledgeActions
-      tags:
-        - Generative Answers
-      summary: Submits an action for a generated answer
-      description: |
-        Submits an action for a generated answer. This action indicates that user has perfomed further actions on the generated answer.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerativeAnswersKnowledgeActionsRequest'
-            example:
-              knowledge_action: COPIED_TO_CONVERSATION
-              search_id: 51D5084D-5C39-4522-B653-74BEDA56F618
-              ticket_nice_id: "1"
-      responses:
-        "204":
-          description: Action performed successfully
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message describing the issue with the request.
-              example:
-                error: 'required properties missing: knowledge_action'
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message describing the issue with the request.
-              example:
-                error: feature not available
 components:
   schemas:
     ArticleAttachmentObject:
@@ -7125,6 +6640,45 @@ components:
               url:
                 type: string
                 description: URL to access the content.
+    HelpCenterGenerativeSearchResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The AI-generated answer for the query. May be null if no answer was generated.
+          nullable: true
+        answer_found:
+          type: boolean
+          description: Indicates whether an answer was successfully generated.
+        citations:
+          type: array
+          description: List of source contents cited in the generated answer.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the cited content.
+              locale:
+                type: string
+                description: Locale of the cited content (e.g., "en-us").
+              title:
+                type: string
+                description: Title of the cited content.
+              type:
+                type: string
+                description: Type of the cited content.
+                enum:
+                  - article
+                  - community_post
+                  - external_content_record
+              url:
+                type: string
+                description: URL to access the cited content. For articles and community posts, includes brand-specific subdomain.
+                nullable: true
+        id:
+          type: string
+          description: Unique identifier for the search request.
     HelpCenterLocalesResponse:
       type: object
       properties:
@@ -7142,6 +6696,185 @@ components:
       properties:
         current_session:
           $ref: '#/components/schemas/HelpCenterSessionObject'
+    KnowledgeQuickAnswersRequest:
+      type: object
+      properties:
+        filters:
+          type: object
+          description: Optional filters to narrow down search results.
+          properties:
+            article_category_ids:
+              type: array
+              description: Array of article category IDs to filter results.
+              items:
+                type: integer
+            article_section_ids:
+              type: array
+              description: Array of article section IDs to filter results.
+              items:
+                type: integer
+            brand_ids:
+              type: array
+              description: Array of brand IDs to filter results.
+              items:
+                type: integer
+            external_source_ids:
+              type: array
+              description: Array of external source IDs to filter results.
+              items:
+                type: string
+            external_type_ids:
+              type: array
+              description: Array of external type IDs to filter results.
+              items:
+                type: string
+            locales:
+              type: array
+              description: Array of locale codes to filter results (e.g., ["en-us", "de"]).
+              items:
+                type: string
+            record_types:
+              type: array
+              description: Array of record types to filter results.
+              items:
+                type: string
+                enum:
+                  - article
+                  - external_content
+        query:
+          type: string
+          description: The search query from the agent.
+        search_id:
+          type: string
+          description: Unique identifier for tracking the search request.
+        ticket_id:
+          type: integer
+          description: The ID of the ticket for which the answer is being generated.
+      required:
+        - query
+        - ticket_id
+        - search_id
+    KnowledgeQuickAnswersResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The AI-generated answer for the query. May be null if no answer was generated.
+          nullable: true
+        answer_found:
+          type: boolean
+          description: Indicates whether an answer was successfully generated.
+        citations:
+          type: array
+          description: List of source contents cited in the generated answer.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the cited content.
+              locale:
+                type: string
+                description: Locale of the cited content (e.g., "en-us").
+              title:
+                type: string
+                description: Title of the cited content.
+              type:
+                type: string
+                description: Type of the cited content.
+                enum:
+                  - article
+                  - community_post
+                  - external_content_record
+              url:
+                type: string
+                description: URL to access the cited content. For articles and community posts, includes brand-specific subdomain.
+                nullable: true
+        id:
+          type: string
+          description: Unique identifier for the search request.
+    KnowledgeSuggestionsRequest:
+      type: object
+      properties:
+        filters:
+          type: object
+          description: Optional filters to narrow down search results.
+          properties:
+            article_category_ids:
+              type: array
+              description: Array of article category IDs to filter results.
+              items:
+                type: integer
+            article_section_ids:
+              type: array
+              description: Array of article section IDs to filter results.
+              items:
+                type: integer
+            brand_ids:
+              type: array
+              description: Array of brand IDs to filter results.
+              items:
+                type: integer
+            external_source_ids:
+              type: array
+              description: Array of external source IDs to filter results.
+              items:
+                type: string
+            external_type_ids:
+              type: array
+              description: Array of external type IDs to filter results.
+              items:
+                type: string
+            locales:
+              type: array
+              description: Array of locale codes to filter results (e.g., ["en-us", "de"]).
+              items:
+                type: string
+            record_types:
+              type: array
+              description: Array of record types to filter results.
+              items:
+                type: string
+                enum:
+                  - article
+                  - external_content
+        query:
+          type: string
+          description: The search query for finding relevant knowledge suggestions.
+      required:
+        - query
+    KnowledgeSuggestionsResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the suggestions request.
+        records:
+          type: array
+          description: List of suggested knowledge records matching the query. Automatically deduplicated when multiple chunks from the same article are returned.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the suggested record.
+              locale:
+                type: string
+                description: Locale of the record (e.g., "en-us").
+              title:
+                type: string
+                description: Title of the suggested record.
+              type:
+                type: string
+                description: Type of the suggested record.
+                enum:
+                  - article
+                  - community_post
+                  - external_content_record
+              url:
+                type: string
+                description: URL to access the record. For articles and community posts, includes brand-specific subdomain. May be null for external content records.
+                nullable: true
     LabelObject:
       type: object
       properties:
