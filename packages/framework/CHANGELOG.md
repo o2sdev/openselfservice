@@ -1,5 +1,12 @@
 # @o2s/framework
 
+## 1.19.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+- 0e61431: feat: update page model and integration to support redirects
+
 ## 1.18.0
 
 ### Minor Changes

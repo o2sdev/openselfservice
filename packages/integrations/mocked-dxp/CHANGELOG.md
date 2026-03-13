@@ -1,5 +1,18 @@
 # @o2s/integrations.mocked-dxp
 
+## 1.1.0
+
+### Minor Changes
+
+- 0e61431: feat: added redirection for homepage dxp mock
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+    - @o2s/integrations.mocked@1.20.0
+
 ## 1.0.0
 
 ### Major Changes
