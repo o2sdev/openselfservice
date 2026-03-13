@@ -60,7 +60,6 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
             products={products}
             title={labels.title}
             LinkComponent={LinkComponent}
-            linkDetailsLabel={labels.detailsLabel}
             addToCartLabel={labels.addToCartLabel}
             onAddToCart={labels.addToCartLabel ? handleAddToCart : undefined}
             isAddingToCart={isAddingToCart}

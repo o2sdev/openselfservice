@@ -151,7 +151,6 @@ export const Default: Story = {
         products: sampleProducts,
         title: 'Recommended Products',
         LinkComponent: MockLinkComponent,
-        linkDetailsLabel: 'View Details',
     },
 };
 
@@ -161,7 +160,6 @@ export const WithDescription: Story = {
         title: 'You Might Also Like',
         description: '<p>Check out these carefully selected products that complement your choice.</p>',
         LinkComponent: MockLinkComponent,
-        linkDetailsLabel: 'View Details',
     },
 };
 
@@ -176,7 +174,6 @@ export const WithAction: Story = {
             </Button>
         ),
         LinkComponent: MockLinkComponent,
-        linkDetailsLabel: 'View Details',
     },
 };
 
@@ -185,8 +182,7 @@ export const WithAddToCart: Story = {
         products: sampleProducts,
         title: 'Recommended Products',
         LinkComponent: MockLinkComponent,
-        linkDetailsLabel: 'View Details',
         addToCartLabel: 'Add to Cart',
-        onAddToCart: (sku: string, currency: string) => console.log('Add to cart:', sku, currency),
+        onAddToCart: (sku, currency) => console.log('Add to cart:', sku, currency),
     },
 };

@@ -21,7 +21,6 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
     action,
     LinkComponent,
     carouselConfig,
-    linkDetailsLabel,
     addToCartLabel,
     onAddToCart,
     isAddingToCart,
@@ -61,14 +60,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                             price={product.price}
                             image={product.image}
                             tags={product.badges?.slice(0, 2)}
-                            link={
-                                linkDetailsLabel
-                                    ? {
-                                          label: linkDetailsLabel,
-                                          url: product.link,
-                                      }
-                                    : undefined
-                            }
+                            link={product.link}
                             action={
                                 onAddToCart && addToCartLabel && product.sku && product.price ? (
                                     <Button

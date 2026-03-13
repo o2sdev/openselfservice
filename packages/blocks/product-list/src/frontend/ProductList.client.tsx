@@ -196,10 +196,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                                     description={product.shortDescription || product.description}
                                                     image={product.image}
                                                     price={product.price}
-                                                    link={{
-                                                        label: data.detailsLabel || 'View Details',
-                                                        url: product.detailsUrl,
-                                                    }}
+                                                    link={product.detailsUrl}
                                                     action={
                                                         data.labels.addToCartLabel ? (
                                                             <Button

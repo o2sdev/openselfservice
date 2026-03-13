@@ -12,7 +12,6 @@ export interface ProductCarouselProps {
     action?: React.ReactNode;
     LinkComponent: FrontendModels.Link.LinkComponent;
     carouselConfig?: Partial<CarouselProps>;
-    linkDetailsLabel?: string;
     addToCartLabel?: string;
     onAddToCart?: (sku: string, currency: Models.Price.Currency) => void;
     isAddingToCart?: boolean;
