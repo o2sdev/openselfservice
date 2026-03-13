@@ -13,7 +13,7 @@ export interface ProductCarouselProps {
     LinkComponent: FrontendModels.Link.LinkComponent;
     carouselConfig?: Partial<CarouselProps>;
     addToCartLabel?: string;
-    onAddToCart?: (sku: string, currency: Models.Price.Currency) => void;
+    onAddToCart?: (sku: string, currency: Models.Price.Currency, variantId?: string) => void;
     isAddingToCart?: boolean;
     carouselClassName?: string;
     keyboardControlMode?: CarouselProps['keyboardControlMode'];
@@ -23,6 +23,7 @@ export interface ProductCarouselProps {
 export interface ProductSummaryItem {
     id: string;
     sku: string;
+    variantId?: string;
     name: string;
     description?: Models.RichText.RichText;
     image?: Models.Media.Media;

@@ -176,21 +176,24 @@ describe('CartsService', () => {
     });
 
     describe('addCartItem', () => {
-        it('should throw BadRequestException when sku is missing', () => {
-            expect(() => service.addCartItem({ quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token')).toThrow(
-                BadRequestException,
-            );
+        it('should throw BadRequestException when variantId is missing', () => {
+            expect(() =>
+                service.addCartItem({ sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token'),
+            ).toThrow(BadRequestException);
         });
 
         it('should throw BadRequestException when cartId absent and currency missing', async () => {
             await expect(
                 firstValueFrom(
-                    service.addCartItem({ sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token'),
+                    service.addCartItem(
+                        { sku: 'SKU1', variantId: 'var_1', quantity: 1 } as Carts.Request.AddCartItemBody,
+                        'Bearer token',
+                    ),
                 ),
             ).rejects.toThrow(BadRequestException);
         });
 
-        it('should retrieve then createLineItem when cartId provided', async () => {
+        it('should retrieve then createLineItem when cartId provided with variantId', async () => {
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: minimalCart });
             mockSdk.store.cart.createLineItem.mockResolvedValue({
                 cart: { ...minimalCart, items: [minimalCartItem] },
@@ -199,7 +202,7 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { cartId: 'cart_1', sku: 'SKU1', quantity: 2 } as Carts.Request.AddCartItemBody,
+                    { cartId: 'cart_1', sku: 'SKU1', variantId: 'var_1', quantity: 2 } as Carts.Request.AddCartItemBody,
                     'Bearer token',
                 ),
             );
@@ -211,10 +214,11 @@ describe('CartsService', () => {
             );
             expect(mockSdk.store.cart.createLineItem).toHaveBeenCalledWith(
                 'cart_1',
-                { variant_id: 'SKU1', quantity: 2, metadata: undefined },
+                { variant_id: 'var_1', quantity: 2, metadata: undefined },
                 { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
+            expect(mockSdk.client.fetch).not.toHaveBeenCalled();
             expect(result).toBeDefined();
             expect(result?.id).toBe('cart_1');
         });
@@ -226,7 +230,7 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { cartId: 'cart_1', sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody,
+                    { cartId: 'cart_1', sku: 'SKU1', variantId: 'var_1', quantity: 1 } as Carts.Request.AddCartItemBody,
                     'Bearer token',
                 ),
             );
@@ -241,7 +245,7 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { sku: 'SKU1', quantity: 2, currency: 'EUR' } as Carts.Request.AddCartItemBody,
+                    { sku: 'SKU1', variantId: 'var_1', quantity: 2, currency: 'EUR' } as Carts.Request.AddCartItemBody,
                     undefined,
                 ),
             );
@@ -253,10 +257,11 @@ describe('CartsService', () => {
             );
             expect(mockSdk.store.cart.createLineItem).toHaveBeenCalledWith(
                 'cart_new',
-                { variant_id: 'SKU1', quantity: 2, metadata: undefined },
+                { variant_id: 'var_1', quantity: 2, metadata: undefined },
                 { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
+            expect(mockSdk.client.fetch).not.toHaveBeenCalled();
             expect(result?.id).toBe('cart_new');
         });
 
@@ -269,6 +274,7 @@ describe('CartsService', () => {
                 service.addCartItem(
                     {
                         sku: 'SKU1',
+                        variantId: 'var_1',
                         quantity: 1,
                         currency: 'EUR',
                         regionId: 'reg_explicit',
@@ -291,7 +297,7 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { sku: 'SKU1', quantity: 1, currency: 'EUR' } as Carts.Request.AddCartItemBody,
+                    { sku: 'SKU1', variantId: 'var_1', quantity: 1, currency: 'EUR' } as Carts.Request.AddCartItemBody,
                     'Bearer token',
                 ),
             );

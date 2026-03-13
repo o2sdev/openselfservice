@@ -134,7 +134,13 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
             try {
                 const cartId = localStorage.getItem('cartId');
                 const result = await sdk.cart.addCartItem(
-                    { cartId: cartId || undefined, sku: product.sku, quantity: 1, currency: product.price.currency },
+                    {
+                        cartId: cartId || undefined,
+                        sku: product.sku,
+                        variantId: product.variantId,
+                        quantity: 1,
+                        currency: product.price.currency,
+                    },
                     { 'x-locale': locale },
                     accessToken,
                 );
@@ -146,7 +152,15 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                 toast({ variant: 'destructive', description: labels.addToCartError });
             }
         });
-    }, [product.sku, product.price.currency, locale, accessToken, labels.addToCartSuccess, labels.addToCartError]);
+    }, [
+        product.sku,
+        product.variantId,
+        product.price.currency,
+        locale,
+        accessToken,
+        labels.addToCartSuccess,
+        labels.addToCartError,
+    ]);
 
     return (
         <div className="w-full flex flex-col gap-8 md:gap-12">

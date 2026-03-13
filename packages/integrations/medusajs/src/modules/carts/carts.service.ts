@@ -148,8 +148,8 @@ export class CartsService extends Carts.Service {
     }
 
     addCartItem(data: Carts.Request.AddCartItemBody, authorization?: string): Observable<Carts.Model.Cart> {
-        if (!data.sku) {
-            throw new BadRequestException('SKU is required for Medusa carts');
+        if (!data.variantId) {
+            throw new BadRequestException('variantId is required for Medusa carts');
         }
 
         const customerId = authorization ? this.authService.getCustomerId(authorization) : undefined;
@@ -182,7 +182,7 @@ export class CartsService extends Carts.Service {
                         this.sdk.store.cart.createLineItem(
                             cartId,
                             {
-                                variant_id: data.sku,
+                                variant_id: data.variantId!,
                                 quantity: data.quantity,
                                 metadata: data.metadata,
                             },
@@ -202,7 +202,7 @@ export class CartsService extends Carts.Service {
 
         return this.createCartAndAddItem(
             data.currency,
-            data.sku,
+            data.variantId,
             data.quantity,
             data.regionId,
             data.metadata,
@@ -331,7 +331,7 @@ export class CartsService extends Carts.Service {
 
     private createCartAndAddItem(
         currency: string,
-        sku: string,
+        variantId: string,
         quantity: number,
         regionId?: string,
         metadata?: Record<string, unknown>,
@@ -353,7 +353,7 @@ export class CartsService extends Carts.Service {
                     this.sdk.store.cart.createLineItem(
                         createResponse.cart.id,
                         {
-                            variant_id: sku,
+                            variant_id: variantId,
                             quantity,
                             metadata,
                         },

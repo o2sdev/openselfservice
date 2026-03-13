@@ -46,6 +46,7 @@ export class ProductItem {
     __typename!: 'ProductItem';
     id!: string;
     sku!: string;
+    variantId?: string;
     name!: string;
     description!: string;
     shortDescription?: string;

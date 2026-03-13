@@ -67,7 +67,9 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                                         variant="secondary"
                                         size="sm"
                                         disabled={isAddingToCart}
-                                        onClick={() => onAddToCart(product.sku, product.price!.currency)}
+                                        onClick={() =>
+                                            onAddToCart(product.sku, product.price!.currency, product.variantId)
+                                        }
                                     >
                                         <ShoppingCart className="h-4 w-4 mr-2" />
                                         {addToCartLabel}

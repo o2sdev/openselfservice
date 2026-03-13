@@ -25,7 +25,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
     const [isAddingToCart, startAddToCartTransition] = useTransition();
 
     const handleAddToCart = useCallback(
-        (sku: string, currency: Models.Price.Currency) => {
+        (sku: string, currency: Models.Price.Currency, variantId?: string) => {
             startAddToCartTransition(async () => {
                 try {
                     const cartId = localStorage.getItem('cartId');
@@ -33,6 +33,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
                         {
                             cartId: cartId || undefined,
                             sku,
+                            variantId,
                             quantity: 1,
                             currency,
                         },

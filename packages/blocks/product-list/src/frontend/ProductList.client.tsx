@@ -47,7 +47,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [isAddingToCart, startAddToCartTransition] = useTransition();
 
     const handleAddToCart = useCallback(
-        (sku: string, currency: Models.Price.Currency) => {
+        (sku: string, currency: Models.Price.Currency, variantId?: string) => {
             startAddToCartTransition(async () => {
                 try {
                     const cartId = localStorage.getItem('cartId');
@@ -55,6 +55,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                         {
                             cartId: cartId || undefined,
                             sku,
+                            variantId,
                             quantity: 1,
                             currency,
                         },
@@ -204,7 +205,11 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                                                 size="sm"
                                                                 disabled={isAddingToCart}
                                                                 onClick={() =>
-                                                                    handleAddToCart(product.sku, product.price.currency)
+                                                                    handleAddToCart(
+                                                                        product.sku,
+                                                                        product.price.currency,
+                                                                        product.variantId,
+                                                                    )
                                                                 }
                                                             >
                                                                 <ShoppingCart className="h-4 w-4 mr-2" />
