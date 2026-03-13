@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -22,11 +22,11 @@ export class CheckoutBillingPaymentService {
         query: GetCheckoutBillingPaymentBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<CheckoutBillingPaymentBlock> {
-        const cms = this.cmsService.getCheckoutBillingPaymentBlock({ ...query, locale: headers['x-locale'] });
-
-        return forkJoin([cms]).pipe(
-            map(([cms]) => {
-                return mapCheckoutBillingPayment(cms);
+        return this.cmsService.getEntry({ ...query, locale: headers['x-locale'] }).pipe(
+            map((cms) => {
+                return mapCheckoutBillingPayment(
+                    cms as CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock,
+                );
             }),
         );
     }

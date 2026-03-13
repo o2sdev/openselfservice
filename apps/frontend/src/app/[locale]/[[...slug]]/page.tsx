@@ -6,8 +6,8 @@ import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-import { AppSpinner } from '@o2s/ui/components/AppSpinner';
-import { Breadcrumbs } from '@o2s/ui/components/Breadcrumbs';
+import { AppSpinner } from '@o2s/ui/components/feedback/AppSpinner';
+import { Breadcrumbs } from '@o2s/ui/components/navigation/Breadcrumbs';
 
 import { Separator } from '@o2s/ui/elements/separator';
 import { Toaster } from '@o2s/ui/elements/toaster';

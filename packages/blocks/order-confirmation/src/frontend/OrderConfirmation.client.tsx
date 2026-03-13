@@ -5,8 +5,8 @@ import React from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
 
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
-import { Price } from '@o2s/ui/components/Price';
+import { Price } from '@o2s/ui/components/commerce/Price';
+import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';

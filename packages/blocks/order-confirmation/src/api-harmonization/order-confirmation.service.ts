@@ -27,16 +27,20 @@ export class OrderConfirmationService {
             return throwError(() => new NotFoundException('Order ID is required'));
         }
 
-        return forkJoin([
-            this.cmsService.getOrderConfirmationBlock({ ...query, locale: headers['x-locale'] }),
-            this.ordersService.getOrder({ id: query.orderId }, headers.authorization),
-        ]).pipe(
-            map(([cms, order]) => {
+        return forkJoin({
+            cms: this.cmsService.getEntry({ ...query, locale: headers['x-locale'] }),
+            order: this.ordersService.getOrder({ id: query.orderId }, headers.authorization),
+        }).pipe(
+            map(({ cms, order }) => {
                 if (!order) {
                     throw new NotFoundException(`Order with ID ${query.orderId} not found`);
                 }
 
-                return mapOrderConfirmation(cms, order, headers['x-locale']);
+                return mapOrderConfirmation(
+                    cms as CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock,
+                    order,
+                    headers['x-locale'],
+                );
             }),
         );
     }

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -14,6 +13,8 @@ export class CartService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getCartBlock(query: GetCartBlockQuery, headers: Models.Headers.AppHeaders): Observable<CartBlock> {
-        return this.cmsService.getCartBlock({ ...query, locale: headers['x-locale'] }).pipe(map(mapCart));
+        return this.cmsService
+            .getEntry({ ...query, locale: headers['x-locale'] })
+            .pipe(map((cms) => mapCart(cms as CMS.Model.CartBlock.CartBlock)));
     }
 }

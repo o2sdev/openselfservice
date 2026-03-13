@@ -229,6 +229,23 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 message: 'What is the name of the block?',
             },
             {
+                type: 'list',
+                name: 'domain',
+                message: 'Which domain should this block belong to?',
+                choices: [
+                    'content',
+                    'marketing',
+                    'services',
+                    'commerce',
+                    'billing',
+                    'support',
+                    'notifications',
+                    'account',
+                    'navigation',
+                    'forms',
+                ],
+            },
+            {
                 type: 'checkbox',
                 name: 'templates',
                 choices: ['o2s', 'dxp'],
@@ -239,47 +256,47 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             // API-HARMONIZATION
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/index.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/index.ts',
                 templateFile: 'templates/block/api-harmonization/index.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.client.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.client.ts',
                 templateFile: 'templates/block/api-harmonization/client.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.controller.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.controller.ts',
                 templateFile: 'templates/block/api-harmonization/controller.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.ts',
                 templateFile: 'templates/block/api-harmonization/service.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.spec.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.spec.ts',
                 templateFile: 'templates/block/api-harmonization/service.spec.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.module.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.module.ts',
                 templateFile: 'templates/block/api-harmonization/module.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.mapper.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.mapper.ts',
                 templateFile: 'templates/block/api-harmonization/mapper.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.model.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.model.ts',
                 templateFile: 'templates/block/api-harmonization/model.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.request.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.request.ts',
                 templateFile: 'templates/block/api-harmonization/request.hbs',
             },
             {
@@ -310,32 +327,32 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             // FRONTEND
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/index.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/frontend/index.ts',
                 templateFile: 'templates/block/frontend/index.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.renderer.tsx',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/frontend/{{pascalCase name}}.renderer.tsx',
                 templateFile: 'templates/block/frontend/renderer.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.server.tsx',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/frontend/{{pascalCase name}}.server.tsx',
                 templateFile: 'templates/block/frontend/server.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.tsx',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.tsx',
                 templateFile: 'templates/block/frontend/client.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.stories.tsx',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.stories.tsx',
                 templateFile: 'templates/block/frontend/stories.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.types.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/frontend/{{pascalCase name}}.types.ts',
                 templateFile: 'templates/block/frontend/types.hbs',
             },
             {
@@ -354,69 +371,69 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             // SDK
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/sdk/index.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/sdk/index.ts',
                 templateFile: 'templates/block/sdk/index.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/sdk/{{kebabCase name}}.ts',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/src/sdk/{{kebabCase name}}.ts',
                 templateFile: 'templates/block/sdk/block.hbs',
             },
 
             // CONFIG
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/.gitignore',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/.gitignore',
                 templateFile: 'templates/block/gitIgnore.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/.prettierrc.mjs',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/.prettierrc.mjs',
                 templateFile: 'templates/block/prettierRc.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/eslint.config.mjs',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/eslint.config.mjs',
                 templateFile: 'templates/block/eslintConfig.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/lint-staged.config.mjs',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/lint-staged.config.mjs',
                 templateFile: 'templates/block/lintStagedConfig.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/package.json',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/package.json',
                 templateFile: 'templates/block/package.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/vitest.config.mjs',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/vitest.config.mjs',
                 templateFile: 'templates/block/vitestConfig.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.api.json',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/tsconfig.api.json',
                 templateFile: 'templates/block/tsconfigApi.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.frontend.json',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/tsconfig.frontend.json',
                 templateFile: 'templates/block/tsconfigFrontend.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.json',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/tsconfig.json',
                 templateFile: 'templates/block/tsconfig.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.sdk.json',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/tsconfig.sdk.json',
                 templateFile: 'templates/block/tsconfigSdk.hbs',
             },
             {
                 type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/README.md',
+                path: 'packages/blocks/{{kebabCase domain}}/{{kebabCase name}}/README.md',
                 templateFile: 'templates/block/README.hbs',
             },
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -22,11 +22,9 @@ export class CheckoutSummaryService {
         query: GetCheckoutSummaryBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<CheckoutSummaryBlock> {
-        const cms = this.cmsService.getCheckoutSummaryBlock({ ...query, locale: headers['x-locale'] });
-
-        return forkJoin([cms]).pipe(
-            map(([cms]) => {
-                return mapCheckoutSummary(cms);
+        return this.cmsService.getEntry({ ...query, locale: headers['x-locale'] }).pipe(
+            map((cms) => {
+                return mapCheckoutSummary(cms as CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock);
             }),
         );
     }

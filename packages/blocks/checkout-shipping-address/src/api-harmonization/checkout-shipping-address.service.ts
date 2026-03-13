@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -22,11 +22,11 @@ export class CheckoutShippingAddressService {
         query: GetCheckoutShippingAddressBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<CheckoutShippingAddressBlock> {
-        const cms = this.cmsService.getCheckoutShippingAddressBlock({ ...query, locale: headers['x-locale'] });
-
-        return forkJoin([cms]).pipe(
-            map(([cms]) => {
-                const result = mapCheckoutShippingAddress(cms);
+        return this.cmsService.getEntry({ ...query, locale: headers['x-locale'] }).pipe(
+            map((cms) => {
+                const result = mapCheckoutShippingAddress(
+                    cms as CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock,
+                );
 
                 // Optional: Add permission flags to the response
                 // if (headers.authorization) {

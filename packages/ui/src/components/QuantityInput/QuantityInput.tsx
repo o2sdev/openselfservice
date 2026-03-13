@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Input } from '@o2s/ui/elements/input';

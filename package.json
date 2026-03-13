@@ -42,6 +42,7 @@
         "packages/utils/*",
         "packages/cli/*",
         "packages/blocks/*",
+        "packages/blocks/*/*",
         "packages/modules/*"
     ],
     "devDependencies": {

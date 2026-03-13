@@ -1,6 +1,6 @@
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+import { CMS } from '@o2s/configs.integrations';
 
-import { CMS } from '@o2s/framework/modules';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
 export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {
     __typename!: 'CheckoutShippingAddressBlock';

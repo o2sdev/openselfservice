@@ -11,8 +11,8 @@ import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary, CartSummarySkeleton } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
-import { Image } from '@o2s/ui/components/Image';
-import { Price } from '@o2s/ui/components/Price';
+import { Price } from '@o2s/ui/components/commerce/Price';
+import { Image } from '@o2s/ui/components/media/Image';
 
 import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';

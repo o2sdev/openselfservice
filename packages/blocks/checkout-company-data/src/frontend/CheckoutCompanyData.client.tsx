@@ -13,7 +13,7 @@ import { CartSummary, CartSummarySkeleton } from '@o2s/ui/components/Cart/CartSu
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
 import { FormField } from '@o2s/ui/components/Checkout/FormField';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
 
 import { Label } from '@o2s/ui/elements/label';
 import { Separator } from '@o2s/ui/elements/separator';

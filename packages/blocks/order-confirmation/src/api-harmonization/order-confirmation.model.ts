@@ -1,6 +1,8 @@
+import { CMS } from '@o2s/configs.integrations';
+
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { CMS, Models, Orders } from '@o2s/framework/modules';
+import { Models, Orders } from '@o2s/framework/modules';
 
 /** Order item for confirmation display */
 export interface OrderConfirmationItem {

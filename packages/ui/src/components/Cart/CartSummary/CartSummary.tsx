@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
-import { Price } from '@o2s/ui/components/Price';
+import { Price } from '@o2s/ui/components/commerce/Price';
+import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
