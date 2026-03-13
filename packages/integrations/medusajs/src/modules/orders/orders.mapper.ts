@@ -20,7 +20,7 @@ export const mapOrder = (order: HttpTypes.StoreOrder, defaultCurrency: string): 
     return {
         id: order.id,
         total: mapPrice(order.total, currency, `Order ${order.id} total`),
-        subtotal: mapPrice(order.subtotal, currency, `Order ${order.id} subtotal`),
+        subtotal: mapPrice(order.item_subtotal, currency, `Order ${order.id} subtotal`),
         shippingTotal: mapPrice(order.shipping_total, currency, `Order ${order.id} shippingTotal`),
         discountTotal: mapPrice(order.discount_total, currency, `Order ${order.id} discountTotal`),
         tax: mapPrice(order.tax_total, currency, `Order ${order.id} tax`),

@@ -40,6 +40,12 @@ The following table shows the implementation status of all blocks available in t
 | ticket-list           | ✅     | ComponentComponentsTicketList          | Fully implemented |
 | ticket-recent         | ✅     | ComponentComponentsTicketRecent        | Fully implemented |
 | user-account          | ✅     | ComponentComponentsUserAccount         | Fully implemented |
+| cart                      | ❌     | -                                      | Not implemented   |
+| checkout-billing-payment  | ❌     | -                                      | Not implemented   |
+| checkout-company-data     | ❌     | -                                      | Not implemented   |
+| checkout-shipping-address | ❌     | -                                      | Not implemented   |
+| checkout-summary          | ❌     | -                                      | Not implemented   |
+| order-confirmation        | ❌     | -                                      | Not implemented   |
 | product-details       | ❌     | -                                      | Not implemented   |
 | product-list          | ❌     | -                                      | Not implemented   |
 | recommended-products  | ❌     | -                                      | Not implemented   |

@@ -3,6 +3,7 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/nextjs-vite';
 import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
 import { createRouter } from '@storybook/nextjs-vite/router.mock';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import { NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
@@ -17,6 +18,9 @@ import messages from '../apps/frontend/src/i18n/messages/en.json';
 import '../apps/frontend/src/styles/global.css';
 
 import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
+import { cartAndCheckoutHandlers } from './mocks/handlers/cart-handlers';
+
+initialize();
 
 createRouter({});
 createNavigation({});
@@ -25,17 +29,22 @@ const ReadmeDocsPage = () => {
     const { story } = useOf('story', ['story']);
     const { preparedMeta } = useOf('meta', ['meta']);
     const readme = story.parameters?.readme ?? preparedMeta.parameters?.readme;
+    const docContent = typeof readme === 'string' ? <Markdown>{readme}</Markdown> : null;
 
-    return React.createElement(
-        React.Fragment,
-        null,
-        React.createElement(Title, null),
-        typeof readme === 'string' ? React.createElement(Markdown, null, readme) : null,
+    return (
+        <>
+            <Title />
+            {docContent}
+        </>
     );
 };
 
 const preview: Preview = {
+    loaders: [mswLoader as () => void | Record<string, unknown> | Promise<void | Record<string, unknown>>],
     parameters: {
+        msw: {
+            handlers: cartAndCheckoutHandlers,
+        },
         docs: {
             page: ReadmeDocsPage,
         },
@@ -49,13 +58,17 @@ const preview: Preview = {
             },
         },
         a11y: {
-            // 'todo' - show a11y violations in the test UI only
-            // 'error' - fail CI on a11y violations
-            // 'off' - skip a11y checks entirely
             test: 'todo',
         },
     },
     decorators: [
+        (Story) => {
+            // Set cartId for cart/checkout blocks - MSW handlers return mock data
+            if (globalThis.window !== undefined) {
+                globalThis.window.localStorage.setItem('cartId', 'storybook-cart-1');
+            }
+            return <Story />;
+        },
         withThemeByClassName({
             themes: {
                 default: 'theme-default',
@@ -63,28 +76,26 @@ const preview: Preview = {
             },
             defaultTheme: 'default',
         }),
-        (Story) =>
-            React.createElement(
-                NextIntlClientProvider,
-                { locale: 'en', messages },
-                React.createElement(
-                    GlobalProvider,
-                    {
-                        config: globalProviderConfig,
-                        labels: globalProviderLabels,
-                        themes: globalProviderThemes,
-                        currentTheme: globalProviderCurrentTheme,
-                        locale: 'en',
-                    },
-                    React.createElement(
-                        TooltipProvider,
-                        null,
-                        React.createElement(Story, null),
-                        React.createElement(Toaster, null),
-                        React.createElement(AppSpinner, null),
-                    ),
-                ),
-            ),
+        (Story) => {
+            return (
+                <NextIntlClientProvider locale="en" messages={messages}>
+                    <GlobalProvider
+                        config={globalProviderConfig}
+                        labels={globalProviderLabels}
+                        themes={globalProviderThemes}
+                        currentTheme={globalProviderCurrentTheme}
+                        locale="en"
+                    >
+                        <TooltipProvider>
+                            <Story />
+
+                            <Toaster />
+                            <AppSpinner />
+                        </TooltipProvider>
+                    </GlobalProvider>
+                </NextIntlClientProvider>
+            );
+        },
     ],
 };
 

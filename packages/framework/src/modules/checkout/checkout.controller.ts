@@ -60,7 +60,7 @@ export class CheckoutController {
         @Body() body: Request.PlaceOrderBody,
         @Headers() headers: AppHeaders,
     ) {
-        return this.checkoutService.placeOrder(params, body, headers.authorization);
+        return this.checkoutService.placeOrder({ ...params, locale: headers['x-locale'] }, body, headers.authorization);
     }
 
     @Post(':cartId/complete')

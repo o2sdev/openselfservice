@@ -5,6 +5,7 @@ export class SetAddressesParams {
 }
 
 export class SetAddressesBody {
+    sameAsBillingAddress?: boolean; // Copy billing address as shipping address
     shippingAddressId?: string; // Use saved address (authenticated users only)
     shippingAddress?: Address.Address; // Or provide new address
     billingAddressId?: string; // Use saved address (authenticated users only)
@@ -44,6 +45,7 @@ export class GetCheckoutSummaryParams {
 
 export class PlaceOrderParams {
     cartId!: string;
+    locale?: string; // From x-locale header
 }
 
 export class PlaceOrderBody {

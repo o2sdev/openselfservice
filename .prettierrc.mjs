@@ -11,6 +11,8 @@ const config = {
     ...apiConfig,
     ...webConfig,
     ...uiConfig,
+    // Required for .tsx files - parser was misinterpreting JSX as regex
+    importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
 };
 
 export default config;
