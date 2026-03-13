@@ -1,8 +1,12 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useState, useTransition } from 'react';
+import React, { useCallback, useState, useTransition } from 'react';
+
+import type { Models } from '@o2s/framework/modules';
+
+import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { DataList } from '@o2s/ui/components/DataList';
@@ -40,6 +44,35 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
+    const [isAddingToCart, startAddToCartTransition] = useTransition();
+
+    const handleAddToCart = useCallback(
+        (sku: string, currency: Models.Price.Currency, variantId?: string) => {
+            startAddToCartTransition(async () => {
+                try {
+                    const cartId = localStorage.getItem('cartId');
+                    const result = await sdk.cart.addCartItem(
+                        {
+                            cartId: cartId || undefined,
+                            sku,
+                            variantId,
+                            quantity: 1,
+                            currency,
+                        },
+                        { 'x-locale': locale },
+                        accessToken,
+                    );
+                    if (!cartId && result?.id) {
+                        localStorage.setItem('cartId', result.id);
+                    }
+                    toast({ description: data.labels.addToCartSuccess });
+                } catch {
+                    toast({ variant: 'destructive', description: data.labels.addToCartError });
+                }
+            });
+        },
+        [locale, accessToken, data.labels.addToCartSuccess, data.labels.addToCartError],
+    );
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {
@@ -164,10 +197,26 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                                     description={product.shortDescription || product.description}
                                                     image={product.image}
                                                     price={product.price}
-                                                    link={{
-                                                        label: data.detailsLabel || 'View Details',
-                                                        url: product.detailsUrl,
-                                                    }}
+                                                    link={product.detailsUrl}
+                                                    action={
+                                                        data.labels.addToCartLabel ? (
+                                                            <Button
+                                                                variant="secondary"
+                                                                size="sm"
+                                                                disabled={isAddingToCart}
+                                                                onClick={() =>
+                                                                    handleAddToCart(
+                                                                        product.sku,
+                                                                        product.price.currency,
+                                                                        product.variantId,
+                                                                    )
+                                                                }
+                                                            >
+                                                                <ShoppingCart className="h-4 w-4 mr-2" />
+                                                                {data.labels.addToCartLabel}
+                                                            </Button>
+                                                        ) : undefined
+                                                    }
                                                     LinkComponent={LinkComponent}
                                                 />
                                             </li>

@@ -1,18 +1,20 @@
 'use client';
 
 import { CircleAlert } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useTransition } from 'react';
+
+import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { Price } from '@o2s/ui/components/Price';
 import { ProductGallery } from '@o2s/ui/components/ProductGallery';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 
 import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
+
+import { sdk } from '../sdk';
 
 import { ProductDetailsPureProps } from './ProductDetails.types';
 import { OptionGroupsSelector } from './components/OptionGroupsSelector';
@@ -59,13 +61,14 @@ function getAvailableValuesForGroup(
 
 export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     locale,
+    accessToken,
     routing,
     hasPriority,
     productId,
     ...component
 }) => {
-    const { product, labels, actionButton } = component;
-    const t = useTranslations();
+    const { product, labels } = component;
+    const [isAddingToCart, startAddToCartTransition] = useTransition();
     const { useRouter } = createNavigation(routing);
     const router = useRouter();
 
@@ -125,6 +128,39 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     }, [product.variants, product.variantId]);
 
     const isOutOfStock = !currentVariantInStock;
+
+    const handleAddToCart = useCallback(() => {
+        startAddToCartTransition(async () => {
+            try {
+                const cartId = localStorage.getItem('cartId');
+                const result = await sdk.cart.addCartItem(
+                    {
+                        cartId: cartId || undefined,
+                        sku: product.sku,
+                        variantId: product.variantId,
+                        quantity: 1,
+                        currency: product.price.currency,
+                    },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                if (!cartId && result?.id) {
+                    localStorage.setItem('cartId', result.id);
+                }
+                toast({ description: labels.addToCartSuccess });
+            } catch {
+                toast({ variant: 'destructive', description: labels.addToCartError });
+            }
+        });
+    }, [
+        product.sku,
+        product.variantId,
+        product.price.currency,
+        locale,
+        accessToken,
+        labels.addToCartSuccess,
+        labels.addToCartError,
+    ]);
 
     return (
         <div className="w-full flex flex-col gap-8 md:gap-12">
@@ -216,41 +252,34 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         <PriceSection
                             price={product.price}
                             priceLabel={labels.price}
-                            actionButton={actionButton}
+                            onAddToCart={handleAddToCart}
+                            addToCartLabel={labels.addToCart}
                             isOutOfStock={isOutOfStock}
+                            isAddingToCart={isAddingToCart}
                         />
                     </div>
                 </div>
             </div>
 
-            {actionButton && (
-                <>
-                    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-100">
-                        <div className="flex flex-col gap-2 max-w-7xl ml-auto mr-4">
-                            <div className="flex items-center justify-end gap-2 mb-2">
-                                <Typography className="text-muted-foreground">{labels.price}</Typography>
-                                <Typography variant="large" className="font-bold text-primary">
-                                    <Price price={product.price} />
-                                </Typography>
-                            </div>
-                            <TooltipHover
-                                trigger={(setIsOpen) => (
-                                    <Button
-                                        variant={actionButton.variant || 'default'}
-                                        size="default"
-                                        className="w-full"
-                                        onClick={() => setIsOpen(true)}
-                                        disabled={isOutOfStock}
-                                    >
-                                        {actionButton.label}
-                                    </Button>
-                                )}
-                                content={<p>{t('general.comingSoon')}</p>}
-                            />
-                        </div>
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-100">
+                <div className="flex flex-col gap-2 max-w-7xl ml-auto mr-4">
+                    <div className="flex items-center justify-end gap-2 mb-2">
+                        <Typography className="text-muted-foreground">{labels.price}</Typography>
+                        <Typography variant="large" className="font-bold text-primary">
+                            <Price price={product.price} />
+                        </Typography>
                     </div>
-                </>
-            )}
+                    <Button
+                        variant="default"
+                        size="default"
+                        className="w-full"
+                        onClick={handleAddToCart}
+                        disabled={isOutOfStock || isAddingToCart}
+                    >
+                        {labels.addToCart}
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 };

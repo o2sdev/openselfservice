@@ -20,6 +20,9 @@ export class ProductListBlock extends Block.Block {
         showMoreFilters: string;
         hideMoreFilters: string;
         noActiveFilters: string;
+        addToCartLabel?: string;
+        addToCartSuccess?: string;
+        addToCartError?: string;
     };
     detailsLabel?: string;
     detailsUrl!: string;

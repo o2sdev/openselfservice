@@ -12,10 +12,7 @@ export interface ProductCardProps {
     price?: Models.Price.Price;
     tags?: ProductCardBadge[];
     status?: ProductCardBadge;
-    link?: {
-        label: string;
-        url: string;
-    };
+    link?: string;
     image?: Models.Media.Media;
     action?: React.ReactNode;
     LinkComponent: FrontendModels.Link.LinkComponent;

@@ -58,13 +58,15 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
     return {
         id: 'product-details-1',
         labels: {
-            actionButtonLabel: 'Request Quote',
             specificationsTitle: 'Specifications',
             descriptionTitle: 'Description',
             downloadLabel: 'Download Brochure',
             priceLabel: 'Price',
             offerLabel: 'Offer',
             variantLabel: 'Variant',
+            addToCartLabel: 'Add to Cart',
+            addToCartSuccess: 'Product added to cart',
+            addToCartError: 'Failed to add product to cart',
         },
         basePath: basePathMap[locale] || basePathMap['en'],
         attributes: attributesMap[locale] || attributesMap['en'],

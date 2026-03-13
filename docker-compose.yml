@@ -62,6 +62,7 @@ services:
 
             DEFAULT_LOCALE: en
             DEFAULT_CURRENCY: EUR
+            DEFAULT_REGION_ID: ''
             DEFAULT_PRODUCT_UNIT: PCS
 
             SUPPORTED_CURRENCIES: EUR,USD,PLN

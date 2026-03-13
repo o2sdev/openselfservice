@@ -33,6 +33,7 @@ const mapProduct = (product: Products.Model.Product, cms: CMS.Model.ProductListB
         __typename: 'ProductItem',
         id: product.id,
         sku: product.sku,
+        variantId: product.variantId,
         name: product.name,
         description: product.description,
         shortDescription: product.shortDescription,
