@@ -43,7 +43,7 @@
     },
     "dependencies": {
         "@medusajs/js-sdk": "^2.13.3",
-        "@medusajs/types": "^2.13.2",
+        "@medusajs/types": "^2.13.3",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "slugify": "^1.6.6"
