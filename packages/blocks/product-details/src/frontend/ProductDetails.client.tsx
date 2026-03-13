@@ -1,7 +1,6 @@
 'use client';
 
 import { CircleAlert } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useMemo, useTransition } from 'react';
 
@@ -9,7 +8,6 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { Price } from '@o2s/ui/components/Price';
 import { ProductGallery } from '@o2s/ui/components/ProductGallery';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 
 import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
 import { Button } from '@o2s/ui/elements/button';
@@ -69,9 +67,8 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     productId,
     ...component
 }) => {
-    const { product, labels, actionButton } = component;
+    const { product, labels } = component;
     const [isAddingToCart, startAddToCartTransition] = useTransition();
-    const t = useTranslations();
     const { useRouter } = createNavigation(routing);
     const router = useRouter();
 
@@ -241,8 +238,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         <PriceSection
                             price={product.price}
                             priceLabel={labels.price}
-                            actionButton={actionButton}
-                            onAddToCart={labels.addToCart ? handleAddToCart : undefined}
+                            onAddToCart={handleAddToCart}
                             addToCartLabel={labels.addToCart}
                             isOutOfStock={isOutOfStock}
                             isAddingToCart={isAddingToCart}
@@ -251,46 +247,25 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                 </div>
             </div>
 
-            {(actionButton || labels.addToCart) && (
-                <>
-                    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-100">
-                        <div className="flex flex-col gap-2 max-w-7xl ml-auto mr-4">
-                            <div className="flex items-center justify-end gap-2 mb-2">
-                                <Typography className="text-muted-foreground">{labels.price}</Typography>
-                                <Typography variant="large" className="font-bold text-primary">
-                                    <Price price={product.price} />
-                                </Typography>
-                            </div>
-                            {labels.addToCart ? (
-                                <Button
-                                    variant="default"
-                                    size="default"
-                                    className="w-full"
-                                    onClick={handleAddToCart}
-                                    disabled={isOutOfStock || isAddingToCart}
-                                >
-                                    {labels.addToCart}
-                                </Button>
-                            ) : actionButton ? (
-                                <TooltipHover
-                                    trigger={(setIsOpen) => (
-                                        <Button
-                                            variant={actionButton.variant || 'default'}
-                                            size="default"
-                                            className="w-full"
-                                            onClick={() => setIsOpen(true)}
-                                            disabled={isOutOfStock}
-                                        >
-                                            {actionButton.label}
-                                        </Button>
-                                    )}
-                                    content={<p>{t('general.comingSoon')}</p>}
-                                />
-                            ) : null}
-                        </div>
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-100">
+                <div className="flex flex-col gap-2 max-w-7xl ml-auto mr-4">
+                    <div className="flex items-center justify-end gap-2 mb-2">
+                        <Typography className="text-muted-foreground">{labels.price}</Typography>
+                        <Typography variant="large" className="font-bold text-primary">
+                            <Price price={product.price} />
+                        </Typography>
                     </div>
-                </>
-            )}
+                    <Button
+                        variant="default"
+                        size="default"
+                        className="w-full"
+                        onClick={handleAddToCart}
+                        disabled={isOutOfStock || isAddingToCart}
+                    >
+                        {labels.addToCart}
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 };

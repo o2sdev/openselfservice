@@ -3,7 +3,6 @@ import { CMS } from '@o2s/framework/modules';
 const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
     id: 'product-details-1',
     labels: {
-        actionButtonLabel: 'Request Quote',
         specificationsTitle: 'Details',
         descriptionTitle: 'Description',
         downloadLabel: 'Download Brochure',
@@ -34,7 +33,6 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
 const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
     id: 'product-details-1',
     labels: {
-        actionButtonLabel: 'Angebot anfordern',
         specificationsTitle: 'Produktdetails',
         descriptionTitle: 'Beschreibung',
         downloadLabel: 'Broschüre herunterladen',
@@ -65,7 +63,6 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
 const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
     id: 'product-details-1',
     labels: {
-        actionButtonLabel: 'Zapytaj o ofertę',
         specificationsTitle: 'Szczegóły',
         descriptionTitle: 'Opis',
         downloadLabel: 'Pobierz broszurę',

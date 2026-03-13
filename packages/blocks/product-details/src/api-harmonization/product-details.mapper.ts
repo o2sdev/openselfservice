@@ -47,7 +47,6 @@ export const mapProductDetails = (
     };
 
     const labels: Model.Labels = {
-        actionButton: cms.labels.actionButtonLabel,
         specifications: cms.labels.specificationsTitle,
         description: cms.labels.descriptionTitle,
         download: cms.labels.downloadLabel,
@@ -64,15 +63,6 @@ export const mapProductDetails = (
         __typename: 'ProductDetailsBlock',
         id: product.id,
         product: mappedProduct,
-        actionButton:
-            labels.actionButton && product.link
-                ? {
-                      label: labels.actionButton,
-                      href: product.link,
-                      variant: 'default',
-                      icon: 'MessageCircle',
-                  }
-                : undefined,
         labels,
     };
 };

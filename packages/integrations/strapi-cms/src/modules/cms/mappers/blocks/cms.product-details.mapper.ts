@@ -6,12 +6,14 @@ export const mapProductDetailsBlock = (_locale: string): CMS.Model.ProductDetail
     return {
         id: 'product-details-1',
         labels: {
-            actionButtonLabel: 'Request Quote',
             specificationsTitle: 'Specifications',
             descriptionTitle: 'Description',
             downloadLabel: 'Download Brochure',
             priceLabel: 'Price',
             offerLabel: 'Offer',
+            addToCartLabel: 'Add to Cart',
+            addToCartSuccess: 'Product added to cart',
+            addToCartError: 'Failed to add product to cart',
         },
     };
 };
