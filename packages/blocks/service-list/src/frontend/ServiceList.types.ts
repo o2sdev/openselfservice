@@ -1,17 +1,11 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/service-list.client';
 
-export interface ServiceListProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
-}
+export type ServiceListProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>>;
 
 export type ServiceListPureProps = ServiceListProps & Model.ServiceListBlock;
 
-export interface ServiceListRendererProps extends Omit<ServiceListProps, ''> {
-    slug: string[];
-}
+export type ServiceListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

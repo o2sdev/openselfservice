@@ -1,18 +1,11 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/faq.client';
 
-export interface FaqProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
-    isDraftModeEnabled?: boolean;
-}
+export type FaqProps = Models.BlockProps.BlockWithDraftModeProps<ReturnType<typeof defineRouting>>;
 
 export type FaqPureProps = FaqProps & Model.FaqBlock;
 
-export type FaqRendererProps = Omit<FaqProps, ''> & {
-    slug: string[];
-};
+export type FaqRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

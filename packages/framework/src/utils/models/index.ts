@@ -20,3 +20,4 @@ export * as CardWithImage from './card-with-image';
 export * as Badge from './badge';
 export * as PricingCard from './pricing-card';
 export * as Document from './document';
+export * as BlockProps from './block-props';

@@ -47,7 +47,7 @@ import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
 import React from 'react';
 
-import { CMS } from '@o2s/framework/modules';
+import { CMS, Models } from '@o2s/framework/modules';
 
 import { Container } from '@o2s/ui/components/Container';
 
@@ -57,16 +57,7 @@ import { routing } from '@/i18n';
 
 import { onSignOut } from '../actions/signOut';
 
-interface BlockProps {
-    id: string;
-    slug: string[];
-    locale: string;
-    accessToken: string | undefined;
-    userId: string | undefined;
-    routing: typeof routing;
-    hasPriority?: boolean;
-    isDraftModeEnabled?: boolean;
-}
+type BlockProps = Models.BlockProps.FullBlockProps<typeof routing>;
 
 export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
     const session = await auth();
