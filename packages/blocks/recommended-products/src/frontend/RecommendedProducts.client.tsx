@@ -3,6 +3,8 @@
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useTransition } from 'react';
 
+import type { Models } from '@o2s/framework/modules';
+
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { ProductCarousel } from '@o2s/ui/components/ProductCarousel';
@@ -23,7 +25,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
     const [isAddingToCart, startAddToCartTransition] = useTransition();
 
     const handleAddToCart = useCallback(
-        (sku: string, currency: string) => {
+        (sku: string, currency: Models.Price.Currency) => {
             startAddToCartTransition(async () => {
                 try {
                     const cartId = localStorage.getItem('cartId');
@@ -32,7 +34,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
                             cartId: cartId || undefined,
                             sku,
                             quantity: 1,
-                            currency: currency as 'USD' | 'EUR' | 'GBP' | 'PLN',
+                            currency,
                         },
                         { 'x-locale': locale },
                         accessToken,

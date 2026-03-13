@@ -14,7 +14,7 @@ export interface ProductCarouselProps {
     carouselConfig?: Partial<CarouselProps>;
     linkDetailsLabel?: string;
     addToCartLabel?: string;
-    onAddToCart?: (sku: string, currency: string) => void;
+    onAddToCart?: (sku: string, currency: Models.Price.Currency) => void;
     isAddingToCart?: boolean;
     carouselClassName?: string;
     keyboardControlMode?: CarouselProps['keyboardControlMode'];

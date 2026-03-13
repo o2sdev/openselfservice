@@ -4,6 +4,8 @@ import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useState, useTransition } from 'react';
 
+import type { Models } from '@o2s/framework/modules';
+
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
@@ -45,7 +47,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [isAddingToCart, startAddToCartTransition] = useTransition();
 
     const handleAddToCart = useCallback(
-        (sku: string, currency: string) => {
+        (sku: string, currency: Models.Price.Currency) => {
             startAddToCartTransition(async () => {
                 try {
                     const cartId = localStorage.getItem('cartId');
@@ -54,7 +56,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                             cartId: cartId || undefined,
                             sku,
                             quantity: 1,
-                            currency: currency as 'USD' | 'EUR' | 'GBP' | 'PLN',
+                            currency,
                         },
                         { 'x-locale': locale },
                         accessToken,
