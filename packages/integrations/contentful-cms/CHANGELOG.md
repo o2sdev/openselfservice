@@ -1,5 +1,17 @@
 # @o2s/integrations.contentful-cms
 
+## 0.7.1
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 9f72807: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.19.1
+    - @o2s/utils.logger@1.2.3
+
 ## 0.7.0
 
 ### Minor Changes
