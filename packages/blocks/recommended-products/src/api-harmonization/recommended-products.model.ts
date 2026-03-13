@@ -9,7 +9,7 @@ export type Badge = {
 
 export type ProductSummary = {
     id: string;
-    sku?: string;
+    sku: string;
     name: string;
     description?: string;
     image: Products.Model.Product['image'];

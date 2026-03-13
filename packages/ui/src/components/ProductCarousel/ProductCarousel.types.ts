@@ -22,7 +22,7 @@ export interface ProductCarouselProps {
 
 export interface ProductSummaryItem {
     id: string;
-    sku?: string;
+    sku: string;
     name: string;
     description?: Models.RichText.RichText;
     image?: Models.Media.Media;

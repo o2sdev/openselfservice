@@ -62,12 +62,12 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                             tags={product.badges?.slice(0, 2)}
                             link={product.link}
                             action={
-                                onAddToCart && addToCartLabel && product.sku && product.price ? (
+                                onAddToCart && addToCartLabel && product.price ? (
                                     <Button
                                         variant="secondary"
                                         size="sm"
                                         disabled={isAddingToCart}
-                                        onClick={() => onAddToCart(product.sku!, product.price!.currency)}
+                                        onClick={() => onAddToCart(product.sku, product.price!.currency)}
                                     >
                                         <ShoppingCart className="h-4 w-4 mr-2" />
                                         {addToCartLabel}
