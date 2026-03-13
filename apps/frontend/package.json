@@ -89,7 +89,7 @@
         "dotenv": "^17.3.1",
         "eslint": "^9.39.3",
         "eslint-config-next": "16.1.6",
-        "postcss": "^8.5.6",
+        "postcss": "^8.5.8",
         "prettier": "^3.8.1",
         "sass": "^1.97.3",
         "shx": "^0.4.0",

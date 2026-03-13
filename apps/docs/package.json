@@ -48,7 +48,7 @@
         "@tailwindcss/postcss": "^4.2.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "autoprefixer": "^10.4.27",
-        "postcss": "^8.5.6",
+        "postcss": "^8.5.8",
         "prettier": "^3.8.1",
         "tailwindcss": "^4.2.1",
         "typescript": "5.9.3"
