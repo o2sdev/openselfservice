@@ -9,6 +9,7 @@ import { Auth, Carts } from '@o2s/framework/modules';
 import { CartsService } from './carts.service';
 
 const DEFAULT_CURRENCY = 'EUR';
+const DEFAULT_REGION_ID = 'reg_default';
 
 const minimalCartItem = {
     id: 'item_1',
@@ -90,7 +91,11 @@ describe('CartsService', () => {
         };
         mockAuthService = { getCustomerId: vi.fn() };
         mockConfig = {
-            get: vi.fn((key: string) => (key === 'DEFAULT_CURRENCY' ? DEFAULT_CURRENCY : '')),
+            get: vi.fn((key: string) => {
+                if (key === 'DEFAULT_CURRENCY') return DEFAULT_CURRENCY;
+                if (key === 'DEFAULT_REGION_ID') return DEFAULT_REGION_ID;
+                return '';
+            }),
         };
         mockLogger = { debug: vi.fn() };
         mockCustomersService = {};
@@ -229,7 +234,7 @@ describe('CartsService', () => {
             expect(result?.id).toBe('cart_1');
         });
 
-        it('should create new cart for guest when no cartId (createCartAndAddItem)', async () => {
+        it('should create new cart for guest when no cartId (createCartAndAddItem) with defaultRegionId fallback', async () => {
             mockSdk.store.cart.create.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_new' } });
             mockSdk.store.cart.createLineItem.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_new' } });
             mockAuthService.getCustomerId.mockReturnValue(undefined);
@@ -242,12 +247,41 @@ describe('CartsService', () => {
             );
 
             expect(mockSdk.store.cart.create).toHaveBeenCalledWith(
-                { currency_code: 'eur', region_id: undefined, metadata: undefined },
+                { currency_code: 'eur', region_id: DEFAULT_REGION_ID, metadata: undefined },
                 { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
-            expect(mockSdk.store.cart.createLineItem).toHaveBeenCalled();
+            expect(mockSdk.store.cart.createLineItem).toHaveBeenCalledWith(
+                'cart_new',
+                { variant_id: 'SKU1', quantity: 2, metadata: undefined },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
+                expect.any(Object),
+            );
             expect(result?.id).toBe('cart_new');
+        });
+
+        it('should use explicit regionId over defaultRegionId when provided', async () => {
+            mockSdk.store.cart.create.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_reg' } });
+            mockSdk.store.cart.createLineItem.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_reg' } });
+            mockAuthService.getCustomerId.mockReturnValue(undefined);
+
+            await firstValueFrom(
+                service.addCartItem(
+                    {
+                        sku: 'SKU1',
+                        quantity: 1,
+                        currency: 'EUR',
+                        regionId: 'reg_explicit',
+                    } as Carts.Request.AddCartItemBody,
+                    undefined,
+                ),
+            );
+
+            expect(mockSdk.store.cart.create).toHaveBeenCalledWith(
+                { currency_code: 'eur', region_id: 'reg_explicit', metadata: undefined },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
+                expect.any(Object),
+            );
         });
 
         it('should create new cart for authenticated user when no cartId', async () => {

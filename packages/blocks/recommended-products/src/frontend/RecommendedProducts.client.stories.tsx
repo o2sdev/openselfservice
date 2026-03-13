@@ -145,6 +145,7 @@ export const SingleProduct: Story = {
         products: [
             {
                 id: 'PRD-005',
+                sku: 'AG-125-A22',
                 name: 'Cordless Angle Grinder',
                 description: 'Cordless angle grinder with 22V battery platform',
                 image: {

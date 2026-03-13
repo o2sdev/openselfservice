@@ -237,6 +237,7 @@ Configure the following environment variables in your API Harmonization server:
 | MEDUSAJS_PUBLISHABLE_API_KEY | string | The publishable API key for Store API operations                     | yes      |
 | MEDUSAJS_ADMIN_API_KEY       | string | The admin API key for Admin API operations                           | yes      |
 | DEFAULT_CURRENCY             | string | The default currency code (e.g., `EUR`, `USD`, `PLN`)                | yes      |
+| DEFAULT_REGION_ID            | string | The default Medusa region ID for cart creation (fallback when not provided by frontend) | no |
 
 You can obtain these values from your Medusa Admin Panel:
 
@@ -251,6 +252,7 @@ MEDUSAJS_BASE_URL=http://localhost:9000
 MEDUSAJS_PUBLISHABLE_API_KEY=pk_xxxxxxxx
 MEDUSAJS_ADMIN_API_KEY=sk_xxxxxxxx
 DEFAULT_CURRENCY=EUR
+DEFAULT_REGION_ID=reg_xxxxxxxx
 ```
 
 ## Verify installation

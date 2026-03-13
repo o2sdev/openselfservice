@@ -27,6 +27,7 @@ import { mapCart } from './carts.mapper';
 export class CartsService extends Carts.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
+    private readonly defaultRegionId: string | undefined;
 
     private readonly cartItemsFields = '*items,*shipping_methods,*billing_address,*shipping_address';
 
@@ -40,6 +41,7 @@ export class CartsService extends Carts.Service {
         super();
         this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
+        this.defaultRegionId = this.config.get('DEFAULT_REGION_ID') || undefined;
 
         if (!this.defaultCurrency) {
             throw new InternalServerErrorException('DEFAULT_CURRENCY is not defined');
@@ -339,7 +341,7 @@ export class CartsService extends Carts.Service {
             this.sdk.store.cart.create(
                 {
                     currency_code: currency.toLowerCase(),
-                    region_id: regionId,
+                    region_id: regionId || this.defaultRegionId,
                     metadata,
                 },
                 { fields: this.cartItemsFields },
