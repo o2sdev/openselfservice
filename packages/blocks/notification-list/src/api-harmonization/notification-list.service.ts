@@ -22,7 +22,11 @@ export class NotificationListService {
         query: GetNotificationListBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<NotificationListBlock> {
-        const cms = this.cmsService.getNotificationListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.NotificationListBlock.NotificationListBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'NotificationListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

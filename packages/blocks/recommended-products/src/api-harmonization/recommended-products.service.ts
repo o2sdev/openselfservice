@@ -20,9 +20,10 @@ export class RecommendedProductsService {
         headers: Models.Headers.AppHeaders,
     ): Observable<Model.RecommendedProductsBlock> {
         const locale = headers['x-locale'] || 'en';
-        const cmsBlock$ = this.cmsService.getRecommendedProductsBlock({
+        const cmsBlock$ = this.cmsService.getBlockConfig<CMS.Model.RecommendedProductsBlock.RecommendedProductsBlock>({
             id: query.id,
             locale,
+            blockType: 'RecommendedProductsBlock',
         });
 
         return cmsBlock$.pipe(

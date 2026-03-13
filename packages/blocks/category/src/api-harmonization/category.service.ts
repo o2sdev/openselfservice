@@ -16,7 +16,11 @@ export class CategoryService {
     ) {}
 
     getCategoryBlock(query: GetCategoryBlockQuery, headers: ApiModels.Headers.AppHeaders): Observable<CategoryBlock> {
-        const cms = this.cmsService.getCategoryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.CategoryBlock.CategoryBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'CategoryBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -36,7 +40,11 @@ export class CategoryService {
         query: GetCategoryBlockArticlesQuery,
         headers: ApiModels.Headers.AppHeaders,
     ): Observable<CategoryArticles> {
-        const cms = this.cmsService.getCategoryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.CategoryBlock.CategoryBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'CategoryBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

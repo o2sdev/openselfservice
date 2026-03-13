@@ -22,7 +22,11 @@ export class TicketSummaryService {
         query: GetTicketSummaryBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<TicketSummaryBlock> {
-        const cms = this.cmsService.getTicketSummaryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketSummaryBlock.TicketSummaryBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'TicketSummaryBlock',
+        });
         const tickets = this.ticketService.getTicketList({
             limit: 1000,
             offset: 0,

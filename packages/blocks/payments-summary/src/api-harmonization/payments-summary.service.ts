@@ -28,7 +28,11 @@ export class PaymentsSummaryService {
         query: GetPaymentsSummaryBlockQuery,
         headers: ApiModels.Headers.AppHeaders,
     ): Observable<PaymentsSummaryBlock> {
-        const cms = this.cmsService.getPaymentsSummaryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'PaymentsSummaryBlock',
+        });
         const invoices = this.invoiceService.getInvoiceList(query);
 
         return forkJoin([invoices, cms]).pipe(

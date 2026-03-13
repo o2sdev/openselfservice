@@ -22,7 +22,11 @@ export class InvoiceListService {
         query: GetInvoiceListBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<InvoiceListBlock> {
-        const cms = this.cmsService.getInvoiceListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.InvoiceListBlock.InvoiceListBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'InvoiceListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

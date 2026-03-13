@@ -22,7 +22,11 @@ export class TicketListService {
         query: GetTicketListBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<TicketListBlock> {
-        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketListBlock.TicketListBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'TicketListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

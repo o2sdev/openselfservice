@@ -13,7 +13,11 @@ export class BentoGridService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getBentoGridBlock(query: GetBentoGridBlockQuery, headers: Models.Headers.AppHeaders): Observable<BentoGridBlock> {
-        const cms = this.cmsService.getBentoGridBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.BentoGridBlock.BentoGridBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'BentoGridBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapBentoGrid(cms, headers['x-locale'])));
     }
