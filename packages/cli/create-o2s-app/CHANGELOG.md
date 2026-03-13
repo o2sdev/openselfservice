@@ -1,5 +1,15 @@
 # create-o2s-app
 
+## 4.0.1
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [98b2e68]
+    - @o2s/telemetry@1.2.2
+
 ## 4.0.0
 
 ### Major Changes

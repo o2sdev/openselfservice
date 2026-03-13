@@ -1,5 +1,18 @@
 # @o2s/blocks.faq
 
+## 1.5.1
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [98b2e68]
+  - @o2s/framework@1.19.1
+  - @o2s/utils.api-harmonization@0.3.2
+  - @o2s/utils.frontend@0.5.1
+  - @o2s/utils.logger@1.2.3
+
 ## 1.5.0
 
 ### Minor Changes
