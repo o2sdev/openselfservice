@@ -41,7 +41,7 @@
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "flatted": "^3.3.3",
+        "flatted": "^3.4.0",
         "graphql": "16.13.0",
         "graphql-request": "7.4.0",
         "graphql-tag": "2.12.6"
