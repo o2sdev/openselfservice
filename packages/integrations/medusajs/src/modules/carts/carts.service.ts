@@ -18,6 +18,7 @@ import { Auth, Carts, Customers } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { verifyResourceAccess } from '../../utils/customer-access';
 import { handleHttpError } from '../../utils/handle-http-error';
 import { mapAddressToMedusa } from '../customers/customers.mapper';
 
@@ -56,20 +57,16 @@ export class CartsService extends Carts.Service {
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response: HttpTypes.StoreCartResponse) => {
+            switchMap((response: HttpTypes.StoreCartResponse) => {
                 const cart = mapCart(response.cart, this.defaultCurrency);
 
-                // Verify ownership for customer carts
-                if (cart.customerId) {
-                    if (!authorization) {
-                        throw new UnauthorizedException('Authentication required to access this cart');
-                    }
-                    if (cart.customerId !== this.authService.getCustomerId(authorization)) {
-                        throw new UnauthorizedException('Unauthorized to access this cart');
-                    }
-                }
-
-                return cart;
+                return verifyResourceAccess(
+                    this.sdk,
+                    this.authService,
+                    this.medusaJsService.getMedusaAdminApiHeaders(),
+                    cart.customerId,
+                    authorization,
+                ).pipe(map(() => cart));
             }),
             catchError((error) => {
                 if (error.status === 404) {
