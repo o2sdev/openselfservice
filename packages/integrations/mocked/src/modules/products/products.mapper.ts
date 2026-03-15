@@ -105,6 +105,17 @@ export const mapProductBySku = (sku: string, locale?: string): Products.Model.Pr
     return product;
 };
 
+export const mapProductByVariantId = (variantId: string, locale?: string): Products.Model.Product | undefined => {
+    let productsSource = MOCK_PRODUCTS_EN;
+    if (locale === 'pl') productsSource = MOCK_PRODUCTS_PL;
+    else if (locale === 'de') productsSource = MOCK_PRODUCTS_DE;
+
+    const product = productsSource.find((p) => p.variants?.some((v) => v.id === variantId));
+    if (!product) return undefined;
+
+    return mapProduct(product.id, locale, variantId);
+};
+
 export const mapProducts = (options: Products.Request.GetProductListQuery): Products.Model.Products => {
     const { sort, locale, offset = 0, limit = 12 } = options;
 
@@ -134,6 +145,7 @@ export const mapProducts = (options: Products.Request.GetProductListQuery): Prod
                     ...product,
                     ...overrides,
                     variantId: firstVariant.id,
+                    sku: `${product.sku}-${firstVariant.slug.toUpperCase()}`,
                     link: `${product.link}/${firstVariant.slug}`,
                 };
             }
