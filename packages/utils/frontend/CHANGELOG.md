@@ -1,5 +1,16 @@
 # @o2s/utils.frontend
 
+## 0.5.1
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+
 ## 0.5.0
 
 ### Minor Changes
