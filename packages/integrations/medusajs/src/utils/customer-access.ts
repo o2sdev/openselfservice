@@ -40,7 +40,7 @@ export const verifyResourceAccess = (
     return from(sdk.admin.customer.retrieve(customerId, {}, adminHeaders)).pipe(
         map((response) => {
             const customer = response.customer as { has_account?: boolean };
-            if (customer.has_account) {
+            if (customer.has_account !== false) {
                 throw new UnauthorizedException('Authentication required to access this resource');
             }
             // Guest customer (has_account=false) — allow access
