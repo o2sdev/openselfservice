@@ -1,7 +1,7 @@
 import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
-import { Sdk } from '@o2s/framework/sdk';
+import { createBlockMethod, Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/{{kebabCase name}}.client';
 
@@ -14,19 +14,16 @@ export const {{ camelCase name }} = (sdk: Sdk) => ({
             headers: Models.Headers.AppHeaders,
             authorization?: string,
         ): Promise<Model.{{ pascalCase name }}Block> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${API_URL}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization
-                        ? {
-                              Authorization: `Bearer ${authorization}`,
-                          }
-                        : {}),
+            createBlockMethod<Model.{{ pascalCase name }}Block>({
+                sdk,
+                request: {
+                    method: 'get',
+                    url: `${API_URL}`,
+                    headers,
+                    authorization,
+                    params: query,
                 },
-                params: query,
+                getDefaultHeaders: Utils.Headers.getApiHeaders,
             }),
     },
 });

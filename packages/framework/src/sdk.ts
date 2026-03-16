@@ -146,3 +146,4 @@ export const extendSdk = <CustomMethods extends Partial<Record<string, unknown>>
         ...overrides,
     };
 };
+export { createBlockMethod } from './sdk/create-block-method';
