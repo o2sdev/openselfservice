@@ -39,7 +39,11 @@ const STARTERS: HoverCardProps[] = [
         href: '/docs/getting-started/installation',
         ctaLabel: 'Get Started',
         gradient:
-            'linear-gradient(90deg, rgba(0, 19, 96, 0.4) 0%, rgba(0, 19, 96, 0.4) 100%), linear-gradient(104.71deg, var(--color-violet) 31.575%, rgba(85, 34, 228, 1) 80.05%)',
+            'linear-gradient(90deg, rgba(0, 19, 96, 0.4) 0%, rgba(0, 19, 96, 0.4) 100%), linear-gradient(311.86deg, var(--color-celadon) 1.526%, var(--color-violet) 69.661%)',
+        backgroundImage: {
+            url: '/img/homepage/starters-card-cli.wizzard.png',
+            alt: 'CLI Wizzard',
+        },
     },
 ];
 
