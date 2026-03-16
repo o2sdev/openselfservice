@@ -35,7 +35,7 @@
     "dependencies": {
         "jwt-decode": "^4.0.0",
         "winston": "^3.19.0",
-        "axios": "^1.13.5",
+        "axios": "^1.13.6",
         "express": "5.2.1"
     },
     "devDependencies": {
