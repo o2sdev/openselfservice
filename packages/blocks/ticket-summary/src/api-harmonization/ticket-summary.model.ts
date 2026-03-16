@@ -1,3 +1,5 @@
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
 export class TicketSummaryInfoCard {
     title!: string;
     icon?: string;
@@ -6,7 +8,7 @@ export class TicketSummaryInfoCard {
     variant?: 'OPEN' | 'IN_PROGRESS' | 'CLOSED';
 }
 
-export class TicketSummaryBlock extends Models.Block.Block {
+export class TicketSummaryBlock extends ApiModels.Block.Block {
     __typename!: 'TicketSummaryBlock';
     layout?: 'vertical' | 'horizontal';
     infoCards!: TicketSummaryInfoCard[];

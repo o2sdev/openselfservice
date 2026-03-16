@@ -33,10 +33,11 @@ export class NotificationSummaryService {
         return forkJoin([notifications, cms]).pipe(
             map(([notifications, cms]) => {
                 const result = mapNotificationSummary(cms, notifications, headers[H.Locale]);
+                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'notifications', [
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'notifications', [
                         'view',
                         'mark_read',
                     ]);

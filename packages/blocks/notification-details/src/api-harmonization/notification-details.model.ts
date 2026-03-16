@@ -1,5 +1,7 @@
 import { Notifications } from '@o2s/configs.integrations';
 
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
 export class NotificationDetailsBlock extends ApiModels.Block.Block {
     __typename!: 'NotificationDetailsBlock';
     data!: Notification;

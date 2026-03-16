@@ -1,5 +1,7 @@
 import { Products } from '@o2s/configs.integrations';
 
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
 export type Badge = {
     label: string;
     variant: 'default' | 'secondary' | 'destructive' | 'outline';

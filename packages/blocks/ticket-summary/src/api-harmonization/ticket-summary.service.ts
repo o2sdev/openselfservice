@@ -30,10 +30,11 @@ export class TicketSummaryService {
         return forkJoin([tickets, cms]).pipe(
             map(([tickets, cms]) => {
                 const result = mapTicketSummary(cms, tickets, headers[H.Locale]);
+                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'tickets', [
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'tickets', [
                         'view',
                         'create',
                     ]);

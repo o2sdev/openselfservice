@@ -42,12 +42,14 @@ export class InvoiceListService {
                             );
 
                             // Extract permissions using ACL service
-                            if (headers[H.Authorization]) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers[H.Authorization],
-                                    'invoices',
-                                    ['view', 'create', 'pay', 'delete'],
-                                );
+                            const authorization = headers[H.Authorization];
+                            if (authorization) {
+                                const permissions = this.authService.canPerformActions(authorization, 'invoices', [
+                                    'view',
+                                    'create',
+                                    'pay',
+                                    'delete',
+                                ]);
 
                                 result.permissions = {
                                     view: permissions.view ?? false,

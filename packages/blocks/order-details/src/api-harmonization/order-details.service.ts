@@ -30,6 +30,7 @@ export class OrderDetailsService {
         query: GetOrderDetailsBlockQuery,
         headers: AppHeaders,
     ): Observable<OrderDetailsBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getOrderDetailsBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
@@ -42,7 +43,7 @@ export class OrderDetailsService {
                             offset: query.offset || 0,
                             sort: query.sort || '',
                         },
-                        headers[H.Authorization],
+                        authorization,
                     )
                     .pipe(
                         map((order) => {
@@ -58,12 +59,13 @@ export class OrderDetailsService {
                             );
 
                             // Extract permissions using ACL service
-                            if (headers[H.Authorization]) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers[H.Authorization],
-                                    'orders',
-                                    ['view', 'edit', 'cancel', 'track'],
-                                );
+                            if (authorization) {
+                                const permissions = this.authService.canPerformActions(authorization, 'orders', [
+                                    'view',
+                                    'edit',
+                                    'cancel',
+                                    'track',
+                                ]);
 
                                 result.permissions = {
                                     view: permissions.view ?? false,

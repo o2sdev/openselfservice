@@ -32,10 +32,9 @@ export class ServiceDetailsService {
                 const result = mapServiceDetails(cms, service, headers[H.Locale], headers[H.ClientTimezone] || '');
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'services', [
-                        'view',
-                    ]);
+                const authorization = headers[H.Authorization];
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'services', ['view']);
 
                     result.permissions = {
                         view: permissions.view ?? false,

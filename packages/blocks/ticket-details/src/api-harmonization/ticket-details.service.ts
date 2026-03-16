@@ -36,8 +36,9 @@ export class TicketDetailsService {
                 const result = mapTicketDetails(ticket, cms, headers[H.Locale], headers[H.ClientTimezone] || '');
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'tickets', [
+                const authorization = headers[H.Authorization];
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'tickets', [
                         'view',
                         'edit',
                         'close',

@@ -23,6 +23,7 @@ export class NotificationListService {
         query: GetNotificationListBlockQuery,
         headers: AppHeaders,
     ): Observable<NotificationListBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getNotificationListBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
@@ -45,12 +46,12 @@ export class NotificationListService {
                             );
 
                             // Extract permissions using ACL service
-                            if (headers[H.Authorization]) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers[H.Authorization],
-                                    'notifications',
-                                    ['view', 'mark_read', 'delete'],
-                                );
+                            if (authorization) {
+                                const permissions = this.authService.canPerformActions(authorization, 'notifications', [
+                                    'view',
+                                    'mark_read',
+                                    'delete',
+                                ]);
 
                                 result.permissions = {
                                     view: permissions.view ?? false,

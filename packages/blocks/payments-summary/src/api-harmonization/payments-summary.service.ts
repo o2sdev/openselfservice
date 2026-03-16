@@ -35,13 +35,11 @@ export class PaymentsSummaryService {
         return forkJoin([invoices, cms]).pipe(
             map(([invoices, cms]) => {
                 const result = mapPaymentsSummary(cms, invoices, headers[H.Locale], this.defaultCurrency);
+                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'invoices', [
-                        'view',
-                        'pay',
-                    ]);
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'invoices', ['view', 'pay']);
 
                     result.permissions = {
                         view: permissions.view ?? false,

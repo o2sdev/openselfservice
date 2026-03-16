@@ -1,6 +1,8 @@
 import { Tickets } from '@o2s/configs.integrations';
 
-export class TicketDetailsBlock extends Models.Block.Block {
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
+export class TicketDetailsBlock extends ApiModels.Block.Block {
     __typename!: 'TicketDetailsBlock';
     data!: Ticket;
     permissions?: {

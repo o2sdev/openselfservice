@@ -1,6 +1,8 @@
 import { CMS } from '@o2s/configs.integrations';
 
-export class PricingSectionBlock extends Models.Block.Block {
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
+export class PricingSectionBlock extends ApiModels.Block.Block {
     __typename!: 'PricingSectionBlock';
     title?: CMS.Model.PricingSectionBlock.PricingSectionBlock['title'];
     subtitle?: CMS.Model.PricingSectionBlock.PricingSectionBlock['subtitle'];

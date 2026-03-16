@@ -20,6 +20,7 @@ export class TicketRecentService {
     ) {}
 
     getTicketRecentBlock(query: GetTicketRecentBlockQuery, headers: AppHeaders): Observable<TicketRecentBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getTicketRecentBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
@@ -36,12 +37,11 @@ export class TicketRecentService {
                             );
 
                             // Extract permissions using ACL service
-                            if (headers[H.Authorization]) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers[H.Authorization],
-                                    'tickets',
-                                    ['view', 'create'],
-                                );
+                            if (authorization) {
+                                const permissions = this.authService.canPerformActions(authorization, 'tickets', [
+                                    'view',
+                                    'create',
+                                ]);
 
                                 result.permissions = {
                                     view: permissions.view ?? false,

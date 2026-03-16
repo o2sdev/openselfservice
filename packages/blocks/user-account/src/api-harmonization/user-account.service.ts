@@ -20,19 +20,17 @@ export class UserAccountService {
     ) {}
 
     getUserAccountBlock(query: GetUserAccountBlockQuery, headers: AppHeaders): Observable<UserAccountBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers[H.Locale] });
-        const user = this.usersService.getUser({ id: query.userId }, headers[H.Authorization]);
+        const user = this.usersService.getUser({ id: query.userId }, authorization);
 
         return forkJoin([cms, user]).pipe(
             map(([cms, user]) => {
                 const result = mapUserAccount(cms, headers[H.Locale], user);
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'settings', [
-                        'view',
-                        'edit',
-                    ]);
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'settings', ['view', 'edit']);
 
                     result.permissions = {
                         view: permissions.view ?? false,

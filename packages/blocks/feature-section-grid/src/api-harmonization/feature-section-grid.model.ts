@@ -1,6 +1,8 @@
 import { CMS } from '@o2s/configs.integrations';
 
-export class FeatureSectionGridBlock extends Models.Block.Block {
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
+export class FeatureSectionGridBlock extends ApiModels.Block.Block {
     __typename!: 'FeatureSectionGridBlock';
     preTitle?: CMS.Model.FeatureSectionGridBlock.FeatureSectionGridBlock['preTitle'];
     title!: CMS.Model.FeatureSectionGridBlock.FeatureSectionGridBlock['title'];

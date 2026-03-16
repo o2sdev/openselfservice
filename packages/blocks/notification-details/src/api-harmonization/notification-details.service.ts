@@ -45,8 +45,9 @@ export class NotificationDetailsService {
                 );
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'notifications', [
+                const authorization = headers[H.Authorization];
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'notifications', [
                         'view',
                         'mark_read',
                         'delete',

@@ -29,13 +29,11 @@ export class PaymentsHistoryService {
         return forkJoin([cms, invoices]).pipe(
             map(([cms, invoices]) => {
                 const result = mapPaymentsHistory(cms, invoices, headers[H.Locale]);
+                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
-                if (headers[H.Authorization]) {
-                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'invoices', [
-                        'view',
-                        'pay',
-                    ]);
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'invoices', ['view', 'pay']);
 
                     result.permissions = {
                         view: permissions.view ?? false,
