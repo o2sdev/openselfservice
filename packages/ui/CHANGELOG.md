@@ -1,5 +1,43 @@
 # @o2s/ui
 
+## 1.12.0
+
+### Minor Changes
+
+- 5d36519: Added new blocks: Cart, Checkout (Summary, Shipping Address, Company Data, Billing Payment) and Order Confirmation. Includes checkout forms validation (Formik + Yup), error handling, promo code support in cart, and new UI components (StepIndicator, RadioTile, AddressFields, CartSummary, QuantityInput, FormField).
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
+## 1.11.0
+
+### Minor Changes
+
+- 1804016: update article slugs to be relative and adjust mapping logic
+
+### Patch Changes
+
+- 8c01be4: added README
+- cc2e932: fix: prevent multiple carousels from responding to arrow keys at the same time
+
+    Added managed keyboard control for Swiper-based carousels so only the active carousel handles left/right arrows.
+    Keyboard control is activated by focus/pointer interaction on a carousel, without any default active carousel that captures arrow keys before interaction.
+    Introduced automatic `keyboardCarouselId` resolution when it is not provided in props.
+
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/framework@1.18.0
+
 ## 1.10.0
 
 ### Minor Changes

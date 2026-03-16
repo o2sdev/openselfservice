@@ -1,0 +1,53 @@
+import { Block } from '@/utils/models';
+
+interface CheckoutFieldConfig {
+    label: string;
+    placeholder?: string;
+    required: boolean;
+}
+
+export class CheckoutCompanyDataBlock extends Block.Block {
+    title!: string;
+    subtitle?: string;
+    fields!: {
+        firstName: CheckoutFieldConfig;
+        lastName: CheckoutFieldConfig;
+        email: CheckoutFieldConfig;
+        phone: CheckoutFieldConfig;
+        companyName: CheckoutFieldConfig;
+        taxId: CheckoutFieldConfig;
+        notes?: CheckoutFieldConfig;
+        address: {
+            streetName: CheckoutFieldConfig;
+            streetNumber: CheckoutFieldConfig;
+            apartment: CheckoutFieldConfig;
+            city: CheckoutFieldConfig;
+            postalCode: CheckoutFieldConfig;
+            country: CheckoutFieldConfig;
+        };
+    };
+    buttons!: {
+        back: { label: string; path: string };
+        next: { label: string; path: string };
+    };
+    errors!: {
+        required: string;
+        invalidTaxId: string;
+        invalidPostalCode: string;
+        invalidEmail: string;
+        cartNotFound: string;
+        submitError: string;
+    };
+    summaryLabels!: {
+        title: string;
+        subtotalLabel: string;
+        taxLabel: string;
+        totalLabel: string;
+        discountLabel: string;
+        shippingLabel: string;
+        freeLabel: string;
+    };
+    stepIndicator!: { steps: string[]; currentStep: number };
+    billingInfoNote?: { icon?: string; text: string };
+    cartPath!: string;
+}

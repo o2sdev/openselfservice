@@ -1,0 +1,153 @@
+import { CMS } from '@o2s/framework/modules';
+
+const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
+    id: 'cart-1',
+    title: 'Cart',
+    subtitle: 'Review and edit your order',
+    defaultCurrency: 'PLN',
+    labels: {
+        itemTotal: 'Total',
+        unknownProductName: 'Product',
+    },
+    errors: {
+        loadError: 'Failed to load cart. Please try again.',
+        updateError: 'Failed to update cart. Please try again.',
+    },
+    actions: {
+        increaseQuantity: 'Increase quantity',
+        decreaseQuantity: 'Decrease quantity',
+        quantity: 'Quantity',
+        remove: 'Remove',
+    },
+    summaryLabels: {
+        title: 'Summary',
+        subtotalLabel: 'Subtotal',
+        taxLabel: 'VAT',
+        totalLabel: 'Total',
+        discountLabel: 'Discount',
+        shippingLabel: 'Shipping',
+        freeLabel: 'Free',
+    },
+    checkoutButton: {
+        label: 'Proceed to checkout',
+        path: '/checkout/company-data',
+        icon: 'ShoppingCart',
+    },
+    continueShopping: {
+        label: 'Continue shopping',
+        path: '/products',
+    },
+    empty: {
+        title: 'Your cart is empty',
+        description: 'Add products to place an order',
+        continueShopping: {
+            label: 'Go to shop',
+            path: '/products',
+        },
+    },
+};
+
+const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
+    id: 'cart-1',
+    title: 'Warenkorb',
+    subtitle: 'Überprüfen und bearbeiten Sie Ihre Bestellung',
+    defaultCurrency: 'PLN',
+    labels: {
+        itemTotal: 'Summe',
+        unknownProductName: 'Produkt',
+    },
+    errors: {
+        loadError: 'Der Warenkorb konnte nicht geladen werden. Bitte versuchen Sie es erneut.',
+        updateError: 'Der Warenkorb konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.',
+    },
+    actions: {
+        increaseQuantity: 'Menge erhöhen',
+        decreaseQuantity: 'Menge verringern',
+        quantity: 'Menge',
+        remove: 'Entfernen',
+    },
+    summaryLabels: {
+        title: 'Zusammenfassung',
+        subtotalLabel: 'Nettosumme',
+        taxLabel: 'MwSt.',
+        totalLabel: 'Bruttosumme',
+        discountLabel: 'Rabatt',
+        shippingLabel: 'Versand',
+        freeLabel: 'Kostenlos',
+    },
+    checkoutButton: {
+        label: 'Zur Kasse',
+        path: '/kasse/firmendaten',
+        icon: 'ShoppingCart',
+    },
+    continueShopping: {
+        label: 'Weiter einkaufen',
+        path: '/produkte',
+    },
+    empty: {
+        title: 'Ihr Warenkorb ist leer',
+        description: 'Fügen Sie Produkte hinzu, um eine Bestellung aufzugeben',
+        continueShopping: {
+            label: 'Zum Shop',
+            path: '/produkte',
+        },
+    },
+};
+
+const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
+    id: 'cart-1',
+    title: 'Koszyk',
+    subtitle: 'Przejrzyj i edytuj swoje zamówienie',
+    defaultCurrency: 'PLN',
+    labels: {
+        itemTotal: 'Suma',
+        unknownProductName: 'Produkt',
+    },
+    errors: {
+        loadError: 'Nie udało się załadować koszyka. Spróbuj ponownie.',
+        updateError: 'Nie udało się zaktualizować koszyka. Spróbuj ponownie.',
+    },
+    actions: {
+        increaseQuantity: 'Zwiększ ilość',
+        decreaseQuantity: 'Zmniejsz ilość',
+        quantity: 'Ilość',
+        remove: 'Usuń',
+    },
+    summaryLabels: {
+        title: 'Podsumowanie',
+        subtotalLabel: 'Suma netto',
+        taxLabel: 'VAT',
+        totalLabel: 'Suma brutto',
+        discountLabel: 'Rabat',
+        shippingLabel: 'Dostawa',
+        freeLabel: 'Gratis',
+    },
+    checkoutButton: {
+        label: 'Przejdź do kasy',
+        path: '/zamowienie/dane-firmy',
+        icon: 'ShoppingCart',
+    },
+    continueShopping: {
+        label: 'Kontynuuj zakupy',
+        path: '/produkty',
+    },
+    empty: {
+        title: 'Twój koszyk jest pusty',
+        description: 'Dodaj produkty, aby złożyć zamówienie',
+        continueShopping: {
+            label: 'Przejdź do sklepu',
+            path: '/produkty',
+        },
+    },
+};
+
+export const mapCartBlock = (options: CMS.Request.GetCmsEntryParams): CMS.Model.CartBlock.CartBlock => {
+    switch (options.locale) {
+        case 'pl':
+            return MOCK_CART_BLOCK_PL;
+        case 'de':
+            return MOCK_CART_BLOCK_DE;
+        default:
+            return MOCK_CART_BLOCK_EN;
+    }
+};

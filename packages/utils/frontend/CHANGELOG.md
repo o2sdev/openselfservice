@@ -1,5 +1,36 @@
 # @o2s/utils.frontend
 
+## 0.5.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
+## 0.4.1
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/framework@1.18.0
+
 ## 0.4.0
 
 ### Minor Changes

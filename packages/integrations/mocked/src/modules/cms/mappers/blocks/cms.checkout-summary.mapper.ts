@@ -1,0 +1,201 @@
+import { CMS } from '@o2s/framework/modules';
+
+const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock = {
+    id: 'checkout-summary-1',
+    title: 'Order summary',
+    subtitle: 'Review and place your order',
+    sections: {
+        products: {
+            title: 'Products',
+            labels: { quantity: 'Quantity', price: 'Unit price', total: 'Total' },
+        },
+        company: {
+            title: 'Company details',
+            companyNameLabel: 'Company name',
+            taxIdLabel: 'Tax ID',
+            addressLabel: 'Billing address',
+        },
+        shipping: {
+            title: 'Shipping',
+            addressLabel: 'Address',
+            methodLabel: 'Shipping method:',
+        },
+        billing: {
+            title: 'Payment',
+            addressLabel: 'Billing address',
+            methodLabel: 'Payment method:',
+        },
+        summary: {
+            title: 'Summary',
+            subtotalLabel: 'Subtotal',
+            taxLabel: 'VAT',
+            discountLabel: 'Discount',
+            shippingLabel: 'Shipping',
+            freeLabel: 'Free',
+            totalLabel: 'Total',
+            activePromoCodesTitle: 'Active discount codes',
+            notesTitle: 'Notes',
+        },
+    },
+    errors: {
+        cartNotFound: 'Your cart is no longer available.',
+        placeOrderError: 'Something went wrong while placing your order. Please try again.',
+        loadError: 'Something went wrong while loading the summary. Please complete the previous steps and try again.',
+    },
+    buttons: {
+        confirm: { label: 'Place order', path: '/order-confirmation' },
+        back: { label: 'Back', path: '/checkout/billing-payment' },
+    },
+    loading: {
+        confirming: 'Placing order...',
+    },
+    placeholders: {
+        companyData: 'Company details not provided',
+        shippingAddress: 'Shipping address not provided',
+        sameAsBillingAddress: 'Same as billing address',
+        billingAddress: 'Billing address not provided',
+    },
+    stepIndicator: {
+        steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
+        currentStep: 4,
+    },
+    cartPath: '/cart',
+};
+
+const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock = {
+    id: 'checkout-summary-1',
+    title: 'Bestellübersicht',
+    subtitle: 'Überprüfen und bestellen',
+    sections: {
+        products: {
+            title: 'Produkte',
+            labels: { quantity: 'Menge', price: 'Stückpreis', total: 'Gesamt' },
+        },
+        company: {
+            title: 'Firmendaten',
+            companyNameLabel: 'Firmenname',
+            taxIdLabel: 'Steuer-ID',
+            addressLabel: 'Rechnungsadresse',
+        },
+        shipping: {
+            title: 'Lieferung',
+            addressLabel: 'Adresse',
+            methodLabel: 'Versandart:',
+        },
+        billing: {
+            title: 'Zahlung',
+            addressLabel: 'Rechnungsadresse',
+            methodLabel: 'Zahlungsmethode:',
+        },
+        summary: {
+            title: 'Zusammenfassung',
+            subtotalLabel: 'Nettosumme',
+            taxLabel: 'MwSt.',
+            discountLabel: 'Rabatt',
+            shippingLabel: 'Versand',
+            freeLabel: 'Kostenlos',
+            totalLabel: 'Gesamt',
+            activePromoCodesTitle: 'Aktive Rabattcodes',
+            notesTitle: 'Anmerkungen',
+        },
+    },
+    errors: {
+        cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
+        placeOrderError: 'Beim Aufgeben der Bestellung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        loadError:
+            'Beim Laden der Zusammenfassung ist ein Fehler aufgetreten. Bitte schließen Sie die vorherigen Schritte ab und versuchen Sie es erneut.',
+    },
+    buttons: {
+        confirm: { label: 'Bestellung aufgeben', path: '/bestellbestaetigung' },
+        back: { label: 'Zurück', path: '/kasse/rechnung-zahlung' },
+    },
+    loading: {
+        confirming: 'Bestellung wird aufgegeben...',
+    },
+    placeholders: {
+        companyData: 'Firmendaten nicht angegeben',
+        shippingAddress: 'Lieferadresse nicht angegeben',
+        sameAsBillingAddress: 'Gleich wie Rechnungsadresse',
+        billingAddress: 'Rechnungsadresse nicht angegeben',
+    },
+    stepIndicator: {
+        steps: ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung'],
+        currentStep: 4,
+    },
+    cartPath: '/warenkorb',
+};
+
+const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock = {
+    id: 'checkout-summary-1',
+    title: 'Podsumowanie zamówienia',
+    subtitle: 'Sprawdź i złóż zamówienie',
+    sections: {
+        products: {
+            title: 'Produkty',
+            labels: { quantity: 'Ilość', price: 'Cena jedn.', total: 'Razem' },
+        },
+        company: {
+            title: 'Dane firmy',
+            companyNameLabel: 'Nazwa firmy',
+            taxIdLabel: 'NIP',
+            addressLabel: 'Adres rozliczeniowy',
+        },
+        shipping: {
+            title: 'Dostawa',
+            addressLabel: 'Adres',
+            methodLabel: 'Metoda dostawy:',
+        },
+        billing: {
+            title: 'Płatność',
+            addressLabel: 'Adres rozliczeniowy',
+            methodLabel: 'Metoda płatności:',
+        },
+        summary: {
+            title: 'Podsumowanie',
+            subtotalLabel: 'Wartość netto',
+            taxLabel: 'VAT',
+            discountLabel: 'Rabat',
+            shippingLabel: 'Dostawa',
+            freeLabel: 'Gratis',
+            totalLabel: 'Razem',
+            activePromoCodesTitle: 'Aktywne kody rabatowe',
+            notesTitle: 'Uwagi',
+        },
+    },
+    errors: {
+        cartNotFound: 'Twój koszyk jest niedostępny.',
+        placeOrderError: 'Wystąpił błąd podczas składania zamówienia. Spróbuj ponownie.',
+        loadError: 'Wystąpił błąd podczas ładowania podsumowania. Uzupełnij poprzednie kroki i spróbuj ponownie.',
+    },
+    buttons: {
+        confirm: { label: 'Złóż zamówienie', path: '/potwierdzenie-zamowienia' },
+        back: { label: 'Wstecz', path: '/zamowienie/platnosc' },
+    },
+    loading: {
+        confirming: 'Składanie zamówienia...',
+    },
+    placeholders: {
+        companyData: 'Dane firmy nie zostały podane',
+        shippingAddress: 'Adres dostawy nie został podany',
+        sameAsBillingAddress: 'Ten sam adres co rozliczeniowy',
+        billingAddress: 'Adres rozliczeniowy nie został podany',
+    },
+    stepIndicator: {
+        steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],
+        currentStep: 4,
+    },
+    cartPath: '/koszyk',
+};
+
+export const mapCheckoutSummaryBlock = (
+    options: CMS.Request.GetCmsEntryParams,
+): CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock => {
+    switch (options.locale) {
+        case 'pl':
+            return MOCK_CHECKOUT_SUMMARY_PL;
+        case 'de':
+            return MOCK_CHECKOUT_SUMMARY_DE;
+        default:
+            return MOCK_CHECKOUT_SUMMARY_EN;
+    }
+};

@@ -1,5 +1,26 @@
 # @o2s/docs
 
+## 2.1.0
+
+### Minor Changes
+
+- a1659cf: feat: update HomepageStartersSection with new CLI features and improved styling
+- 5d36519: Updated documentation with e-commerce blocks and checkout flow information.
+
+## 2.0.0
+
+### Major Changes
+
+- 600d5ac: feat: add interactive CLI wizard with template selection, block/integration picker, and environment variable configuration
+
+### Minor Changes
+
+- 600d5ac: chore: add create-o2s-app flag to package.json in all blocks and integrations
+
+### Patch Changes
+
+- 8c01be4: added README
+
 ## 1.8.0
 
 ### Minor Changes

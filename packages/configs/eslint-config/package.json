@@ -1,6 +1,6 @@
 {
     "name": "@o2s/eslint-config",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "private": true,
     "license": "MIT",
     "description": "Shared ESLint configuration for O2S packages, supporting base, frontend, API, and UI configurations.",
@@ -19,7 +19,7 @@
         "./ui": "./ui.js"
     },
     "devDependencies": {
-        "@eslint/js": "^9.39.3",
+        "@eslint/js": "^9.39.4",
         "@next/eslint-plugin-next": "^16.1.6",
         "@typescript-eslint/eslint-plugin": "^8.56.1",
         "@typescript-eslint/parser": "^8.56.1",

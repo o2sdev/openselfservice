@@ -91,6 +91,10 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         url: '/notifications',
         label: 'Notifications',
     },
+    cart: {
+        url: '/cart',
+        label: 'Cart',
+    },
     contextSwitcher: {
         closeLabel: 'Close',
         showContextSwitcher: true,
@@ -185,6 +189,10 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         url: '/benachrichtigungen',
         label: 'Benachrichtigungen',
     },
+    cart: {
+        url: '/warenkorb',
+        label: 'Warenkorb',
+    },
     contextSwitcher: {
         closeLabel: 'Schließen',
         showContextSwitcher: true,
@@ -278,6 +286,10 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
     notification: {
         url: '/powiadomienia',
         label: 'Powiadomienia',
+    },
+    cart: {
+        url: '/koszyk',
+        label: 'Koszyk',
     },
     contextSwitcher: {
         closeLabel: 'Zamknij',

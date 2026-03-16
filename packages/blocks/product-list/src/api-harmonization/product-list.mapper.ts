@@ -19,6 +19,7 @@ export const mapProductList = (
         fieldMapping: cms.fieldMapping,
         noResults: cms.noResults,
         labels: cms.labels,
+        cartPath: cms.cartPath,
         products: {
             total: products.total,
             data: products.data.map((product) => mapProduct(product, cms)),
@@ -33,6 +34,7 @@ const mapProduct = (product: Products.Model.Product, cms: CMS.Model.ProductListB
         __typename: 'ProductItem',
         id: product.id,
         sku: product.sku,
+        variantId: product.variantId,
         name: product.name,
         description: product.description,
         shortDescription: product.shortDescription,

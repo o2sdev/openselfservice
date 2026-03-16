@@ -37,7 +37,7 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
             data: cart.items?.map((item) => mapCartItem(item, currency)) ?? [],
             total: cart.items?.length ?? 0,
         },
-        subtotal: mapPrice(cart.subtotal, currency, `Cart ${cart.id} subtotal`),
+        subtotal: mapPrice(cart.item_subtotal, currency, `Cart ${cart.id} subtotal`),
         discountTotal: mapPrice(cart.discount_total, currency, `Cart ${cart.id} discountTotal`),
         taxTotal: mapPrice(cart.tax_total, currency, `Cart ${cart.id} taxTotal`),
         shippingTotal: mapPrice(cart.shipping_total, currency, `Cart ${cart.id} shippingTotal`),
@@ -48,7 +48,7 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
         paymentMethod: mapPaymentMethodFromMetadata(asRecord(cart.metadata)),
         promotions: mapPromotions(cart),
         metadata: asRecord(cart.metadata),
-        notes: undefined,
+        notes: asRecord(cart.metadata)?.notes as string | undefined,
         email: cart.email ?? undefined,
     };
 };
@@ -114,7 +114,7 @@ const mapShippingMethod = (
     currency: Models.Price.Currency,
 ): Orders.Model.ShippingMethod => {
     return {
-        id: method.id,
+        id: method.shipping_option_id ?? method.id,
         name: method.name ?? '',
         description: method.description ?? '',
         total: mapPrice(method.total, currency, `Cart shipping method ${method.id} total`),

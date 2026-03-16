@@ -1,8 +1,14 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useState, useTransition } from 'react';
+import React, { useCallback, useState, useTransition } from 'react';
+
+import { Utils } from '@o2s/utils.frontend';
+
+import type { Models } from '@o2s/framework/modules';
+
+import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { DataList } from '@o2s/ui/components/DataList';
@@ -14,6 +20,7 @@ import { Pagination } from '@o2s/ui/components/Pagination';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
+import { ToastAction } from '@o2s/ui/elements/toast';
 
 import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
@@ -21,7 +28,8 @@ import { sdk } from '../sdk';
 import { ProductListPureProps } from './ProductList.types';
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, useRouter } = createNavigation(routing);
+    const router = useRouter();
 
     const initialFilters = {
         id: component.id,
@@ -40,6 +48,58 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
+    const [isAddingToCart, startAddToCartTransition] = useTransition();
+
+    const handleAddToCart = useCallback(
+        (sku: string, currency: Models.Price.Currency, variantId?: string) => {
+            const productName = data.products.data.find((p) => p.sku === sku)?.name ?? sku;
+            startAddToCartTransition(async () => {
+                try {
+                    const cartId = localStorage.getItem('cartId');
+                    const result = await sdk.cart.addCartItem(
+                        {
+                            cartId: cartId || undefined,
+                            sku,
+                            variantId,
+                            quantity: 1,
+                            currency,
+                        },
+                        { 'x-locale': locale },
+                        accessToken,
+                    );
+                    if (!cartId && result?.id) {
+                        localStorage.setItem('cartId', result.id);
+                    }
+                    toast({
+                        description: Utils.StringReplace.reactStringReplace(data.labels.addToCartSuccess ?? '', {
+                            productName,
+                        }),
+                        action:
+                            data.labels.viewCartLabel && data.cartPath ? (
+                                <ToastAction
+                                    altText={data.labels.viewCartLabel}
+                                    onClick={() => router.push(data.cartPath!)}
+                                >
+                                    {data.labels.viewCartLabel}
+                                </ToastAction>
+                            ) : undefined,
+                    });
+                } catch {
+                    toast({ variant: 'destructive', description: data.labels.addToCartError });
+                }
+            });
+        },
+        [
+            locale,
+            accessToken,
+            data.labels.addToCartSuccess,
+            data.labels.addToCartError,
+            data.labels.viewCartLabel,
+            data.cartPath,
+            data.products.data,
+            router,
+        ],
+    );
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {
@@ -164,10 +224,26 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                                     description={product.shortDescription || product.description}
                                                     image={product.image}
                                                     price={product.price}
-                                                    link={{
-                                                        label: data.detailsLabel || 'View Details',
-                                                        url: product.detailsUrl,
-                                                    }}
+                                                    link={product.detailsUrl}
+                                                    action={
+                                                        data.labels.addToCartLabel ? (
+                                                            <Button
+                                                                variant="secondary"
+                                                                size="sm"
+                                                                disabled={isAddingToCart}
+                                                                onClick={() =>
+                                                                    handleAddToCart(
+                                                                        product.sku,
+                                                                        product.price.currency,
+                                                                        product.variantId,
+                                                                    )
+                                                                }
+                                                            >
+                                                                <ShoppingCart className="h-4 w-4 mr-2" />
+                                                                {data.labels.addToCartLabel}
+                                                            </Button>
+                                                        ) : undefined
+                                                    }
                                                     LinkComponent={LinkComponent}
                                                 />
                                             </li>

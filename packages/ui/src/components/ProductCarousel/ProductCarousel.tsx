@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import React, { useId } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -8,6 +9,7 @@ import { ProductCard } from '@o2s/ui/components/Cards/ProductCard';
 import { Carousel } from '@o2s/ui/components/Carousel';
 import { RichText } from '@o2s/ui/components/RichText';
 
+import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { ProductCarouselProps } from './ProductCarousel.types';
@@ -19,9 +21,16 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
     action,
     LinkComponent,
     carouselConfig,
-    linkDetailsLabel,
+    addToCartLabel,
+    onAddToCart,
+    isAddingToCart,
     carouselClassName,
+    keyboardControlMode,
+    keyboardCarouselId,
 }) => {
+    const generatedCarouselId = useId().replaceAll(':', '');
+    const resolvedKeyboardCarouselId = keyboardCarouselId ?? `product-carousel-${generatedCarouselId}`;
+
     if (!products || products.length === 0) {
         return null;
     }
@@ -51,13 +60,21 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                             price={product.price}
                             image={product.image}
                             tags={product.badges?.slice(0, 2)}
-                            link={
-                                linkDetailsLabel
-                                    ? {
-                                          label: linkDetailsLabel,
-                                          url: product.link,
-                                      }
-                                    : undefined
+                            link={product.link}
+                            action={
+                                onAddToCart && addToCartLabel && product.price ? (
+                                    <Button
+                                        variant="secondary"
+                                        size="sm"
+                                        disabled={isAddingToCart}
+                                        onClick={() =>
+                                            onAddToCart(product.sku, product.price!.currency, product.variantId)
+                                        }
+                                    >
+                                        <ShoppingCart className="h-4 w-4 mr-2" />
+                                        {addToCartLabel}
+                                    </Button>
+                                ) : undefined
                             }
                             LinkComponent={LinkComponent}
                         />
@@ -86,6 +103,8 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                     },
                 }}
                 {...carouselConfig}
+                keyboardControlMode={keyboardControlMode}
+                keyboardCarouselId={resolvedKeyboardCarouselId}
             />
         </div>
     );

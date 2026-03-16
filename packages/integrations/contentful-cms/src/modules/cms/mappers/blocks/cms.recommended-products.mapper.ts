@@ -12,9 +12,14 @@ export const mapRecommendedProductsBlock = (
     return {
         id: 'recommended-products-1',
         basePath: basePathMap[locale] || basePathMap.en,
+        cartPath: '/cart',
         labels: {
             title: 'Recommended Products',
             detailsLabel: 'Details',
+            addToCartLabel: 'Add to Cart',
+            addToCartSuccess: '{productName} added to cart',
+            addToCartError: 'Failed to add product to cart',
+            viewCartLabel: 'View Cart',
         },
     };
 };

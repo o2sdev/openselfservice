@@ -29,8 +29,14 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 message: 'Choose which modules you want to be included in the integration.',
                 validate: (input: string[]) => !!input.length,
             },
+            {
+                type: 'checkbox',
+                name: 'templates',
+                choices: ['o2s', 'dxp'],
+                message: 'Which project templates should include this integration? (leave empty for custom-only)',
+            },
         ],
-        actions: (data) => {
+        actions: (data: Record<string, unknown> | undefined) => {
             const actions: PlopTypes.ActionType[] = [
                 {
                     type: 'add',
@@ -82,16 +88,16 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
                     template: '// MODULE_EXPORTS',
                 },
-            {
-                type: 'add',
-                path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
-                templateFile: 'templates/integration/vitestConfig.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/integrations/{{kebabCase name}}/README.md',
-                templateFile: 'templates/integration/README.hbs',
-            },
+                {
+                    type: 'add',
+                    path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
+                    templateFile: 'templates/integration/vitestConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/integrations/{{kebabCase name}}/README.md',
+                    templateFile: 'templates/integration/README.hbs',
+                },
             ];
 
             const modules = data?.modules as string[];
@@ -221,6 +227,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'input',
                 name: 'name',
                 message: 'What is the name of the block?',
+            },
+            {
+                type: 'checkbox',
+                name: 'templates',
+                choices: ['o2s', 'dxp'],
+                message: 'Which project templates should include this block? (leave empty for custom-only)',
             },
         ],
         actions: [

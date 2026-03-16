@@ -34,7 +34,7 @@ describe('customers.mapper', () => {
             expect(result.isDefault).toBe(true);
             expect(result.address.firstName).toBe('John');
             expect(result.address.lastName).toBe('Doe');
-            expect(result.address.country).toBe('pl');
+            expect(result.address.country).toBe('PL');
             expect(result.address.streetName).toBe('Street');
             expect(result.address.streetNumber).toBe('1');
             expect(result.address.city).toBe('Warsaw');
@@ -88,14 +88,14 @@ describe('customers.mapper', () => {
             expect(result.last_name).toBe('Doe');
             expect(result.country_code).toBe('pl');
             expect(result.address_1).toBe('Main St');
-            expect(result.address_2).toBe('10'); // streetNumber takes precedence over apartment
+            expect(result.address_2).toBe('10'); // address_2 = streetNumber
             expect(result.city).toBe('Krakow');
             expect(result.postal_code).toBe('30-001');
             expect(result.province).toBe('Lesser Poland');
             expect(result.phone).toBe('+48123456789');
         });
 
-        it('should use apartment when streetNumber is empty for address_2', () => {
+        it('should put apartment in metadata when streetNumber is empty', () => {
             const address = {
                 firstName: 'J',
                 lastName: 'D',
@@ -109,7 +109,26 @@ describe('customers.mapper', () => {
                 phone: undefined,
             };
             const result = mapAddressToMedusa(address as never);
-            expect(result.address_2).toBe('Apt 2');
+            expect(result.address_2).toBeUndefined();
+            expect(result.metadata).toEqual({ apartment: 'Apt 2' });
+        });
+
+        it('should include taxId and apartment in metadata when present', () => {
+            const address = {
+                firstName: 'J',
+                lastName: 'D',
+                country: 'pl',
+                streetName: 'Marszałkowska',
+                streetNumber: '12',
+                apartment: 'Apt 3',
+                taxId: '1234567890',
+                city: 'Warsaw',
+                postalCode: '00-001',
+            };
+            const result = mapAddressToMedusa(address as never);
+            expect(result.address_1).toBe('Marszałkowska');
+            expect(result.address_2).toBe('12');
+            expect(result.metadata).toEqual({ taxId: '1234567890', apartment: 'Apt 3' });
         });
     });
 });

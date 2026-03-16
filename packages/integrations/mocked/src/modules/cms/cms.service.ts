@@ -6,7 +6,12 @@ import { CMS } from '@o2s/framework/modules';
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
 import { mapBentoGridBlock } from './mappers/blocks/cms.bento-grid.mapper';
+import { mapCartBlock } from './mappers/blocks/cms.cart.mapper';
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
+import { mapCheckoutBillingPaymentBlock } from './mappers/blocks/cms.checkout-billing-payment.mapper';
+import { mapCheckoutCompanyDataBlock } from './mappers/blocks/cms.checkout-company-data.mapper';
+import { mapCheckoutShippingAddressBlock } from './mappers/blocks/cms.checkout-shipping-address.mapper';
+import { mapCheckoutSummaryBlock } from './mappers/blocks/cms.checkout-summary.mapper';
 import { mapCtaSectionBlock } from './mappers/blocks/cms.cta-section.mapper';
 import { mapDocumentListBlock } from './mappers/blocks/cms.document-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
@@ -20,6 +25,7 @@ import { mapMediaSectionBlock } from './mappers/blocks/cms.media-section.mapper'
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
 import { mapNotificationSummaryBlock } from './mappers/blocks/cms.notification-summary.mapper';
+import { mapOrderConfirmationBlock } from './mappers/blocks/cms.order-confirmation.mapper';
 import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
@@ -180,5 +186,29 @@ export class CmsService implements CMS.Service {
             default:
                 throw new NotFoundException(`Unknown block type: ${options.blockType}`);
         }
+    }
+
+    getCartBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCartBlock(options)).pipe(responseDelay());
+    }
+
+    getCheckoutCompanyDataBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCheckoutCompanyDataBlock(options)).pipe(responseDelay());
+    }
+
+    getCheckoutShippingAddressBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCheckoutShippingAddressBlock(options)).pipe(responseDelay());
+    }
+
+    getCheckoutBillingPaymentBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCheckoutBillingPaymentBlock(options)).pipe(responseDelay());
+    }
+
+    getCheckoutSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCheckoutSummaryBlock(options)).pipe(responseDelay());
+    }
+
+    getOrderConfirmationBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapOrderConfirmationBlock(options)).pipe(responseDelay());
     }
 }

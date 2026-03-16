@@ -33,8 +33,12 @@ export class CartsService implements Carts.Service {
     ): Observable<Carts.Model.Cart | undefined> {
         const cart = mapCart(params);
 
+        if (!cart) {
+            throw new NotFoundException('Cart not found');
+        }
+
         // Customer carts require authorization
-        if (cart?.customerId) {
+        if (cart.customerId) {
             if (!authorization) {
                 throw new UnauthorizedException('Authentication required to access this cart');
             }
@@ -432,12 +436,16 @@ export class CartsService implements Carts.Service {
 
         return resolveAddresses$().pipe(
             switchMap(({ shippingAddress, billingAddress }) => {
+                const resolvedShippingAddress =
+                    data.sameAsBillingAddress === true ? existingCart.billingAddress : shippingAddress;
+
                 const updateData: Carts.Request.UpdateCartBody = {
                     notes: data.notes,
                     email: data.email,
                     metadata: {
                         ...existingCart.metadata,
-                        ...(shippingAddress && { shippingAddress }),
+                        sameAsBillingAddress: data.sameAsBillingAddress ?? false,
+                        ...(resolvedShippingAddress && { shippingAddress: resolvedShippingAddress }),
                         ...(billingAddress && { billingAddress }),
                     },
                 };

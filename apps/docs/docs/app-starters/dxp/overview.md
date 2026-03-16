@@ -13,15 +13,12 @@ Its features can be extended with Blocks or integrations O2S provides or your ow
 To create a new DXP application:
 
 ```shell
-npx create-dxp-app@latest my-dxp-portal
+npx create-o2s-app my-dxp-portal --template dxp
 ```
 
-This command will:
+This command automatically scaffolds the DXP starter with its default blocks and integrations — no interactive prompts needed.
 
-- Download the latest DXP Frontend Starter
-- Install all dependencies
-- Set up the project structure optimized for content management
-- Initialize content-focused integrations and UI blocks
+For all available CLI options (custom template, non-interactive mode, etc.), see the [Installation](../../getting-started/installation.md#cli-options) guide.
 
 ## What's included
 

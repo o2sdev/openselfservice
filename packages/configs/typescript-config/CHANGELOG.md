@@ -1,5 +1,15 @@
 # @o2s/typescript-config
 
+## 1.3.0
+
+### Minor Changes
+
+- fcf14d2: Configure Storybook to use package README.md as documentation source
+
+### Patch Changes
+
+- 8c01be4: added README
+
 ## 1.2.0
 
 ### Minor Changes
