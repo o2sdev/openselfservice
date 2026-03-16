@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Notifications } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapNotificationList } from './notification-list.mapper';
 import { NotificationListBlock } from './notification-list.model';
 import { GetNotificationListBlockQuery } from './notification-list.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class NotificationListService {
@@ -21,7 +23,7 @@ export class NotificationListService {
         query: GetNotificationListBlockQuery,
         headers: AppHeaders,
     ): Observable<NotificationListBlock> {
-        const cms = this.cmsService.getNotificationListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getNotificationListBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -31,21 +33,21 @@ export class NotificationListService {
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,
-                        locale: headers['x-locale'],
+                        locale: headers[H.Locale],
                     })
                     .pipe(
                         map((notifications) => {
                             const result = mapNotificationList(
                                 notifications,
                                 cms,
-                                headers['x-locale'],
-                                headers['x-client-timezone'] || '',
+                                headers[H.Locale],
+                                headers[H.ClientTimezone] || '',
                             );
 
                             // Extract permissions using ACL service
-                            if (headers.authorization) {
+                            if (headers[H.Authorization]) {
                                 const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
+                                    headers[H.Authorization],
                                     'notifications',
                                     ['view', 'mark_read', 'delete'],
                                 );

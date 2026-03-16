@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Invoices } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapPaymentsHistory } from './payments-history.mapper';
 import { PaymentsHistoryBlock } from './payments-history.model';
 import { GetPaymentsHistoryBlockQuery } from './payments-history.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class PaymentsHistoryService {
@@ -21,16 +23,16 @@ export class PaymentsHistoryService {
         query: GetPaymentsHistoryBlockQuery,
         headers: AppHeaders,
     ): Observable<PaymentsHistoryBlock> {
-        const cms = this.cmsService.getPaymentsHistoryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getPaymentsHistoryBlock({ ...query, locale: headers[H.Locale] });
         const invoices = this.invoiceService.getInvoiceList(query);
 
         return forkJoin([cms, invoices]).pipe(
             map(([cms, invoices]) => {
-                const result = mapPaymentsHistory(cms, invoices, headers['x-locale']);
+                const result = mapPaymentsHistory(cms, invoices, headers[H.Locale]);
 
                 // Extract permissions using ACL service
-                if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'invoices', [
+                if (headers[H.Authorization]) {
+                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'invoices', [
                         'view',
                         'pay',
                     ]);

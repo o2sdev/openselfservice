@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Tickets } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapTicketRecent } from './ticket-recent.mapper';
 import { TicketRecentBlock } from './ticket-recent.model';
 import { GetTicketRecentBlockQuery } from './ticket-recent.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class TicketRecentService {
@@ -18,25 +20,25 @@ export class TicketRecentService {
     ) {}
 
     getTicketRecentBlock(query: GetTicketRecentBlockQuery, headers: AppHeaders): Observable<TicketRecentBlock> {
-        const cms = this.cmsService.getTicketRecentBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getTicketRecentBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.ticketsService
-                    .getTicketList({ ...query, limit: cms.limit, locale: headers['x-locale'] })
+                    .getTicketList({ ...query, limit: cms.limit, locale: headers[H.Locale] })
                     .pipe(
                         map((tickets) => {
                             const result = mapTicketRecent(
                                 cms,
                                 tickets,
-                                headers['x-locale'],
-                                headers['x-client-timezone'] || '',
+                                headers[H.Locale],
+                                headers[H.ClientTimezone] || '',
                             );
 
                             // Extract permissions using ACL service
-                            if (headers.authorization) {
+                            if (headers[H.Authorization]) {
                                 const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
+                                    headers[H.Authorization],
                                     'tickets',
                                     ['view', 'create'],
                                 );

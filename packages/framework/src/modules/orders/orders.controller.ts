@@ -4,7 +4,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
 import { OrderService } from './orders.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 @Controller('/orders')
 @UseInterceptors(LoggerService)
@@ -13,11 +15,11 @@ export class OrdersController {
 
     @Get(':id')
     getOrder(@Param() params: Request.GetOrderParams, @Headers() headers: AppHeaders) {
-        return this.orderService.getOrder(params, headers.authorization);
+        return this.orderService.getOrder(params, headers[H.Authorization]);
     }
 
     @Get()
     getOrderList(@Query() query: Request.GetOrderListQuery, @Headers() headers: AppHeaders) {
-        return this.orderService.getOrderList(query, headers.authorization);
+        return this.orderService.getOrderList(query, headers[H.Authorization]);
     }
 }

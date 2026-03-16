@@ -6,7 +6,9 @@ import { LoggerService } from '@o2s/utils.logger';
 import { BillingAccount, BillingAccounts } from './billing-accounts.model';
 import { GetBillingAccountParams, GetBillingAccountsListQuery } from './billing-accounts.request';
 import { BillingAccountService } from './billing-accounts.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 @Controller('/billing-accounts')
 @UseInterceptors(LoggerService)
@@ -18,7 +20,7 @@ export class BillingAccountController {
         @Query() query: GetBillingAccountsListQuery,
         @Headers() headers: AppHeaders,
     ): Observable<BillingAccounts> {
-        return this.billingAccountService.getBillingAccounts(query, headers.authorization);
+        return this.billingAccountService.getBillingAccounts(query, headers[H.Authorization]);
     }
 
     @Get(':id')
@@ -26,6 +28,6 @@ export class BillingAccountController {
         @Param() params: GetBillingAccountParams,
         @Headers() headers: AppHeaders,
     ): Observable<BillingAccount> {
-        return this.billingAccountService.getBillingAccount(params, headers.authorization);
+        return this.billingAccountService.getBillingAccount(params, headers[H.Authorization]);
     }
 }

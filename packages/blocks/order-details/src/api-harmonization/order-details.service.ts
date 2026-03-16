@@ -3,12 +3,14 @@ import { ConfigService } from '@nestjs/config';
 import { CMS, Orders } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapOrderDetails } from './order-details.mapper';
 import { OrderDetailsBlock } from './order-details.model';
 import { GetOrderDetailsBlockParams, GetOrderDetailsBlockQuery } from './order-details.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class OrderDetailsService {
@@ -28,7 +30,7 @@ export class OrderDetailsService {
         query: GetOrderDetailsBlockQuery,
         headers: AppHeaders,
     ): Observable<OrderDetailsBlock> {
-        const cms = this.cmsService.getOrderDetailsBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getOrderDetailsBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -40,7 +42,7 @@ export class OrderDetailsService {
                             offset: query.offset || 0,
                             sort: query.sort || '',
                         },
-                        headers['authorization'],
+                        headers[H.Authorization],
                     )
                     .pipe(
                         map((order) => {
@@ -50,15 +52,15 @@ export class OrderDetailsService {
                             const result = mapOrderDetails(
                                 cms,
                                 order,
-                                headers['x-locale'],
-                                headers['x-client-timezone'] || '',
+                                headers[H.Locale],
+                                headers[H.ClientTimezone] || '',
                                 this.defaultProductUnit,
                             );
 
                             // Extract permissions using ACL service
-                            if (headers.authorization) {
+                            if (headers[H.Authorization]) {
                                 const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
+                                    headers[H.Authorization],
                                     'orders',
                                     ['view', 'edit', 'cancel', 'track'],
                                 );

@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Invoices } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapInvoiceList } from './invoice-list.mapper';
 import { InvoiceListBlock } from './invoice-list.model';
 import { GetInvoiceListBlockQuery } from './invoice-list.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class InvoiceListService {
@@ -18,7 +20,7 @@ export class InvoiceListService {
     ) {}
 
     getInvoiceListBlock(query: GetInvoiceListBlockQuery, headers: AppHeaders): Observable<InvoiceListBlock> {
-        const cms = this.cmsService.getInvoiceListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getInvoiceListBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -28,21 +30,21 @@ export class InvoiceListService {
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,
-                        locale: headers['x-locale'],
+                        locale: headers[H.Locale],
                     })
                     .pipe(
                         map((invoices) => {
                             const result = mapInvoiceList(
                                 invoices,
                                 cms,
-                                headers['x-locale'],
-                                headers['x-client-timezone'] || '',
+                                headers[H.Locale],
+                                headers[H.ClientTimezone] || '',
                             );
 
                             // Extract permissions using ACL service
-                            if (headers.authorization) {
+                            if (headers[H.Authorization]) {
                                 const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
+                                    headers[H.Authorization],
                                     'invoices',
                                     ['view', 'create', 'pay', 'delete'],
                                 );

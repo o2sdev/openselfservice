@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Resources } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapServiceList } from './service-list.mapper';
 import { ServiceListBlock } from './service-list.model';
 import { GetServiceListBlockQuery } from './service-list.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class ServiceListService {
@@ -18,7 +20,7 @@ export class ServiceListService {
     ) {}
 
     getServiceListBlock(query: GetServiceListBlockQuery, headers: AppHeaders): Observable<ServiceListBlock> {
-        const cms = this.cmsService.getServiceListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getServiceListBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -33,21 +35,21 @@ export class ServiceListService {
                             category: query.category,
                             sort: query.sort,
                         },
-                        headers['authorization'] || '',
+                        headers[H.Authorization] || '',
                     )
                     .pipe(
                         map((services) => {
                             const result = mapServiceList(
                                 services,
                                 cms,
-                                headers['x-locale'],
-                                headers['x-client-timezone'] || '',
+                                headers[H.Locale],
+                                headers[H.ClientTimezone] || '',
                             );
 
                             // Extract permissions using ACL service
-                            if (headers.authorization) {
+                            if (headers[H.Authorization]) {
                                 const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
+                                    headers[H.Authorization],
                                     'services',
                                     ['view'],
                                 );

@@ -3,9 +3,12 @@ import { Reflector } from '@nestjs/core';
 
 import { LoggerService } from '@o2s/utils.logger';
 
+import { HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { Jwt } from './auth.model';
+
+const H = HeaderName;
 
 @Injectable()
 export class RolesGuard implements Auth.Guards.RoleGuard {
@@ -28,7 +31,7 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
         const MatchingMode = roleMetadata.mode || Auth.Model.MatchingMode.ANY;
 
         const request = context.switchToHttp().getRequest();
-        const authHeader = request.headers['authorization'];
+        const authHeader = request.headers[H.Authorization];
 
         if (!authHeader) {
             throw new UnauthorizedException('Missing authorization token');
@@ -85,7 +88,7 @@ export class PermissionsGuard implements Auth.Guards.PermissionGuard {
         }
 
         const request = context.switchToHttp().getRequest();
-        const authHeader = request.headers['authorization'];
+        const authHeader = request.headers[H.Authorization];
 
         if (!authHeader) {
             throw new UnauthorizedException('Missing authorization token');

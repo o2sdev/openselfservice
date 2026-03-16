@@ -1,12 +1,14 @@
 import { Body, Controller, Get, Headers, Post, Query } from '@nestjs/common';
 import { Observable } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 
 import { URL } from './index';
 import { SurveyJs } from './surveyjs.model';
 import { SurveyJsQuery, SurveyJsSubmitPayload } from './surveyjs.request';
 import { SurveyjsService } from './surveyjs.service';
+
+const H = HeaderName;
 
 @Controller(URL)
 export class SurveyjsController {
@@ -19,6 +21,6 @@ export class SurveyjsController {
 
     @Post()
     submitSurvey(@Body() body: SurveyJsSubmitPayload, @Headers() headers: AppHeaders) {
-        return this.surveyjsService.submitSurvey(body, headers['authorization']);
+        return this.surveyjsService.submitSurvey(body, headers[H.Authorization]);
     }
 }

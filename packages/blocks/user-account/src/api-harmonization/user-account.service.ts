@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Users } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapUserAccount } from './user-account.mapper';
 import { UserAccountBlock } from './user-account.model';
 import { GetUserAccountBlockQuery } from './user-account.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class UserAccountService {
@@ -18,16 +20,16 @@ export class UserAccountService {
     ) {}
 
     getUserAccountBlock(query: GetUserAccountBlockQuery, headers: AppHeaders): Observable<UserAccountBlock> {
-        const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers['x-locale'] });
-        const user = this.usersService.getUser({ id: query.userId }, headers.authorization);
+        const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers[H.Locale] });
+        const user = this.usersService.getUser({ id: query.userId }, headers[H.Authorization]);
 
         return forkJoin([cms, user]).pipe(
             map(([cms, user]) => {
-                const result = mapUserAccount(cms, headers['x-locale'], user);
+                const result = mapUserAccount(cms, headers[H.Locale], user);
 
                 // Extract permissions using ACL service
-                if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'settings', [
+                if (headers[H.Authorization]) {
+                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'settings', [
                         'view',
                         'edit',
                     ]);

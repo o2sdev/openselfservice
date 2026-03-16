@@ -14,7 +14,9 @@ import {
     GetServiceParams,
 } from './resources.request';
 import { ResourceService } from './resources.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 @Controller('/resources')
 @UseInterceptors(LoggerService)
@@ -23,7 +25,7 @@ export class ResourceController {
 
     @Post(':id/purchase')
     purchaseResource(@Param() params: GetResourceParams, @Headers() headers: AppHeaders) {
-        return this.resourceService.purchaseOrActivateResource(params, headers.authorization);
+        return this.resourceService.purchaseOrActivateResource(params, headers[H.Authorization]);
     }
 
     @Get('services')
@@ -37,7 +39,7 @@ export class ResourceController {
 
     @Get('services/:id')
     getService(@Param() params: GetServiceParams, @Headers() headers: AppHeaders): Observable<Service> {
-        return this.resourceService.getService(params, headers.authorization);
+        return this.resourceService.getService(params, headers[H.Authorization]);
     }
 
     @Get('services/featured')
@@ -56,7 +58,7 @@ export class ResourceController {
 
     @Get('assets/:id')
     getAsset(@Param() params: GetAssetParams, @Headers() headers: AppHeaders): Observable<Asset> {
-        return this.resourceService.getAsset(params, headers.authorization);
+        return this.resourceService.getAsset(params, headers[H.Authorization]);
     }
 
     @Get('assets/:id/compatible-services')

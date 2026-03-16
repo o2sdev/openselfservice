@@ -3,12 +3,14 @@ import { CMS, Orders } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/framework/headers';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapOrdersSummary } from './orders-summary.mapper';
 import { OrdersSummaryBlock } from './orders-summary.model';
 import { GetOrdersSummaryBlockQuery } from './orders-summary.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class OrdersSummaryService {
@@ -19,28 +21,28 @@ export class OrdersSummaryService {
     ) {}
 
     getOrdersSummaryBlock(query: GetOrdersSummaryBlockQuery, headers: AppHeaders): Observable<OrdersSummaryBlock> {
-        const cms = this.cmsService.getOrdersSummaryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getOrdersSummaryBlock({ ...query, locale: headers[H.Locale] });
 
         const ordersCurrent = this.orderService.getOrderList(
             {
                 ...query,
                 limit: 1000,
-                locale: headers['x-locale'],
+                locale: headers[H.Locale],
                 dateFrom: dayjs(query.dateFrom).toDate(),
                 dateTo: dayjs(query.dateTo).toDate(),
             },
-            headers['authorization'],
+            headers[H.Authorization],
         );
 
         const ordersPrevious = this.orderService.getOrderList(
             {
                 ...query,
                 limit: 1000,
-                locale: headers['x-locale'],
+                locale: headers[H.Locale],
                 dateFrom: dayjs(query.dateFrom).subtract(1, 'year').toDate(),
                 dateTo: dayjs(query.dateTo).subtract(1, 'year').toDate(),
             },
-            headers['authorization'],
+            headers[H.Authorization],
         );
 
         const diff = Math.abs(
@@ -55,12 +57,12 @@ export class OrdersSummaryService {
                     ordersPrevious,
                     query.range,
                     diff,
-                    headers['x-locale'],
+                    headers[H.Locale],
                 );
 
                 // Extract permissions using ACL service
-                if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'orders', [
+                if (headers[H.Authorization]) {
+                    const permissions = this.authService.canPerformActions(headers[H.Authorization], 'orders', [
                         'view',
                         'create',
                     ]);
