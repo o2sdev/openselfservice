@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Resources } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { mapFeaturedServiceList } from './featured-service-list.mapper';
 import { FeaturedServiceListBlock } from './featured-service-list.model';
@@ -17,7 +17,7 @@ export class FeaturedServiceListService {
 
     getFeaturedServiceListBlock(
         query: GetFeaturedServiceListBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<FeaturedServiceListBlock> {
         const cms = this.cmsService.getFeaturedServiceListBlock({ ...query, locale: headers['x-locale'] });
         const featuredServices = this.resourceService.getFeaturedServiceList();

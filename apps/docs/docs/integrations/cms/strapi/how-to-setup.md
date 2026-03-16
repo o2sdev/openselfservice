@@ -125,14 +125,14 @@ Each folder includes:
 
 ### Step-by-step: importing the content model
 
-1. **Clone the resources repository (optional but recommended)**  
-   ```bash
-   git clone https://github.com/o2sdev/openselfservice-resources.git
-   cd openselfservice-resources
-   ```
-2. **Locate the Strapi export for your starter**  
-   - for the default O2S setup: `packages/cms/strapi/o2s`,  
-   - for the DXP starter: `packages/cms/strapi/dxp`.
+1. **Clone the resources repository (optional but recommended)**
+    ```bash
+    git clone https://github.com/o2sdev/openselfservice-resources.git
+    cd openselfservice-resources
+    ```
+2. **Locate the Strapi export for your starter**
+    - for the default O2S setup: `packages/cms/strapi/o2s`,
+    - for the DXP starter: `packages/cms/strapi/dxp`.
 3. **Follow the README in that folder**  
    The folder contains instructions specific to the given export (e.g. how to use Strapi’s import/export capabilities for content types and data).
 4. **Import the content model into your Strapi instance**  

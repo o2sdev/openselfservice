@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/product-details.client';
@@ -10,7 +10,7 @@ export const productDetails = (sdk: Sdk) => ({
         getProductDetails: (
             params: Request.GetProductDetailsBlockParams,
             query?: Request.GetProductDetailsBlockQuery,
-            headers?: Models.Headers.AppHeaders,
+            headers?: AppHeaders,
             authorization?: string,
         ): Promise<Model.ProductDetailsBlock> => {
             const urlPath = params.variantSlug ? `${URL}/${params.id}/${params.variantSlug}` : `${URL}/${params.id}`;

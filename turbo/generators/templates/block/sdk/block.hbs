@@ -1,9 +1,9 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/{{kebabCase name}}.client';
+import { AppHeaders } from '@o2s/framework/headers';
 
 const API_URL = URL;
 
@@ -11,7 +11,7 @@ export const {{ camelCase name }} = (sdk: Sdk) => ({
     blocks: {
         get{{ pascalCase name }}: (
             query: Request.Get{{ pascalCase name }}BlockQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.{{ pascalCase name }}Block> =>
             sdk.makeRequest({

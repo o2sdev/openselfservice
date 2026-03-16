@@ -1,5 +1,3 @@
-import { Models } from '@o2s/utils.api-harmonization';
-
 import { Notifications } from '@o2s/framework/modules';
 
 export class NotificationSummaryInfoCard {

@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Orders } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapOrderList } from './order-list.mapper';
@@ -18,10 +17,7 @@ export class OrderListService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getOrderListBlock(
-        query: GetOrderListBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
-    ): Observable<OrderListBlock> {
+    getOrderListBlock(query: GetOrderListBlockQuery, headers: AppHeaders): Observable<OrderListBlock> {
         const cms = this.cmsService.getOrderListBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(

@@ -7,13 +7,14 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import process from 'node:process';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
+
+import { HeaderName } from '@o2s/framework/headers';
 
 import { AppConfig } from './app.config';
 import { AppModule } from './app.module';
 
-const H = Models.Headers.HeaderName;
+const H = HeaderName;
 
 async function bootstrap() {
     const logLevel = (process.env.LOG_LEVEL === 'info' ? 'log' : process.env.LOG_LEVEL) as LogLevel;

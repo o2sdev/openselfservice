@@ -1,8 +1,7 @@
 import { Modules } from '@o2s/api-harmonization';
 import { URL } from '@o2s/api-harmonization/modules/organizations/organizations.url';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { getApiHeaders } from '../../utils/api';
@@ -13,7 +12,7 @@ export const organizations = (sdk: Sdk) => ({
     modules: {
         getCustomers: (
             query: Modules.Organizations.Request.GetCustomersQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization: string,
         ): Promise<Modules.Organizations.Model.CustomerList> =>
             sdk.makeRequest({

@@ -1,6 +1,6 @@
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/user-account.client';
@@ -12,7 +12,7 @@ export const userAccount = (sdk: Sdk) => ({
     blocks: {
         getUserAccount: (
             query: Request.GetUserAccountBlockQuery,
-            headers: ApiModels.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.UserAccountBlock> =>
             sdk.makeRequest({

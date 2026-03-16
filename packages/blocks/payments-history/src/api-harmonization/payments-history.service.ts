@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Invoices } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapPaymentsHistory } from './payments-history.mapper';
@@ -20,7 +19,7 @@ export class PaymentsHistoryService {
 
     getPaymentsHistoryBlock(
         query: GetPaymentsHistoryBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<PaymentsHistoryBlock> {
         const cms = this.cmsService.getPaymentsHistoryBlock({ ...query, locale: headers['x-locale'] });
         const invoices = this.invoiceService.getInvoiceList(query);

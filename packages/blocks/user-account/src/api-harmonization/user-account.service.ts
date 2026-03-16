@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Users } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapUserAccount } from './user-account.mapper';
@@ -18,10 +17,7 @@ export class UserAccountService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getUserAccountBlock(
-        query: GetUserAccountBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
-    ): Observable<UserAccountBlock> {
+    getUserAccountBlock(query: GetUserAccountBlockQuery, headers: AppHeaders): Observable<UserAccountBlock> {
         const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers['x-locale'] });
         const user = this.usersService.getUser({ id: query.userId }, headers.authorization);
 

@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Resources } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapServiceList } from './service-list.mapper';
@@ -18,10 +17,7 @@ export class ServiceListService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getServiceListBlock(
-        query: GetServiceListBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
-    ): Observable<ServiceListBlock> {
+    getServiceListBlock(query: GetServiceListBlockQuery, headers: AppHeaders): Observable<ServiceListBlock> {
         const cms = this.cmsService.getServiceListBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(

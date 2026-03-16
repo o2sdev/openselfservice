@@ -1,5 +1,3 @@
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
 import { Models, Products } from '@o2s/framework/modules';
 
 export class FeaturedServiceListBlock extends ApiModels.Block.Block {

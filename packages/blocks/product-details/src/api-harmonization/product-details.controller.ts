@@ -1,7 +1,8 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
+
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { URL } from './';
 import type { GetProductDetailsBlockQuery } from './product-details.request';
@@ -16,7 +17,7 @@ export class ProductDetailsController {
     getProductDetails(
         @Param('id') id: string,
         @Query() query: GetProductDetailsBlockQuery,
-        @Headers() headers: Models.Headers.AppHeaders,
+        @Headers() headers: AppHeaders,
     ) {
         return this.service.getProductDetails(id, undefined, query, headers);
     }
@@ -26,7 +27,7 @@ export class ProductDetailsController {
         @Param('id') id: string,
         @Param('variantSlug') variantSlug: string,
         @Query() query: GetProductDetailsBlockQuery,
-        @Headers() headers: Models.Headers.AppHeaders,
+        @Headers() headers: AppHeaders,
     ) {
         return this.service.getProductDetails(id, variantSlug, query, headers);
     }

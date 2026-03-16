@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Notifications } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapNotificationList } from './notification-list.mapper';
@@ -20,7 +19,7 @@ export class NotificationListService {
 
     getNotificationListBlock(
         query: GetNotificationListBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<NotificationListBlock> {
         const cms = this.cmsService.getNotificationListBlock({ ...query, locale: headers['x-locale'] });
 

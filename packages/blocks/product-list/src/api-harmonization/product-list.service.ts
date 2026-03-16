@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Products } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapProductList } from './product-list.mapper';
@@ -18,10 +17,7 @@ export class ProductListService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getProductListBlock(
-        query: GetProductListBlockQuery,
-        headers: Models.Headers.AppHeaders,
-    ): Observable<ProductListBlock> {
+    getProductListBlock(query: GetProductListBlockQuery, headers: AppHeaders): Observable<ProductListBlock> {
         const cms = this.cmsService.getProductListBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(

@@ -1,7 +1,4 @@
 // this unused import is necessary for TypeScript to properly resolve API methods
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Models } from '@o2s/utils.api-harmonization';
-
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
 import { ticketRecent } from './ticket-recent';

@@ -1,5 +1,3 @@
-import { Models } from '@o2s/utils.api-harmonization';
-
 export class TicketSummaryInfoCard {
     title!: string;
     icon?: string;

@@ -3,8 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { CMS, Invoices } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth, Models } from '@o2s/framework/modules';
 
 import { mapPaymentsSummary } from './payments-summary.mapper';
@@ -26,7 +25,7 @@ export class PaymentsSummaryService {
 
     getPaymentsSummaryBlock(
         query: GetPaymentsSummaryBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<PaymentsSummaryBlock> {
         const cms = this.cmsService.getPaymentsSummaryBlock({ ...query, locale: headers['x-locale'] });
         const invoices = this.invoiceService.getInvoiceList(query);

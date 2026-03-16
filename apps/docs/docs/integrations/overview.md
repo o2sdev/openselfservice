@@ -28,7 +28,7 @@ Most integration packages should be installed in `@o2s/configs.integrations`, be
 | `@o2s/integrations.algolia`        | `npm install @o2s/integrations.algolia --workspace=@o2s/configs.integrations`        |
 | `@o2s/integrations.mocked`         | `npm install @o2s/integrations.mocked --workspace=@o2s/configs.integrations`         |
 
-`@o2s/modules.surveyjs` is a module package (not an integration package), so it has different installation requirements.
+`@o2s/modules.surveyjs` is a module package (not an integration package), so it has different installation requirements. See the [SurveyJS module overview](./forms/surveyjs/overview.md) for setup and usage details.
 
 import DocLinkTiles from '@site/src/components/DocLinkTiles';
 

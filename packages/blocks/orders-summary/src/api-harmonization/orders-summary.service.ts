@@ -3,8 +3,7 @@ import { CMS, Orders } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapOrdersSummary } from './orders-summary.mapper';
@@ -19,10 +18,7 @@ export class OrdersSummaryService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getOrdersSummaryBlock(
-        query: GetOrdersSummaryBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
-    ): Observable<OrdersSummaryBlock> {
+    getOrdersSummaryBlock(query: GetOrdersSummaryBlockQuery, headers: AppHeaders): Observable<OrdersSummaryBlock> {
         const cms = this.cmsService.getOrdersSummaryBlock({ ...query, locale: headers['x-locale'] });
 
         const ordersCurrent = this.orderService.getOrderList(

@@ -1,7 +1,5 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
 export class CtaSectionBlock extends Models.Block.Block {
     __typename!: 'CtaSectionBlock';
     preTitle?: CMS.Model.CtaSectionBlock.CtaSectionBlock['preTitle'];

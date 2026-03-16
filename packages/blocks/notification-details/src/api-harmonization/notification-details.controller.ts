@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Headers, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { URL } from './';
@@ -21,7 +21,7 @@ export class NotificationDetailsController {
     @Get(':id')
     @Auth.Decorators.Permissions({ resource: 'notifications', actions: ['view'] })
     getNotificationDetailsBlock(
-        @Headers() headers: Models.Headers.AppHeaders,
+        @Headers() headers: AppHeaders,
         @Query() query: GetNotificationDetailsBlockQuery,
         @Param() params: GetNotificationDetailsBlockParams,
     ) {

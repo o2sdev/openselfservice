@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Products } from '@o2s/configs.integrations';
 import { Observable, map, switchMap } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { mapRecommendedProducts } from './recommended-products.mapper';
 import * as Model from './recommended-products.model';
@@ -17,7 +17,7 @@ export class RecommendedProductsService {
 
     getRecommendedProductsBlock(
         query: GetRecommendedProductsBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<Model.RecommendedProductsBlock> {
         const locale = headers['x-locale'] || 'en';
         const cmsBlock$ = this.cmsService.getRecommendedProductsBlock({

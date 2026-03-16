@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Resources } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapServiceDetails } from './service-details.mapper';
@@ -21,7 +20,7 @@ export class ServiceDetailsService {
     getServiceDetailsBlock(
         params: GetServiceDetailsBlockParams,
         query: GetServiceDetailsBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<ServiceDetailsBlock> {
         const cms = this.cmsService.getServiceDetailsBlock({ ...query, locale: headers['x-locale'] });
         const service = this.resourceService.getService({ ...params, locale: headers['x-locale'] });

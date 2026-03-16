@@ -3,8 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { CMS, Orders } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapOrderDetails } from './order-details.mapper';
@@ -27,7 +26,7 @@ export class OrderDetailsService {
     getOrderDetailsBlock(
         params: GetOrderDetailsBlockParams,
         query: GetOrderDetailsBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<OrderDetailsBlock> {
         const cms = this.cmsService.getOrderDetailsBlock({ ...query, locale: headers['x-locale'] });
 

@@ -41,7 +41,6 @@ These resources live in a separate companion repository:
 - [**DXP Starter Kit** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/dxp)
 
 The `openselfservice-resources` repo is intentionally separate from the main `openselfservice` codebase – it only contains exports and example data for external tools (like Strapi), so that your application repository stays focused on framework code and integrations.
-In practice this includes things like CMS configurations (content models, plugins, sample content), initial products and assets for commerce engines, and CI/CD pipeline templates for deploying O2S.
 
 To import the content model into your own Strapi instance:
 

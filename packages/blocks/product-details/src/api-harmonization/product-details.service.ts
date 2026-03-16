@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Products } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { mapProductDetails } from './product-details.mapper';
 import * as Model from './product-details.model';
@@ -19,7 +19,7 @@ export class ProductDetailsService {
         id: string,
         variantSlug: string | undefined,
         query: Request.GetProductDetailsBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<Model.ProductDetailsBlock> {
         const locale = query.locale || headers['x-locale'] || 'en';
 

@@ -2,9 +2,9 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NextFunction, Request, Response } from 'express';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { HeaderName } from '@o2s/framework/headers';
 
-const H = Models.Headers.HeaderName;
+const H = HeaderName;
 
 @Injectable()
 export class ContextHeadersMiddleware implements NestMiddleware {

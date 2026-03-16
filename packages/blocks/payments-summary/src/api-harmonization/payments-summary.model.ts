@@ -1,5 +1,3 @@
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
 import { Invoices, Models } from '@o2s/framework/modules';
 
 export class PaymentsSummaryBlock extends ApiModels.Block.Block {

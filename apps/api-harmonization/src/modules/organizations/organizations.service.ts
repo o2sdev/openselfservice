@@ -2,13 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Organizations } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 
 import { mapCustomerList } from './organizations.mapper';
 import { CustomerList } from './organizations.model';
 import { GetCustomersQuery } from './organizations.request';
 
-const H = Models.Headers.HeaderName;
+const H = HeaderName;
 
 @Injectable()
 export class OrganizationsService {
@@ -17,7 +17,7 @@ export class OrganizationsService {
         private readonly organizationsService: Organizations.Service,
     ) {}
 
-    getCustomers(query: GetCustomersQuery, headers: Models.Headers.AppHeaders): Observable<CustomerList> {
+    getCustomers(query: GetCustomersQuery, headers: AppHeaders): Observable<CustomerList> {
         const cms = this.cmsService.getOrganizationList({ locale: headers[H.Locale] });
         // Pass authorization token to filter organizations by current user
         const organizations = this.organizationsService.getOrganizationList(

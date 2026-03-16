@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Headers, Post, Query } from '@nestjs/common';
 import { Observable } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { URL } from './index';
 import { SurveyJs } from './surveyjs.model';
@@ -18,7 +18,7 @@ export class SurveyjsController {
     }
 
     @Post()
-    submitSurvey(@Body() body: SurveyJsSubmitPayload, @Headers() headers: ApiModels.Headers.AppHeaders) {
+    submitSurvey(@Body() body: SurveyJsSubmitPayload, @Headers() headers: AppHeaders) {
         return this.surveyjsService.submitSurvey(body, headers['authorization']);
     }
 }

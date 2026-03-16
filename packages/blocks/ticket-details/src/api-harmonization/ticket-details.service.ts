@@ -2,8 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Tickets } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapTicketDetails } from './ticket-details.mapper';
@@ -21,7 +20,7 @@ export class TicketDetailsService {
     getTicketDetailsBlock(
         params: GetTicketDetailsBlockParams,
         query: GetTicketDetailsBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<TicketDetailsBlock> {
         const cms = this.cmsService.getTicketDetailsBlock({ ...query, locale: headers['x-locale'] });
         const ticket = this.ticketService.getTicket({ ...params, locale: headers['x-locale'] });

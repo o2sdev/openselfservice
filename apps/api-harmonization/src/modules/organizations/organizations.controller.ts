@@ -1,9 +1,9 @@
 import { URL } from '.';
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { GetCustomersQuery } from './organizations.request';
@@ -16,7 +16,7 @@ export class OrganizationsController {
 
     @Get()
     @Auth.Decorators.Permissions({ resource: 'organizations', actions: ['view'] })
-    getCustomers(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetCustomersQuery) {
+    getCustomers(@Headers() headers: AppHeaders, @Query() query: GetCustomersQuery) {
         return this.service.getCustomers(query, headers);
     }
 }

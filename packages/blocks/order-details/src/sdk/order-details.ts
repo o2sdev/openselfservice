@@ -1,6 +1,6 @@
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/order-details.client';
@@ -13,7 +13,7 @@ export const orderDetails = (sdk: Sdk) => ({
         getOrderDetails: (
             params: Request.GetOrderDetailsBlockParams,
             query: Request.GetOrderDetailsBlockQuery,
-            headers: ApiModels.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.OrderDetailsBlock> =>
             sdk.makeRequest({
@@ -30,7 +30,7 @@ export const orderDetails = (sdk: Sdk) => ({
                 },
                 params: query,
             }),
-        getOrderPdf: (id: string, headers: ApiModels.Headers.AppHeaders, authorization?: string): Promise<Blob> =>
+        getOrderPdf: (id: string, headers: AppHeaders, authorization?: string): Promise<Blob> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}/documents/${id}/pdf`,

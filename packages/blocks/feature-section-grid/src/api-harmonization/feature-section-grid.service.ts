@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { mapFeatureSectionGrid } from './feature-section-grid.mapper';
 import { FeatureSectionGridBlock } from './feature-section-grid.model';
@@ -14,7 +14,7 @@ export class FeatureSectionGridService {
 
     getFeatureSectionGridBlock(
         query: GetFeatureSectionGridBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<FeatureSectionGridBlock> {
         const cms = this.cmsService.getFeatureSectionGridBlock({ ...query, locale: headers['x-locale'] });
 

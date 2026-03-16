@@ -71,7 +71,6 @@ Now let's open the `./src/modules/cms/cms.model.ts`:
 import { CMS } from '@o2s/framework/modules';
 
 import { extendCmsModel } from './extend-cms-model';
-
 import * as TicketsSummaryBlock from './models/blocks/tickets-summary.model';
 
 export const Model = extendCmsModel({

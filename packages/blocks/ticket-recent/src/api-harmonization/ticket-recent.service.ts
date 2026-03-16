@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Tickets } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapTicketRecent } from './ticket-recent.mapper';
@@ -18,10 +17,7 @@ export class TicketRecentService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getTicketRecentBlock(
-        query: GetTicketRecentBlockQuery,
-        headers: Models.Headers.AppHeaders,
-    ): Observable<TicketRecentBlock> {
+    getTicketRecentBlock(query: GetTicketRecentBlockQuery, headers: AppHeaders): Observable<TicketRecentBlock> {
         const cms = this.cmsService.getTicketRecentBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(

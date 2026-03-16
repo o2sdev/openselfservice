@@ -1,7 +1,5 @@
 import { CMS, Tickets } from '@o2s/configs.integrations';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
 import { Models } from '@o2s/framework/modules';
 
 export class TicketListBlock extends ApiModels.Block.Block {
