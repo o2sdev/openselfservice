@@ -1,5 +1,12 @@
 # @o2s/docs
 
+## 2.2.0
+
+### Minor Changes
+
+- 375cd90: docs: add variantId parameter to cart API documentation, update Medusa integration docs with variantId requirement
+- a2d9ea4: docs: enhance product starters section with CLI scaffolding link for custom frontend setup
+
 ## 2.1.0
 
 ### Minor Changes

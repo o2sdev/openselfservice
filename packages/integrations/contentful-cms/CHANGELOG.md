@@ -1,5 +1,25 @@
 # @o2s/integrations.contentful-cms
 
+## 0.8.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 9f72807: chore(deps): update dependencies
+- 0300d8e: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- d05b09b: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
 ## 0.7.0
 
 ### Minor Changes
