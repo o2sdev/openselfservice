@@ -29,7 +29,13 @@ const config: StorybookConfig = {
         '../packages/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     ],
     staticDirs: ['./public'],
-    addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-themes', '@storybook/addon-vitest'],
+    addons: [
+        '@storybook/addon-docs',
+        '@storybook/addon-a11y',
+        '@storybook/addon-themes',
+        '@storybook/addon-vitest',
+        'msw-storybook-addon',
+    ],
     framework: {
         name: '@storybook/nextjs-vite',
         options: {},
@@ -73,6 +79,7 @@ const config: StorybookConfig = {
                     '@o2s/configs.integrations/live-preview': path.resolve(__dirname, './mocks/live-preview.mock.ts'),
                     '@o2s/framework/sdk': path.resolve(__dirname, '../packages/framework/src/sdk.ts'),
                     '@o2s/framework/modules': path.resolve(__dirname, '../packages/framework/src/index.ts'),
+                    '@o2s/utils.api-harmonization': path.resolve(__dirname, './mocks/utils.api-harmonization.mock.ts'),
                 },
             },
             ssr: {

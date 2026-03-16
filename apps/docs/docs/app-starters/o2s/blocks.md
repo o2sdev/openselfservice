@@ -16,7 +16,10 @@ and more complex ones that integrate several different data sources, like:
 
 - user invoices, orders and notifications,
 - payment history and summary,
-- tickets and ticket submissions.
+- tickets and ticket submissions,
+- shopping cart management,
+- checkout flow (company data, shipping address, billing & payment, order summary),
+- order confirmation.
 
 :::tip
 For a full list of available blocks, together with their configuration, variants and usage examples, see [our Storybook](https://openselfservice-storybook.vercel.app).

@@ -45,6 +45,13 @@ The integration provides full cart management via the Medusa Store API (`sdk.sto
 - `getCartList` and `getCurrentCart` are not implemented — the Store API does not support listing carts
 - `deleteCart` is a no-op (logs only; Store API has no delete endpoint)
 
+### Promotions {#promotions}
+
+The integration supports cart promotions via the Medusa Store API:
+
+- **Backend:** `applyPromotion` and `removePromotion` are implemented; promotions are mapped to O2S `Carts.Model.Promotion` (types: `FIXED_AMOUNT`, `PERCENTAGE`, `FREE_SHIPPING`)
+- **Frontend component:** `CartPromoCode` from `@o2s/ui/components/Cart/CartPromoCode` is ready for use but is **not included** in the cart block. You can embed it in your preferred place (cart page, checkout sidebar, etc.) by providing `promotions`, `labels`, `onApply`, and `onRemove` props. Use the Carts API (`POST /carts/:cartId/promotions`, `DELETE /carts/:cartId/promotions/:code`) for apply/remove operations.
+
 ### Checkout Flow {#checkout-flow}
 
 Complete checkout orchestration from cart to order:

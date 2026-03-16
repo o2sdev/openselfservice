@@ -38,7 +38,7 @@
         "generate": "graphql-codegen && prettier --write \"generated/**/*.{ts,tsx}\""
     },
     "dependencies": {
-        "@contentful/live-preview": "^4.9.6",
+        "@contentful/live-preview": "^4.9.9",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "contentful": "^11.10.5",
@@ -61,7 +61,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",

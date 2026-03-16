@@ -5,8 +5,13 @@ import * as ArticleList from '@o2s/blocks.article-list/frontend';
 import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
 import * as Article from '@o2s/blocks.article/frontend';
 import * as BentoGrid from '@o2s/blocks.bento-grid/frontend';
+import * as Cart from '@o2s/blocks.cart/frontend';
 import * as CategoryList from '@o2s/blocks.category-list/frontend';
 import * as Category from '@o2s/blocks.category/frontend';
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/frontend';
+import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/frontend';
+import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/frontend';
+import * as CheckoutSummary from '@o2s/blocks.checkout-summary/frontend';
 import * as CtaSection from '@o2s/blocks.cta-section/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as FeatureSectionGrid from '@o2s/blocks.feature-section-grid/frontend';
@@ -18,6 +23,7 @@ import * as MediaSection from '@o2s/blocks.media-section/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/frontend';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/frontend';
 import * as OrderDetails from '@o2s/blocks.order-details/frontend';
 import * as OrderList from '@o2s/blocks.order-list/frontend';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
@@ -51,7 +57,9 @@ import { routing } from '@/i18n';
 
 import { onSignOut } from '../actions/signOut';
 
-type BlockProps = Models.BlockProps.FullBlockProps<typeof routing>;
+type BlockProps = Models.BlockProps.FullBlockProps<typeof routing> & {
+    routing: typeof routing;
+};
 
 export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
     const session = await auth();
@@ -146,6 +154,18 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <ProductDetails.Renderer {...blockProps} />;
         case 'RecommendedProductsBlock':
             return <RecommendedProducts.Renderer {...blockProps} />;
+        case 'OrderConfirmationBlock':
+            return <OrderConfirmation.Renderer {...blockProps} routing={routing} />;
+        case 'CheckoutBillingPaymentBlock':
+            return <CheckoutBillingPayment.Renderer {...blockProps} />;
+        case 'CheckoutCompanyDataBlock':
+            return <CheckoutCompanyData.Renderer {...blockProps} />;
+        case 'CheckoutShippingAddressBlock':
+            return <CheckoutShippingAddress.Renderer {...blockProps} />;
+        case 'CheckoutSummaryBlock':
+            return <CheckoutSummary.Renderer {...blockProps} />;
+        case 'CartBlock':
+            return <Cart.Renderer {...blockProps} />;
         case 'HeroSectionBlock':
             return <HeroSection.Renderer {...blockProps} />;
         case 'BentoGridBlock':

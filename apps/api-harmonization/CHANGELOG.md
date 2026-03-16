@@ -1,5 +1,20 @@
 # @o2s/api-harmonization
 
+## 1.17.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+- 0e61431: feat: update page model and integration to support redirects
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+    - @o2s/integrations.mocked@1.20.0
+    - @o2s/utils.frontend@0.5.0
+
 ## 1.16.0
 
 ### Minor Changes

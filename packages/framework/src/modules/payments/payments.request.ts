@@ -1,5 +1,5 @@
 export class GetProvidersParams {
-    regionId!: string;
+    regionId?: string;
     locale?: string; // From x-locale header
 }
 
