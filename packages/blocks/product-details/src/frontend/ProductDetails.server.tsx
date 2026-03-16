@@ -14,6 +14,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     id,
     productId,
     variantSlug,
+    accessToken,
     locale,
     routing,
     hasPriority,
@@ -35,6 +36,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = async ({
             {...data}
             id={id}
             productId={productId}
+            accessToken={accessToken}
             locale={locale}
             routing={routing}
             hasPriority={hasPriority}

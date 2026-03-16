@@ -1,12 +1,14 @@
 import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { Carts } from '@o2s/framework/modules';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/product-list.client';
 import { URL } from '../api-harmonization/product-list.url';
 
 const API_URL = URL;
+const CARTS_API_URL = '/carts';
 
 export const productList = (sdk: Sdk) => ({
     blocks: {
@@ -28,6 +30,23 @@ export const productList = (sdk: Sdk) => ({
                         : {}),
                 },
                 params: query,
+            }),
+    },
+    cart: {
+        addCartItem: (
+            body: Carts.Request.AddCartItemBody,
+            headers: Models.Headers.AppHeaders,
+            authorization?: string,
+        ): Promise<Carts.Model.Cart> =>
+            sdk.makeRequest({
+                method: 'post',
+                url: `${CARTS_API_URL}/items`,
+                headers: {
+                    ...Utils.Headers.getApiHeaders(),
+                    ...headers,
+                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
+                },
+                data: body,
             }),
     },
 });

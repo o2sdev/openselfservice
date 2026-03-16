@@ -7,7 +7,6 @@ import { Price } from '@o2s/ui/components/Price';
 import { RichText } from '@o2s/ui/components/RichText';
 
 import { Badge } from '@o2s/ui/elements/badge';
-import { Link } from '@o2s/ui/elements/link';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -25,7 +24,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     LinkComponent,
 }) => {
     return (
-        <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
+        <div
+            className={cn(
+                'flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full',
+                link && 'transition-shadow hover:shadow-md',
+            )}
+        >
             {/* Image section */}
             {image?.url && image?.alt && (
                 <div className="relative overflow-hidden h-[180px] shrink-0 rounded-t-lg">
@@ -43,9 +47,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 {/* Content section */}
                 <div className="flex flex-col flex-1">
                     <div className="flex flex-col gap-4">
-                        <Typography variant="highlightedSmall" className="line-clamp-2">
-                            {title}
-                        </Typography>
+                        {link ? (
+                            <LinkComponent
+                                href={link}
+                                className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none [&:focus-visible]:ring-2 [&:focus-visible]:ring-ring [&:focus-visible]:ring-offset-2 rounded-lg"
+                            >
+                                <Typography variant="highlightedSmall" className="line-clamp-2">
+                                    {title}
+                                </Typography>
+                            </LinkComponent>
+                        ) : (
+                            <Typography variant="highlightedSmall" className="line-clamp-2">
+                                {title}
+                            </Typography>
+                        )}
 
                         {tags && tags.length > 0 && (
                             <ul
@@ -72,32 +87,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 <Separator />
 
                 {/* Footer section */}
-                <div className="flex items-start sm:items-center justify-between gap-6 sm:flex-row flex-col w-full">
-                    <div className="flex flex-row gap-2 w-full sm:justify-start justify-between items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 w-full">
+                    <div className="flex flex-row gap-2 items-center">
                         <Typography variant="highlightedSmall" className="shrink-0">
                             <Price price={price} />
                         </Typography>
 
                         {status && (
-                            <div className="">
-                                <Badge key={status.label} variant={status.variant} className="w-fit">
-                                    {status.label}
-                                </Badge>
-                            </div>
+                            <Badge key={status.label} variant={status.variant} className="w-fit">
+                                {status.label}
+                            </Badge>
                         )}
                     </div>
 
-                    {(action || link) && (
-                        <div className="flex sm:items-center gap-4 sm:flex-row flex-col w-full justify-end">
-                            {action}
-
-                            {link && (
-                                <Link asChild variant="primary" size="default">
-                                    <LinkComponent href={link.url}>{link.label}</LinkComponent>
-                                </Link>
-                            )}
-                        </div>
-                    )}
+                    {action && <div className="relative z-10 [&>*]:w-full [&>*]:sm:w-auto">{action}</div>}
                 </div>
             </div>
         </div>

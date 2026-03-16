@@ -24,9 +24,10 @@ O2S maps `regionId` (in request bodies) to Medusa's `region_id`. You must create
 
 Medusa uses **product variants** for cart line items, not products directly. Each variant has its own ID, SKU, price, and options (size, color, etc.).
 
-- **O2S** uses the `sku` field when adding items to cart.
-- **Medusa** expects `variant_id` — the integration maps O2S `sku` to Medusa `variant_id`.
-- You must use the **variant ID** from the product catalog (e.g., from `GET /products/:id` response), not the product ID.
+- **O2S framework** defines `sku` (required) and `variantId` (optional) in `AddCartItemBody`.
+- **Medusa integration** requires `variantId` — it maps directly to Medusa's `variant_id`. If `variantId` is not provided, the request will fail with a `BadRequestException`.
+- The frontend components resolve `variantId` from the product catalog and pass it alongside `sku` when adding items to cart.
+- You can get variant IDs from the product catalog (e.g., from `GET /products/:id` response).
 
 ### Currency
 
