@@ -55,9 +55,8 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
         ],
     };
 
-    return {
-        id: 'product-details-1',
-        labels: {
+    const labelsMap: Record<string, CMS.Model.ProductDetailsBlock.Labels> = {
+        en: {
             specificationsTitle: 'Specifications',
             descriptionTitle: 'Description',
             downloadLabel: 'Download Brochure',
@@ -68,6 +67,35 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
             addToCartSuccess: 'Product added to cart',
             addToCartError: 'Failed to add product to cart',
         },
+        de: {
+            specificationsTitle: 'Spezifikationen',
+            descriptionTitle: 'Beschreibung',
+            downloadLabel: 'Broschüre herunterladen',
+            priceLabel: 'Preis',
+            offerLabel: 'Angebot',
+            variantLabel: 'Variante',
+            addToCartLabel: 'In den Warenkorb',
+            addToCartSuccess: 'Produkt wurde dem Warenkorb hinzugefügt',
+            addToCartError: 'Fehler beim Hinzufügen zum Warenkorb',
+        },
+        pl: {
+            specificationsTitle: 'Specyfikacja',
+            descriptionTitle: 'Opis',
+            downloadLabel: 'Pobierz broszurę',
+            priceLabel: 'Cena',
+            offerLabel: 'Oferta',
+            variantLabel: 'Wariant',
+            addToCartLabel: 'Dodaj do koszyka',
+            addToCartSuccess: 'Produkt dodany do koszyka',
+            addToCartError: 'Nie udało się dodać produktu do koszyka',
+        },
+    };
+
+    const labels = labelsMap[locale] ?? labelsMap['en']!;
+
+    return {
+        id: 'product-details-1',
+        labels,
         basePath: basePathMap[locale] || basePathMap['en'],
         attributes: attributesMap[locale] || attributesMap['en'],
         variantOptionGroups: variantOptionGroupsMap[locale] || variantOptionGroupsMap['en'],

@@ -124,6 +124,7 @@ export const WithCustomTitle: Story = {
     args: {
         ...Default.args,
         labels: {
+            ...Default.args.labels,
             title: 'You Might Also Like',
             detailsLabel: 'View Details',
         },
@@ -134,6 +135,8 @@ export const WithoutTitle: Story = {
     args: {
         ...Default.args,
         labels: {
+            ...Default.args.labels,
+            title: undefined,
             detailsLabel: 'Details',
         },
     },
