@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 import RefreshCwIcon from '@site/src/assets/icons/RefreshCw.svg';
 import RocketIcon from '@site/src/assets/icons/Rocket.svg';
 import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
@@ -337,9 +339,9 @@ export default function ProductStarters() {
                                     <Body>
                                         Use one of our pre-configured starter kits to launch your project — then extend
                                         it with your own blocks and integrations. Need full control?{' '}
-                                        <a href="/docs/getting-started/installation" className="text-highlighted">
+                                        <Link href="/docs/getting-started/installation" className="text-highlighted">
                                             Scaffold a custom frontend with our CLI
-                                        </a>
+                                        </Link>
                                         , choosing exactly the blocks and integrations you want.
                                     </Body>
                                 }

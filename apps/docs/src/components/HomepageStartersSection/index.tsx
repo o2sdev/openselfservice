@@ -41,8 +41,8 @@ const STARTERS: HoverCardProps[] = [
         gradient:
             'linear-gradient(90deg, rgba(0, 19, 96, 0.4) 0%, rgba(0, 19, 96, 0.4) 100%), linear-gradient(311.86deg, var(--color-celadon) 1.526%, var(--color-violet) 69.661%)',
         backgroundImage: {
-            url: '/img/homepage/starters-card-cli.wizzard.png',
-            alt: 'CLI Wizzard',
+            url: '/img/homepage/starters-card-cli.wizard.png',
+            alt: 'CLI Wizard',
         },
     },
 ];
