@@ -336,7 +336,11 @@ export default function ProductStarters() {
                                 description={
                                     <Body>
                                         Use one of our pre-configured starter kits to launch your project — then extend
-                                        it with your own blocks and integrations.
+                                        it with your own blocks and integrations. Need full control?{' '}
+                                        <a href="/docs/getting-started/installation" className="text-highlighted">
+                                            Scaffold a custom frontend with our CLI
+                                        </a>
+                                        , choosing exactly the blocks and integrations you want.
                                     </Body>
                                 }
                             />
