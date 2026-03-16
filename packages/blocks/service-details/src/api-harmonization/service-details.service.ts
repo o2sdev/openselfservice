@@ -23,7 +23,11 @@ export class ServiceDetailsService {
         query: GetServiceDetailsBlockQuery,
         headers: ApiModels.Headers.AppHeaders,
     ): Observable<ServiceDetailsBlock> {
-        const cms = this.cmsService.getServiceDetailsBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.ServiceDetailsBlock.ServiceDetailsBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'ServiceDetailsBlock',
+        });
         const service = this.resourceService.getService({ ...params, locale: headers['x-locale'] });
 
         return forkJoin([cms, service]).pipe(

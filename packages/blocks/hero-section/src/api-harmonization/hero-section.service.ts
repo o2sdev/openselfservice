@@ -16,7 +16,11 @@ export class HeroSectionService {
         query: GetHeroSectionBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<HeroSectionBlock> {
-        const cms = this.cmsService.getHeroSectionBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.HeroSectionBlock.HeroSectionBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'HeroSectionBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapHeroSection(cms, headers['x-locale'])));
     }

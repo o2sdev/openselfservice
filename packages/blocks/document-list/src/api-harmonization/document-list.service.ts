@@ -16,7 +16,11 @@ export class DocumentListService {
         query: GetDocumentListBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<DocumentListBlock> {
-        const cms = this.cmsService.getDocumentListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.DocumentListBlock.DocumentListBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'DocumentListBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapDocumentList(cms, headers['x-locale'])));
     }

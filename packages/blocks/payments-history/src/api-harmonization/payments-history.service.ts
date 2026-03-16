@@ -22,7 +22,11 @@ export class PaymentsHistoryService {
         query: GetPaymentsHistoryBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<PaymentsHistoryBlock> {
-        const cms = this.cmsService.getPaymentsHistoryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'PaymentsHistoryBlock',
+        });
         const invoices = this.invoiceService.getInvoiceList(query);
 
         return forkJoin([cms, invoices]).pipe(

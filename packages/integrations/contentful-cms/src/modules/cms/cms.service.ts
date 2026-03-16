@@ -445,128 +445,81 @@ export class CmsService implements CMS.Service {
         });
     }
 
-    getFaqBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `faq-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock)));
-    }
-
-    getTicketListBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `ticket-list-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapTicketListBlock)));
-    }
-
-    getTicketDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketDetailsBlock(_options.locale));
-    }
-
-    getNotificationListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationListBlock(options.locale));
-    }
-
-    getNotificationDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationDetailsBlock(_options.locale));
-    }
-
-    getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapInvoiceListBlock(options.locale));
-    }
-
-    getInvoiceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapInvoiceDetailsBlock());
-    }
-
-    getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapServiceListBlock(options.locale));
-    }
-
-    getServiceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapServiceDetailsBlock(options.locale));
-    }
-
-    getResourceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapResourceListBlock(options.locale));
-    }
-
-    getResourceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapResourceDetailsBlock());
-    }
-
-    getPaymentsSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsSummaryBlock(options.locale));
-    }
-
-    getPaymentsHistoryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsHistoryBlock(options.locale));
-    }
-
-    getUserAccountBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapUserAccountBlock(_options.locale));
-    }
-
-    getTicketRecentBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketRecentBlock(options.locale));
-    }
-
-    getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
-        return of(mapOrganizationList(options.locale));
-    }
-
     getSurvey(options: CMS.Request.GetCmsSurveyParams) {
         return of(mapSurvey(options.code));
     }
 
-    getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapSurveyJsBlock(options.locale, options.id));
-    }
-
-    getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapOrderListBlock(options.locale));
-    }
-
-    getOrdersSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapOrdersSummaryBlock(options.locale));
-    }
-
-    getOrderDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapOrderDetailsBlock(options.locale));
-    }
-
-    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `quick-links-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapQuickLinksBlock)));
-    }
-
-    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `article-list-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapArticleListBlock)));
-    }
-
-    getCategoryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapCategoryBlock(options.id, options.locale));
-    }
-
-    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `category-list-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapCategoryListBlock)));
-    }
-
-    getArticleSearchBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleSearchBlock(options.locale));
-    }
-
-    getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFeaturedServiceListBlock(options.locale));
-    }
-
-    getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapProductListBlock(options.locale));
-    }
-
-    getProductDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapProductDetailsBlock(options.locale));
-    }
-
-    getRecommendedProductsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapRecommendedProductsBlock(options.locale));
+    getBlockConfig<T>(options: CMS.Request.GetCmsBlockConfigParams): Observable<T> {
+        const key = `${options.blockType}-component-${options.id}-${options.locale}`;
+        switch (options.blockType) {
+            case 'FaqBlock':
+                return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock))) as Observable<T>;
+            case 'TicketListBlock':
+                return this.getCachedBlock(key, () =>
+                    this.getBlock(options).pipe(map(mapTicketListBlock)),
+                ) as Observable<T>;
+            case 'TicketDetailsBlock':
+                return of(mapTicketDetailsBlock(options.locale)) as Observable<T>;
+            case 'TicketRecentBlock':
+                return of(mapTicketRecentBlock(options.locale)) as Observable<T>;
+            case 'NotificationListBlock':
+                return of(mapNotificationListBlock(options.locale)) as Observable<T>;
+            case 'NotificationDetailsBlock':
+                return of(mapNotificationDetailsBlock(options.locale)) as Observable<T>;
+            case 'InvoiceListBlock':
+                return of(mapInvoiceListBlock(options.locale)) as Observable<T>;
+            case 'InvoiceDetailsBlock':
+                return of(mapInvoiceDetailsBlock()) as Observable<T>;
+            case 'OrderListBlock':
+                return of(mapOrderListBlock(options.locale)) as Observable<T>;
+            case 'OrderDetailsBlock':
+                return of(mapOrderDetailsBlock(options.locale)) as Observable<T>;
+            case 'OrdersSummaryBlock':
+                return of(mapOrdersSummaryBlock(options.locale)) as Observable<T>;
+            case 'PaymentsSummaryBlock':
+                return of(mapPaymentsSummaryBlock(options.locale)) as Observable<T>;
+            case 'PaymentsHistoryBlock':
+                return of(mapPaymentsHistoryBlock(options.locale)) as Observable<T>;
+            case 'ProductListBlock':
+                return of(mapProductListBlock(options.locale)) as Observable<T>;
+            case 'ProductDetailsBlock':
+                return of(mapProductDetailsBlock(options.locale)) as Observable<T>;
+            case 'RecommendedProductsBlock':
+                return of(mapRecommendedProductsBlock(options.locale)) as Observable<T>;
+            case 'ServiceListBlock':
+                return of(mapServiceListBlock(options.locale)) as Observable<T>;
+            case 'FeaturedServiceListBlock':
+                return of(mapFeaturedServiceListBlock(options.locale)) as Observable<T>;
+            case 'ServiceDetailsBlock':
+                return of(mapServiceDetailsBlock(options.locale)) as Observable<T>;
+            case 'ResourceListBlock':
+                return of(mapResourceListBlock(options.locale)) as Observable<T>;
+            case 'ResourceDetailsBlock':
+                return of(mapResourceDetailsBlock()) as Observable<T>;
+            case 'UserAccountBlock':
+                return of(mapUserAccountBlock(options.locale)) as Observable<T>;
+            case 'OrganizationList':
+                return of(mapOrganizationList(options.locale)) as Observable<T>;
+            case 'SurveyJsBlock':
+                return of(mapSurveyJsBlock(options.locale, options.id)) as Observable<T>;
+            case 'QuickLinksBlock':
+                return this.getCachedBlock(key, () =>
+                    this.getBlock(options).pipe(map(mapQuickLinksBlock)),
+                ) as Observable<T>;
+            case 'ArticleListBlock':
+                return this.getCachedBlock(key, () =>
+                    this.getBlock(options).pipe(map(mapArticleListBlock)),
+                ) as Observable<T>;
+            case 'ArticleSearchBlock':
+                return of(mapArticleSearchBlock(options.locale)) as Observable<T>;
+            case 'CategoryBlock':
+                return of(mapCategoryBlock(options.id, options.locale)) as Observable<T>;
+            case 'CategoryListBlock':
+                return this.getCachedBlock(key, () =>
+                    this.getBlock(options).pipe(map(mapCategoryListBlock)),
+                ) as Observable<T>;
+            default:
+                throw new NotFoundException(`Unknown block type: ${options.blockType}`);
+        }
     }
 }

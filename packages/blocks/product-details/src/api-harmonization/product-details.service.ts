@@ -23,9 +23,10 @@ export class ProductDetailsService {
     ): Observable<Model.ProductDetailsBlock> {
         const locale = query.locale || headers['x-locale'] || 'en';
 
-        const cms = this.cmsService.getProductDetailsBlock({
+        const cms = this.cmsService.getBlockConfig<CMS.Model.ProductDetailsBlock.ProductDetailsBlock>({
             id: query.id,
             locale,
+            blockType: 'ProductDetailsBlock',
         });
 
         return cms.pipe(

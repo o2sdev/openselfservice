@@ -19,7 +19,11 @@ export class FeaturedServiceListService {
         query: GetFeaturedServiceListBlockQuery,
         headers: ApiModels.Headers.AppHeaders,
     ): Observable<FeaturedServiceListBlock> {
-        const cms = this.cmsService.getFeaturedServiceListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.FeaturedServiceListBlock.FeaturedServiceListBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'FeaturedServiceListBlock',
+        });
         const featuredServices = this.resourceService.getFeaturedServiceList();
 
         return forkJoin([cms, featuredServices]).pipe(

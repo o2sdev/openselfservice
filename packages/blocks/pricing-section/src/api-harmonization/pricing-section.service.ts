@@ -16,7 +16,11 @@ export class PricingSectionService {
         query: GetPricingSectionBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<PricingSectionBlock> {
-        const cms = this.cmsService.getPricingSectionBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.PricingSectionBlock.PricingSectionBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'PricingSectionBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapPricingSection(cms, headers['x-locale'])));
     }

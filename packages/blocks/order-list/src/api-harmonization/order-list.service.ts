@@ -22,7 +22,11 @@ export class OrderListService {
         query: GetOrderListBlockQuery,
         headers: ApiModels.Headers.AppHeaders,
     ): Observable<OrderListBlock> {
-        const cms = this.cmsService.getOrderListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.OrderListBlock.OrderListBlock>({
+            ...query,
+            locale: headers['x-locale'],
+            blockType: 'OrderListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

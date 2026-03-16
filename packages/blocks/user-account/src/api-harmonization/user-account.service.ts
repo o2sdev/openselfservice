@@ -22,7 +22,11 @@ export class UserAccountService {
         query: GetUserAccountBlockQuery,
         headers: ApiModels.Headers.AppHeaders,
     ): Observable<UserAccountBlock> {
-        const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.UserAccountBlock.UserAccountBlock>({
+            id: query.id,
+            locale: headers['x-locale'],
+            blockType: 'UserAccountBlock',
+        });
         const user = this.usersService.getUser({ id: query.userId }, headers.authorization);
 
         return forkJoin([cms, user]).pipe(
