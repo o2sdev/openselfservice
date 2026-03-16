@@ -1,5 +1,16 @@
 # create-o2s-app
 
+## 4.0.0
+
+### Major Changes
+
+- a1659cf: added fix related to dxp starter and mocked data
+
+### Minor Changes
+
+- a1659cf: fix: update CLI commands in logger to reflect new watch commands for development
+- a1659cf: fix: update CLI custom installation process
+
 ## 3.0.0
 
 ### Major Changes

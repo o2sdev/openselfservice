@@ -44,7 +44,7 @@
     "@nestjs/common": "^11.1.14",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*",
-    "axios": "^1.13.5",
+    "axios": "^1.13.6",
     "html-to-text": "^9.0.5",
     "rxjs": "^7.8.2"
   },
@@ -56,7 +56,7 @@
     "@o2s/typescript-config": "*",
     "@types/html-to-text": "^9.0.4",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.3",
+    "eslint": "^9.39.4",
     "prettier": "^3.8.1",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
