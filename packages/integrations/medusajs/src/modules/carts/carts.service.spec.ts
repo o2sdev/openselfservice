@@ -63,7 +63,11 @@ describe('CartsService', () => {
         };
         client: { fetch: ReturnType<typeof vi.fn> };
     };
-    let mockMedusaJsService: { getSdk: ReturnType<typeof vi.fn>; getStoreApiHeaders: ReturnType<typeof vi.fn> };
+    let mockMedusaJsService: {
+        getSdk: ReturnType<typeof vi.fn>;
+        getStoreApiHeaders: ReturnType<typeof vi.fn>;
+        getMedusaAdminApiHeaders: ReturnType<typeof vi.fn>;
+    };
     let mockAuthService: { getCustomerId: ReturnType<typeof vi.fn> };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
@@ -88,6 +92,7 @@ describe('CartsService', () => {
         mockMedusaJsService = {
             getSdk: vi.fn(() => mockSdk),
             getStoreApiHeaders: vi.fn(() => ({})),
+            getMedusaAdminApiHeaders: vi.fn(() => ({ Authorization: 'Basic xxx' })),
         };
         mockAuthService = { getCustomerId: vi.fn() };
         mockConfig = {
