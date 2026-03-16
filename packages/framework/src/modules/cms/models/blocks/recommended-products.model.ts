@@ -6,9 +6,11 @@ export type Labels = {
     addToCartLabel?: string;
     addToCartSuccess?: string;
     addToCartError?: string;
+    viewCartLabel?: string;
 };
 
 export class RecommendedProductsBlock extends Block.Block {
     basePath?: string;
+    cartPath?: string;
     labels!: Labels;
 }

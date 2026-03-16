@@ -25,10 +25,12 @@ export type Labels = {
     addToCartLabel?: string;
     addToCartSuccess?: string;
     addToCartError?: string;
+    viewCartLabel?: string;
 };
 
 export type RecommendedProductsBlock = ApiModels.Block.Block & {
     __typename: 'RecommendedProductsBlock';
     products: ProductSummary[];
     labels: Labels;
+    cartPath?: string;
 };

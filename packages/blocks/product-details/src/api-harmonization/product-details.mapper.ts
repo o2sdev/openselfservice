@@ -57,6 +57,7 @@ export const mapProductDetails = (
         addToCart: cms.labels.addToCartLabel,
         addToCartSuccess: cms.labels.addToCartSuccess,
         addToCartError: cms.labels.addToCartError,
+        viewCart: cms.labels.viewCartLabel,
     };
 
     return {
@@ -64,5 +65,6 @@ export const mapProductDetails = (
         id: product.id,
         product: mappedProduct,
         labels,
+        cartPath: cms.cartPath,
     };
 };

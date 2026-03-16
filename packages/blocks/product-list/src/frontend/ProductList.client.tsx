@@ -4,6 +4,8 @@ import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useState, useTransition } from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
@@ -18,6 +20,7 @@ import { Pagination } from '@o2s/ui/components/Pagination';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
+import { ToastAction } from '@o2s/ui/elements/toast';
 
 import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
@@ -25,7 +28,8 @@ import { sdk } from '../sdk';
 import { ProductListPureProps } from './ProductList.types';
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, useRouter } = createNavigation(routing);
+    const router = useRouter();
 
     const initialFilters = {
         id: component.id,
@@ -48,6 +52,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
 
     const handleAddToCart = useCallback(
         (sku: string, currency: Models.Price.Currency, variantId?: string) => {
+            const productName = data.products.data.find((p) => p.sku === sku)?.name ?? sku;
             startAddToCartTransition(async () => {
                 try {
                     const cartId = localStorage.getItem('cartId');
@@ -65,13 +70,35 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                     if (!cartId && result?.id) {
                         localStorage.setItem('cartId', result.id);
                     }
-                    toast({ description: data.labels.addToCartSuccess });
+                    toast({
+                        description: Utils.StringReplace.reactStringReplace(data.labels.addToCartSuccess ?? '', {
+                            productName,
+                        }),
+                        action:
+                            data.labels.viewCartLabel && data.cartPath ? (
+                                <ToastAction
+                                    altText={data.labels.viewCartLabel}
+                                    onClick={() => router.push(data.cartPath!)}
+                                >
+                                    {data.labels.viewCartLabel}
+                                </ToastAction>
+                            ) : undefined,
+                    });
                 } catch {
                     toast({ variant: 'destructive', description: data.labels.addToCartError });
                 }
             });
         },
-        [locale, accessToken, data.labels.addToCartSuccess, data.labels.addToCartError],
+        [
+            locale,
+            accessToken,
+            data.labels.addToCartSuccess,
+            data.labels.addToCartError,
+            data.labels.viewCartLabel,
+            data.cartPath,
+            data.products.data,
+            router,
+        ],
     );
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {

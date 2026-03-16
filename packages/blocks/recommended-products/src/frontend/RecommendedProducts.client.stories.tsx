@@ -114,9 +114,11 @@ export const Default: Story = {
             title: 'Recommended Products',
             detailsLabel: 'Details',
             addToCartLabel: 'Add to Cart',
-            addToCartSuccess: 'Product added to cart',
+            addToCartSuccess: '{productName} added to cart',
             addToCartError: 'Failed to add product to cart',
+            viewCartLabel: 'View Cart',
         },
+        cartPath: '/cart',
     },
 };
 

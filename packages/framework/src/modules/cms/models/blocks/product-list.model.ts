@@ -23,8 +23,10 @@ export class ProductListBlock extends Block.Block {
         addToCartLabel?: string;
         addToCartSuccess?: string;
         addToCartError?: string;
+        viewCartLabel?: string;
     };
     detailsLabel?: string;
     detailsUrl!: string;
     basePath?: string;
+    cartPath?: string;
 }

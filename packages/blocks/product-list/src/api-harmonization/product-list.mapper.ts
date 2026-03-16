@@ -19,6 +19,7 @@ export const mapProductList = (
         fieldMapping: cms.fieldMapping,
         noResults: cms.noResults,
         labels: cms.labels,
+        cartPath: cms.cartPath,
         products: {
             total: products.total,
             data: products.data.map((product) => mapProduct(product, cms)),

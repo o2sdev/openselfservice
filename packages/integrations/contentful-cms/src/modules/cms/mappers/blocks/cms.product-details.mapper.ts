@@ -64,8 +64,9 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
             offerLabel: 'Offer',
             variantLabel: 'Variant',
             addToCartLabel: 'Add to Cart',
-            addToCartSuccess: 'Product added to cart',
+            addToCartSuccess: '{productName} added to cart',
             addToCartError: 'Failed to add product to cart',
+            viewCartLabel: 'View Cart',
         },
         de: {
             specificationsTitle: 'Spezifikationen',
@@ -75,8 +76,9 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
             offerLabel: 'Angebot',
             variantLabel: 'Variante',
             addToCartLabel: 'In den Warenkorb',
-            addToCartSuccess: 'Produkt wurde dem Warenkorb hinzugefügt',
+            addToCartSuccess: '{productName} zum Warenkorb hinzugefügt',
             addToCartError: 'Fehler beim Hinzufügen zum Warenkorb',
+            viewCartLabel: 'Warenkorb anzeigen',
         },
         pl: {
             specificationsTitle: 'Specyfikacja',
@@ -86,9 +88,16 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
             offerLabel: 'Oferta',
             variantLabel: 'Wariant',
             addToCartLabel: 'Dodaj do koszyka',
-            addToCartSuccess: 'Produkt dodany do koszyka',
+            addToCartSuccess: '{productName} dodany do koszyka',
             addToCartError: 'Nie udało się dodać produktu do koszyka',
+            viewCartLabel: 'Zobacz koszyk',
         },
+    };
+
+    const cartPathMap: Record<string, string> = {
+        en: '/cart',
+        de: '/warenkorb',
+        pl: '/koszyk',
     };
 
     const labels = labelsMap[locale] ?? labelsMap['en']!;
@@ -96,6 +105,7 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
     return {
         id: 'product-details-1',
         labels,
+        cartPath: cartPathMap[locale] || cartPathMap['en'],
         basePath: basePathMap[locale] || basePathMap['en'],
         attributes: attributesMap[locale] || attributesMap['en'],
         variantOptionGroups: variantOptionGroupsMap[locale] || variantOptionGroupsMap['en'],

@@ -44,10 +44,12 @@ export type Labels = {
     addToCart: string;
     addToCartSuccess: string;
     addToCartError: string;
+    viewCart?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {
     __typename: 'ProductDetailsBlock';
     product: Product;
     labels: Labels;
+    cartPath?: string;
 };

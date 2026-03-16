@@ -31,7 +31,9 @@ export class ProductListBlock extends ApiModels.Block.Block {
         addToCartLabel?: string;
         addToCartSuccess?: string;
         addToCartError?: string;
+        viewCartLabel?: string;
     };
+    cartPath?: string;
     permissions?: {
         view: boolean;
     };

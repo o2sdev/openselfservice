@@ -4,6 +4,8 @@ import { CircleAlert } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useMemo, useTransition } from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { Price } from '@o2s/ui/components/Price';
@@ -12,6 +14,7 @@ import { ProductGallery } from '@o2s/ui/components/ProductGallery';
 import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
+import { ToastAction } from '@o2s/ui/elements/toast';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '../sdk';
@@ -147,7 +150,17 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                 if (!cartId && result?.id) {
                     localStorage.setItem('cartId', result.id);
                 }
-                toast({ description: labels.addToCartSuccess });
+                toast({
+                    description: Utils.StringReplace.reactStringReplace(labels.addToCartSuccess, {
+                        productName: product.name,
+                    }),
+                    action:
+                        labels.viewCart && component.cartPath ? (
+                            <ToastAction altText={labels.viewCart} onClick={() => router.push(component.cartPath!)}>
+                                {labels.viewCart}
+                            </ToastAction>
+                        ) : undefined,
+                });
             } catch {
                 toast({ variant: 'destructive', description: labels.addToCartError });
             }
@@ -156,10 +169,14 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
         product.sku,
         product.variantId,
         product.price.currency,
+        product.name,
         locale,
         accessToken,
         labels.addToCartSuccess,
         labels.addToCartError,
+        labels.viewCart,
+        component.cartPath,
+        router,
     ]);
 
     return (

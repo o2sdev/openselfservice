@@ -13,6 +13,7 @@ export const mapRecommendedProducts = (
         addToCartLabel: cms.labels?.addToCartLabel,
         addToCartSuccess: cms.labels?.addToCartSuccess,
         addToCartError: cms.labels?.addToCartError,
+        viewCartLabel: cms.labels?.viewCartLabel,
     };
 
     return {
@@ -20,5 +21,6 @@ export const mapRecommendedProducts = (
         id: cms.id,
         products,
         labels,
+        cartPath: cms.cartPath,
     };
 };
