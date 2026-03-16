@@ -16,50 +16,50 @@ All blocks in the Strapi integration are fully implemented with:
 
 The following table shows the implementation status of all blocks available in the O2S framework:
 
-| Block                 | Status | Strapi Type                            | Notes             |
-| --------------------- | ------ | -------------------------------------- | ----------------- |
-| article               | ✅     | Article (separate module)              | Fully implemented |
-| article-list          | ✅     | ComponentComponentsArticleList         | Fully implemented |
-| article-search        | ✅     | ComponentComponentsArticleSearch       | Fully implemented |
-| category              | ✅     | ComponentComponentsCategory            | Fully implemented |
-| category-list         | ✅     | ComponentComponentsCategoryList        | Fully implemented |
-| faq                   | ✅     | ComponentComponentsFaq                 | Fully implemented |
-| featured-service-list | ✅     | ComponentComponentsFeaturedServiceList | Fully implemented |
-| invoice-list          | ✅     | ComponentComponentsInvoiceList         | Fully implemented |
-| notification-list     | ✅     | ComponentComponentsNotificationList    | Fully implemented |
-| order-details         | ✅     | ComponentComponentsOrderDetails        | Fully implemented |
-| order-list            | ✅     | ComponentComponentsOrderList           | Fully implemented |
-| orders-summary        | ✅     | ComponentComponentsOrdersSummary       | Fully implemented |
-| payments-history      | ✅     | ComponentComponentsPaymentsHistory     | Fully implemented |
-| payments-summary      | ✅     | ComponentComponentsPaymentsSummary     | Fully implemented |
-| quick-links           | ✅     | ComponentComponentsQuickLinks          | Fully implemented |
-| service-details       | ✅     | ComponentComponentsServiceDetails      | Fully implemented |
-| service-list          | ✅     | ComponentComponentsServiceList         | Fully implemented |
-| surveyjs-form         | ✅     | ComponentComponentsSurveyJS            | Fully implemented |
-| ticket-details        | ✅     | ComponentComponentsTicketDetails       | Fully implemented |
-| ticket-list           | ✅     | ComponentComponentsTicketList          | Fully implemented |
-| ticket-recent         | ✅     | ComponentComponentsTicketRecent        | Fully implemented |
-| user-account          | ✅     | ComponentComponentsUserAccount         | Fully implemented |
+| Block                     | Status | Strapi Type                            | Notes             |
+| ------------------------- | ------ | -------------------------------------- | ----------------- |
+| article                   | ✅     | Article (separate module)              | Fully implemented |
+| article-list              | ✅     | ComponentComponentsArticleList         | Fully implemented |
+| article-search            | ✅     | ComponentComponentsArticleSearch       | Fully implemented |
+| category                  | ✅     | ComponentComponentsCategory            | Fully implemented |
+| category-list             | ✅     | ComponentComponentsCategoryList        | Fully implemented |
+| faq                       | ✅     | ComponentComponentsFaq                 | Fully implemented |
+| featured-service-list     | ✅     | ComponentComponentsFeaturedServiceList | Fully implemented |
+| invoice-list              | ✅     | ComponentComponentsInvoiceList         | Fully implemented |
+| notification-list         | ✅     | ComponentComponentsNotificationList    | Fully implemented |
+| order-details             | ✅     | ComponentComponentsOrderDetails        | Fully implemented |
+| order-list                | ✅     | ComponentComponentsOrderList           | Fully implemented |
+| orders-summary            | ✅     | ComponentComponentsOrdersSummary       | Fully implemented |
+| payments-history          | ✅     | ComponentComponentsPaymentsHistory     | Fully implemented |
+| payments-summary          | ✅     | ComponentComponentsPaymentsSummary     | Fully implemented |
+| quick-links               | ✅     | ComponentComponentsQuickLinks          | Fully implemented |
+| service-details           | ✅     | ComponentComponentsServiceDetails      | Fully implemented |
+| service-list              | ✅     | ComponentComponentsServiceList         | Fully implemented |
+| surveyjs-form             | ✅     | ComponentComponentsSurveyJS            | Fully implemented |
+| ticket-details            | ✅     | ComponentComponentsTicketDetails       | Fully implemented |
+| ticket-list               | ✅     | ComponentComponentsTicketList          | Fully implemented |
+| ticket-recent             | ✅     | ComponentComponentsTicketRecent        | Fully implemented |
+| user-account              | ✅     | ComponentComponentsUserAccount         | Fully implemented |
 | cart                      | ❌     | -                                      | Not implemented   |
 | checkout-billing-payment  | ❌     | -                                      | Not implemented   |
 | checkout-company-data     | ❌     | -                                      | Not implemented   |
 | checkout-shipping-address | ❌     | -                                      | Not implemented   |
 | checkout-summary          | ❌     | -                                      | Not implemented   |
 | order-confirmation        | ❌     | -                                      | Not implemented   |
-| product-details       | ❌     | -                                      | Not implemented   |
-| product-list          | ❌     | -                                      | Not implemented   |
-| recommended-products  | ❌     | -                                      | Not implemented   |
-| bento-grid            | ❌     | -                                      | Not implemented   |
-| cta-section           | ❌     | -                                      | Not implemented   |
-| document-list         | ❌     | -                                      | Not implemented   |
-| feature-section       | ❌     | -                                      | Not implemented   |
-| feature-section-grid  | ❌     | -                                      | Not implemented   |
-| hero-section          | ❌     | -                                      | Not implemented   |
-| media-section         | ❌     | -                                      | Not implemented   |
-| notification-summary  | ❌     | -                                      | Not implemented   |
-| notification-details  | ❌     | -                                      | Not implemented   |
-| pricing-section       | ❌     | -                                      | Not implemented   |
-| ticket-summary        | ❌     | -                                      | Not implemented   |
+| product-details           | ❌     | -                                      | Not implemented   |
+| product-list              | ❌     | -                                      | Not implemented   |
+| recommended-products      | ❌     | -                                      | Not implemented   |
+| bento-grid                | ❌     | -                                      | Not implemented   |
+| cta-section               | ❌     | -                                      | Not implemented   |
+| document-list             | ❌     | -                                      | Not implemented   |
+| feature-section           | ❌     | -                                      | Not implemented   |
+| feature-section-grid      | ❌     | -                                      | Not implemented   |
+| hero-section              | ❌     | -                                      | Not implemented   |
+| media-section             | ❌     | -                                      | Not implemented   |
+| notification-summary      | ❌     | -                                      | Not implemented   |
+| notification-details      | ❌     | -                                      | Not implemented   |
+| pricing-section           | ❌     | -                                      | Not implemented   |
+| ticket-summary            | ❌     | -                                      | Not implemented   |
 
 ## Blocks with mock data
 
