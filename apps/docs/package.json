@@ -1,6 +1,6 @@
 {
     "name": "@o2s/docs",
-    "version": "1.8.0",
+    "version": "2.2.0",
     "private": true,
     "scripts": {
         "docusaurus": "docusaurus",
@@ -22,7 +22,7 @@
         "@docusaurus/plugin-google-tag-manager": "^3.9.2",
         "@docusaurus/preset-classic": "3.9.2",
         "@docusaurus/theme-mermaid": "3.9.2",
-        "@easyops-cn/docusaurus-search-local": "^0.55.0",
+        "@easyops-cn/docusaurus-search-local": "^0.55.1",
         "@mdx-js/react": "^3.1.1",
         "@radix-ui/react-accordion": "^1.2.12",
         "@vercel/analytics": "^1.6.1",
@@ -48,7 +48,7 @@
         "@tailwindcss/postcss": "^4.2.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "autoprefixer": "^10.4.27",
-        "postcss": "^8.5.6",
+        "postcss": "^8.5.8",
         "prettier": "^3.8.1",
         "tailwindcss": "^4.2.1",
         "typescript": "5.9.3"

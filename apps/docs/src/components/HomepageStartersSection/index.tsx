@@ -35,9 +35,15 @@ const STARTERS: HoverCardProps[] = [
     {
         title: 'Build your own',
         description:
-            "Soon, with our CLI you'll be able to scaffold fully tailored customer self-service frontends — composed of modular UI components, blocks and integrations.",
-        gradient: 'var(--color-violet)',
-        badge: 'Coming soon',
+            'With our CLI you can scaffold fully tailored customer self-service frontends — composed of modular UI components, blocks and integrations.',
+        href: '/docs/getting-started/installation',
+        ctaLabel: 'Get Started',
+        gradient:
+            'linear-gradient(90deg, rgba(0, 19, 96, 0.4) 0%, rgba(0, 19, 96, 0.4) 100%), linear-gradient(311.86deg, var(--color-celadon) 1.526%, var(--color-violet) 69.661%)',
+        backgroundImage: {
+            url: '/img/homepage/starters-card-cli.wizard.png',
+            alt: 'CLI Wizard',
+        },
     },
 ];
 

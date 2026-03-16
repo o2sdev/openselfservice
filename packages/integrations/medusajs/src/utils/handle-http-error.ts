@@ -1,4 +1,5 @@
 import {
+    BadRequestException,
     ForbiddenException,
     HttpException,
     InternalServerErrorException,
@@ -18,6 +19,8 @@ export const handleHttpError = (error: any) => {
         throw new ForbiddenException('Forbidden');
     } else if (error.status === 401) {
         throw new UnauthorizedException('Unauthorized');
+    } else if (error.status === 400) {
+        return throwError(() => new BadRequestException(error.message || error.data?.message || 'Bad request'));
     }
     return throwError(() => new InternalServerErrorException(error.message));
 };

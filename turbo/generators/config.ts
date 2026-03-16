@@ -29,8 +29,14 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 message: 'Choose which modules you want to be included in the integration.',
                 validate: (input: string[]) => !!input.length,
             },
+            {
+                type: 'checkbox',
+                name: 'templates',
+                choices: ['o2s', 'dxp'],
+                message: 'Which project templates should include this integration? (leave empty for custom-only)',
+            },
         ],
-        actions: (data) => {
+        actions: (data: Record<string, unknown> | undefined) => {
             const actions: PlopTypes.ActionType[] = [
                 {
                     type: 'add',
@@ -243,6 +249,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 name: 'name',
                 message: 'What is the name of the block?',
                 validate: (value) => (value && value.trim().length > 0 ? true : 'Please enter a block name'),
+            },
+            {
+                type: 'checkbox',
+                name: 'templates',
+                choices: ['o2s', 'dxp'],
+                message: 'Which project templates should include this block? (leave empty for custom-only)',
             },
         ],
         actions: (data) => {

@@ -232,6 +232,10 @@ const functionalBlocks = [
                 title: 'Order list & details',
                 image: '/img/featurespage/img-orders.png',
             },
+            {
+                title: 'Cart, checkout & order confirmation',
+                image: '/img/featurespage/img-checkout.png',
+            },
         ],
     },
     {

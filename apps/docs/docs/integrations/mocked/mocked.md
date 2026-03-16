@@ -8,7 +8,7 @@ In order to enable a very quick set-up of O2S, we have prepared an integration t
 
 ## Requirements
 
-This integration is automatically installed when you bootstrap a new portal with `npx create-o2s-app@latest my-portal`. If you need to install it manually in an existing workspace, run:
+This integration is automatically installed when you bootstrap a new portal with `npx create-o2s-app my-portal`. If you need to install it manually in an existing workspace, run:
 
 ```shell
 npm install @o2s/integrations.mocked --workspace=@o2s/configs.integrations
@@ -22,6 +22,8 @@ This integration handles the following base modules from the framework:
 - auth
 - billing-accounts
 - cache
+- carts
+- checkout
 - cms
 - invoices
 - notifications

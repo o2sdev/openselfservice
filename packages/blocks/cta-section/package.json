@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.cta-section",
-    "version": "0.5.0",
+    "version": "0.6.1",
     "private": false,
     "license": "MIT",
     "description": "A simple block displaying static content in the form of an CtaSection.",
@@ -50,7 +50,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
@@ -68,5 +68,8 @@
         "rxjs": "^7",
         "next": "^16.0.5",
         "next-intl": "^4.1.0"
-    }
+    },
+    "o2sTemplate": [
+        "dxp"
+    ]
 }

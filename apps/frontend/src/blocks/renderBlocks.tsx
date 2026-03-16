@@ -4,19 +4,32 @@ import { Modules } from '@o2s/api-harmonization';
 import * as ArticleList from '@o2s/blocks.article-list/frontend';
 import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
 import * as Article from '@o2s/blocks.article/frontend';
+import * as BentoGrid from '@o2s/blocks.bento-grid/frontend';
+import * as Cart from '@o2s/blocks.cart/frontend';
 import * as CategoryList from '@o2s/blocks.category-list/frontend';
 import * as Category from '@o2s/blocks.category/frontend';
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/frontend';
+import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/frontend';
+import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/frontend';
+import * as CheckoutSummary from '@o2s/blocks.checkout-summary/frontend';
+import * as CtaSection from '@o2s/blocks.cta-section/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
+import * as FeatureSectionGrid from '@o2s/blocks.feature-section-grid/frontend';
+import * as FeatureSection from '@o2s/blocks.feature-section/frontend';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/frontend';
+import * as HeroSection from '@o2s/blocks.hero-section/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
+import * as MediaSection from '@o2s/blocks.media-section/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/frontend';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/frontend';
 import * as OrderDetails from '@o2s/blocks.order-details/frontend';
 import * as OrderList from '@o2s/blocks.order-list/frontend';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/frontend';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
+import * as PricingSection from '@o2s/blocks.pricing-section/frontend';
 import * as ProductDetails from '@o2s/blocks.product-details/frontend';
 import * as ProductList from '@o2s/blocks.product-list/frontend';
 import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
@@ -121,11 +134,24 @@ const BLOCK_REGISTRY = {
     TicketSummaryBlock: (blockProps) => <TicketSummary.Renderer {...blockProps} />,
     ProductDetailsBlock: (blockProps) => <ProductDetails.Renderer {...blockProps} />,
     RecommendedProductsBlock: (blockProps) => <RecommendedProducts.Renderer {...blockProps} />,
+    OrderConfirmationBlock: (blockProps) => <OrderConfirmation.Renderer {...blockProps} />,
+    CheckoutBillingPaymentBlock: (blockProps) => <CheckoutBillingPayment.Renderer {...blockProps} />,
+    CheckoutCompanyDataBlock: (blockProps) => <CheckoutCompanyData.Renderer {...blockProps} />,
+    CheckoutShippingAddressBlock: (blockProps) => <CheckoutShippingAddress.Renderer {...blockProps} />,
+    CheckoutSummaryBlock: (blockProps) => <CheckoutSummary.Renderer {...blockProps} />,
+    CartBlock: (blockProps) => <Cart.Renderer {...blockProps} />,
+    HeroSectionBlock: (blockProps) => <HeroSection.Renderer {...blockProps} />,
+    BentoGridBlock: (blockProps) => <BentoGrid.Renderer {...blockProps} />,
+    FeatureSectionBlock: (blockProps) => <FeatureSection.Renderer {...blockProps} />,
+    CtaSectionBlock: (blockProps) => <CtaSection.Renderer {...blockProps} />,
+    MediaSectionBlock: (blockProps) => <MediaSection.Renderer {...blockProps} />,
+    PricingSectionBlock: (blockProps) => <PricingSection.Renderer {...blockProps} />,
+    FeatureSectionGridBlock: (blockProps) => <FeatureSectionGrid.Renderer {...blockProps} />,
     // BLOCK REGISTER
 } satisfies Record<Modules.Page.Model.Blocks, BlockRenderer>;
 
-const isRegisteredBlock = (typename: string): typename is Modules.Page.Model.Blocks => {
-    return Object.hasOwn(BLOCK_REGISTRY, typename);
+const isRegisteredBlock = (typename: string): typename is keyof typeof BLOCK_REGISTRY => {
+    return typename in BLOCK_REGISTRY;
 };
 
 const renderBlock = (typename: string, blockProps: BlockProps) => {

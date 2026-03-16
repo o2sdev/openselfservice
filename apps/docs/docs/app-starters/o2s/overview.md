@@ -11,15 +11,12 @@ The O2S Customer Portal starter is our default template for building customer se
 To create a new customer portal application:
 
 ```shell
-npx create-o2s-app@latest my-customer-portal
+npx create-o2s-app my-customer-portal --template o2s
 ```
 
-This command will:
+This command automatically scaffolds the O2S Customer Portal with its default blocks and integrations — no interactive prompts needed.
 
-- Download the latest O2S Customer Portal starter
-- Install all dependencies
-- Set up the project structure with mocked integrations
-- Initialize a local SQLite database for authentication
+For all available CLI options (custom template, non-interactive mode, etc.), see the [Installation](../../getting-started/installation.md#cli-options) guide.
 
 ## What's included
 

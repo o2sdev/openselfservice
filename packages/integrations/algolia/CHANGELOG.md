@@ -1,5 +1,48 @@
 # @o2s/integrations.algolia
 
+## 1.6.1
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
+## 1.6.0
+
+### Minor Changes
+
+- 600d5ac: chore: add create-o2s-app flag to package.json in all blocks and integrations
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- f9c379f: chore(deps): update dependencies
+- e19e2fd: chore(deps): update dependencies
+- 8a59a9f: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 5c6d8c6: chore(deps): update dependencies
+- 8c01be4: added README
+- 9c78485: chore(deps): update dependencies
+- 01725fc: chore(deps): update dependencies
+- ea200fc: chore(deps): update dependencies
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/framework@1.18.0
+    - @o2s/utils.logger@1.2.2
+
 ## 1.5.0
 
 ### Minor Changes

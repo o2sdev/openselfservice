@@ -1,5 +1,74 @@
 # @o2s/integrations.medusajs
 
+## 1.11.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- fa91166: chore(deps): update dependencies
+- 028ce47: chore(deps): update dependencies
+- 3c0129d: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
+## 1.10.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
+## 1.9.0
+
+### Minor Changes
+
+- c6ae8e6: Medusa.js integration implementations for carts, checkout, customers, and payments.
+- 1f2965c: feat(products): Medusa integration for product catalog
+    - Add product list and product detail pages powered by Medusa Admin SDK
+    - Support SEO-friendly URLs using product handles and variant slugs (e.g. `/products/sweatpants/s-blue`)
+    - Add variant selection with option-based navigation between product variants
+    - Map Medusa product data (prices, categories, tags, images, specs) to the unified product model
+    - Extract key specs and detailed specs from Medusa variant metadata and attributes
+    - Add related products support via custom Medusa product references API
+    - Implement lazy initialization for MedusaJS service to improve startup performance
+    - Add localized mocked product data (EN, DE, PL) with variant overrides for testing
+
+- 600d5ac: chore: add create-o2s-app flag to package.json in all blocks and integrations
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 4cf1139: chore(deps): update dependencies
+- 4c390a3: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/framework@1.18.0
+    - @o2s/utils.logger@1.2.2
+
 ## 1.8.0
 
 ### Minor Changes

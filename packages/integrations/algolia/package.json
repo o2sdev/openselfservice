@@ -1,9 +1,12 @@
 {
     "name": "@o2s/integrations.algolia",
-    "version": "1.5.0",
+    "version": "1.6.1",
     "private": false,
     "license": "MIT",
     "description": "Algolia integration for O2S, providing search functionality.",
+    "o2sModules": [
+        "search"
+    ],
     "keywords": [
         "o2s",
         "integration",
@@ -43,7 +46,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",

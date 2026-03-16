@@ -26,6 +26,15 @@ describe('handleHttpError', () => {
         expect(() => handleHttpError({ status: 401 })).toThrow('Unauthorized');
     });
 
+    it('should return observable that errors with BadRequestException when error.status is 400', async () => {
+        const obs = handleHttpError({ status: 400, message: 'The promotion code SDF is invalid' });
+
+        await expect(firstValueFrom(obs)).rejects.toThrow(BadRequestException);
+        await expect(firstValueFrom(handleHttpError({ status: 400, message: 'Invalid code' }))).rejects.toThrow(
+            'Invalid code',
+        );
+    });
+
     it('should return observable that errors with InternalServerErrorException for other status', async () => {
         const obs = handleHttpError({ status: 500, message: 'Server error' });
 

@@ -13,6 +13,7 @@ export const RecommendedProductsDynamic = dynamic(() =>
 export const RecommendedProducts: React.FC<RecommendedProductsProps> = async ({
     id,
     excludeProductId,
+    accessToken,
     locale,
     routing,
 }) => {
@@ -35,6 +36,7 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = async ({
             {...data}
             id={id}
             excludeProductId={excludeProductId}
+            accessToken={accessToken}
             locale={locale}
             routing={routing}
         />

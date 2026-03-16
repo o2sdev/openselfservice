@@ -1,5 +1,52 @@
 # @o2s/framework
 
+## 1.20.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [98b2e68]
+    - @o2s/utils.logger@1.2.3
+
+## 1.19.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+- 0e61431: feat: update page model and integration to support redirects
+
+## 1.18.0
+
+### Minor Changes
+
+- c6ae8e6: Added the normalized data model for a cart/checkout system with full CRUD operations for items and promotions:
+    - Checkout flow supporting address, shipping, and payment setup
+    - Customer address management for authenticated users
+    - Payment provider integration and session handling
+
+### Patch Changes
+
+- 46d4077: chore(deps): update dependencies
+- a288b11: chore(deps): update dependencies
+- 09d7b17: chore(deps): update dependencies
+- bbb3b89: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 88d180a: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+- Updated dependencies [a288b11]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/utils.logger@1.2.2
+
 ## 1.17.0
 
 ### Minor Changes

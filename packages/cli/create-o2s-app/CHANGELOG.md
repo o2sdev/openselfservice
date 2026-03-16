@@ -1,5 +1,57 @@
 # create-o2s-app
 
+## 4.1.0
+
+### Minor Changes
+
+- a2d9ea4: CLI scaffolding and logging enhancements (branding header, summary box, docs links, block warnings)
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [98b2e68]
+    - @o2s/telemetry@1.2.2
+
+## 4.0.0
+
+### Major Changes
+
+- a1659cf: added fix related to dxp starter and mocked data
+
+### Minor Changes
+
+- a1659cf: fix: update CLI commands in logger to reflect new watch commands for development
+- a1659cf: fix: update CLI custom installation process
+
+## 3.0.0
+
+### Major Changes
+
+- 1df1ec2: added fix related to dxp starter and mocked data
+
+## 2.0.0
+
+### Major Changes
+
+- 600d5ac: feat: add interactive CLI wizard with template selection, block/integration picker, and environment variable configuration
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- b234a1f: chore(deps): update dependencies
+- fefc45d: chore(deps): update dependencies
+- ea200fc: chore(deps): update dependencies
+- ed74c8f: chore(deps): update dependencies
+- Updated dependencies [a288b11]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/telemetry@1.2.1
+
 ## 1.2.1
 
 ### Patch Changes

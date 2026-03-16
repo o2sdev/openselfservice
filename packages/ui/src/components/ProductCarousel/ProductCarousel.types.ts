@@ -12,12 +12,18 @@ export interface ProductCarouselProps {
     action?: React.ReactNode;
     LinkComponent: FrontendModels.Link.LinkComponent;
     carouselConfig?: Partial<CarouselProps>;
-    linkDetailsLabel?: string;
+    addToCartLabel?: string;
+    onAddToCart?: (sku: string, currency: Models.Price.Currency, variantId?: string) => void;
+    isAddingToCart?: boolean;
     carouselClassName?: string;
+    keyboardControlMode?: CarouselProps['keyboardControlMode'];
+    keyboardCarouselId?: string;
 }
 
 export interface ProductSummaryItem {
     id: string;
+    sku: string;
+    variantId?: string;
     name: string;
     description?: Models.RichText.RichText;
     image?: Models.Media.Media;

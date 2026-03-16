@@ -1,5 +1,21 @@
 # @o2s/telemetry
 
+## 1.2.2
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+
+## 1.2.1
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- ea200fc: chore(deps): update dependencies
+
 ## 1.2.0
 
 ### Minor Changes
