@@ -14,7 +14,7 @@ export interface TicketListProps extends Models.BlockProps.BlockWithDraftModePro
 export type TicketListPureProps = TicketListProps & Model.TicketListBlock;
 
 export type TicketListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
-    Pick<TicketListProps, 'enableRowSelection'>;
+    Pick<TicketListProps, 'enableRowSelection' | 'isDraftModeEnabled'>;
 
 export type Action = {
     url: string;

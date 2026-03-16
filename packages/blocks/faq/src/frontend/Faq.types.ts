@@ -8,4 +8,4 @@ export type FaqProps = Models.BlockProps.BlockWithDraftModeProps<ReturnType<type
 
 export type FaqPureProps = FaqProps & Model.FaqBlock;
 
-export type FaqRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;
+export type FaqRendererProps = Models.BlockProps.BlockWithDraftModeProps<ReturnType<typeof defineRouting>>;

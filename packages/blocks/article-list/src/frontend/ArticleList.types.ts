@@ -8,4 +8,4 @@ export type ArticleListProps = Models.BlockProps.BlockWithDraftModeProps<ReturnT
 
 export type ArticleListPureProps = ArticleListProps & Model.ArticleListBlock;
 
-export type ArticleListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;
+export type ArticleListRendererProps = Models.BlockProps.BlockWithDraftModeProps<ReturnType<typeof defineRouting>>;

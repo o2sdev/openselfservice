@@ -10,6 +10,6 @@ export interface UserAccountProps extends Models.BlockProps.BlockWithUserIdProps
 
 export type UserAccountPureProps = UserAccountProps & Model.UserAccountBlock;
 
-export type UserAccountRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> & {
+export type UserAccountRendererProps = Models.BlockProps.BlockWithUserIdProps<ReturnType<typeof defineRouting>> & {
     onSignOut: () => void;
 };

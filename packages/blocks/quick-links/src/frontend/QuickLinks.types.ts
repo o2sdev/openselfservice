@@ -8,4 +8,4 @@ export type QuickLinksProps = Models.BlockProps.BlockWithDraftModeProps<ReturnTy
 
 export type QuickLinksPureProps = QuickLinksProps & Model.QuickLinksBlock;
 
-export type QuickLinksRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;
+export type QuickLinksRendererProps = Models.BlockProps.BlockWithDraftModeProps<ReturnType<typeof defineRouting>>;
