@@ -2,7 +2,7 @@
 import { cleanupTempDir, cloneRepository } from './scaffold/clone';
 import { scaffold } from './scaffold/index';
 import { TemplateType } from './types';
-import { printError, printSummary } from './utils/logger';
+import { printBanner, printError, printSummary } from './utils/logger';
 import { runWizard } from './wizard/index';
 import * as telemetry from '@o2s/telemetry';
 import { Command } from 'commander';
@@ -11,7 +11,7 @@ const program = new Command();
 
 program
     .name('create-o2s-app')
-    .description('Create a new O2S project with interactive setup wizard')
+    .description('Scaffold your custom frontend')
     .argument('[name]', 'Name of the new project')
     .option('--directory [directory]', 'Specify the destination directory')
     .option('--template [template]', 'Template: o2s | dxp | custom')
@@ -19,6 +19,8 @@ program
     .option('--integrations [integrations]', 'Comma-separated list of integration names (for non-interactive mode)')
     .option('--skip-install', 'Skip npm install step')
     .action(async (name, options) => {
+        printBanner();
+
         telemetry.sendEvent('o2s', 'create-o2s-app', 'create-project');
         await telemetry.flushEvents();
 
@@ -51,8 +53,8 @@ program
             printSummary(
                 targetDir,
                 answers.template,
-                answers.selectedBlocks.length,
-                answers.selectedIntegrations.length,
+                answers.selectedBlocks,
+                answers.selectedIntegrations,
                 uncoveredModules,
                 options.skipInstall,
             );

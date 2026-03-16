@@ -1,5 +1,21 @@
 # @o2s/blocks.checkout-shipping-address
 
+## 0.1.1
+
+### Patch Changes
+
+- c1a5460: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+  - @o2s/framework@1.20.0
+  - @o2s/utils.api-harmonization@0.3.2
+  - @o2s/utils.frontend@0.5.1
+  - @o2s/utils.logger@1.2.3
+  - @o2s/ui@1.13.0
+
 ## 0.1.0
 
 ### Minor Changes

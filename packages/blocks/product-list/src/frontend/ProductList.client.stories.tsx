@@ -145,6 +145,9 @@ export const Default: Story = {
             showMoreFilters: 'Show more filters',
             hideMoreFilters: 'Hide more filters',
             noActiveFilters: 'No active filters',
+            addToCartLabel: 'Add to Cart',
+            addToCartSuccess: 'Product added to cart',
+            addToCartError: 'Failed to add product to cart',
         },
         products: {
             total: 6,

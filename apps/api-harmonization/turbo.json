@@ -13,6 +13,7 @@
                 "LOG_FORMAT",
                 "DEFAULT_LOCALE",
                 "DEFAULT_CURRENCY",
+                "DEFAULT_REGION_ID",
                 "DEFAULT_PRODUCT_UNIT",
                 "SUPPORTED_CURRENCIES",
                 "SUPPORTED_LOCALES",

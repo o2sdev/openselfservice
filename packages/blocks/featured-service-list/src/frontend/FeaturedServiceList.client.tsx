@@ -37,10 +37,7 @@ export const FeaturedServiceListPure: React.FC<FeaturedServiceListPureProps> = (
                                     description={service.shortDescription}
                                     image={service.image}
                                     price={service.price}
-                                    link={{
-                                        label: component.detailsLabel,
-                                        url: service.link,
-                                    }}
+                                    link={service.link}
                                     action={
                                         <TooltipHover
                                             trigger={(setIsOpen) => (

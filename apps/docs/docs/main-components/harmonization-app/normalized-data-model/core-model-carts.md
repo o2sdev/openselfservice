@@ -91,6 +91,7 @@ addCartItem(
 | --------- | -------- | ------------------------------- |
 | cartId    | string   | Existing cart ID (optional)     |
 | sku       | string   | Product variant SKU (required)  |
+| variantId | string   | Product variant ID (optional)   |
 | quantity  | number   | Quantity (required)             |
 | currency  | Currency | Required when creating new cart |
 | regionId  | string   | Required when creating new cart |

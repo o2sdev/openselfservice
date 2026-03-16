@@ -1,6 +1,6 @@
 {
   "name": "@o2s/integrations.zendesk",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "private": false,
   "license": "MIT",
   "description": "Zendesk integration for O2S, providing ticket management and support functionality.",
@@ -44,7 +44,7 @@
     "@nestjs/common": "^11.1.14",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*",
-    "axios": "^1.13.5",
+    "axios": "^1.13.6",
     "html-to-text": "^9.0.5",
     "rxjs": "^7.8.2"
   },

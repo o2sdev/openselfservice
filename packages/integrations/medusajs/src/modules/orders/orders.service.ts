@@ -2,7 +2,7 @@ import Medusa from '@medusajs/js-sdk';
 import { HttpTypes, OrderStatus } from '@medusajs/types';
 import { Inject, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, catchError, from, map } from 'rxjs';
+import { Observable, catchError, from, map, switchMap } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -10,6 +10,7 @@ import { Auth, Orders } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { verifyResourceAccess } from '../../utils/customer-access';
 import { handleHttpError } from '../../utils/handle-http-error';
 
 import { mapOrder, mapOrders } from './orders.mapper';
@@ -64,21 +65,16 @@ export class OrdersService extends Orders.Service {
         return from(
             this.sdk.store.order.retrieve(params.id, query, this.medusaJsService.getStoreApiHeaders(authorization)),
         ).pipe(
-            map((response: { order: HttpTypes.StoreOrder }) => {
+            switchMap((response: { order: HttpTypes.StoreOrder }) => {
                 const order = mapOrder(response.order, this.defaultCurrency);
-                // Guest orders (no customer_id): accessible to anyone with order ID
-                if (!order.customerId) {
-                    return order;
-                }
-                // Customer orders: require auth and customerId must match
-                if (!authorization) {
-                    throw new UnauthorizedException('Unauthorized');
-                }
-                const customerId = this.authService.getCustomerId(authorization);
-                if (order.customerId !== customerId) {
-                    throw new UnauthorizedException('Unauthorized');
-                }
-                return order;
+
+                return verifyResourceAccess(
+                    this.sdk,
+                    this.authService,
+                    this.medusaJsService.getMedusaAdminApiHeaders(),
+                    order.customerId,
+                    authorization,
+                ).pipe(map(() => order));
             }),
             catchError((error) => {
                 return handleHttpError(error);
