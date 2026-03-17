@@ -1,14 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
 
+{{#if (eq module 'cms')}}
+import { CMS } from '@o2s/framework/modules';
+{{else}}
 import { {{pascalCase module}} } from '@o2s/framework/modules';
+{{/if}}
 // Optional: Import Auth when you need to inject Auth.Service for permission checking
 // import { Auth } from '@o2s/framework/modules';
 
 @Injectable()
-export class {{pascalCase module}}Service implements {{pascalCase module}}.Service  {
-    // Optional: Inject Auth.Service when you need to check permissions or add permission flags
-    // constructor(
-    //     private readonly authService: Auth.Service,
-    // ) {}
+{{#if (eq module 'cms')}}
+export class {{pascalCase module}}Service extends CMS.Service {
+{{else}}
+export class {{pascalCase module}}Service extends {{pascalCase module}}.Service {
+{{/if}}
+  // Optional: Inject Auth.Service when you need to check permissions or add permission flags
+  // constructor(
+  //   private readonly authService: Auth.Service,
+  // ) {
+  //   super();
+  // }
 }

@@ -2,13 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Tickets } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapTicketDetails } from './ticket-details.mapper';
 import { TicketDetailsBlock } from './ticket-details.model';
 import { GetTicketDetailsBlockParams, GetTicketDetailsBlockQuery } from './ticket-details.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class TicketDetailsService {
@@ -21,10 +22,10 @@ export class TicketDetailsService {
     getTicketDetailsBlock(
         params: GetTicketDetailsBlockParams,
         query: GetTicketDetailsBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<TicketDetailsBlock> {
-        const cms = this.cmsService.getTicketDetailsBlock({ ...query, locale: headers['x-locale'] });
-        const ticket = this.ticketService.getTicket({ ...params, locale: headers['x-locale'] });
+        const cms = this.cmsService.getTicketDetailsBlock({ ...query, locale: headers[H.Locale] });
+        const ticket = this.ticketService.getTicket({ ...params, locale: headers[H.Locale] });
 
         return forkJoin([ticket, cms]).pipe(
             map(([ticket, cms]) => {
@@ -32,11 +33,12 @@ export class TicketDetailsService {
                     throw new NotFoundException();
                 }
 
-                const result = mapTicketDetails(ticket, cms, headers['x-locale'], headers['x-client-timezone'] || '');
+                const result = mapTicketDetails(ticket, cms, headers[H.Locale], headers[H.ClientTimezone] || '');
 
                 // Extract permissions using ACL service
-                if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'tickets', [
+                const authorization = headers[H.Authorization];
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'tickets', [
                         'view',
                         'edit',
                         'close',

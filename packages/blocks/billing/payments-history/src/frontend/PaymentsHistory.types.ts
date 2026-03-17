@@ -1,10 +1,7 @@
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/payments-history.client';
 
-export interface PaymentsHistoryProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    hasPriority?: boolean;
-}
+export type PaymentsHistoryProps = Models.BlockProps.BaseBlockProps;
 
 export type PaymentsHistoryPureProps = PaymentsHistoryProps & Model.PaymentsHistoryBlock;

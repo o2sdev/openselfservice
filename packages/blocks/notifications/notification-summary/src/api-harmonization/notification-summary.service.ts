@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Notifications } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapNotificationSummary } from './notification-summary.mapper';
 import { NotificationSummaryBlock } from './notification-summary.model';
 import { GetNotificationSummaryBlockQuery } from './notification-summary.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class NotificationSummaryService {
@@ -20,22 +21,23 @@ export class NotificationSummaryService {
 
     getNotificationSummaryBlock(
         query: GetNotificationSummaryBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<NotificationSummaryBlock> {
-        const cms = this.cmsService.getNotificationSummaryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getNotificationSummaryBlock({ ...query, locale: headers[H.Locale] });
         const notifications = this.notificationService.getNotificationList({
             limit: 1000,
             offset: 0,
-            locale: headers['x-locale'],
+            locale: headers[H.Locale],
         });
 
         return forkJoin([notifications, cms]).pipe(
             map(([notifications, cms]) => {
-                const result = mapNotificationSummary(cms, notifications, headers['x-locale']);
+                const result = mapNotificationSummary(cms, notifications, headers[H.Locale]);
+                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
-                if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'notifications', [
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'notifications', [
                         'view',
                         'mark_read',
                     ]);

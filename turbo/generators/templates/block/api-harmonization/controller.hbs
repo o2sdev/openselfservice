@@ -1,4 +1,3 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
 import { LoggerService } from '@o2s/utils.logger';
@@ -8,6 +7,7 @@ import { Auth } from '@o2s/framework/modules';
 import { URL } from './';
 import { Get{{pascalCase name}}BlockQuery } from './{{kebabCase name }}.request';
 import { {{pascalCase name}}Service } from './{{kebabCase name}}.service';
+import { AppHeaders } from '@o2s/framework/headers';
 
 @Controller(URL)
 @UseInterceptors(LoggerService)
@@ -18,7 +18,7 @@ export class {{pascalCase name}}Controller {
     @Auth.Decorators.Roles({ roles: [] })
     // Optional: Add permission-based access control
     // @Auth.Decorators.Permissions({ resource: 'resource-name', actions: ['view'] })
-    get{{pascalCase name}}Block(@Headers() headers: Models.Headers.AppHeaders, @Query() query: Get{{pascalCase name }}BlockQuery) {
+    get{{pascalCase name}}Block(@Headers() headers: AppHeaders, @Query() query: Get{{pascalCase name }}BlockQuery) {
         return this.service.get{{pascalCase name}}Block(query, headers);
     }
 }

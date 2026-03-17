@@ -1,16 +1,11 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/ticket-summary.client';
 
-export interface TicketSummaryProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-}
+export type TicketSummaryProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>>;
 
 export type TicketSummaryPureProps = TicketSummaryProps & Model.TicketSummaryBlock;
 
-export type TicketSummaryRendererProps = Omit<TicketSummaryProps, ''> & {
-    slug: string[];
-};
+export type TicketSummaryRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

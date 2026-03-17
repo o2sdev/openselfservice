@@ -5,9 +5,9 @@ import { Loading } from '@o2s/ui/components/feedback/Loading';
 import { Container } from '@o2s/ui/components/layout/Container';
 
 import { NotificationDetails } from './NotificationDetails.server';
-import { FaqRendererProps } from './NotificationDetails.types';
+import { NotificationDetailsRendererProps } from './NotificationDetails.types';
 
-export const NotificationDetailsRenderer: React.FC<FaqRendererProps> = ({
+export const NotificationDetailsRenderer: React.FC<NotificationDetailsRendererProps> = ({
     slug,
     id,
     accessToken,

@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/order-list.client';
@@ -10,7 +10,7 @@ export const orderList = (sdk: Sdk) => ({
     blocks: {
         getOrderList: (
             query: Request.GetOrderListBlockQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.OrderListBlock> =>
             sdk.makeRequest({

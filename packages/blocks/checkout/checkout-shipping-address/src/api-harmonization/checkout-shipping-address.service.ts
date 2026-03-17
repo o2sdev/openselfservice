@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
-import { Observable, map } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
-// import { Auth } from '@o2s/framework/modules';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 
 import { mapCheckoutShippingAddress } from './checkout-shipping-address.mapper';
 import { CheckoutShippingAddressBlock } from './checkout-shipping-address.model';
 import { GetCheckoutShippingAddressBlockQuery } from './checkout-shipping-address.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class CheckoutShippingAddressService {
@@ -20,13 +20,13 @@ export class CheckoutShippingAddressService {
 
     getCheckoutShippingAddressBlock(
         query: GetCheckoutShippingAddressBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<CheckoutShippingAddressBlock> {
-        return this.cmsService.getEntry({ ...query, locale: headers['x-locale'] }).pipe(
-            map((cms) => {
-                const result = mapCheckoutShippingAddress(
-                    cms as CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock,
-                );
+        return forkJoin([
+            this.cmsService.getCheckoutShippingAddressBlock({ ...query, locale: headers[H.Locale] }),
+        ]).pipe(
+            map(([cms]) => {
+                const result = mapCheckoutShippingAddress(cms);
 
                 // Optional: Add permission flags to the response
                 // if (headers.authorization) {

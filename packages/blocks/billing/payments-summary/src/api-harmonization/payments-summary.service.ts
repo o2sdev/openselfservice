@@ -3,13 +3,14 @@ import { ConfigService } from '@nestjs/config';
 import { CMS, Invoices } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth, Models } from '@o2s/framework/modules';
 
 import { mapPaymentsSummary } from './payments-summary.mapper';
 import { PaymentsSummaryBlock } from './payments-summary.model';
 import { GetPaymentsSummaryBlockQuery } from './payments-summary.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class PaymentsSummaryService {
@@ -26,21 +27,19 @@ export class PaymentsSummaryService {
 
     getPaymentsSummaryBlock(
         query: GetPaymentsSummaryBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<PaymentsSummaryBlock> {
-        const cms = this.cmsService.getPaymentsSummaryBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getPaymentsSummaryBlock({ ...query, locale: headers[H.Locale] });
         const invoices = this.invoiceService.getInvoiceList(query);
 
         return forkJoin([invoices, cms]).pipe(
             map(([invoices, cms]) => {
-                const result = mapPaymentsSummary(cms, invoices, headers['x-locale'], this.defaultCurrency);
+                const result = mapPaymentsSummary(cms, invoices, headers[H.Locale], this.defaultCurrency);
+                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
-                if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'invoices', [
-                        'view',
-                        'pay',
-                    ]);
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'invoices', ['view', 'pay']);
 
                     result.permissions = {
                         view: permissions.view ?? false,

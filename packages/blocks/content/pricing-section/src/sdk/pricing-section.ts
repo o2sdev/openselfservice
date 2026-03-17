@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/pricing-section.client';
@@ -12,7 +12,7 @@ export const pricingSection = (sdk: Sdk) => ({
     blocks: {
         getPricingSection: (
             query: Request.GetPricingSectionBlockQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.PricingSectionBlock> =>
             sdk.makeRequest({

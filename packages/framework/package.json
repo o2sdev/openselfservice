@@ -29,6 +29,10 @@
         "./sdk": {
             "import": "./dist/src/sdk.js",
             "require": "./dist/src/sdk.js"
+        },
+        "./headers": {
+            "import": "./dist/src/headers.js",
+            "require": "./dist/src/headers.js"
         }
     },
     "files": [

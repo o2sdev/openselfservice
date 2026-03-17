@@ -1,8 +1,8 @@
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { URL } from './';
@@ -16,7 +16,7 @@ export class DocumentListController {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [] })
-    getDocumentListBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetDocumentListBlockQuery) {
+    getDocumentListBlock(@Headers() headers: AppHeaders, @Query() query: GetDocumentListBlockQuery) {
         return this.service.getDocumentListBlock(query, headers);
     }
 }

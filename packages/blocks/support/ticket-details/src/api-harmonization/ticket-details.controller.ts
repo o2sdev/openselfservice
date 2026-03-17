@@ -1,8 +1,8 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { URL } from './';
@@ -17,7 +17,7 @@ export class TicketDetailsController {
     @Get(':id')
     @Auth.Decorators.Permissions({ resource: 'tickets', actions: ['view'] })
     getTicketDetailsBlock(
-        @Headers() headers: Models.Headers.AppHeaders,
+        @Headers() headers: AppHeaders,
         @Query() query: GetTicketDetailsBlockQuery,
         @Param() params: GetTicketDetailsBlockParams,
     ) {

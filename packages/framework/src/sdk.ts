@@ -6,11 +6,12 @@ import { createTicket, getTicket, getTickets } from './api/tickets';
 import { getCustomerForCurrentUserById, getDefaultCustomerForCurrentUser, getUser } from './api/users';
 import { createInterceptors } from './interceptors';
 import { LoggerConfig } from './utils/logger';
+import { AppHeaders } from './utils/models/headers';
 
 export interface CompatRequestConfig {
     url?: string;
     method?: string;
-    headers?: Record<string, string>;
+    headers?: Partial<AppHeaders> & Record<string, string>;
     params?: unknown;
     data?: unknown;
     [key: string]: unknown;

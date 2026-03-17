@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/ticket-summary.client';
@@ -11,7 +11,7 @@ export const ticketSummary = (sdk: Sdk) => ({
     blocks: {
         getTicketSummary: (
             query: Request.GetTicketSummaryBlockQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.TicketSummaryBlock> =>
             sdk.makeRequest({

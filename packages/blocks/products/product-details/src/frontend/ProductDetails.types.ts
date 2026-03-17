@@ -1,19 +1,15 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import * as Client from '../api-harmonization/product-details.client';
 
-export interface ProductDetailsProps {
-    id: string;
+export interface ProductDetailsProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     productId: string;
     variantSlug?: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
 }
 
 export type ProductDetailsPureProps = ProductDetailsProps & Client.Model.ProductDetailsBlock;
 
-export type ProductDetailsRendererProps = Omit<ProductDetailsProps, 'productId'> & {
-    slug: string[];
-};
+export type ProductDetailsRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
+    Pick<ProductDetailsProps, 'variantSlug'>;

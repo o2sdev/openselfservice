@@ -1,18 +1,13 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/notification-details.client';
 
-export interface NotificationDetailsProps {
-    id: string;
+export interface NotificationDetailsProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     notificationId: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
 }
 
 export type NotificationDetailsPureProps = NotificationDetailsProps & Model.NotificationDetailsBlock;
 
-export type FaqRendererProps = Omit<NotificationDetailsProps, 'notificationId'> & {
-    slug: string[];
-};
+export type NotificationDetailsRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

@@ -2,13 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
 import { Observable, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 
 // import { Auth } from '@o2s/framework/modules';
 
 import { mapCheckoutSummary } from './checkout-summary.mapper';
 import { CheckoutSummaryBlock } from './checkout-summary.model';
 import { GetCheckoutSummaryBlockQuery } from './checkout-summary.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class CheckoutSummaryService {
@@ -20,12 +22,10 @@ export class CheckoutSummaryService {
 
     getCheckoutSummaryBlock(
         query: GetCheckoutSummaryBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<CheckoutSummaryBlock> {
-        return this.cmsService.getEntry({ ...query, locale: headers['x-locale'] }).pipe(
-            map((cms) => {
-                return mapCheckoutSummary(cms as CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock);
-            }),
-        );
+        return this.cmsService
+            .getCheckoutSummaryBlock({ ...query, locale: headers[H.Locale] })
+            .pipe(map(mapCheckoutSummary));
     }
 }
