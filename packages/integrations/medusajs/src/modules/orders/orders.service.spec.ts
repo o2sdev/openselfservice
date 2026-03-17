@@ -34,8 +34,15 @@ const guestOrder = { ...minimalOrder, id: 'order_guest', customer_id: null };
 
 describe('OrdersService', () => {
     let service: OrdersService;
-    let mockSdk: { store: { order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> } } };
-    let mockMedusaJsService: { getSdk: ReturnType<typeof vi.fn>; getStoreApiHeaders: ReturnType<typeof vi.fn> };
+    let mockSdk: {
+        store: { order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> } };
+        admin: { customer: { retrieve: ReturnType<typeof vi.fn> } };
+    };
+    let mockMedusaJsService: {
+        getSdk: ReturnType<typeof vi.fn>;
+        getStoreApiHeaders: ReturnType<typeof vi.fn>;
+        getMedusaAdminApiHeaders: ReturnType<typeof vi.fn>;
+    };
     let mockAuthService: { getCustomerId: ReturnType<typeof vi.fn> };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
@@ -49,10 +56,16 @@ describe('OrdersService', () => {
                     list: vi.fn(),
                 },
             },
+            admin: {
+                customer: {
+                    retrieve: vi.fn(),
+                },
+            },
         };
         mockMedusaJsService = {
             getSdk: vi.fn(() => mockSdk),
             getStoreApiHeaders: vi.fn(() => ({})),
+            getMedusaAdminApiHeaders: vi.fn(() => ({ Authorization: 'Basic xxx' })),
         };
         mockAuthService = { getCustomerId: vi.fn() };
         mockConfig = {
@@ -111,6 +124,7 @@ describe('OrdersService', () => {
 
         it('should throw UnauthorizedException when guest tries to get customer order', async () => {
             mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
+            mockSdk.admin.customer.retrieve.mockResolvedValue({ customer: { has_account: true } });
 
             await expect(firstValueFrom(service.getOrder({ id: 'order_1' }, undefined))).rejects.toThrow(
                 UnauthorizedException,

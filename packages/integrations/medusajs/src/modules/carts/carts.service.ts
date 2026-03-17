@@ -18,6 +18,7 @@ import { Auth, Carts, Customers } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { verifyResourceAccess } from '../../utils/customer-access';
 import { handleHttpError } from '../../utils/handle-http-error';
 import { mapAddressToMedusa } from '../customers/customers.mapper';
 
@@ -27,6 +28,7 @@ import { mapCart } from './carts.mapper';
 export class CartsService extends Carts.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
+    private readonly defaultRegionId: string | undefined;
 
     private readonly cartItemsFields = '*items,*shipping_methods,*billing_address,*shipping_address';
 
@@ -40,6 +42,7 @@ export class CartsService extends Carts.Service {
         super();
         this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
+        this.defaultRegionId = this.config.get('DEFAULT_REGION_ID') || undefined;
 
         if (!this.defaultCurrency) {
             throw new InternalServerErrorException('DEFAULT_CURRENCY is not defined');
@@ -54,20 +57,16 @@ export class CartsService extends Carts.Service {
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response: HttpTypes.StoreCartResponse) => {
+            switchMap((response: HttpTypes.StoreCartResponse) => {
                 const cart = mapCart(response.cart, this.defaultCurrency);
 
-                // Verify ownership for customer carts
-                if (cart.customerId) {
-                    if (!authorization) {
-                        throw new UnauthorizedException('Authentication required to access this cart');
-                    }
-                    if (cart.customerId !== this.authService.getCustomerId(authorization)) {
-                        throw new UnauthorizedException('Unauthorized to access this cart');
-                    }
-                }
-
-                return cart;
+                return verifyResourceAccess(
+                    this.sdk,
+                    this.authService,
+                    this.medusaJsService.getMedusaAdminApiHeaders(),
+                    cart.customerId,
+                    authorization,
+                ).pipe(map(() => cart));
             }),
             catchError((error) => {
                 if (error.status === 404) {
@@ -146,8 +145,8 @@ export class CartsService extends Carts.Service {
     }
 
     addCartItem(data: Carts.Request.AddCartItemBody, authorization?: string): Observable<Carts.Model.Cart> {
-        if (!data.sku) {
-            throw new BadRequestException('SKU is required for Medusa carts');
+        if (!data.variantId) {
+            throw new BadRequestException('variantId is required for Medusa carts');
         }
 
         const customerId = authorization ? this.authService.getCustomerId(authorization) : undefined;
@@ -180,7 +179,7 @@ export class CartsService extends Carts.Service {
                         this.sdk.store.cart.createLineItem(
                             cartId,
                             {
-                                variant_id: data.sku,
+                                variant_id: data.variantId!,
                                 quantity: data.quantity,
                                 metadata: data.metadata,
                             },
@@ -200,7 +199,7 @@ export class CartsService extends Carts.Service {
 
         return this.createCartAndAddItem(
             data.currency,
-            data.sku,
+            data.variantId,
             data.quantity,
             data.regionId,
             data.metadata,
@@ -329,7 +328,7 @@ export class CartsService extends Carts.Service {
 
     private createCartAndAddItem(
         currency: string,
-        sku: string,
+        variantId: string,
         quantity: number,
         regionId?: string,
         metadata?: Record<string, unknown>,
@@ -339,7 +338,7 @@ export class CartsService extends Carts.Service {
             this.sdk.store.cart.create(
                 {
                     currency_code: currency.toLowerCase(),
-                    region_id: regionId,
+                    region_id: regionId || this.defaultRegionId,
                     metadata,
                 },
                 { fields: this.cartItemsFields },
@@ -351,7 +350,7 @@ export class CartsService extends Carts.Service {
                     this.sdk.store.cart.createLineItem(
                         createResponse.cart.id,
                         {
-                            variant_id: sku,
+                            variant_id: variantId,
                             quantity,
                             metadata,
                         },
