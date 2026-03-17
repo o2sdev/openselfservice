@@ -1,5 +1,24 @@
 # @o2s/integrations.mocked
 
+## 1.21.1
+
+### Patch Changes
+
+- 338cb01: Migrate integration services from `implements` to `extends` and add `super()` where needed
+  to keep constructor metadata compatible with NestJS dependency injection.
+
+    Update documentation examples to reflect the new `extends ...Service` pattern.
+
+- 338cb01: Refactor header access to use `HeaderName` constants instead of literal header keys across framework controllers, block harmonization services, and mocked auth guards.
+
+    This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
 ## 1.21.0
 
 ### Minor Changes

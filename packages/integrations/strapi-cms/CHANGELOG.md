@@ -1,5 +1,25 @@
 # @o2s/integrations.strapi-cms
 
+## 2.13.1
+
+### Patch Changes
+
+- 338cb01: Clarify Strapi integration documentation around external `openselfservice-resources` repository:
+  explain why content models and example data live in a separate resources repo, how to pick
+  the right export (`o2s` vs `dxp`), and provide a step-by-step flow for importing the content
+  model into a Strapi instance.
+- feb0a8c: chore(deps): update dependencies
+- 338cb01: Migrate integration services from `implements` to `extends` and add `super()` where needed
+  to keep constructor metadata compatible with NestJS dependency injection.
+
+    Update documentation examples to reflect the new `extends ...Service` pattern.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
 ## 2.13.0
 
 ### Minor Changes
