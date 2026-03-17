@@ -31,6 +31,7 @@ export const discoverBlocks = async (repoDir: string): Promise<BlockInfo[]> => {
 
                 blocks.push({
                     name: blockName,
+                    domain: domainEntry.name,
                     packageName: `@o2s/blocks.${blockName}`,
                     description: packageJson.description || `Block: ${blockName}`,
                     // Fallback to all templates when o2sTemplate is not declared
@@ -39,7 +40,7 @@ export const discoverBlocks = async (repoDir: string): Promise<BlockInfo[]> => {
             }
         }
 
-        return blocks.sort((a, b) => a.name.localeCompare(b.name));
+        return blocks.sort((a, b) => `${a.domain ?? ''}/${a.name}`.localeCompare(`${b.domain ?? ''}/${b.name}`));
     } catch (error) {
         console.error('Error fetching the block list:', error);
         throw new Error('Failed to fetch the block list.');

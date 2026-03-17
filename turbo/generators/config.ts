@@ -258,7 +258,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     'content',
                     'knowledge-base',
                     'services',
-                    'commerce',
+                    'orders',
                     'products',
                     'checkout',
                     'billing',

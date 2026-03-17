@@ -28,7 +28,7 @@ Blocks are grouped by domain to make ownership and discovery easier. Each block 
 - `service-details`
 - `featured-service-list`
 
-### commerce
+### orders
 - `order-list`
 - `order-details`
 - `orders-summary`

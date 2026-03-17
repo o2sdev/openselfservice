@@ -35,7 +35,7 @@ Blocks are grouped by domain under `packages/blocks/<domain>/<block>`.
 - `service-details`
 - `featured-service-list`
 
-### commerce
+### orders
 
 - `order-list`
 - `order-details`

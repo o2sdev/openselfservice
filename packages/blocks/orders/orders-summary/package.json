@@ -14,9 +14,9 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/o2sdev/openselfservice.git",
-        "directory": "packages/blocks/commerce/orders-summary"
+        "directory": "packages/blocks/orders/orders-summary"
     },
-    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/commerce/orders-summary#readme",
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/orders/orders-summary#readme",
     "bugs": {
         "url": "https://github.com/o2sdev/openselfservice/issues"
     },

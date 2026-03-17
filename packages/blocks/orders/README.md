@@ -1,4 +1,4 @@
-# commerce domain blocks
+# orders domain blocks
 
 ## Blocks
 

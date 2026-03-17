@@ -1,22 +1,22 @@
 {
-    "name": "@o2s/blocks.order-list",
-    "version": "1.6.0",
+    "name": "@o2s/blocks.order-details",
+    "version": "1.5.2",
     "private": false,
     "license": "MIT",
-    "description": "A block displaying a list of orders.",
+    "description": "A block displaying details for a specific order, including items, status, and history.",
     "keywords": [
         "o2s",
         "block",
         "orders",
         "ecommerce",
-        "medusa"
+        "order-details"
     ],
     "repository": {
         "type": "git",
         "url": "https://github.com/o2sdev/openselfservice.git",
-        "directory": "packages/blocks/commerce/order-list"
+        "directory": "packages/blocks/orders/order-details"
     },
-    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/commerce/order-list#readme",
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/orders/order-details#readme",
     "bugs": {
         "url": "https://github.com/o2sdev/openselfservice/issues"
     },
@@ -24,7 +24,7 @@
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
         "./sdk": "./dist/sdk/sdk/index.js",
-        "./client": "./dist/api-harmonization/api-harmonization/order-list.client.js"
+        "./client": "./dist/api-harmonization/api-harmonization/order-details.client.js"
     },
     "files": [
         "dist"
