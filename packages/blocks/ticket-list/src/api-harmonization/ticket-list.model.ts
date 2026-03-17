@@ -29,7 +29,7 @@ export class TicketListBlock extends ApiModels.Block.Block {
         ticketId?: string;
     };
     initialFilters?: Partial<Tickets.Model.Ticket & { sort?: string }>;
-    meta?: CMS.Model.TicketListBlock.TicketListBlock['meta'];
+    declare meta?: CMS.Model.TicketListBlock.TicketListBlock['meta'];
     cardHeaderSlots?: {
         top?: string;
         left?: string;

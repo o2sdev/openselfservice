@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Carts } from '@o2s/framework/modules';
 import { Sdk } from '@o2s/framework/sdk';
 
@@ -14,7 +14,7 @@ export const productList = (sdk: Sdk) => ({
     blocks: {
         getProductList: (
             query: Request.GetProductListBlockQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.ProductListBlock> =>
             sdk.makeRequest({
@@ -35,7 +35,7 @@ export const productList = (sdk: Sdk) => ({
     cart: {
         addCartItem: (
             body: Carts.Request.AddCartItemBody,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Carts.Model.Cart> =>
             sdk.makeRequest({

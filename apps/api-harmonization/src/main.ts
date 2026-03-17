@@ -9,8 +9,12 @@ import process from 'node:process';
 
 import { LoggerService } from '@o2s/utils.logger';
 
+import { HeaderName } from '@o2s/framework/headers';
+
 import { AppConfig } from './app.config';
 import { AppModule } from './app.module';
+
+const H = HeaderName;
 
 async function bootstrap() {
     const logLevel = (process.env.LOG_LEVEL === 'info' ? 'log' : process.env.LOG_LEVEL) as LogLevel;
@@ -40,9 +44,9 @@ async function bootstrap() {
             'Cache-Control',
             'Pragma',
             'Expires',
-            'x-locale',
-            'x-currency',
-            'x-client-timezone',
+            H.Locale,
+            H.Currency,
+            H.ClientTimezone,
         ],
         methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     });

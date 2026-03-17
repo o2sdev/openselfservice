@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Tickets } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapTicketList } from './ticket-list.mapper';
 import { TicketListBlock } from './ticket-list.model';
 import { GetTicketListBlockQuery } from './ticket-list.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class TicketListService {
@@ -18,11 +19,9 @@ export class TicketListService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getTicketListBlock(
-        query: GetTicketListBlockQuery,
-        headers: Models.Headers.AppHeaders,
-    ): Observable<TicketListBlock> {
-        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers['x-locale'] });
+    getTicketListBlock(query: GetTicketListBlockQuery, headers: AppHeaders): Observable<TicketListBlock> {
+        const authorization = headers[H.Authorization];
+        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -32,24 +31,24 @@ export class TicketListService {
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,
-                        locale: headers['x-locale'],
+                        locale: headers[H.Locale],
                     })
                     .pipe(
                         map((tickets) => {
                             const result = mapTicketList(
                                 tickets,
                                 cms,
-                                headers['x-locale'],
-                                headers['x-client-timezone'] || '',
+                                headers[H.Locale],
+                                headers[H.ClientTimezone] || '',
                             );
 
                             // Extract permissions using ACL service
-                            if (headers.authorization) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
-                                    'tickets',
-                                    ['view', 'create', 'delete'],
-                                );
+                            if (authorization) {
+                                const permissions = this.authService.canPerformActions(authorization, 'tickets', [
+                                    'view',
+                                    'create',
+                                    'delete',
+                                ]);
 
                                 result.permissions = {
                                     view: permissions.view ?? false,

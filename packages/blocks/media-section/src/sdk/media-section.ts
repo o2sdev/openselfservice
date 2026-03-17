@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/media-section.client';
@@ -12,7 +12,7 @@ export const mediaSection = (sdk: Sdk) => ({
     blocks: {
         getMediaSection: (
             query: Request.GetMediaSectionBlockQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.MediaSectionBlock> =>
             sdk.makeRequest({

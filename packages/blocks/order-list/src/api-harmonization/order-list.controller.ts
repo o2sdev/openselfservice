@@ -1,8 +1,8 @@
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { URL } from './';
@@ -16,7 +16,7 @@ export class OrderListController {
 
     @Get()
     @Auth.Decorators.Permissions({ resource: 'orders', actions: ['view'] })
-    getOrderListBlock(@Headers() headers: ApiModels.Headers.AppHeaders, @Query() query: GetOrderListBlockQuery) {
+    getOrderListBlock(@Headers() headers: AppHeaders, @Query() query: GetOrderListBlockQuery) {
         return this.service.getOrderListBlock(query, headers);
     }
 }

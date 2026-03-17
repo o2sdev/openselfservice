@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Carts } from '@o2s/framework/modules';
 import { Sdk } from '@o2s/framework/sdk';
 
@@ -13,7 +13,7 @@ export const recommendedProducts = (sdk: Sdk) => ({
         getRecommendedProducts: (
             params: { id: string },
             query?: Omit<Request.GetRecommendedProductsBlockQuery, 'id'>,
-            headers?: Models.Headers.AppHeaders,
+            headers?: AppHeaders,
             authorization?: string,
         ): Promise<Model.RecommendedProductsBlock> =>
             sdk.makeRequest({
@@ -37,7 +37,7 @@ export const recommendedProducts = (sdk: Sdk) => ({
     cart: {
         addCartItem: (
             body: Carts.Request.AddCartItemBody,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Carts.Model.Cart> =>
             sdk.makeRequest({

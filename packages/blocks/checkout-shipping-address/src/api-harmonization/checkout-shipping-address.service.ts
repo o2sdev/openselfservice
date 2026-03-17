@@ -2,13 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 
 // import { Auth } from '@o2s/framework/modules';
 
 import { mapCheckoutShippingAddress } from './checkout-shipping-address.mapper';
 import { CheckoutShippingAddressBlock } from './checkout-shipping-address.model';
 import { GetCheckoutShippingAddressBlockQuery } from './checkout-shipping-address.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class CheckoutShippingAddressService {
@@ -20,9 +22,9 @@ export class CheckoutShippingAddressService {
 
     getCheckoutShippingAddressBlock(
         query: GetCheckoutShippingAddressBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<CheckoutShippingAddressBlock> {
-        const cms = this.cmsService.getCheckoutShippingAddressBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getCheckoutShippingAddressBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             map(([cms]) => {

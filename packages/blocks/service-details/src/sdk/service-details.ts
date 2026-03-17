@@ -1,6 +1,6 @@
-import { Models } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/service-details.client';
@@ -13,7 +13,7 @@ export const serviceDetails = (sdk: Sdk) => ({
         getServiceDetails: (
             params: Request.GetServiceDetailsBlockParams,
             query: Request.GetServiceDetailsBlockQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.ServiceDetailsBlock> =>
             sdk.makeRequest({

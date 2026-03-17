@@ -1,8 +1,8 @@
 import { Tickets } from '@o2s/configs.integrations';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-export class TicketRecentBlock extends Models.Block.Block {
+export class TicketRecentBlock extends ApiModels.Block.Block {
     __typename!: 'TicketRecentBlock';
     title?: string;
     noResults?: string;
