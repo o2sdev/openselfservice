@@ -1,5 +1,16 @@
 # @o2s/integrations.medusajs
 
+## 1.11.1
+
+### Patch Changes
+
+- dd58165: chore(deps): update dependencies
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
 ## 1.11.0
 
 ### Minor Changes

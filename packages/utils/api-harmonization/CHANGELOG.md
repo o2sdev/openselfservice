@@ -1,5 +1,21 @@
 # @o2s/utils.api-harmonization
 
+## 0.3.3
+
+### Patch Changes
+
+- 338cb01: Introduce typed header name constants (`HeaderName`) using `as const` and
+  replace selected magic header strings in API harmonization and frontend code.
+
+    Update SDK header typing to use `AppHeaders` for stronger request typing.
+
+- 338cb01: fix(api-harmonization): align typed header usage across services and generated SDK/controller contracts
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
 ## 0.3.2
 
 ### Patch Changes
