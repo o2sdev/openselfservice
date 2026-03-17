@@ -1,17 +1,11 @@
 import { defineRouting } from 'next-intl/routing';
 
+import type { Models } from '@o2s/framework/modules';
+
 import type { Model } from '../api-harmonization/surveyjs.client';
 
-export interface SurveyJsFormProps {
-    id: string;
-    accessToken?: string;
-    locale: string;
-    routing: ReturnType<typeof defineRouting>;
-    hasPriority?: boolean;
-}
+export type SurveyJsFormProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>>;
 
 export type SurveyJsFormPureProps = SurveyJsFormProps & Model.SurveyjsBlock;
 
-export interface SurveyJsFormRendererProps extends Omit<SurveyJsFormProps, ''> {
-    slug: string[];
-}
+export type SurveyJsFormRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;
