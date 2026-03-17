@@ -9,7 +9,7 @@ import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-import { AppSpinner } from '@o2s/ui/components/AppSpinner';
+import { AppSpinner } from '@o2s/ui/components/feedback/AppSpinner';
 
 import { Toaster } from '@o2s/ui/elements/toaster';
 import { TooltipProvider } from '@o2s/ui/elements/tooltip';
@@ -40,7 +40,7 @@ const ReadmeDocsPage = () => {
 };
 
 const preview: Preview = {
-    loaders: [mswLoader],
+    loaders: [mswLoader as () => void | Record<string, unknown> | Promise<void | Record<string, unknown>>],
     parameters: {
         msw: {
             handlers: cartAndCheckoutHandlers,
@@ -57,19 +57,15 @@ const preview: Preview = {
                 date: /Date$/i,
             },
         },
-
         a11y: {
-            // 'todo' - show a11y violations in the test UI only
-            // 'error' - fail CI on a11y violations
-            // 'off' - skip a11y checks entirely
             test: 'todo',
         },
     },
     decorators: [
         (Story) => {
             // Set cartId for cart/checkout blocks - MSW handlers return mock data
-            if (typeof window !== 'undefined') {
-                window.localStorage.setItem('cartId', 'storybook-cart-1');
+            if (globalThis.window !== undefined) {
+                globalThis.window.localStorage.setItem('cartId', 'storybook-cart-1');
             }
             return <Story />;
         },

@@ -128,7 +128,7 @@ You can follow the instructions from the [Switching integrations chapter](./swit
 
 - use the new field in mappers that use notifications:
 
-```typescript title="packages/blocks/notification-list/src/api-harmonization/notification-list.mapper.ts"
+```typescript title="packages/blocks/notifications/notification-list/src/api-harmonization/notification-list.mapper.ts"
 export const mapNotification = (notification: Notifications.Model.Notification): Notification => {
     return {
         id: notification.id,
@@ -140,7 +140,7 @@ export const mapNotification = (notification: Notifications.Model.Notification):
 
 - use the new method in other services:
 
-```typescript title="packages/blocks/notification-details/src/api-harmonization/notification-details.service.ts"
+```typescript title="packages/blocks/notifications/notification-details/src/api-harmonization/notification-details.service.ts"
     getNotificationDetailsBlock(...): Observable<NotificationDetailsBlock> {
     const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers['x-locale'] });
     const notification = this.notificationService.getLatestCriticalNotification(); // usage of the new method

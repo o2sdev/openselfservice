@@ -1,8 +1,8 @@
-import { execSync } from 'child_process';
 import cliProgress from 'cli-progress';
 import * as fs from 'fs-extra';
-import * as os from 'os';
-import * as path from 'path';
+import { execSync } from 'node:child_process';
+import * as os from 'node:os';
+import * as path from 'node:path';
 import prompts, { PromptObject } from 'prompts';
 import simpleGit from 'simple-git';
 
@@ -14,7 +14,6 @@ const BRANCH = 'create-o2s-app/base';
 const BLOCKS_PATH = 'packages/blocks'; // Path to blocks directory in the repo relative to the branch
 const PROJECT_ROOT = path.resolve(__dirname, '../..'); // Adjust to project root
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'packages/blocks'); // Local target folder
-const _FRONTEND_DIR = path.join(PROJECT_ROOT, 'apps/frontend'); // Frontend app directory
 const TEMP_DIR = path.join(os.tmpdir(), `${PROJECT_NAME}-${Date.now()}`); // Temporary directory for cloning
 
 // Types
@@ -41,19 +40,40 @@ const cloneRepository = async (): Promise<string> => {
     }
 };
 
-// Get the list of blocks (top-level folders) from the local clone
+// Get the list of blocks from the local clone in packages/blocks/<domain>/<block>
 const fetchBlocksList = async (): Promise<FileEntry[]> => {
     try {
         const blocksDir = path.join(TEMP_DIR, BLOCKS_PATH);
-        const entries = await fs.readdir(blocksDir, { withFileTypes: true });
+        const domainEntries = await fs.readdir(blocksDir, { withFileTypes: true });
+        const blocks: FileEntry[] = [];
 
-        return entries
-            .filter((entry) => entry.isDirectory())
-            .map((entry) => ({
-                name: entry.name,
-                type: 'dir',
-                path: path.join(BLOCKS_PATH, entry.name),
-            }));
+        for (const domainEntry of domainEntries) {
+            if (!domainEntry.isDirectory()) {
+                continue;
+            }
+
+            const domainPath = path.join(blocksDir, domainEntry.name);
+            const blockEntries = await fs.readdir(domainPath, { withFileTypes: true });
+
+            for (const blockEntry of blockEntries) {
+                if (!blockEntry.isDirectory()) {
+                    continue;
+                }
+
+                const blockPath = path.join(BLOCKS_PATH, domainEntry.name, blockEntry.name);
+                const packageJsonPath = path.join(TEMP_DIR, blockPath, 'package.json');
+
+                if (await fs.pathExists(packageJsonPath)) {
+                    blocks.push({
+                        name: `${domainEntry.name}/${blockEntry.name}`,
+                        type: 'dir',
+                        path: blockPath,
+                    });
+                }
+            }
+        }
+
+        return blocks;
     } catch (error) {
         console.error('Error fetching the block list:', error);
         throw new Error('Failed to fetch the block list.');
@@ -178,13 +198,14 @@ export const ejectBlockCommand = async () => {
         // Copy each selected block
         for (const block of selectedBlocks) {
             const blockName = path.basename(block);
+            const blockRelativePath = path.relative(BLOCKS_PATH, block);
 
             console.log();
-            console.log(`Copying block: ${blockName}`);
+            console.log(`Copying block: ${blockRelativePath}`);
 
-            await copyBlock(block, path.join(OUTPUT_DIR, blockName));
+            await copyBlock(block, path.join(OUTPUT_DIR, blockRelativePath));
 
-            console.log(`Block "${blockName}" ejected successfully.`);
+            console.log(`Block "${blockRelativePath}" ejected successfully.`);
 
             // Install the ejected block in the frontend app
             await installBlockInFrontend(blockName);

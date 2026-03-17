@@ -5,8 +5,8 @@ import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-import { AppSpinner } from '@o2s/ui/components/AppSpinner';
-import { ErrorPage } from '@o2s/ui/components/ErrorPage';
+import { AppSpinner } from '@o2s/ui/components/feedback/AppSpinner';
+import { ErrorPage } from '@o2s/ui/components/feedback/ErrorPage';
 
 import { Toaster } from '@o2s/ui/elements/toaster';
 
