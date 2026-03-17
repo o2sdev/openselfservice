@@ -5,15 +5,9 @@ Blocks are grouped by domain to make ownership and discovery easier. Each block 
 ## Domain map
 
 ### content
-- `article`
-- `article-list`
-- `article-search`
-- `category`
-- `category-list`
 - `faq`
 - `document-list`
-
-### marketing
+- `quick-links`
 - `hero-section`
 - `feature-section`
 - `feature-section-grid`
@@ -21,6 +15,13 @@ Blocks are grouped by domain to make ownership and discovery easier. Each block 
 - `media-section`
 - `bento-grid`
 - `pricing-section`
+
+### knowledge-base
+- `article`
+- `article-list`
+- `article-search`
+- `category`
+- `category-list`
 
 ### services
 - `service-list`
@@ -31,9 +32,19 @@ Blocks are grouped by domain to make ownership and discovery easier. Each block 
 - `order-list`
 - `order-details`
 - `orders-summary`
-- `product-list`
+
+### products
 - `product-details`
+- `product-list`
 - `recommended-products`
+
+### checkout
+- `checkout-billing-payment`
+- `checkout-company-data`
+- `checkout-shipping-address`
+- `checkout-summary`
+- `cart`
+- `order-confirmation`
 
 ### billing
 - `invoice-list`
@@ -53,9 +64,6 @@ Blocks are grouped by domain to make ownership and discovery easier. Each block 
 
 ### account
 - `user-account`
-
-### navigation
-- `quick-links`
 
 ### forms
 - `surveyjs-form`
