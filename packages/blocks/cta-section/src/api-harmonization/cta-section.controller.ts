@@ -1,8 +1,8 @@
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { URL } from './';
@@ -16,7 +16,7 @@ export class CtaSectionController {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [] })
-    getCtaSectionBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetCtaSectionBlockQuery) {
+    getCtaSectionBlock(@Headers() headers: AppHeaders, @Query() query: GetCtaSectionBlockQuery) {
         return this.service.getCtaSectionBlock(query, headers);
     }
 }

@@ -1,8 +1,8 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-export class MediaSectionBlock extends Models.Block.Block {
+export class MediaSectionBlock extends ApiModels.Block.Block {
     __typename!: 'MediaSectionBlock';
     preTitle?: CMS.Model.MediaSectionBlock.MediaSectionBlock['preTitle'];
     title?: CMS.Model.MediaSectionBlock.MediaSectionBlock['title'];

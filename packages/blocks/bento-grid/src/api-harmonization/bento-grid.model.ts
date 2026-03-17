@@ -1,8 +1,8 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-export class BentoGridBlock extends Models.Block.Block {
+export class BentoGridBlock extends ApiModels.Block.Block {
     __typename!: 'BentoGridBlock';
     preTitle?: CMS.Model.BentoGridBlock.BentoGridBlock['preTitle'];
     title?: CMS.Model.BentoGridBlock.BentoGridBlock['title'];

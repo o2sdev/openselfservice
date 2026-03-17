@@ -20,7 +20,7 @@ this package provides a full integration with [Contentful CMS](https://www.conte
 First, install the Contentful integration package:
 
 ```shell
-npm install @o2s/integrations.contentful-cms --workspace=@o2s/configs.integrations --workspace=@o2s/frontend
+npm install @o2s/integrations.contentful-cms --workspace=@o2s/configs.integrations
 ```
 
 ## Environment variables

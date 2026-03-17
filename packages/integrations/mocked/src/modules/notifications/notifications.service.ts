@@ -8,7 +8,11 @@ import * as CustomNotifications from './notifications.model';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class NotificationsService implements Notifications.Service {
+export class NotificationsService extends Notifications.Service {
+    constructor() {
+        super();
+    }
+
     getNotification(
         params: Notifications.Request.GetNotificationParams,
     ): Observable<CustomNotifications.Notification | undefined> {

@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Products } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapProductList } from './product-list.mapper';
 import { ProductListBlock } from './product-list.model';
 import { GetProductListBlockQuery } from './product-list.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class ProductListService {
@@ -18,11 +19,8 @@ export class ProductListService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getProductListBlock(
-        query: GetProductListBlockQuery,
-        headers: Models.Headers.AppHeaders,
-    ): Observable<ProductListBlock> {
-        const cms = this.cmsService.getProductListBlock({ ...query, locale: headers['x-locale'] });
+    getProductListBlock(query: GetProductListBlockQuery, headers: AppHeaders): Observable<ProductListBlock> {
+        const cms = this.cmsService.getProductListBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -34,12 +32,12 @@ export class ProductListService {
                             offset: query.offset || 0,
                             type: 'PHYSICAL' as Products.Model.ProductType,
                             category: query.category,
-                            locale: headers['x-locale'],
+                            locale: headers[H.Locale],
                             basePath: cms.basePath,
                         },
-                        headers['authorization'],
+                        headers[H.Authorization],
                     )
-                    .pipe(map((products) => mapProductList(products, cms, headers['x-locale'])));
+                    .pipe(map((products) => mapProductList(products, cms, headers[H.Locale])));
             }),
         );
     }

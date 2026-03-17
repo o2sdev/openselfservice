@@ -1,8 +1,8 @@
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { URL } from './';
@@ -16,7 +16,7 @@ export class ServiceListController {
 
     @Get()
     @Auth.Decorators.Permissions({ resource: 'services', actions: ['view'] })
-    getServiceListBlock(@Headers() headers: ApiModels.Headers.AppHeaders, @Query() query: GetServiceListBlockQuery) {
+    getServiceListBlock(@Headers() headers: AppHeaders, @Query() query: GetServiceListBlockQuery) {
         return this.service.getServiceListBlock(query, headers);
     }
 }

@@ -1,7 +1,8 @@
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
+
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { URL } from './';
 import { GetProductListBlockQuery } from './product-list.request';
@@ -13,7 +14,7 @@ export class ProductListController {
     constructor(protected readonly service: ProductListService) {}
 
     @Get()
-    getProductListBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetProductListBlockQuery) {
+    getProductListBlock(@Headers() headers: AppHeaders, @Query() query: GetProductListBlockQuery) {
         return this.service.getProductListBlock(query, headers);
     }
 }

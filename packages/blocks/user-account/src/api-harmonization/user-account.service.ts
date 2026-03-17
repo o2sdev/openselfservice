@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Users } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapUserAccount } from './user-account.mapper';
 import { UserAccountBlock } from './user-account.model';
 import { GetUserAccountBlockQuery } from './user-account.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class UserAccountService {
@@ -18,23 +19,18 @@ export class UserAccountService {
         private readonly authService: Auth.Service,
     ) {}
 
-    getUserAccountBlock(
-        query: GetUserAccountBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
-    ): Observable<UserAccountBlock> {
-        const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers['x-locale'] });
-        const user = this.usersService.getUser({ id: query.userId }, headers.authorization);
+    getUserAccountBlock(query: GetUserAccountBlockQuery, headers: AppHeaders): Observable<UserAccountBlock> {
+        const authorization = headers[H.Authorization];
+        const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers[H.Locale] });
+        const user = this.usersService.getUser({ id: query.userId }, authorization);
 
         return forkJoin([cms, user]).pipe(
             map(([cms, user]) => {
-                const result = mapUserAccount(cms, headers['x-locale'], user);
+                const result = mapUserAccount(cms, headers[H.Locale], user);
 
                 // Extract permissions using ACL service
-                if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'settings', [
-                        'view',
-                        'edit',
-                    ]);
+                if (authorization) {
+                    const permissions = this.authService.canPerformActions(authorization, 'settings', ['view', 'edit']);
 
                     result.permissions = {
                         view: permissions.view ?? false,

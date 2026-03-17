@@ -7,7 +7,7 @@ sidebar_position: 150
 ## Install
 
 ```shell
-npm install @o2s/integrations.redis --workspace=@o2s/api
+npm install @o2s/integrations.redis --workspace=@o2s/configs.integrations
 ```
 
 ## Set up Redis instance

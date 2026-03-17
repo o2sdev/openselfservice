@@ -3,13 +3,14 @@ import { ConfigService } from '@nestjs/config';
 import { CMS, Orders } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { mapOrderDetails } from './order-details.mapper';
 import { OrderDetailsBlock } from './order-details.model';
 import { GetOrderDetailsBlockParams, GetOrderDetailsBlockQuery } from './order-details.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class OrderDetailsService {
@@ -27,9 +28,10 @@ export class OrderDetailsService {
     getOrderDetailsBlock(
         params: GetOrderDetailsBlockParams,
         query: GetOrderDetailsBlockQuery,
-        headers: ApiModels.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<OrderDetailsBlock> {
-        const cms = this.cmsService.getOrderDetailsBlock({ ...query, locale: headers['x-locale'] });
+        const authorization = headers[H.Authorization];
+        const cms = this.cmsService.getOrderDetailsBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -41,7 +43,7 @@ export class OrderDetailsService {
                             offset: query.offset || 0,
                             sort: query.sort || '',
                         },
-                        headers['authorization'],
+                        authorization,
                     )
                     .pipe(
                         map((order) => {
@@ -51,18 +53,19 @@ export class OrderDetailsService {
                             const result = mapOrderDetails(
                                 cms,
                                 order,
-                                headers['x-locale'],
-                                headers['x-client-timezone'] || '',
+                                headers[H.Locale],
+                                headers[H.ClientTimezone] || '',
                                 this.defaultProductUnit,
                             );
 
                             // Extract permissions using ACL service
-                            if (headers.authorization) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
-                                    'orders',
-                                    ['view', 'edit', 'cancel', 'track'],
-                                );
+                            if (authorization) {
+                                const permissions = this.authService.canPerformActions(authorization, 'orders', [
+                                    'view',
+                                    'edit',
+                                    'cancel',
+                                    'track',
+                                ]);
 
                                 result.permissions = {
                                     view: permissions.view ?? false,

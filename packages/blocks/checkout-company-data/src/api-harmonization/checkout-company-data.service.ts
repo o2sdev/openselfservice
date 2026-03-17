@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CMS } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 
 import { mapCheckoutCompanyData } from './checkout-company-data.mapper';
 import { CheckoutCompanyDataBlock } from './checkout-company-data.model';
 import { GetCheckoutCompanyDataBlockQuery } from './checkout-company-data.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class CheckoutCompanyDataService {
@@ -18,9 +20,9 @@ export class CheckoutCompanyDataService {
 
     getCheckoutCompanyDataBlock(
         query: GetCheckoutCompanyDataBlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<CheckoutCompanyDataBlock> {
-        const cms = this.cmsService.getCheckoutCompanyDataBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getCheckoutCompanyDataBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             map(([cms]) => {

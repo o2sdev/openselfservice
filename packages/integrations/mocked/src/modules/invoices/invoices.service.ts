@@ -9,7 +9,11 @@ import { mapInvoice, mapInvoices } from './invoices.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class InvoicesService implements Invoices.Service {
+export class InvoicesService extends Invoices.Service {
+    constructor() {
+        super();
+    }
+
     getInvoiceList(query: Invoices.Request.GetInvoiceListQuery): Observable<Invoices.Model.Invoices> {
         return of(mapInvoices(query)).pipe(responseDelay());
     }

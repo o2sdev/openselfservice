@@ -3,7 +3,11 @@ import { Injectable } from '@nestjs/common';
 import { Cache } from '@o2s/framework/modules';
 
 @Injectable()
-export class CacheService implements Cache.Service {
+export class CacheService extends Cache.Service {
+    constructor() {
+        super();
+    }
+
     del(_key: string): Promise<void> {
         return Promise.resolve(undefined);
     }
