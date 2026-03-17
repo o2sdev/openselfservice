@@ -47,6 +47,7 @@ export class DeleteCartParams {
 export class AddCartItemBody {
     cartId?: string; // Optional - if provided, use existing cart; if not, auto-create/find active cart
     sku!: string;
+    variantId?: string; // Optional - integration-specific variant identifier (e.g. Medusa variant UUID);
     quantity!: number;
     currency?: Price.Currency; // Required if creating new cart
     regionId?: string; // Required if creating new cart (for Medusa.js)

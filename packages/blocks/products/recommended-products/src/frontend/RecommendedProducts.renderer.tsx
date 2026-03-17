@@ -10,6 +10,7 @@ import { RecommendedProductsRendererProps } from './RecommendedProducts.types';
 export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererProps> = ({
     id,
     excludeProductId,
+    accessToken,
     routing,
     locale: propLocale,
 }) => {
@@ -25,7 +26,13 @@ export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererPr
                 </Container>
             }
         >
-            <RecommendedProducts id={id} excludeProductId={excludeProductId} locale={locale} routing={routing} />
+            <RecommendedProducts
+                id={id}
+                excludeProductId={excludeProductId}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

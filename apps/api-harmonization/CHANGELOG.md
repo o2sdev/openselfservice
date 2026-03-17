@@ -1,5 +1,77 @@
 # @o2s/api-harmonization
 
+## 1.18.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/blocks.article-list@1.6.1
+    - @o2s/blocks.article-search@1.6.1
+    - @o2s/blocks.article@1.5.1
+    - @o2s/blocks.bento-grid@0.6.1
+    - @o2s/blocks.category-list@1.6.1
+    - @o2s/blocks.category@1.6.1
+    - @o2s/blocks.cta-section@0.6.1
+    - @o2s/blocks.document-list@0.6.1
+    - @o2s/blocks.faq@1.5.1
+    - @o2s/blocks.feature-section-grid@0.5.1
+    - @o2s/blocks.feature-section@0.6.1
+    - @o2s/blocks.featured-service-list@1.4.1
+    - @o2s/blocks.hero-section@0.6.1
+    - @o2s/blocks.invoice-list@1.6.1
+    - @o2s/blocks.media-section@0.6.1
+    - @o2s/blocks.notification-details@1.5.1
+    - @o2s/blocks.notification-list@1.6.1
+    - @o2s/blocks.notification-summary@1.3.1
+    - @o2s/blocks.order-details@1.5.1
+    - @o2s/blocks.order-list@1.6.1
+    - @o2s/blocks.orders-summary@1.5.1
+    - @o2s/blocks.payments-history@1.4.1
+    - @o2s/blocks.payments-summary@1.4.1
+    - @o2s/blocks.pricing-section@0.6.1
+    - @o2s/blocks.product-details@0.3.0
+    - @o2s/blocks.product-list@0.5.0
+    - @o2s/blocks.quick-links@1.5.1
+    - @o2s/blocks.recommended-products@0.3.0
+    - @o2s/blocks.service-details@1.4.1
+    - @o2s/blocks.service-list@1.5.1
+    - @o2s/blocks.surveyjs-form@1.4.1
+    - @o2s/blocks.ticket-details@1.5.1
+    - @o2s/blocks.ticket-list@1.7.1
+    - @o2s/blocks.ticket-recent@1.4.1
+    - @o2s/blocks.ticket-summary@1.3.1
+    - @o2s/blocks.user-account@1.4.1
+    - @o2s/framework@1.20.0
+    - @o2s/integrations.mocked@1.21.0
+    - @o2s/modules.surveyjs@0.4.3
+    - @o2s/telemetry@1.2.2
+    - @o2s/utils.api-harmonization@0.3.2
+    - @o2s/utils.frontend@0.5.1
+    - @o2s/utils.logger@1.2.3
+
+## 1.17.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+- 0e61431: feat: update page model and integration to support redirects
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+    - @o2s/integrations.mocked@1.20.0
+    - @o2s/utils.frontend@0.5.0
+
 ## 1.16.0
 
 ### Minor Changes

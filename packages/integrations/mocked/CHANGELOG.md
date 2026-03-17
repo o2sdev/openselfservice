@@ -1,5 +1,34 @@
 # @o2s/integrations.mocked
 
+## 1.21.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
+## 1.20.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
 ## 1.19.0
 
 ### Minor Changes

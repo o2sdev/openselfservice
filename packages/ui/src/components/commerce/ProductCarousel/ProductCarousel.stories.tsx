@@ -32,6 +32,7 @@ type Story = StoryObj<typeof meta>;
 const sampleProducts: ProductSummaryItem[] = [
     {
         id: 'PRD-005',
+        sku: 'AG-125-A22',
         name: 'Cordless Angle Grinder',
         description: '<p>Cordless angle grinder with 22V battery platform</p>',
         image: {
@@ -52,6 +53,7 @@ const sampleProducts: ProductSummaryItem[] = [
     },
     {
         id: 'PRD-006',
+        sku: 'PD-S',
         name: 'Laser Measurement Device',
         description: '<p>Laser measurement device for distance measurements</p>',
         image: {
@@ -69,6 +71,7 @@ const sampleProducts: ProductSummaryItem[] = [
     },
     {
         id: 'PRD-007',
+        sku: 'SFC-22-A',
         name: 'Cordless Drill Driver',
         description: '<p>Cordless drill driver with 22V battery platform</p>',
         image: {
@@ -86,6 +89,7 @@ const sampleProducts: ProductSummaryItem[] = [
     },
     {
         id: 'PRD-008',
+        sku: 'CAL-PRO',
         name: 'Professional Calibration Service',
         description: '<p>ISO-Certified Calibration for industrial equipment</p>',
         image: {
@@ -103,6 +107,7 @@ const sampleProducts: ProductSummaryItem[] = [
     },
     {
         id: 'PRD-009',
+        sku: 'SAFE-PKG',
         name: 'Safety Equipment Package',
         description: '<p>Complete safety equipment for welding environments</p>',
         image: {
@@ -123,6 +128,7 @@ const sampleProducts: ProductSummaryItem[] = [
     },
     {
         id: 'PRD-010',
+        sku: 'BAT-22V',
         name: 'Power Tool Battery Pack',
         description: '<p>High-capacity battery pack for cordless tools</p>',
         image: {
@@ -145,7 +151,6 @@ export const Default: Story = {
         products: sampleProducts,
         title: 'Recommended Products',
         LinkComponent: MockLinkComponent,
-        linkDetailsLabel: 'View Details',
     },
 };
 
@@ -155,7 +160,6 @@ export const WithDescription: Story = {
         title: 'You Might Also Like',
         description: '<p>Check out these carefully selected products that complement your choice.</p>',
         LinkComponent: MockLinkComponent,
-        linkDetailsLabel: 'View Details',
     },
 };
 
@@ -170,6 +174,15 @@ export const WithAction: Story = {
             </Button>
         ),
         LinkComponent: MockLinkComponent,
-        linkDetailsLabel: 'View Details',
+    },
+};
+
+export const WithAddToCart: Story = {
+    args: {
+        products: sampleProducts,
+        title: 'Recommended Products',
+        LinkComponent: MockLinkComponent,
+        addToCartLabel: 'Add to Cart',
+        onAddToCart: (sku, currency) => console.log('Add to cart:', sku, currency),
     },
 };

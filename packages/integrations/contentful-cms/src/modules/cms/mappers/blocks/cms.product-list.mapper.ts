@@ -37,6 +37,11 @@ export const mapProductListBlock = (_locale: string): CMS.Model.ProductListBlock
             showMoreFilters: 'Show more filters',
             hideMoreFilters: 'Hide more filters',
             noActiveFilters: 'No active filters',
+            addToCartLabel: 'Add to Cart',
+            addToCartSuccess: '{productName} added to cart',
+            addToCartError: 'Failed to add product to cart',
+            viewCartLabel: 'View Cart',
         },
+        cartPath: '/cart',
     };
 };

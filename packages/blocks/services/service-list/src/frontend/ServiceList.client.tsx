@@ -95,10 +95,7 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
                                                 description={service.product.shortDescription}
                                                 image={service.product.image}
                                                 price={service.contract.price}
-                                                link={{
-                                                    label: data.detailsLabel,
-                                                    url: service.detailsUrl,
-                                                }}
+                                                link={service.detailsUrl}
                                                 status={{
                                                     label: service.contract.status.label,
                                                     variant:

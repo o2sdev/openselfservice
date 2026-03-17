@@ -9,6 +9,8 @@ export type Badge = {
 
 export type ProductSummary = {
     id: string;
+    sku: string;
+    variantId?: string;
     name: string;
     description?: string;
     image: Products.Model.Product['image'];
@@ -20,10 +22,15 @@ export type ProductSummary = {
 export type Labels = {
     title?: string;
     detailsLabel?: string;
+    addToCartLabel?: string;
+    addToCartSuccess?: string;
+    addToCartError?: string;
+    viewCartLabel?: string;
 };
 
 export type RecommendedProductsBlock = ApiModels.Block.Block & {
     __typename: 'RecommendedProductsBlock';
     products: ProductSummary[];
     labels: Labels;
+    cartPath?: string;
 };

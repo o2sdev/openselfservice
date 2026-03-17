@@ -107,7 +107,12 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
         showMoreFilters: 'Show more filters',
         hideMoreFilters: 'Hide more filters',
         noActiveFilters: 'No active filters',
+        addToCartLabel: 'Add to Cart',
+        addToCartSuccess: '{productName} added to cart',
+        addToCartError: 'Failed to add product to cart',
+        viewCartLabel: 'View Cart',
     },
+    cartPath: '/cart',
 };
 
 const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = {
@@ -217,7 +222,12 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
         showMoreFilters: 'Mehr Filter anzeigen',
         hideMoreFilters: 'Mehr Filter ausblenden',
         noActiveFilters: 'Keine aktiven Filter',
+        addToCartLabel: 'In den Warenkorb',
+        addToCartSuccess: '{productName} zum Warenkorb hinzugefügt',
+        addToCartError: 'Fehler beim Hinzufügen zum Warenkorb',
+        viewCartLabel: 'Warenkorb anzeigen',
     },
+    cartPath: '/warenkorb',
 };
 
 const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = {
@@ -327,7 +337,12 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
         showMoreFilters: 'Pokaż więcej filtrów',
         hideMoreFilters: 'Ukryj więcej filtrów',
         noActiveFilters: 'Brak aktywnych filtrów',
+        addToCartLabel: 'Dodaj do koszyka',
+        addToCartSuccess: '{productName} dodany do koszyka',
+        addToCartError: 'Nie udało się dodać produktu do koszyka',
+        viewCartLabel: 'Zobacz koszyk',
     },
+    cartPath: '/koszyk',
 };
 
 export const mapProductListBlock = (locale: string): CMS.Model.ProductListBlock.ProductListBlock => {

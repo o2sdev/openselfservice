@@ -9,6 +9,10 @@ export class Header {
         url: string;
         label: string;
     };
+    cart?: {
+        url: string;
+        label: string;
+    };
     languageSwitcherLabel!: string;
     mobileMenuLabel!: {
         open: string;

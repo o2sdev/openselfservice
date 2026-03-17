@@ -1,11 +1,8 @@
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import type { Models } from '@o2s/framework/modules';
 
 import { Price } from '@o2s/ui/components/commerce/Price';
-import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
@@ -14,24 +11,22 @@ import { Typography } from '@o2s/ui/elements/typography';
 interface PriceSectionProps {
     price: Models.Price.Price;
     priceLabel: string;
-    actionButton?: {
-        label: string;
-        variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-        icon?: string;
-    };
+    onAddToCart: () => void;
+    addToCartLabel: string;
     isOutOfStock?: boolean;
+    isAddingToCart?: boolean;
     className?: string;
 }
 
 export const PriceSection: React.FC<PriceSectionProps> = ({
     price,
     priceLabel,
-    actionButton,
+    onAddToCart,
+    addToCartLabel,
     isOutOfStock = false,
+    isAddingToCart = false,
     className,
 }) => {
-    const t = useTranslations();
-
     return (
         <div className={className}>
             <div className="flex flex-col gap-1 mb-4 items-end">
@@ -40,30 +35,18 @@ export const PriceSection: React.FC<PriceSectionProps> = ({
                     <Price price={price} />
                 </Typography>
             </div>
-            {actionButton && (
-                <>
-                    <Separator />
-                    <div className="flex flex-col gap-3 mt-6">
-                        <TooltipHover
-                            trigger={(setIsOpen) => (
-                                <Button
-                                    variant={actionButton.variant || 'default'}
-                                    size="lg"
-                                    className="w-full"
-                                    onClick={() => setIsOpen(true)}
-                                    disabled={isOutOfStock}
-                                >
-                                    {actionButton.icon && (
-                                        <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
-                                    )}
-                                    {actionButton.label}
-                                </Button>
-                            )}
-                            content={<p>{t('general.comingSoon')}</p>}
-                        />
-                    </div>
-                </>
-            )}
+            <Separator />
+            <div className="flex flex-col gap-3 mt-6">
+                <Button
+                    variant="default"
+                    size="lg"
+                    className="w-full"
+                    onClick={onAddToCart}
+                    disabled={isOutOfStock || isAddingToCart}
+                >
+                    {addToCartLabel}
+                </Button>
+            </div>
         </div>
     );
 };

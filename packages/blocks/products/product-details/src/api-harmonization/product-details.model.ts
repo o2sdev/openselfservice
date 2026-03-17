@@ -33,15 +33,7 @@ export type Product = Products.Model.Product & {
     detailedSpecs?: DetailedSpec[];
 };
 
-export type ActionButton = {
-    label: string;
-    href: string;
-    variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-    icon?: string;
-};
-
 export type Labels = {
-    actionButton?: string;
     download?: string;
     specifications: string;
     description: string;
@@ -49,11 +41,15 @@ export type Labels = {
     offer: string;
     variant?: string;
     outOfStock?: string;
+    addToCart: string;
+    addToCartSuccess: string;
+    addToCartError: string;
+    viewCart?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {
     __typename: 'ProductDetailsBlock';
     product: Product;
-    actionButton?: ActionButton;
     labels: Labels;
+    cartPath?: string;
 };

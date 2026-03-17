@@ -14,51 +14,51 @@ This document provides an overview of block implementation status in the Content
 
 The following table shows the implementation status of all blocks available in the O2S framework:
 
-| Block                 | Status | Contentful Type   | Notes             |
-| --------------------- | ------ | ----------------- | ----------------- |
-| article-list          | ✅     | BlockArticleList  | Fully implemented |
-| category-list         | ✅     | BlockCategoryList | Fully implemented |
-| faq                   | ✅     | BlockFaq          | Fully implemented |
-| quick-links           | ✅     | BlockQuickLinks   | Fully implemented |
-| ticket-list           | ✅     | BlockTicketList   | Fully implemented |
-| category              | ❌     | -                 | Not implemented   |
-| article-search        | ❌     | -                 | Not implemented   |
-| featured-service-list | ❌     | -                 | Not implemented   |
-| invoice-details       | ❌     | -                 | Not implemented   |
-| invoice-list          | ❌     | -                 | Not implemented   |
-| notification-details  | ❌     | -                 | Not implemented   |
-| notification-list     | ❌     | -                 | Not implemented   |
-| order-details         | ❌     | -                 | Not implemented   |
-| order-list            | ❌     | -                 | Not implemented   |
-| orders-summary        | ❌     | -                 | Not implemented   |
-| payments-history      | ❌     | -                 | Not implemented   |
-| payments-summary      | ❌     | -                 | Not implemented   |
+| Block                     | Status | Contentful Type   | Notes             |
+| ------------------------- | ------ | ----------------- | ----------------- |
+| article-list              | ✅     | BlockArticleList  | Fully implemented |
+| category-list             | ✅     | BlockCategoryList | Fully implemented |
+| faq                       | ✅     | BlockFaq          | Fully implemented |
+| quick-links               | ✅     | BlockQuickLinks   | Fully implemented |
+| ticket-list               | ✅     | BlockTicketList   | Fully implemented |
+| category                  | ❌     | -                 | Not implemented   |
+| article-search            | ❌     | -                 | Not implemented   |
+| featured-service-list     | ❌     | -                 | Not implemented   |
+| invoice-details           | ❌     | -                 | Not implemented   |
+| invoice-list              | ❌     | -                 | Not implemented   |
+| notification-details      | ❌     | -                 | Not implemented   |
+| notification-list         | ❌     | -                 | Not implemented   |
+| order-details             | ❌     | -                 | Not implemented   |
+| order-list                | ❌     | -                 | Not implemented   |
+| orders-summary            | ❌     | -                 | Not implemented   |
+| payments-history          | ❌     | -                 | Not implemented   |
+| payments-summary          | ❌     | -                 | Not implemented   |
 | cart                      | ❌     | -                 | Not implemented   |
 | checkout-billing-payment  | ❌     | -                 | Not implemented   |
 | checkout-company-data     | ❌     | -                 | Not implemented   |
 | checkout-shipping-address | ❌     | -                 | Not implemented   |
 | checkout-summary          | ❌     | -                 | Not implemented   |
 | order-confirmation        | ❌     | -                 | Not implemented   |
-| product-details       | ❌     | -                 | Not implemented   |
-| product-list          | ❌     | -                 | Not implemented   |
-| recommended-products  | ❌     | -                 | Not implemented   |
-| service-details       | ❌     | -                 | Not implemented   |
-| service-list          | ❌     | -                 | Not implemented   |
-| surveyjs-form         | ❌     | -                 | Not implemented   |
-| ticket-details        | ❌     | -                 | Not implemented   |
-| ticket-recent         | ❌     | -                 | Not implemented   |
-| user-account          | ❌     | -                 | Not implemented   |
-| article               | ❌     | -                 | Not implemented   |
-| bento-grid            | ❌     | -                 | Not implemented   |
-| cta-section           | ❌     | -                 | Not implemented   |
-| document-list         | ❌     | -                 | Not implemented   |
-| feature-section       | ❌     | -                 | Not implemented   |
-| feature-section-grid  | ❌     | -                 | Not implemented   |
-| hero-section          | ❌     | -                 | Not implemented   |
-| media-section         | ❌     | -                 | Not implemented   |
-| notification-summary  | ❌     | -                 | Not implemented   |
-| pricing-section       | ❌     | -                 | Not implemented   |
-| ticket-summary        | ❌     | -                 | Not implemented   |
+| product-details           | ❌     | -                 | Not implemented   |
+| product-list              | ❌     | -                 | Not implemented   |
+| recommended-products      | ❌     | -                 | Not implemented   |
+| service-details           | ❌     | -                 | Not implemented   |
+| service-list              | ❌     | -                 | Not implemented   |
+| surveyjs-form             | ❌     | -                 | Not implemented   |
+| ticket-details            | ❌     | -                 | Not implemented   |
+| ticket-recent             | ❌     | -                 | Not implemented   |
+| user-account              | ❌     | -                 | Not implemented   |
+| article                   | ❌     | -                 | Not implemented   |
+| bento-grid                | ❌     | -                 | Not implemented   |
+| cta-section               | ❌     | -                 | Not implemented   |
+| document-list             | ❌     | -                 | Not implemented   |
+| feature-section           | ❌     | -                 | Not implemented   |
+| feature-section-grid      | ❌     | -                 | Not implemented   |
+| hero-section              | ❌     | -                 | Not implemented   |
+| media-section             | ❌     | -                 | Not implemented   |
+| notification-summary      | ❌     | -                 | Not implemented   |
+| pricing-section           | ❌     | -                 | Not implemented   |
+| ticket-summary            | ❌     | -                 | Not implemented   |
 
 ## Mocked blocks
 

@@ -107,38 +107,34 @@ export const Default: Story = {
             ],
             location: 'Chicago, IL',
         },
-        actionButton: {
-            label: 'Request Quote',
-            href: 'https://example.com/products/xl-2000',
-            variant: 'default',
-            icon: 'MessageCircle',
-        },
         labels: {
             specifications: 'Specifications',
             description: 'Description',
             download: 'Download Brochure',
             price: 'Price',
             offer: 'Offer',
+            addToCart: 'Add to Cart',
+            addToCartSuccess: 'Product added to cart',
+            addToCartError: 'Failed to add product to cart',
         },
         hasPriority: false,
     },
 };
 
-export const WithSecondaryButton: Story = {
+export const OutOfStock: Story = {
     args: {
         ...Default.args,
-        actionButton: {
-            label: 'Add to Cart',
-            href: 'https://example.com/products/xl-2000',
-            variant: 'secondary',
-            icon: 'ShoppingCart',
+        product: {
+            ...Default.args.product,
+            variants: [
+                {
+                    id: 'var-1',
+                    title: 'Default',
+                    slug: 'default',
+                    inStock: false,
+                },
+            ],
+            variantId: 'var-1',
         },
-    },
-};
-
-export const WithoutActionButton: Story = {
-    args: {
-        ...Default.args,
-        actionButton: undefined,
     },
 };

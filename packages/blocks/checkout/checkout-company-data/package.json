@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.checkout-company-data",
-    "version": "0.0.1",
+    "version": "0.1.1",
     "private": false,
     "license": "MIT",
     "description": "Checkout step for company details, tax ID, billing address, order notes, and cart summary preview.",
@@ -38,7 +38,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.1",
+        "eslint": "^9.39.4",
         "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
