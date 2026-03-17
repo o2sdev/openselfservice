@@ -43,7 +43,7 @@
         "@o2s/utils.logger": "*",
         "contentful": "^11.10.5",
         "flatted": "^3.4.1",
-        "graphql": "16.13.0",
+        "graphql": "16.13.1",
         "graphql-request": "7.4.0",
         "graphql-tag": "2.12.6"
     },
