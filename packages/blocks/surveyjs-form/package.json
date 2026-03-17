@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.surveyjs-form",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "private": false,
     "license": "MIT",
     "description": "A block displaying a SurveyJS-based form that can be submitted.",
@@ -52,7 +52,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "survey-core": "^2.5.12",
         "survey-react-ui": "^2.5.12",

@@ -7,7 +7,11 @@ import { mapProduct, mapProducts, mapRelatedProducts } from './products.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class ProductsService implements Products.Service {
+export class ProductsService extends Products.Service {
+    constructor() {
+        super();
+    }
+
     getProductList(
         query: Products.Request.GetProductListQuery,
         _authorization?: string,

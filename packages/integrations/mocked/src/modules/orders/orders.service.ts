@@ -7,8 +7,10 @@ import { mapOrder, mapOrders } from './orders.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class OrdersService implements Orders.Service {
-    constructor(private readonly authService: Auth.Service) {}
+export class OrdersService extends Orders.Service {
+    constructor(private readonly authService: Auth.Service) {
+        super();
+    }
 
     getOrderList(
         query: Orders.Request.GetOrderListQuery,
@@ -31,10 +33,24 @@ export class OrdersService implements Orders.Service {
         params: Orders.Request.GetOrderParams,
         authorization: string | undefined,
     ): Observable<Orders.Model.Order | undefined> {
-        if (!authorization) {
-            throw new UnauthorizedException('Unauthorized');
+        const order = mapOrder(params);
+
+        if (!order) {
+            return of(undefined).pipe(responseDelay());
         }
 
-        return of(mapOrder(params)).pipe(responseDelay());
+        if (order.customerId) {
+            // Order belongs to a customer — only that customer can access it
+            if (!authorization) {
+                throw new UnauthorizedException('Unauthorized');
+            }
+            const customerId = this.authService.getCustomerId(authorization);
+            if (order.customerId !== customerId) {
+                throw new UnauthorizedException('Unauthorized');
+            }
+        }
+        // Guest order (no customerId) — accessible to anyone with the order ID
+
+        return of(order).pipe(responseDelay());
     }
 }

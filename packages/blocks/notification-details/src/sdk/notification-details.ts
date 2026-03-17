@@ -1,6 +1,6 @@
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/notification-details.client';
@@ -13,7 +13,7 @@ export const notificationDetails = (sdk: Sdk) => ({
         getNotificationDetails: (
             params: Request.GetNotificationDetailsBlockParams,
             query: Request.GetNotificationDetailsBlockQuery,
-            headers: ApiModels.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.NotificationDetailsBlock> =>
             sdk.makeRequest({
@@ -32,7 +32,7 @@ export const notificationDetails = (sdk: Sdk) => ({
             }),
         markNotificationAs: (
             body: Request.MarkNotificationAsBlockBody,
-            headers: ApiModels.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<void> =>
             sdk.makeRequest({

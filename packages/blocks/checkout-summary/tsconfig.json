@@ -1,0 +1,18 @@
+{
+    "extends": "@o2s/typescript-config/base.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "baseUrl": "./src",
+    },
+    "references": [
+        { "path": "./tsconfig.frontend.json" },
+        { "path": "./tsconfig.api.json" },
+        { "path": "./tsconfig.sdk.json" }
+    ]
+}

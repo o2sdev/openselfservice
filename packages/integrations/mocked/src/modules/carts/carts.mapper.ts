@@ -1,7 +1,7 @@
 import { Carts, Models, Products } from '@o2s/framework/modules';
 
 import { getMockProviderById, getPaymentMethodDisplay } from '../payments/mocks/providers.mock';
-import { mapProductBySku } from '../products/products.mapper';
+import { mapProductBySku, mapProductByVariantId } from '../products/products.mapper';
 
 // Read payment method stored in metadata by setPayment
 const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
@@ -239,14 +239,20 @@ export const addCartItem = (
 
     let product: Products.Model.Product;
     try {
-        product = mapProductBySku(data.sku, locale);
+        if (data.variantId) {
+            const found = mapProductByVariantId(data.variantId, locale);
+            if (!found) return undefined;
+            product = found;
+        } else {
+            product = mapProductBySku(data.sku, locale);
+        }
     } catch {
         return undefined;
     }
 
     const cart = cartsStore[cartIndex]!;
 
-    const existingIndex = cart.items.data.findIndex((item) => matchesSku(item, data.sku));
+    const existingIndex = cart.items.data.findIndex((item) => matchesSku(item, product.sku));
 
     if (existingIndex !== -1) {
         const item = cart.items.data[existingIndex]!;

@@ -9,6 +9,7 @@ import { ProductDetailsRendererProps } from './ProductDetails.types';
 export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
     id,
     slug,
+    accessToken,
     routing,
     locale: propLocale,
     hasPriority,
@@ -42,6 +43,7 @@ export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
                 id={id}
                 productId={slug[1]}
                 variantSlug={slug[2]}
+                accessToken={accessToken}
                 locale={locale}
                 routing={routing}
                 hasPriority={hasPriority}

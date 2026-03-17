@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
@@ -95,6 +95,10 @@ export default async function Page({ params }: Props) {
             { 'x-locale': locale },
             session?.accessToken,
         );
+
+        if (meta.redirect) {
+            redirect(`/${locale}${meta.redirect}`);
+        }
 
         if (session?.user && session?.error === 'RefreshTokenError') {
             return await signIn();

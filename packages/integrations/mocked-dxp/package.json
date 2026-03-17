@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked-dxp",
-    "version": "1.0.0",
+    "version": "1.1.1",
     "private": false,
     "license": "MIT",
     "description": "Mocked DXP integration for O2S, providing in-memory data for DXP demo flows.",
@@ -51,7 +51,7 @@
         "@o2s/vitest-config": "*",
         "@o2s/telemetry": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

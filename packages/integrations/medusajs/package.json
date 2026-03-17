@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.medusajs",
-    "version": "1.9.0",
+    "version": "1.11.0",
     "private": false,
     "license": "MIT",
     "description": "MedusaJS integration for O2S, providing ecommerce functionality including products, orders, and carts.",
@@ -42,8 +42,8 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@medusajs/js-sdk": "^2.13.2",
-        "@medusajs/types": "^2.13.2",
+        "@medusajs/js-sdk": "^2.13.4",
+        "@medusajs/types": "^2.13.4",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "slugify": "^1.6.6"
@@ -55,7 +55,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",

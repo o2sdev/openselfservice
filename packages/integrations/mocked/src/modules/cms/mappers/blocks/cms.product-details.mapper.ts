@@ -3,7 +3,6 @@ import { CMS } from '@o2s/framework/modules';
 const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
     id: 'product-details-1',
     labels: {
-        actionButtonLabel: 'Request Quote',
         specificationsTitle: 'Details',
         descriptionTitle: 'Description',
         downloadLabel: 'Download Brochure',
@@ -11,8 +10,13 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
         offerLabel: 'Offer',
         variantLabel: 'Variant',
         outOfStockLabel: 'Out of Stock',
+        addToCartLabel: 'Add to Cart',
+        addToCartSuccess: '{productName} added to cart',
+        addToCartError: 'Failed to add product to cart',
+        viewCartLabel: 'View Cart',
     },
     basePath: '/products',
+    cartPath: '/cart',
     attributes: [
         { key: 'weight', label: 'Weight (kg)', showInKeySpecs: true, icon: 'Weight' },
         { key: 'height', label: 'Height (cm)', showInKeySpecs: true, icon: 'Ruler' },
@@ -31,7 +35,6 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
 const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
     id: 'product-details-1',
     labels: {
-        actionButtonLabel: 'Angebot anfordern',
         specificationsTitle: 'Produktdetails',
         descriptionTitle: 'Beschreibung',
         downloadLabel: 'Broschüre herunterladen',
@@ -39,8 +42,13 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
         offerLabel: 'Angebot',
         variantLabel: 'Variante',
         outOfStockLabel: 'Nicht auf Lager',
+        addToCartLabel: 'In den Warenkorb',
+        addToCartSuccess: '{productName} zum Warenkorb hinzugefügt',
+        addToCartError: 'Fehler beim Hinzufügen zum Warenkorb',
+        viewCartLabel: 'Warenkorb anzeigen',
     },
     basePath: '/produkte',
+    cartPath: '/warenkorb',
     attributes: [
         { key: 'weight', label: 'Gewicht (kg)', showInKeySpecs: true, icon: 'Weight' },
         { key: 'height', label: 'Höhe (cm)', showInKeySpecs: true, icon: 'Ruler' },
@@ -59,7 +67,6 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
 const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
     id: 'product-details-1',
     labels: {
-        actionButtonLabel: 'Zapytaj o ofertę',
         specificationsTitle: 'Szczegóły',
         descriptionTitle: 'Opis',
         downloadLabel: 'Pobierz broszurę',
@@ -67,8 +74,13 @@ const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetail
         offerLabel: 'Oferta',
         variantLabel: 'Wariant',
         outOfStockLabel: 'Brak na magazynie',
+        addToCartLabel: 'Dodaj do koszyka',
+        addToCartSuccess: '{productName} dodany do koszyka',
+        addToCartError: 'Nie udało się dodać produktu do koszyka',
+        viewCartLabel: 'Zobacz koszyk',
     },
     basePath: '/produkty',
+    cartPath: '/koszyk',
     attributes: [
         { key: 'weight', label: 'Waga (kg)', showInKeySpecs: true, icon: 'Weight' },
         { key: 'height', label: 'Wysokość (cm)', showInKeySpecs: true, icon: 'Ruler' },

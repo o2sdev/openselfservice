@@ -5,8 +5,13 @@ import * as ArticleList from '@o2s/blocks.article-list/frontend';
 import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
 import * as Article from '@o2s/blocks.article/frontend';
 import * as BentoGrid from '@o2s/blocks.bento-grid/frontend';
+import * as Cart from '@o2s/blocks.cart/frontend';
 import * as CategoryList from '@o2s/blocks.category-list/frontend';
 import * as Category from '@o2s/blocks.category/frontend';
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/frontend';
+import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/frontend';
+import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/frontend';
+import * as CheckoutSummary from '@o2s/blocks.checkout-summary/frontend';
 import * as CtaSection from '@o2s/blocks.cta-section/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as FeatureSectionGrid from '@o2s/blocks.feature-section-grid/frontend';
@@ -18,6 +23,7 @@ import * as MediaSection from '@o2s/blocks.media-section/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/frontend';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/frontend';
 import * as OrderDetails from '@o2s/blocks.order-details/frontend';
 import * as OrderList from '@o2s/blocks.order-list/frontend';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
@@ -62,6 +68,8 @@ interface BlockProps {
     isDraftModeEnabled?: boolean;
 }
 
+type BlockRenderer = (blockProps: BlockProps) => React.ReactNode;
+
 export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
     const session = await auth();
     const locale = await getLocale();
@@ -97,80 +105,60 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
     });
 };
 
+const BLOCK_REGISTRY = {
+    TicketListBlock: (blockProps) => <TicketList.Renderer {...blockProps} />,
+    TicketRecentBlock: (blockProps) => <TickeRecent.Renderer {...blockProps} />,
+    TicketDetailsBlock: (blockProps) => <TicketDetails.Renderer {...blockProps} />,
+    NotificationListBlock: (blockProps) => <NotificationList.Renderer {...blockProps} />,
+    NotificationDetailsBlock: (blockProps) => <NotificationDetails.Renderer {...blockProps} />,
+    FaqBlock: (blockProps) => <Faq.Renderer {...blockProps} />,
+    InvoiceListBlock: (blockProps) => <InvoiceList.Renderer {...blockProps} />,
+    PaymentsSummaryBlock: (blockProps) => <PaymentsSummary.Renderer {...blockProps} />,
+    PaymentsHistoryBlock: (blockProps) => <PaymentsHistory.Renderer {...blockProps} />,
+    UserAccountBlock: (blockProps) => <UserAccount.Renderer {...blockProps} onSignOut={onSignOut} />,
+    ServiceListBlock: (blockProps) => <ServiceList.Renderer {...blockProps} />,
+    ServiceDetailsBlock: (blockProps) => <ServiceDetails.Renderer {...blockProps} />,
+    SurveyJsBlock: (blockProps) => <SurveyJsForm.Renderer {...blockProps} />,
+    OrderListBlock: (blockProps) => <OrderList.Renderer {...blockProps} />,
+    OrdersSummaryBlock: (blockProps) => <OrdersSummary.Renderer {...blockProps} />,
+    OrderDetailsBlock: (blockProps) => <OrderDetails.Renderer {...blockProps} />,
+    QuickLinksBlock: (blockProps) => <QuickLinks.Renderer {...blockProps} />,
+    CategoryListBlock: (blockProps) => <CategoryList.Renderer {...blockProps} />,
+    ArticleListBlock: (blockProps) => <ArticleList.Renderer {...blockProps} />,
+    CategoryBlock: (blockProps) => <Category.Renderer {...blockProps} renderBlocks={renderBlocks} />,
+    ArticleBlock: (blockProps) => <Article.Renderer {...blockProps} />,
+    ArticleSearchBlock: (blockProps) => <ArticleSearch.Renderer {...blockProps} />,
+    FeaturedServiceListBlock: (blockProps) => <FeaturedServiceList.Renderer {...blockProps} />,
+    ProductListBlock: (blockProps) => <ProductList.Renderer {...blockProps} />,
+    NotificationSummaryBlock: (blockProps) => <NotificationSummary.Renderer {...blockProps} />,
+    TicketSummaryBlock: (blockProps) => <TicketSummary.Renderer {...blockProps} />,
+    ProductDetailsBlock: (blockProps) => <ProductDetails.Renderer {...blockProps} />,
+    RecommendedProductsBlock: (blockProps) => <RecommendedProducts.Renderer {...blockProps} />,
+    OrderConfirmationBlock: (blockProps) => <OrderConfirmation.Renderer {...blockProps} />,
+    CheckoutBillingPaymentBlock: (blockProps) => <CheckoutBillingPayment.Renderer {...blockProps} />,
+    CheckoutCompanyDataBlock: (blockProps) => <CheckoutCompanyData.Renderer {...blockProps} />,
+    CheckoutShippingAddressBlock: (blockProps) => <CheckoutShippingAddress.Renderer {...blockProps} />,
+    CheckoutSummaryBlock: (blockProps) => <CheckoutSummary.Renderer {...blockProps} />,
+    CartBlock: (blockProps) => <Cart.Renderer {...blockProps} />,
+    HeroSectionBlock: (blockProps) => <HeroSection.Renderer {...blockProps} />,
+    BentoGridBlock: (blockProps) => <BentoGrid.Renderer {...blockProps} />,
+    FeatureSectionBlock: (blockProps) => <FeatureSection.Renderer {...blockProps} />,
+    CtaSectionBlock: (blockProps) => <CtaSection.Renderer {...blockProps} />,
+    MediaSectionBlock: (blockProps) => <MediaSection.Renderer {...blockProps} />,
+    PricingSectionBlock: (blockProps) => <PricingSection.Renderer {...blockProps} />,
+    FeatureSectionGridBlock: (blockProps) => <FeatureSectionGrid.Renderer {...blockProps} />,
+    // BLOCK REGISTER
+} satisfies Record<Modules.Page.Model.Blocks, BlockRenderer>;
+
+const isRegisteredBlock = (typename: string): typename is keyof typeof BLOCK_REGISTRY => {
+    return typename in BLOCK_REGISTRY;
+};
+
 const renderBlock = (typename: string, blockProps: BlockProps) => {
-    switch (typename as Modules.Page.Model.Blocks) {
-        case 'TicketListBlock':
-            return <TicketList.Renderer {...blockProps} />;
-        case 'TicketRecentBlock':
-            return <TickeRecent.Renderer {...blockProps} />;
-        case 'TicketDetailsBlock':
-            return <TicketDetails.Renderer {...blockProps} />;
-        case 'NotificationListBlock':
-            return <NotificationList.Renderer {...blockProps} />;
-        case 'NotificationDetailsBlock':
-            return <NotificationDetails.Renderer {...blockProps} />;
-        case 'FaqBlock':
-            return <Faq.Renderer {...blockProps} />;
-        case 'InvoiceListBlock':
-            return <InvoiceList.Renderer {...blockProps} />;
-        case 'PaymentsSummaryBlock':
-            return <PaymentsSummary.Renderer {...blockProps} />;
-        case 'PaymentsHistoryBlock':
-            return <PaymentsHistory.Renderer {...blockProps} />;
-        case 'UserAccountBlock':
-            return <UserAccount.Renderer {...blockProps} onSignOut={onSignOut} />;
-        case 'ServiceListBlock':
-            return <ServiceList.Renderer {...blockProps} />;
-        case 'ServiceDetailsBlock':
-            return <ServiceDetails.Renderer {...blockProps} />;
-        case 'SurveyJsBlock':
-            return <SurveyJsForm.Renderer {...blockProps} />;
-        case 'OrderListBlock':
-            return <OrderList.Renderer {...blockProps} />;
-        case 'OrdersSummaryBlock':
-            return <OrdersSummary.Renderer {...blockProps} />;
-        case 'OrderDetailsBlock':
-            return <OrderDetails.Renderer {...blockProps} />;
-        case 'QuickLinksBlock':
-            return <QuickLinks.Renderer {...blockProps} />;
-        case 'CategoryListBlock':
-            return <CategoryList.Renderer {...blockProps} />;
-        case 'ArticleListBlock':
-            return <ArticleList.Renderer {...blockProps} />;
-        case 'CategoryBlock':
-            return <Category.Renderer {...blockProps} renderBlocks={renderBlocks} />;
-        case 'ArticleBlock':
-            return <Article.Renderer {...blockProps} />;
-        case 'ArticleSearchBlock':
-            return <ArticleSearch.Renderer {...blockProps} />;
-        case 'FeaturedServiceListBlock':
-            return <FeaturedServiceList.Renderer {...blockProps} />;
-        case 'ProductListBlock':
-            return <ProductList.Renderer {...blockProps} />;
-        case 'NotificationSummaryBlock':
-            return <NotificationSummary.Renderer {...blockProps} />;
-        case 'TicketSummaryBlock':
-            return <TicketSummary.Renderer {...blockProps} />;
-        case 'ProductDetailsBlock':
-            return <ProductDetails.Renderer {...blockProps} />;
-        case 'RecommendedProductsBlock':
-            return <RecommendedProducts.Renderer {...blockProps} />;
-        case 'HeroSectionBlock':
-            return <HeroSection.Renderer {...blockProps} />;
-        case 'BentoGridBlock':
-            return <BentoGrid.Renderer {...blockProps} />;
-        case 'FeatureSectionBlock':
-            return <FeatureSection.Renderer {...blockProps} />;
-        case 'CtaSectionBlock':
-            return <CtaSection.Renderer {...blockProps} />;
-        case 'MediaSectionBlock':
-            return <MediaSection.Renderer {...blockProps} />;
-        case 'PricingSectionBlock':
-            return <PricingSection.Renderer {...blockProps} />;
-        case 'FeatureSectionGridBlock':
-            return <FeatureSectionGrid.Renderer {...blockProps} />;
-        // BLOCK REGISTER
-        default:
-            return null;
+    if (!isRegisteredBlock(typename)) {
+        console.warn(`[O2S] Unknown block type: "${typename}". Register it in renderBlocks.tsx`);
+        return null;
     }
+
+    return BLOCK_REGISTRY[typename](blockProps);
 };

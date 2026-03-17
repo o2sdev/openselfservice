@@ -47,7 +47,6 @@ export const mapProductDetails = (
     };
 
     const labels: Model.Labels = {
-        actionButton: cms.labels.actionButtonLabel,
         specifications: cms.labels.specificationsTitle,
         description: cms.labels.descriptionTitle,
         download: cms.labels.downloadLabel,
@@ -55,21 +54,17 @@ export const mapProductDetails = (
         offer: cms.labels.offerLabel,
         variant: cms.labels.variantLabel,
         outOfStock: cms.labels.outOfStockLabel,
+        addToCart: cms.labels.addToCartLabel,
+        addToCartSuccess: cms.labels.addToCartSuccess,
+        addToCartError: cms.labels.addToCartError,
+        viewCart: cms.labels.viewCartLabel,
     };
 
     return {
         __typename: 'ProductDetailsBlock',
         id: product.id,
         product: mappedProduct,
-        actionButton:
-            labels.actionButton && product.link
-                ? {
-                      label: labels.actionButton,
-                      href: product.link,
-                      variant: 'default',
-                      icon: 'MessageCircle',
-                  }
-                : undefined,
         labels,
+        cartPath: cms.cartPath,
     };
 };

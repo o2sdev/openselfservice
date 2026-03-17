@@ -1,8 +1,8 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-export class HeroSectionBlock extends Models.Block.Block {
+export class HeroSectionBlock extends ApiModels.Block.Block {
     __typename!: 'HeroSectionBlock';
     preTitle?: CMS.Model.HeroSectionBlock.HeroSectionBlock['preTitle'];
     title!: CMS.Model.HeroSectionBlock.HeroSectionBlock['title'];

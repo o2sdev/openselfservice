@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.user-account",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "private": false,
     "license": "MIT",
     "description": "A block displaying and managing user account information.",
@@ -51,7 +51,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

@@ -1,8 +1,7 @@
 import { Modules } from '@o2s/api-harmonization';
 import { URL } from '@o2s/api-harmonization/modules/page/page.url';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { getApiHeaders } from '../../utils/api';
@@ -13,7 +12,7 @@ export const page = (sdk: Sdk) => ({
     modules: {
         getInit: (
             params: Modules.Page.Request.GetInitQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Modules.Page.Model.Init> =>
             sdk.makeRequest({
@@ -32,7 +31,7 @@ export const page = (sdk: Sdk) => ({
             }),
         getPage: (
             params: Modules.Page.Request.GetPageQuery,
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Modules.Page.Model.Page> =>
             sdk.makeRequest({

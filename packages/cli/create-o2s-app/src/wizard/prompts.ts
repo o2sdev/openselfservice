@@ -95,10 +95,30 @@ export const runWizardPrompts = async (
     let selectedIntegrations: string[];
 
     if (template === 'custom') {
+        const tipLines = [
+            `${kleur.blue().bold('Tip:')} Not sure which blocks to pick?`,
+            `Browse our Storybook to preview all available components:`,
+            kleur.cyan(STORYBOOK_URL),
+        ];
+        const tipWidth = Math.max(
+            'Tip: Not sure which blocks to pick?'.length,
+            'Browse our Storybook to preview all available components:'.length,
+            STORYBOOK_URL.length,
+        );
+        const boxWidth = tipWidth + 4;
+
         console.log();
-        console.log(kleur.cyan().bold('  Tip:') + ' Not sure which blocks to pick?');
-        console.log(`  Browse our Storybook to preview all available components:`);
-        console.log(kleur.cyan(`  ${STORYBOOK_URL}`));
+        console.log(`  ${kleur.blue('╭' + '─'.repeat(boxWidth) + '╮')}`);
+        console.log(
+            `  ${kleur.blue('│')}  ${tipLines[0]}${' '.repeat(boxWidth - 2 - 'Tip: Not sure which blocks to pick?'.length)}${kleur.blue('│')}`,
+        );
+        console.log(
+            `  ${kleur.blue('│')}  ${tipLines[1]}${' '.repeat(boxWidth - 2 - 'Browse our Storybook to preview all available components:'.length)}${kleur.blue('│')}`,
+        );
+        console.log(
+            `  ${kleur.blue('│')}  ${tipLines[2]}${' '.repeat(boxWidth - 2 - STORYBOOK_URL.length)}${kleur.blue('│')}`,
+        );
+        console.log(`  ${kleur.blue('╰' + '─'.repeat(boxWidth) + '╯')}`);
         console.log();
 
         selectedBlocks = await promptBlockSelection(availableBlocks, []);

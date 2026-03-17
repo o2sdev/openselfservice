@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.product-list",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "private": false,
     "license": "MIT",
     "description": "A block for displaying and filtering a list of products with grid and table views.",
@@ -50,7 +50,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

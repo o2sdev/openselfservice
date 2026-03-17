@@ -6,6 +6,7 @@ export interface DesktopNavigationProps {
     logoSlot?: ReactNode;
     contextSlot?: ReactNode;
     localeSlot?: ReactNode;
+    cartSlot?: ReactNode;
     notificationSlot?: ReactNode;
     userSlot?: ReactNode;
     items: CMS.Model.Header.Header['items'];

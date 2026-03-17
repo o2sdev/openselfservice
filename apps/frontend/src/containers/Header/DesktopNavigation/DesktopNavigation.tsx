@@ -29,6 +29,7 @@ export function DesktopNavigation({
     logoSlot,
     contextSlot,
     localeSlot,
+    cartSlot,
     notificationSlot,
     userSlot,
     items,
@@ -229,6 +230,9 @@ export function DesktopNavigation({
                                 <NextLink href={LOGIN_PATH}>{signInLabel}</NextLink>
                             </Button>
                         )}
+
+                        {/* Cart Button */}
+                        {cartSlot}
 
                         {/* Notification Button */}
                         {notificationSlot}

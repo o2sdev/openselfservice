@@ -22,21 +22,21 @@ At the end, the wizard scaffolds your project and installs dependencies.
 
 ## Templates
 
-| Template | Description |
-|----------|-------------|
-| `o2s` | Full O2S Customer Portal — ticket management, invoices, notifications, orders and more |
-| `dxp` | DXP Frontend Starter — knowledge base, marketing portal, Digital Experience Platform |
-| `custom` | Start from scratch — choose only the blocks and integrations you need |
+| Template | Description                                                                            |
+| -------- | -------------------------------------------------------------------------------------- |
+| `o2s`    | Full O2S Customer Portal — ticket management, invoices, notifications, orders and more |
+| `dxp`    | DXP Frontend Starter — knowledge base, marketing portal, Digital Experience Platform   |
+| `custom` | Start from scratch — choose only the blocks and integrations you need                  |
 
 ## Options
 
-| Option | Description |
-|--------|-------------|
-| `--template <template>` | Template to use: `o2s`, `dxp`, or `custom` |
-| `--blocks <blocks>` | Comma-separated list of block names (skips block selection prompt) |
+| Option                          | Description                                                                    |
+| ------------------------------- | ------------------------------------------------------------------------------ |
+| `--template <template>`         | Template to use: `o2s`, `dxp`, or `custom`                                     |
+| `--blocks <blocks>`             | Comma-separated list of block names (skips block selection prompt)             |
 | `--integrations <integrations>` | Comma-separated list of integration names (skips integration selection prompt) |
-| `--skip-install` | Skip the `npm install` step |
-| `--directory <dir>` | Destination directory (defaults to project name) |
+| `--skip-install`                | Skip the `npm install` step                                                    |
+| `--directory <dir>`             | Destination directory (defaults to project name)                               |
 
 ## Non-Interactive Mode
 
@@ -44,18 +44,18 @@ Pass all required options as CLI flags to skip the interactive prompts:
 
 ```bash
 # Create an O2S portal with specific blocks and integrations
-npx create-o2s-app@latest my-portal \
+npx create-o2s-app my-portal \
   --template o2s \
   --blocks ticket-list,invoice-list \
   --integrations zendesk,strapi-cms
 
 # Create a DXP starter, skip install
-npx create-o2s-app@latest my-dxp \
+npx create-o2s-app my-dxp \
   --template dxp \
   --skip-install
 
 # Custom setup with only selected blocks
-npx create-o2s-app@latest my-custom \
+npx create-o2s-app my-custom \
   --template custom \
   --blocks article-list,article-details \
   --integrations strapi-cms

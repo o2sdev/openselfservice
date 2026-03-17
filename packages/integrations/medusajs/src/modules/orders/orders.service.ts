@@ -2,7 +2,7 @@ import Medusa from '@medusajs/js-sdk';
 import { HttpTypes, OrderStatus } from '@medusajs/types';
 import { Inject, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, catchError, from, map } from 'rxjs';
+import { Observable, catchError, from, map, switchMap } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -10,6 +10,7 @@ import { Auth, Orders } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { verifyResourceAccess } from '../../utils/customer-access';
 import { handleHttpError } from '../../utils/handle-http-error';
 
 import { mapOrder, mapOrders } from './orders.mapper';
@@ -28,7 +29,8 @@ export class OrdersService extends Orders.Service {
 
     private readonly additionalOrderListFields =
         '+total,+subtotal,+tax_total,+discount_total,+shipping_total,+shipping_subtotal,+tax_total,+items.product.*';
-    private readonly additionalOrderDetailsFields = 'items.product.*';
+    // customer_id required for authorization check (guest vs customer order access)
+    private readonly additionalOrderDetailsFields = '+customer_id,items.product.*';
 
     constructor(
         private readonly config: ConfigService,
@@ -47,7 +49,8 @@ export class OrdersService extends Orders.Service {
 
     /**
      * Retrieves an order by ID using Medusa Store API.
-     * Store API automatically verifies the order belongs to the authenticated customer.
+     * - Guest orders (no customer_id): accessible to anyone with order ID (order confirmation flow).
+     * - Customer orders: require authorization and order.customerId must match the authenticated customer.
      *
      * @requires Medusa auth plugin must be configured to accept SSO tokens.
      */
@@ -55,11 +58,6 @@ export class OrdersService extends Orders.Service {
         params: Orders.Request.GetOrderParams,
         authorization: string | undefined,
     ): Observable<Orders.Model.Order | undefined> {
-        if (!authorization) {
-            this.logger.debug('Authorization token not found');
-            throw new UnauthorizedException('Unauthorized');
-        }
-
         const query: HttpTypes.SelectParams = {
             fields: this.additionalOrderDetailsFields,
         };
@@ -67,7 +65,17 @@ export class OrdersService extends Orders.Service {
         return from(
             this.sdk.store.order.retrieve(params.id, query, this.medusaJsService.getStoreApiHeaders(authorization)),
         ).pipe(
-            map((response: { order: HttpTypes.StoreOrder }) => mapOrder(response.order, this.defaultCurrency)),
+            switchMap((response: { order: HttpTypes.StoreOrder }) => {
+                const order = mapOrder(response.order, this.defaultCurrency);
+
+                return verifyResourceAccess(
+                    this.sdk,
+                    this.authService,
+                    this.medusaJsService.getMedusaAdminApiHeaders(),
+                    order.customerId,
+                    authorization,
+                ).pipe(map(() => order));
+            }),
             catchError((error) => {
                 return handleHttpError(error);
             }),

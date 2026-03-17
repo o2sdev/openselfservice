@@ -1,6 +1,6 @@
-import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 import { Utils } from '@o2s/utils.frontend';
 
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/surveyjs.client';
@@ -11,7 +11,7 @@ export const surveyjs = (sdk: Sdk) => ({
     modules: {
         getSurvey: (
             params: Request.SurveyJsQuery,
-            headers: ApiModels.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Model.SurveyJs> =>
             sdk.makeRequest({
@@ -31,7 +31,7 @@ export const surveyjs = (sdk: Sdk) => ({
 
         submitSurvey: (
             params: Request.SurveyJsSubmitPayload,
-            headers: ApiModels.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<void> => {
             return sdk.makeRequest({

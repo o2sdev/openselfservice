@@ -1,5 +1,4 @@
 import { CMS } from '@o2s/configs.integrations';
-import { Models } from '@o2s/utils.api-harmonization';
 import { Injectable } from '@nestjs/common';
 import { Observable, forkJoin, map } from 'rxjs';
 
@@ -8,6 +7,9 @@ import { Auth } from '@o2s/framework/modules';
 import { map{{ pascalCase name }} } from './{{ kebabCase name }}.mapper';
 import { {{ pascalCase name }}Block } from './{{ kebabCase name }}.model';
 import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.request';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
+
+const H = HeaderName;
 
 @Injectable()
 export class {{ pascalCase name }}Service {
@@ -19,17 +21,17 @@ export class {{ pascalCase name }}Service {
 
     get{{ pascalCase name }}Block(
         query: Get{{ pascalCase name }}BlockQuery,
-        headers: Models.Headers.AppHeaders,
+        headers: AppHeaders,
     ): Observable<{{ pascalCase name }}Block> {
-        const cms = this.cmsService.get{{ pascalCase name }}Block({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.get{{ pascalCase name }}Block({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             map(([cms]) => {
-                const result = map{{ pascalCase name }}(cms, headers['x-locale']);
+                const result = map{{ pascalCase name }}(cms, headers[H.Locale]);
 
                 // Optional: Add permission flags to the response
-                // if (headers.authorization) {
-                //     const permissions = this.authService.canPerformActions(headers.authorization, 'resource-name', [
+                // if (headers[H.Authorization]) {
+                //     const permissions = this.authService.canPerformActions(headers[H.Authorization], 'resource-name', [
                 //         'view',
                 //         'edit',
                 //     ]);

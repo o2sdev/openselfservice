@@ -98,11 +98,11 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
             </Swiper>
 
             {showNavigation && (
-                <div className="absolute z-10 left-0 right-0 top-2/4 -translate-y-8 flex items-center justify-between px-2">
+                <div className="absolute z-10 left-0 right-0 top-2/4 -translate-y-8 flex items-center justify-between px-2 pointer-events-none">
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-full"
+                        className="rounded-full pointer-events-auto"
                         disabled={index === 0 && !loop}
                         aria-label={labels.previous}
                         onClick={() => {
@@ -115,7 +115,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-full"
+                        className="rounded-full pointer-events-auto"
                         disabled={isEnd && !loop}
                         aria-label={labels.next}
                         onClick={() => {

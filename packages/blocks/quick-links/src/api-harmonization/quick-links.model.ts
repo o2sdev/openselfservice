@@ -1,8 +1,8 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-export class QuickLinksBlock extends Models.Block.Block {
+export class QuickLinksBlock extends ApiModels.Block.Block {
     __typename!: 'QuickLinksBlock';
     title?: CMS.Model.QuickLinksBlock.QuickLinksBlock['title'];
     description?: CMS.Model.QuickLinksBlock.QuickLinksBlock['description'];
