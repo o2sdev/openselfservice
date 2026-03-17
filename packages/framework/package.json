@@ -1,6 +1,6 @@
 {
     "name": "@o2s/framework",
-    "version": "1.20.0",
+    "version": "1.20.1",
     "private": false,
     "license": "MIT",
     "description": "Core O2S framework providing modules, SDK, and ApiConfig for building composable customer portals.",

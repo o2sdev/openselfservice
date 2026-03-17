@@ -1,5 +1,29 @@
 # @o2s/blocks.article-list
 
+## 1.6.2
+
+### Patch Changes
+
+- fadbc63: Extract shared block prop types into framework models and migrate block frontend props to the common `BlockWith*` helpers.
+
+  This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
+
+- fadbc63: Align renderer prop types with runtime usage across blocks.
+
+  Restore missing `isDraftModeEnabled` and `userId` coverage in renderer prop contracts and rename the misnamed notification details renderer prop type for consistency.
+
+- 338cb01: fix(api-harmonization): align typed header usage across services and generated SDK/controller contracts
+- 338cb01: Refactor header access to use `HeaderName` constants instead of literal header keys across framework controllers, block harmonization services, and mocked auth guards.
+
+  This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+  - @o2s/framework@1.20.1
+  - @o2s/utils.api-harmonization@0.3.3
+
 ## 1.6.1
 
 ### Patch Changes

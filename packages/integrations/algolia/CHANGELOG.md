@@ -1,5 +1,16 @@
 # @o2s/integrations.algolia
 
+## 1.6.2
+
+### Patch Changes
+
+- 924f413: chore(deps): update dependencies
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
 ## 1.6.1
 
 ### Patch Changes
