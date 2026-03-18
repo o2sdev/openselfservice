@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 4.1.2
+
+### Patch Changes
+
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+
 ## 4.1.1
 
 ### Patch Changes

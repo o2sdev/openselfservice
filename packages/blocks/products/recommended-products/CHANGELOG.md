@@ -4,6 +4,16 @@
 
 ### Patch Changes
 
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+- fab2aea: refactor: group Storybook stories by domain and rename UI component directories to PascalCase
+- Updated dependencies [a7bb35c]
+- Updated dependencies [fab2aea]
+  - @o2s/ui@1.13.1
+
+## 0.3.1
+
+### Patch Changes
+
 - fadbc63: Extract shared block prop types into framework models and migrate block frontend props to the common `BlockWith*` helpers.
 
   This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
