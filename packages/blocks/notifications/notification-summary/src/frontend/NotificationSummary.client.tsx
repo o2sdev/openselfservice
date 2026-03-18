@@ -6,9 +6,9 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { InfoCard } from '@o2s/ui/components/cards/InfoCard';
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { DynamicIcon, DynamicIconProps } from '@o2s/ui/components/media/DynamicIcon';
+import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { DynamicIcon, DynamicIconProps } from '@o2s/ui/components/Media/DynamicIcon';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

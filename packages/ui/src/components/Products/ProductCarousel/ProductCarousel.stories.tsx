@@ -16,7 +16,7 @@ const MockLinkComponent: FrontendModels.Link.LinkComponent = ({ href, className,
 );
 
 const meta = {
-    title: 'Components/ProductCarousel',
+    title: 'Components/Products/ProductCarousel',
     component: ProductCarousel,
     tags: ['autodocs'],
     parameters: {

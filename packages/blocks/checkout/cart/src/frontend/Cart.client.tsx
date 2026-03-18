@@ -9,7 +9,7 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { CartItem } from '@o2s/ui/components/Cart/CartItem';
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Skeleton } from '@o2s/ui/elements/skeleton';

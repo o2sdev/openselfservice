@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Price } from '@o2s/ui/components/commerce/Price';
-import { DataListColumnConfig } from '@o2s/ui/components/data/DataList';
+import { DataListColumnConfig } from '@o2s/ui/components/Data/DataList';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { BadgeStatus } from '@o2s/ui/elements/badge-status';

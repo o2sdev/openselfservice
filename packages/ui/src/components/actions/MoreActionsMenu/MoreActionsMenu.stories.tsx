@@ -5,7 +5,7 @@ import { Link } from '@o2s/ui/elements/link';
 import { MoreActionsMenu } from './MoreActionsMenu';
 
 const meta = {
-    title: 'Components/MoreActionsMenu',
+    title: 'Components/Actions/MoreActionsMenu',
     component: MoreActionsMenu,
     tags: ['autodocs'],
 } satisfies Meta<typeof MoreActionsMenu>;

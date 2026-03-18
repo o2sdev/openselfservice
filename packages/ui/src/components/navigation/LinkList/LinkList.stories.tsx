@@ -14,7 +14,7 @@ const MockLinkComponent: FrontendModels.Link.LinkComponent = ({ href, className,
 );
 
 const meta = {
-    title: 'Components/LinkList',
+    title: 'Components/Navigation/LinkList',
     component: LinkList,
     tags: ['autodocs'],
 } satisfies Meta<typeof LinkList>;

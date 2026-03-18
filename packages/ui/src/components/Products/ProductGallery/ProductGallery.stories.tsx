@@ -4,7 +4,7 @@ import { ProductGallery } from './ProductGallery';
 import { ImageItem } from './ProductGallery.types';
 
 const meta = {
-    title: 'Components/ProductGallery',
+    title: 'Components/Products/ProductGallery',
     component: ProductGallery,
     tags: ['autodocs'],
     parameters: {

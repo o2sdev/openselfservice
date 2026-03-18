@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { Models } from '@o2s/framework/modules';
 
-import { Price } from '@o2s/ui/components/commerce/Price';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';

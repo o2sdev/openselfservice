@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DynamicIconProps } from '@o2s/ui/components/media/DynamicIcon';
+import { DynamicIconProps } from '@o2s/ui/components/Media/DynamicIcon';
 
 export type InfoCardProps = {
     title: string;

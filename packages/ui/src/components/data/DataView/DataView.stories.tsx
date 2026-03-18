@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArrowRight } from 'lucide-react';
 
-import type { DataListColumnConfig } from '@o2s/ui/components/data/DataList/DataList.types';
-import { DataView } from '@o2s/ui/components/data/DataView';
+import type { DataListColumnConfig } from '@o2s/ui/components/Data/DataList/DataList.types';
+import { DataView } from '@o2s/ui/components/Data/DataView';
 
 import { Button } from '@o2s/ui/elements/button';
 
 import type { DataViewProps } from './DataView.types';
 
 const meta: Meta<typeof DataView> = {
-    title: 'Components/DataView',
+    title: 'Components/Data/DataView',
     component: DataView,
+    tags: ['autodocs'],
     parameters: {
         layout: 'padded',
     },
-    tags: ['autodocs'],
     argTypes: {
         viewMode: {
             control: 'radio',

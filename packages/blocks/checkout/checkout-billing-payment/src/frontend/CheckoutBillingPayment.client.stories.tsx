@@ -60,7 +60,7 @@ const baseBlock = {
 };
 
 const meta = {
-    title: 'Blocks/CheckoutBillingPayment',
+    title: 'Blocks/Checkout/CheckoutBillingPayment',
     component: CheckoutBillingPaymentPure,
     tags: ['autodocs'],
     parameters: { readme },

@@ -4,7 +4,7 @@ import React from 'react';
 import { Image } from './Image';
 
 const meta = {
-    title: 'Components/Image',
+    title: 'Components/Media/Image',
     component: Image,
     tags: ['autodocs'],
     parameters: {

@@ -1,8 +1,8 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/feedback/Loading';
-import { Container } from '@o2s/ui/components/layout/Container';
+import { Loading } from '@o2s/ui/components/Feedback/Loading';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 import { Article } from './Article.server';
 import { ArticleRendererProps } from './Article.types';

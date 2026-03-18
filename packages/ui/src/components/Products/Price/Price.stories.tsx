@@ -44,7 +44,7 @@ const Price = ({ price }: { price?: Models.Price.Price }) => {
 };
 
 const meta = {
-    title: 'Components/Price',
+    title: 'Components/Products/Price',
     component: Price,
     tags: ['autodocs'],
     parameters: {

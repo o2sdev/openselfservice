@@ -3,9 +3,9 @@
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { Image } from '@o2s/ui/components/media/Image';
-import { LinkList } from '@o2s/ui/components/navigation/LinkList';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { Image } from '@o2s/ui/components/Media/Image';
+import { LinkList } from '@o2s/ui/components/Navigation/LinkList';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

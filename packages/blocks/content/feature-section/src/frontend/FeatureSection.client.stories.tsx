@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { FeatureSectionPure } from './FeatureSection.client';
 
 const meta = {
-    title: 'Blocks/FeatureSection',
+    title: 'Blocks/Content/FeatureSection',
     component: FeatureSectionPure,
     tags: ['autodocs'],
     parameters: { readme },

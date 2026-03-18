@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { OrdersSummaryPure } from './OrdersSummary.client';
 
 const meta = {
-    title: 'Blocks/OrdersSummary',
+    title: 'Blocks/Orders/OrdersSummary',
     component: OrdersSummaryPure,
     tags: ['autodocs'],
     parameters: { readme },

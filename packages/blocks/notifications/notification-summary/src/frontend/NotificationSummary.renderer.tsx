@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/feedback/Loading';
+import { Loading } from '@o2s/ui/components/Feedback/Loading';
 
 import { NotificationSummary } from './NotificationSummary.server';
 import { NotificationSummaryRendererProps } from './NotificationSummary.types';

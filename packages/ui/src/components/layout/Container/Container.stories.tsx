@@ -4,7 +4,7 @@ import React from 'react';
 import { Container } from './Container';
 
 const meta = {
-    title: 'Components/Container',
+    title: 'Components/Layout/Container',
     component: Container,
     tags: ['autodocs'],
     parameters: {

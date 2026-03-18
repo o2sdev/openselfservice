@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { NoResults } from './NoResults';
 
 const meta = {
-    title: 'Components/NoResults',
+    title: 'Components/Feedback/NoResults',
     component: NoResults,
     tags: ['autodocs'],
 } satisfies Meta<typeof NoResults>;

@@ -5,7 +5,7 @@ import { Autoplay } from 'swiper/modules';
 import { Carousel } from './Carousel';
 
 const meta = {
-    title: 'Components/Carousel',
+    title: 'Components/Media/Carousel',
     component: Carousel,
     tags: ['autodocs'],
     parameters: {

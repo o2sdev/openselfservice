@@ -4,8 +4,8 @@ import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { Container } from '@o2s/ui/components/layout/Container';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/elements/accordion';
 import { Button } from '@o2s/ui/elements/button';

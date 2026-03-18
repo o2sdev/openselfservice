@@ -5,7 +5,7 @@ import { Button } from '@o2s/ui/elements/button';
 import { ActionList } from './ActionList';
 
 const meta = {
-    title: 'Components/ActionList',
+    title: 'Components/Actions/ActionList',
     component: ActionList,
     tags: ['autodocs'],
 } satisfies Meta<typeof ActionList>;

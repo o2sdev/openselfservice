@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { RichText } from './RichText';
 
 const meta = {
-    title: 'Components/RichText',
+    title: 'Components/Content/RichText',
     component: RichText,
     tags: ['autodocs'],
 } satisfies Meta<typeof RichText>;

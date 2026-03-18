@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Author } from '@o2s/ui/components/content/Author';
-import { Image } from '@o2s/ui/components/media/Image';
+import { Author } from '@o2s/ui/components/Content/Author';
+import { Image } from '@o2s/ui/components/Media/Image';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

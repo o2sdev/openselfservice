@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { DocumentListPure } from './DocumentList.client';
 
 const meta = {
-    title: 'Blocks/DocumentList',
+    title: 'Blocks/Content/DocumentList',
     component: DocumentListPure,
     tags: ['autodocs'],
     parameters: { readme },

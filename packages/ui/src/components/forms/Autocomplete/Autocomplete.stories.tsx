@@ -22,7 +22,7 @@ const sampleSuggestions: SampleSuggestion[] = [
 ];
 
 const meta = {
-    title: 'Components/Autocomplete',
+    title: 'Components/Forms/Autocomplete',
     component: Autocomplete<SampleSuggestion>,
     tags: ['autodocs'],
     parameters: {

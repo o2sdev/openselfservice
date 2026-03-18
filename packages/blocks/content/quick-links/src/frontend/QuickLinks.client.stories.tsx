@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { QuickLinksPure } from './QuickLinks.client';
 
 const meta = {
-    title: 'Blocks/QuickLinks',
+    title: 'Blocks/Content/QuickLinks',
     component: QuickLinksPure,
     tags: ['autodocs'],
     parameters: { readme },

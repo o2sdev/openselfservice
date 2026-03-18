@@ -3,7 +3,7 @@
 import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import React from 'react';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
+import { RichText } from '@o2s/ui/components/Content/RichText';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';

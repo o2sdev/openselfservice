@@ -12,10 +12,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Image } from '@o2s/ui/components/media/Image';
+import { Image } from '@o2s/ui/components/Media/Image';
 
-import { setActiveCarouselId } from '../../media/Carousel/carouselKeyboardManager';
-import { useManagedCarouselKeyboard } from '../../media/Carousel/useManagedCarouselKeyboard';
+import { setActiveCarouselId } from '../../Media/Carousel/carouselKeyboardManager';
+import { useManagedCarouselKeyboard } from '../../Media/Carousel/useManagedCarouselKeyboard';
 
 import { ProductGalleryProps } from './ProductGallery.types';
 

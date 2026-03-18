@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { DataGrid } from '@o2s/ui/components/data/DataGrid';
-import { DataList } from '@o2s/ui/components/data/DataList';
+import { DataGrid } from '@o2s/ui/components/Data/DataGrid';
+import { DataList } from '@o2s/ui/components/Data/DataList';
 
 import { DataViewProps } from './DataView.types';
 

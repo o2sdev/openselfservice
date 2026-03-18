@@ -13,7 +13,7 @@ const MockLinkComponent: FrontendModels.Link.LinkComponent = ({ href, className,
 );
 
 const meta = {
-    title: 'Components/ErrorPage',
+    title: 'Components/Feedback/ErrorPage',
     component: ErrorPage,
     tags: ['autodocs'],
     parameters: {

@@ -7,7 +7,7 @@ import { RadioTileGroup } from './RadioTile';
 import type { RadioTileOption } from './RadioTile.types';
 
 const meta: Meta<typeof RadioTileGroup> = {
-    title: 'Components/RadioTileGroup',
+    title: 'Components/Forms/RadioTileGroup',
     component: RadioTileGroup,
     tags: ['autodocs'],
 };

@@ -27,7 +27,7 @@ const AppSpinnerWrapper: React.FC<{ isVisible: boolean }> = ({ isVisible }) => {
 };
 
 const meta = {
-    title: 'Components/AppSpinner',
+    title: 'Components/Feedback/AppSpinner',
     component: AppSpinnerWrapper,
     tags: ['autodocs'],
     parameters: {

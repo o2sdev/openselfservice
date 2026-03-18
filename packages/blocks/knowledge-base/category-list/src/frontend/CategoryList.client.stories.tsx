@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { CategoryListPure } from './CategoryList.client';
 
 const meta = {
-    title: 'Blocks/CategoryList',
+    title: 'Blocks/KnowledgeBase/CategoryList',
     component: CategoryListPure,
     tags: ['autodocs'],
     parameters: { readme },

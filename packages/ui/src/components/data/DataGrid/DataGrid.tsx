@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { DataListColumnConfig } from '@o2s/ui/components/data/DataList';
+import { DataListColumnConfig } from '@o2s/ui/components/Data/DataList';
 
 import { Card, CardContent, CardFooter, CardHeader } from '@o2s/ui/elements/card';
 import { Separator } from '@o2s/ui/elements/separator';

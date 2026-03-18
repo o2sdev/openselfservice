@@ -10,12 +10,12 @@ import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
-import { ProductCard, ProductCardBadge } from '@o2s/ui/components/cards/ProductCard';
-import { DataList } from '@o2s/ui/components/data/DataList';
-import type { DataListColumnConfig } from '@o2s/ui/components/data/DataList';
-import { NoResults } from '@o2s/ui/components/feedback/NoResults';
-import { FiltersSection } from '@o2s/ui/components/forms/Filters';
-import { Pagination } from '@o2s/ui/components/navigation/Pagination';
+import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
+import { DataList } from '@o2s/ui/components/Data/DataList';
+import type { DataListColumnConfig } from '@o2s/ui/components/Data/DataList';
+import { NoResults } from '@o2s/ui/components/Feedback/NoResults';
+import { FiltersSection } from '@o2s/ui/components/Forms/Filters';
+import { Pagination } from '@o2s/ui/components/Navigation/Pagination';
 
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';

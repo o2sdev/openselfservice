@@ -13,7 +13,7 @@ const MockLinkComponent: FrontendModels.Link.LinkComponent = ({ href, className,
 );
 
 const meta = {
-    title: 'Components/ContentSection',
+    title: 'Components/Content/ContentSection',
     component: ContentSection,
     tags: ['autodocs'],
 } satisfies Meta<typeof ContentSection>;

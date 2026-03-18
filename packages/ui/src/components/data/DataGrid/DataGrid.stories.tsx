@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArrowRight, Download } from 'lucide-react';
 
-import type { DataListColumnConfig } from '@o2s/ui/components/data/DataList';
+import type { DataListColumnConfig } from '@o2s/ui/components/Data/DataList';
 
 import { Button } from '@o2s/ui/elements/button';
 
@@ -9,12 +9,12 @@ import { DataGrid } from './DataGrid';
 import type { DataGridProps } from './DataGrid.types';
 
 const meta: Meta<typeof DataGrid> = {
-    title: 'Components/DataGrid',
+    title: 'Components/Data/DataGrid',
     component: DataGrid,
+    tags: ['autodocs'],
     parameters: {
         layout: 'padded',
     },
-    tags: ['autodocs'],
 };
 
 export default meta;

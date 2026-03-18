@@ -1,7 +1,7 @@
 import { Models } from '@o2s/framework/modules';
 import React from 'react';
 
-import { Price } from '@o2s/ui/components/commerce/Price';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

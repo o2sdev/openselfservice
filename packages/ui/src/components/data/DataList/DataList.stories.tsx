@@ -8,12 +8,12 @@ import { DataList } from './DataList';
 import type { DataListColumnConfig } from './DataList.types';
 
 const meta: Meta<typeof DataList> = {
-    title: 'Components/DataList',
+    title: 'Components/Data/DataList',
     component: DataList,
+    tags: ['autodocs'],
     parameters: {
         layout: 'padded',
     },
-    tags: ['autodocs'],
 };
 
 export default meta;

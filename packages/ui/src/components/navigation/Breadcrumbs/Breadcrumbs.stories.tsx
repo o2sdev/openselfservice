@@ -14,7 +14,7 @@ const MockLinkComponent: FrontendModels.Link.LinkComponent = ({ href, className,
 );
 
 const meta = {
-    title: 'Components/Breadcrumbs',
+    title: 'Components/Navigation/Breadcrumbs',
     component: Breadcrumbs,
     tags: ['autodocs'],
 } satisfies Meta<typeof Breadcrumbs>;

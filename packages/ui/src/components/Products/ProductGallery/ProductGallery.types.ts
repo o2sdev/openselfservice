@@ -1,6 +1,6 @@
 import { SwiperProps } from 'swiper/react';
 
-import { KeyboardControlMode } from '../../media/Carousel/Carousel.types';
+import { KeyboardControlMode } from '../../Media/Carousel/Carousel.types';
 
 export interface ImageItem {
     url: string;

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Models as FrontendModels } from '@o2s/utils.frontend';
 
-import { CarouselProps } from '@o2s/ui/components/media/Carousel';
+import { CarouselProps } from '@o2s/ui/components/Media/Carousel';
 
 export interface ProductCarouselProps {
     products: ProductSummaryItem[];

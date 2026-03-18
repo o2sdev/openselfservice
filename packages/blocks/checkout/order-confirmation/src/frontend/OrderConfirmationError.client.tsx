@@ -3,7 +3,7 @@
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';

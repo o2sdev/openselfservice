@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Author } from './Author';
 
 const meta = {
-    title: 'Components/Author',
+    title: 'Components/Content/Author',
     component: Author,
     tags: ['autodocs'],
 } satisfies Meta<typeof Author>;

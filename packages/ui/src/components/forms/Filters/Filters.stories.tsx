@@ -56,7 +56,7 @@ type FilterType = { category: string; price: string; rating: string[]; sort: str
 type FilterValues = { category: string; price: string; rating: string[]; sort: string; search: string };
 
 const meta = {
-    title: 'Components/Filters',
+    title: 'Components/Forms/Filters',
     component: FiltersWrapper as typeof FiltersWrapper<FilterType, FilterValues>,
     tags: ['autodocs'],
     parameters: {

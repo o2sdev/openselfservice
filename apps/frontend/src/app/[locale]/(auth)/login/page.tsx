@@ -7,8 +7,8 @@ import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-import { AppSpinner } from '@o2s/ui/components/feedback/AppSpinner';
-import { Image } from '@o2s/ui/components/media/Image';
+import { AppSpinner } from '@o2s/ui/components/Feedback/AppSpinner';
+import { Image } from '@o2s/ui/components/Media/Image';
 
 import { Toaster } from '@o2s/ui/elements/toaster';
 

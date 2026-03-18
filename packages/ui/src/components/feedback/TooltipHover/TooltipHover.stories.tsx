@@ -8,7 +8,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { TooltipHover } from './TooltipHover';
 
 const meta = {
-    title: 'Components/TooltipHover',
+    title: 'Components/Feedback/TooltipHover',
     component: TooltipHover,
     tags: ['autodocs'],
     parameters: {

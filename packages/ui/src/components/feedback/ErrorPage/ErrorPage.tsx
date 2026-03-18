@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
+import { RichText } from '@o2s/ui/components/Content/RichText';
 
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';

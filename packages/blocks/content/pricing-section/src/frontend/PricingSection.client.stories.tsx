@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { PricingSectionPure } from './PricingSection.client';
 
 const meta = {
-    title: 'Blocks/PricingSection',
+    title: 'Blocks/Content/PricingSection',
     component: PricingSectionPure,
     tags: ['autodocs'],
     parameters: { readme },

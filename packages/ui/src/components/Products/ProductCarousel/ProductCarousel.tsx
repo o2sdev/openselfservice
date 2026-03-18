@@ -5,9 +5,9 @@ import React, { useId } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { ProductCard } from '@o2s/ui/components/cards/ProductCard';
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { Carousel } from '@o2s/ui/components/media/Carousel';
+import { ProductCard } from '@o2s/ui/components/Cards/ProductCard';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { Carousel } from '@o2s/ui/components/Media/Carousel';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
 
 import { Link } from '@o2s/ui/elements/link';
 

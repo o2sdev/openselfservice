@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { OrderListPure } from './OrderList.client';
 
 const meta = {
-    title: 'Blocks/OrderList',
+    title: 'Blocks/Orders/OrderList',
     component: OrderListPure,
     tags: ['autodocs'],
     parameters: { readme },

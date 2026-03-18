@@ -33,7 +33,7 @@ const PaginationWrapper: React.FC<{
 };
 
 const meta = {
-    title: 'Components/Pagination',
+    title: 'Components/Navigation/Pagination',
     component: PaginationWrapper,
     tags: ['autodocs'],
     parameters: {

@@ -79,7 +79,7 @@ No matter how the component was added, using it looks the same. Import it from t
 
 ```typescript jsx
 import { Button } from '@o2s/ui/elements/button';
-import { Container } from '@o2s/ui/components/layout/Container';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 ...
 

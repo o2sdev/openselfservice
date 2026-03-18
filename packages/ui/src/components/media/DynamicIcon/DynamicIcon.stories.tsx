@@ -4,7 +4,7 @@ import React from 'react';
 import { DynamicIcon } from './DynamicIcon';
 
 const meta = {
-    title: 'Components/DynamicIcon',
+    title: 'Components/Media/DynamicIcon',
     component: DynamicIcon,
     tags: ['autodocs'],
     parameters: {

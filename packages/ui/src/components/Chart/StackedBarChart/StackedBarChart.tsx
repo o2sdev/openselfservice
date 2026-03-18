@@ -3,7 +3,7 @@ import { Bar, BarChart, BarShapeProps, CartesianGrid, LabelList, TooltipProps, X
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { Props as LabelProps } from 'recharts/types/component/Label';
 
-import { Price } from '@o2s/ui/components/commerce/Price';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/elements/chart';
 

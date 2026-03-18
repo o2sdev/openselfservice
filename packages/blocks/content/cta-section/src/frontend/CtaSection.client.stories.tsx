@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { CtaSectionPure } from './CtaSection.client';
 
 const meta = {
-    title: 'Blocks/CtaSection',
+    title: 'Blocks/Content/CtaSection',
     component: CtaSectionPure,
     tags: ['autodocs'],
     parameters: { readme },

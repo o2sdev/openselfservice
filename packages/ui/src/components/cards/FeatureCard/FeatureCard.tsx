@@ -3,9 +3,9 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
-import { Image } from '@o2s/ui/components/media/Image';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
+import { Image } from '@o2s/ui/components/Media/Image';
 
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';

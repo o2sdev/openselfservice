@@ -4,7 +4,7 @@ import React, { FC, ReactNode } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Image } from '@o2s/ui/components/media/Image';
+import { Image } from '@o2s/ui/components/Media/Image';
 
 import { Link } from '@o2s/ui/elements/link';
 import { Typography, TypographyProps } from '@o2s/ui/elements/typography';

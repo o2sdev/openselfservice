@@ -1,8 +1,8 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/feedback/Loading';
-import { Container } from '@o2s/ui/components/layout/Container';
+import { Loading } from '@o2s/ui/components/Feedback/Loading';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 import { OrderConfirmation } from './OrderConfirmation.server';
 import { OrderConfirmationRendererProps } from './OrderConfirmation.types';

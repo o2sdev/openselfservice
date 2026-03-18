@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { MoreActionsMenu } from '@o2s/ui/components/actions/MoreActionsMenu';
+import { MoreActionsMenu } from '@o2s/ui/components/Actions/MoreActionsMenu';
 
 import type { ActionListProps } from './ActionList.types';
 
