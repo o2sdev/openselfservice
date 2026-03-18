@@ -1,5 +1,12 @@
 # @o2s/ui
 
+## 1.13.1
+
+### Patch Changes
+
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+- fab2aea: refactor: group Storybook stories by domain and rename UI component directories to PascalCase
+
 ## 1.13.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @o2s/blocks.invoice-list
 
+## 1.6.3
+
+### Patch Changes
+
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+- fab2aea: refactor: group Storybook stories by domain and rename UI component directories to PascalCase
+- Updated dependencies [a7bb35c]
+- Updated dependencies [fab2aea]
+  - @o2s/ui@1.13.1
+
 ## 1.6.2
 
 ### Patch Changes
