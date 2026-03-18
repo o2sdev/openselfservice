@@ -1,6 +1,6 @@
 {
     "name": "@o2s/ui",
-    "version": "1.13.0",
+    "version": "1.13.1",
     "private": true,
     "license": "MIT",
     "description": "Shared UI component library for O2S blocks, built on Radix UI and Tailwind CSS.",
@@ -19,7 +19,9 @@
         "./hooks/*": "./src/hooks/*.ts",
         "./providers/*": "./src/providers/*/index.ts",
         "./elements/*": "./src/elements/*.tsx",
-        "./components/*": "./src/components/*/index.ts"
+        "./components/*": "./src/components/*/index.ts",
+        "./components/*/*": "./src/components/*/*/index.ts",
+        "./components/*/*/*": "./src/components/*/*/*/index.ts"
     },
     "scripts": {
         "lint": "tsc --noEmit && eslint . --max-warnings=0",

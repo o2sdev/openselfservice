@@ -1,5 +1,70 @@
 # @o2s/frontend
 
+## 1.18.1
+
+### Patch Changes
+
+- 338cb01: Introduce typed header name constants (`HeaderName`) using `as const` and
+  replace selected magic header strings in API harmonization and frontend code.
+
+    Update SDK header typing to use `AppHeaders` for stronger request typing.
+
+- 338cb01: Replace the `renderBlocks` switch with a typed block registry to enforce
+  compile-time coverage of all `Modules.Page.Model.Blocks` entries.
+
+    Keep runtime handling for unknown block types with a warning log and `null`
+    fallback.
+
+- 338cb01: Add a warning log in `renderBlocks` when an unknown block type is encountered.
+
+    This makes missing block registration visible during development instead of silently rendering `null`.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+    - @o2s/blocks.article@1.5.2
+    - @o2s/blocks.article-list@1.6.2
+    - @o2s/blocks.article-search@1.6.2
+    - @o2s/blocks.bento-grid@0.6.2
+    - @o2s/blocks.category@1.6.2
+    - @o2s/blocks.category-list@1.6.2
+    - @o2s/blocks.cta-section@0.6.2
+    - @o2s/blocks.document-list@0.6.2
+    - @o2s/blocks.faq@1.5.2
+    - @o2s/blocks.feature-section@0.6.2
+    - @o2s/blocks.feature-section-grid@0.5.2
+    - @o2s/blocks.featured-service-list@1.4.2
+    - @o2s/blocks.hero-section@0.6.2
+    - @o2s/blocks.invoice-list@1.6.2
+    - @o2s/blocks.media-section@0.6.2
+    - @o2s/blocks.notification-details@1.5.2
+    - @o2s/blocks.notification-list@1.6.2
+    - @o2s/blocks.notification-summary@1.3.2
+    - @o2s/blocks.order-details@1.5.2
+    - @o2s/blocks.order-list@1.6.2
+    - @o2s/blocks.orders-summary@1.5.2
+    - @o2s/blocks.payments-history@1.4.2
+    - @o2s/blocks.payments-summary@1.4.2
+    - @o2s/blocks.pricing-section@0.6.2
+    - @o2s/blocks.product-details@0.3.1
+    - @o2s/blocks.product-list@0.5.1
+    - @o2s/blocks.quick-links@1.5.2
+    - @o2s/blocks.recommended-products@0.3.1
+    - @o2s/blocks.service-details@1.4.2
+    - @o2s/blocks.service-list@1.5.2
+    - @o2s/blocks.surveyjs-form@1.4.2
+    - @o2s/blocks.ticket-details@1.5.2
+    - @o2s/blocks.ticket-list@1.7.2
+    - @o2s/blocks.ticket-recent@1.4.2
+    - @o2s/blocks.ticket-summary@1.3.2
+    - @o2s/blocks.user-account@1.4.2
+    - @o2s/utils.api-harmonization@0.3.3
+    - @o2s/integrations.mocked@1.21.1
+
 ## 1.18.0
 
 ### Minor Changes

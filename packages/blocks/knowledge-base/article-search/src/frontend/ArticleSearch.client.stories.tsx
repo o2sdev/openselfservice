@@ -1,0 +1,52 @@
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { expect } from 'storybook/test';
+
+import readme from '../../README.md?raw';
+
+import { ArticleSearchPure } from './ArticleSearch.client';
+
+const meta = {
+    title: 'Blocks/KnowledgeBase/ArticleSearch',
+    component: ArticleSearchPure,
+    tags: ['autodocs'],
+    parameters: { readme },
+} satisfies Meta<typeof ArticleSearchPure>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+    play: async ({ canvas, userEvent }) => {
+        const searchInput = canvas.getByRole('combobox');
+        await expect(searchInput).toBeInTheDocument();
+        const user = userEvent.setup({
+            delay: 100,
+        });
+        await user.type(searchInput, 'power');
+    },
+    args: {
+        id: 'article-search-1',
+        __typename: 'ArticleSearchBlock',
+        title: 'Search for topics',
+        inputLabel: 'What are you searching for?',
+        noResults: {
+            title: 'No results found',
+            description: 'No results found',
+        },
+        accessToken:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmFuZSBEb2UiLCJlbWFpbCI6ImphbmVAZXhhbXBsZS5jb20iLCJyb2xlIjoic2VsZnNlcnZpY2Vfb3JnX2FkbWluIiwiY3VzdG9tZXIiOnsiaWQiOiJjdXN0LTAwMSIsInJvbGVzIjpbInNlbGZzZXJ2aWNlX29yZ191c2VyIiwic2VsZnNlcnZpY2Vfb3JnX3VzZXIiLCJzZWxmc2VydmljZV9vcmdfYWRtaW4iXSwibmFtZSI6IkFjbWUgQ29ycG9yYXRpb24ifSwiaWF0IjoxNzU2MzA4Njc5fQ.G6C80jKDSGx1FlslKCANGx8xevVxnxc_WSmuXNYszUY',
+        locale: 'en',
+        routing: {
+            locales: ['en', 'de', 'pl'],
+            defaultLocale: 'en',
+            pathnames: {
+                '/login': {
+                    en: '/sign-in',
+                    de: '/einloggen',
+                    pl: '/logowanie',
+                },
+            },
+        },
+    },
+};

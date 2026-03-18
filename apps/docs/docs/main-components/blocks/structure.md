@@ -17,7 +17,7 @@ The idea of a semi-independent block is to consolidate as much code related to f
 In effect, the folder structure of a block looks like this:
 
 ```
-packages/blocks/blockName
+packages/blocks/domainName/blockName
 └───src
     └───api-harmonization
     │   ├───blockName.client.ts

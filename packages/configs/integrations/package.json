@@ -23,9 +23,9 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/framework": "^1.18.0",
-        "@o2s/integrations.mocked": "^1.19.0",
-        "@o2s/integrations.mocked-dxp": "^1.0.0"
+        "@o2s/framework": "1.20.1",
+        "@o2s/integrations.mocked": "1.21.1",
+        "@o2s/integrations.mocked-dxp": "1.1.1"
     },
     "devDependencies": {
         "@o2s/eslint-config": "^1.1.1",

@@ -7,7 +7,7 @@ import { Models } from '@o2s/framework/modules';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Image } from '@o2s/ui/components/Image';
+import { Image } from '@o2s/ui/components/Media/Image';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/elements/accordion';
 import { Link } from '@o2s/ui/elements/link';

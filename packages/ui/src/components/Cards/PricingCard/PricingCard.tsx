@@ -4,12 +4,12 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
-import { Image } from '@o2s/ui/components/Image';
-import { LinkList } from '@o2s/ui/components/LinkList';
-import { Price } from '@o2s/ui/components/Price';
-import { RichText } from '@o2s/ui/components/RichText';
-import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { TooltipHover } from '@o2s/ui/components/Feedback/TooltipHover';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
+import { Image } from '@o2s/ui/components/Media/Image';
+import { LinkList } from '@o2s/ui/components/Navigation/LinkList';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';

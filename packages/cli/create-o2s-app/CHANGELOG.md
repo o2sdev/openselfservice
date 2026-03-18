@@ -1,5 +1,19 @@
 # create-o2s-app
 
+## 4.1.2
+
+### Patch Changes
+
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+
+## 4.1.1
+
+### Patch Changes
+
+- 338cb01: Use the `create-o2s-app/base` branch as the source for `eject-block` so ejected blocks match production-ready templates.
+- 338cb01: Show a post-generation block summary and next steps at the end of generated changes output.
+- 8c57c81: chore(deps): update dependencies
+
 ## 4.1.0
 
 ### Minor Changes

@@ -2,7 +2,7 @@ import { Models } from '@o2s/framework/modules';
 
 import { Models as FrontendModels } from '@o2s/utils.frontend';
 
-import { AuthorProps } from '@o2s/ui/components/Author';
+import { AuthorProps } from '@o2s/ui/components/Content/Author';
 
 export interface BlogCardProps {
     title: string;

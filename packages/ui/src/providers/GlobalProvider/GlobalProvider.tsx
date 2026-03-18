@@ -3,7 +3,7 @@
 import { CMS } from '@o2s/framework/modules';
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
-import { PriceService, usePriceService } from '@o2s/ui/components/Price';
+import { PriceService, usePriceService } from '@o2s/ui/components/Products/Price';
 
 // TODO: reowrk model for `config` to a) not duplicate `page.model.ts` and b) not have `@o2s/api-harmonization`
 // TODO: dependency as it creates circular dependency problem

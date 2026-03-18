@@ -2,9 +2,9 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Image } from '@o2s/ui/components/Image';
-import { Price } from '@o2s/ui/components/Price';
-import { RichText } from '@o2s/ui/components/RichText';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { Image } from '@o2s/ui/components/Media/Image';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Separator } from '@o2s/ui/elements/separator';
