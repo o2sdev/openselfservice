@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { TicketListPure } from './TicketList.client';
 
 const meta = {
-    title: 'Blocks/TicketList',
+    title: 'Blocks/Support/TicketList',
     component: TicketListPure,
     tags: ['autodocs'],
     parameters: { readme },

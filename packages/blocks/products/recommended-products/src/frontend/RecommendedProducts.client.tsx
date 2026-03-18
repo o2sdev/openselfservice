@@ -9,7 +9,7 @@ import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
-import { ProductCarousel } from '@o2s/ui/components/commerce/ProductCarousel';
+import { ProductCarousel } from '@o2s/ui/components/Products/ProductCarousel';
 
 import { ToastAction } from '@o2s/ui/elements/toast';
 

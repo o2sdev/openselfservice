@@ -7,11 +7,11 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { BlogCard } from '@o2s/ui/components/cards/BlogCard';
-import { ContentSection } from '@o2s/ui/components/content/ContentSection';
-import { Container } from '@o2s/ui/components/layout/Container';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
-import { Pagination } from '@o2s/ui/components/navigation/Pagination';
+import { BlogCard } from '@o2s/ui/components/Cards/BlogCard';
+import { ContentSection } from '@o2s/ui/components/Content/ContentSection';
+import { Container } from '@o2s/ui/components/Layout/Container';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
+import { Pagination } from '@o2s/ui/components/Navigation/Pagination';
 
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';

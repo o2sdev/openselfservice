@@ -18,7 +18,7 @@ Import components and elements from their respective paths:
 import { Button } from '@o2s/ui/elements/button';
 import { Card } from '@o2s/ui/elements/card';
 import { Input } from '@o2s/ui/elements/input';
-import { Container } from '@o2s/ui/components/layout/Container';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 export const MyComponent = () => {
     return (
@@ -34,10 +34,10 @@ export const MyComponent = () => {
 
 Component paths are grouped by domain under `components/<group>/<Component>`, for example:
 
-- `@o2s/ui/components/layout/Container`
-- `@o2s/ui/components/feedback/Loading`
-- `@o2s/ui/components/cards/ProductCard`
-- `@o2s/ui/components/charts/Chart/StackedBarChart`
+- `@o2s/ui/components/Layout/Container`
+- `@o2s/ui/components/Feedback/Loading`
+- `@o2s/ui/components/Cards/ProductCard`
+- `@o2s/ui/components/Chart/StackedBarChart`
 
 Available groups:
 

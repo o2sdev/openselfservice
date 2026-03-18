@@ -4,8 +4,8 @@ import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { BlogCard } from '@o2s/ui/components/cards/BlogCard';
-import { ContentSection } from '@o2s/ui/components/content/ContentSection';
+import { BlogCard } from '@o2s/ui/components/Cards/BlogCard';
+import { ContentSection } from '@o2s/ui/components/Content/ContentSection';
 
 import { ArticleListPureProps } from './ArticleList.types';
 

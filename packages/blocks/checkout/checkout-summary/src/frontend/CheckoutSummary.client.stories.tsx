@@ -73,7 +73,7 @@ const baseBlock = {
 };
 
 const meta = {
-    title: 'Blocks/CheckoutSummary',
+    title: 'Blocks/Checkout/CheckoutSummary',
     component: CheckoutSummaryPure,
     tags: ['autodocs'],
     parameters: { readme },

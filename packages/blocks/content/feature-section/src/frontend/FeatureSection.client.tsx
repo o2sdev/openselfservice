@@ -5,10 +5,10 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
-import { Image } from '@o2s/ui/components/media/Image';
-import { LinkList } from '@o2s/ui/components/navigation/LinkList';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
+import { Image } from '@o2s/ui/components/Media/Image';
+import { LinkList } from '@o2s/ui/components/Navigation/LinkList';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

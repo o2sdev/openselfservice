@@ -5,7 +5,7 @@ import React from 'react';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { Container } from '@o2s/ui/components/layout/Container';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

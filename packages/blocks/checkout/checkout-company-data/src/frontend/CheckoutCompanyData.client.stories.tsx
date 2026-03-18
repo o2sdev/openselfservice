@@ -119,7 +119,7 @@ const baseBlock = {
 };
 
 const meta = {
-    title: 'Blocks/CheckoutCompanyData',
+    title: 'Blocks/Checkout/CheckoutCompanyData',
     component: CheckoutCompanyDataPure,
     tags: ['autodocs'],
     parameters: { readme },

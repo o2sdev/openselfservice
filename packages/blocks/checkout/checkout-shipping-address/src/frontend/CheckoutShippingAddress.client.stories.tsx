@@ -105,7 +105,7 @@ const baseBlock = {
 };
 
 const meta = {
-    title: 'Blocks/CheckoutShippingAddress',
+    title: 'Blocks/Checkout/CheckoutShippingAddress',
     component: CheckoutShippingAddressPure,
     tags: ['autodocs'],
     parameters: { readme },

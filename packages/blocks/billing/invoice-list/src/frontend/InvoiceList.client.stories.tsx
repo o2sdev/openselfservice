@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { InvoiceListPure } from './InvoiceList.client';
 
 const meta = {
-    title: 'Blocks/InvoiceList',
+    title: 'Blocks/Billing/InvoiceList',
     component: InvoiceListPure,
     tags: ['autodocs'],
     parameters: { readme },

@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { RecommendedProductsPure } from './RecommendedProducts.client';
 
 const meta = {
-    title: 'Blocks/RecommendedProducts',
+    title: 'Blocks/Products/RecommendedProducts',
     component: RecommendedProductsPure,
     tags: ['autodocs'],
     parameters: { readme },

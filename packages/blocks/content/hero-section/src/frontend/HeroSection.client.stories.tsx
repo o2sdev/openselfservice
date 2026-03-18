@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { HeroSectionPure } from './HeroSection.client';
 
 const meta = {
-    title: 'Blocks/HeroSection',
+    title: 'Blocks/Content/HeroSection',
     component: HeroSectionPure,
     tags: ['autodocs'],
     parameters: { readme },

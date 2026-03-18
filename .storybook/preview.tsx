@@ -1,4 +1,4 @@
-import { Markdown, Title, useOf } from '@storybook/addon-docs/blocks';
+import { Controls, Description, Markdown, Primary, Stories, Title, useOf } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/nextjs-vite';
 import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
@@ -9,7 +9,7 @@ import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-import { AppSpinner } from '@o2s/ui/components/feedback/AppSpinner';
+import { AppSpinner } from '@o2s/ui/components/Feedback/AppSpinner';
 
 import { Toaster } from '@o2s/ui/elements/toaster';
 import { TooltipProvider } from '@o2s/ui/elements/tooltip';
@@ -29,12 +29,23 @@ const ReadmeDocsPage = () => {
     const { story } = useOf('story', ['story']);
     const { preparedMeta } = useOf('meta', ['meta']);
     const readme = story.parameters?.readme ?? preparedMeta.parameters?.readme;
-    const docContent = typeof readme === 'string' ? <Markdown>{readme}</Markdown> : null;
+
+    if (typeof readme === 'string') {
+        return (
+            <>
+                <Title />
+                <Markdown>{readme}</Markdown>
+            </>
+        );
+    }
 
     return (
         <>
             <Title />
-            {docContent}
+            <Description />
+            <Primary />
+            <Controls />
+            <Stories />
         </>
     );
 };

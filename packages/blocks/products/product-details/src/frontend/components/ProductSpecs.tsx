@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
 
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';

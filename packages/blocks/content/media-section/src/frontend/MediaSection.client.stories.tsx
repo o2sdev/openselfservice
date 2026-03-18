@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { MediaSectionPure } from './MediaSection.client';
 
 const meta = {
-    title: 'Blocks/MediaSection',
+    title: 'Blocks/Content/MediaSection',
     component: MediaSectionPure,
     tags: ['autodocs'],
     parameters: { readme },

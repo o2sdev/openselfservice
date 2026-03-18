@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/feedback/Loading';
+import { Loading } from '@o2s/ui/components/Feedback/Loading';
 
 import { CheckoutShippingAddress } from './CheckoutShippingAddress.server';
 import { CheckoutShippingAddressRendererProps } from './CheckoutShippingAddress.types';

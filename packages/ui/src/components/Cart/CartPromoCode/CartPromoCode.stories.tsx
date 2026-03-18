@@ -6,10 +6,10 @@ import { CartPromoCode } from './CartPromoCode';
 const meta: Meta<typeof CartPromoCode> = {
     title: 'Components/Cart/CartPromoCode',
     component: CartPromoCode,
+    tags: ['autodocs'],
     parameters: {
         layout: 'padded',
     },
-    tags: ['autodocs'],
 };
 
 export default meta;

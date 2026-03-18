@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { SurveyJsPure } from './SurveyJs.client';
 
 const meta = {
-    title: 'Blocks/SurveyJsForm',
+    title: 'Blocks/Forms/SurveyJsForm',
     component: SurveyJsPure,
     tags: ['autodocs'],
     parameters: { readme },

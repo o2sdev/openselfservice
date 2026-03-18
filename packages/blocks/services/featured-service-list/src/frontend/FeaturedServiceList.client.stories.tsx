@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { FeaturedServiceListPure } from './FeaturedServiceList.client';
 
 const meta = {
-    title: 'Blocks/FeaturedServiceList',
+    title: 'Blocks/Services/FeaturedServiceList',
     component: FeaturedServiceListPure,
     tags: ['autodocs'],
     parameters: { readme },

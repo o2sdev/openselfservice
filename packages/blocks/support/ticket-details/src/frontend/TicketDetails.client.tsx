@@ -5,9 +5,9 @@ import React from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
-import { Author } from '@o2s/ui/components/content/Author';
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { Container } from '@o2s/ui/components/layout/Container';
+import { Author } from '@o2s/ui/components/Content/Author';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';

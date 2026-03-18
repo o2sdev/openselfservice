@@ -58,7 +58,7 @@ const baseBlock = {
 };
 
 const meta = {
-    title: 'Blocks/Cart',
+    title: 'Blocks/Checkout/Cart',
     component: CartPure,
     tags: ['autodocs'],
     parameters: { readme },
