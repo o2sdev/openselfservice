@@ -105,7 +105,7 @@ const baseBlock = {
 };
 
 const meta = {
-    title: 'Blocks/OrderConfirmation',
+    title: 'Blocks/Checkout/OrderConfirmation',
     component: OrderConfirmationPure,
     tags: ['autodocs'],
     parameters: { readme },

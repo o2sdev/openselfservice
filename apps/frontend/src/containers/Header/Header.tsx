@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { Image } from '@o2s/ui/components/media/Image';
+import { Image } from '@o2s/ui/components/Media/Image';
 
 import { Link } from '@o2s/ui/elements/link';
 

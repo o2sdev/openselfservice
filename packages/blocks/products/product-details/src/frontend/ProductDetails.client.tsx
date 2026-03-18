@@ -8,8 +8,8 @@ import { Utils } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
-import { Price } from '@o2s/ui/components/commerce/Price';
-import { ProductGallery } from '@o2s/ui/components/commerce/ProductGallery';
+import { Price } from '@o2s/ui/components/Products/Price';
+import { ProductGallery } from '@o2s/ui/components/Products/ProductGallery';
 
 import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
 import { Button } from '@o2s/ui/elements/button';

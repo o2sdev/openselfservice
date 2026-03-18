@@ -13,8 +13,8 @@ import { CartSummary, CartSummarySkeleton } from '@o2s/ui/components/Cart/CartSu
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
 import { FormField } from '@o2s/ui/components/Checkout/FormField';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
-import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
-import { Price } from '@o2s/ui/components/commerce/Price';
+import { RadioTileGroup } from '@o2s/ui/components/Forms/RadioTile';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { Checkbox } from '@o2s/ui/elements/checkbox';
 import { Label } from '@o2s/ui/elements/label';

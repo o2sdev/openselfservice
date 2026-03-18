@@ -11,7 +11,7 @@ import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary, CartSummarySkeleton } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
-import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
+import { RadioTileGroup } from '@o2s/ui/components/Forms/RadioTile';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

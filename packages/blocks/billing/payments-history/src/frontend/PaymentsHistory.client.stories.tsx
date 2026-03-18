@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { PaymentsHistoryPure } from './PaymentsHistory.client';
 
 const meta = {
-    title: 'Blocks/PaymentsHistory',
+    title: 'Blocks/Billing/PaymentsHistory',
     component: PaymentsHistoryPure,
     tags: ['autodocs'],
     parameters: { readme },

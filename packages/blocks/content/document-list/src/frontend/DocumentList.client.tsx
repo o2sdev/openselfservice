@@ -3,8 +3,8 @@
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { RichText } from '@o2s/ui/components/content/RichText';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
+import { RichText } from '@o2s/ui/components/Content/RichText';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';

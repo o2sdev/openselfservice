@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { UserAccountPure } from './UserAccount.client';
 
 const meta = {
-    title: 'Blocks/UserAccount',
+    title: 'Blocks/Account/UserAccount',
     component: UserAccountPure,
     tags: ['autodocs'],
     parameters: { readme },

@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import { QuantityInput } from '@o2s/ui/components/QuantityInput';
-import { Price } from '@o2s/ui/components/commerce/Price';
-import { DynamicIcon } from '@o2s/ui/components/media/DynamicIcon';
-import { Image } from '@o2s/ui/components/media/Image';
+import { QuantityInput } from '@o2s/ui/components/Forms/QuantityInput';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
+import { Image } from '@o2s/ui/components/Media/Image';
+import { Price } from '@o2s/ui/components/Products/Price';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';

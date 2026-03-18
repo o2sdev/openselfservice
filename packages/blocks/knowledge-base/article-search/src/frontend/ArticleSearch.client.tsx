@@ -8,8 +8,8 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { Autocomplete } from '@o2s/ui/components/forms/Autocomplete';
-import { Container } from '@o2s/ui/components/layout/Container';
+import { Autocomplete } from '@o2s/ui/components/Forms/Autocomplete';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 import { Typography } from '@o2s/ui/elements/typography';
 

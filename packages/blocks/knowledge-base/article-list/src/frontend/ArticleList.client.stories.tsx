@@ -6,7 +6,7 @@ import readme from '../../README.md?raw';
 import { ArticleListPure } from './ArticleList.client';
 
 const meta = {
-    title: 'Blocks/ArticleList',
+    title: 'Blocks/KnowledgeBase/ArticleList',
     component: ArticleListPure,
     tags: ['autodocs'],
     parameters: { readme },

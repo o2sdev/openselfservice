@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { BentoGridPure } from './BentoGrid.client';
 
 const meta = {
-    title: 'Blocks/BentoGrid',
+    title: 'Blocks/Content/BentoGrid',
     component: BentoGridPure,
     tags: ['autodocs'],
     parameters: { readme },

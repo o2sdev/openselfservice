@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { ProductDetailsPure } from './ProductDetails.client';
 
 const meta = {
-    title: 'Blocks/ProductDetails',
+    title: 'Blocks/Products/ProductDetails',
     component: ProductDetailsPure,
     tags: ['autodocs'],
     parameters: { readme },

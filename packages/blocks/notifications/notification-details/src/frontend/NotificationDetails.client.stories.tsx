@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { NotificationDetailsPure } from './NotificationDetails.client';
 
 const meta = {
-    title: 'Blocks/NotificationDetails',
+    title: 'Blocks/Notifications/NotificationDetails',
     component: NotificationDetailsPure,
     tags: ['autodocs'],
     parameters: { readme },

@@ -4,9 +4,9 @@ import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { ProductCard, ProductCardBadge } from '@o2s/ui/components/cards/ProductCard';
-import { NoResults } from '@o2s/ui/components/feedback/NoResults';
-import { TooltipHover } from '@o2s/ui/components/feedback/TooltipHover';
+import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
+import { NoResults } from '@o2s/ui/components/Feedback/NoResults';
+import { TooltipHover } from '@o2s/ui/components/Feedback/TooltipHover';
 
 import { Separator } from '@o2s/ui/elements/separator';
 import { SwitchWithLabel } from '@o2s/ui/elements/switch';

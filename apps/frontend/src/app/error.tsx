@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 import { useParams } from 'next/navigation';
 import React from 'react';
 
-import { ErrorPage } from '@o2s/ui/components/feedback/ErrorPage';
+import { ErrorPage } from '@o2s/ui/components/Feedback/ErrorPage';
 
 import { Link } from '@/i18n';
 

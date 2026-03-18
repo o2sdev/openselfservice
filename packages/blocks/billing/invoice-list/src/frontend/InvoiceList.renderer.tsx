@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@o2s/ui/components/feedback/Loading';
+import { Loading } from '@o2s/ui/components/Feedback/Loading';
 
 import { InvoiceListServer } from './InvoiceList.server';
 import { InvoiceListRendererProps } from './InvoiceList.types';

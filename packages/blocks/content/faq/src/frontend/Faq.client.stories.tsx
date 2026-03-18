@@ -5,7 +5,7 @@ import readme from '../../README.md?raw';
 import { FaqPure } from './Faq.client';
 
 const meta = {
-    title: 'Blocks/Faq',
+    title: 'Blocks/Content/Faq',
     component: FaqPure,
     tags: ['autodocs'],
     parameters: { readme },
