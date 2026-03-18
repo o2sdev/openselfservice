@@ -38,3 +38,12 @@ adam.makiewicz:
     page: true
     socials:
         github: Shriz07
+
+tomasz.paciorkowski:
+    name: Tomasz Paciorkowski
+    title: Frontend Engineer @ O2S
+    url: https://github.com/tomaszpacior
+    image_url: https://avatars.githubusercontent.com/u/175005357?v=4
+    page: true
+    socials:
+        github: tomaszpacior
