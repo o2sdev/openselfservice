@@ -1,5 +1,11 @@
 # @o2s/blocks.product-list
 
+## 0.5.0
+
+### Minor Changes
+
+- 32183ef: Full list of blocks in packages/blocks - bump minor version
+
 ## 0.4.1
 
 ### Patch Changes

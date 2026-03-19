@@ -1,5 +1,11 @@
 # @o2s/blocks.checkout-summary
 
+## 0.2.0
+
+### Minor Changes
+
+- 32183ef: Full list of blocks in packages/blocks - bump minor version
+
 ## 0.1.2
 
 ### Patch Changes
