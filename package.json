@@ -101,7 +101,7 @@
         "@o2s/blocks.orders-summary": "^1.5.1",
         "@o2s/blocks.payments-history": "^1.4.1",
         "@o2s/blocks.payments-summary": "^1.4.1",
-        "@o2s/blocks.product-list": "^0.5.0",
+        "@o2s/blocks.product-list": "^0.5.2",
         "@o2s/blocks.quick-links": "^1.5.1",
         "@o2s/blocks.service-details": "^1.4.1",
         "@o2s/blocks.service-list": "^1.5.1",
