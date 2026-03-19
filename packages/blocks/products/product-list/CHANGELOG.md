@@ -1,5 +1,11 @@
 # @o2s/blocks.product-list
 
+## 0.5.2
+
+### Patch Changes
+
+- 9198341: Update package dependencies
+
 ## 0.5.0
 
 ### Minor Changes
