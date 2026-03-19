@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.product-details",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "private": false,
     "license": "MIT",
     "description": "A block for displaying comprehensive product information including title, images, price, description.",

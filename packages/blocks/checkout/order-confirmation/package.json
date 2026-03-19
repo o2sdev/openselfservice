@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.order-confirmation",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "private": false,
     "license": "MIT",
     "description": "Order confirmation page displaying order details, addresses, and totals after successful purchase.",
