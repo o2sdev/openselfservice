@@ -74,7 +74,7 @@
         "@o2s/configs.integrations": "0.6.0",
         "@o2s/framework": "1.20.1",
         "@o2s/integrations.mocked": "1.21.1",
-        "@o2s/modules.surveyjs": "0.4.4",
+        "@o2s/modules.surveyjs": "0.5.0",
         "@o2s/telemetry": "1.2.2",
         "@o2s/utils.api-harmonization": "0.3.3",
         "@o2s/utils.frontend": "0.5.1",
