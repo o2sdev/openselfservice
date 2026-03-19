@@ -1,5 +1,11 @@
 # @o2s/blocks.orders-summary
 
+## 1.6.0
+
+### Minor Changes
+
+- 32183ef: Full list of blocks in packages/blocks - bump minor version
+
 ## 1.5.3
 
 ### Patch Changes

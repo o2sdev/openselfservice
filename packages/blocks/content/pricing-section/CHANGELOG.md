@@ -1,5 +1,11 @@
 # @o2s/blocks.pricing-section
 
+## 0.7.0
+
+### Minor Changes
+
+- 32183ef: Full list of blocks in packages/blocks - bump minor version
+
 ## 0.6.3
 
 ### Patch Changes
