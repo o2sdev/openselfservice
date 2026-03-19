@@ -1,5 +1,11 @@
 # @o2s/blocks.payments-summary
 
+## 1.5.0
+
+### Minor Changes
+
+- 32183ef: Full list of blocks in packages/blocks - bump minor version
+
 ## 1.4.3
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @o2s/blocks.ticket-recent
 
+## 1.5.0
+
+### Minor Changes
+
+- 32183ef: Full list of blocks in packages/blocks - bump minor version
+
+### Patch Changes
+
+- 4d1c9c5: Bump version to publish missing packages
+
 ## 1.4.1
 
 ### Patch Changes
