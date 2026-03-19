@@ -1,5 +1,11 @@
 # @o2s/modules.surveyjs
 
+## 0.5.0
+
+### Minor Changes
+
+- bfe9c5a: Minor updates to the SurveyJS module.
+
 ## 0.4.4
 
 ### Patch Changes
