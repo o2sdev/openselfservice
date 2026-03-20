@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.21.2
+
+### Patch Changes
+
+- 0fa9e2f: added exports for some helper methods for the `carts` module for external use (e.g. for other integrations that want to extend this one)
+
 ## 1.21.1
 
 ### Patch Changes
