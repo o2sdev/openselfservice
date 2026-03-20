@@ -1,5 +1,11 @@
 # @o2s/blocks.checkout-billing-payment
 
+## 0.2.1
+
+### Patch Changes
+
+- b7b0325: removed incorrect condition that prevented showing payment methods if there was no specified region id
+
 ## 0.2.0
 
 ### Minor Changes
