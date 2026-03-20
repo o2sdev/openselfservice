@@ -79,16 +79,13 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                     });
                 }
                 setCartPromotions(cart.promotions);
-                if (cart.regionId) {
-                    const providers = await sdk.payments.getProviders(
-                        { regionId: cart.regionId },
-                        { 'x-locale': locale },
-                        accessToken,
-                    );
-                    setPaymentProviders(providers.data ?? []);
-                } else {
-                    setPaymentProviders([]);
-                }
+                const providers = await sdk.payments.getProviders(
+                    { regionId: cart.regionId },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                setPaymentProviders(providers.data ?? []);
+
                 if (cart.paymentMethod) {
                     setInitialFormValues({ paymentMethod: cart.paymentMethod.id });
                 }
