@@ -26,7 +26,11 @@
         "./sdk": "./dist/sdk/index.js",
         "./auth": "./dist/auth/index.js",
         "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js",
-        "./live-preview": "./dist/modules/cms/live-preview/index.js"
+        "./live-preview": "./dist/modules/cms/live-preview/index.js",
+        "./modules/products/mapper": "./dist/modules/products/products.mapper.js",
+        "./modules/checkout/mapper": "./dist/modules/checkout/checkout.mapper.js",
+        "./modules/payments/mocks": "./dist/modules/payments/mocks/providers.mock.js",
+        "./modules/carts/helpers": "./dist/modules/carts/carts.helpers.js"
     },
     "files": [
         "dist",
