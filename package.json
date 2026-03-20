@@ -68,7 +68,7 @@
         "lint-staged": "^16.2.7",
         "msw": "^2.12.11",
         "msw-storybook-addon": "^2.0.6",
-        "npm-check-updates": "^19.6.3",
+        "npm-check-updates": "^19.6.5",
         "playwright": "^1.58.2",
         "prettier": "^3.8.1",
         "rimraf": "^6.1.3",
