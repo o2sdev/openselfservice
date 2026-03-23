@@ -231,13 +231,13 @@ For production, you will typically:
 
 Configure the following environment variables in your API Harmonization server:
 
-| Name                         | Type   | Description                                                          | Required |
-| ---------------------------- | ------ | -------------------------------------------------------------------- | -------- |
-| MEDUSAJS_BASE_URL            | string | The base URL of your Medusa instance (e.g., `http://localhost:9000`) | yes      |
-| MEDUSAJS_PUBLISHABLE_API_KEY | string | The publishable API key for Store API operations                     | yes      |
-| MEDUSAJS_ADMIN_API_KEY       | string | The admin API key for Admin API operations                           | yes      |
-| DEFAULT_CURRENCY             | string | The default currency code (e.g., `EUR`, `USD`, `PLN`)                | yes      |
-| DEFAULT_REGION_ID            | string | The default Medusa region ID for cart creation (fallback when not provided by frontend) | no |
+| Name                         | Type   | Description                                                                             | Required |
+| ---------------------------- | ------ | --------------------------------------------------------------------------------------- | -------- |
+| MEDUSAJS_BASE_URL            | string | The base URL of your Medusa instance (e.g., `http://localhost:9000`)                    | yes      |
+| MEDUSAJS_PUBLISHABLE_API_KEY | string | The publishable API key for Store API operations                                        | yes      |
+| MEDUSAJS_ADMIN_API_KEY       | string | The admin API key for Admin API operations                                              | yes      |
+| DEFAULT_CURRENCY             | string | The default currency code (e.g., `EUR`, `USD`, `PLN`)                                   | yes      |
+| DEFAULT_REGION_ID            | string | The default Medusa region ID for cart creation (fallback when not provided by frontend) | no       |
 
 You can obtain these values from your Medusa Admin Panel:
 
