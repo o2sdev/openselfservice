@@ -6,7 +6,6 @@ import {
     Cache,
     Carts,
     Checkout,
-    CustomModulesConfig,
     Customers,
     Invoices,
     Notifications,
@@ -43,5 +42,4 @@ export const AppConfig: ApiConfig = {
         checkout: Checkout.CheckoutIntegrationConfig,
         auth: Auth.AuthIntegrationConfig,
     },
-    customModules: CustomModulesConfig,
 };

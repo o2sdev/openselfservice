@@ -16,4 +16,4 @@ export * as Resources from './resources';
 export * as Search from './search';
 export * as Tickets from './tickets';
 export * as Users from './users';
-export { CustomModulesConfig } from './custom-modules';
+export * as Documents from './documents';

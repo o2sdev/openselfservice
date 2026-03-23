@@ -279,6 +279,21 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     path: 'packages/modules/{{kebabCase name}}/.gitignore',
                     templateFile: 'templates/custom-module/gitignore.hbs',
                 },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/lint-staged.config.mjs',
+                    templateFile: 'templates/custom-module/lint-staged.config.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/vitest.config.mjs',
+                    templateFile: 'templates/custom-module/vitestConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/turbo.json',
+                    templateFile: 'templates/custom-module/turbo.hbs',
+                },
 
                 // Module source files
                 {

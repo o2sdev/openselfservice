@@ -1,4 +1,2 @@
-export * as Model from './documents.model';
-export { DocumentService as Service } from './documents.service';
-export { MockedDocumentService as MockedService } from './documents.service.mocked';
-export { DocumentController as Controller } from './documents.controller';
+export { Service, Controller, Model } from '@o2s/modules.documents';
+export { MockedDocumentService as MockedService } from './documents.service';

@@ -1,4 +1,4 @@
-import * as Model from './documents.model';
+import { Model } from '@o2s/modules.documents';
 
 const MOCK_DOCUMENTS: Model.Document[] = [
     {

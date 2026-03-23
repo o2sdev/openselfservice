@@ -1,20 +1,20 @@
 {
-    "name": "@o2s/modules.{{kebabCase name}}",
+    "name": "@o2s/modules.documents",
     "version": "0.0.1",
     "private": true,
     "license": "MIT",
-    "description": "Custom {{pascalCase name}} module for O2S.",
+    "description": "Custom Documents module for O2S.",
     "keywords": [
         "o2s",
         "module",
-        "{{kebabCase name}}"
+        "documents"
     ],
     "repository": {
         "type": "git",
         "url": "https://github.com/o2sdev/openselfservice.git",
-        "directory": "packages/modules/{{kebabCase name}}"
+        "directory": "packages/modules/documents"
     },
-    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/modules/{{kebabCase name}}#readme",
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/modules/documents#readme",
     "bugs": {
         "url": "https://github.com/o2sdev/openselfservice/issues"
     },

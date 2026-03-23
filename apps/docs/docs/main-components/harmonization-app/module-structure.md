@@ -210,7 +210,7 @@ export class GetTicketListQuery
 
 Beyond the core modules provided by the framework, you can create your own modules using the `createModule()` factory from `@o2s/framework/modules`. Custom modules follow the same abstract-service/swappable-integration pattern as core modules, enabling you to add domain-specific entities like documents, reports, or warranties.
 
-Custom modules are registered via `ApiConfig.customModules` and automatically wired up using `registerCustomModules()`.
+Custom modules are registered directly in `app.module.ts` using the `createModule()` factory, the same way other non-core modules like SurveyJS are registered.
 
 :::tip
 For a complete guide on creating custom modules, see [Extending framework modules](../../guides/integrations/extending-framework-modules.md).

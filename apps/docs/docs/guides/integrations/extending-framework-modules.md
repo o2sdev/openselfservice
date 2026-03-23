@@ -18,31 +18,37 @@ If you only need to **add fields** to an existing module, see [Extending an inte
 
 ## File structure overview
 
-All custom module files live inside your **integration package** — the same place where core module implementations are located. For example, if you're adding a `documents` module to the mocked integration, the file structure would be:
+A custom module is split across two locations, mirroring how core modules are structured in the framework:
+
+**Module definition** — the abstract service, model, and controller live in `packages/modules/<name>/`:
 
 ```text
-packages/integrations/mocked/src/modules/documents/
-├── documents.model.ts            # Normalized data model
-├── documents.service.ts          # Abstract service class (DI token)
-├── documents.service.mocked.ts   # Concrete implementation
-├── documents.controller.ts       # REST controller
-├── documents.mapper.ts           # Data mapping / mock data
-└── index.ts                      # Barrel exports
+packages/modules/documents/
+├── src/
+│   ├── documents.model.ts        # Normalized data model
+│   ├── documents.service.ts      # Abstract service class (DI token)
+│   ├── documents.controller.ts   # REST controller
+│   └── index.ts                  # Barrel exports
+├── package.json
+└── tsconfig.json
 ```
 
-This mirrors the structure of core module implementations in the same integration (e.g. `packages/integrations/mocked/src/modules/invoices/`).
+**Concrete implementation** — the actual data-fetching logic lives in the integration package:
 
-:::info Where to put files in different project setups
-- **Monorepo:** Create a new directory under your integration package, e.g. `packages/integrations/<your-integration>/src/modules/<module-name>/`
-- **CLI-bootstrapped projects:** Keep `apps/api-harmonization/` free of module definitions. Instead, create the abstract module (model, service, controller) in `packages/modules/<module-name>/` and the concrete implementation in a new integration package at `packages/integrations/<your-integration>/`. This keeps the NestJS app clean and follows the same separation of concerns as the core framework.
-:::
+```text
+packages/integrations/<your-integration>/src/modules/documents/
+├── documents.service-impl.ts     # Concrete implementation
+├── documents.mapper.ts           # Data mapping / mock data
+└── index.ts                      # Barrel exports (re-exports abstract + impl)
+```
+
+This separation keeps the abstract module reusable across integrations, following the same pattern as core framework modules (where abstracts live in `@o2s/framework` and implementations live in integration packages).
 
 After creating the module files, you also need to update:
+
 - `packages/integrations/<your-integration>/src/modules/index.ts` — re-export the new module
-- `packages/integrations/<your-integration>/src/integration.ts` — add a `CustomModules` export
-- `packages/configs/integrations/src/models/` — add a config re-export (if using the configs package)
-- `apps/api-harmonization/src/app.config.ts` — add `customModules` to your `ApiConfig`
-- `apps/api-harmonization/src/app.module.ts` — register custom modules via `registerCustomModules()`
+- `packages/configs/integrations/src/models/` — add a config re-export for the module's types
+- `apps/api-harmonization/src/app.module.ts` — register the module using `createModule()`
 
 ## Using the generator
 
@@ -54,14 +60,15 @@ npm run generate
 ```
 
 This scaffolds a standalone module package at `packages/modules/<name>/` containing the abstract service, model, controller, and barrel export. You provide:
+
 - **Module name** — e.g. `documents`, `reports`, `warranties`
 
 :::note
 After running the generator, you still need to manually:
+
 - Create a concrete service implementation in your integration (see [step 5](#5-create-a-concrete-implementation))
-- Add a config re-export in `packages/configs/integrations/` (if using the configs package)
-- Add `customModules` to `ApiConfig` in `apps/api-harmonization/src/app.config.ts`
-- Register with `registerCustomModules()` in `apps/api-harmonization/src/app.module.ts`
+- Add a config re-export in `packages/configs/integrations/` for the module's types
+- Register the module with `createModule()` in `apps/api-harmonization/src/app.module.ts`
 - Run `npm install && npm run build`
 
 See [step 6](#6-register-the-module) for details.
@@ -71,9 +78,9 @@ See [step 6](#6-register-the-module) for details.
 
 ### 1. Define your normalized data model
 
-Create the model inside your integration package at `packages/integrations/<your-integration>/src/modules/<module-name>/`:
+Create the model inside the module package at `packages/modules/<module-name>/src/`:
 
-```typescript title="packages/integrations/<your-integration>/src/modules/documents/documents.model.ts"
+```typescript title="packages/modules/documents/src/documents.model.ts"
 import { Models } from '@o2s/framework/modules';
 
 export type DocumentType = 'CONTRACT' | 'REPORT' | 'POLICY';
@@ -104,9 +111,9 @@ export class GetDocumentParams {
 
 ### 2. Create an abstract service class
 
-Define the service contract that integrations will implement. This file lives alongside the model in the same directory:
+Define the service contract that integrations will implement. This file lives alongside the model in the same package:
 
-```typescript title="packages/integrations/<your-integration>/src/modules/documents/documents.service.ts"
+```typescript title="packages/modules/documents/src/documents.service.ts"
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import * as Model from './documents.model';
@@ -129,9 +136,9 @@ export abstract class DocumentService {
 
 ### 3. Create a controller
 
-Define REST endpoints for your module in the same directory:
+Define REST endpoints for your module in the same package:
 
-```typescript title="packages/integrations/<your-integration>/src/modules/documents/documents.controller.ts"
+```typescript title="packages/modules/documents/src/documents.controller.ts"
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { LoggerService } from '@o2s/utils.logger';
@@ -163,34 +170,26 @@ export class DocumentController {
 
 ### 4. Create a barrel export
 
-Export everything from the module directory:
+Export the abstract module's public API:
 
-```typescript title="packages/integrations/<your-integration>/src/modules/documents/index.ts"
+```typescript title="packages/modules/documents/src/index.ts"
 export * as Model from './documents.model';
 export { DocumentService as Service } from './documents.service';
-export { MockedDocumentService as MockedService } from './documents.service.mocked';
 export { DocumentController as Controller } from './documents.controller';
-```
-
-Then add the re-export to your integration's modules index:
-
-```typescript title="packages/integrations/<your-integration>/src/modules/index.ts"
-// ... existing module exports
-export * as Documents from './documents';
 ```
 
 ### 5. Create a concrete implementation
 
-Implement the abstract service with your data source. This file also lives in the same module directory:
+Create the implementation in your integration package. This is the only part that lives in `packages/integrations/`:
 
-```typescript title="packages/integrations/<your-integration>/src/modules/documents/documents.service.mocked.ts"
+```typescript title="packages/integrations/<your-integration>/src/modules/documents/documents.service-impl.ts"
 import { Injectable } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
-import { DocumentService } from './documents.service';
-import * as Model from './documents.model';
+
+import { DocumentService, Model } from '@o2s/modules.documents';
 
 @Injectable()
-export class MockedDocumentService extends DocumentService {
+export class DocumentServiceImpl extends DocumentService {
     constructor() {
         super();
     }
@@ -205,97 +204,143 @@ export class MockedDocumentService extends DocumentService {
 }
 ```
 
+Create a barrel export for the integration module, re-exporting both the abstract types and the concrete implementation:
+
+```typescript title="packages/integrations/<your-integration>/src/modules/documents/index.ts"
+export { Service, Controller, Model } from '@o2s/modules.documents';
+export { DocumentServiceImpl as MockedService } from './documents.service-impl';
+```
+
+Then add the re-export to your integration's modules index:
+
+```typescript title="packages/integrations/<your-integration>/src/modules/index.ts"
+// ... existing module exports
+export * as Documents from './documents';
+```
+
 ### 6. Register the module
 
-Add a `CustomModules` export to your integration's main configuration file:
+Create a config re-export in `@o2s/configs.integrations` so that the module's types are accessible to blocks and the app, following the same pattern as core modules:
 
-```typescript title="packages/integrations/<your-integration>/src/integration.ts"
-import { CustomModuleEntry } from '@o2s/framework/modules';
+```typescript title="packages/configs/integrations/src/models/documents.ts"
+import { Integration } from '@o2s/integrations.mocked/integration';
 
-import { DocumentController } from './modules/documents/documents.controller';
-import { DocumentService } from './modules/documents/documents.service';
-import { MockedDocumentService } from './modules/documents/documents.service.mocked';
-
-export const CustomModules: Record<string, CustomModuleEntry> = {
-    documents: {
-        name: 'my-integration',
-        service: DocumentService,
-        serviceImpl: MockedDocumentService,
-        controller: DocumentController,
-    },
-};
+export import Service = Integration.Documents.Service;
+export import MockedService = Integration.Documents.MockedService;
+export import Controller = Integration.Documents.Controller;
+export import Model = Integration.Documents.Model;
 ```
-
-If you use the `@o2s/configs.integrations` package, create a config re-export. When custom modules come from a single integration:
-
-```typescript title="packages/configs/integrations/src/models/custom-modules.ts"
-import { CustomModules } from '@o2s/integrations.mocked/integration';
-
-export const CustomModulesConfig = CustomModules;
-```
-
-When custom modules are spread across multiple integrations, merge them:
-
-```typescript title="packages/configs/integrations/src/models/custom-modules.ts"
-import { CustomModules as Integration1Modules } from '@o2s/integrations.integration1/integration';
-import { CustomModules as Integration2Modules } from '@o2s/integrations.integration2/integration';
-
-export const CustomModulesConfig = {
-    ...Integration1Modules,
-    ...Integration2Modules,
-};
-```
-
-Each custom module can be implemented by a different integration — for example, `documents` by `integration1` and `warranties` by `integration2`. The `customModules` record is a flat map keyed by module name, so entries from different integrations are simply merged together.
-
-And add it to the configs index:
 
 ```typescript title="packages/configs/integrations/src/models/index.ts"
 // ... existing exports
-export { CustomModulesConfig } from './custom-modules';
+export * as Documents from './documents';
 ```
 
-Then add `customModules` to your `ApiConfig`:
-
-```typescript title="apps/api-harmonization/src/app.config.ts"
-import { CustomModulesConfig } from '@o2s/configs.integrations';
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const AppConfig: ApiConfig = {
-    integrations: {
-        // ... core module configs
-    },
-    customModules: CustomModulesConfig,
-};
-```
-
-Finally, use `registerCustomModules()` in your app module to automatically register all custom modules:
+Then register the module directly in `app.module.ts` using `createModule()`, the same way SurveyJS and other non-core modules are registered:
 
 ```typescript title="apps/api-harmonization/src/app.module.ts"
-import { registerCustomModules } from '@o2s/framework/modules';
-import { AppConfig } from './app.config';
+import { Documents } from '@o2s/configs.integrations';
+import { createModule } from '@o2s/framework/modules';
 
-const customModules = registerCustomModules(AppConfig);
+const DocumentsModule = createModule('documents');
+export const DocumentsBaseModule = DocumentsModule.register({
+    name: 'documents',
+    service: Documents.Service,
+    serviceImpl: Documents.MockedService,
+    controller: Documents.Controller,
+});
 
 @Module({
     imports: [
         // ... core modules
-        ...customModules,
+        DocumentsBaseModule,
         // ... block modules
     ],
 })
 export class AppModule {}
 ```
 
-## Creating an integration for your Custom Module
+Each custom module can be implemented by a different integration. For example, if `documents` is implemented in `integration1` and `warranties` in `integration2`, create separate config re-exports for each and register them independently in `app.module.ts`.
+
+## Creating an integration for your custom module
 
 Other integrations can provide alternative implementations for your custom module. They just need to:
 
-1. Import the abstract service class
-2. Create a concrete implementation extending it
-3. Export a `CustomModuleEntry` with their implementation
+1. Add `@o2s/modules.<name>` as a dependency
+2. Create a concrete service class extending the abstract service
+3. Re-export it alongside the abstract types from their `modules/index.ts`
 
-This follows the same pattern as core modules — the abstract service acts as the DI token, and the concrete implementation is swapped via configuration.
+Then update `@o2s/configs.integrations` to point to the new integration, and the `createModule()` call in `app.module.ts` to use the new implementation. This follows the same pattern as swapping core module integrations.
+
+## Using custom modules in blocks
+
+Blocks can inject and use custom module services the same way they use core framework services. Once you've set up the config re-export in [step 6](#6-register-the-module), use the module in blocks exactly like core framework services:
+
+### Block module
+
+```typescript title="packages/blocks/support/ticket-list/src/api-harmonization/ticket-list.module.ts"
+import { DynamicModule, Module } from '@nestjs/common';
+import { CMS, Documents, Tickets } from '@o2s/configs.integrations';
+
+import * as Framework from '@o2s/framework/modules';
+
+import { TicketListController } from './ticket-list.controller';
+import { TicketListService } from './ticket-list.service';
+
+@Module({})
+export class TicketListBlockModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
+        return {
+            module: TicketListBlockModule,
+            providers: [
+                TicketListService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Tickets.Service,
+                    useExisting: Framework.Tickets.Service,
+                },
+                Documents.Service, // custom module — globally provided by createModule()
+            ],
+            controllers: [TicketListController],
+            exports: [TicketListService],
+        };
+    }
+}
+```
+
+### Block service
+
+```typescript title="packages/blocks/support/ticket-list/src/api-harmonization/ticket-list.service.ts"
+import { Injectable } from '@nestjs/common';
+import { CMS, Documents, Tickets } from '@o2s/configs.integrations';
+import { Observable, concatMap, forkJoin, map } from 'rxjs';
+
+@Injectable()
+export class TicketListService {
+    constructor(
+        private readonly cmsService: CMS.Service,
+        private readonly ticketService: Tickets.Service,
+        private readonly documentService: Documents.Service,
+    ) {}
+
+    getTicketListBlock(query, headers): Observable<TicketListBlock> {
+        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers['x-locale'] });
+        const documents = this.documentService.getDocumentList({ limit: 5 });
+
+        return forkJoin([cms, documents]).pipe(
+            concatMap(([cms, documents]) => {
+                // Use both CMS data and documents in your block
+                // ...
+            }),
+        );
+    }
+}
+```
+
+This follows the same pattern as core services — imports come from `@o2s/configs.integrations`, which acts as the single source of truth for which integration provides each module. The abstract service class acts as the DI token, and NestJS resolves it to whatever concrete implementation was registered via `createModule()`.
 
 ## Frontend SDK extension
 
@@ -316,10 +361,17 @@ const sdk = extendSdk(baseSdk, {
 
 ## Working example
 
-The mocked integration includes a complete example of a custom "documents" module at `packages/integrations/mocked/src/modules/documents/`. This module demonstrates:
+The mocked integration includes a working example of a custom "documents" module:
 
-- Normalized data model (`documents.model.ts`)
-- Abstract service definition (`documents.service.ts`)
-- Mocked implementation (`documents.service.mocked.ts`)
-- REST controller (`documents.controller.ts`)
-- Mock data mapper (`documents.mapper.ts`)
+- **Module definition** at `packages/integrations/mocked/src/modules/documents/`:
+    - Normalized data model (`documents.model.ts`)
+    - Abstract service definition (`documents.service.ts`)
+    - REST controller (`documents.controller.ts`)
+    - Mocked implementation (`documents.service.mocked.ts`)
+    - Mock data mapper (`documents.mapper.ts`)
+- **Config re-export** at `packages/configs/integrations/src/models/documents.ts`
+- **Registration** in `apps/api-harmonization/src/app.module.ts` using `createModule()`
+
+:::note
+In the working example, the abstract module and implementation are co-located in the mocked integration for simplicity. In your own projects, follow the recommended split: abstract module in `packages/modules/<name>/` and implementation in `packages/integrations/<integration>/`.
+:::
