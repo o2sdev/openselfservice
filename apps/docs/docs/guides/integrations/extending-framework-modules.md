@@ -226,13 +226,27 @@ export const CustomModules: Record<string, CustomModuleEntry> = {
 };
 ```
 
-If you use the `@o2s/configs.integrations` package, create a config re-export:
+If you use the `@o2s/configs.integrations` package, create a config re-export. When custom modules come from a single integration:
 
 ```typescript title="packages/configs/integrations/src/models/custom-modules.ts"
 import { CustomModules } from '@o2s/integrations.mocked/integration';
 
 export const CustomModulesConfig = CustomModules;
 ```
+
+When custom modules are spread across multiple integrations, merge them:
+
+```typescript title="packages/configs/integrations/src/models/custom-modules.ts"
+import { CustomModules as Integration1Modules } from '@o2s/integrations.integration1/integration';
+import { CustomModules as Integration2Modules } from '@o2s/integrations.integration2/integration';
+
+export const CustomModulesConfig = {
+    ...Integration1Modules,
+    ...Integration2Modules,
+};
+```
+
+Each custom module can be implemented by a different integration — for example, `documents` by `integration1` and `warranties` by `integration2`. The `customModules` record is a flat map keyed by module name, so entries from different integrations are simply merged together.
 
 And add it to the configs index:
 
