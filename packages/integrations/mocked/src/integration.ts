@@ -1,4 +1,4 @@
-import { ApiConfig, Auth, Carts, Customers, Payments, Search } from '@o2s/framework/modules';
+import { ApiConfig, Auth, Carts, CustomModuleEntry, Customers, Payments, Search } from '@o2s/framework/modules';
 
 import { Service as ArticlesService } from './modules/articles';
 import { Service as AuthService } from './modules/auth';
@@ -8,6 +8,11 @@ import { Service as CartsService } from './modules/carts';
 import { Service as CheckoutService } from './modules/checkout';
 import { Service as CmsService } from './modules/cms';
 import { Service as CustomersService } from './modules/customers';
+import {
+    Controller as DocumentController,
+    Service as DocumentService,
+    MockedService as MockedDocumentService,
+} from './modules/documents';
 import { Service as InvoicesService } from './modules/invoices';
 import { Service as NotificationsService } from './modules/notifications';
 import { Service as OrdersService } from './modules/orders';
@@ -99,5 +104,14 @@ export const Config: Partial<ApiConfig['integrations']> = {
     auth: {
         name: 'mocked',
         service: AuthService,
+    },
+};
+
+export const CustomModules: Record<string, CustomModuleEntry> = {
+    documents: {
+        name: 'mocked',
+        service: DocumentService,
+        serviceImpl: MockedDocumentService,
+        controller: DocumentController,
     },
 };

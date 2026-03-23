@@ -26,6 +26,7 @@ import {
     Search,
     Tickets,
     Users,
+    registerCustomModules,
 } from '@o2s/framework/modules';
 
 import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
@@ -102,6 +103,8 @@ export const PaymentsBaseModule = Payments.Module.register(AppConfig);
 export const CheckoutBaseModule = Checkout.Module.register(AppConfig);
 export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
 
+const customModules = registerCustomModules(AppConfig);
+
 @Module({
     imports: [
         HttpModule.register({ global: true }),
@@ -132,6 +135,8 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         PaymentsBaseModule,
         CheckoutBaseModule,
         AuthModuleBaseModule,
+
+        ...customModules,
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
