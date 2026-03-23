@@ -3,7 +3,7 @@
 '@o2s/api-harmonization': minor
 '@o2s/framework': minor
 '@o2s/docs': minor
-' @o2s/integrations.mocked': minor
+'@o2s/integrations.mocked': minor
 ---
 
 add createModule() factory and customModules support to framework
