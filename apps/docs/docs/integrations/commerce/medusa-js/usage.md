@@ -184,15 +184,15 @@ Authorization: Bearer {token}
 
 **Body:**
 
-| Field     | Type   | Description                                              | Required     |
-| --------- | ------ | -------------------------------------------------------- | ------------ |
-| cartId    | string | Existing cart ID (omit to create new cart)               | No           |
-| sku       | string | Product variant SKU                                      | Yes          |
-| variantId | string | Medusa variant ID — maps directly to Medusa `variant_id` | Yes (Medusa) |
-| quantity  | number | Quantity                                                 | Yes          |
-| currency  | string | Required when creating new cart                          | No           |
-| regionId  | string | Required when creating new cart                          | No           |
-| metadata  | object | Optional metadata                                        | No           |
+| Field    | Type   | Description                                         | Required |
+| -------- | ------ | --------------------------------------------------- | -------- |
+| cartId    | string | Existing cart ID (omit to create new cart)                    | No           |
+| sku       | string | Product variant SKU                                          | Yes          |
+| variantId | string | Medusa variant ID — maps directly to Medusa `variant_id`     | Yes (Medusa) |
+| quantity  | number | Quantity                                                     | Yes          |
+| currency  | string | Required when creating new cart                              | No           |
+| regionId  | string | Required when creating new cart                              | No           |
+| metadata  | object | Optional metadata                                            | No           |
 
 **Example:**
 

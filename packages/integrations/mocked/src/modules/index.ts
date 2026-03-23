@@ -16,4 +16,3 @@ export * as Customers from './customers';
 export * as Payments from './payments';
 export * as Checkout from './checkout';
 export * as Auth from './auth';
-export * as Documents from './documents';

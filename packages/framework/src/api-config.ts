@@ -1,4 +1,4 @@
-import { Abstract, Type } from '@nestjs/common';
+import { Type } from '@nestjs/common';
 
 import {
     Articles,
@@ -20,15 +20,6 @@ import {
     Tickets,
     Users,
 } from './';
-
-export interface CustomModuleEntry {
-    name: string;
-    service: Abstract<unknown>;
-    serviceImpl: Type;
-    controller?: Type;
-    imports?: Type[];
-    providers?: Type[];
-}
 
 export interface ApiConfig {
     integrations: {
@@ -141,5 +132,4 @@ export interface ApiConfig {
             imports?: Type[];
         };
     };
-    customModules?: Record<string, CustomModuleEntry>;
 }
