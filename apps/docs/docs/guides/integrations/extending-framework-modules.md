@@ -20,7 +20,7 @@ If you only need to **add fields** to an existing module, see [Extending an inte
 
 All custom module files live inside your **integration package** — the same place where core module implementations are located. For example, if you're adding a `documents` module to the mocked integration, the file structure would be:
 
-```
+```text
 packages/integrations/mocked/src/modules/documents/
 ├── documents.model.ts            # Normalized data model
 ├── documents.service.ts          # Abstract service class (DI token)
@@ -44,7 +44,30 @@ After creating the module files, you also need to update:
 - `apps/api-harmonization/src/app.config.ts` — add `customModules` to your `ApiConfig`
 - `apps/api-harmonization/src/app.module.ts` — register custom modules via `registerCustomModules()`
 
-## Step-by-Step guide
+## Using the generator
+
+A Turbo generator helps you scaffold the module definition:
+
+```bash
+npm run generate
+# Select: custom-module
+```
+
+This scaffolds a standalone module package at `packages/modules/<name>/` containing the abstract service, model, controller, and barrel export. You provide:
+- **Module name** — e.g. `documents`, `reports`, `warranties`
+
+:::note
+After running the generator, you still need to manually:
+- Create a concrete service implementation in your integration (see [step 5](#5-create-a-concrete-implementation))
+- Add a config re-export in `packages/configs/integrations/` (if using the configs package)
+- Add `customModules` to `ApiConfig` in `apps/api-harmonization/src/app.config.ts`
+- Register with `registerCustomModules()` in `apps/api-harmonization/src/app.module.ts`
+- Run `npm install && npm run build`
+
+See [step 6](#6-register-the-module) for details.
+:::
+
+## Step-by-step guide (manual)
 
 ### 1. Define your normalized data model
 

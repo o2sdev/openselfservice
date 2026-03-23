@@ -154,3 +154,9 @@ You can achieve that by following a few steps:
 :::tip
 For a full example about injecting dependencies, you can check the source code od the [Strapi CMS integration](../../integrations/cms/strapi/overview.md).
 :::
+
+## Implementing custom modules
+
+If your project uses [custom modules](./extending-framework-modules.md) (modules beyond the core framework modules), you can add implementations for them to your integration. The process is the same as for core modules — create a service extending the custom module's abstract service and wire it into the integration's `CustomModules` export.
+
+For a complete walkthrough, see [Extending framework modules](./extending-framework-modules.md).

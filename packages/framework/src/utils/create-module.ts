@@ -1,5 +1,5 @@
 import { HttpModule } from '@nestjs/axios';
-import { Abstract, DynamicModule, Global, Module, Type } from '@nestjs/common';
+import { Abstract, DynamicModule, Module, Type } from '@nestjs/common';
 
 export interface CustomModuleConfig {
     name: string;
@@ -16,7 +16,6 @@ export interface RegisterableModule {
 }
 
 export function createModule(name: string): RegisterableModule {
-    @Global()
     @Module({})
     class CustomModule {
         static register(config: CustomModuleConfig): DynamicModule {

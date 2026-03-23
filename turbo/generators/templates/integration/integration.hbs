@@ -1,9 +1,15 @@
-import { ApiConfig } from '@o2s/framework/modules';
+import { ApiConfig, CustomModuleEntry } from '@o2s/framework/modules';
 
 // MODULE_IMPORTS
+
+// CUSTOM_MODULE_IMPORTS
 
 export * as Integration from './modules/index';
 
 export const Config: Partial<ApiConfig['integrations']> = {
 // MODULE_EXPORTS
+};
+
+export const CustomModules: Record<string, CustomModuleEntry> = {
+// CUSTOM_MODULE_EXPORTS
 };
