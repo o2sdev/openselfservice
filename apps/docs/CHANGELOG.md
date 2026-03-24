@@ -1,5 +1,31 @@
 # @o2s/docs
 
+## 2.2.1
+
+### Patch Changes
+
+- 338cb01: Update the CMS integration extension guide to use a helper-based model extension pattern instead of manual model re-exports.
+- 338cb01: Fix telemetry documentation wording to reference O2S instead of Medusa.
+- 338cb01: Fix outdated `@dxp` namespace examples in docs to match the current `@o2s` package naming used across the project.
+- 338cb01: Fix inconsistent integration installation commands in docs by standardizing
+  integration package installation to `@o2s/configs.integrations`.
+
+    Add a central integrations installation table that explains expected commands.
+
+## 2.2.0
+
+### Minor Changes
+
+- 375cd90: docs: add variantId parameter to cart API documentation, update Medusa integration docs with variantId requirement
+- a2d9ea4: docs: enhance product starters section with CLI scaffolding link for custom frontend setup
+
+## 2.1.0
+
+### Minor Changes
+
+- a1659cf: feat: update HomepageStartersSection with new CLI features and improved styling
+- 5d36519: Updated documentation with e-commerce blocks and checkout flow information.
+
 ## 2.0.0
 
 ### Major Changes

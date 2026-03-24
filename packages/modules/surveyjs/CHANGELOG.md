@@ -1,5 +1,44 @@
 # @o2s/modules.surveyjs
 
+## 0.5.0
+
+### Minor Changes
+
+- bfe9c5a: Minor updates to the SurveyJS module.
+
+## 0.4.4
+
+### Patch Changes
+
+- 338cb01: fix(api-harmonization): align typed header usage across services and generated SDK/controller contracts
+- 338cb01: Refactor header access to use `HeaderName` constants instead of literal header keys across framework controllers, block harmonization services, and mocked auth guards.
+
+  This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+  - @o2s/framework@1.20.1
+  - @o2s/utils.api-harmonization@0.3.3
+
+## 0.4.3
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+  - @o2s/framework@1.20.0
+  - @o2s/utils.api-harmonization@0.3.2
+  - @o2s/utils.frontend@0.5.1
+  - @o2s/utils.logger@1.2.3
+  - @o2s/ui@1.13.0
+
 ## 0.4.2
 
 ### Patch Changes

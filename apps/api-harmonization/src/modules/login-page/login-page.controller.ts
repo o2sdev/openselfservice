@@ -1,7 +1,7 @@
 import { URL } from '.';
 import { Controller, Get, Headers } from '@nestjs/common';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders } from '@o2s/framework/headers';
 
 import { LoginPageService } from './login-page.service';
 
@@ -10,7 +10,7 @@ export class LoginPageController {
     constructor(protected readonly service: LoginPageService) {}
 
     @Get()
-    getLoginPage(@Headers() headers: Models.Headers.AppHeaders) {
+    getLoginPage(@Headers() headers: AppHeaders) {
         return this.service.getLoginPage(headers);
     }
 }

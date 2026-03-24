@@ -8,7 +8,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { GetInvoiceListQuery, GetInvoiceParams } from './invoices.request';
 import { InvoiceService } from './invoices.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for invoices. Base path: `/invoices`. All methods delegate to {@link InvoiceService}.
@@ -32,7 +34,7 @@ export class InvoiceController {
         @Query() query: GetInvoiceListQuery,
         @Headers() headers: AppHeaders,
     ): Observable<Invoices.Model.Invoices> {
-        return this.invoiceService.getInvoiceList(query, headers.authorization);
+        return this.invoiceService.getInvoiceList(query, headers[H.Authorization]);
     }
 
     @Get(':id')
@@ -40,7 +42,7 @@ export class InvoiceController {
     @ApiParam({ name: 'id', type: String, description: 'Invoice identifier.' })
     @ApiResponse({ status: 200, description: 'Returns invoice details.' })
     getInvoice(@Param() params: GetInvoiceParams, @Headers() headers: AppHeaders): Observable<Invoices.Model.Invoice> {
-        return this.invoiceService.getInvoice(params, headers.authorization);
+        return this.invoiceService.getInvoice(params, headers[H.Authorization]);
     }
 
     @Get(':id/pdf')
@@ -52,7 +54,7 @@ export class InvoiceController {
         @Headers() headers: AppHeaders,
         @Res() res: Response,
     ): Observable<void> {
-        return this.invoiceService.getInvoicePdf(params, headers.authorization).pipe(
+        return this.invoiceService.getInvoicePdf(params, headers[H.Authorization]).pipe(
             map((pdf) => {
                 res.setHeader('Content-Type', 'application/pdf');
                 res.setHeader('Content-Disposition', `attachment; filename="invoice-${params.id}.pdf"`);

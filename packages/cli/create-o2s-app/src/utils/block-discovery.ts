@@ -2,7 +2,7 @@ import { BLOCKS_PATH } from '../constants';
 import { BlockInfo } from '../types';
 import { getAllTemplateCategories } from '../wizard/templates';
 import * as fs from 'fs-extra';
-import * as path from 'path';
+import * as path from 'node:path';
 
 interface BlockPackageJson {
     description?: string;
@@ -12,35 +12,44 @@ interface BlockPackageJson {
 export const discoverBlocks = async (repoDir: string): Promise<BlockInfo[]> => {
     try {
         const blocksDir = path.join(repoDir, BLOCKS_PATH);
-        const entries = await fs.readdir(blocksDir, { withFileTypes: true });
+        const domainEntries = await fs.readdir(blocksDir, { withFileTypes: true });
 
         const blocks: BlockInfo[] = [];
 
-        for (const entry of entries) {
-            if (!entry.isDirectory()) continue;
+        for (const domainEntry of domainEntries) {
+            if (!domainEntry.isDirectory()) continue;
 
-            const blockName = entry.name;
-            const packageJson = await readBlockPackageJson(repoDir, blockName);
+            const domainDirPath = path.join(blocksDir, domainEntry.name);
+            const blockEntries = await fs.readdir(domainDirPath, { withFileTypes: true });
 
-            blocks.push({
-                name: blockName,
-                packageName: `@o2s/blocks.${blockName}`,
-                description: packageJson.description || `Block: ${blockName}`,
-                // Fallback to all templates when o2sTemplate is not declared
-                category: packageJson.o2sTemplate ?? getAllTemplateCategories(),
-            });
+            for (const blockEntry of blockEntries) {
+                if (!blockEntry.isDirectory()) continue;
+
+                const blockName = blockEntry.name;
+                const blockPath = path.join(domainEntry.name, blockName);
+                const packageJson = await readBlockPackageJson(repoDir, blockPath);
+
+                blocks.push({
+                    name: blockName,
+                    domain: domainEntry.name,
+                    packageName: `@o2s/blocks.${blockName}`,
+                    description: packageJson.description || `Block: ${blockName}`,
+                    // Fallback to all templates when o2sTemplate is not declared
+                    category: packageJson.o2sTemplate ?? getAllTemplateCategories(),
+                });
+            }
         }
 
-        return blocks.sort((a, b) => a.name.localeCompare(b.name));
+        return blocks.sort((a, b) => `${a.domain ?? ''}/${a.name}`.localeCompare(`${b.domain ?? ''}/${b.name}`));
     } catch (error) {
         console.error('Error fetching the block list:', error);
         throw new Error('Failed to fetch the block list.');
     }
 };
 
-const readBlockPackageJson = async (repoDir: string, blockName: string): Promise<BlockPackageJson> => {
+const readBlockPackageJson = async (repoDir: string, blockPath: string): Promise<BlockPackageJson> => {
     try {
-        const packageJsonPath = path.join(repoDir, BLOCKS_PATH, blockName, 'package.json');
+        const packageJsonPath = path.join(repoDir, BLOCKS_PATH, blockPath, 'package.json');
 
         if (await fs.pathExists(packageJsonPath)) {
             return await fs.readJson(packageJsonPath);
@@ -48,7 +57,7 @@ const readBlockPackageJson = async (repoDir: string, blockName: string): Promise
 
         return {};
     } catch (error) {
-        console.warn(`Warning: Could not read package.json for block "${blockName}":`, error);
+        console.warn(`Warning: Could not read package.json for block "${blockPath}":`, error);
         return {};
     }
 };

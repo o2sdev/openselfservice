@@ -5,7 +5,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
 import { CartService } from './carts.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for carts. Base path: `/carts`. All methods delegate to {@link CartService}.
@@ -25,7 +27,7 @@ export class CartsController {
     @ApiOperation({ summary: 'Get current cart' })
     @ApiResponse({ status: 200, description: 'Returns active cart for current user/session.' })
     getCurrentCart(@Headers() headers: AppHeaders): ReturnType<CartService['getCurrentCart']> {
-        return this.cartService.getCurrentCart(headers.authorization);
+        return this.cartService.getCurrentCart(headers[H.Authorization]);
     }
 
     @Get(':id')
@@ -37,7 +39,7 @@ export class CartsController {
         @Param() params: Request.GetCartParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['getCart']> {
-        return this.cartService.getCart(params, headers.authorization);
+        return this.cartService.getCart(params, headers[H.Authorization]);
     }
 
     @Get()
@@ -65,7 +67,7 @@ export class CartsController {
         @Query() query: Request.GetCartListQuery,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['getCartList']> {
-        return this.cartService.getCartList(query, headers.authorization);
+        return this.cartService.getCartList(query, headers[H.Authorization]);
     }
 
     @Post()
@@ -77,7 +79,7 @@ export class CartsController {
         @Body() body: Request.CreateCartBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['createCart']> {
-        return this.cartService.createCart(body, headers.authorization);
+        return this.cartService.createCart(body, headers[H.Authorization]);
     }
 
     @Patch(':id')
@@ -91,7 +93,7 @@ export class CartsController {
         @Body() body: Request.UpdateCartBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['updateCart']> {
-        return this.cartService.updateCart(params, body, headers.authorization);
+        return this.cartService.updateCart(params, body, headers[H.Authorization]);
     }
 
     @Delete(':id')
@@ -103,7 +105,7 @@ export class CartsController {
         @Param() params: Request.DeleteCartParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['deleteCart']> {
-        return this.cartService.deleteCart(params, headers.authorization);
+        return this.cartService.deleteCart(params, headers[H.Authorization]);
     }
 
     // Cart item operations
@@ -116,7 +118,7 @@ export class CartsController {
         @Body() body: Request.AddCartItemBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['addCartItem']> {
-        return this.cartService.addCartItem(body, headers.authorization);
+        return this.cartService.addCartItem(body, headers[H.Authorization]);
     }
 
     @Patch(':cartId/items/:itemId')
@@ -131,7 +133,7 @@ export class CartsController {
         @Body() body: Request.UpdateCartItemBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['updateCartItem']> {
-        return this.cartService.updateCartItem(params, body, headers.authorization);
+        return this.cartService.updateCartItem(params, body, headers[H.Authorization]);
     }
 
     @Delete(':cartId/items/:itemId')
@@ -144,7 +146,7 @@ export class CartsController {
         @Param() params: Request.RemoveCartItemParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['removeCartItem']> {
-        return this.cartService.removeCartItem(params, headers.authorization);
+        return this.cartService.removeCartItem(params, headers[H.Authorization]);
     }
 
     // Promotion operations
@@ -159,7 +161,7 @@ export class CartsController {
         @Body() body: Request.ApplyPromotionBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['applyPromotion']> {
-        return this.cartService.applyPromotion(params, body, headers.authorization);
+        return this.cartService.applyPromotion(params, body, headers[H.Authorization]);
     }
 
     @Delete(':cartId/promotions/:code')
@@ -172,6 +174,6 @@ export class CartsController {
         @Param() params: Request.RemovePromotionParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<CartService['removePromotion']> {
-        return this.cartService.removePromotion(params, headers.authorization);
+        return this.cartService.removePromotion(params, headers[H.Authorization]);
     }
 }

@@ -2,6 +2,7 @@ export type TemplateType = 'o2s' | 'dxp' | 'custom';
 
 export interface BlockInfo {
     name: string;
+    domain?: string;
     packageName: string;
     description: string;
     category: string[];

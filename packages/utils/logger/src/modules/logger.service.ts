@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Response } from 'express';
 import { jwtDecode } from 'jwt-decode';
-import { Observable, tap } from 'rxjs';
+import { Observable, mergeMap, of, tap } from 'rxjs';
 import { Logger, createLogger, format, transports } from 'winston';
 
 const COLOR = {
@@ -160,6 +160,10 @@ export class LoggerService extends ConsoleLogger {
         );
     }
 
+    private isObservableLike(value: unknown): value is { subscribe: (...args: unknown[]) => unknown } {
+        return !!value && typeof value === 'object' && 'subscribe' in value && typeof value.subscribe === 'function';
+    }
+
     intercept(context: ExecutionContext, next: CallHandler): Observable<string> {
         const args = context.getArgByIndex(0);
 
@@ -189,6 +193,32 @@ export class LoggerService extends ConsoleLogger {
         }
 
         return next.handle().pipe(
+            mergeMap((value) => {
+                // Some workspace packages can return observable-like values that Nest does not unwrap.
+                // Flattening here prevents serializing internal observable fields (e.g. { source: {} }).
+                if (this.isObservableLike(value)) {
+                    return new Observable<unknown>((subscriber) => {
+                        const subscription = value.subscribe({
+                            next: (nextValue: unknown) => subscriber.next(nextValue),
+                            error: (error: unknown) => subscriber.error(error),
+                            complete: () => subscriber.complete(),
+                        });
+
+                        return () => {
+                            if (
+                                subscription &&
+                                typeof subscription === 'object' &&
+                                'unsubscribe' in subscription &&
+                                typeof subscription.unsubscribe === 'function'
+                            ) {
+                                subscription.unsubscribe();
+                            }
+                        };
+                    });
+                }
+
+                return of(value);
+            }),
             tap((next) => {
                 const response = context.getArgByIndex(1);
                 if (this.logLevel === 'debug' || this.logLevel === 'verbose') {

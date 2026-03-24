@@ -1,5 +1,43 @@
 # @o2s/integrations.strapi-cms
 
+## 2.13.1
+
+### Patch Changes
+
+- 338cb01: Clarify Strapi integration documentation around external `openselfservice-resources` repository:
+  explain why content models and example data live in a separate resources repo, how to pick
+  the right export (`o2s` vs `dxp`), and provide a step-by-step flow for importing the content
+  model into a Strapi instance.
+- feb0a8c: chore(deps): update dependencies
+- 338cb01: Migrate integration services from `implements` to `extends` and add `super()` where needed
+  to keep constructor metadata compatible with NestJS dependency injection.
+
+    Update documentation examples to reflect the new `extends ...Service` pattern.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
+## 2.13.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- d05b09b: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
 ## 2.12.0
 
 ### Minor Changes

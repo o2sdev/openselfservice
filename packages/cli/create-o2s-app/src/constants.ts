@@ -4,7 +4,8 @@ export const GITHUB_REPO_URL = 'https://github.com/o2sdev/openselfservice';
 export const GITHUB_BRANCH = 'create-o2s-app/base';
 export const PROJECT_PREFIX = 'o2s';
 export const STORYBOOK_URL = 'https://storybook-o2s.openselfservice.com/';
-export const DOCS_URL = 'https://docs.openselfservice.com/getting-started';
+export const DOCS_URL = 'https://www.openselfservice.com/docs/getting-started/installation';
+export const DOCS_INTEGRATIONS_URL = 'https://www.openselfservice.com/docs/integrations';
 
 export const BLOCKS_PATH = 'packages/blocks';
 export const INTEGRATIONS_PATH = 'packages/integrations';
@@ -15,7 +16,9 @@ export const ALWAYS_REMOVE_DIRS: string[] = [
     '.github',
     '.changeset',
     'apps/docs',
+    'packages/blocks',
     'packages/framework',
+    'packages/integrations',
     'packages/modules',
     'packages/utils',
     'packages/cli',

@@ -1,20 +1,26 @@
-import React from 'react';
-import { NextIntlClientProvider } from 'next-intl';
-import type { Preview } from '@storybook/nextjs-vite';
-import { createRouter } from '@storybook/nextjs-vite/router.mock';
-import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
-import { Markdown, Title, useOf } from '@storybook/addon-docs/blocks';
+import { Controls, Description, Markdown, Primary, Stories, Title, useOf } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
+import type { Preview } from '@storybook/nextjs-vite';
+import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
+import { createRouter } from '@storybook/nextjs-vite/router.mock';
+import { initialize, mswLoader } from 'msw-storybook-addon';
+import { NextIntlClientProvider } from 'next-intl';
+import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
-import { AppSpinner } from '@o2s/ui/components/AppSpinner';
+
+import { AppSpinner } from '@o2s/ui/components/Feedback/AppSpinner';
+
 import { Toaster } from '@o2s/ui/elements/toaster';
 import { TooltipProvider } from '@o2s/ui/elements/tooltip';
 
-import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
-
+import messages from '../apps/frontend/src/i18n/messages/en.json';
 import '../apps/frontend/src/styles/global.css';
-import messages from '../apps/frontend/src/i18n/messages/en.json'
+
+import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
+import { cartAndCheckoutHandlers } from './mocks/handlers/cart-handlers';
+
+initialize();
 
 createRouter({});
 createNavigation({});
@@ -24,37 +30,56 @@ const ReadmeDocsPage = () => {
     const { preparedMeta } = useOf('meta', ['meta']);
     const readme = story.parameters?.readme ?? preparedMeta.parameters?.readme;
 
+    if (typeof readme === 'string') {
+        return (
+            <>
+                <Title />
+                <Markdown>{readme}</Markdown>
+            </>
+        );
+    }
+
     return (
         <>
             <Title />
-            {typeof readme === 'string' ? <Markdown>{readme}</Markdown> : null}
+            <Description />
+            <Primary />
+            <Controls />
+            <Stories />
         </>
     );
 };
 
 const preview: Preview = {
-  parameters: {
-      docs: {
-          page: ReadmeDocsPage,
-      },
-      nextjs: {
-          appDirectory: true,
-      },
-      controls: {
-        matchers: {
-         color: /(background|color)$/i,
-         date: /Date$/i,
+    loaders: [mswLoader as () => void | Record<string, unknown> | Promise<void | Record<string, unknown>>],
+    parameters: {
+        msw: {
+            handlers: cartAndCheckoutHandlers,
         },
-      },
-
-      a11y: {
-          // 'todo' - show a11y violations in the test UI only
-          // 'error' - fail CI on a11y violations
-          // 'off' - skip a11y checks entirely
-          test: 'todo'
-      }
-  },
+        docs: {
+            page: ReadmeDocsPage,
+        },
+        nextjs: {
+            appDirectory: true,
+        },
+        controls: {
+            matchers: {
+                color: /(background|color)$/i,
+                date: /Date$/i,
+            },
+        },
+        a11y: {
+            test: 'todo',
+        },
+    },
     decorators: [
+        (Story) => {
+            // Set cartId for cart/checkout blocks - MSW handlers return mock data
+            if (globalThis.window !== undefined) {
+                globalThis.window.localStorage.setItem('cartId', 'storybook-cart-1');
+            }
+            return <Story />;
+        },
         withThemeByClassName({
             themes: {
                 default: 'theme-default',
@@ -63,9 +88,15 @@ const preview: Preview = {
             defaultTheme: 'default',
         }),
         (Story) => {
-            return(
+            return (
                 <NextIntlClientProvider locale="en" messages={messages}>
-                    <GlobalProvider config={globalProviderConfig} labels={globalProviderLabels} themes={globalProviderThemes} currentTheme={globalProviderCurrentTheme} locale="en">
+                    <GlobalProvider
+                        config={globalProviderConfig}
+                        labels={globalProviderLabels}
+                        themes={globalProviderThemes}
+                        currentTheme={globalProviderCurrentTheme}
+                        locale="en"
+                    >
                         <TooltipProvider>
                             <Story />
 
@@ -74,9 +105,9 @@ const preview: Preview = {
                         </TooltipProvider>
                     </GlobalProvider>
                 </NextIntlClientProvider>
-            )
-        }
-    ]
+            );
+        },
+    ],
 };
 
 export default preview;

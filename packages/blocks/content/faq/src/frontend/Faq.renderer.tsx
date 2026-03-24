@@ -1,0 +1,38 @@
+import { useLocale } from 'next-intl';
+import React, { Suspense } from 'react';
+
+import { Loading } from '@o2s/ui/components/Feedback/Loading';
+import { Container } from '@o2s/ui/components/Layout/Container';
+
+import { Faq } from './Faq.server';
+import { FaqRendererProps } from './Faq.types';
+
+export const FaqRenderer: React.FC<FaqRendererProps> = ({
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+    isDraftModeEnabled,
+}) => {
+    const locale = useLocale();
+
+    return (
+        <Suspense
+            key={id}
+            fallback={
+                <Container variant="narrow">
+                    <Loading bars={[13, 14]} />
+                </Container>
+            }
+        >
+            <Faq
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+                isDraftModeEnabled={isDraftModeEnabled}
+            />
+        </Suspense>
+    );
+};

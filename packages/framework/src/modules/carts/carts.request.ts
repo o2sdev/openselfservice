@@ -106,6 +106,11 @@ export class AddCartItemBody {
     /** Item quantity. */
     @ApiProperty({ description: 'Item quantity.' })
     quantity!: number;
+    /** Optional integration-specific variant identifier (e.g. Medusa variant UUID). */
+    @ApiPropertyOptional({
+        description: 'Optional integration-specific variant identifier (e.g. Medusa variant UUID).',
+    })
+    variantId?: string;
     /** Currency code (typically required when a new cart is created). */
     @ApiPropertyOptional({ description: 'Currency code (typically required when a new cart is created).' })
     currency?: Price.Currency;
@@ -208,6 +213,11 @@ export class UpdateCartAddressesBody {
     /** Inline billing address payload. */
     @ApiPropertyOptional({ description: 'Inline billing address payload.' })
     billingAddress?: Address.Address;
+    /** Optional cart notes. */
+    @ApiPropertyOptional({ description: 'Optional cart notes.' })
+    /** Copy billing address as shipping address. */
+    @ApiPropertyOptional({ description: 'Copy billing address as shipping address.' })
+    sameAsBillingAddress?: boolean;
     /** Optional cart notes. */
     @ApiPropertyOptional({ description: 'Optional cart notes.' })
     notes?: string;

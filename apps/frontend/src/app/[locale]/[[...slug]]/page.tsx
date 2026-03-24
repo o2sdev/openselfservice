@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-import { AppSpinner } from '@o2s/ui/components/AppSpinner';
-import { Breadcrumbs } from '@o2s/ui/components/Breadcrumbs';
+import { AppSpinner } from '@o2s/ui/components/Feedback/AppSpinner';
+import { Breadcrumbs } from '@o2s/ui/components/Navigation/Breadcrumbs';
 
 import { Separator } from '@o2s/ui/elements/separator';
 import { Toaster } from '@o2s/ui/elements/toaster';
@@ -95,6 +95,10 @@ export default async function Page({ params }: Props) {
             { 'x-locale': locale },
             session?.accessToken,
         );
+
+        if (meta.redirect) {
+            redirect(`/${locale}${meta.redirect}`);
+        }
 
         if (session?.user && session?.error === 'RefreshTokenError') {
             return await signIn();

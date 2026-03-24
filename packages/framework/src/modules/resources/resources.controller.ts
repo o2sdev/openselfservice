@@ -15,7 +15,9 @@ import {
     GetServiceParams,
 } from './resources.request';
 import { ResourceService } from './resources.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for resources, services, and assets. Base path: `/resources`. All methods delegate to {@link ResourceService}.
@@ -34,7 +36,7 @@ export class ResourceController {
         @Param() params: GetResourceParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<ResourceService['purchaseOrActivateResource']> {
-        return this.resourceService.purchaseOrActivateResource(params, headers.authorization);
+        return this.resourceService.purchaseOrActivateResource(params, headers[H.Authorization]);
     }
 
     @Get('services')
@@ -59,7 +61,7 @@ export class ResourceController {
     @ApiParam({ name: 'id', type: String, description: 'Service identifier.' })
     @ApiResponse({ status: 200, description: 'Returns service details.' })
     getService(@Param() params: GetServiceParams, @Headers() headers: AppHeaders): Observable<Service> {
-        return this.resourceService.getService(params, headers.authorization);
+        return this.resourceService.getService(params, headers[H.Authorization]);
     }
 
     @Get('services/featured')
@@ -86,7 +88,7 @@ export class ResourceController {
     @ApiParam({ name: 'id', type: String, description: 'Asset identifier.' })
     @ApiResponse({ status: 200, description: 'Returns asset details.' })
     getAsset(@Param() params: GetAssetParams, @Headers() headers: AppHeaders): Observable<Asset> {
-        return this.resourceService.getAsset(params, headers.authorization);
+        return this.resourceService.getAsset(params, headers[H.Authorization]);
     }
 
     @Get('assets/:id/compatible-services')

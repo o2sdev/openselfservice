@@ -1,7 +1,6 @@
 import { Block } from '@/utils/models';
 
 export type Labels = {
-    actionButtonLabel?: string;
     downloadLabel?: string;
     specificationsTitle: string;
     descriptionTitle: string;
@@ -9,6 +8,10 @@ export type Labels = {
     offerLabel: string;
     variantLabel?: string;
     outOfStockLabel?: string;
+    addToCartLabel: string;
+    addToCartSuccess: string;
+    addToCartError: string;
+    viewCartLabel?: string;
 };
 
 export type AttributeConfig = {
@@ -47,6 +50,7 @@ export class ProductDetailsBlock extends Block.Block {
     title?: string;
     labels!: Labels;
     basePath?: string;
+    cartPath?: string;
     /**
      * Configuration of product attributes to display.
      * The block will filter and format product.attributes based on this configuration.

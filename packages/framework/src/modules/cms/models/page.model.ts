@@ -25,6 +25,7 @@ export class Page {
     /** Role-based access control (e.g., ['ORG_USER', 'ORG_ADMIN']) */
     roles?: string[];
     theme?: string;
+    redirect?: string;
 }
 
 /** Base template contract used by CMS page layouts. */

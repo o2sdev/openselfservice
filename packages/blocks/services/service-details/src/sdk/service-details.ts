@@ -1,0 +1,34 @@
+import { Utils } from '@o2s/utils.frontend';
+
+import { AppHeaders } from '@o2s/framework/headers';
+import { Sdk } from '@o2s/framework/sdk';
+
+import { Model, Request } from '../api-harmonization/service-details.client';
+import { URL } from '../api-harmonization/service-details.url';
+
+const API_URL = URL;
+
+export const serviceDetails = (sdk: Sdk) => ({
+    blocks: {
+        getServiceDetails: (
+            params: Request.GetServiceDetailsBlockParams,
+            query: Request.GetServiceDetailsBlockQuery,
+            headers: AppHeaders,
+            authorization?: string,
+        ): Promise<Model.ServiceDetailsBlock> =>
+            sdk.makeRequest({
+                method: 'get',
+                url: `${API_URL}/${params.id}`,
+                headers: {
+                    ...Utils.Headers.getApiHeaders(),
+                    ...headers,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
+                },
+                params: query,
+            }),
+    },
+});

@@ -25,6 +25,11 @@ export class SetAddressesBody {
     billingAddress?: Address.Address;
     /** Optional checkout notes. */
     @ApiPropertyOptional({ description: 'Optional checkout notes.' })
+    /** Copy billing address as shipping address. */
+    @ApiPropertyOptional({ description: 'Copy billing address as shipping address.' })
+    sameAsBillingAddress?: boolean;
+    /** Optional checkout notes. */
+    @ApiPropertyOptional({ description: 'Optional checkout notes.' })
     notes?: string;
     /** Customer email, typically required for guest checkout. */
     @ApiPropertyOptional({ description: 'Customer email, typically required for guest checkout.' })
@@ -93,6 +98,7 @@ export class PlaceOrderParams {
     /** Cart identifier. */
     @ApiProperty({ description: 'Cart identifier.' })
     cartId!: string;
+    locale?: string; // From x-locale header
 }
 
 /** Optional request body for placing an order. */

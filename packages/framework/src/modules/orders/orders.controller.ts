@@ -5,7 +5,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
 import { OrderService } from './orders.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for orders. Base path: `/orders`. All methods delegate to {@link OrderService}.
@@ -24,7 +26,7 @@ export class OrdersController {
         @Param() params: Request.GetOrderParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<OrderService['getOrder']> {
-        return this.orderService.getOrder(params, headers.authorization);
+        return this.orderService.getOrder(params, headers[H.Authorization]);
     }
 
     @Get()
@@ -35,6 +37,6 @@ export class OrdersController {
         @Query() query: Request.GetOrderListQuery,
         @Headers() headers: AppHeaders,
     ): ReturnType<OrderService['getOrderList']> {
-        return this.orderService.getOrderList(query, headers.authorization);
+        return this.orderService.getOrderList(query, headers[H.Authorization]);
     }
 }

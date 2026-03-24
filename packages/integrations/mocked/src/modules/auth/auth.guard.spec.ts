@@ -5,10 +5,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { LoggerService } from '@o2s/utils.logger';
 
+import { HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
 import { PermissionsGuard, RolesGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+
+const H = HeaderName;
 
 describe('Auth Guards', () => {
     let reflector: Reflector;
@@ -65,7 +68,7 @@ describe('Auth Guards', () => {
         });
 
         it('should throw UnauthorizedException if token verification fails', async () => {
-            request.headers['authorization'] = 'Bearer invalid';
+            request.headers[H.Authorization] = 'Bearer invalid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({ roles: ['admin'] });
             vi.mocked(authService.verifyToken).mockRejectedValue(new Error('Invalid token'));
@@ -74,7 +77,7 @@ describe('Auth Guards', () => {
         });
 
         it('should throw UnauthorizedException if token is revoked', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             const mockToken = { jti: '123' };
 
@@ -86,7 +89,7 @@ describe('Auth Guards', () => {
         });
 
         it('should use existing verified token if present', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
             request['x-decoded-token'] = { jti: '123' };
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({ roles: ['admin'] });
@@ -100,7 +103,7 @@ describe('Auth Guards', () => {
         });
 
         it('should validate roles with ANY mode (default)', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 roles: ['admin', 'editor'],
@@ -116,7 +119,7 @@ describe('Auth Guards', () => {
         });
 
         it('should fail validation with ANY mode if no roles match', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({ roles: ['admin', 'editor'] });
             vi.mocked(authService.verifyToken).mockResolvedValue({});
@@ -129,7 +132,7 @@ describe('Auth Guards', () => {
         });
 
         it('should validate roles with ALL mode', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 roles: ['admin', 'editor'],
@@ -145,7 +148,7 @@ describe('Auth Guards', () => {
         });
 
         it('should fail validation with ALL mode if not all roles match', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 roles: ['admin', 'editor'],
@@ -183,7 +186,7 @@ describe('Auth Guards', () => {
         });
 
         it('should validate permissions with ALL mode (default)', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 resource: 'res',
@@ -203,7 +206,7 @@ describe('Auth Guards', () => {
         });
 
         it('should fail validation with ALL mode if one action is missing', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({ resource: 'res', actions: ['read', 'write'] });
             vi.mocked(authService.verifyToken).mockResolvedValue({});
@@ -217,7 +220,7 @@ describe('Auth Guards', () => {
         });
 
         it('should validate permissions with ANY mode', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 resource: 'res',
@@ -237,7 +240,7 @@ describe('Auth Guards', () => {
         });
 
         it('should fail validation with ANY mode if all actions are missing', async () => {
-            request.headers['authorization'] = 'Bearer valid';
+            request.headers[H.Authorization] = 'Bearer valid';
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 resource: 'res',

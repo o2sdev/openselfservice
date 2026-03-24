@@ -4,7 +4,7 @@ sidebar_position: 200
 
 # Creating the harmonizing block
 
-We can start by using [a generator](../using-generators.md#block) to generate a scaffolded block, to which you will be adding your own implementation. After you provide the block name (using whatever case you want, e.g. `tickets summary`), it will create a new folder with the files: `./packages/blocks/tickets-summary/`.
+We can start by using [a generator](../using-generators.md#block) to generate a scaffolded block, to which you will be adding your own implementation. After you provide the block name (using whatever case you want, e.g. `tickets summary`) and domain (e.g. `support`), it will create a new folder with the files: `./packages/blocks/support/tickets-summary/`.
 
 ### Declaring dependencies
 

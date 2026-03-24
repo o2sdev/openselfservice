@@ -1,5 +1,37 @@
 # @o2s/ui
 
+## 1.13.1
+
+### Patch Changes
+
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+- fab2aea: refactor: group Storybook stories by domain and rename UI component directories to PascalCase
+
+## 1.13.0
+
+### Minor Changes
+
+- 375cd90: feat(blocks, ui): add variantId support to cart item handling, enhance add-to-cart toast with product name and cart link action across ProductDetails, ProductList and RecommendedProducts blocks
+
+### Patch Changes
+
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+
+## 1.12.0
+
+### Minor Changes
+
+- 5d36519: Added new blocks: Cart, Checkout (Summary, Shipping Address, Company Data, Billing Payment) and Order Confirmation. Includes checkout forms validation (Formik + Yup), error handling, promo code support in cart, and new UI components (StepIndicator, RadioTile, AddressFields, CartSummary, QuantityInput, FormField).
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
 ## 1.11.0
 
 ### Minor Changes

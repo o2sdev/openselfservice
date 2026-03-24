@@ -5,7 +5,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
 import { NotificationService } from './notifications.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for notifications. Base path: `/notifications`. All methods delegate to {@link NotificationService}.
@@ -24,7 +26,7 @@ export class NotificationsController {
         @Param() params: Request.GetNotificationParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<NotificationService['getNotification']> {
-        return this.notificationService.getNotification(params, headers.authorization);
+        return this.notificationService.getNotification(params, headers[H.Authorization]);
     }
 
     @Get()
@@ -40,7 +42,7 @@ export class NotificationsController {
         @Query() query: Request.GetNotificationListQuery,
         @Headers() headers: AppHeaders,
     ): ReturnType<NotificationService['getNotificationList']> {
-        return this.notificationService.getNotificationList(query, headers.authorization);
+        return this.notificationService.getNotificationList(query, headers[H.Authorization]);
     }
 
     @Post()
@@ -51,6 +53,6 @@ export class NotificationsController {
         @Body() request: Request.MarkNotificationAsRequest,
         @Headers() headers: AppHeaders,
     ): ReturnType<NotificationService['markAs']> {
-        return this.notificationService.markAs(request, headers.authorization);
+        return this.notificationService.markAs(request, headers[H.Authorization]);
     }
 }

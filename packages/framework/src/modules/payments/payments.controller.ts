@@ -5,7 +5,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
 import { PaymentService } from './payments.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for payments. Base path: `/payments`. All methods delegate to {@link PaymentService}.
@@ -29,7 +31,7 @@ export class PaymentsController {
         @Query() params: Request.GetProvidersParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<PaymentService['getProviders']> {
-        return this.paymentService.getProviders({ ...params, locale: headers['x-locale'] }, headers.authorization);
+        return this.paymentService.getProviders({ ...params, locale: headers[H.Locale] }, headers[H.Authorization]);
     }
 
     @Post('sessions')
@@ -40,7 +42,7 @@ export class PaymentsController {
         @Body() body: Request.CreateSessionBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<PaymentService['createSession']> {
-        return this.paymentService.createSession(body, headers.authorization);
+        return this.paymentService.createSession(body, headers[H.Authorization]);
     }
 
     @Get('sessions/:id')
@@ -51,7 +53,7 @@ export class PaymentsController {
         @Param() params: Request.GetSessionParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<PaymentService['getSession']> {
-        return this.paymentService.getSession(params, headers.authorization);
+        return this.paymentService.getSession(params, headers[H.Authorization]);
     }
 
     @Patch('sessions/:id')
@@ -64,7 +66,7 @@ export class PaymentsController {
         @Body() body: Request.UpdateSessionBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<PaymentService['updateSession']> {
-        return this.paymentService.updateSession(params, body, headers.authorization);
+        return this.paymentService.updateSession(params, body, headers[H.Authorization]);
     }
 
     @Delete('sessions/:id')
@@ -75,6 +77,6 @@ export class PaymentsController {
         @Param() params: Request.CancelSessionParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<PaymentService['cancelSession']> {
-        return this.paymentService.cancelSession(params, headers.authorization);
+        return this.paymentService.cancelSession(params, headers[H.Authorization]);
     }
 }

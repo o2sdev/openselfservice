@@ -5,7 +5,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
 import { TicketService } from './tickets.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for tickets. Base path: `/tickets`. All methods delegate to {@link TicketService}.
@@ -24,7 +26,7 @@ export class TicketsController {
         @Param() params: Request.GetTicketParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<TicketService['getTicket']> {
-        return this.ticketService.getTicket(params, headers.authorization);
+        return this.ticketService.getTicket(params, headers[H.Authorization]);
     }
 
     @Get()
@@ -40,7 +42,7 @@ export class TicketsController {
         @Query() query: Request.GetTicketListQuery,
         @Headers() headers: AppHeaders,
     ): ReturnType<TicketService['getTicketList']> {
-        return this.ticketService.getTicketList(query, headers.authorization);
+        return this.ticketService.getTicketList(query, headers[H.Authorization]);
     }
 
     @Post()
@@ -51,6 +53,6 @@ export class TicketsController {
         @Body() body: Request.PostTicketBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<TicketService['createTicket']> {
-        return this.ticketService.createTicket(body, headers.authorization);
+        return this.ticketService.createTicket(body, headers[H.Authorization]);
     }
 }

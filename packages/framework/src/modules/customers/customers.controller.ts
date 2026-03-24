@@ -5,7 +5,9 @@ import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
 import { CustomerService } from './customers.service';
-import { AppHeaders } from '@/utils/models/headers';
+import { AppHeaders, HeaderName } from '@/utils/models/headers';
+
+const H = HeaderName;
 
 /**
  * HTTP controller for customer addresses. Base path: `/customers/addresses`. All methods delegate to {@link CustomerService}.
@@ -20,7 +22,7 @@ export class CustomersController {
     @ApiOperation({ summary: 'List customer addresses' })
     @ApiResponse({ status: 200, description: 'Returns customer addresses list.' })
     getAddresses(@Headers() headers: AppHeaders): ReturnType<CustomerService['getAddresses']> {
-        return this.customerService.getAddresses(headers.authorization);
+        return this.customerService.getAddresses(headers[H.Authorization]);
     }
 
     @Get(':id')
@@ -31,7 +33,7 @@ export class CustomersController {
         @Param() params: Request.GetAddressParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<CustomerService['getAddress']> {
-        return this.customerService.getAddress(params, headers.authorization);
+        return this.customerService.getAddress(params, headers[H.Authorization]);
     }
 
     @Post()
@@ -42,7 +44,7 @@ export class CustomersController {
         @Body() body: Request.CreateAddressBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<CustomerService['createAddress']> {
-        return this.customerService.createAddress(body, headers.authorization);
+        return this.customerService.createAddress(body, headers[H.Authorization]);
     }
 
     @Patch(':id')
@@ -55,7 +57,7 @@ export class CustomersController {
         @Body() body: Request.UpdateAddressBody,
         @Headers() headers: AppHeaders,
     ): ReturnType<CustomerService['updateAddress']> {
-        return this.customerService.updateAddress(params, body, headers.authorization);
+        return this.customerService.updateAddress(params, body, headers[H.Authorization]);
     }
 
     @Delete(':id')
@@ -66,7 +68,7 @@ export class CustomersController {
         @Param() params: Request.DeleteAddressParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<CustomerService['deleteAddress']> {
-        return this.customerService.deleteAddress(params, headers.authorization);
+        return this.customerService.deleteAddress(params, headers[H.Authorization]);
     }
 
     @Post(':id/default')
@@ -77,6 +79,6 @@ export class CustomersController {
         @Param() params: Request.SetDefaultAddressParams,
         @Headers() headers: AppHeaders,
     ): ReturnType<CustomerService['setDefaultAddress']> {
-        return this.customerService.setDefaultAddress(params, headers.authorization);
+        return this.customerService.setDefaultAddress(params, headers[H.Authorization]);
     }
 }
