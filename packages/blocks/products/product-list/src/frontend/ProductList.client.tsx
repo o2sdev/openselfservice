@@ -1,5 +1,6 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useState, useTransition } from 'react';
@@ -72,6 +73,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                     if (!cartId && result?.id) {
                         localStorage.setItem('cartId', result.id);
                     }
+                    eventBus.emit('cart:changed', { itemCount: result.items.data.length });
                     toast({
                         description: Utils.StringReplace.reactStringReplace(data.labels.addToCartSuccess ?? '', {
                             productName,

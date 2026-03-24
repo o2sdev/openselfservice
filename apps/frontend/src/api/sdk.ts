@@ -4,10 +4,13 @@ import { Modules } from '@o2s/api-harmonization';
 
 // this unused import is necessary for TypeScript to properly resolve API methods
 
+import { AppHeaders } from '@o2s/framework/headers';
+import { Carts } from '@o2s/framework/modules';
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
 import { Notifications } from '@o2s/integrations.mocked/sdk';
 
+import { cart } from '@/api/modules/cart';
 import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
 import { organizations } from '@/api/modules/organizations';
@@ -28,9 +31,17 @@ const internalSdk = getSdk({
     },
 });
 
+const getCurrentCart: (headers: AppHeaders, authorization?: string) => Promise<Carts.Model.Cart> = (
+    headers,
+    authorization,
+) => cart(internalSdk).cart.getCurrentCart(headers, authorization);
+
 export const sdk = extendSdk(internalSdk, {
     notifications: {
         ...Notifications.extend(internalSdk),
+    },
+    cart: {
+        getCurrentCart,
     },
     modules: {
         getInit: page(internalSdk).modules.getInit,

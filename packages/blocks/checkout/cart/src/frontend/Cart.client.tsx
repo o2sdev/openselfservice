@@ -1,5 +1,6 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 
@@ -70,6 +71,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                     accessToken,
                 );
                 setCart(updated);
+                eventBus.emit('cart:changed', { itemCount: updated.items.data.length });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }
@@ -84,6 +86,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
             try {
                 const updated = await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
                 setCart(updated);
+                eventBus.emit('cart:changed', { itemCount: updated.items.data.length });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }

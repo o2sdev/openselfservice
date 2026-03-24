@@ -21,7 +21,8 @@
         "./elements/*": "./src/elements/*.tsx",
         "./components/*": "./src/components/*/index.ts",
         "./components/*/*": "./src/components/*/*/index.ts",
-        "./components/*/*/*": "./src/components/*/*/*/index.ts"
+        "./components/*/*/*": "./src/components/*/*/*/index.ts",
+        "./event-bus": "./src/event-bus/index.ts"
     },
     "scripts": {
         "lint": "tsc --noEmit && eslint . --max-warnings=0",
@@ -77,6 +78,7 @@
         "libphonenumber-js": "^1.12.38",
         "lucide-react": "^0.575.0",
         "markdown-to-jsx": "9.7.0",
+        "mitt": "^3.0.1",
         "react-day-picker": "^9.14.0",
         "react-indiana-drag-scroll": "^2.2.1",
         "recharts": "^3.7.0",
