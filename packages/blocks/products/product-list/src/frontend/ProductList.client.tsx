@@ -1,5 +1,6 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useState, useTransition } from 'react';
@@ -26,6 +27,8 @@ import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';
+
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
@@ -57,7 +60,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
             const productName = data.products.data.find((p) => p.sku === sku)?.name ?? sku;
             startAddToCartTransition(async () => {
                 try {
-                    const cartId = localStorage.getItem('cartId');
+                    const cartId = localStorage.getItem(cartIdLocalStorageKey);
                     const result = await sdk.cart.addCartItem(
                         {
                             cartId: cartId || undefined,
@@ -70,8 +73,9 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                         accessToken,
                     );
                     if (!cartId && result?.id) {
-                        localStorage.setItem('cartId', result.id);
+                        localStorage.setItem(cartIdLocalStorageKey, result.id);
                     }
+                    eventBus.emit('cart:changed', { cart: result });
                     toast({
                         description: Utils.StringReplace.reactStringReplace(data.labels.addToCartSuccess ?? '', {
                             productName,

@@ -19,8 +19,9 @@ import { sdk } from '../sdk';
 
 import { CheckoutBillingPaymentPureProps } from './CheckoutBillingPayment.types';
 
-const CART_ID_KEY = 'cartId';
 const FORM_ID = 'checkout-billing-form';
+
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymentPureProps>> = ({
     locale,
@@ -59,7 +60,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     });
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) {
             toast({ description: errors?.cartNotFound, variant: 'destructive' });
             router.replace(cartPath ?? '/');
@@ -101,7 +102,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     });
 
     const handleSubmit = (values: { paymentMethod: string }) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) return;
 
         startSubmitTransition(async () => {

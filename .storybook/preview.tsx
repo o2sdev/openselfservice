@@ -20,6 +20,8 @@ import '../apps/frontend/src/styles/global.css';
 import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
 import { cartAndCheckoutHandlers } from './mocks/handlers/cart-handlers';
 
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
+
 initialize();
 
 createRouter({});
@@ -76,7 +78,7 @@ const preview: Preview = {
         (Story) => {
             // Set cartId for cart/checkout blocks - MSW handlers return mock data
             if (globalThis.window !== undefined) {
-                globalThis.window.localStorage.setItem('cartId', 'storybook-cart-1');
+                globalThis.window.localStorage.setItem(cartIdLocalStorageKey, 'storybook-cart-1');
             }
             return <Story />;
         },

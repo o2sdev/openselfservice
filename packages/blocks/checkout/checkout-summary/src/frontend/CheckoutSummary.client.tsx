@@ -21,7 +21,7 @@ import { sdk } from '../sdk';
 
 import { CheckoutSummaryPureProps } from './CheckoutSummary.types';
 
-const CART_ID_KEY = 'cartId';
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> = ({
     locale,
@@ -46,7 +46,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const [isSubmitPending, startSubmitTransition] = useTransition();
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -71,7 +71,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     }, [locale, accessToken, toast, errors.cartNotFound, errors.loadError, router, cartPath]);
 
     const handleConfirm = () => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -85,7 +85,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
                 if (result.order?.id) {
                     const redirectUrl = result.paymentRedirectUrl || `${buttons.confirm.path}/${result.order.id}`;
-                    localStorage.removeItem(CART_ID_KEY);
+                    localStorage.removeItem(cartIdLocalStorageKey);
                     window.location.href = redirectUrl;
                     return;
                 }
