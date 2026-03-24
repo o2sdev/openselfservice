@@ -241,6 +241,106 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         },
     });
 
+    plop.setGenerator('custom-module', {
+        description: 'Creates a new custom module package (abstract service, model, controller)',
+        prompts: [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'What is the name of the custom module? (e.g. documents, reports, warranties)',
+                validate: (input: string) => (input && input.trim().length > 0 ? true : 'Please enter a module name'),
+            },
+        ],
+        actions: (data) => {
+            const actions: PlopTypes.ActionType[] = [
+                // Package config files
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/package.json',
+                    templateFile: 'templates/custom-module/package.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/tsconfig.json',
+                    templateFile: 'templates/custom-module/tsconfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/eslint.config.mjs',
+                    templateFile: 'templates/custom-module/eslint.config.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/.prettierrc.mjs',
+                    templateFile: 'templates/custom-module/prettierrc.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/.gitignore',
+                    templateFile: 'templates/custom-module/gitignore.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/lint-staged.config.mjs',
+                    templateFile: 'templates/custom-module/lint-staged.config.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/vitest.config.mjs',
+                    templateFile: 'templates/custom-module/vitestConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/turbo.json',
+                    templateFile: 'templates/custom-module/turbo.hbs',
+                },
+
+                // Module source files
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/src/{{kebabCase name}}.model.ts',
+                    templateFile: 'templates/custom-module/model.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/src/{{kebabCase name}}.service.ts',
+                    templateFile: 'templates/custom-module/service.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/src/{{kebabCase name}}.controller.ts',
+                    templateFile: 'templates/custom-module/controller.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/modules/{{kebabCase name}}/src/index.ts',
+                    templateFile: 'templates/custom-module/index.hbs',
+                },
+            ];
+
+            actions.push(() => {
+                const moduleName = String(data?.name ?? '').trim();
+                const kebabModuleName = plop.getHelper('kebabCase')(moduleName) as string;
+                const packageName = `@o2s/modules.${kebabModuleName}`;
+                const modulePath = `packages/modules/${kebabModuleName}`;
+
+                return [
+                    `Created ${packageName}`,
+                    `  ${modulePath}/src/`,
+                    '',
+                    'Next steps:',
+                    `  1. Add your fields to ${modulePath}/src/${kebabModuleName}.model.ts`,
+                    `  2. Add your abstract methods to ${modulePath}/src/${kebabModuleName}.service.ts`,
+                    '  3. Run: npm install',
+                    '',
+                    'See docs: guides/integrations/extending-framework-modules',
+                ].join('\n');
+            });
+
+            return actions;
+        },
+    });
+
     plop.setGenerator('block', {
         description: 'Adds a new block',
         prompts: [

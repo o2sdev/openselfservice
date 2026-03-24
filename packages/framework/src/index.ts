@@ -3,6 +3,9 @@ export type { ApiConfig } from './api-config';
 export * as Models from './utils/models';
 
 /** Headless CMS: pages, entries, blocks, header/footer, app config. */
+export { createModule } from './utils/create-module';
+export type { CustomModuleConfig, RegisterableModule } from './utils/create-module';
+
 export * as CMS from './modules/cms';
 /** Support tickets: list, single, create. */
 export * as Tickets from './modules/tickets';

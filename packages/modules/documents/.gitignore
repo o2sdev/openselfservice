@@ -1,0 +1,21 @@
+
+# compiled output
+/dist
+/node_modules
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+
+# IDEs
+/.idea
+.vscode/*
+
+# dotenv
+.env
+.env.*.local

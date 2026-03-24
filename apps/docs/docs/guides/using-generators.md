@@ -62,3 +62,19 @@ You can also create a whole new integration by using the `integration` generator
     - controller,
     - service,
     - mapper.
+
+---
+
+## Custom Module
+
+To create a new custom module (a module beyond the core framework modules), use the `custom-module` generator. It will:
+
+1. Ask you for the module name (e.g. `documents`, `reports`, `warranties`).
+2. Create a new package at `packages/modules/<module-name>/` with:
+    - abstract service class (the DI token),
+    - normalized data model,
+    - REST controller,
+    - barrel export,
+    - package configuration files (tsconfig, eslint, prettier).
+
+For a full walkthrough, see the [Extending framework modules](./integrations/extending-framework-modules.md) guide.
