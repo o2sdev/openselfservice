@@ -28,8 +28,12 @@ export class NotificationDetailsService {
         query: GetNotificationDetailsBlockQuery,
         headers: AppHeaders,
     ): Observable<NotificationDetailsBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers[H.Locale] });
-        const notification = this.notificationService.getNotification({ ...params, locale: headers[H.Locale] });
+        const notification = this.notificationService.getNotification(
+            { ...params, locale: headers[H.Locale] },
+            authorization,
+        );
 
         return forkJoin([notification, cms]).pipe(
             map(([notification, cms]) => {
@@ -45,7 +49,6 @@ export class NotificationDetailsService {
                 );
 
                 // Extract permissions using ACL service
-                const authorization = headers[H.Authorization];
                 if (authorization) {
                     const permissions = this.authService.canPerformActions(authorization, 'notifications', [
                         'view',
@@ -65,7 +68,8 @@ export class NotificationDetailsService {
         );
     }
 
-    markNotificationAs(body: MarkNotificationAsBlockBody): Observable<void> {
-        return this.notificationService.markAs(body);
+    markNotificationAs(body: MarkNotificationAsBlockBody, headers: AppHeaders): Observable<void> {
+        const authorization = headers[H.Authorization];
+        return this.notificationService.markAs(body, authorization);
     }
 }

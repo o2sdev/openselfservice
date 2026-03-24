@@ -30,7 +30,7 @@ export class NotificationDetailsController {
 
     @Post()
     @Auth.Decorators.Permissions({ resource: 'notifications', actions: ['mark_read'] })
-    markNotificationAs(@Body() body: MarkNotificationAsBlockBody) {
-        return this.service.markNotificationAs(body);
+    markNotificationAs(@Headers() headers: AppHeaders, @Body() body: MarkNotificationAsBlockBody) {
+        return this.service.markNotificationAs(body, headers);
     }
 }

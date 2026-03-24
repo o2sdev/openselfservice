@@ -29,13 +29,13 @@ export class PaymentsSummaryService {
         query: GetPaymentsSummaryBlockQuery,
         headers: AppHeaders,
     ): Observable<PaymentsSummaryBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getPaymentsSummaryBlock({ ...query, locale: headers[H.Locale] });
-        const invoices = this.invoiceService.getInvoiceList(query);
+        const invoices = this.invoiceService.getInvoiceList(query, authorization);
 
         return forkJoin([invoices, cms]).pipe(
             map(([invoices, cms]) => {
                 const result = mapPaymentsSummary(cms, invoices, headers[H.Locale], this.defaultCurrency);
-                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
                 if (authorization) {
