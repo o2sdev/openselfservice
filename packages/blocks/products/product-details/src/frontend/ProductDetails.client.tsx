@@ -27,6 +27,8 @@ import { ProductInfo } from './components/ProductInfo';
 import { ProductSpecs } from './components/ProductSpecs';
 import { VariantSelector } from './components/VariantSelector';
 
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
+
 function resolveVariant(
     variants: Array<{ id: string; title: string; slug: string; link?: string; options?: Record<string, string> }>,
     selectedOptions: Record<string, string>,
@@ -136,7 +138,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     const handleAddToCart = useCallback(() => {
         startAddToCartTransition(async () => {
             try {
-                const cartId = localStorage.getItem('cartId');
+                const cartId = localStorage.getItem(cartIdLocalStorageKey);
                 const result = await sdk.cart.addCartItem(
                     {
                         cartId: cartId || undefined,
@@ -149,7 +151,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                     accessToken,
                 );
                 if (!cartId && result?.id) {
-                    localStorage.setItem('cartId', result.id);
+                    localStorage.setItem(cartIdLocalStorageKey, result.id);
                 }
                 eventBus.emit('cart:changed', { cart: result });
                 toast({

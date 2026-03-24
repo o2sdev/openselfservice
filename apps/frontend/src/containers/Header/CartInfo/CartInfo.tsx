@@ -15,7 +15,7 @@ import { Link as NextLink } from '@/i18n';
 
 import { CartInfoProps } from './CartInfo.types';
 
-const CART_ID_KEY = 'cartId';
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 /** Last known line-item count for this browser session; survives header remounts on navigation (avoids badge flicker). */
 let lastKnownCartItemCount = 0;
@@ -44,7 +44,7 @@ export const CartInfo = ({ data }: CartInfoProps) => {
                 return;
             }
 
-            const cartId = localStorage.getItem(CART_ID_KEY);
+            const cartId = localStorage.getItem(cartIdLocalStorageKey);
             if (!cartId) {
                 if (!cancelled) {
                     lastKnownCartItemCount = 0;

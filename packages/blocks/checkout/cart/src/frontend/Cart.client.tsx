@@ -20,7 +20,7 @@ import { sdk } from '../sdk';
 
 import { CartPureProps } from './Cart.types';
 
-const CART_ID_KEY = 'cartId';
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     locale,
@@ -44,7 +44,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     const [isMutationPending, startMutationTransition] = useTransition();
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) return;
 
         startInitialLoadTransition(async () => {
@@ -58,7 +58,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     }, [locale, accessToken, errors?.loadError]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) return;
 
         startMutationTransition(async () => {
@@ -79,7 +79,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     };
 
     const removeItem = (itemId: string) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) return;
 
         startMutationTransition(async () => {

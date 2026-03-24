@@ -24,8 +24,9 @@ import { sdk } from '../sdk';
 
 import { CheckoutCompanyDataPureProps } from './CheckoutCompanyData.types';
 
-const CART_ID_KEY = 'cartId';
 const FORM_ID = 'checkout-company-form';
+
+const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureProps>> = ({
     locale,
@@ -75,7 +76,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     });
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -124,7 +125,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     }, [locale, accessToken, toast, errors.cartNotFound, router, cartPath]);
 
     const handleSubmit = (values: typeof initialFormValues) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             return;
