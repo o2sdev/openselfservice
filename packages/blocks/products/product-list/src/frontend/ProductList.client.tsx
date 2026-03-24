@@ -73,7 +73,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                     if (!cartId && result?.id) {
                         localStorage.setItem('cartId', result.id);
                     }
-                    eventBus.emit('cart:changed', { itemCount: result.items.data.length });
+                    eventBus.emit('cart:changed', { cart: result });
                     toast({
                         description: Utils.StringReplace.reactStringReplace(data.labels.addToCartSuccess ?? '', {
                             productName,

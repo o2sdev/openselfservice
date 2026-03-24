@@ -151,7 +151,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                 if (!cartId && result?.id) {
                     localStorage.setItem('cartId', result.id);
                 }
-                eventBus.emit('cart:changed', { itemCount: result.items.data.length });
+                eventBus.emit('cart:changed', { cart: result });
                 toast({
                     description: Utils.StringReplace.reactStringReplace(labels.addToCartSuccess, {
                         productName: product.name,

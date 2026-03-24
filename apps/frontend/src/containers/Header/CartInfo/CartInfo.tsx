@@ -53,8 +53,9 @@ export const CartInfo = ({ data }: CartInfoProps) => {
     }, [session.data?.accessToken, locale]);
 
     const onCartChanged = useCallback((payload: O2SEventMap['cart:changed']) => {
-        lastKnownCartItemCount = payload.itemCount;
-        setItemCount(payload.itemCount);
+        const next = payload.cart.items.data.length;
+        lastKnownCartItemCount = next;
+        setItemCount(next);
     }, []);
 
     useEventBus('cart:changed', onCartChanged);

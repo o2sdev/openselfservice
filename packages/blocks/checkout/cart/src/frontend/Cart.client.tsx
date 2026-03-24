@@ -71,7 +71,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                     accessToken,
                 );
                 setCart(updated);
-                eventBus.emit('cart:changed', { itemCount: updated.items.data.length });
+                eventBus.emit('cart:changed', { cart: updated });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }
@@ -86,7 +86,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
             try {
                 const updated = await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
                 setCart(updated);
-                eventBus.emit('cart:changed', { itemCount: updated.items.data.length });
+                eventBus.emit('cart:changed', { cart: updated });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }
