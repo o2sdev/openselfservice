@@ -15,6 +15,8 @@ import { Link as NextLink } from '@/i18n';
 
 import { CartInfoProps } from './CartInfo.types';
 
+const CART_ID_KEY = 'cartId';
+
 /** Last known line-item count for this browser session; survives header remounts on navigation (avoids badge flicker). */
 let lastKnownCartItemCount = 0;
 
@@ -28,15 +30,31 @@ export const CartInfo = ({ data }: CartInfoProps) => {
         let cancelled = false;
 
         void (async () => {
-            if (!token) {
+            if (token) {
+                try {
+                    const cart = await sdk.cart.getCurrentCart({ 'x-locale': locale }, token);
+                    if (!cancelled) {
+                        const next = cart.items.data.length;
+                        lastKnownCartItemCount = next;
+                        setItemCount(next);
+                    }
+                } catch {
+                    // Do not reset to 0 — avoids flicker on client navigations or transient API errors.
+                }
+                return;
+            }
+
+            const cartId = localStorage.getItem(CART_ID_KEY);
+            if (!cartId) {
                 if (!cancelled) {
                     lastKnownCartItemCount = 0;
                     setItemCount(0);
                 }
                 return;
             }
+
             try {
-                const cart = await sdk.cart.getCurrentCart({ 'x-locale': locale }, token);
+                const cart = await sdk.cart.getCart(cartId, { 'x-locale': locale });
                 if (!cancelled) {
                     const next = cart.items.data.length;
                     lastKnownCartItemCount = next;

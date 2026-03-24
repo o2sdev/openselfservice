@@ -1,5 +1,6 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useTransition } from 'react';
 
@@ -49,6 +50,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
                     if (!cartId && result?.id) {
                         localStorage.setItem('cartId', result.id);
                     }
+                    eventBus.emit('cart:changed', { cart: result });
                     toast({
                         description: Utils.StringReplace.reactStringReplace(labels.addToCartSuccess ?? '', {
                             productName,

@@ -36,12 +36,19 @@ const getCurrentCart: (headers: AppHeaders, authorization?: string) => Promise<C
     authorization,
 ) => cart(internalSdk).cart.getCurrentCart(headers, authorization);
 
+const getCart: (cartId: string, headers: AppHeaders, authorization?: string) => Promise<Carts.Model.Cart> = (
+    cartId,
+    headers,
+    authorization,
+) => cart(internalSdk).cart.getCart(cartId, headers, authorization);
+
 export const sdk = extendSdk(internalSdk, {
     notifications: {
         ...Notifications.extend(internalSdk),
     },
     cart: {
         getCurrentCart,
+        getCart,
     },
     modules: {
         getInit: page(internalSdk).modules.getInit,
