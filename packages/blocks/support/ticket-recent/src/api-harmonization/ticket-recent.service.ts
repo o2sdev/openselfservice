@@ -26,7 +26,7 @@ export class TicketRecentService {
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.ticketsService
-                    .getTicketList({ ...query, limit: cms.limit, locale: headers[H.Locale] })
+                    .getTicketList({ ...query, limit: cms.limit, locale: headers[H.Locale] }, authorization)
                     .pipe(
                         map((tickets) => {
                             const result = mapTicketRecent(

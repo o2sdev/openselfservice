@@ -24,15 +24,15 @@ export class ServiceDetailsService {
         query: GetServiceDetailsBlockQuery,
         headers: AppHeaders,
     ): Observable<ServiceDetailsBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getServiceDetailsBlock({ ...query, locale: headers[H.Locale] });
-        const service = this.resourceService.getService({ ...params, locale: headers[H.Locale] });
+        const service = this.resourceService.getService({ ...params, locale: headers[H.Locale] }, authorization);
 
         return forkJoin([cms, service]).pipe(
             map(([cms, service]) => {
                 const result = mapServiceDetails(cms, service, headers[H.Locale], headers[H.ClientTimezone] || '');
 
                 // Extract permissions using ACL service
-                const authorization = headers[H.Authorization];
                 if (authorization) {
                     const permissions = this.authService.canPerformActions(authorization, 'services', ['view']);
 

@@ -15,17 +15,19 @@ export class NotificationsService extends Notifications.Service {
 
     getNotification(
         params: Notifications.Request.GetNotificationParams,
+        _authorization?: string,
     ): Observable<CustomNotifications.Notification | undefined> {
         return of(mapNotification(params.id, params.locale)).pipe(responseDelay());
     }
 
     getNotificationList(
         options: Notifications.Request.GetNotificationListQuery,
+        _authorization?: string,
     ): Observable<CustomNotifications.Notifications> {
         return of(mapNotifications(options)).pipe(responseDelay());
     }
 
-    markAs(_request: Notifications.Request.MarkNotificationAsRequest): Observable<void> {
+    markAs(_request: Notifications.Request.MarkNotificationAsRequest, _authorization?: string): Observable<void> {
         throw new NotImplementedException('The method is not implemented');
     }
 }
