@@ -2,6 +2,9 @@ export type { ApiConfig } from './api-config';
 
 export * as Models from './utils/models';
 
+export { createModule } from './utils/create-module';
+export type { CustomModuleConfig, RegisterableModule } from './utils/create-module';
+
 export * as CMS from './modules/cms';
 export * as Tickets from './modules/tickets';
 export * as Notifications from './modules/notifications';
