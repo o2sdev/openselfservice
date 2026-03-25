@@ -1,5 +1,89 @@
 # @o2s/frontend
 
+## 1.18.2
+
+### Patch Changes
+
+- 0aaac5b: fix: resolve build and lint issues
+    - Fix `src/` bare import in organizations module to use relative path
+    - Convert express import to type-only in context-headers middleware
+    - Update page model to import `CMS` from `@o2s/configs.integrations`
+    - Add `@typescript-eslint/no-empty-object-type: off` rule to frontend-block ESLint config
+    - Add `npm dedupe` step to api-harmonization and frontend Dockerfiles
+    - Add `tsconfig.tsbuildinfo` to `.gitignore` across all packages
+
+- e8cdde6: feat: add mitt-based event bus (`@o2s/ui/event-bus`), cart header badge with `cart:changed`, SDK `GET /carts/current`, and emit `cart:changed` from product list, product details, recommended products, and cart block
+
+    refactor: read guest cart localStorage key from `NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY` (required; set in e.g. `apps/frontend/.env.development`) across shop and checkout blocks
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [0aaac5b]
+- Updated dependencies [afbd639]
+- Updated dependencies [e8cdde6]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [7ac16b0]
+- Updated dependencies [afbd639]
+- Updated dependencies [0aaac5b]
+    - @o2s/api-harmonization@1.19.0
+    - @o2s/blocks.ticket-details@1.7.0
+    - @o2s/blocks.ticket-summary@1.5.0
+    - @o2s/blocks.ticket-recent@1.6.0
+    - @o2s/blocks.ticket-list@1.9.0
+    - @o2s/integrations.mocked@1.22.0
+    - @o2s/ui@1.14.0
+    - @o2s/blocks.product-list@0.5.3
+    - @o2s/blocks.product-details@0.4.1
+    - @o2s/blocks.recommended-products@0.5.0
+    - @o2s/blocks.cart@0.2.1
+    - @o2s/blocks.checkout-billing-payment@0.2.2
+    - @o2s/blocks.checkout-summary@0.2.1
+    - @o2s/blocks.checkout-shipping-address@0.2.1
+    - @o2s/blocks.checkout-company-data@0.2.1
+    - @o2s/blocks.notification-details@1.7.0
+    - @o2s/blocks.notification-summary@1.5.0
+    - @o2s/blocks.notification-list@1.8.0
+    - @o2s/blocks.featured-service-list@1.5.1
+    - @o2s/blocks.article-search@1.7.1
+    - @o2s/blocks.feature-section-grid@0.6.1
+    - @o2s/blocks.category-list@1.7.1
+    - @o2s/blocks.order-confirmation@0.2.1
+    - @o2s/blocks.article-list@1.7.1
+    - @o2s/blocks.payments-history@1.6.0
+    - @o2s/blocks.payments-summary@1.6.0
+    - @o2s/blocks.service-details@1.6.0
+    - @o2s/blocks.feature-section@0.7.1
+    - @o2s/blocks.pricing-section@0.7.1
+    - @o2s/blocks.category@1.7.1
+    - @o2s/blocks.article@1.6.1
+    - @o2s/blocks.document-list@0.7.1
+    - @o2s/blocks.media-section@0.7.1
+    - @o2s/blocks.orders-summary@1.6.1
+    - @o2s/blocks.service-list@1.6.1
+    - @o2s/blocks.user-account@1.5.1
+    - @o2s/blocks.invoice-list@1.7.1
+    - @o2s/blocks.hero-section@0.7.1
+    - @o2s/blocks.order-details@1.6.1
+    - @o2s/blocks.cta-section@0.7.1
+    - @o2s/blocks.quick-links@1.6.1
+    - @o2s/blocks.surveyjs-form@1.5.1
+    - @o2s/blocks.bento-grid@0.7.1
+    - @o2s/blocks.order-list@1.7.1
+    - @o2s/blocks.faq@1.6.1
+    - @o2s/utils.frontend@0.5.2
+    - @o2s/configs.integrations@0.7.0
+    - @o2s/framework@1.21.0
+
 ## 1.18.1
 
 ### Patch Changes

@@ -1,5 +1,34 @@
 # @o2s/blocks.product-details
 
+## 0.4.1
+
+### Patch Changes
+
+- e8cdde6: feat: add mitt-based event bus (`@o2s/ui/event-bus`), cart header badge with `cart:changed`, SDK `GET /carts/current`, and emit `cart:changed` from product list, product details, recommended products, and cart block
+
+  refactor: read guest cart localStorage key from `NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY` (required; set in e.g. `apps/frontend/.env.development`) across shop and checkout blocks
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+  Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+  Key dependency categories added:
+  - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+  - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+  - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+  - `vite` for vitest configs in integrations
+  - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [e8cdde6]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [7ac16b0]
+- Updated dependencies [0aaac5b]
+  - @o2s/ui@1.14.0
+  - @o2s/utils.frontend@0.5.2
+  - @o2s/configs.integrations@0.7.0
+  - @o2s/framework@1.21.0
+
 ## 0.4.0
 
 ### Minor Changes

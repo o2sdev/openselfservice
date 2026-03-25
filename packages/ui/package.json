@@ -1,6 +1,6 @@
 {
     "name": "@o2s/ui",
-    "version": "1.13.1",
+    "version": "1.14.0",
     "private": true,
     "license": "MIT",
     "description": "Shared UI component library for O2S blocks, built on Radix UI and Tailwind CSS.",
@@ -52,7 +52,7 @@
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "@o2s/configs.integrations": "^0.6.0",
+        "@o2s/configs.integrations": "^0.7.0",
         "@o2s/framework": "*",
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-avatar": "^1.1.11",

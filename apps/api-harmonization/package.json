@@ -1,6 +1,6 @@
 {
     "name": "@o2s/api-harmonization",
-    "version": "1.18.1",
+    "version": "1.19.0",
     "description": "",
     "author": "",
     "private": true,
@@ -71,7 +71,7 @@
         "@o2s/blocks.ticket-recent": "*",
         "@o2s/blocks.ticket-summary": "*",
         "@o2s/blocks.user-account": "*",
-        "@o2s/configs.integrations": "^0.6.0",
+        "@o2s/configs.integrations": "^0.7.0",
         "@o2s/framework": "*",
         "@o2s/integrations.mocked": "*",
         "@o2s/modules.surveyjs": "*",

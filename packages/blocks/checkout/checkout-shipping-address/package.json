@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.checkout-shipping-address",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "private": false,
     "license": "MIT",
     "description": "Checkout step for recipient details, shipping address, delivery method, and cart summary preview.",

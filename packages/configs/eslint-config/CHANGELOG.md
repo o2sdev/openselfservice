@@ -1,5 +1,28 @@
 # @o2s/eslint-config
 
+## 1.1.2
+
+### Patch Changes
+
+- 0aaac5b: fix: resolve build and lint issues
+    - Fix `src/` bare import in organizations module to use relative path
+    - Convert express import to type-only in context-headers middleware
+    - Update page model to import `CMS` from `@o2s/configs.integrations`
+    - Add `@typescript-eslint/no-empty-object-type: off` rule to frontend-block ESLint config
+    - Add `npm dedupe` step to api-harmonization and frontend Dockerfiles
+    - Add `tsconfig.tsbuildinfo` to `.gitignore` across all packages
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
 ## 1.1.1
 
 ### Patch Changes
