@@ -60,6 +60,14 @@ describe('CartsService', () => {
                 update: ReturnType<typeof vi.fn>;
                 addShippingMethod: ReturnType<typeof vi.fn>;
             };
+            customer: {
+                retrieve: ReturnType<typeof vi.fn>;
+            };
+        };
+        admin: {
+            customer: {
+                retrieve: ReturnType<typeof vi.fn>;
+            };
         };
         client: { fetch: ReturnType<typeof vi.fn> };
     };
@@ -85,6 +93,14 @@ describe('CartsService', () => {
                     deleteLineItem: vi.fn(),
                     update: vi.fn(),
                     addShippingMethod: vi.fn(),
+                },
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { id: 'cust_1' } }),
+                },
+            },
+            admin: {
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { has_account: false } }),
                 },
             },
             client: { fetch: vi.fn() },
@@ -147,12 +163,12 @@ describe('CartsService', () => {
 
         it('should throw UnauthorizedException when cart.customerId !== auth customerId', async () => {
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: { ...minimalCart, customer_id: 'cust_1' } });
-            mockAuthService.getCustomerId.mockReturnValue('cust_other');
+            mockSdk.store.customer.retrieve.mockResolvedValue({ customer: { id: 'cust_other' } });
+            mockSdk.admin.customer.retrieve.mockResolvedValue({ customer: { has_account: true } });
 
             await expect(firstValueFrom(service.getCart({ id: 'cart_1' }, 'Bearer token'))).rejects.toThrow(
                 UnauthorizedException,
             );
-            expect(mockAuthService.getCustomerId).toHaveBeenCalledWith('Bearer token');
         });
 
         it('should throw NotFoundException on 404', async () => {

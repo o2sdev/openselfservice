@@ -61,6 +61,7 @@ export class CartsService extends Carts.Service {
                 return verifyResourceAccess(
                     this.sdk,
                     this.medusaJsService.getMedusaAdminApiHeaders(),
+                    this.medusaJsService.getStoreApiHeaders(authorization),
                     cart.customerId,
                     authorization,
                 ).pipe(map(() => cart));
@@ -146,20 +147,38 @@ export class CartsService extends Carts.Service {
             throw new BadRequestException('variantId is required for Medusa carts');
         }
 
-        // If cartId provided, add item directly — Medusa validates cart access server-side.
+        // If cartId provided, verify access then add item
         if (data.cartId) {
-            return from(
-                this.sdk.store.cart.createLineItem(
-                    data.cartId,
-                    {
-                        variant_id: data.variantId!,
-                        quantity: data.quantity,
-                        metadata: data.metadata,
-                    },
-                    { fields: this.cartItemsFields },
-                    this.medusaJsService.getStoreApiHeaders(authorization),
-                ),
-            ).pipe(
+            const cartId = data.cartId;
+            const storeHeaders = this.medusaJsService.getStoreApiHeaders(authorization);
+
+            return from(this.sdk.store.cart.retrieve(cartId, { fields: this.cartItemsFields }, storeHeaders)).pipe(
+                switchMap((response: HttpTypes.StoreCartResponse) => {
+                    const cart = mapCart(response.cart, this.defaultCurrency);
+
+                    return verifyResourceAccess(
+                        this.sdk,
+                        this.medusaJsService.getMedusaAdminApiHeaders(),
+                        storeHeaders,
+                        cart.customerId,
+                        authorization,
+                    ).pipe(
+                        switchMap(() =>
+                            from(
+                                this.sdk.store.cart.createLineItem(
+                                    cartId,
+                                    {
+                                        variant_id: data.variantId!,
+                                        quantity: data.quantity,
+                                        metadata: data.metadata,
+                                    },
+                                    { fields: this.cartItemsFields },
+                                    storeHeaders,
+                                ),
+                            ),
+                        ),
+                    );
+                }),
                 map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
                 catchError((error) => handleHttpError(error)),
             );

@@ -70,6 +70,7 @@ export class OrdersService extends Orders.Service {
                 return verifyResourceAccess(
                     this.sdk,
                     this.medusaJsService.getMedusaAdminApiHeaders(),
+                    this.medusaJsService.getStoreApiHeaders(authorization),
                     order.customerId,
                     authorization,
                 ).pipe(map(() => order));

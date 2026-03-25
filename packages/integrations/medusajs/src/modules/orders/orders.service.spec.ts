@@ -33,7 +33,10 @@ const guestOrder = { ...minimalOrder, id: 'order_guest', customer_id: null };
 describe('OrdersService', () => {
     let service: OrdersService;
     let mockSdk: {
-        store: { order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> } };
+        store: {
+            order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> };
+            customer: { retrieve: ReturnType<typeof vi.fn> };
+        };
         admin: { customer: { retrieve: ReturnType<typeof vi.fn> } };
     };
     let mockMedusaJsService: {
@@ -52,6 +55,9 @@ describe('OrdersService', () => {
                 order: {
                     retrieve: vi.fn(),
                     list: vi.fn(),
+                },
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { id: 'cust_1' } }),
                 },
             },
             admin: {
@@ -129,7 +135,7 @@ describe('OrdersService', () => {
 
         it('should return customer order when authenticated user matches customerId', async () => {
             mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
-            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            mockSdk.store.customer.retrieve.mockResolvedValue({ customer: { id: 'cust_1' } });
 
             const result = await firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'));
 
@@ -141,7 +147,8 @@ describe('OrdersService', () => {
 
         it('should throw UnauthorizedException when authenticated user tries to get another customer order', async () => {
             mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
-            mockAuthService.getCustomerId.mockReturnValue('cust_other');
+            mockSdk.store.customer.retrieve.mockResolvedValue({ customer: { id: 'cust_other' } });
+            mockSdk.admin.customer.retrieve.mockResolvedValue({ customer: { has_account: true } });
 
             await expect(firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'))).rejects.toThrow(
                 UnauthorizedException,
