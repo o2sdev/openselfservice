@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Auth, Carts } from '@o2s/framework/modules';
+import { Carts } from '@o2s/framework/modules';
 
 import { CartsService } from './carts.service';
 
@@ -109,7 +109,6 @@ describe('CartsService', () => {
             mockConfig as unknown as ConfigService,
             mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
             mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-            mockAuthService as unknown as Auth.Service,
             mockCustomersService as unknown as import('@o2s/framework/modules').Customers.Service,
         );
     });
@@ -124,7 +123,6 @@ describe('CartsService', () => {
                         mockConfig as unknown as ConfigService,
                         mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
                         mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-                        mockAuthService as unknown as Auth.Service,
                         mockCustomersService as unknown as import('@o2s/framework/modules').Customers.Service,
                     ),
             ).toThrow('DEFAULT_CURRENCY is not defined');

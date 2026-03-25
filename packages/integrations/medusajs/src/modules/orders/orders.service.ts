@@ -6,7 +6,7 @@ import { Observable, catchError, from, map, switchMap } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, Orders } from '@o2s/framework/modules';
+import { Orders } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
@@ -28,7 +28,7 @@ export class OrdersService extends Orders.Service {
     private readonly defaultCurrency: string;
 
     private readonly additionalOrderListFields =
-        '+total,+subtotal,+tax_total,+discount_total,+shipping_total,+shipping_subtotal,+tax_total,+items.product.*';
+        '+total,+subtotal,+item_subtotal,+tax_total,+discount_total,+shipping_total,+shipping_subtotal,+items.product.*';
     // customer_id required for authorization check (guest vs customer order access)
     private readonly additionalOrderDetailsFields = '+customer_id,items.product.*';
 
@@ -36,7 +36,6 @@ export class OrdersService extends Orders.Service {
         private readonly config: ConfigService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
-        private readonly authService: Auth.Service,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
@@ -70,7 +69,6 @@ export class OrdersService extends Orders.Service {
 
                 return verifyResourceAccess(
                     this.sdk,
-                    this.authService,
                     this.medusaJsService.getMedusaAdminApiHeaders(),
                     order.customerId,
                     authorization,

@@ -7,14 +7,13 @@ import {
     InternalServerErrorException,
     NotFoundException,
     NotImplementedException,
-    UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, Carts, Customers } from '@o2s/framework/modules';
+import { Carts, Customers } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
@@ -36,7 +35,6 @@ export class CartsService extends Carts.Service {
         private readonly config: ConfigService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
-        private readonly authService: Auth.Service,
         private readonly customersService: Customers.Service,
     ) {
         super();
@@ -62,7 +60,6 @@ export class CartsService extends Carts.Service {
 
                 return verifyResourceAccess(
                     this.sdk,
-                    this.authService,
                     this.medusaJsService.getMedusaAdminApiHeaders(),
                     cart.customerId,
                     authorization,
@@ -149,46 +146,21 @@ export class CartsService extends Carts.Service {
             throw new BadRequestException('variantId is required for Medusa carts');
         }
 
-        const customerId = authorization ? this.authService.getCustomerId(authorization) : undefined;
-
-        // If cartId provided, use it (after verifying access)
+        // If cartId provided, add item directly — Medusa validates cart access server-side.
         if (data.cartId) {
-            const cartId = data.cartId;
             return from(
-                this.sdk.store.cart.retrieve(
-                    cartId,
+                this.sdk.store.cart.createLineItem(
+                    data.cartId,
+                    {
+                        variant_id: data.variantId!,
+                        quantity: data.quantity,
+                        metadata: data.metadata,
+                    },
                     { fields: this.cartItemsFields },
                     this.medusaJsService.getStoreApiHeaders(authorization),
                 ),
             ).pipe(
-                switchMap((response: HttpTypes.StoreCartResponse) => {
-                    const cart = mapCart(response.cart, this.defaultCurrency);
-
-                    if (cart.customerId) {
-                        if (!authorization) {
-                            return throwError(
-                                () => new UnauthorizedException('Authentication required to access this cart'),
-                            );
-                        }
-                        if (cart.customerId !== customerId) {
-                            return throwError(() => new UnauthorizedException('Unauthorized to access this cart'));
-                        }
-                    }
-
-                    return from(
-                        this.sdk.store.cart.createLineItem(
-                            cartId,
-                            {
-                                variant_id: data.variantId!,
-                                quantity: data.quantity,
-                                metadata: data.metadata,
-                            },
-                            { fields: this.cartItemsFields },
-                            this.medusaJsService.getStoreApiHeaders(authorization),
-                        ),
-                    );
-                }),
-                map((addResponse: HttpTypes.StoreCartResponse) => mapCart(addResponse.cart, this.defaultCurrency)),
+                map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
                 catchError((error) => handleHttpError(error)),
             );
         }
@@ -306,15 +278,7 @@ export class CartsService extends Carts.Service {
                     return throwError(() => new NotFoundException(`Cart with ID ${params.cartId} not found`));
                 }
 
-                // Verify ownership for customer carts
-                if (cart.customerId && authorization) {
-                    const customerId = this.authService.getCustomerId(authorization);
-                    if (cart.customerId !== customerId) {
-                        return throwError(
-                            () => new UnauthorizedException('Unauthorized to prepare checkout for this cart'),
-                        );
-                    }
-                }
+                // Ownership is already verified by Medusa when getCart retrieves the cart.
 
                 // Validate cart has items
                 if (!cart.items || cart.items.data.length === 0) {
