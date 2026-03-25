@@ -30,20 +30,6 @@ export const CartInfo = ({ data }: CartInfoProps) => {
         let cancelled = false;
 
         void (async () => {
-            if (token) {
-                try {
-                    const cart = await sdk.cart.getCurrentCart({ 'x-locale': locale }, token);
-                    if (!cancelled) {
-                        const next = cart.items.data.length;
-                        lastKnownCartItemCount = next;
-                        setItemCount(next);
-                    }
-                } catch {
-                    // Do not reset to 0 — avoids flicker on client navigations or transient API errors.
-                }
-                return;
-            }
-
             const cartId = localStorage.getItem(cartIdLocalStorageKey);
             if (!cartId) {
                 if (!cancelled) {
@@ -54,7 +40,7 @@ export const CartInfo = ({ data }: CartInfoProps) => {
             }
 
             try {
-                const cart = await sdk.cart.getCart(cartId, { 'x-locale': locale });
+                const cart = await sdk.cart.getCart(cartId, { 'x-locale': locale }, token);
                 if (!cancelled) {
                     const next = cart.items.data.length;
                     lastKnownCartItemCount = next;
