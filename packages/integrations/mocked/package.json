@@ -63,12 +63,13 @@
         "prisma": "^6.19.2"
     },
     "devDependencies": {
+        "@auth/core": "^0.41.1",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
+        "@o2s/telemetry": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "@o2s/telemetry": "*",
         "@types/jsonwebtoken": "^9.0.10",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.4",
@@ -76,6 +77,7 @@
         "prettier": "^3.8.1",
         "shx": "^0.4.0",
         "tsc-alias": "^1.8.16",
+        "tsx": "^4.21.0",
         "typescript": "^5.9.3",
         "vitest": "^4.0.18"
     },

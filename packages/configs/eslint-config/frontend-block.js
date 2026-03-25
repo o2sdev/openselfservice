@@ -40,6 +40,7 @@ export const config = [
                     skipUndeclared: true,
                 },
             ],
+            '@typescript-eslint/no-empty-object-type': 'off',
         },
     },
     eslintPluginPrettierRecommended,

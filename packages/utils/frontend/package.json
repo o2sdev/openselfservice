@@ -31,7 +31,10 @@
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
-        "@o2s/framework": "*"
+        "@o2s/framework": "*",
+        "@o2s/ui": "*",
+        "class-variance-authority": "^0.7.1",
+        "react": "^19.2.4"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",

@@ -1,6 +1,6 @@
 'use client';
 
-import { CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/configs.integrations';
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 import { PriceService, usePriceService } from '@o2s/ui/components/Products/Price';

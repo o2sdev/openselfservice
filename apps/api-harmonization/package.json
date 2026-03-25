@@ -33,9 +33,9 @@
         "@o2s/blocks.article-list": "*",
         "@o2s/blocks.article-search": "*",
         "@o2s/blocks.bento-grid": "*",
+        "@o2s/blocks.cart": "*",
         "@o2s/blocks.category": "*",
         "@o2s/blocks.category-list": "*",
-        "@o2s/blocks.cart": "*",
         "@o2s/blocks.checkout-billing-payment": "*",
         "@o2s/blocks.checkout-company-data": "*",
         "@o2s/blocks.checkout-shipping-address": "*",
@@ -52,10 +52,10 @@
         "@o2s/blocks.notification-details": "*",
         "@o2s/blocks.notification-list": "*",
         "@o2s/blocks.notification-summary": "*",
+        "@o2s/blocks.order-confirmation": "*",
         "@o2s/blocks.order-details": "*",
         "@o2s/blocks.order-list": "*",
         "@o2s/blocks.orders-summary": "*",
-        "@o2s/blocks.order-confirmation": "*",
         "@o2s/blocks.payments-history": "*",
         "@o2s/blocks.payments-summary": "*",
         "@o2s/blocks.pricing-section": "*",
@@ -71,7 +71,7 @@
         "@o2s/blocks.ticket-recent": "*",
         "@o2s/blocks.ticket-summary": "*",
         "@o2s/blocks.user-account": "*",
-        "@o2s/configs.integrations": "*",
+        "@o2s/configs.integrations": "^0.6.0",
         "@o2s/framework": "*",
         "@o2s/integrations.mocked": "*",
         "@o2s/modules.surveyjs": "*",
@@ -128,6 +128,7 @@
         "ts-loader": "^9.5.4",
         "ts-node": "^10.9.2",
         "tsconfig-paths": "^4.2.0",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.18"
     }
 }
