@@ -31,7 +31,7 @@ export const Cart: React.FC<CartProps> = async ({ id, accessToken, locale, routi
             locale={locale}
             routing={routing}
             hasPriority={hasPriority}
-            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
         />
     );
 };

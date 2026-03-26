@@ -37,7 +37,7 @@ export const CheckoutShippingAddress: React.FC<CheckoutShippingAddressProps> = a
             accessToken={accessToken}
             locale={locale}
             routing={routing}
-            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
         />
     );
 };

@@ -38,7 +38,7 @@ export const ProductList: React.FC<ProductListProps> = async ({ id, accessToken,
             accessToken={accessToken}
             locale={locale}
             routing={routing}
-            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
         />
     );
 };

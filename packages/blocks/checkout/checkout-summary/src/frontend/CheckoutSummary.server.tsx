@@ -32,7 +32,7 @@ export const CheckoutSummary: React.FC<CheckoutSummaryProps> = async ({ id, acce
             accessToken={accessToken}
             locale={locale}
             routing={routing}
-            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
         />
     );
 };
