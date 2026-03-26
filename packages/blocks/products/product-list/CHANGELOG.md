@@ -1,5 +1,11 @@
 # @o2s/blocks.product-list
 
+## 0.5.4
+
+### Patch Changes
+
+- 7124ed8: fix: replace build-time `NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY` env variable with runtime `CART_ID_LOCAL_STORAGE_KEY` passed as a prop from server components across all shop and checkout blocks
+
 ## 0.5.3
 
 ### Patch Changes
