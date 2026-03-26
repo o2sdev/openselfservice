@@ -1,5 +1,20 @@
 # @o2s/frontend
 
+## 1.18.3
+
+### Patch Changes
+
+- 7124ed8: fix: replace build-time `NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY` env variable with runtime `CART_ID_LOCAL_STORAGE_KEY` passed as a prop from server components across all shop and checkout blocks
+- Updated dependencies [7124ed8]
+    - @o2s/blocks.checkout-shipping-address@0.2.2
+    - @o2s/blocks.checkout-billing-payment@0.2.3
+    - @o2s/blocks.checkout-company-data@0.2.2
+    - @o2s/blocks.recommended-products@0.5.1
+    - @o2s/blocks.checkout-summary@0.2.2
+    - @o2s/blocks.product-details@0.4.2
+    - @o2s/blocks.product-list@0.5.4
+    - @o2s/blocks.cart@0.2.2
+
 ## 1.18.2
 
 ### Patch Changes
