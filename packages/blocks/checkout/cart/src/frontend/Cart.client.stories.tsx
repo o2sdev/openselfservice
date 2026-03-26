@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { defineRouting } from 'next-intl/routing';
 import React from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import readme from '../../README.md?raw';
 
 import { CartPure } from './Cart.client';
-
-const cartIdLocalStorageKey = process.env.CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 const routing = defineRouting({
     locales: ['en'],
@@ -76,7 +76,6 @@ export const Default: Story = {
         id: 'cart-1',
         locale: 'en',
         routing,
-        cartIdLocalStorageKey: cartIdLocalStorageKey,
     },
 };
 
@@ -88,12 +87,11 @@ export const EmptyCart: Story = {
         id: 'cart-1',
         locale: 'en',
         routing,
-        cartIdLocalStorageKey: cartIdLocalStorageKey,
     },
     decorators: [
         (Story) => {
             if (typeof window !== 'undefined') {
-                window.localStorage.setItem(cartIdLocalStorageKey, EMPTY_CART_ID);
+                Utils.CartStorage.setCartId(EMPTY_CART_ID);
             }
             return <Story />;
         },

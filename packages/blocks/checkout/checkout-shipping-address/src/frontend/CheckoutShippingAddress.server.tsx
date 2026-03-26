@@ -31,13 +31,6 @@ export const CheckoutShippingAddress: React.FC<CheckoutShippingAddressProps> = a
     }
 
     return (
-        <CheckoutShippingAddressDynamic
-            {...data}
-            id={id}
-            accessToken={accessToken}
-            locale={locale}
-            routing={routing}
-            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
-        />
+        <CheckoutShippingAddressDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />
     );
 };

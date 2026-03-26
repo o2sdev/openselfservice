@@ -9,8 +9,7 @@ export interface CheckoutBillingPaymentProps {
     routing: ReturnType<typeof defineRouting>;
 }
 
-export type CheckoutBillingPaymentPureProps = CheckoutBillingPaymentProps &
-    Model.CheckoutBillingPaymentBlock & { cartIdLocalStorageKey: string };
+export type CheckoutBillingPaymentPureProps = CheckoutBillingPaymentProps & Model.CheckoutBillingPaymentBlock;
 
 export type CheckoutBillingPaymentRendererProps = Omit<CheckoutBillingPaymentProps, ''> & {
     slug: string[];

@@ -25,7 +25,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     locale,
     accessToken,
     routing,
-    cartIdLocalStorageKey,
     title,
     subtitle,
     stepIndicator,
@@ -45,7 +44,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const [isSubmitPending, startSubmitTransition] = useTransition();
 
     useEffect(() => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -67,10 +66,10 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 }
             }
         });
-    }, [locale, accessToken, cartIdLocalStorageKey, toast, errors.cartNotFound, errors.loadError, router, cartPath]);
+    }, [locale, accessToken, toast, errors.cartNotFound, errors.loadError, router, cartPath]);
 
     const handleConfirm = () => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -84,7 +83,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
                 if (result.order?.id) {
                     const redirectUrl = result.paymentRedirectUrl || `${buttons.confirm.path}/${result.order.id}`;
-                    localStorage.removeItem(cartIdLocalStorageKey);
+                    Utils.CartStorage.removeCartId();
                     window.location.href = redirectUrl;
                     return;
                 }

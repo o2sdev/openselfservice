@@ -22,7 +22,6 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
     locale,
     accessToken,
     routing,
-    cartIdLocalStorageKey,
     ...component
 }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
@@ -36,7 +35,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
             const productName = products.find((p) => p.sku === sku)?.name ?? sku;
             startAddToCartTransition(async () => {
                 try {
-                    const cartId = localStorage.getItem(cartIdLocalStorageKey);
+                    const cartId = Utils.CartStorage.getCartId();
                     const result = await sdk.cart.addCartItem(
                         {
                             cartId: cartId || undefined,
@@ -49,7 +48,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
                         accessToken,
                     );
                     if (!cartId && result?.id) {
-                        localStorage.setItem(cartIdLocalStorageKey, result.id);
+                        Utils.CartStorage.setCartId(result.id);
                     }
                     eventBus.emit('cart:changed', { cart: result });
                     toast({
@@ -74,7 +73,6 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
         [
             locale,
             accessToken,
-            cartIdLocalStorageKey,
             labels.addToCartSuccess,
             labels.addToCartError,
             labels.viewCartLabel,

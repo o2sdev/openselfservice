@@ -9,5 +9,4 @@ export interface HeaderProps {
         [key: string]: string;
     };
     shouldIncludeSignInButton?: boolean;
-    cartIdLocalStorageKey?: string;
 }

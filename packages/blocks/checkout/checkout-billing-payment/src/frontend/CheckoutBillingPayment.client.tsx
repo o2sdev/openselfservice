@@ -5,6 +5,8 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Carts, Models, Payments } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
@@ -25,7 +27,6 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     locale,
     accessToken,
     routing,
-    cartIdLocalStorageKey,
     title,
     subtitle,
     stepIndicator,
@@ -59,7 +60,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     });
 
     useEffect(() => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors?.cartNotFound, variant: 'destructive' });
             router.replace(cartPath ?? '/');
@@ -94,14 +95,14 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                 router.replace(cartPath ?? '/');
             }
         });
-    }, [locale, accessToken, cartIdLocalStorageKey, toast, errors?.cartNotFound, router, cartPath]);
+    }, [locale, accessToken, toast, errors?.cartNotFound, router, cartPath]);
 
     const validationSchema = YupObject().shape({
         paymentMethod: fields.paymentMethod.required ? YupString().required(errors.required) : YupString(),
     });
 
     const handleSubmit = (values: { paymentMethod: string }) => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startSubmitTransition(async () => {

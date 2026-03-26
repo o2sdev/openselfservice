@@ -10,7 +10,7 @@ export interface CartProps {
     hasPriority?: boolean;
 }
 
-export type CartPureProps = CartProps & Model.CartBlock & { cartIdLocalStorageKey: string };
+export type CartPureProps = CartProps & Model.CartBlock;
 
 export type CartRendererProps = Omit<CartProps, 'locale'> & {
     slug: string[];

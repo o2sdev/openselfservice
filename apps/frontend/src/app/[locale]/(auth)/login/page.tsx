@@ -99,11 +99,7 @@ export default async function LoginPage({ params }: Readonly<Props>) {
             <body>
                 <GlobalProvider config={init} labels={init.labels} locale={locale} themes={init.themes}>
                     <div className="flex flex-col min-h-dvh">
-                        <Header
-                            data={init.common.header}
-                            shouldIncludeSignInButton={false}
-                            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
-                        />
+                        <Header data={init.common.header} shouldIncludeSignInButton={false} />
                         <div className="flex flex-col grow">
                             <AuthLayout>
                                 <SignInForm

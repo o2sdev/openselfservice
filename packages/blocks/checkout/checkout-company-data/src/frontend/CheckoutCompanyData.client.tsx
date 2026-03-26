@@ -5,6 +5,8 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Carts, Models } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
@@ -30,7 +32,6 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     locale,
     accessToken,
     routing,
-    cartIdLocalStorageKey,
     title,
     subtitle,
     stepIndicator,
@@ -75,7 +76,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     });
 
     useEffect(() => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -121,10 +122,10 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                 router.replace(cartPath);
             }
         });
-    }, [locale, accessToken, cartIdLocalStorageKey, toast, errors.cartNotFound, router, cartPath]);
+    }, [locale, accessToken, toast, errors.cartNotFound, router, cartPath]);
 
     const handleSubmit = (values: typeof initialFormValues) => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             return;

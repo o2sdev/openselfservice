@@ -4,6 +4,8 @@ import { eventBus } from '@o2s/ui/event-bus';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Carts } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
@@ -24,7 +26,6 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     locale,
     accessToken,
     routing,
-    cartIdLocalStorageKey,
     title,
     subtitle,
     defaultCurrency,
@@ -43,7 +44,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     const [isMutationPending, startMutationTransition] = useTransition();
 
     useEffect(() => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startInitialLoadTransition(async () => {
@@ -54,10 +55,10 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 toast({ variant: 'destructive', description: errors?.loadError });
             }
         });
-    }, [locale, accessToken, cartIdLocalStorageKey, errors?.loadError]);
+    }, [locale, accessToken, errors?.loadError]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startMutationTransition(async () => {
@@ -78,7 +79,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     };
 
     const removeItem = (itemId: string) => {
-        const cartId = localStorage.getItem(cartIdLocalStorageKey);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startMutationTransition(async () => {

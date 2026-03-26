@@ -69,7 +69,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     routing,
     hasPriority,
     productId,
-    cartIdLocalStorageKey,
     ...component
 }) => {
     const { product, labels } = component;
@@ -137,7 +136,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     const handleAddToCart = useCallback(() => {
         startAddToCartTransition(async () => {
             try {
-                const cartId = localStorage.getItem(cartIdLocalStorageKey);
+                const cartId = Utils.CartStorage.getCartId();
                 const result = await sdk.cart.addCartItem(
                     {
                         cartId: cartId || undefined,
@@ -150,7 +149,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                     accessToken,
                 );
                 if (!cartId && result?.id) {
-                    localStorage.setItem(cartIdLocalStorageKey, result.id);
+                    Utils.CartStorage.setCartId(result.id);
                 }
                 eventBus.emit('cart:changed', { cart: result });
                 toast({
@@ -175,7 +174,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
         product.name,
         locale,
         accessToken,
-        cartIdLocalStorageKey,
         labels.addToCartSuccess,
         labels.addToCartError,
         labels.viewCart,
