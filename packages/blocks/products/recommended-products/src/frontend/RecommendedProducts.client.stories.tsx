@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     args: {
+        cartIdLocalStorageKey: process.env.CART_ID_LOCAL_STORAGE_KEY!,
         __typename: 'RecommendedProductsBlock',
         id: 'recommended-products-1',
         locale: 'en',

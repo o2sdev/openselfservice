@@ -7,10 +7,10 @@ export interface CheckoutSummaryProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
-    cartIdLocalStorageKey: string;
 }
 
-export type CheckoutSummaryPureProps = CheckoutSummaryProps & Model.CheckoutSummaryBlock;
+export type CheckoutSummaryPureProps = CheckoutSummaryProps &
+    Model.CheckoutSummaryBlock & { cartIdLocalStorageKey: string };
 
 export type CheckoutSummaryRendererProps = Omit<CheckoutSummaryProps, ''> & {
     slug: string[];

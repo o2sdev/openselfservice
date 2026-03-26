@@ -7,10 +7,10 @@ export interface CheckoutCompanyDataProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
-    cartIdLocalStorageKey: string;
 }
 
-export type CheckoutCompanyDataPureProps = CheckoutCompanyDataProps & Model.CheckoutCompanyDataBlock;
+export type CheckoutCompanyDataPureProps = CheckoutCompanyDataProps &
+    Model.CheckoutCompanyDataBlock & { cartIdLocalStorageKey: string };
 
 export type CheckoutCompanyDataRendererProps = Omit<CheckoutCompanyDataProps, ''> & {
     slug: string[];

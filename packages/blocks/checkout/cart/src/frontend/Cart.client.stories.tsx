@@ -76,6 +76,7 @@ export const Default: Story = {
         id: 'cart-1',
         locale: 'en',
         routing,
+        cartIdLocalStorageKey: cartIdLocalStorageKey,
     },
 };
 
@@ -87,6 +88,7 @@ export const EmptyCart: Story = {
         id: 'cart-1',
         locale: 'en',
         routing,
+        cartIdLocalStorageKey: cartIdLocalStorageKey,
     },
     decorators: [
         (Story) => {

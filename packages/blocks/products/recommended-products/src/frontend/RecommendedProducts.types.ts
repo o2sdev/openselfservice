@@ -7,10 +7,10 @@ import { Model } from '../api-harmonization/recommended-products.client';
 export interface RecommendedProductsProps extends Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>> {
     excludeProductId?: string;
     limit?: number;
-    cartIdLocalStorageKey: string;
 }
 
-export type RecommendedProductsPureProps = RecommendedProductsProps & Model.RecommendedProductsBlock;
+export type RecommendedProductsPureProps = RecommendedProductsProps &
+    Model.RecommendedProductsBlock & { cartIdLocalStorageKey: string };
 
 export type RecommendedProductsRendererProps = Omit<
     Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>,

@@ -8,10 +8,9 @@ export interface CartProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
-    cartIdLocalStorageKey: string;
 }
 
-export type CartPureProps = CartProps & Model.CartBlock;
+export type CartPureProps = CartProps & Model.CartBlock & { cartIdLocalStorageKey: string };
 
 export type CartRendererProps = Omit<CartProps, 'locale'> & {
     slug: string[];
