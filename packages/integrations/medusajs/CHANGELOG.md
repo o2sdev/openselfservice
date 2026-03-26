@@ -1,5 +1,11 @@
 # @o2s/integrations.medusajs
 
+## 1.12.0
+
+### Minor Changes
+
+- 880c2df: Simplify cart/order ownership checks — resolve Medusa customer ID via /store/customers/me instead of relying on auth token claims. Fix missing +item_subtotal field in order list query.
+
 ## 1.11.2
 
 ### Patch Changes
