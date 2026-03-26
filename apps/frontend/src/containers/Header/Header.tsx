@@ -26,6 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
     alternativeUrls,
     children,
     shouldIncludeSignInButton = true,
+    cartIdLocalStorageKey,
 }) => {
     const session = useSession();
     const isSignedIn = !!session.data?.user;
@@ -72,8 +73,13 @@ export const Header: React.FC<HeaderProps> = ({
             return null;
         }
 
-        return <CartInfo data={{ url: data.cart.url, label: data.cart.label }} />;
-    }, [data.cart]);
+        return (
+            <CartInfo
+                data={{ url: data.cart.url, label: data.cart.label }}
+                cartIdLocalStorageKey={cartIdLocalStorageKey!}
+            />
+        );
+    }, [data.cart, cartIdLocalStorageKey]);
 
     const LocaleSlot = useMemo(
         () => <LocaleSwitcher label={data.languageSwitcherLabel} alternativeUrls={alternativeUrls} />,

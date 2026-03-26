@@ -26,12 +26,11 @@ import { CheckoutCompanyDataPureProps } from './CheckoutCompanyData.types';
 
 const FORM_ID = 'checkout-company-form';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureProps>> = ({
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     title,
     subtitle,
     stepIndicator,
@@ -122,7 +121,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                 router.replace(cartPath);
             }
         });
-    }, [locale, accessToken, toast, errors.cartNotFound, router, cartPath]);
+    }, [locale, accessToken, cartIdLocalStorageKey, toast, errors.cartNotFound, router, cartPath]);
 
     const handleSubmit = (values: typeof initialFormValues) => {
         const cartId = localStorage.getItem(cartIdLocalStorageKey);

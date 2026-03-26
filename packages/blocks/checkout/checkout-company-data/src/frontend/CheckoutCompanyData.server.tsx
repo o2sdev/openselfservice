@@ -25,5 +25,14 @@ export const CheckoutCompanyData: React.FC<CheckoutCompanyDataProps> = async ({ 
         return null;
     }
 
-    return <CheckoutCompanyDataDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+    return (
+        <CheckoutCompanyDataDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+        />
+    );
 };

@@ -7,6 +7,7 @@ export interface CheckoutShippingAddressProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    cartIdLocalStorageKey?: string;
 }
 
 export type CheckoutShippingAddressPureProps = CheckoutShippingAddressProps & Model.CheckoutShippingAddressBlock;

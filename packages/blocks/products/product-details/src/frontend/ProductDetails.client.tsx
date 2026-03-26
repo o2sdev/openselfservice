@@ -27,8 +27,6 @@ import { ProductInfo } from './components/ProductInfo';
 import { ProductSpecs } from './components/ProductSpecs';
 import { VariantSelector } from './components/VariantSelector';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 function resolveVariant(
     variants: Array<{ id: string; title: string; slug: string; link?: string; options?: Record<string, string> }>,
     selectedOptions: Record<string, string>,
@@ -71,6 +69,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     routing,
     hasPriority,
     productId,
+    cartIdLocalStorageKey,
     ...component
 }) => {
     const { product, labels } = component;
@@ -176,6 +175,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
         product.name,
         locale,
         accessToken,
+        cartIdLocalStorageKey,
         labels.addToCartSuccess,
         labels.addToCartError,
         labels.viewCart,

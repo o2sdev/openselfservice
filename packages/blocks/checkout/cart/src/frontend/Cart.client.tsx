@@ -20,12 +20,11 @@ import { sdk } from '../sdk';
 
 import { CartPureProps } from './Cart.types';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     title,
     subtitle,
     defaultCurrency,
@@ -55,7 +54,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 toast({ variant: 'destructive', description: errors?.loadError });
             }
         });
-    }, [locale, accessToken, errors?.loadError]);
+    }, [locale, accessToken, cartIdLocalStorageKey, errors?.loadError]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
         const cartId = localStorage.getItem(cartIdLocalStorageKey);

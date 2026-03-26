@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const env: {
     NEXT_PUBLIC_API_URL?: string;
-    NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY?: string;
+    CART_ID_LOCAL_STORAGE_KEY?: string;
 } = {};
 
 dotenv.config({

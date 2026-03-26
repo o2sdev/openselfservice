@@ -31,5 +31,14 @@ export const ProductList: React.FC<ProductListProps> = async ({ id, accessToken,
         return null;
     }
 
-    return <ProductListDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+    return (
+        <ProductListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+        />
+    );
 };

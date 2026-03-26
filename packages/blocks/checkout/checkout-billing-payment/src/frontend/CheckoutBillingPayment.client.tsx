@@ -21,12 +21,11 @@ import { CheckoutBillingPaymentPureProps } from './CheckoutBillingPayment.types'
 
 const FORM_ID = 'checkout-billing-form';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymentPureProps>> = ({
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     title,
     subtitle,
     stepIndicator,
@@ -95,7 +94,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                 router.replace(cartPath ?? '/');
             }
         });
-    }, [locale, accessToken, toast, errors?.cartNotFound, router, cartPath]);
+    }, [locale, accessToken, cartIdLocalStorageKey, toast, errors?.cartNotFound, router, cartPath]);
 
     const validationSchema = YupObject().shape({
         paymentMethod: fields.paymentMethod.required ? YupString().required(errors.required) : YupString(),

@@ -123,7 +123,11 @@ export default async function Page({ params }: Props) {
                     currentTheme={meta.theme}
                 >
                     <div className="flex flex-col min-h-dvh">
-                        <Header data={init.common.header} alternativeUrls={data.alternativeUrls} />
+                        <Header
+                            data={init.common.header}
+                            alternativeUrls={data.alternativeUrls}
+                            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+                        />
                         <div className="flex flex-col grow">
                             <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
                                 <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">

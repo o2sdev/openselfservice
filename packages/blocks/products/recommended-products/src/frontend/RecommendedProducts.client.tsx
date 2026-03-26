@@ -18,12 +18,11 @@ import { sdk } from '../sdk';
 
 import { RecommendedProductsPureProps } from './RecommendedProducts.types';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = ({
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     ...component
 }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
@@ -75,6 +74,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
         [
             locale,
             accessToken,
+            cartIdLocalStorageKey,
             labels.addToCartSuccess,
             labels.addToCartError,
             labels.viewCartLabel,

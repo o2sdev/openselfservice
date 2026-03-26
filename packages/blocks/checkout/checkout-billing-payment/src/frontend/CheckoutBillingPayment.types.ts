@@ -7,6 +7,7 @@ export interface CheckoutBillingPaymentProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    cartIdLocalStorageKey?: string;
 }
 
 export type CheckoutBillingPaymentPureProps = CheckoutBillingPaymentProps & Model.CheckoutBillingPaymentBlock;

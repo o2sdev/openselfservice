@@ -21,12 +21,11 @@ import { sdk } from '../sdk';
 
 import { CheckoutSummaryPureProps } from './CheckoutSummary.types';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> = ({
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     title,
     subtitle,
     stepIndicator,
@@ -68,7 +67,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 }
             }
         });
-    }, [locale, accessToken, toast, errors.cartNotFound, errors.loadError, router, cartPath]);
+    }, [locale, accessToken, cartIdLocalStorageKey, toast, errors.cartNotFound, errors.loadError, router, cartPath]);
 
     const handleConfirm = () => {
         const cartId = localStorage.getItem(cartIdLocalStorageKey);

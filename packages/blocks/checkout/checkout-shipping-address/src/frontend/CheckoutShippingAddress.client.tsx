@@ -27,12 +27,11 @@ import { CheckoutShippingAddressPureProps } from './CheckoutShippingAddress.type
 
 const FORM_ID = 'checkout-shipping-form';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddressPureProps>> = ({
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     title,
     subtitle,
     stepIndicator,
@@ -124,7 +123,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                 router.replace(cartPath);
             }
         });
-    }, [locale, accessToken, toast, errors.cartNotFound, router, cartPath]);
+    }, [locale, accessToken, cartIdLocalStorageKey, toast, errors.cartNotFound, router, cartPath]);
 
     const handleSubmit = (values: typeof initialFormValues) => {
         startSubmitTransition(async () => {

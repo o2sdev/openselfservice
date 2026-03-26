@@ -20,7 +20,7 @@ import '../apps/frontend/src/styles/global.css';
 import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
 import { cartAndCheckoutHandlers } from './mocks/handlers/cart-handlers';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
+const cartIdLocalStorageKey = process.env.CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 initialize();
 

@@ -15,12 +15,10 @@ import { Link as NextLink } from '@/i18n';
 
 import { CartInfoProps } from './CartInfo.types';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
 /** Last known line-item count for this browser session; survives header remounts on navigation (avoids badge flicker). */
 let lastKnownCartItemCount = 0;
 
-export const CartInfo = ({ data }: CartInfoProps) => {
+export const CartInfo = ({ data, cartIdLocalStorageKey }: CartInfoProps) => {
     const session = useSession();
     const locale = useLocale();
     const [itemCount, setItemCount] = useState(() => lastKnownCartItemCount);
@@ -54,7 +52,7 @@ export const CartInfo = ({ data }: CartInfoProps) => {
         return () => {
             cancelled = true;
         };
-    }, [session.data?.accessToken, locale]);
+    }, [session.data?.accessToken, locale, cartIdLocalStorageKey]);
 
     const onCartChanged = useCallback((payload: O2SEventMap['cart:changed']) => {
         const next = payload.cart.items.data.length;

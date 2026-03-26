@@ -28,9 +28,13 @@ import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
-
-export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const ProductListPure: React.FC<ProductListPureProps> = ({
+    locale,
+    accessToken,
+    routing,
+    cartIdLocalStorageKey,
+    ...component
+}) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
     const initialProducts = component.products?.data ?? [];
@@ -98,6 +102,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         [
             locale,
             accessToken,
+            cartIdLocalStorageKey,
             data.labels.addToCartSuccess,
             data.labels.addToCartError,
             data.labels.viewCartLabel,

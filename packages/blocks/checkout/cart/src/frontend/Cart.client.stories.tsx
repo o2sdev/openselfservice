@@ -6,7 +6,7 @@ import readme from '../../README.md?raw';
 
 import { CartPure } from './Cart.client';
 
-const cartIdLocalStorageKey = process.env.NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY!.trim();
+const cartIdLocalStorageKey = process.env.CART_ID_LOCAL_STORAGE_KEY!.trim();
 
 const routing = defineRouting({
     locales: ['en'],
