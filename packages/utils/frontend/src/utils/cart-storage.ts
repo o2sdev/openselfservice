@@ -16,7 +16,7 @@ interface CartStorageMap {
  * Configure the cart storage utility. Call once at app initialization.
  *
  * @param config.storageKey - localStorage key name (defaults to 'cartId')
- * @param config.orgId - current organization ID (uses '__default__' when omitted)
+ * @param config.orgId - current organization ID (uses 'guest' key when omitted)
  */
 export function configureCartStorage(config: CartStorageConfig): void {
     if (config.storageKey) {
