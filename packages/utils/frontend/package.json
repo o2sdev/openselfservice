@@ -1,6 +1,6 @@
 {
     "name": "@o2s/utils.frontend",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "description": "Utility functions for O2S frontend applications.",
     "private": false,
     "license": "MIT",
@@ -31,7 +31,10 @@
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
-        "@o2s/framework": "*"
+        "@o2s/framework": "*",
+        "@o2s/ui": "*",
+        "class-variance-authority": "^0.7.1",
+        "react": "^19.2.4"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",

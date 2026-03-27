@@ -1,5 +1,29 @@
 # @o2s/integrations.medusajs
 
+## 1.12.0
+
+### Minor Changes
+
+- 880c2df: Simplify cart/order ownership checks — resolve Medusa customer ID via /store/customers/me instead of relying on auth token claims. Fix missing +item_subtotal field in order list query.
+
+## 1.11.2
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [7ac16b0]
+    - @o2s/framework@1.21.0
+
 ## 1.11.1
 
 ### Patch Changes

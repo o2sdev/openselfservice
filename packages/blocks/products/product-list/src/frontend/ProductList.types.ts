@@ -8,7 +8,7 @@ export interface ProductListProps extends Models.BlockProps.BaseBlockProps<Retur
     enableRowSelection?: boolean;
 }
 
-export type ProductListPureProps = ProductListProps & Model.ProductListBlock;
+export type ProductListPureProps = ProductListProps & Model.ProductListBlock & { cartIdLocalStorageKey: string };
 
 export type ProductListRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
     Pick<ProductListProps, 'enableRowSelection'>;

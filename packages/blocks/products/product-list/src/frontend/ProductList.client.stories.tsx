@@ -31,6 +31,7 @@ export const Default: Story = {
                 },
             },
         },
+        cartIdLocalStorageKey: process.env.CART_ID_LOCAL_STORAGE_KEY!,
         __typename: 'ProductListBlock',
         id: 'product-list-1',
         title: 'Products',

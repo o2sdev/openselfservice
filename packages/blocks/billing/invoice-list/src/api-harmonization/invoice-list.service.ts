@@ -21,20 +21,24 @@ export class InvoiceListService {
     ) {}
 
     getInvoiceListBlock(query: GetInvoiceListBlockQuery, headers: AppHeaders): Observable<InvoiceListBlock> {
+        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getInvoiceListBlock({ ...query, locale: headers[H.Locale] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.invoiceService
-                    .getInvoiceList({
-                        ...(cms.initialFilters || {}),
-                        ...query,
-                        limit: query.limit || cms.pagination?.limit || 1,
-                        offset: query.offset || 0,
-                        dateFrom: query.dateFrom ? dayjs(query.dateFrom).toISOString() : undefined,
-                        dateTo: query.dateTo ? dayjs(query.dateTo).toISOString() : undefined,
-                        locale: headers[H.Locale],
-                    })
+                    .getInvoiceList(
+                        {
+                            ...(cms.initialFilters || {}),
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 1,
+                            offset: query.offset || 0,
+                            dateFrom: query.dateFrom ? dayjs(query.dateFrom).toISOString() : undefined,
+                            dateTo: query.dateTo ? dayjs(query.dateTo).toISOString() : undefined,
+                            locale: headers[H.Locale],
+                        },
+                        authorization,
+                    )
                     .pipe(
                         map((invoices) => {
                             const result = mapInvoiceList(
@@ -45,7 +49,6 @@ export class InvoiceListService {
                             );
 
                             // Extract permissions using ACL service
-                            const authorization = headers[H.Authorization];
                             if (authorization) {
                                 const permissions = this.authService.canPerformActions(authorization, 'invoices', [
                                     'view',
@@ -69,7 +72,8 @@ export class InvoiceListService {
         );
     }
 
-    getInvoicePdf(id: string): Observable<Buffer> {
-        return this.invoiceService.getInvoicePdf({ id });
+    getInvoicePdf(id: string, headers: AppHeaders): Observable<Buffer> {
+        const authorization = headers[H.Authorization];
+        return this.invoiceService.getInvoicePdf({ id }, authorization);
     }
 }

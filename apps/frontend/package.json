@@ -1,6 +1,6 @@
 {
     "name": "@o2s/frontend",
-    "version": "1.18.1",
+    "version": "1.18.3",
     "private": true,
     "scripts": {
         "dev": "next dev --turbopack",
@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "@contentful/live-preview": "^4.9.10",
+        "@o2s/api-harmonization": "*",
         "@o2s/blocks.article": "*",
         "@o2s/blocks.article-list": "*",
         "@o2s/blocks.article-search": "*",
@@ -57,6 +58,7 @@
         "@o2s/blocks.ticket-recent": "*",
         "@o2s/blocks.ticket-summary": "*",
         "@o2s/blocks.user-account": "*",
+        "@o2s/configs.integrations": "^0.7.0",
         "@o2s/framework": "*",
         "@o2s/integrations.mocked": "*",
         "@o2s/ui": "*",
@@ -80,6 +82,7 @@
         "zod": "^4.3.6"
     },
     "devDependencies": {
+        "@auth/core": "^0.41.1",
         "@next/bundle-analyzer": "16.1.6",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
@@ -95,6 +98,7 @@
         "dotenv": "^17.3.1",
         "eslint": "^9.39.4",
         "eslint-config-next": "16.1.6",
+        "lucide-react": "^0.575.0",
         "postcss": "^8.5.8",
         "prettier": "^3.8.1",
         "sass": "^1.97.3",

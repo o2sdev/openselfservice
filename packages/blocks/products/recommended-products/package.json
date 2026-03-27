@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.recommended-products",
-    "version": "0.4.0",
+    "version": "0.5.1",
     "private": false,
     "license": "MIT",
     "description": "A simple block displaying static content in the form of an RecommendedProducts.",
@@ -45,17 +45,20 @@
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
-        "dotenv-cli": "^11.0.0",
+        "@nestjs/testing": "^11.1.14",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
+        "@storybook/nextjs-vite": "^10.2.19",
         "concurrently": "^9.2.1",
+        "dotenv-cli": "^11.0.0",
         "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.18"
     },
     "peerDependencies": {
         "@types/react": "^19",

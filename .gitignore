@@ -58,3 +58,6 @@ agent-os
 
 # Generated files
 O2S-API.postman_collection.json
+
+# TypeScript build info
+tsconfig.tsbuildinfo

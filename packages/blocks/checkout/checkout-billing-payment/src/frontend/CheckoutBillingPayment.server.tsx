@@ -31,6 +31,13 @@ export const CheckoutBillingPayment: React.FC<CheckoutBillingPaymentProps> = asy
     }
 
     return (
-        <CheckoutBillingPaymentDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />
+        <CheckoutBillingPaymentDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
+        />
     );
 };

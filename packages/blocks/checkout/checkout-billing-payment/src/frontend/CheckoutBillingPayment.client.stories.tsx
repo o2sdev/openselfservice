@@ -76,5 +76,6 @@ export const Default: Story = {
         id: 'checkout-billing-payment-1',
         locale: 'en',
         routing,
+        cartIdLocalStorageKey: process.env.CART_ID_LOCAL_STORAGE_KEY!,
     },
 };

@@ -1,5 +1,6 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useTransition } from 'react';
 
@@ -21,6 +22,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     ...component
 }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
@@ -34,7 +36,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
             const productName = products.find((p) => p.sku === sku)?.name ?? sku;
             startAddToCartTransition(async () => {
                 try {
-                    const cartId = localStorage.getItem('cartId');
+                    const cartId = localStorage.getItem(cartIdLocalStorageKey);
                     const result = await sdk.cart.addCartItem(
                         {
                             cartId: cartId || undefined,
@@ -47,8 +49,9 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
                         accessToken,
                     );
                     if (!cartId && result?.id) {
-                        localStorage.setItem('cartId', result.id);
+                        localStorage.setItem(cartIdLocalStorageKey, result.id);
                     }
+                    eventBus.emit('cart:changed', { cart: result });
                     toast({
                         description: Utils.StringReplace.reactStringReplace(labels.addToCartSuccess ?? '', {
                             productName,
@@ -71,6 +74,7 @@ export const RecommendedProductsPure: React.FC<RecommendedProductsPureProps> = (
         [
             locale,
             accessToken,
+            cartIdLocalStorageKey,
             labels.addToCartSuccess,
             labels.addToCartError,
             labels.viewCartLabel,

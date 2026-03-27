@@ -29,13 +29,16 @@ export class NotificationListService {
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.notificationService
-                    .getNotificationList({
-                        ...(cms.initialFilters || {}),
-                        ...query,
-                        limit: query.limit || cms.pagination?.limit || 1,
-                        offset: query.offset || 0,
-                        locale: headers[H.Locale],
-                    })
+                    .getNotificationList(
+                        {
+                            ...(cms.initialFilters || {}),
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 1,
+                            offset: query.offset || 0,
+                            locale: headers[H.Locale],
+                        },
+                        authorization,
+                    )
                     .pipe(
                         map((notifications) => {
                             const result = mapNotificationList(

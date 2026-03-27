@@ -89,5 +89,6 @@ export const Default: Story = {
         id: 'checkout-summary-1',
         locale: 'en',
         routing,
+        cartIdLocalStorageKey: process.env.CART_ID_LOCAL_STORAGE_KEY!,
     },
 };

@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Auth, Carts } from '@o2s/framework/modules';
+import { Carts } from '@o2s/framework/modules';
 
 import { CartsService } from './carts.service';
 
@@ -60,6 +60,14 @@ describe('CartsService', () => {
                 update: ReturnType<typeof vi.fn>;
                 addShippingMethod: ReturnType<typeof vi.fn>;
             };
+            customer: {
+                retrieve: ReturnType<typeof vi.fn>;
+            };
+        };
+        admin: {
+            customer: {
+                retrieve: ReturnType<typeof vi.fn>;
+            };
         };
         client: { fetch: ReturnType<typeof vi.fn> };
     };
@@ -86,6 +94,14 @@ describe('CartsService', () => {
                     update: vi.fn(),
                     addShippingMethod: vi.fn(),
                 },
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { id: 'cust_1' } }),
+                },
+            },
+            admin: {
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { has_account: false } }),
+                },
             },
             client: { fetch: vi.fn() },
         };
@@ -109,7 +125,6 @@ describe('CartsService', () => {
             mockConfig as unknown as ConfigService,
             mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
             mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-            mockAuthService as unknown as Auth.Service,
             mockCustomersService as unknown as import('@o2s/framework/modules').Customers.Service,
         );
     });
@@ -124,7 +139,6 @@ describe('CartsService', () => {
                         mockConfig as unknown as ConfigService,
                         mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
                         mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-                        mockAuthService as unknown as Auth.Service,
                         mockCustomersService as unknown as import('@o2s/framework/modules').Customers.Service,
                     ),
             ).toThrow('DEFAULT_CURRENCY is not defined');
@@ -149,12 +163,12 @@ describe('CartsService', () => {
 
         it('should throw UnauthorizedException when cart.customerId !== auth customerId', async () => {
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: { ...minimalCart, customer_id: 'cust_1' } });
-            mockAuthService.getCustomerId.mockReturnValue('cust_other');
+            mockSdk.store.customer.retrieve.mockResolvedValue({ customer: { id: 'cust_other' } });
+            mockSdk.admin.customer.retrieve.mockResolvedValue({ customer: { has_account: true } });
 
             await expect(firstValueFrom(service.getCart({ id: 'cart_1' }, 'Bearer token'))).rejects.toThrow(
                 UnauthorizedException,
             );
-            expect(mockAuthService.getCustomerId).toHaveBeenCalledWith('Bearer token');
         });
 
         it('should throw NotFoundException on 404', async () => {

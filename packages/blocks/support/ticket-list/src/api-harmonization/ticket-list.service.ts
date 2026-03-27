@@ -26,13 +26,16 @@ export class TicketListService {
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.ticketService
-                    .getTicketList({
-                        ...(cms.initialFilters || {}),
-                        ...query,
-                        limit: query.limit || cms.pagination?.limit || 1,
-                        offset: query.offset || 0,
-                        locale: headers[H.Locale],
-                    })
+                    .getTicketList(
+                        {
+                            ...(cms.initialFilters || {}),
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 1,
+                            offset: query.offset || 0,
+                            locale: headers[H.Locale],
+                        },
+                        authorization,
+                    )
                     .pipe(
                         map((tickets) => {
                             const result = mapTicketList(

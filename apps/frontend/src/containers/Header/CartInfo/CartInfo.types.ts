@@ -3,4 +3,5 @@ export interface CartInfoProps {
         url: string;
         label: string;
     };
+    cartIdLocalStorageKey: string;
 }

@@ -6,6 +6,8 @@ import readme from '../../README.md?raw';
 
 import { CartPure } from './Cart.client';
 
+const cartIdLocalStorageKey = process.env.CART_ID_LOCAL_STORAGE_KEY!.trim();
+
 const routing = defineRouting({
     locales: ['en'],
     defaultLocale: 'en',
@@ -74,6 +76,7 @@ export const Default: Story = {
         id: 'cart-1',
         locale: 'en',
         routing,
+        cartIdLocalStorageKey: cartIdLocalStorageKey,
     },
 };
 
@@ -85,11 +88,12 @@ export const EmptyCart: Story = {
         id: 'cart-1',
         locale: 'en',
         routing,
+        cartIdLocalStorageKey: cartIdLocalStorageKey,
     },
     decorators: [
         (Story) => {
             if (typeof window !== 'undefined') {
-                window.localStorage.setItem('cartId', EMPTY_CART_ID);
+                window.localStorage.setItem(cartIdLocalStorageKey, EMPTY_CART_ID);
             }
             return <Story />;
         },

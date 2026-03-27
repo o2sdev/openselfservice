@@ -9,7 +9,8 @@ export interface CheckoutCompanyDataProps {
     routing: ReturnType<typeof defineRouting>;
 }
 
-export type CheckoutCompanyDataPureProps = CheckoutCompanyDataProps & Model.CheckoutCompanyDataBlock;
+export type CheckoutCompanyDataPureProps = CheckoutCompanyDataProps &
+    Model.CheckoutCompanyDataBlock & { cartIdLocalStorageKey: string };
 
 export type CheckoutCompanyDataRendererProps = Omit<CheckoutCompanyDataProps, ''> & {
     slug: string[];

@@ -1,5 +1,6 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 
@@ -19,12 +20,11 @@ import { sdk } from '../sdk';
 
 import { CartPureProps } from './Cart.types';
 
-const CART_ID_KEY = 'cartId';
-
 export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     locale,
     accessToken,
     routing,
+    cartIdLocalStorageKey,
     title,
     subtitle,
     defaultCurrency,
@@ -43,7 +43,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     const [isMutationPending, startMutationTransition] = useTransition();
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) return;
 
         startInitialLoadTransition(async () => {
@@ -54,10 +54,10 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 toast({ variant: 'destructive', description: errors?.loadError });
             }
         });
-    }, [locale, accessToken, errors?.loadError]);
+    }, [locale, accessToken, cartIdLocalStorageKey, errors?.loadError]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) return;
 
         startMutationTransition(async () => {
@@ -70,6 +70,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                     accessToken,
                 );
                 setCart(updated);
+                eventBus.emit('cart:changed', { cart: updated });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }
@@ -77,13 +78,14 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     };
 
     const removeItem = (itemId: string) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = localStorage.getItem(cartIdLocalStorageKey);
         if (!cartId) return;
 
         startMutationTransition(async () => {
             try {
                 const updated = await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
                 setCart(updated);
+                eventBus.emit('cart:changed', { cart: updated });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }

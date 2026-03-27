@@ -67,7 +67,7 @@ export default async function NotFound() {
         <body>
             <GlobalProvider config={init} labels={init.labels} locale={locale} themes={init.themes}>
                 <div className="flex flex-col min-h-dvh">
-                    <Header data={init.common.header} />
+                    <Header data={init.common.header} cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY} />
                     <div className="flex flex-col grow">
                         <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
                             <main className="flex flex-col items-center justify-center grow">

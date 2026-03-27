@@ -19,11 +19,14 @@ export class ResourcesService extends Resources.Service {
         super();
     }
 
-    purchaseOrActivateService(_params: Resources.Request.GetServiceParams): Observable<void> {
+    purchaseOrActivateService(_params: Resources.Request.GetServiceParams, _authorization?: string): Observable<void> {
         throw new Error('Method not implemented.');
     }
 
-    purchaseOrActivateResource(_params: Resources.Request.GetResourceParams): Observable<void> {
+    purchaseOrActivateResource(
+        _params: Resources.Request.GetResourceParams,
+        _authorization?: string,
+    ): Observable<void> {
         throw new Error('Method not implemented');
     }
 
@@ -34,7 +37,10 @@ export class ResourcesService extends Resources.Service {
         return of(mapServices(query, authorization)).pipe(responseDelay());
     }
 
-    getService(params: Resources.Request.GetServiceParams): Observable<Resources.Model.Service> {
+    getService(
+        params: Resources.Request.GetServiceParams,
+        _authorization?: string,
+    ): Observable<Resources.Model.Service> {
         return of(mapService(params.id)).pipe(responseDelay());
     }
 
@@ -45,7 +51,7 @@ export class ResourcesService extends Resources.Service {
         return of(mapAssets(query, authorization)).pipe(responseDelay());
     }
 
-    getAsset(params: Resources.Request.GetAssetParams): Observable<Resources.Model.Asset> {
+    getAsset(params: Resources.Request.GetAssetParams, _authorization?: string): Observable<Resources.Model.Asset> {
         return of(mapAsset(params.id)).pipe(responseDelay());
     }
 

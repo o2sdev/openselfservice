@@ -40,6 +40,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = async ({
             locale={locale}
             routing={routing}
             hasPriority={hasPriority}
+            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
         />
     );
 };

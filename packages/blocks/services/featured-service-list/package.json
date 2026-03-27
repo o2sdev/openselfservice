@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.featured-service-list",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "private": false,
     "license": "MIT",
     "description": "A block displaying a list of featured services.",
@@ -44,13 +44,14 @@
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
-        "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
+        "@storybook/nextjs-vite": "^10.2.19",
         "concurrently": "^9.2.1",
+        "dotenv-cli": "^11.0.0",
         "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",

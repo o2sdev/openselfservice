@@ -9,7 +9,8 @@ export interface CheckoutSummaryProps {
     routing: ReturnType<typeof defineRouting>;
 }
 
-export type CheckoutSummaryPureProps = CheckoutSummaryProps & Model.CheckoutSummaryBlock;
+export type CheckoutSummaryPureProps = CheckoutSummaryProps &
+    Model.CheckoutSummaryBlock & { cartIdLocalStorageKey: string };
 
 export type CheckoutSummaryRendererProps = Omit<CheckoutSummaryProps, ''> & {
     slug: string[];

@@ -19,3 +19,6 @@
 # dotenv
 .env
 .env.*.local
+
+# TypeScript build info
+tsconfig.tsbuildinfo
