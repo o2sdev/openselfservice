@@ -10,6 +10,7 @@ import { transformIntegrationConfigs } from './transform-integration-configs';
 import { transformRootPackageJson } from './transform-package-json';
 import { transformPageModel } from './transform-page-model';
 import { transformRenderBlocks } from './transform-render-blocks';
+import { transformStorybookConfig } from './transform-storybook-config';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -74,6 +75,7 @@ export const scaffold = async (
         transformRenderBlocks(targetDir, selectedBlocks),
         transformPageModel(targetDir, selectedBlocks),
         transformAppsPackageJson(targetDir, selectedBlocks, selectedIntegrations),
+        transformStorybookConfig(targetDir),
     ]);
 
     // Step 5: Clean up root package.json (remove workspace entries for deleted dirs)
