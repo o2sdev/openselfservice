@@ -18,5 +18,7 @@ export const transformStorybookConfig = async (projectDir: string): Promise<void
         return !FRAMEWORK_REFERENCE_REGEX.test(line);
     });
 
+    if (filteredLines.length === lines.length) return;
+
     await fs.writeFile(filePath, filteredLines.join('\n'), 'utf-8');
 };
