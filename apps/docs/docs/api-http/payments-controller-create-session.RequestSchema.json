@@ -1,1 +1,0 @@
-{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"cartId":{"type":"string"},"providerId":{"type":"string"},"returnUrl":{"type":"string"},"cancelUrl":{"type":"string"},"metadata":{"type":"object"}},"required":["cartId","providerId","returnUrl"],"title":"CreateSessionBody"}}}}}

@@ -1,0 +1,10 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns ticket-list block.",
+            "content": {
+                "application/json": { "schema": { "type": "object", "properties": {}, "title": "TicketListBlock" } }
+            }
+        }
+    }
+}

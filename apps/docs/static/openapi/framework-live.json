@@ -43,7 +43,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS entry."
+            "description": "Returns a single CMS entry. Structure varies by content type (e.g., Article, Page, Block). Common fields: id, createdAt, updatedAt.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS entry",
@@ -103,7 +111,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS entries."
+            "description": "Returns CMS entries collection. Structure varies by content type. Typically contains data array and pagination info.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS entries",
@@ -154,7 +170,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS page."
+            "description": "Returns CMS page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page"
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS page",
@@ -196,7 +219,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS pages."
+            "description": "Returns CMS pages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Page"
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS pages",
@@ -238,7 +271,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS login page."
+            "description": "Returns CMS login page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginPage"
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS login page",
@@ -280,7 +320,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS not-found page."
+            "description": "Returns CMS not-found page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundPage"
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS not-found page",
@@ -331,7 +378,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS header."
+            "description": "Returns CMS header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Header"
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS header",
@@ -382,7 +436,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS footer."
+            "description": "Returns CMS footer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Footer"
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS footer",
@@ -433,7 +494,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns CMS app config."
+            "description": "Returns CMS app config.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppConfig"
+                }
+              }
+            }
           }
         },
         "summary": "Get CMS app config",
@@ -484,7 +552,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns FAQ block."
+            "description": "Returns FAQ block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaqBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get FAQ block",
@@ -535,7 +610,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns ticket-list block."
+            "description": "Returns ticket-list block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketListBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get ticket-list block",
@@ -586,7 +668,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns ticket-details block."
+            "description": "Returns ticket-details block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketDetailsBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get ticket-details block",
@@ -637,7 +726,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns notification-list block."
+            "description": "Returns notification-list block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationListBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get notification-list block",
@@ -688,7 +784,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns notification-details block."
+            "description": "Returns notification-details block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationDetailsBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get notification-details block",
@@ -739,7 +842,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns article-list block."
+            "description": "Returns article-list block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleListBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get article-list block",
@@ -790,7 +900,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns article-details block."
+            "description": "Returns article details from CMS.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
           }
         },
         "summary": "Get article-details block",
@@ -841,7 +958,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns invoice-list block."
+            "description": "Returns invoice-list block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceListBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get invoice-list block",
@@ -892,7 +1016,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns invoice-details block."
+            "description": "Returns invoice-details block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceDetailsBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get invoice-details block",
@@ -943,7 +1074,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns resource-list block."
+            "description": "Returns resource-list block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get resource-list block",
@@ -994,7 +1132,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns resource-details block."
+            "description": "Returns resource-details block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceDetailsBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get resource-details block",
@@ -1045,7 +1190,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns user-account block."
+            "description": "Returns user-account block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAccountBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get user-account block",
@@ -1096,7 +1248,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns service-list block."
+            "description": "Returns service-list block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceListBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get service-list block",
@@ -1147,7 +1306,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns service-details block."
+            "description": "Returns service-details block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceDetailsBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get service-details block",
@@ -1198,7 +1364,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns featured-service-list block."
+            "description": "Returns featured-service-list block.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeaturedServiceListBlock"
+                }
+              }
+            }
           }
         },
         "summary": "Get featured-service-list block",
@@ -1232,7 +1405,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns ticket details."
+            "description": "Returns ticket details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ticket"
+                }
+              }
+            }
           }
         },
         "summary": "Get ticket by id",
@@ -1267,9 +1447,17 @@
             "name": "status",
             "required": false,
             "in": "query",
-            "description": "One or more ticket statuses to filter by.",
+            "description": "One or more ticket statuses to filter by. Use a single value or repeat the query parameter for multiple.",
             "schema": {
-              "$ref": "#/components/schemas/Object"
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "OPEN",
+                  "CLOSED",
+                  "IN_PROGRESS"
+                ]
+              }
             }
           },
           {
@@ -1330,6 +1518,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Ticket list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -1337,7 +1526,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns ticket list."
+            "description": "Returns ticket list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedTickets"
+                }
+              }
+            }
           }
         },
         "summary": "List tickets",
@@ -1350,6 +1546,7 @@
         "parameters": [],
         "requestBody": {
           "required": true,
+          "description": "Ticket creation payload.",
           "content": {
             "application/json": {
               "schema": {
@@ -1360,7 +1557,14 @@
         },
         "responses": {
           "201": {
-            "description": "Ticket created."
+            "description": "Ticket created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ticket"
+                }
+              }
+            }
           }
         },
         "summary": "Create ticket",
@@ -1394,7 +1598,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns notification details."
+            "description": "Returns notification details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Notification"
+                }
+              }
+            }
           }
         },
         "summary": "Get notification by id",
@@ -1422,7 +1633,13 @@
             "in": "query",
             "description": "Notification priority filter.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "LOW",
+                "MEDIUM",
+                "HIGH",
+                "CRITICAL"
+              ]
             }
           },
           {
@@ -1431,7 +1648,12 @@
             "in": "query",
             "description": "Notification status filter.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "UNVIEWED",
+                "VIEWED",
+                "READ"
+              ]
             }
           },
           {
@@ -1474,6 +1696,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Notification list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -1481,7 +1704,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns notifications list."
+            "description": "Returns notifications list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotifications"
+                }
+              }
+            }
           }
         },
         "summary": "List notifications",
@@ -1494,6 +1724,7 @@
         "parameters": [],
         "requestBody": {
           "required": true,
+          "description": "Notification status update payload.",
           "content": {
             "application/json": {
               "schema": {
@@ -1519,7 +1750,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns current user profile."
+            "description": "Returns current user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         },
         "summary": "Get current user",
@@ -1532,6 +1770,7 @@
         "parameters": [],
         "requestBody": {
           "required": true,
+          "description": "User profile fields to update.",
           "content": {
             "application/json": {
               "schema": {
@@ -1542,7 +1781,14 @@
         },
         "responses": {
           "200": {
-            "description": "Current user updated."
+            "description": "Current user updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         },
         "summary": "Update current user",
@@ -1580,7 +1826,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns user details."
+            "description": "Returns user details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         },
         "summary": "Get user by id",
@@ -1603,6 +1856,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "User profile fields to update.",
           "content": {
             "application/json": {
               "schema": {
@@ -1613,7 +1867,14 @@
         },
         "responses": {
           "200": {
-            "description": "User updated."
+            "description": "User updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         },
         "summary": "Update user by id",
@@ -1651,7 +1912,17 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns customers linked to current user."
+            "description": "Returns customers linked to current user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Customer"
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Get customers for current user",
@@ -1668,7 +1939,7 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "description": "Customer identifier.",
+            "description": "Customer identifier linked to current user.",
             "schema": {
               "type": "string"
             }
@@ -1676,7 +1947,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns customer details for current user."
+            "description": "Returns customer details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
           }
         },
         "summary": "Get current user customer by id",
@@ -1701,7 +1979,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns organization details."
+            "description": "Returns organization details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            }
           }
         },
         "summary": "Get organization by id",
@@ -1727,6 +2012,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Organization list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -1734,7 +2020,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns organizations list."
+            "description": "Returns organizations list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedOrganizations"
+                }
+              }
+            }
           }
         },
         "summary": "List organizations",
@@ -1760,7 +2053,7 @@
             "name": "userId",
             "required": true,
             "in": "path",
-            "description": "User identifier to check membership for.",
+            "description": "User identifier.",
             "schema": {
               "type": "string"
             }
@@ -1768,7 +2061,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns membership check result."
+            "description": "Returns true if user is a member of the organization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
           }
         },
         "summary": "Check organization membership",
@@ -1803,6 +2103,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Billing account list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -1810,7 +2111,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns billing accounts list."
+            "description": "Returns billing accounts list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedBillingAccounts"
+                }
+              }
+            }
           }
         },
         "summary": "List billing accounts",
@@ -1835,7 +2143,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns billing account details."
+            "description": "Returns billing account details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingAccount"
+                }
+              }
+            }
           }
         },
         "summary": "Get billing account by id",
@@ -1852,6 +2167,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Resource identifier.",
             "schema": {
               "type": "string"
             }
@@ -1860,6 +2176,7 @@
             "name": "locale",
             "required": false,
             "in": "path",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -1884,22 +2201,34 @@
             "name": "status",
             "required": false,
             "in": "query",
+            "description": "Filter services by contract status.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ACTIVE",
+                "EXPIRED",
+                "INACTIVE"
+              ]
             }
           },
           {
             "name": "type",
             "required": false,
             "in": "query",
+            "description": "Filter services by product type.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PHYSICAL",
+                "VIRTUAL"
+              ]
             }
           },
           {
             "name": "category",
             "required": false,
             "in": "query",
+            "description": "Filter services by category identifier.",
             "schema": {
               "type": "string"
             }
@@ -1908,6 +2237,7 @@
             "name": "billingAccountId",
             "required": false,
             "in": "query",
+            "description": "Filter services by billing account identifier.",
             "schema": {
               "type": "string"
             }
@@ -1916,6 +2246,7 @@
             "name": "dateFrom",
             "required": false,
             "in": "query",
+            "description": "Include services created/updated from this date (ISO string).",
             "schema": {
               "type": "string"
             }
@@ -1924,6 +2255,7 @@
             "name": "dateTo",
             "required": false,
             "in": "query",
+            "description": "Include services created/updated until this date (ISO string).",
             "schema": {
               "type": "string"
             }
@@ -1932,6 +2264,7 @@
             "name": "sort",
             "required": false,
             "in": "query",
+            "description": "Sort expression, for example `createdAt_DESC`.",
             "schema": {
               "type": "string"
             }
@@ -1940,6 +2273,7 @@
             "name": "locale",
             "required": false,
             "in": "query",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -1948,6 +2282,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Service list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -1955,7 +2290,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns services list."
+            "description": "Returns services list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedServices"
+                }
+              }
+            }
           }
         },
         "summary": "List services",
@@ -1972,6 +2314,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Service identifier.",
             "schema": {
               "type": "string"
             }
@@ -1980,6 +2323,7 @@
             "name": "locale",
             "required": false,
             "in": "path",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -1987,7 +2331,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns service details."
+            "description": "Returns service details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
           }
         },
         "summary": "Get service by id",
@@ -2002,7 +2353,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns featured services list."
+            "description": "Returns featured services list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedProducts"
+                }
+              }
+            }
           }
         },
         "summary": "List featured services",
@@ -2019,14 +2377,20 @@
             "name": "type",
             "required": false,
             "in": "query",
+            "description": "Filter assets by product type.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PHYSICAL",
+                "VIRTUAL"
+              ]
             }
           },
           {
             "name": "status",
             "required": false,
             "in": "query",
+            "description": "Filter assets by lifecycle/status value from integration.",
             "schema": {
               "type": "string"
             }
@@ -2035,6 +2399,7 @@
             "name": "billingAccountId",
             "required": false,
             "in": "query",
+            "description": "Filter assets by billing account identifier.",
             "schema": {
               "type": "string"
             }
@@ -2043,6 +2408,7 @@
             "name": "dateFrom",
             "required": false,
             "in": "query",
+            "description": "Include assets created/updated from this date (ISO string).",
             "schema": {
               "type": "string"
             }
@@ -2051,6 +2417,7 @@
             "name": "dateTo",
             "required": false,
             "in": "query",
+            "description": "Include assets created/updated until this date (ISO string).",
             "schema": {
               "type": "string"
             }
@@ -2059,6 +2426,7 @@
             "name": "sort",
             "required": false,
             "in": "query",
+            "description": "Sort expression, for example `createdAt_DESC`.",
             "schema": {
               "type": "string"
             }
@@ -2067,6 +2435,7 @@
             "name": "locale",
             "required": false,
             "in": "query",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -2075,6 +2444,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Asset list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -2082,7 +2452,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns assets list."
+            "description": "Returns assets list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedAssets"
+                }
+              }
+            }
           }
         },
         "summary": "List assets",
@@ -2099,6 +2476,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Asset identifier.",
             "schema": {
               "type": "string"
             }
@@ -2107,6 +2485,7 @@
             "name": "locale",
             "required": false,
             "in": "path",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -2114,7 +2493,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns asset details."
+            "description": "Returns asset details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asset"
+                }
+              }
+            }
           }
         },
         "summary": "Get asset by id",
@@ -2131,6 +2517,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Asset identifier used to resolve compatible services.",
             "schema": {
               "type": "string"
             }
@@ -2139,6 +2526,7 @@
             "name": "locale",
             "required": false,
             "in": "path",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -2146,7 +2534,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns compatible services."
+            "description": "Returns compatible services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedProducts"
+                }
+              }
+            }
           }
         },
         "summary": "List compatible services for asset",
@@ -2163,22 +2558,37 @@
             "name": "paymentStatus",
             "required": false,
             "in": "query",
+            "description": "Filter invoices by payment status.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PAYMENT_COMPLETE",
+                "PAYMENT_DECLINED",
+                "PAYMENT_DUE",
+                "PAYMENT_PAST_DUE"
+              ]
             }
           },
           {
             "name": "type",
             "required": false,
             "in": "query",
+            "description": "Filter invoices by invoice type.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "STANDARD",
+                "PROFORMA",
+                "CREDIT_NOTE",
+                "DEBIT_NOTE"
+              ]
             }
           },
           {
             "name": "dateFrom",
             "required": false,
             "in": "query",
+            "description": "Include invoices issued from this date (ISO string).",
             "schema": {
               "type": "string"
             }
@@ -2187,6 +2597,7 @@
             "name": "dateTo",
             "required": false,
             "in": "query",
+            "description": "Include invoices issued until this date (ISO string).",
             "schema": {
               "type": "string"
             }
@@ -2195,6 +2606,7 @@
             "name": "sort",
             "required": false,
             "in": "query",
+            "description": "Sort expression, for example `issuedDate_DESC`.",
             "schema": {
               "type": "string"
             }
@@ -2203,6 +2615,7 @@
             "name": "search",
             "required": false,
             "in": "query",
+            "description": "Free-text search phrase for invoice content/number.",
             "schema": {
               "type": "string"
             }
@@ -2211,6 +2624,7 @@
             "name": "locale",
             "required": false,
             "in": "query",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -2219,6 +2633,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Invoice list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -2226,7 +2641,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns invoices list."
+            "description": "Returns invoices list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedInvoices"
+                }
+              }
+            }
           }
         },
         "summary": "List invoices",
@@ -2243,6 +2665,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Invoice identifier.",
             "schema": {
               "type": "string"
             }
@@ -2250,7 +2673,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns invoice details."
+            "description": "Returns invoice details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
           }
         },
         "summary": "Get invoice by id",
@@ -2267,6 +2697,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Invoice identifier.",
             "schema": {
               "type": "string"
             }
@@ -2274,7 +2705,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns invoice PDF file."
+            "description": "Returns invoice PDF file.",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
           }
         },
         "summary": "Download invoice PDF",
@@ -2309,6 +2748,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Article category list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -2316,7 +2756,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns article categories list."
+            "description": "Returns article categories list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedCategories"
+                }
+              }
+            }
           }
         },
         "summary": "List article categories",
@@ -2333,6 +2780,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Article category identifier.",
             "schema": {
               "type": "string"
             }
@@ -2341,6 +2789,7 @@
             "name": "locale",
             "required": false,
             "in": "query",
+            "description": "Optional locale code used to localize response.",
             "schema": {
               "type": "string"
             }
@@ -2348,7 +2797,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns article category details."
+            "description": "Returns article category details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
           }
         },
         "summary": "Get article category by id",
@@ -2431,7 +2887,7 @@
             "name": "query",
             "required": false,
             "in": "query",
-            "description": "Free-text search phrase.",
+            "description": "Article search filters and search phrase query.",
             "schema": {
               "type": "string"
             }
@@ -2439,7 +2895,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns article search results."
+            "description": "Returns article search results.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedArticles"
+                }
+              }
+            }
           }
         },
         "summary": "Search articles",
@@ -2456,6 +2919,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Article identifier (slug).",
             "schema": {
               "type": "string"
             }
@@ -2464,6 +2928,7 @@
             "name": "locale",
             "required": false,
             "in": "query",
+            "description": "Optional locale code used to localize response.",
             "schema": {
               "type": "string"
             }
@@ -2471,7 +2936,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns article details."
+            "description": "Returns article details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
           }
         },
         "summary": "Get article by id",
@@ -2554,6 +3026,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Article list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -2561,7 +3034,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns article list."
+            "description": "Returns article list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedArticles"
+                }
+              }
+            }
           }
         },
         "summary": "List articles",
@@ -2578,6 +3058,7 @@
             "name": "index",
             "required": true,
             "in": "query",
+            "description": "Search index name (e.g., articles, products).",
             "schema": {
               "type": "string"
             }
@@ -2585,6 +3066,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Search query and filters.",
           "content": {
             "application/json": {
               "schema": {
@@ -2594,12 +3076,20 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Returns search results.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultResponse"
+                }
+              }
+            }
           }
         },
+        "summary": "Search across index",
         "tags": [
-          "Search"
+          "search"
         ]
       }
     },
@@ -2613,7 +3103,11 @@
             "in": "query",
             "description": "Product type filter.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PHYSICAL",
+                "VIRTUAL"
+              ]
             }
           },
           {
@@ -2656,6 +3150,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Product list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -2663,7 +3158,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns product list."
+            "description": "Returns product list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedProducts"
+                }
+              }
+            }
           }
         },
         "summary": "List products",
@@ -2727,7 +3229,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns product details."
+            "description": "Returns product details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
           }
         },
         "summary": "Get product by id",
@@ -2746,14 +3255,19 @@
             "in": "path",
             "description": "Relation type to resolve (spare part, replacement, compatible service).",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "SPARE_PART",
+                "REPLACEMENT",
+                "COMPATIBLE_SERVICE"
+              ]
             }
           },
           {
             "name": "id",
             "required": true,
             "in": "path",
-            "description": "Source product identifier (bound from route `:id`).",
+            "description": "Product identifier.",
             "schema": {
               "type": "string"
             }
@@ -2762,7 +3276,7 @@
             "name": "variantId",
             "required": true,
             "in": "path",
-            "description": "Optional source product variant identifier (bound from route `:variantId`).",
+            "description": "Product variant identifier.",
             "schema": {
               "type": "string"
             }
@@ -2797,7 +3311,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns related product list."
+            "description": "Returns related product list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedProducts"
+                }
+              }
+            }
           }
         },
         "summary": "List related products",
@@ -2849,7 +3370,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns order details."
+            "description": "Returns order details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
           }
         },
         "summary": "Get order by id",
@@ -2886,7 +3414,16 @@
             "in": "query",
             "description": "Order status filter.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "COMPLETED",
+                "SHIPPED",
+                "CANCELLED",
+                "ARCHIVED",
+                "REQUIRES_ACTION",
+                "UNKNOWN"
+              ]
             }
           },
           {
@@ -2895,7 +3432,18 @@
             "in": "query",
             "description": "Payment status filter.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "PAID",
+                "FAILED",
+                "REFUNDED",
+                "NOT_PAID",
+                "CAPTURED",
+                "PARTIALLY_REFUNDED",
+                "REQUIRES_ACTION",
+                "UNKNOWN"
+              ]
             }
           },
           {
@@ -2938,6 +3486,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Order list filters and pagination query.",
             "schema": {
               "type": "string"
             }
@@ -2945,7 +3494,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns order list."
+            "description": "Returns order list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedOrders"
+                }
+              }
+            }
           }
         },
         "summary": "List orders",
@@ -2970,7 +3526,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns active cart for current user/session."
+            "description": "Returns active cart for current user/session.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           }
         },
         "summary": "Get current cart",
@@ -3004,7 +3567,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns cart details."
+            "description": "Returns cart details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           },
           "404": {
             "description": "Cart was not found."
@@ -3049,7 +3619,14 @@
         },
         "responses": {
           "200": {
-            "description": "Cart updated successfully."
+            "description": "Cart updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           },
           "404": {
             "description": "Cart was not found."
@@ -3113,7 +3690,7 @@
             "name": "customerId",
             "required": false,
             "in": "query",
-            "description": "Customer identifier filter.",
+            "description": "Optional customer identifier filter.",
             "schema": {
               "type": "string"
             }
@@ -3122,7 +3699,7 @@
             "name": "sort",
             "required": false,
             "in": "query",
-            "description": "Sort expression from query string, e.g. `createdAt_DESC`.",
+            "description": "Sort expression, for example `createdAt_DESC`.",
             "schema": {
               "type": "string"
             }
@@ -3131,7 +3708,7 @@
             "name": "locale",
             "required": false,
             "in": "query",
-            "description": "Optional locale provided in the request body (kept as string).",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -3139,7 +3716,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns paginated carts list."
+            "description": "Returns paginated carts list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedCarts"
+                }
+              }
+            }
           }
         },
         "summary": "List carts",
@@ -3172,10 +3756,14 @@
         },
         "responses": {
           "201": {
-            "description": "Cart created successfully."
-          },
-          "400": {
-            "description": "Invalid cart payload."
+            "description": "Cart created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           }
         },
         "summary": "Create cart",
@@ -3210,10 +3798,14 @@
         },
         "responses": {
           "201": {
-            "description": "Item added to cart."
-          },
-          "400": {
-            "description": "Invalid cart item payload."
+            "description": "Item added to cart.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           }
         },
         "summary": "Add item to cart",
@@ -3266,7 +3858,14 @@
         },
         "responses": {
           "200": {
-            "description": "Cart item updated."
+            "description": "Cart item updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           },
           "404": {
             "description": "Cart or item was not found."
@@ -3357,7 +3956,14 @@
         },
         "responses": {
           "200": {
-            "description": "Promotion applied."
+            "description": "Promotion applied.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           },
           "404": {
             "description": "Cart was not found."
@@ -3421,7 +4027,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns customer addresses list."
+            "description": "Returns customer addresses list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedCustomerAddresses"
+                }
+              }
+            }
           }
         },
         "summary": "List customer addresses",
@@ -3434,6 +4047,7 @@
         "parameters": [],
         "requestBody": {
           "required": true,
+          "description": "Customer address payload to create.",
           "content": {
             "application/json": {
               "schema": {
@@ -3444,7 +4058,14 @@
         },
         "responses": {
           "201": {
-            "description": "Customer address created."
+            "description": "Customer address created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                }
+              }
+            }
           }
         },
         "summary": "Create customer address",
@@ -3469,7 +4090,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns customer address details."
+            "description": "Returns customer address details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                }
+              }
+            }
           }
         },
         "summary": "Get customer address by id",
@@ -3492,6 +4120,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Customer address payload to update.",
           "content": {
             "application/json": {
               "schema": {
@@ -3502,7 +4131,14 @@
         },
         "responses": {
           "200": {
-            "description": "Customer address updated."
+            "description": "Customer address updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                }
+              }
+            }
           }
         },
         "summary": "Update customer address",
@@ -3550,7 +4186,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Default customer address updated."
+            "description": "Default customer address updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAddress"
+                }
+              }
+            }
           }
         },
         "summary": "Set default customer address",
@@ -3567,6 +4210,7 @@
             "name": "regionId",
             "required": true,
             "in": "query",
+            "description": "Region identifier used to resolve available payment providers.",
             "schema": {
               "type": "string"
             }
@@ -3575,6 +4219,7 @@
             "name": "locale",
             "required": false,
             "in": "query",
+            "description": "Optional locale code used to localize response values.",
             "schema": {
               "type": "string"
             }
@@ -3583,6 +4228,7 @@
             "name": "query",
             "required": false,
             "in": "query",
+            "description": "Payment provider resolution query (region, locale).",
             "schema": {
               "type": "string"
             }
@@ -3590,7 +4236,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns available payment providers."
+            "description": "Returns available payment providers.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedPaymentProviders"
+                }
+              }
+            }
           }
         },
         "summary": "List payment providers",
@@ -3605,6 +4258,7 @@
         "parameters": [],
         "requestBody": {
           "required": true,
+          "description": "Payment session creation payload.",
           "content": {
             "application/json": {
               "schema": {
@@ -3615,7 +4269,14 @@
         },
         "responses": {
           "201": {
-            "description": "Payment session created."
+            "description": "Payment session created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentSession"
+                }
+              }
+            }
           }
         },
         "summary": "Create payment session",
@@ -3632,6 +4293,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Payment session identifier.",
             "schema": {
               "type": "string"
             }
@@ -3639,7 +4301,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns payment session details."
+            "description": "Returns payment session details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentSession"
+                }
+              }
+            }
           }
         },
         "summary": "Get payment session by id",
@@ -3654,6 +4323,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Payment session identifier.",
             "schema": {
               "type": "string"
             }
@@ -3661,6 +4331,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Payment session update payload.",
           "content": {
             "application/json": {
               "schema": {
@@ -3671,7 +4342,14 @@
         },
         "responses": {
           "200": {
-            "description": "Payment session updated."
+            "description": "Payment session updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentSession"
+                }
+              }
+            }
           }
         },
         "summary": "Update payment session",
@@ -3686,6 +4364,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "Payment session identifier.",
             "schema": {
               "type": "string"
             }
@@ -3718,6 +4397,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Shipping/billing address payload for checkout.",
           "content": {
             "application/json": {
               "schema": {
@@ -3728,7 +4408,14 @@
         },
         "responses": {
           "201": {
-            "description": "Checkout addresses set."
+            "description": "Checkout addresses set.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           }
         },
         "summary": "Set checkout addresses",
@@ -3753,6 +4440,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Shipping method selection payload.",
           "content": {
             "application/json": {
               "schema": {
@@ -3763,7 +4451,14 @@
         },
         "responses": {
           "201": {
-            "description": "Checkout shipping method set."
+            "description": "Checkout shipping method set.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
           }
         },
         "summary": "Set checkout shipping method",
@@ -3788,6 +4483,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Payment provider selection payload.",
           "content": {
             "application/json": {
               "schema": {
@@ -3798,7 +4494,14 @@
         },
         "responses": {
           "201": {
-            "description": "Checkout payment set."
+            "description": "Checkout payment set.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentSession"
+                }
+              }
+            }
           }
         },
         "summary": "Set checkout payment",
@@ -3832,7 +4535,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns checkout shipping options."
+            "description": "Returns checkout shipping options.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShippingOptions"
+                }
+              }
+            }
           }
         },
         "summary": "Get checkout shipping options",
@@ -3866,7 +4576,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns checkout summary."
+            "description": "Returns checkout summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutSummary"
+                }
+              }
+            }
           }
         },
         "summary": "Get checkout summary",
@@ -3891,6 +4608,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Optional data required to place order (for example guest email).",
           "content": {
             "application/json": {
               "schema": {
@@ -3901,7 +4619,14 @@
         },
         "responses": {
           "201": {
-            "description": "Order placement started."
+            "description": "Order placement started.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlaceOrderResponse"
+                }
+              }
+            }
           }
         },
         "summary": "Place order from cart",
@@ -3926,6 +4651,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "Combined checkout payload used to complete checkout in one call.",
           "content": {
             "application/json": {
               "schema": {
@@ -3936,7 +4662,14 @@
         },
         "responses": {
           "201": {
-            "description": "Checkout completed."
+            "description": "Checkout completed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlaceOrderResponse"
+                }
+              }
+            }
           }
         },
         "summary": "Complete checkout flow",
@@ -3944,32 +4677,24 @@
           "checkout"
         ]
       }
-    },
-    "/api/organization-list": {
-      "get": {
-        "operationId": "OrganizationsController_getCustomers",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Organizations"
-        ]
-      }
     }
   },
   "info": {
-    "title": "O2S API Harmonization HTTP API",
-    "description": "Live API documentation generated from current NestJS controllers and DTOs.",
+    "title": "Open Self Service REST API",
+    "description": "Complete REST API reference for the Open Self Service harmonization layer. This API provides a unified interface to interact with various backend systems including CMS, ticketing, notifications, billing, e-commerce, and more. All endpoints return normalized data models regardless of the underlying integration.",
     "version": "1.0.0",
     "contact": {}
   },
   "tags": [],
   "servers": [
     {
-      "url": "http://localhost:3001"
+      "url": "{baseUrl}",
+      "description": "Base URL for requests (you can change it to your API, e.g. staging or localhost).",
+      "variables": {
+        "baseUrl": {
+          "default": "http://localhost:3001"
+        }
+      }
     }
   ],
   "components": {
@@ -3984,6 +4709,437 @@
       "Object": {
         "type": "object",
         "properties": {}
+      },
+      "Page": {
+        "type": "object",
+        "properties": {}
+      },
+      "LoginPage": {
+        "type": "object",
+        "properties": {}
+      },
+      "NotFoundPage": {
+        "type": "object",
+        "properties": {}
+      },
+      "Header": {
+        "type": "object",
+        "properties": {}
+      },
+      "Footer": {
+        "type": "object",
+        "properties": {}
+      },
+      "AppConfig": {
+        "type": "object",
+        "properties": {}
+      },
+      "FaqBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "TicketListBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "TicketDetailsBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "NotificationListBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "NotificationDetailsBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "ArticleListBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "Media": {
+        "type": "object",
+        "properties": {}
+      },
+      "ArticleCategoryRef": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Category identifier"
+          },
+          "title": {
+            "type": "string",
+            "description": "Category title"
+          }
+        },
+        "required": [
+          "id",
+          "title"
+        ]
+      },
+      "Author": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Author display name"
+          },
+          "position": {
+            "type": "string",
+            "description": "Author job position"
+          },
+          "email": {
+            "type": "string",
+            "description": "Author email address"
+          },
+          "avatar": {
+            "description": "Author avatar image",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ArticleSectionText": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Section identifier"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Section creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "__typename": {
+            "type": "string",
+            "description": "Section type discriminator",
+            "enum": [
+              "ArticleSectionText"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "description": "Section title"
+          },
+          "content": {
+            "type": "string",
+            "description": "Section text content (may contain HTML/markdown)"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "__typename",
+          "content"
+        ]
+      },
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique article identifier"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly article slug"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Article creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "title": {
+            "type": "string",
+            "description": "Article title"
+          },
+          "lead": {
+            "type": "string",
+            "description": "Article lead/summary paragraph"
+          },
+          "tags": {
+            "description": "Article tags",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "image": {
+            "description": "Main article image",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              }
+            ]
+          },
+          "thumbnail": {
+            "description": "Article thumbnail image",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              }
+            ]
+          },
+          "category": {
+            "description": "Article category reference",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArticleCategoryRef"
+              }
+            ]
+          },
+          "author": {
+            "description": "Article author",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Author"
+              }
+            ]
+          },
+          "sections": {
+            "description": "Article content sections (text or image)",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArticleSectionText"
+            }
+          },
+          "roles": {
+            "description": "Role-based access control roles",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "theme": {
+            "type": "string",
+            "description": "Article theme/style variant"
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "createdAt",
+          "updatedAt",
+          "title",
+          "lead",
+          "tags",
+          "sections"
+        ]
+      },
+      "InvoiceListBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "InvoiceDetailsBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "ResourceListBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "ResourceDetailsBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "UserAccountBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "ServiceListBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "ServiceDetailsBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "FeaturedServiceListBlock": {
+        "type": "object",
+        "properties": {}
+      },
+      "TicketProperty": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Property identifier"
+          },
+          "value": {
+            "type": "string",
+            "description": "Property value"
+          }
+        },
+        "required": [
+          "id",
+          "value"
+        ]
+      },
+      "TicketAttachment": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Attachment file name"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to download the attachment"
+          },
+          "size": {
+            "type": "number",
+            "description": "File size in bytes"
+          },
+          "author": {
+            "description": "User who uploaded the attachment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Author"
+              }
+            ]
+          },
+          "date": {
+            "type": "string",
+            "description": "Upload date in ISO 8601 format"
+          },
+          "ariaLabel": {
+            "type": "string",
+            "description": "Accessible label for screen readers"
+          }
+        },
+        "required": [
+          "name",
+          "url",
+          "size",
+          "author",
+          "date",
+          "ariaLabel"
+        ]
+      },
+      "TicketComment": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "description": "Comment author",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Author"
+              }
+            ]
+          },
+          "date": {
+            "type": "string",
+            "description": "Comment date in ISO 8601 format"
+          },
+          "content": {
+            "type": "string",
+            "description": "Comment text content"
+          }
+        },
+        "required": [
+          "author",
+          "date",
+          "content"
+        ]
+      },
+      "Ticket": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ticket identifier"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Ticket creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "topic": {
+            "type": "string",
+            "description": "Ticket subject/topic"
+          },
+          "type": {
+            "type": "string",
+            "description": "Ticket type/category"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current ticket status",
+            "enum": [
+              "OPEN",
+              "CLOSED",
+              "IN_PROGRESS"
+            ]
+          },
+          "properties": {
+            "description": "Custom ticket properties",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketProperty"
+            }
+          },
+          "attachments": {
+            "description": "Attached files",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketAttachment"
+            }
+          },
+          "comments": {
+            "description": "Ticket conversation thread",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketComment"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "topic",
+          "status",
+          "properties"
+        ]
+      },
+      "PaginatedTickets": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of tickets",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ticket"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of tickets matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
       },
       "PostTicketBody": {
         "type": "object",
@@ -4014,6 +5170,84 @@
           }
         }
       },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique notification identifier"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Notification creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "title": {
+            "type": "string",
+            "description": "Notification title"
+          },
+          "content": {
+            "type": "string",
+            "description": "Notification message content"
+          },
+          "type": {
+            "type": "string",
+            "description": "Notification type/category"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Notification priority level",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "description": "Current notification status",
+            "enum": [
+              "UNVIEWED",
+              "VIEWED",
+              "READ"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "title",
+          "content",
+          "type",
+          "priority",
+          "status"
+        ]
+      },
+      "PaginatedNotifications": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of notifications",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of notifications matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
       "MarkNotificationAsRequest": {
         "type": "object",
         "properties": {
@@ -4023,12 +5257,58 @@
           },
           "status": {
             "type": "string",
-            "description": "Target notification status to set."
+            "description": "Target notification status to set.",
+            "enum": [
+              "UNVIEWED",
+              "VIEWED",
+              "READ"
+            ]
           }
         },
         "required": [
           "id",
           "status"
+        ]
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {}
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique user identifier"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for login"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email address"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "User first name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "User last name"
+          },
+          "customers": {
+            "description": "Customers associated with this user",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Customer"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "username",
+          "email"
         ]
       },
       "PostUserBody": {
@@ -4048,9 +5328,1632 @@
           "lastName"
         ]
       },
-      "SearchPayload": {
+      "Organization": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether the organization is currently active"
+          },
+          "taxId": {
+            "type": "string",
+            "description": "Tax identification number"
+          },
+          "children": {
+            "description": "Child organizations in hierarchy",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Organization"
+            }
+          },
+          "customers": {
+            "description": "Customers associated with this organization",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Customer"
+            }
+          }
+        },
+        "required": [
+          "isActive",
+          "taxId",
+          "children",
+          "customers"
+        ]
+      },
+      "PaginatedOrganizations": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of organizations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Organization"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of organizations matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "ProductTag": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Tag display label"
+          },
+          "variant": {
+            "type": "string",
+            "description": "Visual variant/style of the tag"
+          }
+        },
+        "required": [
+          "label",
+          "variant"
+        ]
+      },
+      "ProductOptionGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Option group identifier"
+          },
+          "title": {
+            "type": "string",
+            "description": "Option group display title"
+          },
+          "values": {
+            "description": "Available values for this option group",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "values"
+        ]
+      },
+      "ProductVariantOption": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Variant identifier"
+          },
+          "title": {
+            "type": "string",
+            "description": "Variant display title"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly variant slug"
+          },
+          "link": {
+            "type": "string",
+            "description": "Link to variant page"
+          },
+          "options": {
+            "type": "object",
+            "description": "Selected option values for this variant",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "inStock": {
+            "type": "boolean",
+            "description": "Whether this variant is in stock"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "slug"
+        ]
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique product identifier"
+          },
+          "sku": {
+            "type": "string",
+            "description": "Stock keeping unit"
+          },
+          "name": {
+            "type": "string",
+            "description": "Product name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Full product description"
+          },
+          "shortDescription": {
+            "type": "string",
+            "description": "Short product description"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "Product subtitle"
+          },
+          "variantId": {
+            "type": "string",
+            "description": "Selected variant identifier"
+          },
+          "image": {
+            "description": "Main product image",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              }
+            ]
+          },
+          "images": {
+            "description": "Additional product images",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Media"
+            }
+          },
+          "price": {
+            "type": "object",
+            "description": "Product price"
+          },
+          "link": {
+            "type": "string",
+            "description": "Product page URL"
+          },
+          "type": {
+            "type": "string",
+            "description": "Product type",
+            "enum": [
+              "PHYSICAL",
+              "VIRTUAL"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "description": "Product category"
+          },
+          "tags": {
+            "description": "Product tags",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductTag"
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "description": "Product attributes",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "location": {
+            "type": "string",
+            "description": "Product location/warehouse"
+          },
+          "optionGroups": {
+            "description": "Available option groups",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductOptionGroup"
+            }
+          },
+          "variants": {
+            "description": "Product variants",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVariantOption"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "sku",
+          "name",
+          "description",
+          "price",
+          "link",
+          "type",
+          "category",
+          "tags"
+        ]
+      },
+      "Resource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique resource identifier"
+          },
+          "product": {
+            "description": "Associated product details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Product"
+              }
+            ]
+          },
+          "billingAccountId": {
+            "type": "string",
+            "description": "Billing account identifier"
+          }
+        },
+        "required": [
+          "id",
+          "product",
+          "billingAccountId"
+        ]
+      },
+      "BillingAccount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique billing account identifier"
+          },
+          "number": {
+            "type": "string",
+            "description": "Billing account number"
+          },
+          "status": {
+            "type": "string",
+            "description": "Billing account status"
+          },
+          "resources": {
+            "description": "Resources associated with this billing account",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Resource"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "number",
+          "status"
+        ]
+      },
+      "PaginatedBillingAccounts": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of billing accounts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BillingAccount"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of billing accounts matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "Contract": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique contract identifier"
+          },
+          "type": {
+            "type": "string",
+            "description": "Contract type"
+          },
+          "status": {
+            "type": "string",
+            "description": "Contract lifecycle status",
+            "enum": [
+              "ACTIVE",
+              "EXPIRED",
+              "INACTIVE"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Contract start date in ISO 8601 format"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Contract end date in ISO 8601 format"
+          },
+          "paymentPeriod": {
+            "type": "string",
+            "description": "Billing recurrence period",
+            "enum": [
+              "ONE_TIME",
+              "MONTHLY",
+              "YEARLY",
+              "WEEKLY"
+            ]
+          },
+          "price": {
+            "type": "object",
+            "description": "Contract price"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "startDate",
+          "endDate",
+          "price"
+        ]
+      },
+      "Address": {
         "type": "object",
         "properties": {}
+      },
+      "PaginatedProducts": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of products",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of products matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "Asset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique resource identifier"
+          },
+          "product": {
+            "description": "Associated product details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Product"
+              }
+            ]
+          },
+          "billingAccountId": {
+            "type": "string",
+            "description": "Billing account identifier"
+          },
+          "__typename": {
+            "type": "string",
+            "description": "Resource discriminator",
+            "enum": [
+              "Asset"
+            ]
+          },
+          "manufacturer": {
+            "type": "string",
+            "description": "Asset manufacturer"
+          },
+          "model": {
+            "type": "string",
+            "description": "Asset model name"
+          },
+          "serialNo": {
+            "type": "string",
+            "description": "Asset serial number"
+          },
+          "description": {
+            "type": "string",
+            "description": "Asset description"
+          },
+          "status": {
+            "type": "string",
+            "description": "Asset lifecycle status",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "RETIRED"
+            ]
+          },
+          "address": {
+            "description": "Asset location address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "compatibleServices": {
+            "description": "Compatible services for this asset",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginatedProducts"
+              }
+            ]
+          },
+          "endOfWarranty": {
+            "type": "string",
+            "description": "Warranty end date in ISO 8601 format"
+          }
+        },
+        "required": [
+          "id",
+          "product",
+          "billingAccountId",
+          "__typename",
+          "model",
+          "serialNo",
+          "description"
+        ]
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique resource identifier"
+          },
+          "product": {
+            "description": "Associated product details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Product"
+              }
+            ]
+          },
+          "billingAccountId": {
+            "type": "string",
+            "description": "Billing account identifier"
+          },
+          "__typename": {
+            "type": "string",
+            "description": "Resource discriminator",
+            "enum": [
+              "Service"
+            ]
+          },
+          "contract": {
+            "description": "Service contract details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Contract"
+              }
+            ]
+          },
+          "assets": {
+            "description": "Assets linked to this service",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Asset"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "product",
+          "billingAccountId",
+          "__typename",
+          "contract",
+          "assets"
+        ]
+      },
+      "PaginatedServices": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of services",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Service"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of services"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "PaginatedAssets": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of assets",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Asset"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of assets"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "Invoice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique invoice identifier"
+          },
+          "externalId": {
+            "type": "string",
+            "description": "External system invoice identifier"
+          },
+          "billingAccountId": {
+            "type": "string",
+            "description": "Associated billing account identifier"
+          },
+          "billingPeriod": {
+            "type": "string",
+            "description": "Billing period (e.g., \"2024-01\")"
+          },
+          "paymentMethodId": {
+            "type": "string",
+            "description": "Payment method identifier"
+          },
+          "type": {
+            "type": "string",
+            "description": "Invoice type",
+            "enum": [
+              "STANDARD",
+              "PROFORMA",
+              "CREDIT_NOTE",
+              "DEBIT_NOTE"
+            ]
+          },
+          "paymentStatus": {
+            "type": "string",
+            "description": "Payment status",
+            "enum": [
+              "PAYMENT_COMPLETE",
+              "PAYMENT_DECLINED",
+              "PAYMENT_DUE",
+              "PAYMENT_PAST_DUE"
+            ]
+          },
+          "issuedDate": {
+            "type": "string",
+            "description": "Invoice issue date in ISO 8601 format"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Invoice currency code"
+          },
+          "paymentDueDate": {
+            "type": "string",
+            "description": "Payment due date in ISO 8601 format"
+          },
+          "totalAmountDue": {
+            "type": "object",
+            "description": "Total amount due including tax"
+          },
+          "totalNetAmountDue": {
+            "type": "object",
+            "description": "Net amount due before tax"
+          },
+          "totalAmountPaid": {
+            "type": "object",
+            "description": "Amount already paid"
+          },
+          "totalToBePaid": {
+            "type": "object",
+            "description": "Remaining amount to be paid"
+          }
+        },
+        "required": [
+          "id",
+          "externalId",
+          "billingAccountId",
+          "billingPeriod",
+          "paymentMethodId",
+          "type",
+          "paymentStatus",
+          "issuedDate",
+          "currency",
+          "paymentDueDate",
+          "totalAmountDue",
+          "totalNetAmountDue",
+          "totalAmountPaid",
+          "totalToBePaid"
+        ]
+      },
+      "PaginatedInvoices": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of invoices",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Invoice"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of invoices matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "CategoryParent": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Parent category slug"
+          },
+          "title": {
+            "type": "string",
+            "description": "Parent category title"
+          },
+          "parent": {
+            "description": "Grandparent category",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CategoryParent"
+              }
+            ]
+          }
+        },
+        "required": [
+          "slug",
+          "title"
+        ]
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique category identifier"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly category slug"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Category creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "title": {
+            "type": "string",
+            "description": "Category display title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Category description"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Category icon identifier"
+          },
+          "parent": {
+            "description": "Parent category hierarchy",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CategoryParent"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "createdAt",
+          "updatedAt",
+          "title",
+          "description"
+        ]
+      },
+      "PaginatedCategories": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of categories",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of categories"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "ArticleListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique article identifier"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly article slug"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Article creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "title": {
+            "type": "string",
+            "description": "Article title"
+          },
+          "lead": {
+            "type": "string",
+            "description": "Article lead/summary paragraph"
+          },
+          "tags": {
+            "description": "Article tags",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "image": {
+            "description": "Main article image",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              }
+            ]
+          },
+          "thumbnail": {
+            "description": "Article thumbnail image",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              }
+            ]
+          },
+          "category": {
+            "description": "Article category reference",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArticleCategoryRef"
+              }
+            ]
+          },
+          "author": {
+            "description": "Article author",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Author"
+              }
+            ]
+          },
+          "roles": {
+            "description": "Role-based access control roles",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "theme": {
+            "type": "string",
+            "description": "Article theme/style variant"
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "createdAt",
+          "updatedAt",
+          "title",
+          "lead",
+          "tags"
+        ]
+      },
+      "PaginatedArticles": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of articles",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArticleListItem"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of articles"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "SearchPagination": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "number",
+            "description": "Number of results to skip"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of results to return"
+          }
+        }
+      },
+      "SearchSortOption": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Field name to sort by"
+          },
+          "order": {
+            "type": "string",
+            "description": "Sort direction",
+            "enum": [
+              "asc",
+              "desc"
+            ]
+          }
+        },
+        "required": [
+          "field",
+          "order"
+        ]
+      },
+      "SearchPayload": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query string"
+          },
+          "exact": {
+            "type": "object",
+            "description": "Exact match filters",
+            "additionalProperties": true
+          },
+          "range": {
+            "type": "object",
+            "description": "Range filters (min/max)",
+            "additionalProperties": true
+          },
+          "exists": {
+            "description": "Fields that must exist",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notExists": {
+            "description": "Fields that must not exist",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pagination": {
+            "description": "Pagination settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchPagination"
+              }
+            ]
+          },
+          "filter": {
+            "type": "object",
+            "description": "Additional filters",
+            "additionalProperties": true
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional metadata",
+            "additionalProperties": true
+          },
+          "sort": {
+            "description": "Sort configuration",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchSortOption"
+            }
+          },
+          "locale": {
+            "type": "string",
+            "description": "Locale for localized results"
+          }
+        }
+      },
+      "SearchResultResponse": {
+        "type": "object",
+        "properties": {
+          "hits": {
+            "description": "Search result hits (structure depends on search index)",
+            "type": "array",
+            "items": {
+              "type": "array"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of matching results"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Result metadata",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "hits",
+          "total"
+        ]
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Order item identifier"
+          },
+          "productId": {
+            "type": "string",
+            "description": "Associated product identifier"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Quantity ordered"
+          },
+          "price": {
+            "type": "object",
+            "description": "Unit price"
+          },
+          "total": {
+            "type": "object",
+            "description": "Total price for this line item"
+          },
+          "subtotal": {
+            "type": "object",
+            "description": "Subtotal before discounts"
+          },
+          "discountTotal": {
+            "type": "object",
+            "description": "Total discount applied"
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit of measure"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code"
+          },
+          "product": {
+            "description": "Product details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Product"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "productId",
+          "quantity",
+          "price",
+          "currency",
+          "product"
+        ]
+      },
+      "OrderItems": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of order items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of items"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "ShippingMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Shipping method identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Shipping method display name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Shipping method description"
+          },
+          "total": {
+            "type": "object",
+            "description": "Total shipping cost including tax"
+          },
+          "subtotal": {
+            "type": "object",
+            "description": "Shipping cost before tax"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Document identifier"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Document creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "type": {
+            "type": "string",
+            "description": "Document type (e.g., invoice, receipt)"
+          },
+          "orderId": {
+            "type": "string",
+            "description": "Associated order identifier"
+          },
+          "dueDate": {
+            "type": "string",
+            "description": "Payment due date in ISO 8601 format"
+          },
+          "status": {
+            "type": "string",
+            "description": "Document payment status",
+            "enum": [
+              "PENDING",
+              "PAID",
+              "FAILED",
+              "REFUNDED",
+              "NOT_PAID",
+              "CAPTURED",
+              "PARTIALLY_REFUNDED",
+              "REQUIRES_ACTION",
+              "UNKNOWN"
+            ]
+          },
+          "toBePaid": {
+            "type": "object",
+            "description": "Amount remaining to be paid"
+          },
+          "total": {
+            "type": "object",
+            "description": "Total document amount"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "type",
+          "orderId",
+          "dueDate",
+          "status",
+          "toBePaid",
+          "total"
+        ]
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique order identifier"
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Customer identifier"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Order creation timestamp in ISO 8601 format"
+          },
+          "paymentDueDate": {
+            "type": "string",
+            "description": "Payment due date in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "total": {
+            "type": "object",
+            "description": "Order total including tax and shipping"
+          },
+          "subtotal": {
+            "type": "object",
+            "description": "Order subtotal before tax and shipping"
+          },
+          "shippingTotal": {
+            "type": "object",
+            "description": "Total shipping cost"
+          },
+          "shippingSubtotal": {
+            "type": "object",
+            "description": "Shipping subtotal before tax"
+          },
+          "discountTotal": {
+            "type": "object",
+            "description": "Total discount applied"
+          },
+          "tax": {
+            "type": "object",
+            "description": "Tax amount"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Order currency code"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "description": "Current payment status",
+            "enum": [
+              "PENDING",
+              "PAID",
+              "FAILED",
+              "REFUNDED",
+              "NOT_PAID",
+              "CAPTURED",
+              "PARTIALLY_REFUNDED",
+              "REQUIRES_ACTION",
+              "UNKNOWN"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "description": "Current order fulfillment status",
+            "enum": [
+              "PENDING",
+              "COMPLETED",
+              "SHIPPED",
+              "CANCELLED",
+              "ARCHIVED",
+              "REQUIRES_ACTION",
+              "UNKNOWN"
+            ]
+          },
+          "items": {
+            "description": "Order line items",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OrderItems"
+              }
+            ]
+          },
+          "purchaseOrderNumber": {
+            "type": "string",
+            "description": "Purchase order number for B2B orders"
+          },
+          "shippingAddress": {
+            "description": "Shipping address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "billingAddress": {
+            "description": "Billing address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "shippingMethods": {
+            "description": "Selected shipping methods",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShippingMethod"
+            }
+          },
+          "customerComment": {
+            "type": "string",
+            "description": "Customer notes or comments"
+          },
+          "documents": {
+            "description": "Associated documents (invoices, receipts)",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email for guest order confirmation"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "total",
+          "currency",
+          "paymentStatus",
+          "status",
+          "items",
+          "shippingMethods"
+        ]
+      },
+      "PaginatedOrders": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of orders",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Order"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of orders matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "CartItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Cart item identifier"
+          },
+          "sku": {
+            "type": "string",
+            "description": "Product SKU"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Item quantity"
+          },
+          "price": {
+            "type": "object",
+            "description": "Unit price"
+          },
+          "subtotal": {
+            "type": "object",
+            "description": "Line subtotal before discounts"
+          },
+          "discountTotal": {
+            "type": "object",
+            "description": "Total discount for this line"
+          },
+          "total": {
+            "type": "object",
+            "description": "Line total including discounts"
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit of measure"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code"
+          },
+          "product": {
+            "description": "Product details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Product"
+              }
+            ]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Item-level metadata",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "sku",
+          "quantity",
+          "price",
+          "total",
+          "currency",
+          "product"
+        ]
+      },
+      "CartItems": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of cart items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of items in cart"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "PaymentMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Payment method identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Payment method display name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Payment method description"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "Promotion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Promotion identifier"
+          },
+          "code": {
+            "type": "string",
+            "description": "Promotion/coupon code"
+          },
+          "name": {
+            "type": "string",
+            "description": "Promotion display name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Promotion description"
+          },
+          "type": {
+            "type": "string",
+            "description": "Promotion discount type",
+            "enum": [
+              "PERCENTAGE",
+              "FIXED_AMOUNT",
+              "FREE_SHIPPING"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Discount value (amount or percentage)"
+          }
+        },
+        "required": [
+          "id",
+          "code"
+        ]
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique cart identifier"
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Associated customer identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Cart display name"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Cart creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          },
+          "expiresAt": {
+            "type": "string",
+            "description": "Cart expiration timestamp in ISO 8601 format"
+          },
+          "regionId": {
+            "type": "string",
+            "description": "Region identifier for pricing/shipping"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Cart currency code"
+          },
+          "items": {
+            "description": "Cart line items",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CartItems"
+              }
+            ]
+          },
+          "subtotal": {
+            "type": "object",
+            "description": "Cart subtotal before discounts and shipping"
+          },
+          "discountTotal": {
+            "type": "object",
+            "description": "Total discount amount"
+          },
+          "taxTotal": {
+            "type": "object",
+            "description": "Total tax amount"
+          },
+          "shippingTotal": {
+            "type": "object",
+            "description": "Total shipping cost"
+          },
+          "total": {
+            "type": "object",
+            "description": "Cart grand total"
+          },
+          "shippingAddress": {
+            "description": "Shipping address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "billingAddress": {
+            "description": "Billing address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "shippingMethod": {
+            "description": "Selected shipping method",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ShippingMethod"
+              }
+            ]
+          },
+          "paymentMethod": {
+            "description": "Selected payment method",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethod"
+              }
+            ]
+          },
+          "promotions": {
+            "description": "Applied promotions/coupons",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Promotion"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Cart-level metadata",
+            "additionalProperties": true
+          },
+          "notes": {
+            "type": "string",
+            "description": "Customer notes"
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email for guest checkout"
+          },
+          "paymentSessionId": {
+            "type": "string",
+            "description": "Active payment session identifier"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "currency",
+          "items",
+          "total"
+        ]
+      },
+      "PaginatedCarts": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of carts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cart"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of carts"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
       },
       "CreateCartBody": {
         "type": "object",
@@ -4146,6 +7049,10 @@
             "type": "number",
             "description": "Item quantity."
           },
+          "variantId": {
+            "type": "string",
+            "description": "Optional integration-specific variant identifier (e.g. Medusa variant UUID)."
+          },
           "currency": {
             "type": "string",
             "description": "Currency code (typically required when a new cart is created)."
@@ -4203,9 +7110,69 @@
           "code"
         ]
       },
-      "Address": {
+      "CustomerAddress": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique address identifier"
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Associated customer identifier"
+          },
+          "label": {
+            "type": "string",
+            "description": "UI label (e.g., Home, Work, Billing)"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "Whether this is the default address"
+          },
+          "address": {
+            "description": "Full address details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Address creation timestamp in ISO 8601 format"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp in ISO 8601 format"
+          }
+        },
+        "required": [
+          "id",
+          "customerId",
+          "address",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "PaginatedCustomerAddresses": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of customer addresses",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerAddress"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of addresses matching the query"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
       },
       "CreateAddressBody": {
         "type": "object",
@@ -4252,23 +7219,86 @@
           }
         }
       },
+      "PaymentProvider": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique payment provider identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Payment provider display name"
+          },
+          "type": {
+            "type": "string",
+            "description": "Payment provider type (e.g., card, bank_transfer)"
+          },
+          "isEnabled": {
+            "type": "boolean",
+            "description": "Whether this provider is currently enabled"
+          },
+          "requiresRedirect": {
+            "type": "boolean",
+            "description": "True when provider requires redirect flow (e.g., hosted checkout)"
+          },
+          "config": {
+            "type": "object",
+            "description": "Provider-specific configuration payload",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "isEnabled",
+          "requiresRedirect"
+        ]
+      },
+      "PaginatedPaymentProviders": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of payment providers",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentProvider"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of payment providers"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
       "CreateSessionBody": {
         "type": "object",
         "properties": {
           "cartId": {
-            "type": "string"
+            "type": "string",
+            "description": "Cart identifier used to create payment session context."
           },
           "providerId": {
-            "type": "string"
+            "type": "string",
+            "description": "Payment provider identifier selected by user."
           },
           "returnUrl": {
-            "type": "string"
+            "type": "string",
+            "description": "Return URL for successful/finished payment flow."
           },
           "cancelUrl": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional return URL for canceled payment flow."
           },
           "metadata": {
-            "type": "object"
+            "type": "object",
+            "description": "Provider-specific metadata payload.",
+            "additionalProperties": true
           }
         },
         "required": [
@@ -4277,17 +7307,72 @@
           "returnUrl"
         ]
       },
+      "PaymentSession": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique payment session identifier"
+          },
+          "cartId": {
+            "type": "string",
+            "description": "Associated cart identifier"
+          },
+          "providerId": {
+            "type": "string",
+            "description": "Payment provider identifier"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current payment session status",
+            "enum": [
+              "PENDING",
+              "AUTHORIZED",
+              "CAPTURED",
+              "FAILED",
+              "CANCELLED"
+            ]
+          },
+          "redirectUrl": {
+            "type": "string",
+            "description": "Redirect target URL for redirect-based providers"
+          },
+          "clientSecret": {
+            "type": "string",
+            "description": "Client secret/token for embedded payment forms"
+          },
+          "expiresAt": {
+            "type": "string",
+            "description": "Session expiration timestamp in ISO 8601 format"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Provider-specific metadata payload",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "cartId",
+          "providerId",
+          "status"
+        ]
+      },
       "UpdateSessionBody": {
         "type": "object",
         "properties": {
           "returnUrl": {
-            "type": "string"
+            "type": "string",
+            "description": "Updated return URL for successful/finished payment flow."
           },
           "cancelUrl": {
-            "type": "string"
+            "type": "string",
+            "description": "Updated return URL for canceled payment flow."
           },
           "metadata": {
-            "type": "object"
+            "type": "object",
+            "description": "Provider-specific metadata payload.",
+            "additionalProperties": true
           }
         }
       },
@@ -4317,6 +7402,10 @@
                 "$ref": "#/components/schemas/Address"
               }
             ]
+          },
+          "sameAsBillingAddress": {
+            "type": "boolean",
+            "description": "Optional checkout notes."
           },
           "notes": {
             "type": "string",
@@ -4366,6 +7455,127 @@
           "returnUrl"
         ]
       },
+      "ShippingOptions": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Available shipping methods",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShippingMethod"
+            }
+          },
+          "total": {
+            "type": "number",
+            "description": "Total number of available shipping options"
+          }
+        },
+        "required": [
+          "data",
+          "total"
+        ]
+      },
+      "CheckoutTotals": {
+        "type": "object",
+        "properties": {
+          "subtotal": {
+            "type": "object",
+            "description": "Cart subtotal before shipping/tax"
+          },
+          "shipping": {
+            "type": "object",
+            "description": "Shipping cost"
+          },
+          "tax": {
+            "type": "object",
+            "description": "Tax amount"
+          },
+          "discount": {
+            "type": "object",
+            "description": "Discount amount"
+          },
+          "total": {
+            "type": "object",
+            "description": "Grand total"
+          }
+        },
+        "required": [
+          "subtotal",
+          "shipping",
+          "tax",
+          "discount",
+          "total"
+        ]
+      },
+      "CheckoutSummary": {
+        "type": "object",
+        "properties": {
+          "cart": {
+            "description": "Cart details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Cart"
+              }
+            ]
+          },
+          "shippingAddress": {
+            "description": "Shipping address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "billingAddress": {
+            "description": "Billing address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "shippingMethod": {
+            "description": "Selected shipping method",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ShippingMethod"
+              }
+            ]
+          },
+          "paymentMethod": {
+            "description": "Selected payment method",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentMethod"
+              }
+            ]
+          },
+          "totals": {
+            "description": "Price totals breakdown",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CheckoutTotals"
+              }
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "description": "Customer notes"
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email for guest checkout"
+          }
+        },
+        "required": [
+          "cart",
+          "shippingAddress",
+          "billingAddress",
+          "shippingMethod",
+          "paymentMethod",
+          "totals"
+        ]
+      },
       "PlaceOrderBody": {
         "type": "object",
         "properties": {
@@ -4374,6 +7584,26 @@
             "description": "Customer email, required for guest checkout when not set earlier."
           }
         }
+      },
+      "PlaceOrderResponse": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "description": "Created order",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Order"
+              }
+            ]
+          },
+          "paymentRedirectUrl": {
+            "type": "string",
+            "description": "Redirect URL for external payment flow"
+          }
+        },
+        "required": [
+          "order"
+        ]
       },
       "CompleteCheckoutBody": {
         "type": "object",

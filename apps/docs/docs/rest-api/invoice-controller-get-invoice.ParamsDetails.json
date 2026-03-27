@@ -1,0 +1,11 @@
+{
+    "parameters": [
+        {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Invoice identifier.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

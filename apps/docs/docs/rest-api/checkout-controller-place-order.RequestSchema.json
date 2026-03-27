@@ -1,0 +1,21 @@
+{
+    "title": "Body",
+    "body": {
+        "required": true,
+        "description": "Optional data required to place order (for example guest email).",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "description": "Customer email, required for guest checkout when not set earlier."
+                        }
+                    },
+                    "title": "PlaceOrderBody"
+                }
+            }
+        }
+    }
+}

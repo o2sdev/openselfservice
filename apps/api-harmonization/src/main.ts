@@ -58,8 +58,10 @@ async function bootstrap() {
     app.set('query parser', 'extended');
 
     const swaggerConfig = new DocumentBuilder()
-        .setTitle('O2S API Harmonization HTTP API')
-        .setDescription('Live API documentation generated from current NestJS controllers and DTOs.')
+        .setTitle('Open Self Service REST API')
+        .setDescription(
+            'Complete REST API reference for the Open Self Service harmonization layer. This API provides a unified interface to interact with various backend systems including CMS, ticketing, notifications, billing, e-commerce, and more. All endpoints return normalized data models regardless of the underlying integration.',
+        )
         .setVersion('1.0.0')
         .addBearerAuth()
         .build();

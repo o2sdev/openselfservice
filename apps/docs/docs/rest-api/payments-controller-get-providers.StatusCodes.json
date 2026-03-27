@@ -1,0 +1,49 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns available payment providers.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "description": "Array of payment providers",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": { "type": "string", "description": "Unique payment provider identifier" },
+                                        "name": { "type": "string", "description": "Payment provider display name" },
+                                        "type": {
+                                            "type": "string",
+                                            "description": "Payment provider type (e.g., card, bank_transfer)"
+                                        },
+                                        "isEnabled": {
+                                            "type": "boolean",
+                                            "description": "Whether this provider is currently enabled"
+                                        },
+                                        "requiresRedirect": {
+                                            "type": "boolean",
+                                            "description": "True when provider requires redirect flow (e.g., hosted checkout)"
+                                        },
+                                        "config": {
+                                            "type": "object",
+                                            "description": "Provider-specific configuration payload",
+                                            "additionalProperties": true
+                                        }
+                                    },
+                                    "required": ["id", "name", "type", "isEnabled", "requiresRedirect"],
+                                    "title": "PaymentProvider"
+                                }
+                            },
+                            "total": { "type": "number", "description": "Total number of payment providers" }
+                        },
+                        "required": ["data", "total"],
+                        "title": "PaginatedPaymentProviders"
+                    }
+                }
+            }
+        }
+    }
+}

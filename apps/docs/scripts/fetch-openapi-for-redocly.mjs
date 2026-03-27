@@ -72,11 +72,29 @@ function filterFrameworkOnly(document) {
     const tags = (document.tags ?? []).filter((tag) => usedTags.has(String(tag.name).toLowerCase()));
     const serverUrl = resolveApiServerUrl();
 
+    // Jedna zmienna w URL → w Try it out motyw pokazuje pole tekstowe (nie tylko select);
+    // domyślna wartość pochodzi z O2S_OPENAPI_SERVER_URL / NEXT_PUBLIC_API_URL_INTERNAL lub origin O2S_OPENAPI_URL.
     return {
         ...document,
+        info: {
+            ...(document.info ?? {}),
+            title: 'Open Self Service REST API',
+            description:
+                'Complete REST API reference for the Open Self Service harmonization layer. This API provides a unified interface to interact with various backend systems including CMS, ticketing, notifications, billing, e-commerce, and more. All endpoints return normalized data models regardless of the underlying integration.',
+        },
         paths: filteredPaths,
         tags,
-        servers: [{ url: serverUrl }],
+        servers: [
+            {
+                url: '{baseUrl}',
+                description: 'Base URL for requests (you can change it to your API, e.g. staging or localhost).',
+                variables: {
+                    baseUrl: {
+                        default: serverUrl,
+                    },
+                },
+            },
+        ],
     };
 }
 

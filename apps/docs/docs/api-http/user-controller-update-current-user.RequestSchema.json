@@ -1,1 +1,0 @@
-{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"firstName":{"type":"string","description":"User first name."},"lastName":{"type":"string","description":"User last name."}},"required":["firstName","lastName"],"title":"PostUserBody"}}}}}

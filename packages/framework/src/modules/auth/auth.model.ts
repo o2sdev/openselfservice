@@ -1,11 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-export type Jwt = jwt.JwtPayload;
+/** Permission matching mode (OpenAPI + TS union). */
+export const MATCHING_MODE_VALUES = ['all', 'any'] as const;
+export type MatchingMode = (typeof MATCHING_MODE_VALUES)[number];
 
-export enum MatchingMode {
-    ALL = 'all',
-    ANY = 'any',
-}
+export type Jwt = jwt.JwtPayload;
 
 export type Role = string;
 

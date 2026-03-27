@@ -1,0 +1,33 @@
+{
+    "title": "Body",
+    "body": {
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "customerId": {
+                            "type": "string",
+                            "description": "Optional customer identifier for authenticated user cart binding."
+                        },
+                        "name": { "type": "string", "description": "Optional cart display name." },
+                        "regionId": { "type": "string", "description": "Region identifier used by commerce backend." },
+                        "currency": { "type": "string", "description": "Cart currency code." },
+                        "metadata": {
+                            "type": "object",
+                            "description": "Integration-specific cart metadata payload.",
+                            "additionalProperties": true
+                        },
+                        "locale": {
+                            "type": "string",
+                            "description": "Optional locale provided in the request body (kept as string)."
+                        }
+                    },
+                    "required": ["currency"],
+                    "title": "CreateCartBody"
+                }
+            }
+        }
+    }
+}

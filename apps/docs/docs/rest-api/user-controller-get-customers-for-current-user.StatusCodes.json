@@ -1,0 +1,12 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns customers linked to current user.",
+            "content": {
+                "application/json": {
+                    "schema": { "type": "array", "items": { "type": "object", "properties": {}, "title": "Customer" } }
+                }
+            }
+        }
+    }
+}

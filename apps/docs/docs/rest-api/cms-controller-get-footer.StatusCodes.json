@@ -1,0 +1,8 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns CMS footer.",
+            "content": { "application/json": { "schema": { "type": "object", "properties": {}, "title": "Footer" } } }
+        }
+    }
+}

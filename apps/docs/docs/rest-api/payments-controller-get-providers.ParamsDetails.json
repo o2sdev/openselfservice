@@ -1,0 +1,25 @@
+{
+    "parameters": [
+        {
+            "name": "regionId",
+            "required": true,
+            "in": "query",
+            "description": "Region identifier used to resolve available payment providers.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "description": "Payment provider resolution query (region, locale).",
+            "schema": { "type": "string" }
+        }
+    ]
+}

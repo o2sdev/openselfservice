@@ -1,1 +1,0 @@
-{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"shippingOptionId":{"type":"string","description":"Shipping option identifier returned by shipping options endpoint."}},"required":["shippingOptionId"],"title":"SetShippingMethodBody"}}}}}

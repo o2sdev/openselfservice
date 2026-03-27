@@ -1,0 +1,11 @@
+{
+    "parameters": [
+        {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Organization identifier.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

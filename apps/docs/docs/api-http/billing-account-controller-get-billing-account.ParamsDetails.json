@@ -1,1 +1,0 @@
-{"parameters":[{"name":"id","required":true,"in":"path","description":"Billing account identifier.","schema":{"type":"string"}}]}

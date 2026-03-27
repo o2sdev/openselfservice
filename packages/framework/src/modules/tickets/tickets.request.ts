@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-import { TicketStatus } from './tickets.model';
+import { TICKET_STATUS_VALUES, type TicketStatus } from './tickets.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
 /** Query params for fetching a single ticket. */
@@ -54,7 +54,12 @@ export class GetTicketListQuery extends PaginationQuery {
     @ApiPropertyOptional({ description: 'Ticket type filter.' })
     type?: string;
     /** One or many statuses to filter by. */
-    @ApiPropertyOptional({ description: 'One or more ticket statuses to filter by.' })
+    @ApiPropertyOptional({
+        description:
+            'One or more ticket statuses to filter by. Use a single value or repeat the query parameter for multiple.',
+        enum: TICKET_STATUS_VALUES,
+        isArray: true,
+    })
     status?: TicketStatus | TicketStatus[];
     /** Date range start from query string (kept as string). */
     @ApiPropertyOptional({ description: 'Date range start as ISO string.' })

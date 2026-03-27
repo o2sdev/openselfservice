@@ -1,0 +1,10 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns resource-list block.",
+            "content": {
+                "application/json": { "schema": { "type": "object", "properties": {}, "title": "ResourceListBlock" } }
+            }
+        }
+    }
+}

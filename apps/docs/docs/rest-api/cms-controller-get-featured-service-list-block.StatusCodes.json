@@ -1,0 +1,12 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns featured-service-list block.",
+            "content": {
+                "application/json": {
+                    "schema": { "type": "object", "properties": {}, "title": "FeaturedServiceListBlock" }
+                }
+            }
+        }
+    }
+}

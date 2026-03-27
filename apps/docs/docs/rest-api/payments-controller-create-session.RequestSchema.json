@@ -1,0 +1,39 @@
+{
+    "title": "Body",
+    "body": {
+        "required": true,
+        "description": "Payment session creation payload.",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "cartId": {
+                            "type": "string",
+                            "description": "Cart identifier used to create payment session context."
+                        },
+                        "providerId": {
+                            "type": "string",
+                            "description": "Payment provider identifier selected by user."
+                        },
+                        "returnUrl": {
+                            "type": "string",
+                            "description": "Return URL for successful/finished payment flow."
+                        },
+                        "cancelUrl": {
+                            "type": "string",
+                            "description": "Optional return URL for canceled payment flow."
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "description": "Provider-specific metadata payload.",
+                            "additionalProperties": true
+                        }
+                    },
+                    "required": ["cartId", "providerId", "returnUrl"],
+                    "title": "CreateSessionBody"
+                }
+            }
+        }
+    }
+}

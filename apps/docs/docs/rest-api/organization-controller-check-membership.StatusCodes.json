@@ -1,0 +1,8 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns true if user is a member of the organization.",
+            "content": { "application/json": { "schema": { "type": "boolean" } } }
+        }
+    }
+}

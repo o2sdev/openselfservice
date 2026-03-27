@@ -1,0 +1,12 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns notification-details block.",
+            "content": {
+                "application/json": {
+                    "schema": { "type": "object", "properties": {}, "title": "NotificationDetailsBlock" }
+                }
+            }
+        }
+    }
+}

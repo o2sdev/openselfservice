@@ -1,0 +1,46 @@
+{
+    "parameters": [
+        {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "description": "Relation type to resolve (spare part, replacement, compatible service).",
+            "schema": { "type": "string", "enum": ["SPARE_PART", "REPLACEMENT", "COMPATIBLE_SERVICE"] }
+        },
+        {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Product identifier.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "variantId",
+            "required": true,
+            "in": "path",
+            "description": "Product variant identifier.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "sort",
+            "required": false,
+            "in": "path",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "basePath",
+            "required": false,
+            "in": "path",
+            "description": "Optional base path override used by integration routing.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns service-details block.",
+            "content": {
+                "application/json": { "schema": { "type": "object", "properties": {}, "title": "ServiceDetailsBlock" } }
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+{
+    "parameters": [
+        {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Notification type filter.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "priority",
+            "required": false,
+            "in": "query",
+            "description": "Notification priority filter.",
+            "schema": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] }
+        },
+        {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Notification status filter.",
+            "schema": { "type": "string", "enum": ["UNVIEWED", "VIEWED", "READ"] }
+        },
+        {
+            "name": "dateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Date range start as ISO string.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "dateTo",
+            "required": false,
+            "in": "query",
+            "description": "Date range end as ISO string.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "description": "Notification list filters and pagination query.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

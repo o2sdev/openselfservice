@@ -1,1 +1,0 @@
-{"parameters":[{"name":"id","required":true,"in":"path","description":"Customer address identifier.","schema":{"type":"string"}}]}

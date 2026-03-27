@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Headers, Param, Patch, UseInterceptors } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
+import { User } from './users.model';
 import { UserService } from './users.service';
+import { Customer } from '@/utils/models/customer';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
 const H = HeaderName;
@@ -20,7 +22,7 @@ export class UserController {
 
     @Get('/me')
     @ApiOperation({ summary: 'Get current user' })
-    @ApiResponse({ status: 200, description: 'Returns current user profile.' })
+    @ApiOkResponse({ description: 'Returns current user profile.', type: User })
     getCurrentUser(@Headers() headers: AppHeaders): ReturnType<UserService['getCurrentUser']> {
         return this.userService.getCurrentUser(headers[H.Authorization]);
     }
@@ -28,7 +30,7 @@ export class UserController {
     @Get(':id')
     @ApiOperation({ summary: 'Get user by id' })
     @ApiParam({ name: 'id', type: String, description: 'User identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns user details.' })
+    @ApiOkResponse({ description: 'Returns user details.', type: User })
     getUser(
         @Param() params: Request.GetUserParams,
         @Headers() headers: AppHeaders,
@@ -39,7 +41,7 @@ export class UserController {
     @Patch('/me')
     @ApiOperation({ summary: 'Update current user' })
     @ApiBody({ type: Request.PostUserBody, description: 'User profile fields to update.' })
-    @ApiResponse({ status: 200, description: 'Current user updated.' })
+    @ApiOkResponse({ description: 'Current user updated.', type: User })
     updateCurrentUser(
         @Body() body: Request.PostUserBody,
         @Headers() headers: AppHeaders,
@@ -51,7 +53,7 @@ export class UserController {
     @ApiOperation({ summary: 'Update user by id' })
     @ApiParam({ name: 'id', type: String, description: 'User identifier.' })
     @ApiBody({ type: Request.PostUserBody, description: 'User profile fields to update.' })
-    @ApiResponse({ status: 200, description: 'User updated.' })
+    @ApiOkResponse({ description: 'User updated.', type: User })
     updateUser(
         @Param() params: Request.GetUserParams,
         @Body() body: Request.PostUserBody,
@@ -62,7 +64,7 @@ export class UserController {
 
     @Get('/me/customers')
     @ApiOperation({ summary: 'Get customers for current user' })
-    @ApiResponse({ status: 200, description: 'Returns customers linked to current user.' })
+    @ApiOkResponse({ description: 'Returns customers linked to current user.', type: [Customer] })
     getCustomersForCurrentUser(@Headers() headers: AppHeaders): ReturnType<UserService['getCurrentUserCustomers']> {
         return this.userService.getCurrentUserCustomers(headers[H.Authorization]);
     }
@@ -70,6 +72,7 @@ export class UserController {
     @Get('/me/customers/:id')
     @ApiOperation({ summary: 'Get current user customer by id' })
     @ApiParam({ name: 'id', type: String, description: 'Customer identifier linked to current user.' })
+    @ApiOkResponse({ description: 'Returns customer details.', type: Customer })
     getCustomerForCurrentUserById(
         @Param() params: Request.GetCustomerParams,
         @Headers() headers: AppHeaders,
@@ -79,7 +82,7 @@ export class UserController {
 
     @Delete('/me')
     @ApiOperation({ summary: 'Delete current user' })
-    @ApiResponse({ status: 200, description: 'Current user deleted.' })
+    @ApiOkResponse({ description: 'Current user deleted.' })
     deleteCurrentUser(@Headers() headers: AppHeaders): ReturnType<UserService['deleteCurrentUser']> {
         return this.userService.deleteCurrentUser(headers[H.Authorization]);
     }
@@ -87,7 +90,7 @@ export class UserController {
     @Delete(':id')
     @ApiOperation({ summary: 'Delete user by id' })
     @ApiParam({ name: 'id', type: String, description: 'User identifier.' })
-    @ApiResponse({ status: 200, description: 'User deleted.' })
+    @ApiOkResponse({ description: 'User deleted.' })
     deleteUser(
         @Param() params: Request.GetUserParams,
         @Headers() headers: AppHeaders,

@@ -1,0 +1,11 @@
+{
+    "parameters": [
+        {
+            "name": "index",
+            "required": true,
+            "in": "query",
+            "description": "Search index name (e.g., articles, products).",
+            "schema": { "type": "string" }
+        }
+    ]
+}

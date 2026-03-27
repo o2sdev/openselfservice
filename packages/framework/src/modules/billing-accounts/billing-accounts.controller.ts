@@ -1,10 +1,10 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { BillingAccount, BillingAccounts } from './billing-accounts.model';
+import { BillingAccount, PaginatedBillingAccounts } from './billing-accounts.model';
 import { GetBillingAccountParams, GetBillingAccountsListQuery } from './billing-accounts.request';
 import { BillingAccountService } from './billing-accounts.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
@@ -28,18 +28,18 @@ export class BillingAccountController {
         type: String,
         description: 'Billing account list filters and pagination query.',
     })
-    @ApiResponse({ status: 200, description: 'Returns billing accounts list.' })
+    @ApiOkResponse({ description: 'Returns billing accounts list.', type: PaginatedBillingAccounts })
     getBillingAccounts(
         @Query() query: GetBillingAccountsListQuery,
         @Headers() headers: AppHeaders,
-    ): Observable<BillingAccounts> {
+    ): Observable<PaginatedBillingAccounts> {
         return this.billingAccountService.getBillingAccounts(query, headers[H.Authorization]);
     }
 
     @Get(':id')
     @ApiOperation({ summary: 'Get billing account by id' })
     @ApiParam({ name: 'id', type: String, description: 'Billing account identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns billing account details.' })
+    @ApiOkResponse({ description: 'Returns billing account details.', type: BillingAccount })
     getBillingAccount(
         @Param() params: GetBillingAccountParams,
         @Headers() headers: AppHeaders,

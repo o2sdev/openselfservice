@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-import type { OrderStatus, PaymentStatus } from './orders.model';
+import { ORDER_STATUS_VALUES, type OrderStatus, PAYMENT_STATUS_VALUES, type PaymentStatus } from './orders.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
 /** Query params for fetching a single order. */
@@ -28,10 +28,10 @@ export class GetOrderListQuery extends PaginationQuery {
     @ApiPropertyOptional({ description: 'Customer identifier filter.' })
     customerId?: string;
     /** Order status filter. */
-    @ApiPropertyOptional({ description: 'Order status filter.' })
+    @ApiPropertyOptional({ description: 'Order status filter.', enum: ORDER_STATUS_VALUES })
     status?: OrderStatus;
     /** Payment status filter. */
-    @ApiPropertyOptional({ description: 'Payment status filter.' })
+    @ApiPropertyOptional({ description: 'Payment status filter.', enum: PAYMENT_STATUS_VALUES })
     paymentStatus?: PaymentStatus;
     /** Sort expression from query string, e.g. `createdAt_DESC`. */
     @ApiPropertyOptional({ description: 'Sort expression from query string, for example `createdAt_DESC`.' })

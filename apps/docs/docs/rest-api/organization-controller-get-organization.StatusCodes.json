@@ -1,0 +1,33 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns organization details.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "isActive": {
+                                "type": "boolean",
+                                "description": "Whether the organization is currently active"
+                            },
+                            "taxId": { "type": "string", "description": "Tax identification number" },
+                            "children": {
+                                "description": "Child organizations in hierarchy",
+                                "type": "array",
+                                "items": "circular(Organization)"
+                            },
+                            "customers": {
+                                "description": "Customers associated with this organization",
+                                "type": "array",
+                                "items": { "type": "object", "properties": {}, "title": "Customer" }
+                            }
+                        },
+                        "required": ["isActive", "taxId", "children", "customers"],
+                        "title": "Organization"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns notification details.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string", "description": "Unique notification identifier" },
+                            "createdAt": {
+                                "type": "string",
+                                "description": "Notification creation timestamp in ISO 8601 format"
+                            },
+                            "updatedAt": {
+                                "type": "string",
+                                "description": "Last update timestamp in ISO 8601 format"
+                            },
+                            "title": { "type": "string", "description": "Notification title" },
+                            "content": { "type": "string", "description": "Notification message content" },
+                            "type": { "type": "string", "description": "Notification type/category" },
+                            "priority": {
+                                "type": "string",
+                                "description": "Notification priority level",
+                                "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "Current notification status",
+                                "enum": ["UNVIEWED", "VIEWED", "READ"]
+                            }
+                        },
+                        "required": ["id", "createdAt", "updatedAt", "title", "content", "type", "priority", "status"],
+                        "title": "Notification"
+                    }
+                }
+            }
+        }
+    }
+}

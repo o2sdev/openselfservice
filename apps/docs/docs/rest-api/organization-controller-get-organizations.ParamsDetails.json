@@ -1,0 +1,18 @@
+{
+    "parameters": [
+        {
+            "name": "taxId",
+            "required": false,
+            "in": "query",
+            "description": "Optional tax identifier filter.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "description": "Organization list filters and pagination query.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

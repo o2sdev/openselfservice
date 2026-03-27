@@ -130,15 +130,15 @@ getRelatedProductList(
 
 #### Params Parameters
 
-| Parameter        | Type                 | Description                             |
-| ---------------- | -------------------- | --------------------------------------- |
-| type             | ProductReferenceType | Type of relationship (required)         |
-| id               | string               | ID of the base product (required)      |
-| variantId        | string               | Optional variant ID of the base product |
-| locale           | string               | Locale for localized content            |
-| limit            | number               | Maximum number of items to return       |
-| offset           | number               | Number of items to skip                 |
-| sort             | string               | Sorting criteria                        |
+| Parameter | Type                 | Description                             |
+| --------- | -------------------- | --------------------------------------- |
+| type      | ProductReferenceType | Type of relationship (required)         |
+| id        | string               | ID of the base product (required)       |
+| variantId | string               | Optional variant ID of the base product |
+| locale    | string               | Locale for localized content            |
+| limit     | number               | Maximum number of items to return       |
+| offset    | number               | Number of items to skip                 |
+| sort      | string               | Sorting criteria                        |
 
 #### Returns
 

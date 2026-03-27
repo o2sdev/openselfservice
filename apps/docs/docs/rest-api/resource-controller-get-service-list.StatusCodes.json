@@ -1,0 +1,696 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns services list.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "description": "Array of services",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": { "type": "string", "description": "Unique resource identifier" },
+                                        "product": {
+                                            "description": "Associated product details",
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "description": "Unique product identifier"
+                                                        },
+                                                        "sku": {
+                                                            "type": "string",
+                                                            "description": "Stock keeping unit"
+                                                        },
+                                                        "name": { "type": "string", "description": "Product name" },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "description": "Full product description"
+                                                        },
+                                                        "shortDescription": {
+                                                            "type": "string",
+                                                            "description": "Short product description"
+                                                        },
+                                                        "subtitle": {
+                                                            "type": "string",
+                                                            "description": "Product subtitle"
+                                                        },
+                                                        "variantId": {
+                                                            "type": "string",
+                                                            "description": "Selected variant identifier"
+                                                        },
+                                                        "image": {
+                                                            "description": "Main product image",
+                                                            "allOf": [
+                                                                { "type": "object", "properties": {}, "title": "Media" }
+                                                            ]
+                                                        },
+                                                        "images": {
+                                                            "description": "Additional product images",
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {},
+                                                                "title": "Media"
+                                                            }
+                                                        },
+                                                        "price": { "type": "object", "description": "Product price" },
+                                                        "link": { "type": "string", "description": "Product page URL" },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "description": "Product type",
+                                                            "enum": ["PHYSICAL", "VIRTUAL"]
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "description": "Product category"
+                                                        },
+                                                        "tags": {
+                                                            "description": "Product tags",
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "label": {
+                                                                        "type": "string",
+                                                                        "description": "Tag display label"
+                                                                    },
+                                                                    "variant": {
+                                                                        "type": "string",
+                                                                        "description": "Visual variant/style of the tag"
+                                                                    }
+                                                                },
+                                                                "required": ["label", "variant"],
+                                                                "title": "ProductTag"
+                                                            }
+                                                        },
+                                                        "attributes": {
+                                                            "type": "object",
+                                                            "description": "Product attributes",
+                                                            "additionalProperties": {
+                                                                "oneOf": [{ "type": "string" }, { "type": "number" }]
+                                                            }
+                                                        },
+                                                        "location": {
+                                                            "type": "string",
+                                                            "description": "Product location/warehouse"
+                                                        },
+                                                        "optionGroups": {
+                                                            "description": "Available option groups",
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "description": "Option group identifier"
+                                                                    },
+                                                                    "title": {
+                                                                        "type": "string",
+                                                                        "description": "Option group display title"
+                                                                    },
+                                                                    "values": {
+                                                                        "description": "Available values for this option group",
+                                                                        "type": "array",
+                                                                        "items": { "type": "string" }
+                                                                    }
+                                                                },
+                                                                "required": ["id", "title", "values"],
+                                                                "title": "ProductOptionGroup"
+                                                            }
+                                                        },
+                                                        "variants": {
+                                                            "description": "Product variants",
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "description": "Variant identifier"
+                                                                    },
+                                                                    "title": {
+                                                                        "type": "string",
+                                                                        "description": "Variant display title"
+                                                                    },
+                                                                    "slug": {
+                                                                        "type": "string",
+                                                                        "description": "URL-friendly variant slug"
+                                                                    },
+                                                                    "link": {
+                                                                        "type": "string",
+                                                                        "description": "Link to variant page"
+                                                                    },
+                                                                    "options": {
+                                                                        "type": "object",
+                                                                        "description": "Selected option values for this variant",
+                                                                        "additionalProperties": { "type": "string" }
+                                                                    },
+                                                                    "inStock": {
+                                                                        "type": "boolean",
+                                                                        "description": "Whether this variant is in stock"
+                                                                    }
+                                                                },
+                                                                "required": ["id", "title", "slug"],
+                                                                "title": "ProductVariantOption"
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "sku",
+                                                        "name",
+                                                        "description",
+                                                        "price",
+                                                        "link",
+                                                        "type",
+                                                        "category",
+                                                        "tags"
+                                                    ],
+                                                    "title": "Product"
+                                                }
+                                            ]
+                                        },
+                                        "billingAccountId": {
+                                            "type": "string",
+                                            "description": "Billing account identifier"
+                                        },
+                                        "__typename": {
+                                            "type": "string",
+                                            "description": "Resource discriminator",
+                                            "enum": ["Service"]
+                                        },
+                                        "contract": {
+                                            "description": "Service contract details",
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "description": "Unique contract identifier"
+                                                        },
+                                                        "type": { "type": "string", "description": "Contract type" },
+                                                        "status": {
+                                                            "type": "string",
+                                                            "description": "Contract lifecycle status",
+                                                            "enum": ["ACTIVE", "EXPIRED", "INACTIVE"]
+                                                        },
+                                                        "startDate": {
+                                                            "type": "string",
+                                                            "description": "Contract start date in ISO 8601 format"
+                                                        },
+                                                        "endDate": {
+                                                            "type": "string",
+                                                            "description": "Contract end date in ISO 8601 format"
+                                                        },
+                                                        "paymentPeriod": {
+                                                            "type": "string",
+                                                            "description": "Billing recurrence period",
+                                                            "enum": ["ONE_TIME", "MONTHLY", "YEARLY", "WEEKLY"]
+                                                        },
+                                                        "price": { "type": "object", "description": "Contract price" }
+                                                    },
+                                                    "required": ["id", "status", "startDate", "endDate", "price"],
+                                                    "title": "Contract"
+                                                }
+                                            ]
+                                        },
+                                        "assets": {
+                                            "description": "Assets linked to this service",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "Unique resource identifier"
+                                                    },
+                                                    "product": {
+                                                        "description": "Associated product details",
+                                                        "allOf": [
+                                                            {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "description": "Unique product identifier"
+                                                                    },
+                                                                    "sku": {
+                                                                        "type": "string",
+                                                                        "description": "Stock keeping unit"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "description": "Product name"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "description": "Full product description"
+                                                                    },
+                                                                    "shortDescription": {
+                                                                        "type": "string",
+                                                                        "description": "Short product description"
+                                                                    },
+                                                                    "subtitle": {
+                                                                        "type": "string",
+                                                                        "description": "Product subtitle"
+                                                                    },
+                                                                    "variantId": {
+                                                                        "type": "string",
+                                                                        "description": "Selected variant identifier"
+                                                                    },
+                                                                    "image": {
+                                                                        "description": "Main product image",
+                                                                        "allOf": [
+                                                                            {
+                                                                                "type": "object",
+                                                                                "properties": {},
+                                                                                "title": "Media"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "images": {
+                                                                        "description": "Additional product images",
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {},
+                                                                            "title": "Media"
+                                                                        }
+                                                                    },
+                                                                    "price": {
+                                                                        "type": "object",
+                                                                        "description": "Product price"
+                                                                    },
+                                                                    "link": {
+                                                                        "type": "string",
+                                                                        "description": "Product page URL"
+                                                                    },
+                                                                    "type": {
+                                                                        "type": "string",
+                                                                        "description": "Product type",
+                                                                        "enum": ["PHYSICAL", "VIRTUAL"]
+                                                                    },
+                                                                    "category": {
+                                                                        "type": "string",
+                                                                        "description": "Product category"
+                                                                    },
+                                                                    "tags": {
+                                                                        "description": "Product tags",
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "label": {
+                                                                                    "type": "string",
+                                                                                    "description": "Tag display label"
+                                                                                },
+                                                                                "variant": {
+                                                                                    "type": "string",
+                                                                                    "description": "Visual variant/style of the tag"
+                                                                                }
+                                                                            },
+                                                                            "required": ["label", "variant"],
+                                                                            "title": "ProductTag"
+                                                                        }
+                                                                    },
+                                                                    "attributes": {
+                                                                        "type": "object",
+                                                                        "description": "Product attributes",
+                                                                        "additionalProperties": {
+                                                                            "oneOf": [
+                                                                                { "type": "string" },
+                                                                                { "type": "number" }
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    "location": {
+                                                                        "type": "string",
+                                                                        "description": "Product location/warehouse"
+                                                                    },
+                                                                    "optionGroups": {
+                                                                        "description": "Available option groups",
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "string",
+                                                                                    "description": "Option group identifier"
+                                                                                },
+                                                                                "title": {
+                                                                                    "type": "string",
+                                                                                    "description": "Option group display title"
+                                                                                },
+                                                                                "values": {
+                                                                                    "description": "Available values for this option group",
+                                                                                    "type": "array",
+                                                                                    "items": { "type": "string" }
+                                                                                }
+                                                                            },
+                                                                            "required": ["id", "title", "values"],
+                                                                            "title": "ProductOptionGroup"
+                                                                        }
+                                                                    },
+                                                                    "variants": {
+                                                                        "description": "Product variants",
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "string",
+                                                                                    "description": "Variant identifier"
+                                                                                },
+                                                                                "title": {
+                                                                                    "type": "string",
+                                                                                    "description": "Variant display title"
+                                                                                },
+                                                                                "slug": {
+                                                                                    "type": "string",
+                                                                                    "description": "URL-friendly variant slug"
+                                                                                },
+                                                                                "link": {
+                                                                                    "type": "string",
+                                                                                    "description": "Link to variant page"
+                                                                                },
+                                                                                "options": {
+                                                                                    "type": "object",
+                                                                                    "description": "Selected option values for this variant",
+                                                                                    "additionalProperties": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "inStock": {
+                                                                                    "type": "boolean",
+                                                                                    "description": "Whether this variant is in stock"
+                                                                                }
+                                                                            },
+                                                                            "required": ["id", "title", "slug"],
+                                                                            "title": "ProductVariantOption"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "id",
+                                                                    "sku",
+                                                                    "name",
+                                                                    "description",
+                                                                    "price",
+                                                                    "link",
+                                                                    "type",
+                                                                    "category",
+                                                                    "tags"
+                                                                ],
+                                                                "title": "Product"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "billingAccountId": {
+                                                        "type": "string",
+                                                        "description": "Billing account identifier"
+                                                    },
+                                                    "__typename": {
+                                                        "type": "string",
+                                                        "description": "Resource discriminator",
+                                                        "enum": ["Asset"]
+                                                    },
+                                                    "manufacturer": {
+                                                        "type": "string",
+                                                        "description": "Asset manufacturer"
+                                                    },
+                                                    "model": { "type": "string", "description": "Asset model name" },
+                                                    "serialNo": {
+                                                        "type": "string",
+                                                        "description": "Asset serial number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "description": "Asset description"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "description": "Asset lifecycle status",
+                                                        "enum": ["ACTIVE", "INACTIVE", "RETIRED"]
+                                                    },
+                                                    "address": {
+                                                        "description": "Asset location address",
+                                                        "allOf": [
+                                                            { "type": "object", "properties": {}, "title": "Address" }
+                                                        ]
+                                                    },
+                                                    "compatibleServices": {
+                                                        "description": "Compatible services for this asset",
+                                                        "allOf": [
+                                                            {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "data": {
+                                                                        "description": "Array of products",
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "string",
+                                                                                    "description": "Unique product identifier"
+                                                                                },
+                                                                                "sku": {
+                                                                                    "type": "string",
+                                                                                    "description": "Stock keeping unit"
+                                                                                },
+                                                                                "name": {
+                                                                                    "type": "string",
+                                                                                    "description": "Product name"
+                                                                                },
+                                                                                "description": {
+                                                                                    "type": "string",
+                                                                                    "description": "Full product description"
+                                                                                },
+                                                                                "shortDescription": {
+                                                                                    "type": "string",
+                                                                                    "description": "Short product description"
+                                                                                },
+                                                                                "subtitle": {
+                                                                                    "type": "string",
+                                                                                    "description": "Product subtitle"
+                                                                                },
+                                                                                "variantId": {
+                                                                                    "type": "string",
+                                                                                    "description": "Selected variant identifier"
+                                                                                },
+                                                                                "image": {
+                                                                                    "description": "Main product image",
+                                                                                    "allOf": [
+                                                                                        {
+                                                                                            "type": "object",
+                                                                                            "properties": {},
+                                                                                            "title": "Media"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                "images": {
+                                                                                    "description": "Additional product images",
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {},
+                                                                                        "title": "Media"
+                                                                                    }
+                                                                                },
+                                                                                "price": {
+                                                                                    "type": "object",
+                                                                                    "description": "Product price"
+                                                                                },
+                                                                                "link": {
+                                                                                    "type": "string",
+                                                                                    "description": "Product page URL"
+                                                                                },
+                                                                                "type": {
+                                                                                    "type": "string",
+                                                                                    "description": "Product type",
+                                                                                    "enum": ["PHYSICAL", "VIRTUAL"]
+                                                                                },
+                                                                                "category": {
+                                                                                    "type": "string",
+                                                                                    "description": "Product category"
+                                                                                },
+                                                                                "tags": {
+                                                                                    "description": "Product tags",
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "label": {
+                                                                                                "type": "string",
+                                                                                                "description": "Tag display label"
+                                                                                            },
+                                                                                            "variant": {
+                                                                                                "type": "string",
+                                                                                                "description": "Visual variant/style of the tag"
+                                                                                            }
+                                                                                        },
+                                                                                        "required": [
+                                                                                            "label",
+                                                                                            "variant"
+                                                                                        ],
+                                                                                        "title": "ProductTag"
+                                                                                    }
+                                                                                },
+                                                                                "attributes": {
+                                                                                    "type": "object",
+                                                                                    "description": "Product attributes",
+                                                                                    "additionalProperties": {
+                                                                                        "oneOf": [
+                                                                                            { "type": "string" },
+                                                                                            { "type": "number" }
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                "location": {
+                                                                                    "type": "string",
+                                                                                    "description": "Product location/warehouse"
+                                                                                },
+                                                                                "optionGroups": {
+                                                                                    "description": "Available option groups",
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "id": {
+                                                                                                "type": "string",
+                                                                                                "description": "Option group identifier"
+                                                                                            },
+                                                                                            "title": {
+                                                                                                "type": "string",
+                                                                                                "description": "Option group display title"
+                                                                                            },
+                                                                                            "values": {
+                                                                                                "description": "Available values for this option group",
+                                                                                                "type": "array",
+                                                                                                "items": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            }
+                                                                                        },
+                                                                                        "required": [
+                                                                                            "id",
+                                                                                            "title",
+                                                                                            "values"
+                                                                                        ],
+                                                                                        "title": "ProductOptionGroup"
+                                                                                    }
+                                                                                },
+                                                                                "variants": {
+                                                                                    "description": "Product variants",
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "id": {
+                                                                                                "type": "string",
+                                                                                                "description": "Variant identifier"
+                                                                                            },
+                                                                                            "title": {
+                                                                                                "type": "string",
+                                                                                                "description": "Variant display title"
+                                                                                            },
+                                                                                            "slug": {
+                                                                                                "type": "string",
+                                                                                                "description": "URL-friendly variant slug"
+                                                                                            },
+                                                                                            "link": {
+                                                                                                "type": "string",
+                                                                                                "description": "Link to variant page"
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "type": "object",
+                                                                                                "description": "Selected option values for this variant",
+                                                                                                "additionalProperties": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            },
+                                                                                            "inStock": {
+                                                                                                "type": "boolean",
+                                                                                                "description": "Whether this variant is in stock"
+                                                                                            }
+                                                                                        },
+                                                                                        "required": [
+                                                                                            "id",
+                                                                                            "title",
+                                                                                            "slug"
+                                                                                        ],
+                                                                                        "title": "ProductVariantOption"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "id",
+                                                                                "sku",
+                                                                                "name",
+                                                                                "description",
+                                                                                "price",
+                                                                                "link",
+                                                                                "type",
+                                                                                "category",
+                                                                                "tags"
+                                                                            ],
+                                                                            "title": "Product"
+                                                                        }
+                                                                    },
+                                                                    "total": {
+                                                                        "type": "number",
+                                                                        "description": "Total number of products matching the query"
+                                                                    }
+                                                                },
+                                                                "required": ["data", "total"],
+                                                                "title": "PaginatedProducts"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "endOfWarranty": {
+                                                        "type": "string",
+                                                        "description": "Warranty end date in ISO 8601 format"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "product",
+                                                    "billingAccountId",
+                                                    "__typename",
+                                                    "model",
+                                                    "serialNo",
+                                                    "description"
+                                                ],
+                                                "title": "Asset"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "product",
+                                        "billingAccountId",
+                                        "__typename",
+                                        "contract",
+                                        "assets"
+                                    ],
+                                    "title": "Service"
+                                }
+                            },
+                            "total": { "type": "number", "description": "Total number of services" }
+                        },
+                        "required": ["data", "total"],
+                        "title": "PaginatedServices"
+                    }
+                }
+            }
+        }
+    }
+}

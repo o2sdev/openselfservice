@@ -1,0 +1,32 @@
+{
+    "parameters": [
+        {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer token used by the integration layer.",
+            "required": false,
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "customerId",
+            "required": false,
+            "in": "query",
+            "description": "Optional customer identifier filter.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression, for example `createdAt_DESC`.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

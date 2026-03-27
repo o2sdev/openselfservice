@@ -1,0 +1,32 @@
+{
+    "parameters": [
+        {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Order identifier.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "limit",
+            "required": false,
+            "in": "path",
+            "description": "Optional page size for embedded list views.",
+            "schema": { "type": "number" }
+        },
+        {
+            "name": "offset",
+            "required": false,
+            "in": "path",
+            "description": "Optional page offset for embedded list views.",
+            "schema": { "type": "number" }
+        },
+        {
+            "name": "sort",
+            "required": false,
+            "in": "path",
+            "description": "Sort expression from query string, for example `createdAt_DESC`.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

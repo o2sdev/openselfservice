@@ -1,0 +1,18 @@
+{
+    "parameters": [
+        {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Ticket identifier.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "locale",
+            "required": false,
+            "in": "path",
+            "description": "Optional locale code used to localize response values.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

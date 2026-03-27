@@ -1,6 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-import type { InvoiceType, PaymentStatusType } from './invoices.model';
+import {
+    INVOICE_TYPE_VALUES,
+    type InvoiceType,
+    PAYMENT_STATUS_TYPE_VALUES,
+    type PaymentStatusType,
+} from './invoices.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
 /** Query params for fetching a single invoice. */
@@ -13,10 +18,10 @@ export class GetInvoiceParams {
 /** Query params for fetching a paginated invoice list. */
 export class GetInvoiceListQuery extends PaginationQuery {
     /** Payment status filter. */
-    @ApiPropertyOptional({ description: 'Filter invoices by payment status.' })
+    @ApiPropertyOptional({ description: 'Filter invoices by payment status.', enum: PAYMENT_STATUS_TYPE_VALUES })
     paymentStatus?: PaymentStatusType;
     /** Invoice type filter. */
-    @ApiPropertyOptional({ description: 'Filter invoices by invoice type.' })
+    @ApiPropertyOptional({ description: 'Filter invoices by invoice type.', enum: INVOICE_TYPE_VALUES })
     type?: InvoiceType;
     /** Date range start from query string (kept as string). */
     @ApiPropertyOptional({ description: 'Include invoices issued from this date (ISO string).' })

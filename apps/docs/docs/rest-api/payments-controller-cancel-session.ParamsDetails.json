@@ -1,0 +1,11 @@
+{
+    "parameters": [
+        {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Payment session identifier.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

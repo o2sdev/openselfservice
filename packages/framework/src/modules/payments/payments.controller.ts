@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
+import { PaginatedPaymentProviders, PaymentSession } from './payments.model';
 import { PaymentService } from './payments.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
@@ -26,7 +27,7 @@ export class PaymentsController {
         type: String,
         description: 'Payment provider resolution query (region, locale).',
     })
-    @ApiResponse({ status: 200, description: 'Returns available payment providers.' })
+    @ApiOkResponse({ description: 'Returns available payment providers.', type: PaginatedPaymentProviders })
     getProviders(
         @Query() params: Request.GetProvidersParams,
         @Headers() headers: AppHeaders,
@@ -37,7 +38,7 @@ export class PaymentsController {
     @Post('sessions')
     @ApiOperation({ summary: 'Create payment session' })
     @ApiBody({ type: Request.CreateSessionBody, description: 'Payment session creation payload.' })
-    @ApiResponse({ status: 201, description: 'Payment session created.' })
+    @ApiCreatedResponse({ description: 'Payment session created.', type: PaymentSession })
     createSession(
         @Body() body: Request.CreateSessionBody,
         @Headers() headers: AppHeaders,
@@ -48,7 +49,7 @@ export class PaymentsController {
     @Get('sessions/:id')
     @ApiOperation({ summary: 'Get payment session by id' })
     @ApiParam({ name: 'id', type: String, description: 'Payment session identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns payment session details.' })
+    @ApiOkResponse({ description: 'Returns payment session details.', type: PaymentSession })
     getSession(
         @Param() params: Request.GetSessionParams,
         @Headers() headers: AppHeaders,
@@ -60,7 +61,7 @@ export class PaymentsController {
     @ApiOperation({ summary: 'Update payment session' })
     @ApiParam({ name: 'id', type: String, description: 'Payment session identifier.' })
     @ApiBody({ type: Request.UpdateSessionBody, description: 'Payment session update payload.' })
-    @ApiResponse({ status: 200, description: 'Payment session updated.' })
+    @ApiOkResponse({ description: 'Payment session updated.', type: PaymentSession })
     updateSession(
         @Param() params: Request.UpdateSessionParams,
         @Body() body: Request.UpdateSessionBody,
@@ -72,7 +73,7 @@ export class PaymentsController {
     @Delete('sessions/:id')
     @ApiOperation({ summary: 'Cancel payment session' })
     @ApiParam({ name: 'id', type: String, description: 'Payment session identifier.' })
-    @ApiResponse({ status: 200, description: 'Payment session canceled.' })
+    @ApiOkResponse({ description: 'Payment session canceled.' })
     cancelSession(
         @Param() params: Request.CancelSessionParams,
         @Headers() headers: AppHeaders,

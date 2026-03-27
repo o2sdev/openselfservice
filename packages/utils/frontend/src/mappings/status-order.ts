@@ -1,4 +1,4 @@
-import { Orders } from '@o2s/framework/modules';
+import type { Orders } from '@o2s/framework/modules';
 import { VariantProps } from 'class-variance-authority';
 
 import { badgeVariants } from '@o2s/ui/elements/badge';

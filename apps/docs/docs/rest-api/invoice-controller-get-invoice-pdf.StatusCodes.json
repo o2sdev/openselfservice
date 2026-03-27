@@ -1,0 +1,8 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns invoice PDF file.",
+            "content": { "application/pdf": { "schema": { "type": "string", "format": "binary" } } }
+        }
+    }
+}

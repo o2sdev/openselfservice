@@ -1,0 +1,18 @@
+{
+    "parameters": [
+        {
+            "name": "orgId",
+            "required": true,
+            "in": "path",
+            "description": "Organization identifier.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "description": "User identifier.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

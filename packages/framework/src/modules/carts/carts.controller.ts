@@ -1,9 +1,21 @@
 import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
-import { ApiBody, ApiHeader, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+    ApiBody,
+    ApiCreatedResponse,
+    ApiHeader,
+    ApiNoContentResponse,
+    ApiNotFoundResponse,
+    ApiOkResponse,
+    ApiOperation,
+    ApiParam,
+    ApiQuery,
+    ApiTags,
+} from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
+import { Cart, PaginatedCarts } from './carts.model';
 import { CartService } from './carts.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
@@ -25,7 +37,7 @@ export class CartsController {
 
     @Get('current')
     @ApiOperation({ summary: 'Get current cart' })
-    @ApiResponse({ status: 200, description: 'Returns active cart for current user/session.' })
+    @ApiOkResponse({ description: 'Returns active cart for current user/session.', type: Cart })
     getCurrentCart(@Headers() headers: AppHeaders): ReturnType<CartService['getCurrentCart']> {
         return this.cartService.getCurrentCart(headers[H.Authorization]);
     }
@@ -33,8 +45,8 @@ export class CartsController {
     @Get(':id')
     @ApiOperation({ summary: 'Get cart by id' })
     @ApiParam({ name: 'id', type: String, description: 'Cart identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns cart details.' })
-    @ApiResponse({ status: 404, description: 'Cart was not found.' })
+    @ApiOkResponse({ description: 'Returns cart details.', type: Cart })
+    @ApiNotFoundResponse({ description: 'Cart was not found.' })
     getCart(
         @Param() params: Request.GetCartParams,
         @Headers() headers: AppHeaders,
@@ -62,7 +74,7 @@ export class CartsController {
         type: String,
         description: 'Optional locale code used to localize response values.',
     })
-    @ApiResponse({ status: 200, description: 'Returns paginated carts list.' })
+    @ApiOkResponse({ description: 'Returns paginated carts list.', type: PaginatedCarts })
     getCartList(
         @Query() query: Request.GetCartListQuery,
         @Headers() headers: AppHeaders,
@@ -73,8 +85,7 @@ export class CartsController {
     @Post()
     @ApiOperation({ summary: 'Create cart' })
     @ApiBody({ type: Request.CreateCartBody })
-    @ApiResponse({ status: 201, description: 'Cart created successfully.' })
-    @ApiResponse({ status: 400, description: 'Invalid cart payload.' })
+    @ApiCreatedResponse({ description: 'Cart created successfully.', type: Cart })
     createCart(
         @Body() body: Request.CreateCartBody,
         @Headers() headers: AppHeaders,
@@ -86,8 +97,8 @@ export class CartsController {
     @ApiOperation({ summary: 'Update cart' })
     @ApiParam({ name: 'id', type: String, description: 'Cart identifier.' })
     @ApiBody({ type: Request.UpdateCartBody })
-    @ApiResponse({ status: 200, description: 'Cart updated successfully.' })
-    @ApiResponse({ status: 404, description: 'Cart was not found.' })
+    @ApiOkResponse({ description: 'Cart updated successfully.', type: Cart })
+    @ApiNotFoundResponse({ description: 'Cart was not found.' })
     updateCart(
         @Param() params: Request.UpdateCartParams,
         @Body() body: Request.UpdateCartBody,
@@ -99,8 +110,8 @@ export class CartsController {
     @Delete(':id')
     @ApiOperation({ summary: 'Delete cart' })
     @ApiParam({ name: 'id', type: String, description: 'Cart identifier.' })
-    @ApiResponse({ status: 204, description: 'Cart deleted successfully.' })
-    @ApiResponse({ status: 404, description: 'Cart was not found.' })
+    @ApiNoContentResponse({ description: 'Cart deleted successfully.' })
+    @ApiNotFoundResponse({ description: 'Cart was not found.' })
     deleteCart(
         @Param() params: Request.DeleteCartParams,
         @Headers() headers: AppHeaders,
@@ -108,12 +119,10 @@ export class CartsController {
         return this.cartService.deleteCart(params, headers[H.Authorization]);
     }
 
-    // Cart item operations
     @Post('items')
     @ApiOperation({ summary: 'Add item to cart' })
     @ApiBody({ type: Request.AddCartItemBody })
-    @ApiResponse({ status: 201, description: 'Item added to cart.' })
-    @ApiResponse({ status: 400, description: 'Invalid cart item payload.' })
+    @ApiCreatedResponse({ description: 'Item added to cart.', type: Cart })
     addCartItem(
         @Body() body: Request.AddCartItemBody,
         @Headers() headers: AppHeaders,
@@ -126,8 +135,8 @@ export class CartsController {
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
     @ApiParam({ name: 'itemId', type: String, description: 'Cart item identifier.' })
     @ApiBody({ type: Request.UpdateCartItemBody })
-    @ApiResponse({ status: 200, description: 'Cart item updated.' })
-    @ApiResponse({ status: 404, description: 'Cart or item was not found.' })
+    @ApiOkResponse({ description: 'Cart item updated.', type: Cart })
+    @ApiNotFoundResponse({ description: 'Cart or item was not found.' })
     updateCartItem(
         @Param() params: Request.UpdateCartItemParams,
         @Body() body: Request.UpdateCartItemBody,
@@ -140,8 +149,8 @@ export class CartsController {
     @ApiOperation({ summary: 'Remove cart item' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
     @ApiParam({ name: 'itemId', type: String, description: 'Cart item identifier.' })
-    @ApiResponse({ status: 204, description: 'Cart item removed.' })
-    @ApiResponse({ status: 404, description: 'Cart or item was not found.' })
+    @ApiNoContentResponse({ description: 'Cart item removed.' })
+    @ApiNotFoundResponse({ description: 'Cart or item was not found.' })
     removeCartItem(
         @Param() params: Request.RemoveCartItemParams,
         @Headers() headers: AppHeaders,
@@ -149,13 +158,12 @@ export class CartsController {
         return this.cartService.removeCartItem(params, headers[H.Authorization]);
     }
 
-    // Promotion operations
     @Post(':cartId/promotions')
     @ApiOperation({ summary: 'Apply promotion code' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
     @ApiBody({ type: Request.ApplyPromotionBody })
-    @ApiResponse({ status: 200, description: 'Promotion applied.' })
-    @ApiResponse({ status: 404, description: 'Cart was not found.' })
+    @ApiOkResponse({ description: 'Promotion applied.', type: Cart })
+    @ApiNotFoundResponse({ description: 'Cart was not found.' })
     applyPromotion(
         @Param() params: Request.ApplyPromotionParams,
         @Body() body: Request.ApplyPromotionBody,
@@ -168,8 +176,8 @@ export class CartsController {
     @ApiOperation({ summary: 'Remove promotion code' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
     @ApiParam({ name: 'code', type: String, description: 'Promotion/coupon code.' })
-    @ApiResponse({ status: 204, description: 'Promotion removed.' })
-    @ApiResponse({ status: 404, description: 'Cart or promotion was not found.' })
+    @ApiNoContentResponse({ description: 'Promotion removed.' })
+    @ApiNotFoundResponse({ description: 'Cart or promotion was not found.' })
     removePromotion(
         @Param() params: Request.RemovePromotionParams,
         @Headers() headers: AppHeaders,

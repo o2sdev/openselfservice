@@ -1,0 +1,51 @@
+{
+    "title": "Body",
+    "body": {
+        "required": true,
+        "description": "Combined checkout payload used to complete checkout in one call.",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "shippingAddressId": {
+                            "type": "string",
+                            "description": "Saved shipping address identifier for authenticated users."
+                        },
+                        "shippingAddress": {
+                            "description": "Inline shipping address payload (required for guest checkout).",
+                            "allOf": [{ "type": "object", "properties": {}, "title": "Address" }]
+                        },
+                        "billingAddressId": {
+                            "type": "string",
+                            "description": "Saved billing address identifier for authenticated users."
+                        },
+                        "billingAddress": {
+                            "description": "Inline billing address payload (required for guest checkout).",
+                            "allOf": [{ "type": "object", "properties": {}, "title": "Address" }]
+                        },
+                        "shippingMethodId": { "type": "string", "description": "Selected shipping method identifier." },
+                        "paymentProviderId": { "type": "string", "description": "Payment provider identifier." },
+                        "returnUrl": {
+                            "type": "string",
+                            "description": "URL used for redirect after successful payment flow."
+                        },
+                        "cancelUrl": {
+                            "type": "string",
+                            "description": "Optional URL used for redirect when payment flow is canceled."
+                        },
+                        "notes": { "type": "string", "description": "Optional checkout notes." },
+                        "email": { "type": "string", "description": "Customer email required for guest checkout." },
+                        "metadata": {
+                            "type": "object",
+                            "description": "Provider-specific metadata payload.",
+                            "additionalProperties": true
+                        }
+                    },
+                    "required": ["paymentProviderId", "returnUrl"],
+                    "title": "CompleteCheckoutBody"
+                }
+            }
+        }
+    }
+}

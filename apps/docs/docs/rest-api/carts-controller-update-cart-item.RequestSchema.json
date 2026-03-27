@@ -1,0 +1,26 @@
+{
+    "title": "Body",
+    "body": {
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "quantity": { "type": "number", "description": "Updated item quantity." },
+                        "metadata": {
+                            "type": "object",
+                            "description": "Integration-specific item metadata payload.",
+                            "additionalProperties": true
+                        },
+                        "locale": {
+                            "type": "string",
+                            "description": "Optional locale provided in the request body (kept as string)."
+                        }
+                    },
+                    "title": "UpdateCartItemBody"
+                }
+            }
+        }
+    }
+}

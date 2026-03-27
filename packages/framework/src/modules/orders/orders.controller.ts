@@ -1,9 +1,10 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
+import { Order, PaginatedOrders } from './orders.model';
 import { OrderService } from './orders.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
@@ -21,7 +22,7 @@ export class OrdersController {
     @Get(':id')
     @ApiOperation({ summary: 'Get order by id' })
     @ApiParam({ name: 'id', type: String, description: 'Order identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns order details.' })
+    @ApiOkResponse({ description: 'Returns order details.', type: Order })
     getOrder(
         @Param() params: Request.GetOrderParams,
         @Headers() headers: AppHeaders,
@@ -32,7 +33,7 @@ export class OrdersController {
     @Get()
     @ApiOperation({ summary: 'List orders' })
     @ApiQuery({ name: 'query', required: false, type: String, description: 'Order list filters and pagination query.' })
-    @ApiResponse({ status: 200, description: 'Returns order list.' })
+    @ApiOkResponse({ description: 'Returns order list.', type: PaginatedOrders })
     getOrderList(
         @Query() query: Request.GetOrderListQuery,
         @Headers() headers: AppHeaders,

@@ -6,7 +6,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { LoggerService } from '@o2s/utils.logger';
 
 import { HeaderName } from '@o2s/framework/headers';
-import { Auth } from '@o2s/framework/modules';
 
 import { PermissionsGuard, RolesGuard } from './auth.guard';
 import { AuthService } from './auth.service';
@@ -107,7 +106,7 @@ describe('Auth Guards', () => {
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 roles: ['admin', 'editor'],
-                mode: Auth.Model.MatchingMode.ANY,
+                mode: 'any',
             });
             vi.mocked(authService.verifyToken).mockResolvedValue({});
             vi.mocked(authService.isTokenRevoked).mockResolvedValue(false);
@@ -136,7 +135,7 @@ describe('Auth Guards', () => {
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 roles: ['admin', 'editor'],
-                mode: Auth.Model.MatchingMode.ALL,
+                mode: 'all',
             });
             vi.mocked(authService.verifyToken).mockResolvedValue({});
             vi.mocked(authService.isTokenRevoked).mockResolvedValue(false);
@@ -152,7 +151,7 @@ describe('Auth Guards', () => {
 
             vi.mocked(reflector.getAllAndMerge).mockReturnValue({
                 roles: ['admin', 'editor'],
-                mode: Auth.Model.MatchingMode.ALL,
+                mode: 'all',
             });
             vi.mocked(authService.verifyToken).mockResolvedValue({});
             vi.mocked(authService.isTokenRevoked).mockResolvedValue(false);

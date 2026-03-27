@@ -1,0 +1,33 @@
+{
+    "parameters": [
+        {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "When true, returns draft/preview CMS content.",
+            "schema": { "type": "boolean" }
+        },
+        {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "type",
+            "required": true,
+            "in": "query",
+            "description": "CMS content type key (for example `page`, `article`).",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "filters",
+            "required": false,
+            "in": "query",
+            "description": "Optional map of integration-specific filters.",
+            "schema": { "type": "object", "properties": {}, "title": "Object" }
+        },
+        { "name": "query", "required": false, "in": "query", "schema": { "type": "string" } }
+    ]
+}

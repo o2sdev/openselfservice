@@ -1,9 +1,10 @@
 import { Request } from '.';
 import { Controller, Get, Param, Query, UseInterceptors } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
+import { Article, Category, PaginatedArticles, PaginatedCategories } from './articles.model';
 import { ArticlesService } from './articles.service';
 
 /**
@@ -24,7 +25,7 @@ export class ArticleController {
         type: String,
         description: 'Article category list filters and pagination query.',
     })
-    @ApiResponse({ status: 200, description: 'Returns article categories list.' })
+    @ApiOkResponse({ description: 'Returns article categories list.', type: PaginatedCategories })
     getCategoryList(@Query() query: Request.GetCategoryListQuery): ReturnType<ArticlesService['getCategoryList']> {
         return this.articleService.getCategoryList(query);
     }
@@ -38,7 +39,7 @@ export class ArticleController {
         type: String,
         description: 'Optional locale code used to localize response.',
     })
-    @ApiResponse({ status: 200, description: 'Returns article category details.' })
+    @ApiOkResponse({ description: 'Returns article category details.', type: Category })
     getCategory(@Param('id') id: string, @Query('locale') locale: string): ReturnType<ArticlesService['getCategory']> {
         return this.articleService.getCategory({ id, locale });
     }
@@ -51,7 +52,7 @@ export class ArticleController {
         type: String,
         description: 'Article search filters and search phrase query.',
     })
-    @ApiResponse({ status: 200, description: 'Returns article search results.' })
+    @ApiOkResponse({ description: 'Returns article search results.', type: PaginatedArticles })
     searchArticles(@Query() query: Request.SearchArticlesBody): ReturnType<ArticlesService['searchArticles']> {
         return this.articleService.searchArticles(query);
     }
@@ -65,7 +66,7 @@ export class ArticleController {
         type: String,
         description: 'Optional locale code used to localize response.',
     })
-    @ApiResponse({ status: 200, description: 'Returns article details.' })
+    @ApiOkResponse({ description: 'Returns article details.', type: Article })
     getArticle(@Param('id') id: string, @Query('locale') locale: string): ReturnType<ArticlesService['getArticle']> {
         return this.articleService.getArticle({ slug: id, locale });
     }
@@ -78,7 +79,7 @@ export class ArticleController {
         type: String,
         description: 'Article list filters and pagination query.',
     })
-    @ApiResponse({ status: 200, description: 'Returns article list.' })
+    @ApiOkResponse({ description: 'Returns article list.', type: PaginatedArticles })
     getArticleList(@Query() query: Request.GetArticleListQuery): ReturnType<ArticlesService['getArticleList']> {
         return this.articleService.getArticleList(query);
     }

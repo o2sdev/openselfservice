@@ -3,13 +3,18 @@ import { IsOptional, Matches } from 'class-validator';
 
 import type { VariantOptionGroupConfig } from '../cms/models/blocks/product-details.model';
 
-import type { ProductReferenceType, ProductType } from './products.model';
+import {
+    PRODUCT_REFERENCE_TYPE_VALUES,
+    PRODUCT_TYPE_VALUES,
+    type ProductReferenceType,
+    type ProductType,
+} from './products.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
 /** Query params for fetching a paginated product list. */
 export class GetProductListQuery extends PaginationQuery {
     /** Product type filter. */
-    @ApiPropertyOptional({ description: 'Product type filter.' })
+    @ApiPropertyOptional({ description: 'Product type filter.', enum: PRODUCT_TYPE_VALUES })
     type?: ProductType;
     /** Product category filter. */
     @ApiPropertyOptional({ description: 'Product category filter.' })
@@ -53,7 +58,10 @@ export class GetProductParams {
 /** Query params for fetching products related to a selected product/variant. */
 export class GetRelatedProductListParams extends PaginationQuery {
     /** Relation type to resolve (spare part, replacement, compatible service). */
-    @ApiProperty({ description: 'Relation type to resolve (spare part, replacement, compatible service).' })
+    @ApiProperty({
+        description: 'Relation type to resolve (spare part, replacement, compatible service).',
+        enum: PRODUCT_REFERENCE_TYPE_VALUES,
+    })
     type!: ProductReferenceType;
     /** Source product identifier (bound from route :id). */
     @ApiProperty({ description: 'Source product identifier (bound from route `:id`).' })

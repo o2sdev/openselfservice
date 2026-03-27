@@ -1,0 +1,28 @@
+{
+    "responses": {
+        "200": {
+            "description": "User updated.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string", "description": "Unique user identifier" },
+                            "username": { "type": "string", "description": "Username for login" },
+                            "email": { "type": "string", "description": "User email address" },
+                            "firstName": { "type": "string", "description": "User first name" },
+                            "lastName": { "type": "string", "description": "User last name" },
+                            "customers": {
+                                "description": "Customers associated with this user",
+                                "type": "array",
+                                "items": { "type": "object", "properties": {}, "title": "Customer" }
+                            }
+                        },
+                        "required": ["id", "username", "email"],
+                        "title": "User"
+                    }
+                }
+            }
+        }
+    }
+}

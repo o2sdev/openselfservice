@@ -1,0 +1,106 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns product details.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string", "description": "Unique product identifier" },
+                            "sku": { "type": "string", "description": "Stock keeping unit" },
+                            "name": { "type": "string", "description": "Product name" },
+                            "description": { "type": "string", "description": "Full product description" },
+                            "shortDescription": { "type": "string", "description": "Short product description" },
+                            "subtitle": { "type": "string", "description": "Product subtitle" },
+                            "variantId": { "type": "string", "description": "Selected variant identifier" },
+                            "image": {
+                                "description": "Main product image",
+                                "allOf": [{ "type": "object", "properties": {}, "title": "Media" }]
+                            },
+                            "images": {
+                                "description": "Additional product images",
+                                "type": "array",
+                                "items": { "type": "object", "properties": {}, "title": "Media" }
+                            },
+                            "price": { "type": "object", "description": "Product price" },
+                            "link": { "type": "string", "description": "Product page URL" },
+                            "type": {
+                                "type": "string",
+                                "description": "Product type",
+                                "enum": ["PHYSICAL", "VIRTUAL"]
+                            },
+                            "category": { "type": "string", "description": "Product category" },
+                            "tags": {
+                                "description": "Product tags",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "label": { "type": "string", "description": "Tag display label" },
+                                        "variant": {
+                                            "type": "string",
+                                            "description": "Visual variant/style of the tag"
+                                        }
+                                    },
+                                    "required": ["label", "variant"],
+                                    "title": "ProductTag"
+                                }
+                            },
+                            "attributes": {
+                                "type": "object",
+                                "description": "Product attributes",
+                                "additionalProperties": { "oneOf": [{ "type": "string" }, { "type": "number" }] }
+                            },
+                            "location": { "type": "string", "description": "Product location/warehouse" },
+                            "optionGroups": {
+                                "description": "Available option groups",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": { "type": "string", "description": "Option group identifier" },
+                                        "title": { "type": "string", "description": "Option group display title" },
+                                        "values": {
+                                            "description": "Available values for this option group",
+                                            "type": "array",
+                                            "items": { "type": "string" }
+                                        }
+                                    },
+                                    "required": ["id", "title", "values"],
+                                    "title": "ProductOptionGroup"
+                                }
+                            },
+                            "variants": {
+                                "description": "Product variants",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": { "type": "string", "description": "Variant identifier" },
+                                        "title": { "type": "string", "description": "Variant display title" },
+                                        "slug": { "type": "string", "description": "URL-friendly variant slug" },
+                                        "link": { "type": "string", "description": "Link to variant page" },
+                                        "options": {
+                                            "type": "object",
+                                            "description": "Selected option values for this variant",
+                                            "additionalProperties": { "type": "string" }
+                                        },
+                                        "inStock": {
+                                            "type": "boolean",
+                                            "description": "Whether this variant is in stock"
+                                        }
+                                    },
+                                    "required": ["id", "title", "slug"],
+                                    "title": "ProductVariantOption"
+                                }
+                            }
+                        },
+                        "required": ["id", "sku", "name", "description", "price", "link", "type", "category", "tags"],
+                        "title": "Product"
+                    }
+                }
+            }
+        }
+    }
+}

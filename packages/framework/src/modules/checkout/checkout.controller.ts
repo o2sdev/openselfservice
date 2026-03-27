@@ -1,9 +1,13 @@
 import { Body, Controller, Get, Headers, Param, Post, UseInterceptors } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
+import * as Carts from '../carts';
+import * as Payments from '../payments';
+
 import { Request } from './';
+import { CheckoutSummary, PlaceOrderResponse, ShippingOptions } from './checkout.model';
 import { CheckoutService } from './checkout.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
@@ -22,7 +26,7 @@ export class CheckoutController {
     @ApiOperation({ summary: 'Set checkout addresses' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
     @ApiBody({ type: Request.SetAddressesBody, description: 'Shipping/billing address payload for checkout.' })
-    @ApiResponse({ status: 201, description: 'Checkout addresses set.' })
+    @ApiCreatedResponse({ description: 'Checkout addresses set.', type: Carts.Model.Cart })
     setAddresses(
         @Param() params: Request.SetAddressesParams,
         @Body() body: Request.SetAddressesBody,
@@ -35,7 +39,7 @@ export class CheckoutController {
     @ApiOperation({ summary: 'Set checkout shipping method' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
     @ApiBody({ type: Request.SetShippingMethodBody, description: 'Shipping method selection payload.' })
-    @ApiResponse({ status: 201, description: 'Checkout shipping method set.' })
+    @ApiCreatedResponse({ description: 'Checkout shipping method set.', type: Carts.Model.Cart })
     setShippingMethod(
         @Param() params: Request.SetShippingMethodParams,
         @Body() body: Request.SetShippingMethodBody,
@@ -48,7 +52,7 @@ export class CheckoutController {
     @ApiOperation({ summary: 'Set checkout payment' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
     @ApiBody({ type: Request.SetPaymentBody, description: 'Payment provider selection payload.' })
-    @ApiResponse({ status: 201, description: 'Checkout payment set.' })
+    @ApiCreatedResponse({ description: 'Checkout payment set.', type: Payments.Model.PaymentSession })
     setPayment(
         @Param() params: Request.SetPaymentParams,
         @Body() body: Request.SetPaymentBody,
@@ -60,7 +64,7 @@ export class CheckoutController {
     @Get(':cartId/shipping-options')
     @ApiOperation({ summary: 'Get checkout shipping options' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns checkout shipping options.' })
+    @ApiOkResponse({ description: 'Returns checkout shipping options.', type: ShippingOptions })
     getShippingOptions(
         @Param() params: Request.GetShippingOptionsParams,
         @Headers() headers: AppHeaders,
@@ -74,7 +78,7 @@ export class CheckoutController {
     @Get(':cartId/summary')
     @ApiOperation({ summary: 'Get checkout summary' })
     @ApiParam({ name: 'cartId', type: String, description: 'Cart identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns checkout summary.' })
+    @ApiOkResponse({ description: 'Returns checkout summary.', type: CheckoutSummary })
     getCheckoutSummary(
         @Param() params: Request.GetCheckoutSummaryParams,
         @Headers() headers: AppHeaders,
@@ -92,7 +96,7 @@ export class CheckoutController {
         type: Request.PlaceOrderBody,
         description: 'Optional data required to place order (for example guest email).',
     })
-    @ApiResponse({ status: 201, description: 'Order placement started.' })
+    @ApiCreatedResponse({ description: 'Order placement started.', type: PlaceOrderResponse })
     placeOrder(
         @Param() params: Request.PlaceOrderParams,
         @Body() body: Request.PlaceOrderBody,
@@ -112,7 +116,7 @@ export class CheckoutController {
         type: Request.CompleteCheckoutBody,
         description: 'Combined checkout payload used to complete checkout in one call.',
     })
-    @ApiResponse({ status: 201, description: 'Checkout completed.' })
+    @ApiCreatedResponse({ description: 'Checkout completed.', type: PlaceOrderResponse })
     completeCheckout(
         @Param() params: Request.CompleteCheckoutParams,
         @Body() body: Request.CompleteCheckoutBody,

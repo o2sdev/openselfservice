@@ -1,0 +1,8 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns FAQ block.",
+            "content": { "application/json": { "schema": { "type": "object", "properties": {}, "title": "FaqBlock" } } }
+        }
+    }
+}

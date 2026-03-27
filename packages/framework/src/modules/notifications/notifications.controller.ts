@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Headers, Param, Post, Query, UseInterceptors } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
+import { Notification, PaginatedNotifications } from './notifications.model';
 import { NotificationService } from './notifications.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
@@ -21,7 +22,7 @@ export class NotificationsController {
     @Get(':id')
     @ApiOperation({ summary: 'Get notification by id' })
     @ApiParam({ name: 'id', type: String, description: 'Notification identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns notification details.' })
+    @ApiOkResponse({ description: 'Returns notification details.', type: Notification })
     getNotification(
         @Param() params: Request.GetNotificationParams,
         @Headers() headers: AppHeaders,
@@ -37,7 +38,7 @@ export class NotificationsController {
         type: String,
         description: 'Notification list filters and pagination query.',
     })
-    @ApiResponse({ status: 200, description: 'Returns notifications list.' })
+    @ApiOkResponse({ description: 'Returns notifications list.', type: PaginatedNotifications })
     getNotificationList(
         @Query() query: Request.GetNotificationListQuery,
         @Headers() headers: AppHeaders,
@@ -48,7 +49,7 @@ export class NotificationsController {
     @Post()
     @ApiOperation({ summary: 'Update notification status' })
     @ApiBody({ type: Request.MarkNotificationAsRequest, description: 'Notification status update payload.' })
-    @ApiResponse({ status: 200, description: 'Notification status updated.' })
+    @ApiOkResponse({ description: 'Notification status updated.' })
     markNotificationAs(
         @Body() request: Request.MarkNotificationAsRequest,
         @Headers() headers: AppHeaders,

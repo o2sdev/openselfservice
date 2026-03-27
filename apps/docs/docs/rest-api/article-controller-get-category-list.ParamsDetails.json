@@ -1,0 +1,25 @@
+{
+    "parameters": [
+        {
+            "name": "locale",
+            "required": true,
+            "in": "query",
+            "description": "Locale code used to localize the response, for example `pl` or `en`.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Optional sort configuration for category list results.",
+            "schema": { "type": "object", "properties": {}, "title": "Object" }
+        },
+        {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "description": "Article category list filters and pagination query.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

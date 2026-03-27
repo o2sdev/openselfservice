@@ -1,11 +1,11 @@
-import * as Invoices from '.';
 import { Controller, Get, Headers, Param, Query, Res, UseInterceptors } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiParam, ApiProduces, ApiQuery, ApiTags } from '@nestjs/swagger';
 import type { Response } from 'express';
 import { Observable, map } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
+import { Invoice, PaginatedInvoices } from './invoices.model';
 import { GetInvoiceListQuery, GetInvoiceParams } from './invoices.request';
 import { InvoiceService } from './invoices.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
@@ -29,26 +29,24 @@ export class InvoiceController {
         type: String,
         description: 'Invoice list filters and pagination query.',
     })
-    @ApiResponse({ status: 200, description: 'Returns invoices list.' })
-    getInvoiceList(
-        @Query() query: GetInvoiceListQuery,
-        @Headers() headers: AppHeaders,
-    ): Observable<Invoices.Model.Invoices> {
+    @ApiOkResponse({ description: 'Returns invoices list.', type: PaginatedInvoices })
+    getInvoiceList(@Query() query: GetInvoiceListQuery, @Headers() headers: AppHeaders): Observable<PaginatedInvoices> {
         return this.invoiceService.getInvoiceList(query, headers[H.Authorization]);
     }
 
     @Get(':id')
     @ApiOperation({ summary: 'Get invoice by id' })
     @ApiParam({ name: 'id', type: String, description: 'Invoice identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns invoice details.' })
-    getInvoice(@Param() params: GetInvoiceParams, @Headers() headers: AppHeaders): Observable<Invoices.Model.Invoice> {
+    @ApiOkResponse({ description: 'Returns invoice details.', type: Invoice })
+    getInvoice(@Param() params: GetInvoiceParams, @Headers() headers: AppHeaders): Observable<Invoice> {
         return this.invoiceService.getInvoice(params, headers[H.Authorization]);
     }
 
     @Get(':id/pdf')
     @ApiOperation({ summary: 'Download invoice PDF' })
     @ApiParam({ name: 'id', type: String, description: 'Invoice identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns invoice PDF file.' })
+    @ApiProduces('application/pdf')
+    @ApiOkResponse({ description: 'Returns invoice PDF file.', schema: { type: 'string', format: 'binary' } })
     getInvoicePdf(
         @Param() params: GetInvoiceParams,
         @Headers() headers: AppHeaders,

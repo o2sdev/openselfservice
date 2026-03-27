@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Headers, Param, Post, Query, UseInterceptors } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
+import { PaginatedTickets, Ticket } from './tickets.model';
 import { TicketService } from './tickets.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
@@ -21,7 +22,7 @@ export class TicketsController {
     @Get(':id')
     @ApiOperation({ summary: 'Get ticket by id' })
     @ApiParam({ name: 'id', type: String, description: 'Ticket identifier.' })
-    @ApiResponse({ status: 200, description: 'Returns ticket details.' })
+    @ApiOkResponse({ description: 'Returns ticket details.', type: Ticket })
     getTicket(
         @Param() params: Request.GetTicketParams,
         @Headers() headers: AppHeaders,
@@ -37,7 +38,7 @@ export class TicketsController {
         type: String,
         description: 'Ticket list filters and pagination query.',
     })
-    @ApiResponse({ status: 200, description: 'Returns ticket list.' })
+    @ApiOkResponse({ description: 'Returns ticket list.', type: PaginatedTickets })
     getTicketList(
         @Query() query: Request.GetTicketListQuery,
         @Headers() headers: AppHeaders,
@@ -48,7 +49,7 @@ export class TicketsController {
     @Post()
     @ApiOperation({ summary: 'Create ticket' })
     @ApiBody({ type: Request.PostTicketBody, description: 'Ticket creation payload.' })
-    @ApiResponse({ status: 201, description: 'Ticket created.' })
+    @ApiCreatedResponse({ description: 'Ticket created.', type: Ticket })
     createTicket(
         @Body() body: Request.PostTicketBody,
         @Headers() headers: AppHeaders,

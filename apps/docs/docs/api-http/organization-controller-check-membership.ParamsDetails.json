@@ -1,1 +1,0 @@
-{"parameters":[{"name":"orgId","required":true,"in":"path","description":"Organization identifier.","schema":{"type":"string"}},{"name":"userId","required":true,"in":"path","description":"User identifier to check membership for.","schema":{"type":"string"}}]}

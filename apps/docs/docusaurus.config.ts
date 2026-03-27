@@ -277,11 +277,12 @@ const config: Config = {
                 id: 'openapi',
                 docsPluginId: 'classic',
                 config: {
-                    framework: {
+                    'rest-api': {
                         specPath: 'static/openapi/framework-live.json',
-                        outputDir: 'docs/api-http',
+                        outputDir: 'docs/rest-api',
                         sidebarOptions: {
                             groupPathsBy: 'tag',
+                            categoryLinkSource: 'info',
                         },
                     },
                 },

@@ -1,0 +1,31 @@
+{
+    "responses": {
+        "201": {
+            "description": "Customer address created.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string", "description": "Unique address identifier" },
+                            "customerId": { "type": "string", "description": "Associated customer identifier" },
+                            "label": { "type": "string", "description": "UI label (e.g., Home, Work, Billing)" },
+                            "isDefault": { "type": "boolean", "description": "Whether this is the default address" },
+                            "address": {
+                                "description": "Full address details",
+                                "allOf": [{ "type": "object", "properties": {}, "title": "Address" }]
+                            },
+                            "createdAt": {
+                                "type": "string",
+                                "description": "Address creation timestamp in ISO 8601 format"
+                            },
+                            "updatedAt": { "type": "string", "description": "Last update timestamp in ISO 8601 format" }
+                        },
+                        "required": ["id", "customerId", "address", "createdAt", "updatedAt"],
+                        "title": "CustomerAddress"
+                    }
+                }
+            }
+        }
+    }
+}

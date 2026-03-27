@@ -1,0 +1,12 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns CMS pages.",
+            "content": {
+                "application/json": {
+                    "schema": { "type": "array", "items": { "type": "object", "properties": {}, "title": "Page" } }
+                }
+            }
+        }
+    }
+}

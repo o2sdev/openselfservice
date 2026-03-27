@@ -1,1 +1,0 @@
-{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"Notification identifier."},"status":{"type":"string","description":"Target notification status to set."}},"required":["id","status"],"title":"MarkNotificationAsRequest"}}}}}

@@ -1,0 +1,26 @@
+{
+    "title": "Body",
+    "body": {
+        "required": true,
+        "description": "Customer address payload to update.",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "label": { "type": "string", "description": "Optional address label visible in UI." },
+                        "isDefault": {
+                            "type": "boolean",
+                            "description": "When true, sets the updated address as default."
+                        },
+                        "address": {
+                            "description": "Updated full address payload.",
+                            "allOf": [{ "type": "object", "properties": {}, "title": "Address" }]
+                        }
+                    },
+                    "title": "UpdateAddressBody"
+                }
+            }
+        }
+    }
+}

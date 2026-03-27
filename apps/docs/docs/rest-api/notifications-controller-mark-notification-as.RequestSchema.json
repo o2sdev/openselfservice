@@ -1,0 +1,24 @@
+{
+    "title": "Body",
+    "body": {
+        "required": true,
+        "description": "Notification status update payload.",
+        "content": {
+            "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "string", "description": "Notification identifier." },
+                        "status": {
+                            "type": "string",
+                            "description": "Target notification status to set.",
+                            "enum": ["UNVIEWED", "VIEWED", "READ"]
+                        }
+                    },
+                    "required": ["id", "status"],
+                    "title": "MarkNotificationAsRequest"
+                }
+            }
+        }
+    }
+}

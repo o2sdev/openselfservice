@@ -1,0 +1,46 @@
+{
+    "parameters": [
+        {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Product type filter.",
+            "schema": { "type": "string", "enum": ["PHYSICAL", "VIRTUAL"] }
+        },
+        {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "description": "Product category filter.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "description": "Optional locale code used to localize response values.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Sort expression from query string, for example `name_ASC`.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "basePath",
+            "required": false,
+            "in": "query",
+            "description": "Optional base path override used by integration routing.",
+            "schema": { "type": "string" }
+        },
+        {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "description": "Product list filters and pagination query.",
+            "schema": { "type": "string" }
+        }
+    ]
+}

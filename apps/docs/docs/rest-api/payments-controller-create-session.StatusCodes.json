@@ -1,0 +1,43 @@
+{
+    "responses": {
+        "201": {
+            "description": "Payment session created.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string", "description": "Unique payment session identifier" },
+                            "cartId": { "type": "string", "description": "Associated cart identifier" },
+                            "providerId": { "type": "string", "description": "Payment provider identifier" },
+                            "status": {
+                                "type": "string",
+                                "description": "Current payment session status",
+                                "enum": ["PENDING", "AUTHORIZED", "CAPTURED", "FAILED", "CANCELLED"]
+                            },
+                            "redirectUrl": {
+                                "type": "string",
+                                "description": "Redirect target URL for redirect-based providers"
+                            },
+                            "clientSecret": {
+                                "type": "string",
+                                "description": "Client secret/token for embedded payment forms"
+                            },
+                            "expiresAt": {
+                                "type": "string",
+                                "description": "Session expiration timestamp in ISO 8601 format"
+                            },
+                            "metadata": {
+                                "type": "object",
+                                "description": "Provider-specific metadata payload",
+                                "additionalProperties": true
+                            }
+                        },
+                        "required": ["id", "cartId", "providerId", "status"],
+                        "title": "PaymentSession"
+                    }
+                }
+            }
+        }
+    }
+}

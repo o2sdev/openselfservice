@@ -1,0 +1,10 @@
+{
+    "responses": {
+        "200": {
+            "description": "Returns user-account block.",
+            "content": {
+                "application/json": { "schema": { "type": "object", "properties": {}, "title": "UserAccountBlock" } }
+            }
+        }
+    }
+}

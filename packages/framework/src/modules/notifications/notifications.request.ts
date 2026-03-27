@@ -1,6 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-import type { NotificationPriority, NotificationStatus } from './notifications.model';
+import {
+    NOTIFICATION_PRIORITY_VALUES,
+    NOTIFICATION_STATUS_VALUES,
+    type NotificationPriority,
+    type NotificationStatus,
+} from './notifications.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
 /** Query params for fetching a single notification. */
@@ -19,10 +24,10 @@ export class GetNotificationListQuery extends PaginationQuery {
     @ApiPropertyOptional({ description: 'Notification type filter.' })
     type?: string;
     /** Priority level filter. */
-    @ApiPropertyOptional({ description: 'Notification priority filter.' })
+    @ApiPropertyOptional({ description: 'Notification priority filter.', enum: NOTIFICATION_PRIORITY_VALUES })
     priority?: NotificationPriority;
     /** Notification status filter. */
-    @ApiPropertyOptional({ description: 'Notification status filter.' })
+    @ApiPropertyOptional({ description: 'Notification status filter.', enum: NOTIFICATION_STATUS_VALUES })
     status?: NotificationStatus;
     /** Date range start from query string (kept as string). */
     @ApiPropertyOptional({ description: 'Date range start as ISO string.' })
@@ -44,6 +49,6 @@ export class MarkNotificationAsRequest {
     @ApiProperty({ description: 'Notification identifier.' })
     id!: string;
     /** New notification status. */
-    @ApiProperty({ description: 'Target notification status to set.' })
+    @ApiProperty({ description: 'Target notification status to set.', enum: NOTIFICATION_STATUS_VALUES })
     status!: NotificationStatus;
 }
