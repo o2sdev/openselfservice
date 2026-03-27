@@ -1,4 +1,4 @@
-const DEFAULT_KEY = '__default__';
+const DEFAULT_KEY = 'guest';
 
 let _storageKey = 'cartId';
 let _currentOrgId: string | undefined;
