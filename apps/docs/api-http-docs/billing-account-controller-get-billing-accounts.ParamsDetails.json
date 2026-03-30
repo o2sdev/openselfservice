@@ -1,1 +1,0 @@
-{"parameters":[{"name":"status","required":false,"in":"query","schema":{"type":"string"}},{"name":"number","required":false,"in":"query","schema":{"type":"string"}},{"name":"query","required":false,"in":"query","schema":{"type":"string"}}]}

@@ -1,6 +1,0 @@
-{
-    "responses": {
-        "204": { "description": "Cart item removed." },
-        "404": { "description": "Cart or item was not found." }
-    }
-}

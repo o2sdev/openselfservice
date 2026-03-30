@@ -1,8 +1,0 @@
-{
-    "responses": {
-        "200": {
-            "description": "Returns a single CMS entry. Structure varies by content type (e.g., Article, Page, Block). Common fields: id, createdAt, updatedAt.",
-            "content": { "application/json": { "schema": { "type": "object", "additionalProperties": true } } }
-        }
-    }
-}

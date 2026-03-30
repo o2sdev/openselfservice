@@ -1,1 +1,0 @@
-{"parameters":[{"name":"orgId","required":true,"in":"path","schema":{"type":"string"}},{"name":"userId","required":true,"in":"path","schema":{"type":"string"}}]}

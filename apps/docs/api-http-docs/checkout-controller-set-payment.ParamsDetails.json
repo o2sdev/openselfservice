@@ -1,1 +1,0 @@
-{"parameters":[{"name":"cartId","required":true,"in":"path","schema":{"type":"string"}}]}

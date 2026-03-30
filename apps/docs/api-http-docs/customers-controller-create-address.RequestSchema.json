@@ -1,1 +1,0 @@
-{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"label":{"type":"string"},"isDefault":{"type":"boolean"},"address":{"type":"object","properties":{},"title":"Address"}},"required":["address"],"title":"CreateAddressBody"}}}}}

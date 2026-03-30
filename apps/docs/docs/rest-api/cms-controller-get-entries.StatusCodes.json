@@ -1,8 +1,0 @@
-{
-    "responses": {
-        "200": {
-            "description": "Returns CMS entries collection. Structure varies by content type. Typically contains data array and pagination info.",
-            "content": { "application/json": { "schema": { "type": "object", "additionalProperties": true } } }
-        }
-    }
-}

@@ -1,1 +1,0 @@
-{"parameters":[{"name":"authorization","in":"header","description":"Bearer token used by the integration layer.","required":false,"schema":{"type":"string"}},{"name":"id","required":true,"in":"path","description":"Cart identifier.","schema":{"type":"string"}}]}

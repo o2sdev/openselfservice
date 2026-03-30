@@ -59,5 +59,9 @@ agent-os
 # Generated files
 O2S-API.postman_collection.json
 
+# Docs app — generated from static/openapi/framework-live.json (committed source of truth)
+apps/docs/docs/rest-api/
+apps/docs/static/api/reference/
+
 # TypeScript build info
 tsconfig.tsbuildinfo

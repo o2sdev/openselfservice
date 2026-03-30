@@ -1,6 +1,0 @@
-{
-    "responses": {
-        "204": { "description": "Promotion removed." },
-        "404": { "description": "Cart or promotion was not found." }
-    }
-}

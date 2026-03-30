@@ -2,7 +2,8 @@ import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import process from 'node:process';
 
-const openApiUrl = process.env.O2S_OPENAPI_URL ?? 'http://localhost:3001/api/docs-api-json';
+const openApiUrlFromEnv = process.env.O2S_OPENAPI_URL?.trim();
+const openApiUrl = openApiUrlFromEnv || 'http://localhost:3001/api/docs-api-json';
 const outputPath = resolve(process.cwd(), 'static/openapi/framework-live.json');
 const strictMode = process.argv.includes('--strict') || process.env.O2S_OPENAPI_STRICT === '1';
 const frameworkTags = new Set([
@@ -72,8 +73,8 @@ function filterFrameworkOnly(document) {
     const tags = (document.tags ?? []).filter((tag) => usedTags.has(String(tag.name).toLowerCase()));
     const serverUrl = resolveApiServerUrl();
 
-    // Jedna zmienna w URL → w Try it out motyw pokazuje pole tekstowe (nie tylko select);
-    // domyślna wartość pochodzi z O2S_OPENAPI_SERVER_URL / NEXT_PUBLIC_API_URL_INTERNAL lub origin O2S_OPENAPI_URL.
+    // A single `{baseUrl}` variable → in Try it out the UI shows a text field (not only a select).
+    // The default is taken from O2S_OPENAPI_SERVER_URL / NEXT_PUBLIC_API_URL_INTERNAL, or from the origin of O2S_OPENAPI_URL.
     return {
         ...document,
         info: {

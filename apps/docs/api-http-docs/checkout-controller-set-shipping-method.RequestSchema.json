@@ -1,1 +1,0 @@
-{"title":"Body","body":{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"shippingOptionId":{"type":"string"}},"required":["shippingOptionId"],"title":"SetShippingMethodBody"}}}}}
