@@ -1,5 +1,17 @@
 # @o2s/blocks.product-details
 
+## 0.5.0
+
+### Minor Changes
+
+- 1dbf967: Add CartStorage utility for org-scoped cart management in localStorage. Replace direct localStorage calls and cartIdLocalStorageKey prop with centralized Utils.CartStorage across all blocks and app components.
+
+### Patch Changes
+
+- Updated dependencies [1dbf967]
+  - @o2s/utils.frontend@0.6.0
+  - @o2s/ui@1.15.0
+
 ## 0.4.2
 
 ### Patch Changes
