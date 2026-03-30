@@ -476,7 +476,12 @@ const resourcesRequests = [
 frameworkModules.push(createFolder('Resources', resourcesRequests));
 
 // Search Module
-const searchRequests = [createRequest('Search', 'GET', '/search', [{ key: 'index', value: 'articles' }])];
+const searchRequests = [
+    createRequest('Search', 'POST', '/search', [{ key: 'index', value: 'articles' }], {
+        query: 'search term',
+        pagination: { limit: 10, offset: 0 },
+    }),
+];
 frameworkModules.push(createFolder('Search', searchRequests));
 
 // Page Module

@@ -236,8 +236,8 @@ describe('ProductsService', () => {
 
             const result = await firstValueFrom(
                 service.getRelatedProductList({
-                    productId: 'p1',
-                    productVariantId: 'v1',
+                    id: 'p1',
+                    variantId: 'v1',
                     type: 'COMPATIBLE_SERVICE',
                     basePath: TEST_BASE_PATH,
                 }),

@@ -1,30 +1,59 @@
 import { Body, Controller, Get, Headers, Param, Post, Query, UseInterceptors } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
+import { Notification, PaginatedNotifications } from './notifications.model';
 import { NotificationService } from './notifications.service';
 import { AppHeaders, HeaderName } from '@/utils/models/headers';
 
 const H = HeaderName;
 
+/**
+ * HTTP controller for notifications. Base path: `/notifications`. All methods delegate to {@link NotificationService}.
+ */
 @Controller('/notifications')
 @UseInterceptors(LoggerService)
+@ApiTags('notifications')
 export class NotificationsController {
     constructor(protected readonly notificationService: NotificationService) {}
 
     @Get(':id')
-    getNotification(@Param() params: Request.GetNotificationParams, @Headers() headers: AppHeaders) {
+    @ApiOperation({ summary: 'Get notification by id' })
+    @ApiParam({ name: 'id', type: String, description: 'Notification identifier.' })
+    @ApiOkResponse({ description: 'Returns notification details.', type: Notification })
+    getNotification(
+        @Param() params: Request.GetNotificationParams,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<NotificationService['getNotification']> {
         return this.notificationService.getNotification(params, headers[H.Authorization]);
     }
 
     @Get()
-    getNotificationList(@Query() query: Request.GetNotificationListQuery, @Headers() headers: AppHeaders) {
+    @ApiOperation({ summary: 'List notifications' })
+    @ApiQuery({
+        name: 'query',
+        required: false,
+        type: String,
+        description: 'Notification list filters and pagination query.',
+    })
+    @ApiOkResponse({ description: 'Returns notifications list.', type: PaginatedNotifications })
+    getNotificationList(
+        @Query() query: Request.GetNotificationListQuery,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<NotificationService['getNotificationList']> {
         return this.notificationService.getNotificationList(query, headers[H.Authorization]);
     }
 
     @Post()
-    markNotificationAs(@Body() request: Request.MarkNotificationAsRequest, @Headers() headers: AppHeaders) {
+    @ApiOperation({ summary: 'Update notification status' })
+    @ApiBody({ type: Request.MarkNotificationAsRequest, description: 'Notification status update payload.' })
+    @ApiOkResponse({ description: 'Notification status updated.' })
+    markNotificationAs(
+        @Body() request: Request.MarkNotificationAsRequest,
+        @Headers() headers: AppHeaders,
+    ): ReturnType<NotificationService['markAs']> {
         return this.notificationService.markAs(request, headers[H.Authorization]);
     }
 }

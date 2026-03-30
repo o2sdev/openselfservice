@@ -7,6 +7,11 @@
 # Generated files
 .docusaurus
 .cache-loader
+/docs/api
+
+# OpenAPI-driven docs (generated from static/openapi/framework-live.json; JSON stays committed)
+/docs/rest-api/
+/static/api/reference/
 
 # Misc
 .DS_Store

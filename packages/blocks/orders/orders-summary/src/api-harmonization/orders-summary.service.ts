@@ -21,7 +21,6 @@ export class OrdersSummaryService {
     ) {}
 
     getOrdersSummaryBlock(query: GetOrdersSummaryBlockQuery, headers: AppHeaders): Observable<OrdersSummaryBlock> {
-        const authorization = headers[H.Authorization];
         const cms = this.cmsService.getOrdersSummaryBlock({ ...query, locale: headers[H.Locale] });
 
         const ordersCurrent = this.orderService.getOrderList(
@@ -29,10 +28,10 @@ export class OrdersSummaryService {
                 ...query,
                 limit: 1000,
                 locale: headers[H.Locale],
-                dateFrom: dayjs(query.dateFrom).toDate(),
-                dateTo: dayjs(query.dateTo).toDate(),
+                dateFrom: dayjs(query.dateFrom).toISOString(),
+                dateTo: dayjs(query.dateTo).toISOString(),
             },
-            authorization,
+            headers[H.Authorization],
         );
 
         const ordersPrevious = this.orderService.getOrderList(
@@ -40,10 +39,10 @@ export class OrdersSummaryService {
                 ...query,
                 limit: 1000,
                 locale: headers[H.Locale],
-                dateFrom: dayjs(query.dateFrom).subtract(1, 'year').toDate(),
-                dateTo: dayjs(query.dateTo).subtract(1, 'year').toDate(),
+                dateFrom: dayjs(query.dateFrom).subtract(1, 'year').toISOString(),
+                dateTo: dayjs(query.dateTo).subtract(1, 'year').toISOString(),
             },
-            authorization,
+            headers[H.Authorization],
         );
 
         const diff = Math.abs(
@@ -62,6 +61,7 @@ export class OrdersSummaryService {
                 );
 
                 // Extract permissions using ACL service
+                const authorization = headers[H.Authorization];
                 if (authorization) {
                     const permissions = this.authService.canPerformActions(authorization, 'orders', ['view', 'create']);
 

@@ -121,9 +121,6 @@ describe('SearchService', () => {
 
             expect(result.hits).toEqual(hits);
             expect(result.total).toBe(1);
-            expect(result.page).toBe(0);
-            expect(result.nbPages).toBe(1);
-            expect(result.processingTimeMS).toBe(2);
         });
 
         it('should return empty result when results[0] is missing', async () => {

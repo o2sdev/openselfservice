@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
 import { parse, stringify } from 'flatted';
-import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
+import { Observable, catchError, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
 import { CMS, Cache } from '@o2s/framework/modules';
 
@@ -116,14 +116,16 @@ export class CmsService extends CMS.Service {
         });
     }
 
-    getEntry(options: CMS.Request.GetCmsEntryParams) {
-        const key = `entry-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => of(undefined));
+    getEntry<T>(options: CMS.Request.GetCmsEntryParams): Observable<T | undefined> {
+        return this.getBlock(options).pipe(
+            map((data) => data as T),
+            catchError(() => of(undefined)),
+        );
     }
 
-    getEntries(options: CMS.Request.GetCmsEntriesParams) {
+    getEntries<T>(options: CMS.Request.GetCmsEntriesParams) {
         const key = `entries-${options.type}-${options.locale}-${JSON.stringify(options.filters || {})}`;
-        return this.getCachedBlock(key, () => of(undefined));
+        return this.getCachedBlock<T>(key, () => of({} as T));
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {

@@ -645,6 +645,41 @@ aside:not(.theme-doc-sidebar-container) {
     margin-top: 1rem;
 }
 
+/* OpenAPI plugin quick contrast fix */
+.theme-api-markdown .openapi-right-panel__container {
+    --ifm-pre-color: #0b173d;
+    --ifm-pre-background: #ffffff;
+    --openapi-input-background: #ffffff;
+}
+
+.theme-api-markdown .openapi-right-panel__container .openapi-explorer__request-form,
+.theme-api-markdown .openapi-right-panel__container .openapi-explorer__request-header-container,
+.theme-api-markdown .openapi-right-panel__container .openapi-explorer__details-summary,
+.theme-api-markdown .openapi-right-panel__container .openapi-explorer__form-item,
+.theme-api-markdown .openapi-right-panel__container .openapi-explorer__form-item-label,
+.theme-api-markdown .openapi-right-panel__container .openapi-explorer__form-item-description,
+.theme-api-markdown .openapi-right-panel__container .openapi-explorer__details-container {
+    color: #0b173d !important;
+}
+
+.theme-api-markdown .openapi-tabs__heading,
+.theme-api-markdown .openapi-tabs__response-header,
+.theme-api-markdown .openapi-markdown__details-summary-header-body,
+.theme-api-markdown .openapi-tabs__tab-list-item,
+.theme-api-markdown .openapi-tabs__tab-list-item button,
+.theme-api-markdown .openapi-schema__property,
+.theme-api-markdown .openapi-schema__name,
+.theme-api-markdown .openapi-markdown__details summary,
+.theme-api-markdown .openapi-markdown__details strong {
+    color: var(--ifm-font-color-base) !important;
+}
+
+/* Endpoint path in white method badge */
+.theme-api-markdown .openapi__method-endpoint,
+.theme-api-markdown .openapi__method-endpoint-path {
+    color: #0b173d !important;
+}
+
 .dropdown__link {
     display: flex;
     align-items: center;

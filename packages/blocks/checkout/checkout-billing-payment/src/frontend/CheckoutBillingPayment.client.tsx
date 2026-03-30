@@ -80,6 +80,11 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                     });
                 }
                 setCartPromotions(cart.promotions);
+                if (!cart.regionId) {
+                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                    router.replace(cartPath ?? '/');
+                    return;
+                }
                 const providers = await sdk.payments.getProviders(
                     { regionId: cart.regionId },
                     { 'x-locale': locale },

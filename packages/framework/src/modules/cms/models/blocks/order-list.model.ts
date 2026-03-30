@@ -2,6 +2,7 @@ import { Order } from '@/modules/orders/orders.model';
 
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
+/** CMS block configuration for order list view. */
 export class OrderListBlock extends Block.Block {
     title?: string;
     subtitle?: string;

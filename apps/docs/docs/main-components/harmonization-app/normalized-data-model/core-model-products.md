@@ -130,15 +130,15 @@ getRelatedProductList(
 
 #### Params Parameters
 
-| Parameter        | Type                 | Description                             |
-| ---------------- | -------------------- | --------------------------------------- |
-| type             | ProductReferenceType | Type of relationship (required)         |
-| productId        | string               | ID of the base product (required)       |
-| productVariantId | string               | Optional variant ID of the base product |
-| locale           | string               | Locale for localized content            |
-| limit            | number               | Maximum number of items to return       |
-| offset           | number               | Number of items to skip                 |
-| sort             | string               | Sorting criteria                        |
+| Parameter | Type                 | Description                             |
+| --------- | -------------------- | --------------------------------------- |
+| type      | ProductReferenceType | Type of relationship (required)         |
+| id        | string               | ID of the base product (required)       |
+| variantId | string               | Optional variant ID of the base product |
+| locale    | string               | Locale for localized content            |
+| limit     | number               | Maximum number of items to return       |
+| offset    | number               | Number of items to skip                 |
+| sort      | string               | Sorting criteria                        |
 
 #### Returns
 
@@ -150,8 +150,8 @@ An Observable that emits a paginated list of related products.
 productService
     .getRelatedProductList({
         type: 'SPARE_PART',
-        productId: 'prod-123',
-        productVariantId: 'var-456',
+        id: 'prod-123',
+        variantId: 'var-456',
         locale: 'en-US',
         limit: 5,
     })

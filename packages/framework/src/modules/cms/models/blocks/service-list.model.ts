@@ -3,6 +3,7 @@ import { Contract } from '@/modules/resources/resources.model';
 
 import { Block, Filters, Mapping, Pagination } from '@/utils/models';
 
+/** CMS block configuration for service list view. */
 export class ServiceListBlock extends Block.Block {
     title?: string;
     subtitle?: string;

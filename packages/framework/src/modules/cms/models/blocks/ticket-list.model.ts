@@ -3,6 +3,7 @@ import { Ticket } from '@/modules/tickets/tickets.model';
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 import { Link } from '@/utils/models/link';
 
+/** CMS block configuration for ticket list view. */
 export class TicketListBlock extends Block.Block<Meta> {
     title?: string;
     subtitle?: string;
@@ -37,6 +38,7 @@ export class TicketListBlock extends Block.Block<Meta> {
     initialFilters?: Partial<Ticket & { sort?: string }>;
 }
 
+/** CMS metadata map for ticket list block editor fields. */
 export class Meta {
     __id!: string;
     title!: string;

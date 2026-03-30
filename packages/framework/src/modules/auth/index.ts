@@ -1,3 +1,8 @@
+/**
+ * # Auth module
+ *
+ * Authentication: no controller in framework; service for login, tokens, session. Under `integrations.auth`: `name`, `service`, `imports`.
+ */
 export * as Decorators from './auth.decorators';
 export * as Guards from './auth.guard';
 

@@ -1,5 +1,6 @@
 import { Models } from '@o2s/framework/modules';
 
+/** CMS page with template, SEO and optional parent hierarchy. */
 export class Page {
     id!: string;
     slug!: string;
@@ -27,20 +28,24 @@ export class Page {
     redirect?: string;
 }
 
+/** Base template contract used by CMS page layouts. */
 export abstract class Template {
     slots!: {
         [key: string]: SlotBlock[];
     };
 }
 
+/** Block entry rendered inside a template slot. */
 export class SlotBlock {
     __typename!: string;
     layout?: LayoutSection;
     id!: string;
 }
 
+/** Supported page template variants. */
 export type PageTemplate = OneColumnTemplate | TwoColumnTemplate;
 
+/** One-column template variant. */
 export class OneColumnTemplate implements Template {
     __typename!: 'OneColumnTemplate';
     slots!: {
@@ -48,6 +53,7 @@ export class OneColumnTemplate implements Template {
     };
 }
 
+/** Two-column template variant with top, left, right and bottom slot regions. */
 export class TwoColumnTemplate implements Template {
     __typename!: 'TwoColumnTemplate';
     slots!: {
@@ -58,6 +64,7 @@ export class TwoColumnTemplate implements Template {
     };
 }
 
+/** Optional per-block layout section configuration. */
 export class LayoutSection {
     spacing?: 'none' | 'small' | 'medium' | 'large';
     background?: 'none' | 'light' | 'dark' | 'brand';

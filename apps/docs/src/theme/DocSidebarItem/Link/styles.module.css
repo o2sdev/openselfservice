@@ -1,0 +1,59 @@
+.menuExternalLink {
+    align-items: center;
+}
+
+.linkLabel {
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.methodBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    margin-right: 0.5rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.get {
+    color: #0b5d1e;
+    background: #d6f5dd;
+}
+
+.post {
+    color: #0b3c8a;
+    background: #dbeafe;
+}
+
+.put {
+    color: #7a2e0a;
+    background: #ffedd5;
+}
+
+.patch {
+    color: #5b21b6;
+    background: #ede9fe;
+}
+
+.delete {
+    color: #991b1b;
+    background: #fee2e2;
+}
+
+.options {
+    color: #374151;
+    background: #e5e7eb;
+}
+
+.head {
+    color: #1f2937;
+    background: #d1d5db;
+}

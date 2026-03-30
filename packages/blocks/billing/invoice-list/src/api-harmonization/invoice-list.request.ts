@@ -4,7 +4,7 @@ export class GetInvoiceListBlockQuery implements Omit<CMS.Request.GetCmsEntryPar
     id!: string;
     offset?: number;
     limit?: number;
-    dateFrom?: Date;
-    dateTo?: Date;
+    dateFrom?: string;
+    dateTo?: string;
     search?: string;
 }

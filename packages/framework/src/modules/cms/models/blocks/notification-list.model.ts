@@ -2,6 +2,7 @@ import { Notification } from '@/modules/notifications/notifications.model';
 
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
+/** CMS block configuration for notification list view. */
 export class NotificationListBlock extends Block.Block {
     title?: string;
     subtitle?: string;

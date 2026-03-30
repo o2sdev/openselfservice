@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS, Invoices } from '@o2s/configs.integrations';
+import dayjs from 'dayjs';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { AppHeaders, HeaderName } from '@o2s/framework/headers';
@@ -32,6 +33,8 @@ export class InvoiceListService {
                             ...query,
                             limit: query.limit || cms.pagination?.limit || 1,
                             offset: query.offset || 0,
+                            dateFrom: query.dateFrom ? dayjs(query.dateFrom).toISOString() : undefined,
+                            dateTo: query.dateTo ? dayjs(query.dateTo).toISOString() : undefined,
                             locale: headers[H.Locale],
                         },
                         authorization,
