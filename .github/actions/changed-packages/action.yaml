@@ -1,6 +1,6 @@
 name: Determine changed packages
 
-description: 'Determines which packages have changed using Turborepo. Returns JSON output with changed packages information.'
+description: 'Determines which packages have changed using Turborepo. Returns a small JSON object { "packages": [...] } (not full turbo dry-run, to stay under GitHub output size limits).'
 
 inputs:
     event-name:
@@ -17,7 +17,7 @@ inputs:
 
 outputs:
     package_changed:
-        description: 'JSON string containing changed packages information from turbo dry-run'
+        description: 'JSON string {"packages":[...]} — package names from turbo dry-run only'
         value: ${{ steps.changeset.outputs.result }}
     stories_changed:
         description: 'True if any storybook files or config changed'
@@ -44,15 +44,17 @@ runs:
           run: |
               # Get turbo dry-run output
               TURBO_OUTPUT=$(npx -y turbo build --dry-run=json --filter=...[$TURBO_REF_FILTER])
-              
-              # Set output for the action
+
+              # GitHub limits total job outputs to 1 MiB; full turbo JSON includes huge "tasks" — only pass package names.
+              PACKAGE_JSON=$(echo "$TURBO_OUTPUT" | jq -c '{packages: (.packages // [])}')
+
               echo 'result<<CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
-              echo "$TURBO_OUTPUT" >> $GITHUB_OUTPUT
+              echo "$PACKAGE_JSON" >> $GITHUB_OUTPUT
               echo 'CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
 
               # Debug logging
               echo "### Changed Packages (Turborepo) ###"
-              echo "$TURBO_OUTPUT" | jq -r '.packages[]' || echo "No packages changed or jq error"
+              echo "$PACKAGE_JSON" | jq -r '.packages[]' || echo "No packages changed or jq error"
               echo "####################################"
 
         - name: Determine storybook changes
