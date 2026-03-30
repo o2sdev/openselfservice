@@ -9,8 +9,7 @@ export interface ProductDetailsProps extends Models.BlockProps.BaseBlockProps<Re
     variantSlug?: string;
 }
 
-export type ProductDetailsPureProps = ProductDetailsProps &
-    Client.Model.ProductDetailsBlock & { cartIdLocalStorageKey: string };
+export type ProductDetailsPureProps = ProductDetailsProps & Client.Model.ProductDetailsBlock;
 
 export type ProductDetailsRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> &
     Pick<ProductDetailsProps, 'variantSlug'>;

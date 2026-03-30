@@ -28,13 +28,7 @@ import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';
 
-export const ProductListPure: React.FC<ProductListPureProps> = ({
-    locale,
-    accessToken,
-    routing,
-    cartIdLocalStorageKey,
-    ...component
-}) => {
+export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
     const initialProducts = component.products?.data ?? [];
@@ -64,7 +58,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({
             const productName = data.products.data.find((p) => p.sku === sku)?.name ?? sku;
             startAddToCartTransition(async () => {
                 try {
-                    const cartId = localStorage.getItem(cartIdLocalStorageKey);
+                    const cartId = Utils.CartStorage.getCartId();
                     const result = await sdk.cart.addCartItem(
                         {
                             cartId: cartId || undefined,
@@ -77,7 +71,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({
                         accessToken,
                     );
                     if (!cartId && result?.id) {
-                        localStorage.setItem(cartIdLocalStorageKey, result.id);
+                        Utils.CartStorage.setCartId(result.id);
                     }
                     eventBus.emit('cart:changed', { cart: result });
                     toast({
@@ -102,7 +96,6 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({
         [
             locale,
             accessToken,
-            cartIdLocalStorageKey,
             data.labels.addToCartSuccess,
             data.labels.addToCartError,
             data.labels.viewCartLabel,

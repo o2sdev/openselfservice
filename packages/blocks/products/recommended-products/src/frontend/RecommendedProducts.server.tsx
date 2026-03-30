@@ -39,7 +39,6 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = async ({
             accessToken={accessToken}
             locale={locale}
             routing={routing}
-            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
         />
     );
 };

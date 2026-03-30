@@ -1,7 +1,9 @@
 'use client';
 
 import { CMS } from '@o2s/configs.integrations';
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+
+import { Utils } from '@o2s/utils.frontend';
 
 import { PriceService, usePriceService } from '@o2s/ui/components/Products/Price';
 
@@ -23,6 +25,10 @@ export interface GlobalProviderProps {
     locale: string;
     themes: CMS.Model.AppConfig.Themes;
     currentTheme?: string;
+    user?: {
+        orgId?: string;
+    };
+    cartStorageKey?: string;
     children: ReactNode;
 }
 
@@ -48,14 +54,37 @@ export interface GlobalContextType {
         available: CMS.Model.AppConfig.Themes;
         current?: string;
     };
+    user?: {
+        orgId?: string;
+    };
 }
 
 export const GlobalContext = createContext({} as GlobalContextType);
 
-export const GlobalProvider = ({ config, labels, locale, themes, currentTheme, children }: GlobalProviderProps) => {
+export const GlobalProvider = ({
+    config,
+    labels,
+    locale,
+    themes,
+    currentTheme,
+    user,
+    cartStorageKey,
+    children,
+}: GlobalProviderProps) => {
     const priceService = usePriceService(locale);
 
     const [isSpinnerVisible, setIsSpinnerVisible] = useState(false);
+
+    useEffect(() => {
+        Utils.CartStorage.configureCartStorage({ storageKey: cartStorageKey, orgId: user?.orgId });
+
+        if (user?.orgId) {
+            sessionStorage.setItem('wasAuthenticated', '1');
+        } else if (sessionStorage.getItem('wasAuthenticated')) {
+            sessionStorage.removeItem('wasAuthenticated');
+            Utils.CartStorage.removeAllCartIds();
+        }
+    }, [cartStorageKey, user?.orgId]);
 
     return (
         <GlobalContext.Provider
@@ -71,6 +100,7 @@ export const GlobalProvider = ({ config, labels, locale, themes, currentTheme, c
                     available: themes,
                     current: currentTheme,
                 },
+                user,
             }}
         >
             {children}

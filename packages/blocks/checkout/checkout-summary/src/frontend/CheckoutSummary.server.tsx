@@ -25,14 +25,5 @@ export const CheckoutSummary: React.FC<CheckoutSummaryProps> = async ({ id, acce
         return null;
     }
 
-    return (
-        <CheckoutSummaryDynamic
-            {...data}
-            id={id}
-            accessToken={accessToken}
-            locale={locale}
-            routing={routing}
-            cartIdLocalStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY!}
-        />
-    );
+    return <CheckoutSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };

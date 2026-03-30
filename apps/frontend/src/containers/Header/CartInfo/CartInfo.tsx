@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react';
 import { useLocale } from 'next-intl';
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 
@@ -18,7 +20,7 @@ import { CartInfoProps } from './CartInfo.types';
 /** Last known line-item count for this browser session; survives header remounts on navigation (avoids badge flicker). */
 let lastKnownCartItemCount = 0;
 
-export const CartInfo = ({ data, cartIdLocalStorageKey }: CartInfoProps) => {
+export const CartInfo = ({ data }: CartInfoProps) => {
     const session = useSession();
     const locale = useLocale();
     const [itemCount, setItemCount] = useState(() => lastKnownCartItemCount);
@@ -28,7 +30,7 @@ export const CartInfo = ({ data, cartIdLocalStorageKey }: CartInfoProps) => {
         let cancelled = false;
 
         void (async () => {
-            const cartId = localStorage.getItem(cartIdLocalStorageKey);
+            const cartId = Utils.CartStorage.getCartId();
             if (!cartId) {
                 if (!cancelled) {
                     lastKnownCartItemCount = 0;
@@ -52,7 +54,7 @@ export const CartInfo = ({ data, cartIdLocalStorageKey }: CartInfoProps) => {
         return () => {
             cancelled = true;
         };
-    }, [session.data?.accessToken, locale, cartIdLocalStorageKey]);
+    }, [session.data?.accessToken, locale]);
 
     const onCartChanged = useCallback((payload: O2SEventMap['cart:changed']) => {
         const next = payload.cart.items.data.length;

@@ -9,8 +9,7 @@ export interface RecommendedProductsProps extends Models.BlockProps.BaseBlockPro
     limit?: number;
 }
 
-export type RecommendedProductsPureProps = RecommendedProductsProps &
-    Model.RecommendedProductsBlock & { cartIdLocalStorageKey: string };
+export type RecommendedProductsPureProps = RecommendedProductsProps & Model.RecommendedProductsBlock;
 
 export type RecommendedProductsRendererProps = Omit<
     Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>,
