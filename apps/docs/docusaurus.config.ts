@@ -593,6 +593,17 @@ const config: Config = {
             darkTheme: prismThemes.dracula,
         },
 
+        // docusaurus-theme-openapi-docs: order and subset of code-sample tabs (right-hand API panel)
+        // https://github.com/PaloAltoNetworks/docusaurus-openapi-docs — CodeSnippets reads themeConfig.languageTabs
+        languageTabs: [
+            { language: 'curl' },
+            { language: 'javascript' },
+            { language: 'nodejs' },
+            { language: 'java' },
+            { language: 'python' },
+            { language: 'go' },
+        ],
+
         zoom: {
             selector: '.markdown img',
             background: {
