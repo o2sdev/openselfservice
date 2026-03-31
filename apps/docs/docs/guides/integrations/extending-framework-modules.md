@@ -318,6 +318,10 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Documents, Tickets } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
+
+const H = HeaderName;
+
 @Injectable()
 export class TicketListService {
     constructor(
