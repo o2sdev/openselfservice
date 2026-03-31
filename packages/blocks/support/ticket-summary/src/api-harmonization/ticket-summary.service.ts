@@ -21,7 +21,11 @@ export class TicketSummaryService {
 
     getTicketSummaryBlock(query: GetTicketSummaryBlockQuery, headers: AppHeaders): Observable<TicketSummaryBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getTicketSummaryBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketSummaryBlock.TicketSummaryBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'TicketSummaryBlock',
+        });
         const tickets = this.ticketService.getTicketList(
             {
                 limit: 1000,

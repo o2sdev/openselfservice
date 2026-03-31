@@ -18,7 +18,11 @@ export class ArticleSearchService {
     ) {}
 
     getArticleSearchBlock(query: GetArticleSearchBlockQuery, headers: AppHeaders): Observable<ArticleSearchBlock> {
-        const cms = this.cmsService.getArticleSearchBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.ArticleSearchBlock.ArticleSearchBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'ArticleSearchBlock',
+        });
         return forkJoin([cms]).pipe(map(([cms]) => mapArticleSearch(cms, headers[H.Locale])));
     }
 

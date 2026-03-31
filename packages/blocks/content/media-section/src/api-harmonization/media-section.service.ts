@@ -15,7 +15,11 @@ export class MediaSectionService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getMediaSectionBlock(query: GetMediaSectionBlockQuery, headers: AppHeaders): Observable<MediaSectionBlock> {
-        const cms = this.cmsService.getMediaSectionBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.MediaSectionBlock.MediaSectionBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'MediaSectionBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapMediaSection(cms, headers[H.Locale])));
     }

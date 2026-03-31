@@ -318,6 +318,10 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Documents, Tickets } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
+
+const H = HeaderName;
+
 @Injectable()
 export class TicketListService {
     constructor(
@@ -327,7 +331,9 @@ export class TicketListService {
     ) {}
 
     getTicketListBlock(query, headers): Observable<TicketListBlock> {
-        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketListBlock.TicketListBlock>({
+            ...query, locale: headers[H.Locale], blockType: 'TicketListBlock',
+        });
         const documents = this.documentService.getDocumentList({ limit: 5 });
 
         return forkJoin([cms, documents]).pipe(

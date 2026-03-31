@@ -18,7 +18,11 @@ export class OrganizationsService {
     ) {}
 
     getCustomers(query: GetCustomersQuery, headers: AppHeaders): Observable<CustomerList> {
-        const cms = this.cmsService.getOrganizationList({ locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.OrganizationList.OrganizationList>({
+            id: 'organizations',
+            locale: headers[H.Locale],
+            blockType: 'OrganizationList',
+        });
         // Pass authorization token to filter organizations by current user
         const organizations = this.organizationsService.getOrganizationList(
             {
@@ -29,8 +33,8 @@ export class OrganizationsService {
             headers[H.Authorization],
         );
 
-        return forkJoin([organizations, cms]).pipe(
-            map(([organizations, cms]) => {
+        return forkJoin({ organizations, cms }).pipe(
+            map(({ organizations, cms }) => {
                 if (!organizations) {
                     throw new NotFoundException();
                 }

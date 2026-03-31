@@ -23,7 +23,11 @@ export class CheckoutCompanyDataService {
         headers: AppHeaders,
     ): Observable<CheckoutCompanyDataBlock> {
         return this.cmsService
-            .getCheckoutCompanyDataBlock({ ...query, locale: headers[H.Locale] })
+            .getBlockConfig<CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock>({
+                ...query,
+                locale: headers[H.Locale],
+                blockType: 'CheckoutCompanyDataBlock',
+            })
             .pipe(map(mapCheckoutCompanyData));
 
         // Optional: Add permission flags to the response

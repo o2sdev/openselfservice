@@ -21,7 +21,11 @@ export class OrderListService {
 
     getOrderListBlock(query: GetOrderListBlockQuery, headers: AppHeaders): Observable<OrderListBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getOrderListBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.OrderListBlock.OrderListBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'OrderListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

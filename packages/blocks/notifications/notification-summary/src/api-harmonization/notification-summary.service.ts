@@ -24,7 +24,11 @@ export class NotificationSummaryService {
         headers: AppHeaders,
     ): Observable<NotificationSummaryBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getNotificationSummaryBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'NotificationSummaryBlock',
+        });
         const notifications = this.notificationService.getNotificationList(
             {
                 limit: 1000,

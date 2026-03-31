@@ -31,7 +31,11 @@ export class PaymentsSummaryService {
         headers: AppHeaders,
     ): Observable<PaymentsSummaryBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getPaymentsSummaryBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'PaymentsSummaryBlock',
+        });
         const invoices = this.invoiceService.getInvoiceList(
             {
                 limit: query.limit,

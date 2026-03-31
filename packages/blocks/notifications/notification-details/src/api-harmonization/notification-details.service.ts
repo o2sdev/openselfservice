@@ -29,7 +29,11 @@ export class NotificationDetailsService {
         headers: AppHeaders,
     ): Observable<NotificationDetailsBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'NotificationDetailsBlock',
+        });
         const notification = this.notificationService.getNotification(
             { ...params, locale: headers[H.Locale] },
             authorization,

@@ -15,6 +15,12 @@ export class CartService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getCartBlock(query: GetCartBlockQuery, headers: AppHeaders): Observable<CartBlock> {
-        return this.cmsService.getCartBlock({ ...query, locale: headers[H.Locale] }).pipe(map(mapCart));
+        return this.cmsService
+            .getBlockConfig<CMS.Model.CartBlock.CartBlock>({
+                ...query,
+                locale: headers[H.Locale],
+                blockType: 'CartBlock',
+            })
+            .pipe(map(mapCart));
     }
 }

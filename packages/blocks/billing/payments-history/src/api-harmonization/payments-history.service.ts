@@ -25,7 +25,11 @@ export class PaymentsHistoryService {
         headers: AppHeaders,
     ): Observable<PaymentsHistoryBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getPaymentsHistoryBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'PaymentsHistoryBlock',
+        });
         const invoices = this.invoiceService.getInvoiceList(
             {
                 limit: query.limit,

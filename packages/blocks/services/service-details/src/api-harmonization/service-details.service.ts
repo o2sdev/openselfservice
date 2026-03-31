@@ -25,7 +25,11 @@ export class ServiceDetailsService {
         headers: AppHeaders,
     ): Observable<ServiceDetailsBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getServiceDetailsBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.ServiceDetailsBlock.ServiceDetailsBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'ServiceDetailsBlock',
+        });
         const service = this.resourceService.getService({ ...params, locale: headers[H.Locale] }, authorization);
 
         return forkJoin([cms, service]).pipe(

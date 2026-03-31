@@ -104,24 +104,30 @@ export class CmsController {
     @ApiOperation({ summary: 'Get FAQ block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns FAQ block.', type: Model.FaqBlock.FaqBlock })
-    getFaqBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getFaqBlock']> {
-        return this.cms.getFaqBlock(params);
+    getFaqBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.FaqBlock.FaqBlock>({ ...params, blockType: 'FaqBlock' });
     }
 
     @Get('/blocks/ticket-list')
     @ApiOperation({ summary: 'Get ticket-list block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns ticket-list block.', type: Model.TicketListBlock.TicketListBlock })
-    getTicketListBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getTicketListBlock']> {
-        return this.cms.getTicketListBlock(params);
+    getTicketListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.TicketListBlock.TicketListBlock>({
+            ...params,
+            blockType: 'TicketListBlock',
+        });
     }
 
     @Get('/blocks/ticket-details')
     @ApiOperation({ summary: 'Get ticket-details block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns ticket-details block.', type: Model.TicketDetailsBlock.TicketDetailsBlock })
-    getTicketDetailsBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getTicketDetailsBlock']> {
-        return this.cms.getTicketDetailsBlock(params);
+    getTicketDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.TicketDetailsBlock.TicketDetailsBlock>({
+            ...params,
+            blockType: 'TicketDetailsBlock',
+        });
     }
 
     @Get('/blocks/notification-list')
@@ -131,10 +137,11 @@ export class CmsController {
         description: 'Returns notification-list block.',
         type: Model.NotificationListBlock.NotificationListBlock,
     })
-    getNotificationListBlock(
-        @Query() params: Request.GetCmsEntryParams,
-    ): ReturnType<CmsService['getNotificationListBlock']> {
-        return this.cms.getNotificationListBlock(params);
+    getNotificationListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.NotificationListBlock.NotificationListBlock>({
+            ...params,
+            blockType: 'NotificationListBlock',
+        });
     }
 
     @Get('/blocks/notification-details')
@@ -144,18 +151,22 @@ export class CmsController {
         description: 'Returns notification-details block.',
         type: Model.NotificationDetailsBlock.NotificationDetailsBlock,
     })
-    getNotificationDetailsBlock(
-        @Query() params: Request.GetCmsEntryParams,
-    ): ReturnType<CmsService['getNotificationDetailsBlock']> {
-        return this.cms.getNotificationDetailsBlock(params);
+    getNotificationDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.NotificationDetailsBlock.NotificationDetailsBlock>({
+            ...params,
+            blockType: 'NotificationDetailsBlock',
+        });
     }
 
     @Get('/blocks/article-list')
     @ApiOperation({ summary: 'Get article-list block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns article-list block.', type: Model.ArticleListBlock.ArticleListBlock })
-    getArticleListBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getArticleListBlock']> {
-        return this.cms.getArticleListBlock(params);
+    getArticleListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.ArticleListBlock.ArticleListBlock>({
+            ...params,
+            blockType: 'ArticleListBlock',
+        });
     }
 
     @Get('/blocks/article-details')
@@ -176,8 +187,11 @@ export class CmsController {
     @ApiOperation({ summary: 'Get invoice-list block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns invoice-list block.', type: Model.InvoiceListBlock.InvoiceListBlock })
-    getInvoiceListBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getInvoiceListBlock']> {
-        return this.cms.getInvoiceListBlock(params);
+    getInvoiceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.InvoiceListBlock.InvoiceListBlock>({
+            ...params,
+            blockType: 'InvoiceListBlock',
+        });
     }
 
     @Get('/blocks/invoice-details')
@@ -187,18 +201,22 @@ export class CmsController {
         description: 'Returns invoice-details block.',
         type: Model.InvoiceDetailsBlock.InvoiceDetailsBlock,
     })
-    getInvoiceDetailsBlock(
-        @Query() params: Request.GetCmsEntryParams,
-    ): ReturnType<CmsService['getInvoiceDetailsBlock']> {
-        return this.cms.getInvoiceDetailsBlock(params);
+    getInvoiceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.InvoiceDetailsBlock.InvoiceDetailsBlock>({
+            ...params,
+            blockType: 'InvoiceDetailsBlock',
+        });
     }
 
     @Get('/blocks/resource-list')
     @ApiOperation({ summary: 'Get resource-list block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns resource-list block.', type: Model.ResourceListBlock.ResourceListBlock })
-    getResourceListBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getResourceListBlock']> {
-        return this.cms.getResourceListBlock(params);
+    getResourceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.ResourceListBlock.ResourceListBlock>({
+            ...params,
+            blockType: 'ResourceListBlock',
+        });
     }
 
     @Get('/blocks/resource-details')
@@ -208,26 +226,33 @@ export class CmsController {
         description: 'Returns resource-details block.',
         type: Model.ResourceDetailsBlock.ResourceDetailsBlock,
     })
-    getResourceDetailsBlock(
-        @Query() params: Request.GetCmsEntryParams,
-    ): ReturnType<CmsService['getResourceDetailsBlock']> {
-        return this.cms.getResourceDetailsBlock(params);
+    getResourceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.ResourceDetailsBlock.ResourceDetailsBlock>({
+            ...params,
+            blockType: 'ResourceDetailsBlock',
+        });
     }
 
     @Get('/blocks/user-account')
     @ApiOperation({ summary: 'Get user-account block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns user-account block.', type: Model.UserAccountBlock.UserAccountBlock })
-    getUserAccountBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getUserAccountBlock']> {
-        return this.cms.getUserAccountBlock(params);
+    getUserAccountBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.UserAccountBlock.UserAccountBlock>({
+            ...params,
+            blockType: 'UserAccountBlock',
+        });
     }
 
     @Get('/blocks/service-list')
     @ApiOperation({ summary: 'Get service-list block' })
     @ApiQuery({ name: 'query', required: false, type: String })
     @ApiOkResponse({ description: 'Returns service-list block.', type: Model.ServiceListBlock.ServiceListBlock })
-    getServiceListBlock(@Query() params: Request.GetCmsEntryParams): ReturnType<CmsService['getServiceListBlock']> {
-        return this.cms.getServiceListBlock(params);
+    getServiceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.ServiceListBlock.ServiceListBlock>({
+            ...params,
+            blockType: 'ServiceListBlock',
+        });
     }
 
     @Get('/blocks/service-details')
@@ -237,10 +262,11 @@ export class CmsController {
         description: 'Returns service-details block.',
         type: Model.ServiceDetailsBlock.ServiceDetailsBlock,
     })
-    getServiceDetailsBlock(
-        @Query() params: Request.GetCmsEntryParams,
-    ): ReturnType<CmsService['getServiceDetailsBlock']> {
-        return this.cms.getServiceDetailsBlock(params);
+    getServiceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.ServiceDetailsBlock.ServiceDetailsBlock>({
+            ...params,
+            blockType: 'ServiceDetailsBlock',
+        });
     }
 
     @Get('/blocks/featured-service-list')
@@ -250,9 +276,10 @@ export class CmsController {
         description: 'Returns featured-service-list block.',
         type: Model.FeaturedServiceListBlock.FeaturedServiceListBlock,
     })
-    getFeaturedServiceListBlock(
-        @Query() params: Request.GetCmsEntryParams,
-    ): ReturnType<CmsService['getFeaturedServiceListBlock']> {
-        return this.cms.getFeaturedServiceListBlock(params);
+    getFeaturedServiceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getBlockConfig<Model.FeaturedServiceListBlock.FeaturedServiceListBlock>({
+            ...params,
+            blockType: 'FeaturedServiceListBlock',
+        });
     }
 }

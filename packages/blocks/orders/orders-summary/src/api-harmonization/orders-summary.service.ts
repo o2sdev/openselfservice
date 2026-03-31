@@ -21,7 +21,11 @@ export class OrdersSummaryService {
     ) {}
 
     getOrdersSummaryBlock(query: GetOrdersSummaryBlockQuery, headers: AppHeaders): Observable<OrdersSummaryBlock> {
-        const cms = this.cmsService.getOrdersSummaryBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'OrdersSummaryBlock',
+        });
 
         const ordersCurrent = this.orderService.getOrderList(
             {

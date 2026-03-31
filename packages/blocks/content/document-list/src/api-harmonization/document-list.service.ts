@@ -15,7 +15,11 @@ export class DocumentListService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getDocumentListBlock(query: GetDocumentListBlockQuery, headers: AppHeaders): Observable<DocumentListBlock> {
-        const cms = this.cmsService.getDocumentListBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.DocumentListBlock.DocumentListBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'DocumentListBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapDocumentList(cms, headers[H.Locale])));
     }

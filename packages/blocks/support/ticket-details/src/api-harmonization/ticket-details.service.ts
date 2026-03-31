@@ -25,7 +25,11 @@ export class TicketDetailsService {
         headers: AppHeaders,
     ): Observable<TicketDetailsBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getTicketDetailsBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketDetailsBlock.TicketDetailsBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'TicketDetailsBlock',
+        });
         const ticket = this.ticketService.getTicket({ ...params, locale: headers[H.Locale] }, authorization);
 
         return forkJoin([ticket, cms]).pipe(

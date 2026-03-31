@@ -97,11 +97,15 @@ fragment FaqComponent on ComponentComponentsFaq {
 }
 ```
 
-**Service Method:**
+**Service Method (inside `getBlockConfig` switch):**
 
 ```typescript
-getFaqBlock(options: CMS.Request.GetCmsEntryParams) {
-    const key = `faq-component-${options.id}-${options.locale}`;
-    return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock)));
+getBlockConfig<T>(options: CMS.Request.GetCmsBlockConfigParams): Observable<T> {
+    const key = `${options.blockType}-component-${options.id}-${options.locale}`;
+    switch (options.blockType) {
+        case 'FaqBlock':
+            return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock))) as Observable<T>;
+        // ... other block types
+    }
 }
 ```
