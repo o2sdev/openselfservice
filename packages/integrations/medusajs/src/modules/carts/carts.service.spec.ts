@@ -4,11 +4,12 @@ import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Auth, Carts } from '@o2s/framework/modules';
+import { Carts } from '@o2s/framework/modules';
 
 import { CartsService } from './carts.service';
 
 const DEFAULT_CURRENCY = 'EUR';
+const DEFAULT_REGION_ID = 'reg_default';
 
 const minimalCartItem = {
     id: 'item_1',
@@ -34,6 +35,7 @@ const minimalCart = {
     created_at: new Date('2024-01-01'),
     updated_at: new Date('2024-01-02'),
     items: [],
+    item_subtotal: 9000,
     subtotal: 9000,
     total: 10000,
     discount_total: 0,
@@ -58,10 +60,22 @@ describe('CartsService', () => {
                 update: ReturnType<typeof vi.fn>;
                 addShippingMethod: ReturnType<typeof vi.fn>;
             };
+            customer: {
+                retrieve: ReturnType<typeof vi.fn>;
+            };
+        };
+        admin: {
+            customer: {
+                retrieve: ReturnType<typeof vi.fn>;
+            };
         };
         client: { fetch: ReturnType<typeof vi.fn> };
     };
-    let mockMedusaJsService: { getSdk: ReturnType<typeof vi.fn>; getStoreApiHeaders: ReturnType<typeof vi.fn> };
+    let mockMedusaJsService: {
+        getSdk: ReturnType<typeof vi.fn>;
+        getStoreApiHeaders: ReturnType<typeof vi.fn>;
+        getMedusaAdminApiHeaders: ReturnType<typeof vi.fn>;
+    };
     let mockAuthService: { getCustomerId: ReturnType<typeof vi.fn> };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
@@ -80,16 +94,29 @@ describe('CartsService', () => {
                     update: vi.fn(),
                     addShippingMethod: vi.fn(),
                 },
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { id: 'cust_1' } }),
+                },
+            },
+            admin: {
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { has_account: false } }),
+                },
             },
             client: { fetch: vi.fn() },
         };
         mockMedusaJsService = {
             getSdk: vi.fn(() => mockSdk),
             getStoreApiHeaders: vi.fn(() => ({})),
+            getMedusaAdminApiHeaders: vi.fn(() => ({ Authorization: 'Basic xxx' })),
         };
         mockAuthService = { getCustomerId: vi.fn() };
         mockConfig = {
-            get: vi.fn((key: string) => (key === 'DEFAULT_CURRENCY' ? DEFAULT_CURRENCY : '')),
+            get: vi.fn((key: string) => {
+                if (key === 'DEFAULT_CURRENCY') return DEFAULT_CURRENCY;
+                if (key === 'DEFAULT_REGION_ID') return DEFAULT_REGION_ID;
+                return '';
+            }),
         };
         mockLogger = { debug: vi.fn() };
         mockCustomersService = {};
@@ -98,7 +125,6 @@ describe('CartsService', () => {
             mockConfig as unknown as ConfigService,
             mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
             mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-            mockAuthService as unknown as Auth.Service,
             mockCustomersService as unknown as import('@o2s/framework/modules').Customers.Service,
         );
     });
@@ -113,7 +139,6 @@ describe('CartsService', () => {
                         mockConfig as unknown as ConfigService,
                         mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
                         mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-                        mockAuthService as unknown as Auth.Service,
                         mockCustomersService as unknown as import('@o2s/framework/modules').Customers.Service,
                     ),
             ).toThrow('DEFAULT_CURRENCY is not defined');
@@ -128,7 +153,7 @@ describe('CartsService', () => {
 
             expect(mockSdk.store.cart.retrieve).toHaveBeenCalledWith(
                 'cart_1',
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
             expect(result).toBeDefined();
@@ -138,12 +163,12 @@ describe('CartsService', () => {
 
         it('should throw UnauthorizedException when cart.customerId !== auth customerId', async () => {
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: { ...minimalCart, customer_id: 'cust_1' } });
-            mockAuthService.getCustomerId.mockReturnValue('cust_other');
+            mockSdk.store.customer.retrieve.mockResolvedValue({ customer: { id: 'cust_other' } });
+            mockSdk.admin.customer.retrieve.mockResolvedValue({ customer: { has_account: true } });
 
             await expect(firstValueFrom(service.getCart({ id: 'cart_1' }, 'Bearer token'))).rejects.toThrow(
                 UnauthorizedException,
             );
-            expect(mockAuthService.getCustomerId).toHaveBeenCalledWith('Bearer token');
         });
 
         it('should throw NotFoundException on 404', async () => {
@@ -163,28 +188,31 @@ describe('CartsService', () => {
 
             expect(mockSdk.store.cart.create).toHaveBeenCalledWith(
                 { currency_code: 'eur', region_id: 'reg_1', metadata: undefined },
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
         });
     });
 
     describe('addCartItem', () => {
-        it('should throw BadRequestException when sku is missing', () => {
-            expect(() => service.addCartItem({ quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token')).toThrow(
-                BadRequestException,
-            );
+        it('should throw BadRequestException when variantId is missing', () => {
+            expect(() =>
+                service.addCartItem({ sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token'),
+            ).toThrow(BadRequestException);
         });
 
         it('should throw BadRequestException when cartId absent and currency missing', async () => {
             await expect(
                 firstValueFrom(
-                    service.addCartItem({ sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token'),
+                    service.addCartItem(
+                        { sku: 'SKU1', variantId: 'var_1', quantity: 1 } as Carts.Request.AddCartItemBody,
+                        'Bearer token',
+                    ),
                 ),
             ).rejects.toThrow(BadRequestException);
         });
 
-        it('should retrieve then createLineItem when cartId provided', async () => {
+        it('should retrieve then createLineItem when cartId provided with variantId', async () => {
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: minimalCart });
             mockSdk.store.cart.createLineItem.mockResolvedValue({
                 cart: { ...minimalCart, items: [minimalCartItem] },
@@ -193,22 +221,23 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { cartId: 'cart_1', sku: 'SKU1', quantity: 2 } as Carts.Request.AddCartItemBody,
+                    { cartId: 'cart_1', sku: 'SKU1', variantId: 'var_1', quantity: 2 } as Carts.Request.AddCartItemBody,
                     'Bearer token',
                 ),
             );
 
             expect(mockSdk.store.cart.retrieve).toHaveBeenCalledWith(
                 'cart_1',
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
             expect(mockSdk.store.cart.createLineItem).toHaveBeenCalledWith(
                 'cart_1',
-                { variant_id: 'SKU1', quantity: 2, metadata: undefined },
-                { fields: '*items,*shipping_methods' },
+                { variant_id: 'var_1', quantity: 2, metadata: undefined },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
+            expect(mockSdk.client.fetch).not.toHaveBeenCalled();
             expect(result).toBeDefined();
             expect(result?.id).toBe('cart_1');
         });
@@ -220,7 +249,7 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { cartId: 'cart_1', sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody,
+                    { cartId: 'cart_1', sku: 'SKU1', variantId: 'var_1', quantity: 1 } as Carts.Request.AddCartItemBody,
                     'Bearer token',
                 ),
             );
@@ -228,25 +257,56 @@ describe('CartsService', () => {
             expect(result?.id).toBe('cart_1');
         });
 
-        it('should create new cart for guest when no cartId (createCartAndAddItem)', async () => {
+        it('should create new cart for guest when no cartId (createCartAndAddItem) with defaultRegionId fallback', async () => {
             mockSdk.store.cart.create.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_new' } });
             mockSdk.store.cart.createLineItem.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_new' } });
             mockAuthService.getCustomerId.mockReturnValue(undefined);
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { sku: 'SKU1', quantity: 2, currency: 'EUR' } as Carts.Request.AddCartItemBody,
+                    { sku: 'SKU1', variantId: 'var_1', quantity: 2, currency: 'EUR' } as Carts.Request.AddCartItemBody,
                     undefined,
                 ),
             );
 
             expect(mockSdk.store.cart.create).toHaveBeenCalledWith(
-                { currency_code: 'eur', region_id: undefined, metadata: undefined },
-                { fields: '*items,*shipping_methods' },
+                { currency_code: 'eur', region_id: DEFAULT_REGION_ID, metadata: undefined },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
-            expect(mockSdk.store.cart.createLineItem).toHaveBeenCalled();
+            expect(mockSdk.store.cart.createLineItem).toHaveBeenCalledWith(
+                'cart_new',
+                { variant_id: 'var_1', quantity: 2, metadata: undefined },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
+                expect.any(Object),
+            );
+            expect(mockSdk.client.fetch).not.toHaveBeenCalled();
             expect(result?.id).toBe('cart_new');
+        });
+
+        it('should use explicit regionId over defaultRegionId when provided', async () => {
+            mockSdk.store.cart.create.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_reg' } });
+            mockSdk.store.cart.createLineItem.mockResolvedValue({ cart: { ...minimalCart, id: 'cart_reg' } });
+            mockAuthService.getCustomerId.mockReturnValue(undefined);
+
+            await firstValueFrom(
+                service.addCartItem(
+                    {
+                        sku: 'SKU1',
+                        variantId: 'var_1',
+                        quantity: 1,
+                        currency: 'EUR',
+                        regionId: 'reg_explicit',
+                    } as Carts.Request.AddCartItemBody,
+                    undefined,
+                ),
+            );
+
+            expect(mockSdk.store.cart.create).toHaveBeenCalledWith(
+                { currency_code: 'eur', region_id: 'reg_explicit', metadata: undefined },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
+                expect.any(Object),
+            );
         });
 
         it('should create new cart for authenticated user when no cartId', async () => {
@@ -256,7 +316,7 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(
                 service.addCartItem(
-                    { sku: 'SKU1', quantity: 1, currency: 'EUR' } as Carts.Request.AddCartItemBody,
+                    { sku: 'SKU1', variantId: 'var_1', quantity: 1, currency: 'EUR' } as Carts.Request.AddCartItemBody,
                     'Bearer token',
                 ),
             );
@@ -278,7 +338,7 @@ describe('CartsService', () => {
                 'cart_1',
                 'item_1',
                 { quantity: 3, metadata: undefined },
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
             expect(result?.id).toBe('cart_1');
@@ -298,7 +358,7 @@ describe('CartsService', () => {
             expect(mockSdk.store.cart.deleteLineItem).toHaveBeenCalledWith(
                 'cart_1',
                 'item_1',
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
             expect(result?.id).toBe('cart_1');
@@ -339,7 +399,7 @@ describe('CartsService', () => {
                     email: 'user@test.com',
                     metadata: expect.objectContaining({ notes: 'Gift wrap', custom: 'value' }),
                 }),
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
             expect(result?.id).toBe('cart_1');
@@ -381,7 +441,7 @@ describe('CartsService', () => {
                     shipping_address: expect.objectContaining({ first_name: 'John', country_code: 'pl' }),
                     billing_address: expect.objectContaining({ address_1: 'Billing St' }),
                 }),
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
             expect(result).toBeDefined();
@@ -422,7 +482,7 @@ describe('CartsService', () => {
             expect(mockSdk.store.cart.addShippingMethod).toHaveBeenCalledWith(
                 'cart_1',
                 { option_id: 'opt_1' },
-                { fields: '*items,*shipping_methods' },
+                { fields: '*items,*shipping_methods,*billing_address,*shipping_address' },
                 expect.any(Object),
             );
             expect(result).toBeDefined();

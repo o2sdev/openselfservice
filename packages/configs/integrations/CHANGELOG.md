@@ -1,5 +1,24 @@
 # @o2s/configs.integrations
 
+## 0.7.0
+
+### Minor Changes
+
+- 7ac16b0: add createModule() factory for custom framework modules
+
+    Enable developers to define new base modules beyond the core modules using createModule(). Custom modules are registered directly in app.module.ts, following the same pattern as SurveyJS.
+
+    Includes example documents module in mocked integration, custom-module Turbo generator, and documentation guide.
+
+### Patch Changes
+
+- Updated dependencies [afbd639]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [7ac16b0]
+- Updated dependencies [afbd639]
+    - @o2s/integrations.mocked@1.22.0
+    - @o2s/framework@1.21.0
+
 ## 0.6.0
 
 ### Minor Changes

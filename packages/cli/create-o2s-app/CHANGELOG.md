@@ -1,5 +1,50 @@
 # create-o2s-app
 
+## 4.1.2
+
+### Patch Changes
+
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+
+## 4.1.1
+
+### Patch Changes
+
+- 338cb01: Use the `create-o2s-app/base` branch as the source for `eject-block` so ejected blocks match production-ready templates.
+- 338cb01: Show a post-generation block summary and next steps at the end of generated changes output.
+- 8c57c81: chore(deps): update dependencies
+
+## 4.1.0
+
+### Minor Changes
+
+- a2d9ea4: CLI scaffolding and logging enhancements (branding header, summary box, docs links, block warnings)
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [98b2e68]
+    - @o2s/telemetry@1.2.2
+
+## 4.0.0
+
+### Major Changes
+
+- a1659cf: added fix related to dxp starter and mocked data
+
+### Minor Changes
+
+- a1659cf: fix: update CLI commands in logger to reflect new watch commands for development
+- a1659cf: fix: update CLI custom installation process
+
+## 3.0.0
+
+### Major Changes
+
+- 1df1ec2: added fix related to dxp starter and mocked data
+
 ## 2.0.0
 
 ### Major Changes

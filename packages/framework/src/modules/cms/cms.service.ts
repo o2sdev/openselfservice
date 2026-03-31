@@ -3,141 +3,54 @@ import { Observable } from 'rxjs';
 
 import * as CMS from './';
 
+/** Raw CMS entry payload. Generic shape for single entry responses. */
+export type CmsEntryData = Record<string, unknown>;
+/** Raw CMS entries payload. Generic shape for collection responses. */
+export type CmsEntriesData = Record<string, unknown>;
+
+/**
+ * Abstract CMS service. Implementation is provided by API Harmonization (integration with headless CMS).
+ * All methods return RxJS {@link Observable}. Handles pages, entries, header/footer, app config, and block types.
+ */
 @Injectable()
 export abstract class CmsService {
     protected constructor(..._services: unknown[]) {}
 
+    /** Fetches app-level configuration (branding, feature flags, etc.). */
     abstract getAppConfig(options: CMS.Request.GetCmsAppConfigParams): Observable<CMS.Model.AppConfig.AppConfig>;
 
-    abstract getEntry(options: CMS.Request.GetCmsEntryParams): Observable<unknown>;
+    /** Fetches a single CMS entry by ID. Returns undefined if not found. */
+    abstract getEntry<T = CmsEntryData>(options: CMS.Request.GetCmsEntryParams): Observable<T | undefined>;
 
-    abstract getEntries(options: CMS.Request.GetCmsEntriesParams): Observable<unknown>;
+    /** Fetches multiple CMS entries matching the query. */
+    abstract getEntries<T = CmsEntriesData>(options: CMS.Request.GetCmsEntriesParams): Observable<T>;
 
+    /** Fetches a page by slug/ID. Returns undefined if not found. */
     abstract getPage(options: CMS.Request.GetCmsPageParams): Observable<CMS.Model.Page.Page | undefined>;
 
+    /** Fetches all pages matching the query. */
     abstract getPages(options: CMS.Request.GetCmsPagesParams): Observable<CMS.Model.Page.Page[]>;
 
+    /** Fetches alternative language versions of the current page. */
     abstract getAlternativePages(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.Page.Page[]>;
 
+    /** Fetches login page configuration. */
     abstract getLoginPage(options: CMS.Request.GetCmsLoginPageParams): Observable<CMS.Model.LoginPage.LoginPage>;
 
+    /** Fetches 404 not-found page configuration. */
     abstract getNotFoundPage(
         options: CMS.Request.GetCmsNotFoundPageParams,
     ): Observable<CMS.Model.NotFoundPage.NotFoundPage>;
 
+    /** Fetches header navigation and branding. */
     abstract getHeader(options: CMS.Request.GetCmsHeaderParams): Observable<CMS.Model.Header.Header>;
 
-    abstract getFooter(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.Footer.Footer>;
+    /** Fetches footer content and links. */
+    abstract getFooter(options: CMS.Request.GetCmsFooterParams): Observable<CMS.Model.Footer.Footer>;
 
-    abstract getFaqBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.FaqBlock.FaqBlock>;
-
-    abstract getTicketListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketListBlock.TicketListBlock>;
-
-    abstract getTicketDetailsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketDetailsBlock.TicketDetailsBlock>;
-
-    abstract getNotificationListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.NotificationListBlock.NotificationListBlock>;
-
-    abstract getNotificationDetailsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock>;
-
-    abstract getInvoiceListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.InvoiceListBlock.InvoiceListBlock>;
-
-    abstract getInvoiceDetailsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.InvoiceDetailsBlock.InvoiceDetailsBlock>;
-
-    abstract getResourceListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ResourceListBlock.ResourceListBlock>;
-
-    abstract getResourceDetailsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ResourceDetailsBlock.ResourceDetailsBlock>;
-
-    abstract getPaymentsSummaryBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock>;
-
-    abstract getPaymentsHistoryBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock>;
-
-    abstract getUserAccountBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.UserAccountBlock.UserAccountBlock>;
-
-    abstract getTicketRecentBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketRecentBlock.TicketRecentBlock>;
-
-    abstract getServiceListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ServiceListBlock.ServiceListBlock>;
-
-    abstract getFeaturedServiceListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.FeaturedServiceListBlock.FeaturedServiceListBlock>;
-
-    abstract getServiceDetailsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ServiceDetailsBlock.ServiceDetailsBlock>;
-
-    abstract getOrganizationList(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.OrganizationList.OrganizationList>;
-
+    /** Fetches survey definition by ID. */
     abstract getSurvey(options: CMS.Request.GetCmsSurveyParams): Observable<CMS.Model.Survey.Survey>;
 
-    abstract getSurveyJsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.SurveyJsBlock.SurveyJsBlock>;
-
-    abstract getOrderListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.OrderListBlock.OrderListBlock>;
-
-    abstract getOrdersSummaryBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock>;
-
-    abstract getQuickLinksBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock>;
-
-    abstract getArticleListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock>;
-
-    abstract getCategoryBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.CategoryBlock.CategoryBlock>;
-
-    abstract getCategoryListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.CategoryListBlock.CategoryListBlock>;
-
-    abstract getArticleSearchBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleSearchBlock.ArticleSearchBlock>;
-
-    abstract getProductListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ProductListBlock.ProductListBlock>;
-
-    abstract getProductDetailsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ProductDetailsBlock.ProductDetailsBlock>;
-
-    abstract getRecommendedProductsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.RecommendedProductsBlock.RecommendedProductsBlock>;
+    /** Fetches block configuration by block type. Generic method replacing block-specific methods. */
+    abstract getBlockConfig<T>(options: CMS.Request.GetCmsBlockConfigParams): Observable<T>;
 }

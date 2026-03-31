@@ -1,10 +1,13 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
+import { HeaderName } from '@o2s/framework/headers';
 
 import type { Model } from '../api-harmonization/{{ kebabCase name }}.client';
 import { sdk } from '../sdk';
 
 import { {{ pascalCase name }}Props } from './{{ pascalCase name }}.types';
+
+const H = HeaderName;
 
 export const {{ pascalCase name }}Dynamic = dynamic(() =>
     import('./{{ pascalCase name }}.client').then((module) => module.{{ pascalCase name }}Pure),
@@ -17,7 +20,7 @@ export const {{ pascalCase name }}: React.FC<{{ pascalCase name }}Props> = async
             {
                 id,
             },
-            { 'x-locale': locale },
+            { [H.Locale]: locale },
             accessToken,
         );
     } catch (error) {

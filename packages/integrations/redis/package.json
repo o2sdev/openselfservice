@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.redis",
-    "version": "1.4.0",
+    "version": "1.4.2",
     "private": false,
     "license": "MIT",
     "description": "Redis integration for O2S, providing caching functionality.",
@@ -48,7 +48,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",

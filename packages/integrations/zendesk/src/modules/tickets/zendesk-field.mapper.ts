@@ -128,10 +128,14 @@ const validateAndConvertValue = (fieldName: string, value: unknown): string | nu
     }
 
     if (typeof value === 'string') {
-        // Convert date strings to YYYY-MM-DD format for date fields
+        // Convert date strings to YYYY-MM-DD format for date fields (use local date to avoid UTC shift)
         if (/\d{4}-\d{2}-\d{2}/.test(value)) {
             const date = new Date(value);
-            return isNaN(date.getTime()) ? value : (date.toISOString().split('T')[0] ?? value);
+            if (Number.isNaN(date.getTime())) return value;
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
         }
         return value;
     }

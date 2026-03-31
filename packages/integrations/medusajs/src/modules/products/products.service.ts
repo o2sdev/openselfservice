@@ -37,10 +37,10 @@ export class ProductsService extends Products.Service {
         '*variants,*variants.prices,*variants.options,*categories,*tags,*images,+variants.inventory_quantity,+variants.manage_inventory,+variants.allow_backorder';
     // Store API fields for retrieving product with variants (includes inventory_quantity)
     private readonly storeRetrieveFields =
-        '*variants,*variants.options,*variants.options.option,+variants.inventory_quantity,+variants.manage_inventory,+variants.allow_backorder';
+        '*variants,*variants.prices,*variants.options,*variants.options.option,+variants.inventory_quantity,+variants.manage_inventory,+variants.allow_backorder';
     // Store API fields for retrieving product with variant details (weight, height, etc.)
     private readonly productDetailFields =
-        '*variants,+variants.weight,+variants.height,+variants.width,+variants.length,+variants.material,+variants.origin_country,+variants.hs_code,+variants.mid_code,+variants.metadata,+variants.prices,*variants.options,*variants.options.option,+metadata,+handle,+,+images,+tags';
+        '*variants,*variants.prices,+variants.weight,+variants.height,+variants.width,+variants.length,+variants.material,+variants.origin_country,+variants.hs_code,+variants.mid_code,+variants.metadata,*variants.options,*variants.options.option,+metadata,+handle,+,+images,+tags';
 
     constructor(
         private readonly config: ConfigService,
@@ -254,7 +254,7 @@ export class ProductsService extends Products.Service {
     getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
         return this.httpClient
             .get<RelatedProductsResponse>(
-                `${this.medusaJsService.getBaseUrl()}/admin/products/${params.productId}/variants/${params.productVariantId}/references`,
+                `${this.medusaJsService.getBaseUrl()}/admin/products/${params.id}/variants/${params.variantId}/references`,
                 {
                     headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                     params: {

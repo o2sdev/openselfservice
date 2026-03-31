@@ -4,8 +4,6 @@ import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Auth } from '@o2s/framework/modules';
-
 import { OrdersService } from './orders.service';
 
 const DEFAULT_CURRENCY = 'EUR';
@@ -15,6 +13,7 @@ const minimalOrder = {
     customer_id: 'cust_1',
     currency_code: 'eur',
     total: 10000,
+    item_subtotal: 9000,
     subtotal: 9000,
     tax_total: 1000,
     discount_total: 0,
@@ -29,10 +28,22 @@ const minimalOrder = {
     shipping_methods: [],
 };
 
+const guestOrder = { ...minimalOrder, id: 'order_guest', customer_id: null };
+
 describe('OrdersService', () => {
     let service: OrdersService;
-    let mockSdk: { store: { order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> } } };
-    let mockMedusaJsService: { getSdk: ReturnType<typeof vi.fn>; getStoreApiHeaders: ReturnType<typeof vi.fn> };
+    let mockSdk: {
+        store: {
+            order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> };
+            customer: { retrieve: ReturnType<typeof vi.fn> };
+        };
+        admin: { customer: { retrieve: ReturnType<typeof vi.fn> } };
+    };
+    let mockMedusaJsService: {
+        getSdk: ReturnType<typeof vi.fn>;
+        getStoreApiHeaders: ReturnType<typeof vi.fn>;
+        getMedusaAdminApiHeaders: ReturnType<typeof vi.fn>;
+    };
     let mockAuthService: { getCustomerId: ReturnType<typeof vi.fn> };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
@@ -45,11 +56,20 @@ describe('OrdersService', () => {
                     retrieve: vi.fn(),
                     list: vi.fn(),
                 },
+                customer: {
+                    retrieve: vi.fn().mockResolvedValue({ customer: { id: 'cust_1' } }),
+                },
+            },
+            admin: {
+                customer: {
+                    retrieve: vi.fn(),
+                },
             },
         };
         mockMedusaJsService = {
             getSdk: vi.fn(() => mockSdk),
             getStoreApiHeaders: vi.fn(() => ({})),
+            getMedusaAdminApiHeaders: vi.fn(() => ({ Authorization: 'Basic xxx' })),
         };
         mockAuthService = { getCustomerId: vi.fn() };
         mockConfig = {
@@ -61,7 +81,6 @@ describe('OrdersService', () => {
             mockConfig as unknown as ConfigService,
             mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
             mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-            mockAuthService as unknown as Auth.Service,
         );
     });
 
@@ -75,36 +94,70 @@ describe('OrdersService', () => {
                         mockConfig as unknown as ConfigService,
                         mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
                         mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-                        mockAuthService as unknown as Auth.Service,
                     ),
             ).toThrow('DEFAULT_CURRENCY is not defined');
         });
     });
 
     describe('getOrder', () => {
-        it('should throw UnauthorizedException when authorization is missing', () => {
-            expect(() => service.getOrder({ id: 'order_1' }, undefined)).toThrow(UnauthorizedException);
-            expect(mockLogger.debug).toHaveBeenCalledWith('Authorization token not found');
-        });
+        it('should return guest order for guest (no authorization)', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: guestOrder });
 
-        it('should call sdk.store.order.retrieve and return mapped order', async () => {
-            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
-
-            const result = await firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'));
+            const result = await firstValueFrom(service.getOrder({ id: 'order_guest' }, undefined));
 
             expect(mockSdk.store.order.retrieve).toHaveBeenCalledWith(
-                'order_1',
+                'order_guest',
                 expect.objectContaining({ fields: expect.any(String) }),
                 expect.any(Object),
             );
+            expect(result).toBeDefined();
+            expect(result?.id).toBe('order_guest');
+            expect(result?.customerId).toBeUndefined();
+        });
+
+        it('should return guest order for authenticated user', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: guestOrder });
+
+            const result = await firstValueFrom(service.getOrder({ id: 'order_guest' }, 'Bearer token'));
+
+            expect(result).toBeDefined();
+            expect(result?.id).toBe('order_guest');
+        });
+
+        it('should throw UnauthorizedException when guest tries to get customer order', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
+            mockSdk.admin.customer.retrieve.mockResolvedValue({ customer: { has_account: true } });
+
+            await expect(firstValueFrom(service.getOrder({ id: 'order_1' }, undefined))).rejects.toThrow(
+                UnauthorizedException,
+            );
+        });
+
+        it('should return customer order when authenticated user matches customerId', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
+            mockSdk.store.customer.retrieve.mockResolvedValue({ customer: { id: 'cust_1' } });
+
+            const result = await firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'));
+
             expect(result).toBeDefined();
             expect(result?.id).toBe('order_1');
             expect(result?.status).toBe('COMPLETED');
             expect(result?.paymentStatus).toBe('CAPTURED');
         });
 
+        it('should throw UnauthorizedException when authenticated user tries to get another customer order', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
+            mockSdk.store.customer.retrieve.mockResolvedValue({ customer: { id: 'cust_other' } });
+            mockSdk.admin.customer.retrieve.mockResolvedValue({ customer: { has_account: true } });
+
+            await expect(firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'))).rejects.toThrow(
+                UnauthorizedException,
+            );
+        });
+
         it('should throw NotFoundException when SDK returns 404', async () => {
             mockSdk.store.order.retrieve.mockRejectedValue({ status: 404 });
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
 
             await expect(firstValueFrom(service.getOrder({ id: 'missing' }, 'Bearer token'))).rejects.toThrow(
                 NotFoundException,

@@ -46,7 +46,7 @@ CLAUDE.md
 storybook-static
 
 # Dist folders
-dist
+/dist
 
 # AI rules
 .ai
@@ -58,3 +58,6 @@ agent-os
 
 # Generated files
 O2S-API.postman_collection.json
+
+# TypeScript build info
+tsconfig.tsbuildinfo

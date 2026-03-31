@@ -11,7 +11,7 @@ Because a block is treated as a NPM package, it can be simply installed and impo
 A block needs to be installed into both the API Harmonization server and the Frontend app. You can either do that twice in their appropriate folders, or once on the root level of the project:
 
 ```shell
-npm install @dxp/blocks.block-name --workspace=@o2s/api-harmonization --workspace=@o2s/frontend
+npm install @o2s/blocks.block-name --workspace=@o2s/api-harmonization --workspace=@o2s/frontend
 ```
 
 ## Using a block in apps
@@ -71,7 +71,7 @@ switch (block.__typename as Modules.Page.Model.Blocks) {
 
 ## Adding a new block
 
-To add a completely new block, you can either manuallt create and initialize a package within the `packages/blocks` folder, or just use the [dedicated generator](../../guides/using-generators.md#block) that will take care of everything automatically.
+To add a completely new block, you can either manually create and initialize a package within `packages/blocks/<domain>/<block-name>`, or just use the [dedicated generator](../../guides/using-generators.md#block) that will take care of everything automatically.
 
 :::tip
 For more information on how to actually implement the block parts, take a look into the [Create a new block guide](../../guides/create-new-block/overview.md)

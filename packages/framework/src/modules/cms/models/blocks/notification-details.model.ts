@@ -2,6 +2,7 @@ import { Notification } from '@/modules/notifications/notifications.model';
 
 import { Block, Mapping } from '@/utils/models';
 
+/** CMS block configuration for notification details view. */
 export class NotificationDetailsBlock extends Block.Block {
     properties!: {
         [key: string]: string;

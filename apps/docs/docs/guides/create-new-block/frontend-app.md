@@ -24,7 +24,7 @@ switch (block.__typename as Modules.Page.Model.Blocks) {
 
 ### Fetch block data
 
-Next, we need to fetch the initial data required to actually render the block. The generated files already include the necessary code to do that, located at `packages/blocks/tickets-summary/src/frontend/TicketsSummary.server.tsx`:
+Next, we need to fetch the initial data required to actually render the block. The generated files already include the necessary code to do that, located at `packages/blocks/support/tickets-summary/src/frontend/TicketsSummary.server.tsx`:
 
 ```typescript jsx
 const data = await sdk.blocks.getTicketsSummary(
@@ -38,7 +38,7 @@ const data = await sdk.blocks.getTicketsSummary(
 
 ### Render the content
 
-In the last step, we need to display the block. Let's edit the `packages/blocks/tickets-summary/src/frontend/TicketsSummary.client.tsx` file and render the content in a simple layout:
+In the last step, we need to display the block. Let's edit the `packages/blocks/support/tickets-summary/src/frontend/TicketsSummary.client.tsx` file and render the content in a simple layout:
 
 ```typescript jsx
 export const TicketsSummaryPure: React.FC<TicketsSummaryPureProps> = ({ ...block }) => {

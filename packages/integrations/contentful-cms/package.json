@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.contentful-cms",
-    "version": "0.7.0",
+    "version": "0.8.2",
     "private": false,
     "license": "MIT",
     "description": "Contentful CMS integration for O2S, providing content management functionality via GraphQL.",
@@ -38,11 +38,11 @@
         "generate": "graphql-codegen && prettier --write \"generated/**/*.{ts,tsx}\""
     },
     "dependencies": {
-        "@contentful/live-preview": "^4.9.6",
+        "@contentful/live-preview": "^4.9.10",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "contentful": "^11.10.5",
-        "flatted": "^3.3.3",
+        "flatted": "^3.4.1",
         "graphql": "16.13.0",
         "graphql-request": "7.4.0",
         "graphql-tag": "2.12.6"
@@ -61,10 +61,11 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",
+        "vite": "^7.3.1",
         "vitest": "^4.0.18"
     },
     "peerDependencies": {

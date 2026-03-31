@@ -7,17 +7,17 @@ import {
     InternalServerErrorException,
     NotFoundException,
     NotImplementedException,
-    UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, Carts, Customers } from '@o2s/framework/modules';
+import { Carts, Customers } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { verifyResourceAccess } from '../../utils/customer-access';
 import { handleHttpError } from '../../utils/handle-http-error';
 import { mapAddressToMedusa } from '../customers/customers.mapper';
 
@@ -27,19 +27,20 @@ import { mapCart } from './carts.mapper';
 export class CartsService extends Carts.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
+    private readonly defaultRegionId: string | undefined;
 
-    private readonly cartItemsFields = '*items,*shipping_methods';
+    private readonly cartItemsFields = '*items,*shipping_methods,*billing_address,*shipping_address';
 
     constructor(
         private readonly config: ConfigService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
-        private readonly authService: Auth.Service,
         private readonly customersService: Customers.Service,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
+        this.defaultRegionId = this.config.get('DEFAULT_REGION_ID') || undefined;
 
         if (!this.defaultCurrency) {
             throw new InternalServerErrorException('DEFAULT_CURRENCY is not defined');
@@ -54,19 +55,16 @@ export class CartsService extends Carts.Service {
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response: HttpTypes.StoreCartResponse) => {
+            switchMap((response: HttpTypes.StoreCartResponse) => {
                 const cart = mapCart(response.cart, this.defaultCurrency);
 
-                // Verify ownership for customer carts
-                if (
-                    cart.customerId &&
-                    authorization &&
-                    cart.customerId !== this.authService.getCustomerId(authorization)
-                ) {
-                    throw new UnauthorizedException('Unauthorized to access this cart');
-                }
-
-                return cart;
+                return verifyResourceAccess(
+                    this.sdk,
+                    this.medusaJsService.getMedusaAdminApiHeaders(),
+                    this.medusaJsService.getStoreApiHeaders(authorization),
+                    cart.customerId,
+                    authorization,
+                ).pipe(map(() => cart));
             }),
             catchError((error) => {
                 if (error.status === 404) {
@@ -145,43 +143,43 @@ export class CartsService extends Carts.Service {
     }
 
     addCartItem(data: Carts.Request.AddCartItemBody, authorization?: string): Observable<Carts.Model.Cart> {
-        if (!data.sku) {
-            throw new BadRequestException('SKU is required for Medusa carts');
+        if (!data.variantId) {
+            throw new BadRequestException('variantId is required for Medusa carts');
         }
 
-        const customerId = authorization ? this.authService.getCustomerId(authorization) : undefined;
-
-        // If cartId provided, use it (after verifying access)
+        // If cartId provided, verify access then add item
         if (data.cartId) {
             const cartId = data.cartId;
-            return from(
-                this.sdk.store.cart.retrieve(
-                    cartId,
-                    { fields: this.cartItemsFields },
-                    this.medusaJsService.getStoreApiHeaders(authorization),
-                ),
-            ).pipe(
+            const storeHeaders = this.medusaJsService.getStoreApiHeaders(authorization);
+
+            return from(this.sdk.store.cart.retrieve(cartId, { fields: this.cartItemsFields }, storeHeaders)).pipe(
                 switchMap((response: HttpTypes.StoreCartResponse) => {
                     const cart = mapCart(response.cart, this.defaultCurrency);
 
-                    if (cart.customerId && authorization && cart.customerId !== customerId) {
-                        return throwError(() => new UnauthorizedException('Unauthorized to access this cart'));
-                    }
-
-                    return from(
-                        this.sdk.store.cart.createLineItem(
-                            cartId,
-                            {
-                                variant_id: data.sku,
-                                quantity: data.quantity,
-                                metadata: data.metadata,
-                            },
-                            { fields: this.cartItemsFields },
-                            this.medusaJsService.getStoreApiHeaders(authorization),
+                    return verifyResourceAccess(
+                        this.sdk,
+                        this.medusaJsService.getMedusaAdminApiHeaders(),
+                        storeHeaders,
+                        cart.customerId,
+                        authorization,
+                    ).pipe(
+                        switchMap(() =>
+                            from(
+                                this.sdk.store.cart.createLineItem(
+                                    cartId,
+                                    {
+                                        variant_id: data.variantId!,
+                                        quantity: data.quantity,
+                                        metadata: data.metadata,
+                                    },
+                                    { fields: this.cartItemsFields },
+                                    storeHeaders,
+                                ),
+                            ),
                         ),
                     );
                 }),
-                map((addResponse: HttpTypes.StoreCartResponse) => mapCart(addResponse.cart, this.defaultCurrency)),
+                map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
                 catchError((error) => handleHttpError(error)),
             );
         }
@@ -192,7 +190,7 @@ export class CartsService extends Carts.Service {
 
         return this.createCartAndAddItem(
             data.currency,
-            data.sku,
+            data.variantId,
             data.quantity,
             data.regionId,
             data.metadata,
@@ -299,15 +297,7 @@ export class CartsService extends Carts.Service {
                     return throwError(() => new NotFoundException(`Cart with ID ${params.cartId} not found`));
                 }
 
-                // Verify ownership for customer carts
-                if (cart.customerId && authorization) {
-                    const customerId = this.authService.getCustomerId(authorization);
-                    if (cart.customerId !== customerId) {
-                        return throwError(
-                            () => new UnauthorizedException('Unauthorized to prepare checkout for this cart'),
-                        );
-                    }
-                }
+                // Ownership is already verified by Medusa when getCart retrieves the cart.
 
                 // Validate cart has items
                 if (!cart.items || cart.items.data.length === 0) {
@@ -321,7 +311,7 @@ export class CartsService extends Carts.Service {
 
     private createCartAndAddItem(
         currency: string,
-        sku: string,
+        variantId: string,
         quantity: number,
         regionId?: string,
         metadata?: Record<string, unknown>,
@@ -331,7 +321,7 @@ export class CartsService extends Carts.Service {
             this.sdk.store.cart.create(
                 {
                     currency_code: currency.toLowerCase(),
-                    region_id: regionId,
+                    region_id: regionId || this.defaultRegionId,
                     metadata,
                 },
                 { fields: this.cartItemsFields },
@@ -343,7 +333,7 @@ export class CartsService extends Carts.Service {
                     this.sdk.store.cart.createLineItem(
                         createResponse.cart.id,
                         {
-                            variant_id: sku,
+                            variant_id: variantId,
                             quantity,
                             metadata,
                         },
@@ -404,8 +394,19 @@ export class CartsService extends Carts.Service {
                 // Resolve both addresses in parallel
                 return forkJoin([shippingAddress$, billingAddress$]).pipe(
                     switchMap(([shippingAddress, billingAddress]) => {
+                        // Handle sameAsBillingAddress: copy billing address to shipping
+                        let resolvedShipping = shippingAddress;
+                        if (data.sameAsBillingAddress && !resolvedShipping) {
+                            // Prefer the new billing address from request; fall back to cart's existing billing
+                            resolvedShipping = billingAddress
+                                ? billingAddress
+                                : cart.billingAddress
+                                  ? mapAddressToMedusa(cart.billingAddress)
+                                  : null;
+                        }
+
                         // At least one address must be provided
-                        if (!shippingAddress && !billingAddress) {
+                        if (!resolvedShipping && !billingAddress) {
                             return throwError(
                                 () => new BadRequestException('At least one address (shipping or billing) is required'),
                             );
@@ -424,13 +425,11 @@ export class CartsService extends Carts.Service {
                             cartUpdate.email = data.email;
                         }
 
-                        // Set addresses (use shipping as billing if billing not provided)
-                        if (shippingAddress) {
-                            cartUpdate.shipping_address = shippingAddress;
-                            cartUpdate.billing_address = billingAddress ?? shippingAddress;
-                        } else if (billingAddress) {
-                            // If only billing provided, use it for both
-                            cartUpdate.shipping_address = billingAddress;
+                        // Set addresses independently — each only updates its own field
+                        if (resolvedShipping) {
+                            cartUpdate.shipping_address = resolvedShipping;
+                        }
+                        if (billingAddress) {
                             cartUpdate.billing_address = billingAddress;
                         }
 

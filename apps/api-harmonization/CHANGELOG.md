@@ -1,5 +1,217 @@
 # @o2s/api-harmonization
 
+## 1.19.0
+
+### Minor Changes
+
+- 7ac16b0: add createModule() factory for custom framework modules
+
+    Enable developers to define new base modules beyond the core modules using createModule(). Custom modules are registered directly in app.module.ts, following the same pattern as SurveyJS.
+
+    Includes example documents module in mocked integration, custom-module Turbo generator, and documentation guide.
+
+### Patch Changes
+
+- 0aaac5b: fix: resolve build and lint issues
+    - Fix `src/` bare import in organizations module to use relative path
+    - Convert express import to type-only in context-headers middleware
+    - Update page model to import `CMS` from `@o2s/configs.integrations`
+    - Add `@typescript-eslint/no-empty-object-type: off` rule to frontend-block ESLint config
+    - Add `npm dedupe` step to api-harmonization and frontend Dockerfiles
+    - Add `tsconfig.tsbuildinfo` to `.gitignore` across all packages
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [afbd639]
+- Updated dependencies [e8cdde6]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [7ac16b0]
+- Updated dependencies [afbd639]
+    - @o2s/blocks.ticket-details@1.7.0
+    - @o2s/blocks.ticket-summary@1.5.0
+    - @o2s/blocks.ticket-recent@1.6.0
+    - @o2s/blocks.ticket-list@1.9.0
+    - @o2s/integrations.mocked@1.22.0
+    - @o2s/blocks.product-list@0.5.3
+    - @o2s/blocks.product-details@0.4.1
+    - @o2s/blocks.recommended-products@0.5.0
+    - @o2s/blocks.cart@0.2.1
+    - @o2s/blocks.checkout-billing-payment@0.2.2
+    - @o2s/blocks.checkout-summary@0.2.1
+    - @o2s/blocks.checkout-shipping-address@0.2.1
+    - @o2s/blocks.checkout-company-data@0.2.1
+    - @o2s/blocks.notification-details@1.7.0
+    - @o2s/blocks.notification-summary@1.5.0
+    - @o2s/blocks.notification-list@1.8.0
+    - @o2s/blocks.featured-service-list@1.5.1
+    - @o2s/blocks.article-search@1.7.1
+    - @o2s/blocks.feature-section-grid@0.6.1
+    - @o2s/blocks.category-list@1.7.1
+    - @o2s/blocks.order-confirmation@0.2.1
+    - @o2s/blocks.article-list@1.7.1
+    - @o2s/blocks.payments-history@1.6.0
+    - @o2s/blocks.payments-summary@1.6.0
+    - @o2s/blocks.service-details@1.6.0
+    - @o2s/blocks.feature-section@0.7.1
+    - @o2s/blocks.pricing-section@0.7.1
+    - @o2s/blocks.category@1.7.1
+    - @o2s/blocks.article@1.6.1
+    - @o2s/blocks.document-list@0.7.1
+    - @o2s/blocks.media-section@0.7.1
+    - @o2s/blocks.orders-summary@1.6.1
+    - @o2s/blocks.service-list@1.6.1
+    - @o2s/blocks.user-account@1.5.1
+    - @o2s/blocks.invoice-list@1.7.1
+    - @o2s/blocks.hero-section@0.7.1
+    - @o2s/blocks.order-details@1.6.1
+    - @o2s/blocks.cta-section@0.7.1
+    - @o2s/blocks.quick-links@1.6.1
+    - @o2s/blocks.surveyjs-form@1.5.1
+    - @o2s/blocks.bento-grid@0.7.1
+    - @o2s/blocks.order-list@1.7.1
+    - @o2s/blocks.faq@1.6.1
+    - @o2s/modules.surveyjs@0.5.1
+    - @o2s/utils.frontend@0.5.2
+    - @o2s/configs.integrations@0.7.0
+    - @o2s/framework@1.21.0
+
+## 1.18.1
+
+### Patch Changes
+
+- 338cb01: Introduce typed header name constants (`HeaderName`) using `as const` and
+  replace selected magic header strings in API harmonization and frontend code.
+
+    Update SDK header typing to use `AppHeaders` for stronger request typing.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+    - @o2s/blocks.article@1.5.2
+    - @o2s/blocks.article-list@1.6.2
+    - @o2s/blocks.article-search@1.6.2
+    - @o2s/blocks.bento-grid@0.6.2
+    - @o2s/blocks.category@1.6.2
+    - @o2s/blocks.category-list@1.6.2
+    - @o2s/blocks.cta-section@0.6.2
+    - @o2s/blocks.document-list@0.6.2
+    - @o2s/blocks.faq@1.5.2
+    - @o2s/blocks.feature-section@0.6.2
+    - @o2s/blocks.feature-section-grid@0.5.2
+    - @o2s/blocks.featured-service-list@1.4.2
+    - @o2s/blocks.hero-section@0.6.2
+    - @o2s/blocks.invoice-list@1.6.2
+    - @o2s/blocks.media-section@0.6.2
+    - @o2s/blocks.notification-details@1.5.2
+    - @o2s/blocks.notification-list@1.6.2
+    - @o2s/blocks.notification-summary@1.3.2
+    - @o2s/blocks.order-details@1.5.2
+    - @o2s/blocks.order-list@1.6.2
+    - @o2s/blocks.orders-summary@1.5.2
+    - @o2s/blocks.payments-history@1.4.2
+    - @o2s/blocks.payments-summary@1.4.2
+    - @o2s/blocks.pricing-section@0.6.2
+    - @o2s/blocks.product-details@0.3.1
+    - @o2s/blocks.product-list@0.5.1
+    - @o2s/blocks.quick-links@1.5.2
+    - @o2s/blocks.recommended-products@0.3.1
+    - @o2s/blocks.service-details@1.4.2
+    - @o2s/blocks.service-list@1.5.2
+    - @o2s/blocks.surveyjs-form@1.4.2
+    - @o2s/blocks.ticket-details@1.5.2
+    - @o2s/blocks.ticket-list@1.7.2
+    - @o2s/blocks.ticket-recent@1.4.2
+    - @o2s/blocks.ticket-summary@1.3.2
+    - @o2s/blocks.user-account@1.4.2
+    - @o2s/utils.api-harmonization@0.3.3
+    - @o2s/modules.surveyjs@0.4.4
+    - @o2s/integrations.mocked@1.21.1
+
+## 1.18.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/blocks.article-list@1.6.1
+    - @o2s/blocks.article-search@1.6.1
+    - @o2s/blocks.article@1.5.1
+    - @o2s/blocks.bento-grid@0.6.1
+    - @o2s/blocks.category-list@1.6.1
+    - @o2s/blocks.category@1.6.1
+    - @o2s/blocks.cta-section@0.6.1
+    - @o2s/blocks.document-list@0.6.1
+    - @o2s/blocks.faq@1.5.1
+    - @o2s/blocks.feature-section-grid@0.5.1
+    - @o2s/blocks.feature-section@0.6.1
+    - @o2s/blocks.featured-service-list@1.4.1
+    - @o2s/blocks.hero-section@0.6.1
+    - @o2s/blocks.invoice-list@1.6.1
+    - @o2s/blocks.media-section@0.6.1
+    - @o2s/blocks.notification-details@1.5.1
+    - @o2s/blocks.notification-list@1.6.1
+    - @o2s/blocks.notification-summary@1.3.1
+    - @o2s/blocks.order-details@1.5.1
+    - @o2s/blocks.order-list@1.6.1
+    - @o2s/blocks.orders-summary@1.5.1
+    - @o2s/blocks.payments-history@1.4.1
+    - @o2s/blocks.payments-summary@1.4.1
+    - @o2s/blocks.pricing-section@0.6.1
+    - @o2s/blocks.product-details@0.3.0
+    - @o2s/blocks.product-list@0.5.0
+    - @o2s/blocks.quick-links@1.5.1
+    - @o2s/blocks.recommended-products@0.3.0
+    - @o2s/blocks.service-details@1.4.1
+    - @o2s/blocks.service-list@1.5.1
+    - @o2s/blocks.surveyjs-form@1.4.1
+    - @o2s/blocks.ticket-details@1.5.1
+    - @o2s/blocks.ticket-list@1.7.1
+    - @o2s/blocks.ticket-recent@1.4.1
+    - @o2s/blocks.ticket-summary@1.3.1
+    - @o2s/blocks.user-account@1.4.1
+    - @o2s/framework@1.20.0
+    - @o2s/integrations.mocked@1.21.0
+    - @o2s/modules.surveyjs@0.4.3
+    - @o2s/telemetry@1.2.2
+    - @o2s/utils.api-harmonization@0.3.2
+    - @o2s/utils.frontend@0.5.1
+    - @o2s/utils.logger@1.2.3
+
+## 1.17.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+- 0e61431: feat: update page model and integration to support redirects
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+    - @o2s/integrations.mocked@1.20.0
+    - @o2s/utils.frontend@0.5.0
+
 ## 1.16.0
 
 ### Minor Changes

@@ -49,10 +49,7 @@ const sampleTags: ProductCardBadge[] = [
 
 const sampleStatus: ProductCardBadge = { label: 'In Stock', variant: 'outline' };
 
-const sampleLink = {
-    label: 'View Details',
-    url: '/products/sample-product',
-};
+const sampleLink = '/products/sample-product';
 
 const sampleDescription =
     '<p>This is a sample product description. It provides information about the product features and benefits.</p>';

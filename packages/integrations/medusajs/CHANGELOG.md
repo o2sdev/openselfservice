@@ -1,5 +1,72 @@
 # @o2s/integrations.medusajs
 
+## 1.12.0
+
+### Minor Changes
+
+- 880c2df: Simplify cart/order ownership checks — resolve Medusa customer ID via /store/customers/me instead of relying on auth token claims. Fix missing +item_subtotal field in order list query.
+
+## 1.11.2
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [7ac16b0]
+    - @o2s/framework@1.21.0
+
+## 1.11.1
+
+### Patch Changes
+
+- dd58165: chore(deps): update dependencies
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
+## 1.11.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- fa91166: chore(deps): update dependencies
+- 028ce47: chore(deps): update dependencies
+- 3c0129d: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
+## 1.10.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
 ## 1.9.0
 
 ### Minor Changes

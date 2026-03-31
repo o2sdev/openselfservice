@@ -2,6 +2,7 @@ import { Product } from '@/modules/products/products.model';
 
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
+/** CMS block configuration for product list view. */
 export class ProductListBlock extends Block.Block {
     title!: string;
     subtitle?: string;
@@ -20,8 +21,13 @@ export class ProductListBlock extends Block.Block {
         showMoreFilters: string;
         hideMoreFilters: string;
         noActiveFilters: string;
+        addToCartLabel?: string;
+        addToCartSuccess?: string;
+        addToCartError?: string;
+        viewCartLabel?: string;
     };
     detailsLabel?: string;
     detailsUrl!: string;
     basePath?: string;
+    cartPath?: string;
 }

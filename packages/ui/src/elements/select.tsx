@@ -164,6 +164,7 @@ interface SelectWithTitleProps {
     isRequired?: boolean;
     requiredLabel?: string;
     optionalLabel?: string;
+    isLabelHidden?: boolean;
 }
 
 type SelectWithTitleOwnProps = SelectWithTitleProps & { ref?: React.Ref<HTMLDivElement> };
@@ -178,6 +179,7 @@ const SelectWithTitle = ({
     isRequired,
     optionalLabel = '',
     requiredLabel = '',
+    isLabelHidden = false,
     ref,
     ...props
 }: SelectWithTitleOwnProps) => {
@@ -198,18 +200,26 @@ const SelectWithTitle = ({
         return null;
     };
 
+    const ariaLabel = isLabelHidden && typeof label === 'string' ? label : undefined;
+
     return (
         <div className="grid gap-2" ref={ref}>
-            <Label htmlFor={selectId} className={cn(labelClassName, hasError && 'text-destructive')}>
-                <span className="pr-2">{label}</span>
-                {renderAdditionalLabel()}
-            </Label>
-            <Select {...props}>{children}</Select>
+            {!isLabelHidden && (
+                <Label htmlFor={selectId} className={cn(labelClassName, hasError && 'text-destructive')}>
+                    <span className="pr-2">{label}</span>
+                    {renderAdditionalLabel()}
+                </Label>
+            )}
+            <Select {...props} aria-label={ariaLabel}>
+                {children}
+            </Select>
             {description && <p className="text-sm text-muted-foreground">{description}</p>}
             {hasError && errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
         </div>
     );
 };
+
+const SelectWithDetails = SelectWithTitle;
 
 export {
     Select,
@@ -223,4 +233,5 @@ export {
     SelectScrollUpButton,
     SelectScrollDownButton,
     SelectWithTitle,
+    SelectWithDetails,
 };

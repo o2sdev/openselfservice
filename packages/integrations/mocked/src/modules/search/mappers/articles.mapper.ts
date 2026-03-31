@@ -3,6 +3,8 @@ import { Articles, Search } from '@o2s/framework/modules';
 import { MOCK_ARTICLES_DE, MOCK_ARTICLES_EN, MOCK_ARTICLES_PL } from '@/modules/articles/mocks/articles.mocks';
 
 export const mapArticles = (payload: Search.Model.SearchPayload): Articles.Model.Articles => {
+    // Mockowany search używa wyłącznie ogólnej paginacji z `payload.pagination`
+    // i ignoruje potencjalne, integracyjne pola specyficzne dla zewnętrznych providerów.
     const offset = payload.pagination?.offset || 0;
     const limit = payload.pagination?.limit || 10;
 

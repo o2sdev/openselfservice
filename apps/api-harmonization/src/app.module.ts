@@ -2,7 +2,7 @@ import { HttpModule } from '@nestjs/axios';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, Reflector } from '@nestjs/core';
-import { Auth } from '@o2s/configs.integrations';
+import { Auth, Documents } from '@o2s/configs.integrations';
 import * as SurveyJs from '@o2s/modules.surveyjs/api-harmonization';
 
 import { LoggerModule, LoggerService } from '@o2s/utils.logger';
@@ -26,14 +26,20 @@ import {
     Search,
     Tickets,
     Users,
+    createModule,
 } from '@o2s/framework/modules';
 
 import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
 import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
 import * as Article from '@o2s/blocks.article/api-harmonization';
 import * as BentoGrid from '@o2s/blocks.bento-grid/api-harmonization';
+import * as Cart from '@o2s/blocks.cart/api-harmonization';
 import * as CategoryList from '@o2s/blocks.category-list/api-harmonization';
 import * as Category from '@o2s/blocks.category/api-harmonization';
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
+import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/api-harmonization';
+import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/api-harmonization';
+import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization';
 import * as CtaSection from '@o2s/blocks.cta-section/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as FeatureSectionGrid from '@o2s/blocks.feature-section-grid/api-harmonization';
@@ -45,6 +51,7 @@ import * as MediaSection from '@o2s/blocks.media-section/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/api-harmonization';
 import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
 import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
@@ -96,6 +103,14 @@ export const PaymentsBaseModule = Payments.Module.register(AppConfig);
 export const CheckoutBaseModule = Checkout.Module.register(AppConfig);
 export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
 
+const DocumentsModule = createModule('documents');
+export const DocumentsBaseModule = DocumentsModule.register({
+    name: 'documents',
+    service: Documents.Service,
+    serviceImpl: Documents.MockedService,
+    controller: Documents.Controller,
+});
+
 @Module({
     imports: [
         HttpModule.register({ global: true }),
@@ -126,6 +141,8 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         PaymentsBaseModule,
         CheckoutBaseModule,
         AuthModuleBaseModule,
+
+        DocumentsBaseModule,
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
@@ -162,6 +179,12 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         TicketSummary.Module.register(AppConfig),
         ProductDetails.Module.register(AppConfig),
         RecommendedProducts.Module.register(AppConfig),
+        OrderConfirmation.Module.register(AppConfig),
+        CheckoutBillingPayment.Module.register(AppConfig),
+        CheckoutCompanyData.Module.register(AppConfig),
+        CheckoutShippingAddress.Module.register(AppConfig),
+        CheckoutSummary.Module.register(AppConfig),
+        Cart.Module.register(AppConfig),
         HeroSection.Module.register(AppConfig),
         BentoGrid.Module.register(AppConfig),
         FeatureSection.Module.register(AppConfig),

@@ -1,5 +1,62 @@
 # @o2s/utils.frontend
 
+## 0.6.0
+
+### Minor Changes
+
+- 1dbf967: Add CartStorage utility for org-scoped cart management in localStorage. Replace direct localStorage calls and cartIdLocalStorageKey prop with centralized Utils.CartStorage across all blocks and app components.
+
+### Patch Changes
+
+- Updated dependencies [1dbf967]
+    - @o2s/ui@1.15.0
+
+## 0.5.2
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [e8cdde6]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [7ac16b0]
+- Updated dependencies [0aaac5b]
+    - @o2s/ui@1.14.0
+    - @o2s/framework@1.21.0
+
+## 0.5.1
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+
+## 0.5.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
 ## 0.4.1
 
 ### Patch Changes

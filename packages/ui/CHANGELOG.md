@@ -1,5 +1,79 @@
 # @o2s/ui
 
+## 1.15.0
+
+### Minor Changes
+
+- 1dbf967: Add CartStorage utility for org-scoped cart management in localStorage. Replace direct localStorage calls and cartIdLocalStorageKey prop with centralized Utils.CartStorage across all blocks and app components.
+
+## 1.14.0
+
+### Minor Changes
+
+- e8cdde6: feat: add mitt-based event bus (`@o2s/ui/event-bus`), cart header badge with `cart:changed`, SDK `GET /carts/current`, and emit `cart:changed` from product list, product details, recommended products, and cart block
+
+    refactor: read guest cart localStorage key from `NEXT_PUBLIC_CART_ID_LOCAL_STORAGE_KEY` (required; set in e.g. `apps/frontend/.env.development`) across shop and checkout blocks
+
+- 0aaac5b: feat: add form components for user management
+
+    Add `FormField`, `FormFieldWrapper`, and `InputValidations` components with shared Yup validation schemas for email, phone, password, and role fields.
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- 0aaac5b: fix: improve accessibility and flexibility of UI form elements
+    - `PhoneInput`: add `label` and `caption` props for proper form labeling
+    - `SelectWithDetails`: add `isLabelHidden` prop for visually hidden but accessible labels
+    - `Switch`: add `SwitchWithLabelAndDetails` variant with description, error, and read-only support
+    - `LoadingOverlay`: ensure full-width/height coverage on container
+    - `GlobalProvider`: update CMS import path to use `@o2s/configs.integrations`
+
+- Updated dependencies [7ac16b0]
+    - @o2s/configs.integrations@0.7.0
+    - @o2s/framework@1.21.0
+
+## 1.13.1
+
+### Patch Changes
+
+- a7bb35c: refactor: reorganize blocks into domain folders and update generation/docs tooling
+- fab2aea: refactor: group Storybook stories by domain and rename UI component directories to PascalCase
+
+## 1.13.0
+
+### Minor Changes
+
+- 375cd90: feat(blocks, ui): add variantId support to cart item handling, enhance add-to-cart toast with product name and cart link action across ProductDetails, ProductList and RecommendedProducts blocks
+
+### Patch Changes
+
+- Updated dependencies [83a3d13]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+
+## 1.12.0
+
+### Minor Changes
+
+- 5d36519: Added new blocks: Cart, Checkout (Summary, Shipping Address, Company Data, Billing Payment) and Order Confirmation. Includes checkout forms validation (Formik + Yup), error handling, promo code support in cart, and new UI components (StepIndicator, RadioTile, AddressFields, CartSummary, QuantityInput, FormField).
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
 ## 1.11.0
 
 ### Minor Changes

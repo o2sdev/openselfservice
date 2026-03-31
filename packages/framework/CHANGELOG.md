@@ -1,5 +1,55 @@
 # @o2s/framework
 
+## 1.21.0
+
+### Minor Changes
+
+- 7ac16b0: add createModule() factory for custom framework modules
+
+    Enable developers to define new base modules beyond the core modules using createModule(). Custom modules are registered directly in app.module.ts, following the same pattern as SurveyJS.
+
+    Includes example documents module in mocked integration, custom-module Turbo generator, and documentation guide.
+
+## 1.20.1
+
+### Patch Changes
+
+- fadbc63: Extract shared block prop types into framework models and migrate block frontend props to the common `BlockWith*` helpers.
+
+    This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
+
+- 338cb01: Introduce typed header name constants (`HeaderName`) using `as const` and
+  replace selected magic header strings in API harmonization and frontend code.
+
+    Update SDK header typing to use `AppHeaders` for stronger request typing.
+
+- 338cb01: fix(api-harmonization): align typed header usage across services and generated SDK/controller contracts
+- 338cb01: Refactor header access to use `HeaderName` constants instead of literal header keys across framework controllers, block harmonization services, and mocked auth guards.
+
+    This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
+
+## 1.20.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [98b2e68]
+    - @o2s/utils.logger@1.2.3
+
+## 1.19.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+- 0e61431: feat: update page model and integration to support redirects
+
 ## 1.18.0
 
 ### Minor Changes

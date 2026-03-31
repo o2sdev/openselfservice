@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.19.0",
+    "version": "1.22.0",
     "private": false,
     "license": "MIT",
     "description": "Mocked integration for O2S development and testing, providing in-memory data with Prisma.",
@@ -26,7 +26,11 @@
         "./sdk": "./dist/sdk/index.js",
         "./auth": "./dist/auth/index.js",
         "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js",
-        "./live-preview": "./dist/modules/cms/live-preview/index.js"
+        "./live-preview": "./dist/modules/cms/live-preview/index.js",
+        "./modules/products/mapper": "./dist/modules/products/products.mapper.js",
+        "./modules/checkout/mapper": "./dist/modules/checkout/checkout.mapper.js",
+        "./modules/payments/mocks": "./dist/modules/payments/mocks/providers.mock.js",
+        "./modules/carts/helpers": "./dist/modules/carts/carts.helpers.js"
     },
     "files": [
         "dist",
@@ -50,6 +54,7 @@
     "dependencies": {
         "@auth/prisma-adapter": "^2.11.1",
         "@o2s/framework": "*",
+        "@o2s/modules.documents": "*",
         "@o2s/utils.logger": "*",
         "@prisma/client": "^6.19.2",
         "bcryptjs": "^3.0.3",
@@ -58,19 +63,21 @@
         "prisma": "^6.19.2"
     },
     "devDependencies": {
+        "@auth/core": "^0.41.1",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
+        "@o2s/telemetry": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "@o2s/telemetry": "*",
         "@types/jsonwebtoken": "^9.0.10",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.3",
+        "eslint": "^9.39.4",
         "express": "5.2.1",
         "prettier": "^3.8.1",
         "shx": "^0.4.0",
         "tsc-alias": "^1.8.16",
+        "tsx": "^4.21.0",
         "typescript": "^5.9.3",
         "vitest": "^4.0.18"
     },

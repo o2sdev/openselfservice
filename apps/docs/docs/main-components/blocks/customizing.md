@@ -14,7 +14,7 @@ To _eject_ a block from the version that is published to NPM, you can run a dedi
 npm run eject-block
 ```
 
-which will then prompt you for to the blocks you want to take over. Once the process is done, the code of these blocks will be copied to your project into the `packages/blocks` folder, and automatically install their dependencies.
+which will then prompt you for to the blocks you want to take over. Once the process is done, the code of these blocks will be copied to your project into the `packages/blocks/<domain>/<block-name>` folders, and automatically install their dependencies.
 
 Once you restart the app, it will now use the ejected version of these blocks, instead of ones installed earlier via NPM.
 

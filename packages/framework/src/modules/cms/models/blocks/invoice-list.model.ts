@@ -2,6 +2,7 @@ import { Invoice } from '@/modules/invoices/invoices.model';
 
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
+/** CMS block configuration for invoice list view. */
 export class InvoiceListBlock extends Block.Block {
     title?: string;
     fieldMapping!: Mapping.Mapping<Invoice>;

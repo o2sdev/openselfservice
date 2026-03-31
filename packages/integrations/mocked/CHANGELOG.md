@@ -1,5 +1,88 @@
 # @o2s/integrations.mocked
 
+## 1.22.0
+
+### Minor Changes
+
+- afbd639: feat: enhance ticket services to include authorization parameter
+- 7ac16b0: add createModule() factory for custom framework modules
+
+    Enable developers to define new base modules beyond the core modules using createModule(). Custom modules are registered directly in app.module.ts, following the same pattern as SurveyJS.
+
+    Includes example documents module in mocked integration, custom-module Turbo generator, and documentation guide.
+
+- afbd639: refactor: update API harmonization services to include authorization headers
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [7ac16b0]
+    - @o2s/framework@1.21.0
+
+## 1.21.2
+
+### Patch Changes
+
+- 0fa9e2f: added exports for some helper methods for the `carts` module for external use (e.g. for other integrations that want to extend this one)
+
+## 1.21.1
+
+### Patch Changes
+
+- 338cb01: Migrate integration services from `implements` to `extends` and add `super()` where needed
+  to keep constructor metadata compatible with NestJS dependency injection.
+
+    Update documentation examples to reflect the new `extends ...Service` pattern.
+
+- 338cb01: Refactor header access to use `HeaderName` constants instead of literal header keys across framework controllers, block harmonization services, and mocked auth guards.
+
+    This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
+## 1.21.0
+
+### Minor Changes
+
+- 375cd90: feat(framework, integrations): add variantId to AddCartItemBody and cart item models, add viewCartLabel and cartPath to CMS block models. Implement variantId-based cart operations in Medusa integration. Localize CMS mappers (EN/DE/PL) for Contentful and Strapi.
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
+## 1.20.0
+
+### Minor Changes
+
+- 5d36519: Extended framework with e-commerce models: Address (companyName, taxId), Cart, Checkout and Order Confirmation CMS blocks. Added Mocked and Medusa integration support for cart, checkout flow, and guest order retrieval.
+
+### Patch Changes
+
+- Updated dependencies [5d36519]
+- Updated dependencies [0e61431]
+    - @o2s/framework@1.19.0
+
 ## 1.19.0
 
 ### Minor Changes

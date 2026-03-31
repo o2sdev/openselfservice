@@ -8,6 +8,7 @@ export {
     Checkout,
     CMS,
     Customers,
+    Documents,
     Invoices,
     Notifications,
     Orders,

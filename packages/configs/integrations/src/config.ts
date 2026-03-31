@@ -49,3 +49,4 @@ export import Resources = Mocked.Integration.Resources;
 export import Search = Mocked.Integration.Search;
 export import Tickets = Mocked.Integration.Tickets;
 export import Users = Mocked.Integration.Users;
+export import Documents = Mocked.Integration.Documents;

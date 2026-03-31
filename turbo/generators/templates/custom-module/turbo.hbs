@@ -1,0 +1,12 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "extends": ["//"],
+    "tasks": {
+        "dev": {
+            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"]
+        },
+        "build": {
+            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"]
+        }
+    }
+}

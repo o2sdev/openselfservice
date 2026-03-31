@@ -15,6 +15,7 @@ type ResourceMapping = Omit<Mapping.Mapping<Resource>, 'fieldMapping'> & {
     };
 };
 
+/** CMS block configuration for resource details view. */
 export class ResourceDetailsBlock extends Block.Block {
     properties!: {
         [key: string]: string;

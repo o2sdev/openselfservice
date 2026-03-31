@@ -1,0 +1,19 @@
+import { Injectable } from '@nestjs/common';
+import { Observable } from 'rxjs';
+
+import * as Model from './{{kebabCase name}}.model';
+
+@Injectable()
+export abstract class {{pascalCase name}}Service {
+    protected constructor(..._services: unknown[]) {}
+
+    abstract get{{pascalCase name}}List(
+        query: Model.Get{{pascalCase name}}ListQuery,
+        authorization?: string,
+    ): Observable<Model.{{pascalCase name}}List>;
+
+    abstract get{{pascalCase name}}(
+        params: Model.Get{{pascalCase name}}Params,
+        authorization?: string,
+    ): Observable<Model.{{pascalCase name}}>;
+}

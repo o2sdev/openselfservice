@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { Image } from '@o2s/ui/components/Image';
+import { Image } from '@o2s/ui/components/Media/Image';
 
 import { Link } from '@o2s/ui/elements/link';
 
@@ -14,6 +14,7 @@ import { Link as NextLink } from '@/i18n';
 import { LocaleSwitcher } from '../Auth/Toolbar/LocaleSwitcher';
 import { ContextSwitcher } from '../ContextSwitcher/ContextSwitcher';
 
+import { CartInfo } from './CartInfo/CartInfo';
 import { DesktopNavigation } from './DesktopNavigation/DesktopNavigation';
 import { HeaderProps } from './Header.types';
 import { MobileNavigation } from './MobileNavigation/MobileNavigation';
@@ -66,6 +67,14 @@ export const Header: React.FC<HeaderProps> = ({
         return <NotificationInfo data={{ url: data.notification.url, label: data.notification.label }} />;
     }, [isSignedIn, data.notification]);
 
+    const CartSlot = useMemo(() => {
+        if (!data.cart?.url || !data.cart?.label) {
+            return null;
+        }
+
+        return <CartInfo data={{ url: data.cart.url, label: data.cart.label }} />;
+    }, [data.cart]);
+
     const LocaleSlot = useMemo(
         () => <LocaleSwitcher label={data.languageSwitcherLabel} alternativeUrls={alternativeUrls} />,
         [data.languageSwitcherLabel, alternativeUrls],
@@ -79,11 +88,12 @@ export const Header: React.FC<HeaderProps> = ({
     return (
         <header className="flex flex-col gap-4">
             <>
-                <div className="md:block hidden">
+                <div className="lg:block hidden">
                     <DesktopNavigation
                         logoSlot={LogoSlot}
                         contextSlot={ContextSwitchSlot}
                         localeSlot={LocaleSlot}
+                        cartSlot={CartSlot}
                         notificationSlot={NotificationSlot}
                         userSlot={UserSlot}
                         items={data.items}
@@ -91,11 +101,12 @@ export const Header: React.FC<HeaderProps> = ({
                         shouldIncludeSignInButton={shouldIncludeSignInButton}
                     />
                 </div>
-                <div className="md:hidden">
+                <div className="lg:hidden">
                     <MobileNavigation
                         logoSlot={LogoSlot}
                         contextSlot={ContextSwitchSlot}
                         localeSlot={LocaleSlot}
+                        cartSlot={CartSlot}
                         notificationSlot={NotificationSlot}
                         userSlot={UserSlot}
                         items={data.items}
