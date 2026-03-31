@@ -70,85 +70,38 @@ export class CmsService extends CMS.Service {
         return of(mapFooter(options.locale));
     }
 
-    override getFaqBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.FaqBlock.FaqBlock> {
-        return of(mapFaqBlock(options.locale)).pipe(responseDelay());
-    }
-
-    override getHeroSectionBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.HeroSectionBlock.HeroSectionBlock> {
-        return of(mapHeroSectionBlock(options)).pipe(responseDelay());
-    }
-
-    override getFeatureSectionBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.FeatureSectionBlock.FeatureSectionBlock> {
-        return of(mapFeatureSectionBlock(options)).pipe(responseDelay());
-    }
-
-    override getCtaSectionBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.CtaSectionBlock.CtaSectionBlock> {
-        return of(mapCtaSectionBlock(options)).pipe(responseDelay());
-    }
-
-    override getBentoGridBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.BentoGridBlock.BentoGridBlock> {
-        return of(mapBentoGridBlock(options)).pipe(responseDelay());
-    }
-
-    override getMediaSectionBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.MediaSectionBlock.MediaSectionBlock> {
-        return of(mapMediaSectionBlock(options)).pipe(responseDelay());
-    }
-
-    override getQuickLinksBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock> {
-        return of(mapQuickLinksBlock(options)).pipe(responseDelay());
-    }
-
-    override getFeatureSectionGridBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.FeatureSectionGridBlock.FeatureSectionGridBlock> {
-        return of(mapFeatureSectionGridBlock(options)).pipe(responseDelay());
-    }
-
-    override getPricingSectionBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.PricingSectionBlock.PricingSectionBlock> {
-        return of(mapPricingSectionBlock(options)).pipe(responseDelay());
-    }
-
-    override getDocumentListBlock(
-        _options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.DocumentListBlock.DocumentListBlock> {
-        return of(mapDocumentListBlock(_options.locale)).pipe(responseDelay());
-    }
-
-    override getArticleListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock> {
-        return of(mapArticleListBlock(options.id, options.locale)).pipe(responseDelay());
-    }
-
-    override getCategoryBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
-        return of(mapCategoryBlock(options.id, options.locale)).pipe(responseDelay());
-    }
-
-    override getCategoryListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.CategoryListBlock.CategoryListBlock> {
-        return of(mapCategoryListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    override getArticleSearchBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleSearchBlock.ArticleSearchBlock> {
-        return of(mapArticleSearchBlock(options.id, options.locale)).pipe(responseDelay());
+    override getBlockConfig<T>(options: CMS.Request.GetCmsBlockConfigParams): Observable<T> {
+        switch (options.blockType) {
+            case 'FaqBlock':
+                return of(mapFaqBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'HeroSectionBlock':
+                return of(mapHeroSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'FeatureSectionBlock':
+                return of(mapFeatureSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CtaSectionBlock':
+                return of(mapCtaSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'BentoGridBlock':
+                return of(mapBentoGridBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'MediaSectionBlock':
+                return of(mapMediaSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'QuickLinksBlock':
+                return of(mapQuickLinksBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'FeatureSectionGridBlock':
+                return of(mapFeatureSectionGridBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'PricingSectionBlock':
+                return of(mapPricingSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'DocumentListBlock':
+                return of(mapDocumentListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ArticleListBlock':
+                return of(mapArticleListBlock(options.id, options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'CategoryBlock':
+                return of(mapCategoryBlock(options.id, options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'CategoryListBlock':
+                return of(mapCategoryListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ArticleSearchBlock':
+                return of(mapArticleSearchBlock(options.id, options.locale)).pipe(responseDelay()) as Observable<T>;
+            default:
+                return super.getBlockConfig<T>(options);
+        }
     }
 }

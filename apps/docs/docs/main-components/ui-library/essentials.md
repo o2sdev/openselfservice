@@ -9,8 +9,23 @@ The UI Library is kept as an internal package, that currently is available only 
 - `@o2s/ui/components/*` - React-based UI components (`./src/components/*`),
 - `@o2s/ui/globals` - the main CSS file that defines the theme (`./src/globals.css`),
 - `@o2s/ui/lib/*` - various utilities and helpers, (`./src/lib/*`),
-- `@o2s/ui/tailwind.config` - the Tailwind config that can used in other frotnend apps,
+- `@o2s/ui/tailwind.config` - the Tailwind config that can be used in other frontend apps,
 - `@o2s/ui/postcss.config` - PostCSS config to be used in other apps.
+
+Components are grouped by domain in `./src/components/<group>/<Component>`.
+Current groups are:
+
+- `actions`
+- `cards`
+- `charts`
+- `commerce`
+- `content`
+- `data`
+- `feedback`
+- `forms`
+- `layout`
+- `media`
+- `navigation`
 
 ## Components
 
@@ -60,15 +75,20 @@ export const SampleComponent: React.FC<Readonly<SampleComponentProps>> = ({ ...p
 
 ### Usage
 
-No mater how the component was added, using it looks the same. All that is required is to import ith from the `ui` package and use it as any other React component:
+No matter how the component was added, using it looks the same. Import it from the `ui` package and use it as any other React component:
 
 ```typescript jsx
-import { Button } from '@o2s/ui/components/button';
+import { Button } from '@o2s/ui/elements/button';
+import { Container } from '@o2s/ui/components/Layout/Container';
 
 ...
 
 return (
-    <Button variant="secondary" onClick={() => {}}>Click me!<Button>
+    <Container>
+        <Button variant="secondary" onClick={() => {}}>
+            Click me!
+        </Button>
+    </Container>
 );
 ```
 

@@ -101,6 +101,17 @@ jobs:
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Restore build outputs from cache
+              uses: actions/cache/restore@v5
+              with:
+                  path: |
+                      **/dist/**
+                      **/build/**
+                      **/.next/**
+                      **/next-env.d.ts
+                      !**/node_modules/**
+                  key: ${{ runner.os }}-build-${{ github.sha }}
+
             - name: Deploy Docs to Vercel
               id: deploy-docs
               uses: ./.github/actions/deploy-vercel
@@ -129,6 +140,17 @@ jobs:
               uses: ./.github/actions/setup-env
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Restore build outputs from cache
+              uses: actions/cache/restore@v5
+              with:
+                  path: |
+                      **/dist/**
+                      **/build/**
+                      **/.next/**
+                      **/next-env.d.ts
+                      !**/node_modules/**
+                  key: ${{ runner.os }}-build-${{ github.sha }}
 
             - name: Deploy Storybook to Vercel
               id: deploy-storybook

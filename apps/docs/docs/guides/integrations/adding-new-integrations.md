@@ -55,10 +55,10 @@ export * as Tickets from './tickets';
 
 Within each module you need to create at least three files:
 
-1. A service that implements all required methods, where you will place your logic related to API communication:
+1. A service that extends the module base service and implements all required methods, where you will place your logic related to API communication:
     ```typescript title="./src/modules/notifications/notifications.service.ts"
     @Injectable()
-    export class NotificationsService implements Notifications.Service  {
+    export class NotificationsService extends Notifications.Service  {
         getNotification (options: Notifications.Request.GetNotificationParams) {
             ...
         }
@@ -106,10 +106,12 @@ You can achieve that by following a few steps:
     import { CMS, Cache } from '@o2s/framework/modules';
 
     @Injectable()
-    export class CmsService implements CMS.Service {
+    export class CmsService extends CMS.Service {
         constructor(
             private readonly cacheService: Cache.Service,
-        ) {}
+        ) {
+            super();
+        }
     }
     ```
 
@@ -152,3 +154,9 @@ You can achieve that by following a few steps:
 :::tip
 For a full example about injecting dependencies, you can check the source code od the [Strapi CMS integration](../../integrations/cms/strapi/overview.md).
 :::
+
+## Implementing custom modules
+
+If your project uses [custom modules](./extending-framework-modules.md) (modules beyond the core framework modules), you can add implementations for them to your integration. The process is the same as for core modules — create a service extending the custom module's abstract service and wire it into the integration's `CustomModules` export.
+
+For a complete walkthrough, see [Extending framework modules](./extending-framework-modules.md).

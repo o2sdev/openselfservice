@@ -1,49 +1,57 @@
 import Medusa from '@medusajs/js-sdk';
+import { HttpTypes } from '@medusajs/types';
 import { UnauthorizedException } from '@nestjs/common';
-import { Observable, from, map } from 'rxjs';
-
-import { Auth } from '@o2s/framework/modules';
+import { Observable, from, map, of, switchMap } from 'rxjs';
 
 /**
- * Checks if a resource (cart/order) with a given customerId can be accessed.
+ * Verifies that the caller has access to a resource owned by a given customer.
  *
- * Medusa assigns a customer_id to both registered and guest customers.
- * Guest customers (has_account=false) are created automatically when an email is provided.
- * This helper uses Admin API to check has_account and enforce ownership:
- *
- * - No customerId on resource → accessible to anyone
- * - No authorization token → check if customer is guest (has_account=false), if so allow access
- * - Authorization provided → customerId must match the authenticated user
+ * - No customerId on resource → allow (public/unassigned resource)
+ * - Authenticated + resource is mine → allow
+ * - Authenticated + resource belongs to a guest → allow (e.g. cart created before login)
+ * - Authenticated + resource belongs to another registered user → deny
+ * - Unauthenticated + resource belongs to a guest → allow (guest checkout flow)
+ * - Unauthenticated + resource belongs to a registered user → deny
  */
 export const verifyResourceAccess = (
     sdk: Medusa,
-    authService: Auth.Service,
     adminHeaders: Record<string, string>,
+    storeHeaders: Record<string, string>,
     customerId: string | undefined,
     authorization: string | undefined,
 ): Observable<void> => {
-    // No customer on resource — public access
     if (!customerId) {
         return from(Promise.resolve());
     }
 
-    // Authorized user — check ownership directly (no Admin API call needed)
     if (authorization) {
-        const tokenCustomerId = authService.getCustomerId(authorization);
-        if (customerId !== tokenCustomerId) {
-            throw new UnauthorizedException('Unauthorized');
-        }
-        return from(Promise.resolve());
+        // Resolve the caller's Medusa customer ID via /store/customers/me
+        return from(sdk.store.customer.retrieve({}, storeHeaders)).pipe(
+            switchMap((response: HttpTypes.StoreCustomerResponse) => {
+                if (response.customer?.id === customerId) {
+                    return of(undefined);
+                }
+
+                // Not the owner — allow if it's a guest cart, deny if registered
+                return from(sdk.admin.customer.retrieve(customerId, {}, adminHeaders)).pipe(
+                    map((adminResponse) => {
+                        const customer = adminResponse.customer as { has_account?: boolean };
+                        if (customer.has_account !== false) {
+                            throw new UnauthorizedException('Unauthorized to access this resource');
+                        }
+                    }),
+                );
+            }),
+        );
     }
 
-    // No authorization — check if this is a guest customer via Admin API
+    // No token — only allow if this is a guest customer (has_account=false)
     return from(sdk.admin.customer.retrieve(customerId, {}, adminHeaders)).pipe(
         map((response) => {
             const customer = response.customer as { has_account?: boolean };
             if (customer.has_account !== false) {
                 throw new UnauthorizedException('Authentication required to access this resource');
             }
-            // Guest customer (has_account=false) — allow access
         }),
     );
 };

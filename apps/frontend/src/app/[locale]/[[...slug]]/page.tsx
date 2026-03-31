@@ -6,8 +6,8 @@ import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-import { AppSpinner } from '@o2s/ui/components/AppSpinner';
-import { Breadcrumbs } from '@o2s/ui/components/Breadcrumbs';
+import { AppSpinner } from '@o2s/ui/components/Feedback/AppSpinner';
+import { Breadcrumbs } from '@o2s/ui/components/Navigation/Breadcrumbs';
 
 import { Separator } from '@o2s/ui/elements/separator';
 import { Toaster } from '@o2s/ui/elements/toaster';
@@ -121,6 +121,8 @@ export default async function Page({ params }: Props) {
                     locale={locale}
                     themes={init.themes}
                     currentTheme={meta.theme}
+                    user={{ orgId: session?.user?.customer?.id }}
+                    cartStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
                 >
                     <div className="flex flex-col min-h-dvh">
                         <Header data={init.common.header} alternativeUrls={data.alternativeUrls} />

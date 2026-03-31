@@ -1,5 +1,6 @@
 import { Block, Link, Media, RichText } from '@/utils/models';
 
+/** CMS block configuration for hero section. */
 export class HeroSectionBlock extends Block.Block {
     preTitle?: string;
     title?: string;

@@ -58,9 +58,13 @@ import { mapSurvey } from './mappers/cms.survey.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class CmsService implements CMS.Service {
+export class CmsService extends CMS.Service {
+    constructor() {
+        super();
+    }
+
     getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
-        return of<T>({} as T);
+        return of<T | undefined>(undefined);
     }
 
     getEntries<T>(_options: CMS.Request.GetCmsEntriesParams) {
@@ -183,6 +187,18 @@ export class CmsService implements CMS.Service {
                 return of(mapMediaSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
             case 'PricingSectionBlock':
                 return of(mapPricingSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CartBlock':
+                return of(mapCartBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutCompanyDataBlock':
+                return of(mapCheckoutCompanyDataBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutShippingAddressBlock':
+                return of(mapCheckoutShippingAddressBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutBillingPaymentBlock':
+                return of(mapCheckoutBillingPaymentBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutSummaryBlock':
+                return of(mapCheckoutSummaryBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'OrderConfirmationBlock':
+                return of(mapOrderConfirmationBlock(options)).pipe(responseDelay()) as Observable<T>;
             default:
                 throw new NotFoundException(`Unknown block type: ${options.blockType}`);
         }

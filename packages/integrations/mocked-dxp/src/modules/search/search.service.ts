@@ -7,8 +7,8 @@ import { mapArticles } from './mappers/articles.mapper';
 
 @Injectable()
 export class SearchService extends Search.Service {
-    constructor() {
-        super();
+    constructor(...services: unknown[]) {
+        super(...services);
     }
 
     search<T>(indexName: string, _payload: Search.Model.SearchPayload): Observable<Search.Model.SearchResult<T>> {
@@ -19,7 +19,7 @@ export class SearchService extends Search.Service {
         return of(mapArticles(payload));
     }
 
-    protected buildQuery() {
+    protected buildQuery(_payload: Search.Model.SearchPayload): Record<string, unknown> {
         throw new Error('Method not implemented.');
     }
 }

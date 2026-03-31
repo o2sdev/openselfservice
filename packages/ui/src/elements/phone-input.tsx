@@ -53,6 +53,8 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
     onChange,
     hasError,
     errorMessage,
+    label,
+    caption,
     ...props
 }) => {
     const callingCode = getCountryCallingCode(defaultCountry, phoneInputMetadata);
@@ -109,11 +111,14 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
             // @ts-expect-error - InputFormat types expect basic input props, but InputWithDetails requires additional props (label, hasError, etc.)
             inputComponent={InputWithDetails}
             {...props}
+            label={label || props.placeholder || 'Phone number'}
+            isLabelHidden={!label}
             value={formattedPhone}
             onPaste={handlePaste}
             onChange={(event) => handleChange(typeof event === 'string' ? event : event?.target.value)}
             type="tel"
             inputMode="tel"
+            caption={caption}
             hasError={hasError || (formattedPhone.length > 0 && !isValid)}
             errorMessage={errorMessage || (formattedPhone.length > 0 && !isValid ? 'Invalid phone number' : undefined)}
         />

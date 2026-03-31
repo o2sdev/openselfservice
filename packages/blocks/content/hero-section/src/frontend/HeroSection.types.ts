@@ -1,0 +1,11 @@
+import { defineRouting } from 'next-intl/routing';
+
+import type { Models } from '@o2s/framework/modules';
+
+import type { Model } from '../api-harmonization/hero-section.client';
+
+export type HeroSectionProps = Models.BlockProps.BaseBlockProps<ReturnType<typeof defineRouting>>;
+
+export type HeroSectionPureProps = HeroSectionProps & Model.HeroSectionBlock;
+
+export type HeroSectionRendererProps = Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>>;

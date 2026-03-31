@@ -1,5 +1,53 @@
 # @o2s/docs
 
+## 2.3.0
+
+### Minor Changes
+
+- 7ac16b0: add createModule() factory for custom framework modules
+
+    Enable developers to define new base modules beyond the core modules using createModule(). Custom modules are registered directly in app.module.ts, following the same pattern as SurveyJS.
+
+    Includes example documents module in mocked integration, custom-module Turbo generator, and documentation guide.
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [e8cdde6]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [0aaac5b]
+    - @o2s/ui@1.14.0
+
+## 2.2.1
+
+### Patch Changes
+
+- 338cb01: Update the CMS integration extension guide to use a helper-based model extension pattern instead of manual model re-exports.
+- 338cb01: Fix telemetry documentation wording to reference O2S instead of Medusa.
+- 338cb01: Fix outdated `@dxp` namespace examples in docs to match the current `@o2s` package naming used across the project.
+- 338cb01: Fix inconsistent integration installation commands in docs by standardizing
+  integration package installation to `@o2s/configs.integrations`.
+
+    Add a central integrations installation table that explains expected commands.
+
+## 2.2.0
+
+### Minor Changes
+
+- 375cd90: docs: add variantId parameter to cart API documentation, update Medusa integration docs with variantId requirement
+- a2d9ea4: docs: enhance product starters section with CLI scaffolding link for custom frontend setup
+
 ## 2.1.0
 
 ### Minor Changes

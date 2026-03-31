@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/Media/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
 import { InputWithLabel } from '@o2s/ui/elements/input';

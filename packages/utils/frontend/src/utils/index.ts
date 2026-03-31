@@ -1,3 +1,4 @@
+export * as CartStorage from './cart-storage';
 export * as DownloadFile from './download-file';
 export * as FormatAddress from './format-address';
 export * as FormatCountry from './format-country';

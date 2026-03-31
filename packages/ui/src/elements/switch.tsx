@@ -43,4 +43,46 @@ const SwitchWithLabel = ({
     );
 };
 
-export { Switch, SwitchWithLabel };
+type SwitchWithLabelAndDetailsProps = React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> & {
+    label: string;
+    labelClassName?: string;
+    description?: string;
+    errorMessage?: string;
+    hasError?: boolean;
+    readOnly?: boolean;
+    required?: boolean;
+};
+
+const SwitchWithLabelAndDetails = ({
+    label,
+    id,
+    labelClassName,
+    description,
+    errorMessage,
+    hasError,
+    readOnly,
+    ...props
+}: SwitchWithLabelAndDetailsProps) => {
+    const generatedId = React.useId();
+    const switchId = id || generatedId;
+
+    return (
+        <div className="grid gap-2">
+            <div className="flex items-start space-x-2">
+                <Label htmlFor={switchId} className={cn('mt-[1px]', labelClassName, hasError && 'text-destructive')}>
+                    {label}
+                </Label>
+                <Switch
+                    {...props}
+                    id={switchId}
+                    className={cn(props.className, readOnly && 'cursor-not-allowed opacity-50')}
+                    disabled={props.disabled || readOnly}
+                />
+            </div>
+            {description && <p className="text-sm text-muted-foreground">{description}</p>}
+            {hasError && errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
+        </div>
+    );
+};
+
+export { Switch, SwitchWithLabel, SwitchWithLabelAndDetails };

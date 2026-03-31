@@ -16,6 +16,7 @@ This section provides practical instructions and best practices for working with
 - **[Code style](./code-style.md)** – Ensure consistency across the codebase with established coding conventions.
 - **[Adding new components with generators](./using-generators.md)** – Learn how to extend and customize O2S by quickly bootstrapping its components.
 - **[The SDK](./sdk.md)** – Understand how to interact with the API Harmonization Server using the built-in TypeScript SDK.
+- **[REST API Reference](/docs/rest-api/open-self-service-rest-api)** – Complete REST API reference for the Open Self Service harmonization layer.
 
 ### Integrations
 

@@ -5,10 +5,13 @@ import * as Payments from '../payments';
 
 import * as Checkout from './';
 
+/**
+ * Abstract checkout service. Implementation is provided by API Harmonization. All methods return RxJS {@link Observable}.
+ */
 export abstract class CheckoutService {
     protected constructor(..._services: unknown[]) {}
 
-    // Set addresses (shipping and/or billing)
+    /** Sets addresses (shipping and/or billing) on checkout. */
     abstract setAddresses(
         params: Checkout.Request.SetAddressesParams,
         data: Checkout.Request.SetAddressesBody,
@@ -22,14 +25,14 @@ export abstract class CheckoutService {
         authorization?: string,
     ): Observable<Carts.Model.Cart>;
 
-    // Set payment (independent action, can be called before or after shipping)
+    /** Sets payment method. Can be called before or after shipping. */
     abstract setPayment(
         params: Checkout.Request.SetPaymentParams,
         data: Checkout.Request.SetPaymentBody,
         authorization?: string,
     ): Observable<Payments.Model.PaymentSession>;
 
-    // Get checkout summary (returns current state of cart with all checkout data)
+    /** Returns current checkout state (cart with addresses, shipping, payment). */
     abstract getCheckoutSummary(
         params: Checkout.Request.GetCheckoutSummaryParams,
         authorization?: string,
@@ -42,13 +45,13 @@ export abstract class CheckoutService {
         authorization?: string,
     ): Observable<Checkout.Model.PlaceOrderResponse>;
 
-    // Get available shipping options for a cart (params.locale for localized names/descriptions)
+    /** Returns available shipping options for cart. Use params.locale for localized names. */
     abstract getShippingOptions(
         params: Checkout.Request.GetShippingOptionsParams,
         authorization?: string,
     ): Observable<Checkout.Model.ShippingOptions>;
 
-    // Complete checkout (orchestrates shipping + payment + order placement in single call)
+    /** Completes checkout in one call (shipping + payment + order placement). */
     abstract completeCheckout(
         params: Checkout.Request.CompleteCheckoutParams,
         data: Checkout.Request.CompleteCheckoutBody,

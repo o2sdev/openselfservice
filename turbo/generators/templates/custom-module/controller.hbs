@@ -1,0 +1,29 @@
+import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
+import { Observable } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
+
+import * as Model from './{{kebabCase name}}.model';
+import { {{pascalCase name}}Service } from './{{kebabCase name}}.service';
+
+@Controller('/{{kebabCase name}}')
+@UseInterceptors(LoggerService)
+export class {{pascalCase name}}Controller {
+    constructor(protected readonly {{camelCase name}}Service: {{pascalCase name}}Service) {}
+
+    @Get()
+    get{{pascalCase name}}List(
+        @Query() query: Model.Get{{pascalCase name}}ListQuery,
+        @Headers('authorization') authorization?: string,
+    ): Observable<Model.{{pascalCase name}}List> {
+        return this.{{camelCase name}}Service.get{{pascalCase name}}List(query, authorization);
+    }
+
+    @Get(':id')
+    get{{pascalCase name}}(
+        @Param() params: Model.Get{{pascalCase name}}Params,
+        @Headers('authorization') authorization?: string,
+    ): Observable<Model.{{pascalCase name}}> {
+        return this.{{camelCase name}}Service.get{{pascalCase name}}(params, authorization);
+    }
+}

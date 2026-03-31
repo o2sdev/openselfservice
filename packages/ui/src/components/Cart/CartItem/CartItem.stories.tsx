@@ -6,10 +6,10 @@ import { CartItem } from './CartItem';
 const meta: Meta<typeof CartItem> = {
     title: 'Components/Cart/CartItem',
     component: CartItem,
+    tags: ['autodocs'],
     parameters: {
         layout: 'padded',
     },
-    tags: ['autodocs'],
 };
 
 export default meta;

@@ -1,0 +1,33 @@
+import { Utils } from '@o2s/utils.frontend';
+
+import { AppHeaders } from '@o2s/framework/headers';
+import { Sdk } from '@o2s/framework/sdk';
+
+import { Model, Request } from '../api-harmonization/bento-grid.client';
+import { URL } from '../api-harmonization/bento-grid.url';
+
+const API_URL = URL;
+
+export const bentoGrid = (sdk: Sdk) => ({
+    blocks: {
+        getBentoGrid: (
+            query: Request.GetBentoGridBlockQuery,
+            headers: AppHeaders,
+            authorization?: string,
+        ): Promise<Model.BentoGridBlock> =>
+            sdk.makeRequest({
+                method: 'get',
+                url: `${API_URL}`,
+                headers: {
+                    ...Utils.Headers.getApiHeaders(),
+                    ...headers,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
+                },
+                params: query,
+            }),
+    },
+});

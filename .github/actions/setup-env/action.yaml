@@ -24,10 +24,22 @@ runs:
                   **/generated/**
               key: ${{ runner.os }}-install-${{ github.sha }}
 
+        # postman-code-generators (via docusaurus-plugin-openapi-docs) runs postinstall → deepinstall.js,
+        # which uses detect-package-manager. On GitHub-hosted runners Yarn is often available globally
+        # (Corepack shim and/or apt package yarnpkg). Nested codegen folders have no lockfile, so the
+        # detector picks Yarn 1, which then fails on the monorepo packageManager field. Ensure only npm
+        # is used for that script: disable Corepack shims and remove standalone Yarn if present.
         - name: Install Packages
           if: steps.cache-install.outputs.cache-hit != 'true'
           shell: bash
-          run: npm ci
+          run: |
+              corepack disable || true
+              if command -v apt-get >/dev/null 2>&1; then
+                sudo apt-get remove -y yarnpkg 2>/dev/null || true
+              fi
+              sudo rm -f /usr/bin/yarn /usr/local/bin/yarn 2>/dev/null || true
+              npm ci
+              corepack enable || true
           env:
               CI: true
 

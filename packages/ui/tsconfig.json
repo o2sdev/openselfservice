@@ -2,6 +2,7 @@
     "extends": "@o2s/typescript-config/ui.json",
     "compilerOptions": {
         "outDir": "dist",
+        "rootDir": "src",
         "baseUrl": "./",
         "paths": {
             "@o2s/ui/*": ["./src/*"],
@@ -10,6 +11,7 @@
             "@o2s/ui/providers/*": ["./src/providers/*"],
             "@o2s/ui/hooks/*": ["./src/hooks/*"],
             "@o2s/ui/lib/*": ["./src/lib/*"],
+            "@o2s/ui/event-bus": ["./src/event-bus"]
         }
     },
     "include": ["src"],

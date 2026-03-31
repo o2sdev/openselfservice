@@ -95,89 +95,105 @@ describe('CmsService', () => {
         });
     });
 
-    describe('getHeroSectionBlock', () => {
+    describe('getBlockConfig - HeroSectionBlock', () => {
         it('should return hero section block', async () => {
-            const result = await firstValueFrom(service.getHeroSectionBlock({ id: 'hero-section-1', locale: 'en' }));
+            const result = await firstValueFrom(
+                service.getBlockConfig({ id: 'hero-section-1', locale: 'en', blockType: 'HeroSectionBlock' }),
+            );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('hero-section-1');
+            expect((result as Record<string, unknown>).id).toBe('hero-section-1');
         });
     });
 
-    describe('getFaqBlock', () => {
+    describe('getBlockConfig - FaqBlock', () => {
         it('should return FAQ block', async () => {
-            const result = await firstValueFrom(service.getFaqBlock({ id: 'faq', locale: 'en' }));
+            const result = await firstValueFrom(
+                service.getBlockConfig({ id: 'faq', locale: 'en', blockType: 'FaqBlock' }),
+            );
 
             expect(result).toBeDefined();
         });
     });
 
-    describe('getBentoGridBlock', () => {
+    describe('getBlockConfig - BentoGridBlock', () => {
         it('should return bento grid block', async () => {
-            const result = await firstValueFrom(service.getBentoGridBlock({ id: 'bento-grid-1', locale: 'en' }));
+            const result = await firstValueFrom(
+                service.getBlockConfig({ id: 'bento-grid-1', locale: 'en', blockType: 'BentoGridBlock' }),
+            );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('bento-grid-1');
+            expect((result as Record<string, unknown>).id).toBe('bento-grid-1');
         });
     });
 
-    describe('getFeatureSectionBlock', () => {
+    describe('getBlockConfig - FeatureSectionBlock', () => {
         it('should return feature section block', async () => {
             const result = await firstValueFrom(
-                service.getFeatureSectionBlock({ id: 'feature-section-1', locale: 'en' }),
+                service.getBlockConfig({ id: 'feature-section-1', locale: 'en', blockType: 'FeatureSectionBlock' }),
             );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('feature-section-1');
+            expect((result as Record<string, unknown>).id).toBe('feature-section-1');
         });
     });
 
-    describe('getCtaSectionBlock', () => {
+    describe('getBlockConfig - CtaSectionBlock', () => {
         it('should return CTA section block', async () => {
-            const result = await firstValueFrom(service.getCtaSectionBlock({ id: 'cta-section-1', locale: 'en' }));
+            const result = await firstValueFrom(
+                service.getBlockConfig({ id: 'cta-section-1', locale: 'en', blockType: 'CtaSectionBlock' }),
+            );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('cta-section-1');
+            expect((result as Record<string, unknown>).id).toBe('cta-section-1');
         });
     });
 
-    describe('getMediaSectionBlock', () => {
+    describe('getBlockConfig - MediaSectionBlock', () => {
         it('should return media section block', async () => {
-            const result = await firstValueFrom(service.getMediaSectionBlock({ id: 'media-section-1', locale: 'en' }));
+            const result = await firstValueFrom(
+                service.getBlockConfig({ id: 'media-section-1', locale: 'en', blockType: 'MediaSectionBlock' }),
+            );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('media-section-1');
+            expect((result as Record<string, unknown>).id).toBe('media-section-1');
         });
     });
 
-    describe('getPricingSectionBlock', () => {
+    describe('getBlockConfig - PricingSectionBlock', () => {
         it('should return pricing section block', async () => {
             const result = await firstValueFrom(
-                service.getPricingSectionBlock({ id: 'pricing-section-1', locale: 'en' }),
+                service.getBlockConfig({ id: 'pricing-section-1', locale: 'en', blockType: 'PricingSectionBlock' }),
             );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('pricing-section-1');
+            expect((result as Record<string, unknown>).id).toBe('pricing-section-1');
         });
     });
 
-    describe('getQuickLinksBlock', () => {
+    describe('getBlockConfig - QuickLinksBlock', () => {
         it('should return quick links block', async () => {
-            const result = await firstValueFrom(service.getQuickLinksBlock({ id: 'quick-links-1', locale: 'en' }));
+            const result = await firstValueFrom(
+                service.getBlockConfig({ id: 'quick-links-1', locale: 'en', blockType: 'QuickLinksBlock' }),
+            );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('quick-links-1');
+            expect((result as Record<string, unknown>).id).toBe('quick-links-1');
         });
     });
 
-    describe('getFeatureSectionGridBlock', () => {
+    describe('getBlockConfig - FeatureSectionGridBlock', () => {
         it('should return feature section grid block', async () => {
             const result = await firstValueFrom(
-                service.getFeatureSectionGridBlock({ id: 'feature-section-grid-1', locale: 'en' }),
+                service.getBlockConfig({
+                    id: 'feature-section-grid-1',
+                    locale: 'en',
+                    blockType: 'FeatureSectionGridBlock',
+                }),
             );
 
             expect(result).toBeDefined();
-            expect(result.id).toBe('feature-section-grid-1');
+            expect((result as Record<string, unknown>).id).toBe('feature-section-grid-1');
         });
     });
 });

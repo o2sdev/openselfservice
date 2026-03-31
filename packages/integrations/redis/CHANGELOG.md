@@ -1,5 +1,33 @@
 # @o2s/integrations.redis
 
+## 1.4.2
+
+### Patch Changes
+
+- 338cb01: Migrate integration services from `implements` to `extends` and add `super()` where needed
+  to keep constructor metadata compatible with NestJS dependency injection.
+
+    Update documentation examples to reflect the new `extends ...Service` pattern.
+
+- Updated dependencies [fadbc63]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+- Updated dependencies [338cb01]
+    - @o2s/framework@1.20.1
+
+## 1.4.1
+
+### Patch Changes
+
+- 83a3d13: chore(deps): update dependencies
+- 98b2e68: chore(deps): update dependencies
+- Updated dependencies [83a3d13]
+- Updated dependencies [daf592e]
+- Updated dependencies [375cd90]
+- Updated dependencies [98b2e68]
+    - @o2s/framework@1.20.0
+    - @o2s/utils.logger@1.2.3
+
 ## 1.4.0
 
 ### Minor Changes

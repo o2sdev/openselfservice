@@ -6,8 +6,10 @@ import { Articles, Search } from '@o2s/framework/modules';
 import { mapArticle, mapCategories, mapCategory } from './articles.mapper';
 
 @Injectable()
-export class ArticlesService implements Articles.Service {
-    constructor(private readonly searchService: Search.Service) {}
+export class ArticlesService extends Articles.Service {
+    constructor(private readonly searchService: Search.Service) {
+        super();
+    }
 
     getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
         return defer(() => of(mapCategory(options.locale, options.id)));
@@ -29,8 +31,6 @@ export class ArticlesService implements Articles.Service {
                       category: options.category,
                   }
                 : undefined,
-            hitsPerPage: options.limit,
-            page: options.offset,
             sort: options.sortBy
                 ? [
                       {
@@ -61,8 +61,6 @@ export class ArticlesService implements Articles.Service {
                       category: options.category,
                   }
                 : undefined,
-            hitsPerPage: options.limit,
-            page: options.offset,
             sort: options.sortBy
                 ? [
                       {

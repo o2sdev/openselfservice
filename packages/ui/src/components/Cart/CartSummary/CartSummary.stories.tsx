@@ -5,10 +5,10 @@ import { CartSummary } from './CartSummary';
 const meta: Meta<typeof CartSummary> = {
     title: 'Components/Cart/CartSummary',
     component: CartSummary,
+    tags: ['autodocs'],
     parameters: {
         layout: 'padded',
     },
-    tags: ['autodocs'],
 };
 
 export default meta;

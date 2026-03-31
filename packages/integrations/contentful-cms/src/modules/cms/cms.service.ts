@@ -74,13 +74,15 @@ function toBooleanPreview(preview?: boolean | string): boolean {
 }
 
 @Injectable()
-export class CmsService implements CMS.Service {
+export class CmsService extends CMS.Service {
     constructor(
         private readonly graphqlService: GraphqlService,
         private readonly restDeliveryService: RestDeliveryService,
         private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
-    ) {}
+    ) {
+        super();
+    }
 
     /**
      * Universal error handler for Contentful GraphQL errors
@@ -214,7 +216,7 @@ export class CmsService implements CMS.Service {
     }
 
     getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
-        return of<T>({} as T);
+        return of<T | undefined>(undefined);
     }
 
     getEntries<T>(_options: CMS.Request.GetCmsEntriesParams) {

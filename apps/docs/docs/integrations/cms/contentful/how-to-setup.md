@@ -13,10 +13,10 @@ The first step is to install the Contentful integration package in your workspac
 Install the package using npm with the following command:
 
 ```shell
-npm install @o2s/integrations.contentful-cms --workspace=@o2s/configs.integrations --workspace=@o2s/frontend
+npm install @o2s/integrations.contentful-cms --workspace=@o2s/configs.integrations
 ```
 
-This command installs the integration package in both the integrations configuration workspace and the frontend workspace, ensuring that all necessary dependencies are available where they're needed.
+This command installs the integration package in the integrations config workspace, where integration packages are configured and resolved.
 
 ## Configuration
 

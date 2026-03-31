@@ -2,11 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Organizations } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { Models } from '@o2s/utils.api-harmonization';
+import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 
 import { mapCustomerList } from './organizations.mapper';
 import { CustomerList } from './organizations.model';
 import { GetCustomersQuery } from './organizations.request';
+
+const H = HeaderName;
 
 @Injectable()
 export class OrganizationsService {
@@ -15,10 +17,10 @@ export class OrganizationsService {
         private readonly organizationsService: Organizations.Service,
     ) {}
 
-    getCustomers(query: GetCustomersQuery, headers: Models.Headers.AppHeaders): Observable<CustomerList> {
-        const cms$ = this.cmsService.getBlockConfig<CMS.Model.OrganizationList.OrganizationList>({
+    getCustomers(query: GetCustomersQuery, headers: AppHeaders): Observable<CustomerList> {
+        const cms = this.cmsService.getBlockConfig<CMS.Model.OrganizationList.OrganizationList>({
             id: 'organizations',
-            locale: headers['x-locale'],
+            locale: headers[H.Locale],
             blockType: 'OrganizationList',
         });
         // Pass authorization token to filter organizations by current user
@@ -28,20 +30,16 @@ export class OrganizationsService {
                 limit: query.limit || 1000,
                 offset: query.offset || 0,
             },
-            headers.authorization,
+            headers[H.Authorization],
         );
 
-        return forkJoin({ organizations, cms: cms$ }).pipe(
+        return forkJoin({ organizations, cms }).pipe(
             map(({ organizations, cms }) => {
                 if (!organizations) {
                     throw new NotFoundException();
                 }
 
-                return mapCustomerList(
-                    organizations,
-                    cms as CMS.Model.OrganizationList.OrganizationList,
-                    headers['x-locale'],
-                );
+                return mapCustomerList(organizations, cms, headers[H.Locale]);
             }),
         );
     }

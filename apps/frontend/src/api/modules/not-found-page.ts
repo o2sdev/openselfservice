@@ -1,8 +1,7 @@
 import { Modules } from '@o2s/api-harmonization';
 import { URL } from '@o2s/api-harmonization/modules/not-found-page/not-found-page.url';
 
-import { Models } from '@o2s/utils.api-harmonization';
-
+import { AppHeaders } from '@o2s/framework/headers';
 import { Sdk } from '@o2s/framework/sdk';
 
 import { getApiHeaders } from '../../utils/api';
@@ -12,7 +11,7 @@ const API_URL = URL;
 export const notFoundPage = (sdk: Sdk) => ({
     modules: {
         getNotFoundPage: (
-            headers: Models.Headers.AppHeaders,
+            headers: AppHeaders,
             authorization?: string,
         ): Promise<Modules.NotFoundPage.Model.NotFoundPage> => {
             return sdk.makeRequest({
