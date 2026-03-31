@@ -327,7 +327,9 @@ export class TicketListService {
     ) {}
 
     getTicketListBlock(query, headers): Observable<TicketListBlock> {
-        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers['x-locale'] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketListBlock.TicketListBlock>({
+            ...query, locale: headers[H.Locale], blockType: 'TicketListBlock',
+        });
         const documents = this.documentService.getDocumentList({ limit: 5 });
 
         return forkJoin([cms, documents]).pipe(
