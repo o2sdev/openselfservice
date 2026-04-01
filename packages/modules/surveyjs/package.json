@@ -36,7 +36,6 @@
     },
     "dependencies": {
         "@o2s/configs.integrations": "*",
-        "@o2s/framework": "*",
         "@o2s/ui": "*",
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
@@ -59,6 +58,7 @@
         "typescript": "^5.9.3"
     },
     "peerDependencies": {
+        "@o2s/framework": "*",
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "react": "^19",

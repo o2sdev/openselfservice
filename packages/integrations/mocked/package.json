@@ -53,7 +53,6 @@
     },
     "dependencies": {
         "@auth/prisma-adapter": "^2.11.1",
-        "@o2s/framework": "*",
         "@o2s/modules.documents": "*",
         "@o2s/utils.logger": "*",
         "@prisma/client": "^6.19.2",
@@ -82,6 +81,7 @@
         "vitest": "^4.0.18"
     },
     "peerDependencies": {
+        "@o2s/framework": "*",
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",

@@ -84,6 +84,23 @@ The `.env.local` file is generated automatically with all required environment v
 
 > **Note:** The scaffolded project does not have a git repository initialized. Run `git init` in the project directory to start tracking changes.
 
+## Maintainers: `create-o2s-app/base` branch
+
+The CLI clones the **`create-o2s-app/base`** branch (see `src/constants.ts`). After publishing `@o2s/*` packages to npm, merge `main` into `create-o2s-app/base` and pin dependency versions in the starter apps.
+
+**`@o2s/framework` and `@o2s/integrations.mocked` are peer dependencies** of blocks, integrations, and `@o2s/configs.integrations`. They must **not** be duplicated as nested installs under `packages/configs/integrations` — the consuming apps (`apps/api-harmonization`, `apps/frontend`) already declare them as direct dependencies.
+
+When updating **`packages/configs/integrations`** on `create-o2s-app/base`, only install packages that remain **runtime dependencies** of that package (not peer-only). For example:
+
+```shell
+cd packages/configs/integrations
+npm i @o2s/integrations.mocked-dxp@latest
+```
+
+Do **not** run `npm i @o2s/framework@latest` or `npm i @o2s/integrations.mocked@latest` here for the purpose of “pinning” — those are **peer** dependencies; versions are pinned via **`apps/api-harmonization`** and **`apps/frontend`** (and Komendy 1–2 in your release checklist).
+
+**`@o2s/configs.integrations`** is a private workspace package — keep it as `"*"` in app `package.json` files so the workspace always resolves to the local copy.
+
 ## Related
 
 - [O2S Documentation](https://openselfservice.com/docs)

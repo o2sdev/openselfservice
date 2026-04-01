@@ -31,7 +31,6 @@
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
-        "@o2s/framework": "*",
         "@o2s/ui": "*",
         "class-variance-authority": "^0.7.1",
         "react": "^19.2.4"
@@ -49,6 +48,7 @@
         "typescript": "^5.9.3"
     },
     "peerDependencies": {
+        "@o2s/framework": "*",
         "jsonwebtoken": "^9.0.2",
         "dayjs": "^1.11.13"
     }

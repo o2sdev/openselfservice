@@ -39,8 +39,6 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/framework": "*",
-        "@o2s/integrations.mocked": "*",
         "@o2s/utils.logger": "*"
     },
     "devDependencies": {
@@ -58,6 +56,8 @@
         "vitest": "^4.0.18"
     },
     "peerDependencies": {
+        "@o2s/framework": "*",
+        "@o2s/integrations.mocked": "*",
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",

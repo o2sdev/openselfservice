@@ -38,7 +38,6 @@
     },
     "dependencies": {
         "@o2s/configs.integrations": "*",
-        "@o2s/framework": "*",
         "@o2s/ui": "*",
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
@@ -63,19 +62,20 @@
         "vitest": "^4.0.18"
     },
     "peerDependencies": {
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
-        "react": "^19",
-        "react-dom": "^19",
-        "react-hook-form": "^7",
-        "tailwindcss": "^4",
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
-        "rxjs": "^7",
+        "@o2s/framework": "*",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
         "next": "^16.0.5",
-        "next-intl": "^4.1.0"
+        "next-intl": "^4.1.0",
+        "react": "^19",
+        "react-dom": "^19",
+        "react-hook-form": "^7",
+        "rxjs": "^7",
+        "tailwindcss": "^4"
     },
     "o2sTemplate": [
         "o2s"

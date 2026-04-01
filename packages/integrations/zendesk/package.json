@@ -42,7 +42,6 @@
     "dependencies": {
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.1.14",
-        "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "axios": "^1.13.6",
         "html-to-text": "^9.0.5",
@@ -63,5 +62,8 @@
         "tsx": "^4.21.0",
         "typescript": "^5.9.3",
         "vitest": "^4.0.18"
+    },
+    "peerDependencies": {
+        "@o2s/framework": "*"
     }
 }
