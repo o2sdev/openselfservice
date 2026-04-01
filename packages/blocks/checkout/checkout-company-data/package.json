@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.checkout-company-data",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "private": false,
     "license": "MIT",
     "description": "Checkout step for company details, tax ID, billing address, order notes, and cart summary preview.",
