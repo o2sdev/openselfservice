@@ -1,5 +1,21 @@
 # @o2s/framework
 
+## 1.22.0
+
+### Minor Changes
+
+- 7d99d13: feat(framework): expose richer API surface and add framework API reference docs
+- 6edc9ca: Replaced 36+ block-specific abstract methods in CmsService with a single generic getBlockConfig<T>() method. Added Swagger decorators to all CMS block controller endpoints. Extended CmsBlockType union with checkout block types.
+
+### Patch Changes
+
+- 7d99d13: docs(api): REST API reference, OpenAPI tooling, and cross-package alignment
+
+    Expand `@nestjs/swagger` metadata and related types across framework modules, exports, and CMS block
+    models. Update billing and orders blocks that call the harmonization API, plus checkout billing
+    payment UI where needed. Align Algolia, Contentful, Medusa, mocked, mocked-dxp, Strapi, and Zendesk
+    integrations with the updated contracts, mappers, and tests.
+
 ## 1.21.0
 
 ### Minor Changes

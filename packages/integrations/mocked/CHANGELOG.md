@@ -1,5 +1,25 @@
 # @o2s/integrations.mocked
 
+## 1.23.0
+
+### Minor Changes
+
+- 6edc9ca: Added checkout block type cases (Cart, CheckoutCompanyData, CheckoutShippingAddress, CheckoutBillingPayment, CheckoutSummary, OrderConfirmation) to the getBlockConfig switch in mocked CMS service. Refactored mocked-dxp to use getBlockConfig override instead of individual block method overrides.
+
+### Patch Changes
+
+- 7d99d13: docs(api): REST API reference, OpenAPI tooling, and cross-package alignment
+
+    Expand `@nestjs/swagger` metadata and related types across framework modules, exports, and CMS block
+    models. Update billing and orders blocks that call the harmonization API, plus checkout billing
+    payment UI where needed. Align Algolia, Contentful, Medusa, mocked, mocked-dxp, Strapi, and Zendesk
+    integrations with the updated contracts, mappers, and tests.
+
+- Updated dependencies [7d99d13]
+- Updated dependencies [7d99d13]
+- Updated dependencies [6edc9ca]
+    - @o2s/framework@1.22.0
+
 ## 1.22.0
 
 ### Minor Changes

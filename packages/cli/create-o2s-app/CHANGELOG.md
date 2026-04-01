@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 4.1.3
+
+### Patch Changes
+
+- 58f6c14: add error object to telemetry event for better debugging
+
 ## 4.1.2
 
 ### Patch Changes

@@ -1,5 +1,62 @@
 # @o2s/api-harmonization
 
+## 1.20.0
+
+### Minor Changes
+
+- 6edc9ca: Replaced 36+ block-specific abstract methods in CmsService with a single generic getBlockConfig<T>() method. Added Swagger decorators to all CMS block controller endpoints. Extended CmsBlockType union with checkout block types.
+
+### Patch Changes
+
+- Updated dependencies [6edc9ca]
+- Updated dependencies [7d99d13]
+- Updated dependencies [7d99d13]
+- Updated dependencies [6edc9ca]
+- Updated dependencies [6edc9ca]
+    - @o2s/integrations.mocked@1.23.0
+    - @o2s/framework@1.22.0
+    - @o2s/blocks.checkout-billing-payment@0.4.0
+    - @o2s/blocks.invoice-list@1.8.0
+    - @o2s/blocks.orders-summary@1.7.0
+    - @o2s/blocks.payments-history@1.7.0
+    - @o2s/blocks.payments-summary@1.7.0
+    - @o2s/blocks.checkout-shipping-address@0.4.0
+    - @o2s/blocks.notification-details@1.8.0
+    - @o2s/blocks.notification-summary@1.6.0
+    - @o2s/blocks.notification-list@1.9.0
+    - @o2s/blocks.checkout-company-data@0.4.0
+    - @o2s/blocks.featured-service-list@1.6.0
+    - @o2s/blocks.article-search@1.8.0
+    - @o2s/blocks.recommended-products@0.7.0
+    - @o2s/blocks.feature-section-grid@0.7.0
+    - @o2s/blocks.category-list@1.8.0
+    - @o2s/blocks.order-confirmation@0.3.0
+    - @o2s/blocks.article-list@1.8.0
+    - @o2s/blocks.checkout-summary@0.4.0
+    - @o2s/blocks.product-details@0.6.0
+    - @o2s/blocks.service-details@1.7.0
+    - @o2s/blocks.feature-section@0.8.0
+    - @o2s/blocks.pricing-section@0.8.0
+    - @o2s/blocks.category@1.8.0
+    - @o2s/blocks.ticket-details@1.8.0
+    - @o2s/blocks.ticket-summary@1.6.0
+    - @o2s/blocks.document-list@0.8.0
+    - @o2s/blocks.media-section@0.8.0
+    - @o2s/blocks.product-list@0.7.0
+    - @o2s/blocks.service-list@1.7.0
+    - @o2s/blocks.ticket-recent@1.7.0
+    - @o2s/blocks.user-account@1.6.0
+    - @o2s/blocks.hero-section@0.8.0
+    - @o2s/blocks.order-details@1.7.0
+    - @o2s/blocks.cta-section@0.8.0
+    - @o2s/blocks.quick-links@1.7.0
+    - @o2s/blocks.surveyjs-form@1.6.0
+    - @o2s/blocks.ticket-list@1.10.0
+    - @o2s/blocks.bento-grid@0.8.0
+    - @o2s/blocks.order-list@1.8.0
+    - @o2s/blocks.cart@0.4.0
+    - @o2s/blocks.faq@1.7.0
+
 ## 1.19.0
 
 ### Minor Changes
