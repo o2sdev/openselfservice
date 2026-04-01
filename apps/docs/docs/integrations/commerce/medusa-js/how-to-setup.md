@@ -18,111 +18,49 @@ npm install @o2s/integrations.medusajs --workspace=@o2s/configs.integrations
 
 After installing the package, configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Medusa.js instead of the default mocked integration.
 
-### Step 1: Update the integration configs
+### Step 1: Update the integration config
 
-The Medusa.js integration supports multiple modules. Update the corresponding config files for each module you use.
+The Medusa.js integration supports multiple domains: orders, products, carts, checkout, customers, payments, and resources. All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
 
-**Update `packages/configs/integrations/src/models/orders.ts`:**
+Open this file and make the following changes:
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
+1. **Add the Medusa.js import:**
 
-import { ApiConfig } from '@o2s/framework/modules';
+    ```typescript
+    import * as Medusa from '@o2s/integrations.medusajs/integration';
+    ```
 
-export const OrdersIntegrationConfig: ApiConfig['integrations']['orders'] = Config.orders!;
+2. **Update domain assignments** in the `createIntegrationConfig` call — change each Medusa-supported domain from `Mocked` to `Medusa`:
 
-export import Service = Integration.Orders.Service;
-export import Request = Integration.Orders.Request;
-export import Model = Integration.Orders.Model;
-```
+    ```typescript
+    const result = createIntegrationConfig({
+        // ... other domains remain Mocked
+        orders: Medusa,
+        products: Medusa,
+        carts: Medusa,
+        checkout: Medusa,
+        customers: Medusa,   // required for checkout address resolution
+        payments: Medusa,    // required for checkout
+        resources: Medusa,   // if using Resources module
+        // ... other domains remain Mocked
+    });
+    ```
 
-**Update `packages/configs/integrations/src/models/products.ts`:**
+3. **Update the matching `export import` type aliases:**
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const ProductsIntegrationConfig: ApiConfig['integrations']['products'] = Config.products!;
-
-export import Service = Integration.Products.Service;
-export import Request = Integration.Products.Request;
-export import Model = Integration.Products.Model;
-```
-
-**Update `packages/configs/integrations/src/models/carts.ts`:**
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const CartsIntegrationConfig: ApiConfig['integrations']['carts'] = Config.carts!;
-
-export import Service = Integration.Carts.Service;
-export import Request = Integration.Carts.Request;
-export import Model = Integration.Carts.Model;
-```
-
-**Update `packages/configs/integrations/src/models/checkout.ts`:**
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const CheckoutIntegrationConfig: ApiConfig['integrations']['checkout'] = Config.checkout!;
-
-export import Service = Integration.Checkout.Service;
-export import Request = Integration.Checkout.Request;
-export import Model = Integration.Checkout.Model;
-```
-
-**Update `packages/configs/integrations/src/models/customers.ts`** (required for checkout address resolution):
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const CustomersIntegrationConfig: ApiConfig['integrations']['customers'] = Config.customers!;
-
-export import Service = Integration.Customers.Service;
-export import Request = Integration.Customers.Request;
-export import Model = Integration.Customers.Model;
-```
-
-**Update `packages/configs/integrations/src/models/payments.ts`** (required for checkout):
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const PaymentsIntegrationConfig: ApiConfig['integrations']['payments'] = Config.payments!;
-
-export import Service = Integration.Payments.Service;
-export import Request = Integration.Payments.Request;
-export import Model = Integration.Payments.Model;
-```
-
-**Update `packages/configs/integrations/src/models/resources.ts`** (if using Resources module):
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const ResourcesIntegrationConfig: ApiConfig['integrations']['resources'] = Config.resources!;
-
-export import Service = Integration.Resources.Service;
-export import Request = Integration.Resources.Request;
-export import Model = Integration.Resources.Model;
-```
+    ```typescript
+    export import Orders = Medusa.Integration.Orders;
+    export import Products = Medusa.Integration.Products;
+    export import Carts = Medusa.Integration.Carts;
+    export import Checkout = Medusa.Integration.Checkout;
+    export import Customers = Medusa.Integration.Customers;
+    export import Payments = Medusa.Integration.Payments;
+    export import Resources = Medusa.Integration.Resources;
+    ```
 
 ### Step 2: Verify AppConfig
 
-The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference the integration configs. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
+The `AppConfig` in `apps/api-harmonization/src/app.config.ts` already imports from `@o2s/configs.integrations`. You don't need to modify this file.
 
 ## Medusa.js server setup
 
