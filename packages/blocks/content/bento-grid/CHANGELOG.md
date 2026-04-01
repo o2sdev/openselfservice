@@ -1,5 +1,18 @@
 # @o2s/blocks.bento-grid
 
+## 0.8.0
+
+### Minor Changes
+
+- 6edc9ca: Updated all block services to use the generic getBlockConfig<T>() method instead of block-specific CMS service methods.
+
+### Patch Changes
+
+- Updated dependencies [7d99d13]
+- Updated dependencies [7d99d13]
+- Updated dependencies [6edc9ca]
+  - @o2s/framework@1.22.0
+
 ## 0.7.1
 
 ### Patch Changes
