@@ -5,7 +5,7 @@ import type { ApiConfig } from '../api-config';
  * Domain presence is validated at runtime by createIntegrationConfig.
  */
 export type IntegrationWithDomain = {
-    Config: Record<string, unknown>;
+    Config: Partial<ApiConfig['integrations']>;
     Integration: Record<string, unknown>;
 };
 
@@ -18,26 +18,26 @@ export type IntegrationConfigInput = {
     [D in DomainKey]: IntegrationWithDomain;
 };
 
-const DOMAIN_KEYS: DomainKey[] = [
-    'articles',
-    'auth',
-    'billingAccounts',
-    'cache',
-    'carts',
-    'checkout',
-    'cms',
-    'customers',
-    'invoices',
-    'notifications',
-    'orders',
-    'organizations',
-    'payments',
-    'products',
-    'resources',
-    'search',
-    'tickets',
-    'users',
-];
+const DOMAIN_KEYS = {
+    articles: true,
+    auth: true,
+    billingAccounts: true,
+    cache: true,
+    carts: true,
+    checkout: true,
+    cms: true,
+    customers: true,
+    invoices: true,
+    notifications: true,
+    orders: true,
+    organizations: true,
+    payments: true,
+    products: true,
+    resources: true,
+    search: true,
+    tickets: true,
+    users: true,
+} satisfies Record<DomainKey, true>;
 
 /**
  * Creates integration config from a domain-to-integration map.
@@ -58,13 +58,13 @@ export function createIntegrationConfig<T extends IntegrationConfigInput>(
 } {
     const integrations: Record<string, unknown> = {};
 
-    for (const domain of DOMAIN_KEYS) {
-        const integration = config[domain] as IntegrationWithDomain;
+    for (const domain of Object.keys(DOMAIN_KEYS) as DomainKey[]) {
+        const integration = config[domain];
         if (!integration?.Config) {
             throw new Error(`Missing integration for domain: ${domain}`);
         }
 
-        const domainConfig = (integration.Config as Record<string, unknown>)[domain];
+        const domainConfig = integration.Config[domain];
         if (!domainConfig) {
             throw new Error(`Integration does not provide config for domain: ${domain}`);
         }
