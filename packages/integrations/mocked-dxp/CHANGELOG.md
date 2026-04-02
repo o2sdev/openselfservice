@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked-dxp
 
+## 1.2.2
+
+### Patch Changes
+
+- c893e2c: remove unused constructor arguments in SearchService
+
 ## 1.2.1
 
 ### Patch Changes

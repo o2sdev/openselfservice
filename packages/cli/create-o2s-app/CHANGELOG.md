@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 4.1.7
+
+### Patch Changes
+
+- 3ff35ec: remove unused logic for handling private modules during scaffolding
+
 ## 4.1.6
 
 ### Patch Changes
