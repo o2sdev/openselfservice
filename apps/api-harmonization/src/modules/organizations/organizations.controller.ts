@@ -1,5 +1,6 @@
 import { URL } from '.';
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
+import { ApiExcludeController } from '@nestjs/swagger';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -11,6 +12,7 @@ import { OrganizationsService } from './organizations.service';
 
 @Controller(URL)
 @UseInterceptors(LoggerService)
+@ApiExcludeController()
 export class OrganizationsController {
     constructor(protected readonly service: OrganizationsService) {}
 

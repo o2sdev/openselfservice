@@ -7,6 +7,8 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
 import { AppSpinner } from '@o2s/ui/components/Feedback/AppSpinner';
@@ -76,7 +78,7 @@ const preview: Preview = {
         (Story) => {
             // Set cartId for cart/checkout blocks - MSW handlers return mock data
             if (globalThis.window !== undefined) {
-                globalThis.window.localStorage.setItem('cartId', 'storybook-cart-1');
+                Utils.CartStorage.setCartId('storybook-cart-1');
             }
             return <Story />;
         },

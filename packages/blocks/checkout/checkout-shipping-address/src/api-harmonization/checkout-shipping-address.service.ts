@@ -23,7 +23,11 @@ export class CheckoutShippingAddressService {
         headers: AppHeaders,
     ): Observable<CheckoutShippingAddressBlock> {
         return forkJoin([
-            this.cmsService.getCheckoutShippingAddressBlock({ ...query, locale: headers[H.Locale] }),
+            this.cmsService.getBlockConfig<CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock>({
+                ...query,
+                locale: headers[H.Locale],
+                blockType: 'CheckoutShippingAddressBlock',
+            }),
         ]).pipe(
             map(([cms]) => {
                 const result = mapCheckoutShippingAddress(cms);

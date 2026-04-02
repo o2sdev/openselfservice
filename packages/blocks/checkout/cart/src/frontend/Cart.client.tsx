@@ -1,7 +1,10 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
+
+import { Utils } from '@o2s/utils.frontend';
 
 import { Carts } from '@o2s/framework/modules';
 
@@ -18,8 +21,6 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { sdk } from '../sdk';
 
 import { CartPureProps } from './Cart.types';
-
-const CART_ID_KEY = 'cartId';
 
 export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     locale,
@@ -43,7 +44,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     const [isMutationPending, startMutationTransition] = useTransition();
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startInitialLoadTransition(async () => {
@@ -57,7 +58,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     }, [locale, accessToken, errors?.loadError]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startMutationTransition(async () => {
@@ -70,6 +71,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                     accessToken,
                 );
                 setCart(updated);
+                eventBus.emit('cart:changed', { cart: updated });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }
@@ -77,13 +79,14 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     };
 
     const removeItem = (itemId: string) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startMutationTransition(async () => {
             try {
                 const updated = await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
                 setCart(updated);
+                eventBus.emit('cart:changed', { cart: updated });
             } catch {
                 toast({ variant: 'destructive', description: errors?.updateError });
             }

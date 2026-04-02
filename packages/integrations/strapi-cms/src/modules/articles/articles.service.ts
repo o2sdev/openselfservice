@@ -109,8 +109,6 @@ export class ArticlesService extends Articles.Service {
                       category: options.category,
                   }
                 : undefined,
-            hitsPerPage: options.limit,
-            page: options.offset,
             sort: options.sortBy
                 ? [
                       {

@@ -7,7 +7,7 @@ import tailwindPlugin from './plugins/tailwind-config';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-let hideDocs = false;
+const hideDocs = false;
 
 const config: Config = {
     title: 'Open Self Service',
@@ -257,6 +257,37 @@ const config: Config = {
         },
     },
     plugins: [
+        function webpackNodePolyfillsPlugin() {
+            return {
+                name: 'webpack-node-polyfills',
+                configureWebpack() {
+                    return {
+                        resolve: {
+                            fallback: {
+                                path: require.resolve('path-browserify'),
+                            },
+                        },
+                    };
+                },
+            };
+        },
+        [
+            'docusaurus-plugin-openapi-docs',
+            {
+                id: 'openapi',
+                docsPluginId: 'classic',
+                config: {
+                    'rest-api': {
+                        specPath: 'static/openapi/framework-live.json',
+                        outputDir: 'docs/rest-api',
+                        sidebarOptions: {
+                            groupPathsBy: 'tag',
+                            categoryLinkSource: 'info',
+                        },
+                    },
+                },
+            },
+        ],
         tailwindPlugin,
         '@docusaurus/theme-mermaid',
         'docusaurus-plugin-image-zoom',
@@ -277,6 +308,7 @@ const config: Config = {
                     : {
                           sidebarPath: './sidebars.ts',
                           routeBasePath: '/docs',
+                          docItemComponent: '@theme/ApiItem',
                           // Please change this to your repo.
                           // Remove this to remove the "edit this page" links.
                           // editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
@@ -561,6 +593,17 @@ const config: Config = {
             darkTheme: prismThemes.dracula,
         },
 
+        // docusaurus-theme-openapi-docs: order and subset of code-sample tabs (right-hand API panel)
+        // https://github.com/PaloAltoNetworks/docusaurus-openapi-docs — CodeSnippets reads themeConfig.languageTabs
+        languageTabs: [
+            { language: 'curl' },
+            { language: 'javascript' },
+            { language: 'nodejs' },
+            { language: 'java' },
+            { language: 'python' },
+            { language: 'go' },
+        ],
+
         zoom: {
             selector: '.markdown img',
             background: {
@@ -576,6 +619,7 @@ const config: Config = {
     } satisfies Preset.ThemeConfig,
 
     themes: [
+        'docusaurus-theme-openapi-docs',
         ...(hideDocs
             ? []
             : [

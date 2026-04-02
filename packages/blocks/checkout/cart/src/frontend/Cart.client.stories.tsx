@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { defineRouting } from 'next-intl/routing';
 import React from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import readme from '../../README.md?raw';
 
 import { CartPure } from './Cart.client';
@@ -89,7 +91,7 @@ export const EmptyCart: Story = {
     decorators: [
         (Story) => {
             if (typeof window !== 'undefined') {
-                window.localStorage.setItem('cartId', EMPTY_CART_ID);
+                Utils.CartStorage.setCartId(EMPTY_CART_ID);
             }
             return <Story />;
         },

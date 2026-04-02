@@ -24,8 +24,13 @@ export class TicketDetailsService {
         query: GetTicketDetailsBlockQuery,
         headers: AppHeaders,
     ): Observable<TicketDetailsBlock> {
-        const cms = this.cmsService.getTicketDetailsBlock({ ...query, locale: headers[H.Locale] });
-        const ticket = this.ticketService.getTicket({ ...params, locale: headers[H.Locale] });
+        const authorization = headers[H.Authorization];
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketDetailsBlock.TicketDetailsBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'TicketDetailsBlock',
+        });
+        const ticket = this.ticketService.getTicket({ ...params, locale: headers[H.Locale] }, authorization);
 
         return forkJoin([ticket, cms]).pipe(
             map(([ticket, cms]) => {
@@ -36,7 +41,6 @@ export class TicketDetailsService {
                 const result = mapTicketDetails(ticket, cms, headers[H.Locale], headers[H.ClientTimezone] || '');
 
                 // Extract permissions using ACL service
-                const authorization = headers[H.Authorization];
                 if (authorization) {
                     const permissions = this.authService.canPerformActions(authorization, 'tickets', [
                         'view',

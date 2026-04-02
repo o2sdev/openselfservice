@@ -1,6 +1,7 @@
 import { LogLevel } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as telemetry from '@o2s/telemetry';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
@@ -55,6 +56,21 @@ async function bootstrap() {
     app.use(cookieParser());
     app.use(compression());
     app.set('query parser', 'extended');
+
+    const swaggerConfig = new DocumentBuilder()
+        .setTitle('Open Self Service REST API')
+        .setDescription(
+            'Complete REST API reference for the Open Self Service harmonization layer. This API provides a unified interface to interact with various backend systems including CMS, ticketing, notifications, billing, e-commerce, and more. All endpoints return normalized data models regardless of the underlying integration.',
+        )
+        .setVersion('1.0.0')
+        .addBearerAuth()
+        .build();
+    const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('docs-api', app, swaggerDocument, {
+        jsonDocumentUrl: 'docs-api-json',
+        yamlDocumentUrl: 'docs-api-yaml',
+        useGlobalPrefix: Boolean(process.env.API_PREFIX),
+    });
 
     app.enableShutdownHooks();
 

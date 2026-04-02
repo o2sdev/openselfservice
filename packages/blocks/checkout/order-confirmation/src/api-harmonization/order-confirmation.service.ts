@@ -30,7 +30,11 @@ export class OrderConfirmationService {
         }
 
         return forkJoin([
-            this.cmsService.getOrderConfirmationBlock({ ...query, locale: headers[H.Locale] }),
+            this.cmsService.getBlockConfig<CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock>({
+                ...query,
+                locale: headers[H.Locale],
+                blockType: 'OrderConfirmationBlock',
+            }),
             this.ordersService.getOrder({ id: query.orderId }, headers[H.Authorization]),
         ]).pipe(
             map(([cms, order]) => {

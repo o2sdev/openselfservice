@@ -20,17 +20,24 @@ export class TicketSummaryService {
     ) {}
 
     getTicketSummaryBlock(query: GetTicketSummaryBlockQuery, headers: AppHeaders): Observable<TicketSummaryBlock> {
-        const cms = this.cmsService.getTicketSummaryBlock({ ...query, locale: headers[H.Locale] });
-        const tickets = this.ticketService.getTicketList({
-            limit: 1000,
-            offset: 0,
+        const authorization = headers[H.Authorization];
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketSummaryBlock.TicketSummaryBlock>({
+            ...query,
             locale: headers[H.Locale],
+            blockType: 'TicketSummaryBlock',
         });
+        const tickets = this.ticketService.getTicketList(
+            {
+                limit: 1000,
+                offset: 0,
+                locale: headers[H.Locale],
+            },
+            authorization,
+        );
 
         return forkJoin([tickets, cms]).pipe(
             map(([tickets, cms]) => {
                 const result = mapTicketSummary(cms, tickets, headers[H.Locale]);
-                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
                 if (authorization) {

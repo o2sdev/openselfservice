@@ -1,5 +1,31 @@
 # @o2s/integrations.algolia
 
+## 1.6.4
+
+### Patch Changes
+
+- 31df3a8: fix(deps): move @o2s/framework to peerDependencies in all published packages
+
+    `@o2s/framework` was listed in `dependencies` of blocks, integrations, modules, and utils packages. When installed from npm with mismatched versions across the dependency tree, npm would create nested copies of `@o2s/framework` with different class references. This caused NestJS to fail resolving DI tokens (e.g. `SearchService`) because injected class instances came from a different `@o2s/framework` copy than the one registered in the application module.
+
+    Moved `@o2s/framework` to `peerDependencies` across all affected packages so that the consuming application always provides a single shared copy. Also moved `@o2s/integrations.mocked` to `peerDependencies` in `@o2s/integrations.mocked-dxp`.
+
+## 1.6.3
+
+### Patch Changes
+
+- 7d99d13: docs(api): REST API reference, OpenAPI tooling, and cross-package alignment
+
+    Expand `@nestjs/swagger` metadata and related types across framework modules, exports, and CMS block
+    models. Update billing and orders blocks that call the harmonization API, plus checkout billing
+    payment UI where needed. Align Algolia, Contentful, Medusa, mocked, mocked-dxp, Strapi, and Zendesk
+    integrations with the updated contracts, mappers, and tests.
+
+- Updated dependencies [7d99d13]
+- Updated dependencies [7d99d13]
+- Updated dependencies [6edc9ca]
+    - @o2s/framework@1.22.0
+
 ## 1.6.2
 
 ### Patch Changes

@@ -121,6 +121,8 @@ export default async function Page({ params }: Props) {
                     locale={locale}
                     themes={init.themes}
                     currentTheme={meta.theme}
+                    user={{ orgId: session?.user?.customer?.id }}
+                    cartStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
                 >
                     <div className="flex flex-col min-h-dvh">
                         <Header data={init.common.header} alternativeUrls={data.alternativeUrls} />

@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { of } from 'rxjs';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Observable, of } from 'rxjs';
 
 import { CMS } from '@o2s/framework/modules';
 
@@ -64,7 +64,7 @@ export class CmsService extends CMS.Service {
     }
 
     getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
-        return of<T>({} as T);
+        return of<T | undefined>(undefined);
     }
 
     getEntries<T>(_options: CMS.Request.GetCmsEntriesParams) {
@@ -103,164 +103,105 @@ export class CmsService extends CMS.Service {
         return of(mapFooter(options.locale));
     }
 
-    getFaqBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFaqBlock(_options.locale)).pipe(responseDelay());
-    }
-
-    getTicketListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getTicketDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketDetailsBlock(_options.locale)).pipe(responseDelay());
-    }
-
-    getNotificationListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getNotificationDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationDetailsBlock(_options.locale)).pipe(responseDelay());
-    }
-
-    getNotificationSummaryBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationSummaryBlock(_options.locale)).pipe(responseDelay());
-    }
-
-    getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapInvoiceListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getInvoiceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapInvoiceDetailsBlock()).pipe(responseDelay());
-    }
-
-    getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapServiceListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getServiceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapServiceDetailsBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getResourceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapResourceListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getResourceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapResourceDetailsBlock()).pipe(responseDelay());
-    }
-
-    getPaymentsSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsSummaryBlock(options.id, options.locale)).pipe(responseDelay());
-    }
-
-    getPaymentsHistoryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsHistoryBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getUserAccountBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapUserAccountBlock(_options.locale)).pipe(responseDelay());
-    }
-
-    getTicketRecentBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketRecentBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
-        return of(mapOrganizationList(options.locale)).pipe(responseDelay());
-    }
-
     getSurvey(options: CMS.Request.GetCmsSurveyParams) {
         return of(mapSurvey(options.code)).pipe(responseDelay());
     }
 
-    getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapSurveyJsBlock(options.locale, options.id)).pipe(responseDelay());
-    }
-
-    getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapOrderListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getOrdersSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapOrdersSummaryBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getOrderDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapOrderDetailsBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapQuickLinksBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getCategoryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapCategoryBlock(options.id, options.locale)).pipe(responseDelay());
-    }
-
-    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapCategoryListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getArticleSearchBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleSearchBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFeaturedServiceListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapProductListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getProductDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapProductDetailsBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getRecommendedProductsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapRecommendedProductsBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getTicketSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketSummaryBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getBentoGridBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapBentoGridBlock(options)).pipe(responseDelay());
-    }
-
-    getCtaSectionBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapCtaSectionBlock(options)).pipe(responseDelay());
-    }
-
-    getDocumentListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapDocumentListBlock(_options.locale)).pipe(responseDelay());
-    }
-
-    getFeatureSectionBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFeatureSectionBlock(options)).pipe(responseDelay());
-    }
-
-    getFeatureSectionGridBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFeatureSectionGridBlock(options)).pipe(responseDelay());
-    }
-
-    getHeroSectionBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapHeroSectionBlock(options)).pipe(responseDelay());
-    }
-
-    getMediaSectionBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapMediaSectionBlock(options)).pipe(responseDelay());
-    }
-
-    getPricingSectionBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPricingSectionBlock(options)).pipe(responseDelay());
+    getBlockConfig<T>(options: CMS.Request.GetCmsBlockConfigParams): Observable<T> {
+        switch (options.blockType) {
+            case 'FaqBlock':
+                return of(mapFaqBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'TicketListBlock':
+                return of(mapTicketListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'TicketDetailsBlock':
+                return of(mapTicketDetailsBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'TicketRecentBlock':
+                return of(mapTicketRecentBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'TicketSummaryBlock':
+                return of(mapTicketSummaryBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'NotificationListBlock':
+                return of(mapNotificationListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'NotificationDetailsBlock':
+                return of(mapNotificationDetailsBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'NotificationSummaryBlock':
+                return of(mapNotificationSummaryBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'InvoiceListBlock':
+                return of(mapInvoiceListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'InvoiceDetailsBlock':
+                return of(mapInvoiceDetailsBlock()).pipe(responseDelay()) as Observable<T>;
+            case 'OrderListBlock':
+                return of(mapOrderListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'OrderDetailsBlock':
+                return of(mapOrderDetailsBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'OrdersSummaryBlock':
+                return of(mapOrdersSummaryBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'PaymentsSummaryBlock':
+                return of(mapPaymentsSummaryBlock(options.id, options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'PaymentsHistoryBlock':
+                return of(mapPaymentsHistoryBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ProductListBlock':
+                return of(mapProductListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ProductDetailsBlock':
+                return of(mapProductDetailsBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'RecommendedProductsBlock':
+                return of(mapRecommendedProductsBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ServiceListBlock':
+                return of(mapServiceListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'FeaturedServiceListBlock':
+                return of(mapFeaturedServiceListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ServiceDetailsBlock':
+                return of(mapServiceDetailsBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ResourceListBlock':
+                return of(mapResourceListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ResourceDetailsBlock':
+                return of(mapResourceDetailsBlock()).pipe(responseDelay()) as Observable<T>;
+            case 'UserAccountBlock':
+                return of(mapUserAccountBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'OrganizationList':
+                return of(mapOrganizationList(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'SurveyJsBlock':
+                return of(mapSurveyJsBlock(options.locale, options.id)).pipe(responseDelay()) as Observable<T>;
+            case 'QuickLinksBlock':
+                return of(mapQuickLinksBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ArticleListBlock':
+                return of(mapArticleListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'ArticleSearchBlock':
+                return of(mapArticleSearchBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'CategoryBlock':
+                return of(mapCategoryBlock(options.id, options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'CategoryListBlock':
+                return of(mapCategoryListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'BentoGridBlock':
+                return of(mapBentoGridBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CtaSectionBlock':
+                return of(mapCtaSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'DocumentListBlock':
+                return of(mapDocumentListBlock(options.locale)).pipe(responseDelay()) as Observable<T>;
+            case 'FeatureSectionBlock':
+                return of(mapFeatureSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'FeatureSectionGridBlock':
+                return of(mapFeatureSectionGridBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'HeroSectionBlock':
+                return of(mapHeroSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'MediaSectionBlock':
+                return of(mapMediaSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'PricingSectionBlock':
+                return of(mapPricingSectionBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CartBlock':
+                return of(mapCartBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutCompanyDataBlock':
+                return of(mapCheckoutCompanyDataBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutShippingAddressBlock':
+                return of(mapCheckoutShippingAddressBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutBillingPaymentBlock':
+                return of(mapCheckoutBillingPaymentBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'CheckoutSummaryBlock':
+                return of(mapCheckoutSummaryBlock(options)).pipe(responseDelay()) as Observable<T>;
+            case 'OrderConfirmationBlock':
+                return of(mapOrderConfirmationBlock(options)).pipe(responseDelay()) as Observable<T>;
+            default:
+                throw new NotFoundException(`Unknown block type: ${options.blockType}`);
+        }
     }
 
     getCartBlock(options: CMS.Request.GetCmsEntryParams) {

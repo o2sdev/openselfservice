@@ -15,7 +15,11 @@ export class QuickLinksService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getQuickLinksBlock(query: GetQuickLinksBlockQuery, headers: AppHeaders): Observable<QuickLinksBlock> {
-        const cms = this.cmsService.getQuickLinksBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.QuickLinksBlock.QuickLinksBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'QuickLinksBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapQuickLinks(cms, headers[H.Locale])));
     }

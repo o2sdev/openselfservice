@@ -24,18 +24,25 @@ export class NotificationListService {
         headers: AppHeaders,
     ): Observable<NotificationListBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getNotificationListBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.NotificationListBlock.NotificationListBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'NotificationListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.notificationService
-                    .getNotificationList({
-                        ...(cms.initialFilters || {}),
-                        ...query,
-                        limit: query.limit || cms.pagination?.limit || 1,
-                        offset: query.offset || 0,
-                        locale: headers[H.Locale],
-                    })
+                    .getNotificationList(
+                        {
+                            ...(cms.initialFilters || {}),
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 1,
+                            offset: query.offset || 0,
+                            locale: headers[H.Locale],
+                        },
+                        authorization,
+                    )
                     .pipe(
                         map((notifications) => {
                             const result = mapNotificationList(

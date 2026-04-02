@@ -5,6 +5,8 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Carts, Models, Payments } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
@@ -19,7 +21,6 @@ import { sdk } from '../sdk';
 
 import { CheckoutBillingPaymentPureProps } from './CheckoutBillingPayment.types';
 
-const CART_ID_KEY = 'cartId';
 const FORM_ID = 'checkout-billing-form';
 
 export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymentPureProps>> = ({
@@ -59,7 +60,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     });
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors?.cartNotFound, variant: 'destructive' });
             router.replace(cartPath ?? '/');
@@ -79,16 +80,18 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                     });
                 }
                 setCartPromotions(cart.promotions);
-                if (cart.regionId) {
-                    const providers = await sdk.payments.getProviders(
-                        { regionId: cart.regionId },
-                        { 'x-locale': locale },
-                        accessToken,
-                    );
-                    setPaymentProviders(providers.data ?? []);
-                } else {
-                    setPaymentProviders([]);
+                if (!cart.regionId) {
+                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                    router.replace(cartPath ?? '/');
+                    return;
                 }
+                const providers = await sdk.payments.getProviders(
+                    { regionId: cart.regionId },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                setPaymentProviders(providers.data ?? []);
+
                 if (cart.paymentMethod) {
                     setInitialFormValues({ paymentMethod: cart.paymentMethod.id });
                 }
@@ -104,7 +107,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     });
 
     const handleSubmit = (values: { paymentMethod: string }) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) return;
 
         startSubmitTransition(async () => {

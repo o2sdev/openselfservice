@@ -23,17 +23,24 @@ export class NotificationSummaryService {
         query: GetNotificationSummaryBlockQuery,
         headers: AppHeaders,
     ): Observable<NotificationSummaryBlock> {
-        const cms = this.cmsService.getNotificationSummaryBlock({ ...query, locale: headers[H.Locale] });
-        const notifications = this.notificationService.getNotificationList({
-            limit: 1000,
-            offset: 0,
+        const authorization = headers[H.Authorization];
+        const cms = this.cmsService.getBlockConfig<CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock>({
+            ...query,
             locale: headers[H.Locale],
+            blockType: 'NotificationSummaryBlock',
         });
+        const notifications = this.notificationService.getNotificationList(
+            {
+                limit: 1000,
+                offset: 0,
+                locale: headers[H.Locale],
+            },
+            authorization,
+        );
 
         return forkJoin([notifications, cms]).pipe(
             map(([notifications, cms]) => {
                 const result = mapNotificationSummary(cms, notifications, headers[H.Locale]);
-                const authorization = headers[H.Authorization];
 
                 // Extract permissions using ACL service
                 if (authorization) {

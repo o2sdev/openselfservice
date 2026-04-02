@@ -12,11 +12,11 @@ export class TicketService extends Tickets.Service {
         super();
     }
 
-    getTicket(options: Tickets.Request.GetTicketParams) {
+    getTicket(options: Tickets.Request.GetTicketParams, _authorization?: string) {
         return of(mapTicket(options.id, options.locale)).pipe(responseDelay());
     }
 
-    getTicketList(options: Tickets.Request.GetTicketListQuery) {
+    getTicketList(options: Tickets.Request.GetTicketListQuery, _authorization?: string) {
         return of(mapTickets(options)).pipe(responseDelay());
     }
 

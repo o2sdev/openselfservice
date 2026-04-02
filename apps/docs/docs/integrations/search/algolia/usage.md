@@ -10,11 +10,11 @@ This page provides practical examples and API reference for using the Algolia in
 
 The integration provides access to search functionality through the framework's search controller:
 
-### GET /search
+### POST /search
 
 Performs a search query against a specified Algolia index.
 
-**Endpoint:** `GET /search?index={indexName}`
+**Endpoint:** `POST /search?index={indexName}`
 
 **Query parameters:**
 
@@ -33,7 +33,7 @@ Returns a `SearchResult<T>` object with search results.
 **Example using cURL:**
 
 ```bash
-curl -X GET "http://localhost:3000/search?index=articles" \
+curl -X POST "http://localhost:3000/search?index=articles" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "getting started",
@@ -193,7 +193,7 @@ results.articles.forEach((article) => {
 import { sdk } from '@o2s/framework/sdk';
 
 const results = await sdk.makeRequest<SearchResult<Product>>({
-    method: 'get',
+    method: 'post',
     url: '/search',
     params: { index: 'products' },
     data: {

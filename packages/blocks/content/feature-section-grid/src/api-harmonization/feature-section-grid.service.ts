@@ -18,7 +18,11 @@ export class FeatureSectionGridService {
         query: GetFeatureSectionGridBlockQuery,
         headers: AppHeaders,
     ): Observable<FeatureSectionGridBlock> {
-        const cms = this.cmsService.getFeatureSectionGridBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.FeatureSectionGridBlock.FeatureSectionGridBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'FeatureSectionGridBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapFeatureSectionGrid(cms, headers[H.Locale])));
     }

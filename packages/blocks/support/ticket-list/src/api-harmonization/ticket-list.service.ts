@@ -21,18 +21,25 @@ export class TicketListService {
 
     getTicketListBlock(query: GetTicketListBlockQuery, headers: AppHeaders): Observable<TicketListBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.TicketListBlock.TicketListBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'TicketListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.ticketService
-                    .getTicketList({
-                        ...(cms.initialFilters || {}),
-                        ...query,
-                        limit: query.limit || cms.pagination?.limit || 1,
-                        offset: query.offset || 0,
-                        locale: headers[H.Locale],
-                    })
+                    .getTicketList(
+                        {
+                            ...(cms.initialFilters || {}),
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 1,
+                            offset: query.offset || 0,
+                            locale: headers[H.Locale],
+                        },
+                        authorization,
+                    )
                     .pipe(
                         map((tickets) => {
                             const result = mapTicketList(

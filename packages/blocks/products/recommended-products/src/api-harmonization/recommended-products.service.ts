@@ -21,21 +21,26 @@ export class RecommendedProductsService {
         query: GetRecommendedProductsBlockQuery,
         headers: AppHeaders,
     ): Observable<Model.RecommendedProductsBlock> {
+        const authorization = headers[H.Authorization];
         const locale = headers[H.Locale] || 'en';
-        const cmsBlock$ = this.cmsService.getRecommendedProductsBlock({
+        const cmsBlock$ = this.cmsService.getBlockConfig<CMS.Model.RecommendedProductsBlock.RecommendedProductsBlock>({
             id: query.id,
             locale,
+            blockType: 'RecommendedProductsBlock',
         });
 
         return cmsBlock$.pipe(
             switchMap((cmsBlock) => {
                 return this.productsService
-                    .getProductList({
-                        basePath: cmsBlock.basePath || '',
-                        offset: 0,
-                        limit: 7, // Fetch 7 to have 6 after excluding current product
-                        locale,
-                    })
+                    .getProductList(
+                        {
+                            basePath: cmsBlock.basePath || '',
+                            offset: 0,
+                            limit: 7, // Fetch 7 to have 6 after excluding current product
+                            locale,
+                        },
+                        authorization,
+                    )
                     .pipe(
                         map((products) => {
                             // Filter out excluded product and products without images

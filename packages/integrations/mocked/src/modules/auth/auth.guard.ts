@@ -28,7 +28,7 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
             return true;
         }
 
-        const MatchingMode = roleMetadata.mode || Auth.Model.MatchingMode.ANY;
+        const MatchingMode = roleMetadata.mode || 'any';
 
         const request = context.switchToHttp().getRequest();
         const authHeader = request.headers[H.Authorization];
@@ -62,7 +62,7 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
         this.logger.debug(userRoles.join(','), 'User roles');
         this.logger.debug(requiredRoles.join(','), 'Required roles');
 
-        return MatchingMode === Auth.Model.MatchingMode.ALL
+        return MatchingMode === 'all'
             ? requiredRoles.every((role) => userRoles.includes(role))
             : requiredRoles.some((role) => userRoles.includes(role));
     }

@@ -3,6 +3,7 @@ import { Contract } from '@/modules/resources/resources.model';
 
 import { Block, Mapping } from '@/utils/models';
 
+/** CMS block configuration for service details view. */
 export class ServiceDetailsBlock extends Block.Block {
     title?: string;
     properties?: {

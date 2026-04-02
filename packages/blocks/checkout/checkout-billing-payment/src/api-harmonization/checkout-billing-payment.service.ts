@@ -19,7 +19,11 @@ export class CheckoutBillingPaymentService {
         headers: AppHeaders,
     ): Observable<CheckoutBillingPaymentBlock> {
         return this.cmsService
-            .getCheckoutBillingPaymentBlock({ ...query, locale: headers[H.Locale] })
+            .getBlockConfig<CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock>({
+                ...query,
+                locale: headers[H.Locale],
+                blockType: 'CheckoutBillingPaymentBlock',
+            })
             .pipe(map(mapCheckoutBillingPayment));
     }
 }

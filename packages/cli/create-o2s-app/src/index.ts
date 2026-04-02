@@ -71,6 +71,7 @@ program
                 telemetry.sendEvent('o2s', 'create-o2s-app', 'create-project-error', {
                     phase,
                     errorMessage: error instanceof Error ? error.message : 'unknown error',
+                    error: error instanceof Error ? error : undefined,
                 });
                 await telemetry.flushEvents();
                 printError('Failed to create project', error);

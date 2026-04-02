@@ -1,5 +1,70 @@
 # @o2s/integrations.mocked
 
+## 1.23.1
+
+### Patch Changes
+
+- 31df3a8: fix(deps): move @o2s/framework to peerDependencies in all published packages
+
+    `@o2s/framework` was listed in `dependencies` of blocks, integrations, modules, and utils packages. When installed from npm with mismatched versions across the dependency tree, npm would create nested copies of `@o2s/framework` with different class references. This caused NestJS to fail resolving DI tokens (e.g. `SearchService`) because injected class instances came from a different `@o2s/framework` copy than the one registered in the application module.
+
+    Moved `@o2s/framework` to `peerDependencies` across all affected packages so that the consuming application always provides a single shared copy. Also moved `@o2s/integrations.mocked` to `peerDependencies` in `@o2s/integrations.mocked-dxp`.
+
+## 1.23.0
+
+### Minor Changes
+
+- 6edc9ca: Added checkout block type cases (Cart, CheckoutCompanyData, CheckoutShippingAddress, CheckoutBillingPayment, CheckoutSummary, OrderConfirmation) to the getBlockConfig switch in mocked CMS service. Refactored mocked-dxp to use getBlockConfig override instead of individual block method overrides.
+
+### Patch Changes
+
+- 7d99d13: docs(api): REST API reference, OpenAPI tooling, and cross-package alignment
+
+    Expand `@nestjs/swagger` metadata and related types across framework modules, exports, and CMS block
+    models. Update billing and orders blocks that call the harmonization API, plus checkout billing
+    payment UI where needed. Align Algolia, Contentful, Medusa, mocked, mocked-dxp, Strapi, and Zendesk
+    integrations with the updated contracts, mappers, and tests.
+
+- Updated dependencies [7d99d13]
+- Updated dependencies [7d99d13]
+- Updated dependencies [6edc9ca]
+    - @o2s/framework@1.22.0
+
+## 1.22.0
+
+### Minor Changes
+
+- afbd639: feat: enhance ticket services to include authorization parameter
+- 7ac16b0: add createModule() factory for custom framework modules
+
+    Enable developers to define new base modules beyond the core modules using createModule(). Custom modules are registered directly in app.module.ts, following the same pattern as SurveyJS.
+
+    Includes example documents module in mocked integration, custom-module Turbo generator, and documentation guide.
+
+- afbd639: refactor: update API harmonization services to include authorization headers
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [7ac16b0]
+    - @o2s/framework@1.21.0
+
+## 1.21.2
+
+### Patch Changes
+
+- 0fa9e2f: added exports for some helper methods for the `carts` module for external use (e.g. for other integrations that want to extend this one)
+
 ## 1.21.1
 
 ### Patch Changes

@@ -1,5 +1,49 @@
 # @o2s/utils.frontend
 
+## 0.6.1
+
+### Patch Changes
+
+- 31df3a8: fix(deps): move @o2s/framework to peerDependencies in all published packages
+
+    `@o2s/framework` was listed in `dependencies` of blocks, integrations, modules, and utils packages. When installed from npm with mismatched versions across the dependency tree, npm would create nested copies of `@o2s/framework` with different class references. This caused NestJS to fail resolving DI tokens (e.g. `SearchService`) because injected class instances came from a different `@o2s/framework` copy than the one registered in the application module.
+
+    Moved `@o2s/framework` to `peerDependencies` across all affected packages so that the consuming application always provides a single shared copy. Also moved `@o2s/integrations.mocked` to `peerDependencies` in `@o2s/integrations.mocked-dxp`.
+
+## 0.6.0
+
+### Minor Changes
+
+- 1dbf967: Add CartStorage utility for org-scoped cart management in localStorage. Replace direct localStorage calls and cartIdLocalStorageKey prop with centralized Utils.CartStorage across all blocks and app components.
+
+### Patch Changes
+
+- Updated dependencies [1dbf967]
+    - @o2s/ui@1.15.0
+
+## 0.5.2
+
+### Patch Changes
+
+- 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
+
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+
+- Updated dependencies [e8cdde6]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [0aaac5b]
+- Updated dependencies [7ac16b0]
+- Updated dependencies [0aaac5b]
+    - @o2s/ui@1.14.0
+    - @o2s/framework@1.21.0
+
 ## 0.5.1
 
 ### Patch Changes

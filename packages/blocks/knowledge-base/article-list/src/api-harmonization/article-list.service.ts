@@ -18,7 +18,11 @@ export class ArticleListService {
     ) {}
 
     getArticleListBlock(query: GetArticleListBlockQuery, headers: AppHeaders): Observable<ArticleListBlock> {
-        const cms = this.cmsService.getArticleListBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.ArticleListBlock.ArticleListBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'ArticleListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

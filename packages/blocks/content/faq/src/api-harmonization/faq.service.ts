@@ -15,9 +15,10 @@ export class FaqService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getFaqBlock(query: GetFaqBlockQuery, headers: AppHeaders): Observable<FaqBlock> {
-        const cms = this.cmsService.getFaqBlock({
+        const cms = this.cmsService.getBlockConfig<CMS.Model.FaqBlock.FaqBlock>({
             ...query,
             locale: headers[H.Locale],
+            blockType: 'FaqBlock',
         });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapFaq(cms)));

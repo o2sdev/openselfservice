@@ -15,7 +15,11 @@ export class CtaSectionService {
     constructor(private readonly cmsService: CMS.Service) {}
 
     getCtaSectionBlock(query: GetCtaSectionBlockQuery, headers: AppHeaders): Observable<CtaSectionBlock> {
-        const cms = this.cmsService.getCtaSectionBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.CtaSectionBlock.CtaSectionBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'CtaSectionBlock',
+        });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapCtaSection(cms, headers[H.Locale])));
     }

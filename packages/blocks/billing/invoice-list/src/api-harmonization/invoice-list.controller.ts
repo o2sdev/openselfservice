@@ -24,8 +24,8 @@ export class InvoiceListController {
 
     @Get(':id/pdf')
     @Auth.Decorators.Permissions({ resource: 'invoices', actions: ['view'] })
-    getInvoicePdf(@Param('id') id: string, @Res() res: Response): Observable<void> {
-        return this.service.getInvoicePdf(id).pipe(
+    getInvoicePdf(@Headers() headers: AppHeaders, @Param('id') id: string, @Res() res: Response): Observable<void> {
+        return this.service.getInvoicePdf(id, headers).pipe(
             map((pdf) => {
                 res.setHeader('Content-Type', 'application/pdf');
                 res.setHeader('Content-Disposition', `attachment; filename="invoice-${id}.pdf"`);

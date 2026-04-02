@@ -1,10 +1,10 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 import { config as baseConfig } from './base.js';
 
@@ -40,6 +40,7 @@ export const config = [
                     skipUndeclared: true,
                 },
             ],
+            '@typescript-eslint/no-empty-object-type': 'off',
         },
     },
     eslintPluginPrettierRecommended,

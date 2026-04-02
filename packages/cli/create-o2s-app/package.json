@@ -1,6 +1,6 @@
 {
     "name": "create-o2s-app",
-    "version": "4.1.2",
+    "version": "4.1.4",
     "private": false,
     "license": "MIT",
     "description": "CLI tool to scaffold new O2S applications with Next.js and NestJS setup.",

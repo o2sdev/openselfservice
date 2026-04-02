@@ -65,7 +65,14 @@ export default async function NotFound() {
 
     return (
         <body>
-            <GlobalProvider config={init} labels={init.labels} locale={locale} themes={init.themes}>
+            <GlobalProvider
+                config={init}
+                labels={init.labels}
+                locale={locale}
+                themes={init.themes}
+                user={{ orgId: session?.user?.customer?.id }}
+                cartStorageKey={process.env.CART_ID_LOCAL_STORAGE_KEY}
+            >
                 <div className="flex flex-col min-h-dvh">
                     <Header data={init.common.header} />
                     <div className="flex flex-col grow">

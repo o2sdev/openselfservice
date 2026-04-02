@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.algolia",
-    "version": "1.6.2",
+    "version": "1.6.4",
     "private": false,
     "license": "MIT",
     "description": "Algolia integration for O2S, providing search functionality.",
@@ -35,7 +35,6 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "algoliasearch": "^5.49.2"
     },
@@ -53,6 +52,7 @@
         "vitest": "^4.0.18"
     },
     "peerDependencies": {
+        "@o2s/framework": "*",
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",

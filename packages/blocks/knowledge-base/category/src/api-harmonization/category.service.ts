@@ -18,7 +18,11 @@ export class CategoryService {
     ) {}
 
     getCategoryBlock(query: GetCategoryBlockQuery, headers: AppHeaders): Observable<CategoryBlock> {
-        const cms = this.cmsService.getCategoryBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.CategoryBlock.CategoryBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'CategoryBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -35,7 +39,11 @@ export class CategoryService {
     }
 
     getCategoryArticles(query: GetCategoryBlockArticlesQuery, headers: AppHeaders): Observable<CategoryArticles> {
-        const cms = this.cmsService.getCategoryBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.CategoryBlock.CategoryBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'CategoryBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

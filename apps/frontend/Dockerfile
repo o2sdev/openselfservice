@@ -23,6 +23,7 @@ WORKDIR /app
 COPY --from=builder /app/out/full/ .
 
 RUN npm i
+RUN npm dedupe
 
 # Uncomment and use build args to enable remote caching
 # ARG TURBO_TEAM

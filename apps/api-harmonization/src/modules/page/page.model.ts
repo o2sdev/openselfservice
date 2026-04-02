@@ -1,4 +1,6 @@
-import { CMS, Models } from '@o2s/framework/modules';
+import { CMS } from '@o2s/configs.integrations';
+
+import { Models } from '@o2s/framework/modules';
 
 import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
 import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';

@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.strapi-cms",
-    "version": "2.13.1",
+    "version": "2.14.1",
     "private": false,
     "license": "MIT",
     "description": "Strapi CMS integration for O2S, providing content management functionality via GraphQL.",
@@ -39,7 +39,6 @@
         "test": "vitest run"
     },
     "dependencies": {
-        "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "flatted": "^3.4.1",
         "graphql": "16.13.0",
@@ -64,9 +63,11 @@
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",
+        "vite": "^7.3.1",
         "vitest": "^4.0.18"
     },
     "peerDependencies": {
+        "@o2s/framework": "*",
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",

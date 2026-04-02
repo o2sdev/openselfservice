@@ -1,5 +1,6 @@
 'use client';
 
+import { eventBus } from '@o2s/ui/event-bus';
 import { CircleAlert } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useMemo, useTransition } from 'react';
@@ -135,7 +136,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     const handleAddToCart = useCallback(() => {
         startAddToCartTransition(async () => {
             try {
-                const cartId = localStorage.getItem('cartId');
+                const cartId = Utils.CartStorage.getCartId();
                 const result = await sdk.cart.addCartItem(
                     {
                         cartId: cartId || undefined,
@@ -148,8 +149,9 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                     accessToken,
                 );
                 if (!cartId && result?.id) {
-                    localStorage.setItem('cartId', result.id);
+                    Utils.CartStorage.setCartId(result.id);
                 }
+                eventBus.emit('cart:changed', { cart: result });
                 toast({
                     description: Utils.StringReplace.reactStringReplace(labels.addToCartSuccess, {
                         productName: product.name,

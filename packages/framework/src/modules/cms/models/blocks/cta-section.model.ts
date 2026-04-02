@@ -1,5 +1,6 @@
 import { Block, Link, Media, RichText } from '@/utils/models';
 
+/** CMS block configuration for call-to-action section. */
 export class CtaSectionBlock extends Block.Block {
     preTitle?: string;
     title?: string;

@@ -25,7 +25,11 @@ export class CheckoutSummaryService {
         headers: AppHeaders,
     ): Observable<CheckoutSummaryBlock> {
         return this.cmsService
-            .getCheckoutSummaryBlock({ ...query, locale: headers[H.Locale] })
+            .getBlockConfig<CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock>({
+                ...query,
+                locale: headers[H.Locale],
+                blockType: 'CheckoutSummaryBlock',
+            })
             .pipe(map(mapCheckoutSummary));
     }
 }

@@ -5,6 +5,8 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { boolean as YupBoolean, object as YupObject, string as YupString } from 'yup';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Carts, Models, Orders } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
@@ -25,7 +27,6 @@ import { sdk } from '../sdk';
 
 import { CheckoutShippingAddressPureProps } from './CheckoutShippingAddress.types';
 
-const CART_ID_KEY = 'cartId';
 const FORM_ID = 'checkout-shipping-form';
 
 export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddressPureProps>> = ({
@@ -74,7 +75,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     });
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -127,7 +128,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
 
     const handleSubmit = (values: typeof initialFormValues) => {
         startSubmitTransition(async () => {
-            const cartId = localStorage.getItem(CART_ID_KEY);
+            const cartId = Utils.CartStorage.getCartId();
             if (!cartId) return;
             try {
                 await sdk.checkout.setAddresses(

@@ -21,7 +21,11 @@ export class ServiceListService {
 
     getServiceListBlock(query: GetServiceListBlockQuery, headers: AppHeaders): Observable<ServiceListBlock> {
         const authorization = headers[H.Authorization];
-        const cms = this.cmsService.getServiceListBlock({ ...query, locale: headers[H.Locale] });
+        const cms = this.cmsService.getBlockConfig<CMS.Model.ServiceListBlock.ServiceListBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'ServiceListBlock',
+        });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

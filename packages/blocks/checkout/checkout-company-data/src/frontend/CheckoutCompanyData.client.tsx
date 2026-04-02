@@ -5,6 +5,8 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Carts, Models } from '@o2s/framework/modules';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
@@ -24,7 +26,6 @@ import { sdk } from '../sdk';
 
 import { CheckoutCompanyDataPureProps } from './CheckoutCompanyData.types';
 
-const CART_ID_KEY = 'cartId';
 const FORM_ID = 'checkout-company-form';
 
 export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureProps>> = ({
@@ -75,7 +76,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     });
 
     useEffect(() => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             router.replace(cartPath);
@@ -124,7 +125,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     }, [locale, accessToken, toast, errors.cartNotFound, router, cartPath]);
 
     const handleSubmit = (values: typeof initialFormValues) => {
-        const cartId = localStorage.getItem(CART_ID_KEY);
+        const cartId = Utils.CartStorage.getCartId();
         if (!cartId) {
             toast({ description: errors.cartNotFound, variant: 'destructive' });
             return;

@@ -18,7 +18,11 @@ export class CategoryListService {
     ) {}
 
     getCategoryListBlock(query: GetCategoryListBlockQuery, headers: AppHeaders): Observable<CategoryListBlock> {
-        const cms$ = this.cmsService.getCategoryListBlock({ ...query, locale: headers[H.Locale] });
+        const cms$ = this.cmsService.getBlockConfig<CMS.Model.CategoryListBlock.CategoryListBlock>({
+            ...query,
+            locale: headers[H.Locale],
+            blockType: 'CategoryListBlock',
+        });
 
         return forkJoin([cms$]).pipe(
             concatMap(([cms]) => {

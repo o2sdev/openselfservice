@@ -1,0 +1,21 @@
+import { Models } from '@o2s/framework/modules';
+
+// Define your domain-specific types here
+// export type {{pascalCase name}}Type = 'TYPE_A' | 'TYPE_B';
+// export type {{pascalCase name}}Status = 'ACTIVE' | 'INACTIVE';
+
+export class {{pascalCase name}} {
+    id!: string;
+    // Add your fields here
+}
+
+export type {{pascalCase name}}List = Models.Pagination.Paginated<{{pascalCase name}}>;
+
+export class Get{{pascalCase name}}ListQuery {
+    offset?: number;
+    limit?: number;
+}
+
+export class Get{{pascalCase name}}Params {
+    id!: string;
+}

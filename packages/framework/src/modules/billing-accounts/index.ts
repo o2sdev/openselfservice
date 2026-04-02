@@ -1,3 +1,8 @@
+/**
+ * # BillingAccounts module
+ *
+ * Billing accounts: list, single. Base path: `/billing-accounts`. Under `integrations.billingAccounts`: `name`, `service`, `controller`, `imports`.
+ */
 export * as Model from './billing-accounts.model';
 export * as Request from './billing-accounts.request';
 export { BillingAccountService as Service } from './billing-accounts.service';

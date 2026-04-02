@@ -2,7 +2,7 @@ import { HttpModule } from '@nestjs/axios';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, Reflector } from '@nestjs/core';
-import { Auth } from '@o2s/configs.integrations';
+import { Auth, Documents } from '@o2s/configs.integrations';
 import * as SurveyJs from '@o2s/modules.surveyjs/api-harmonization';
 
 import { LoggerModule, LoggerService } from '@o2s/utils.logger';
@@ -26,6 +26,7 @@ import {
     Search,
     Tickets,
     Users,
+    createModule,
 } from '@o2s/framework/modules';
 
 import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
@@ -102,6 +103,14 @@ export const PaymentsBaseModule = Payments.Module.register(AppConfig);
 export const CheckoutBaseModule = Checkout.Module.register(AppConfig);
 export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
 
+const DocumentsModule = createModule('documents');
+export const DocumentsBaseModule = DocumentsModule.register({
+    name: 'documents',
+    service: Documents.Service,
+    serviceImpl: Documents.MockedService,
+    controller: Documents.Controller,
+});
+
 @Module({
     imports: [
         HttpModule.register({ global: true }),
@@ -132,6 +141,8 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         PaymentsBaseModule,
         CheckoutBaseModule,
         AuthModuleBaseModule,
+
+        DocumentsBaseModule,
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
