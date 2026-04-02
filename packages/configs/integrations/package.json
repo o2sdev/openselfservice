@@ -27,9 +27,9 @@
         "@o2s/integrations.mocked": "*"
     },
     "devDependencies": {
+        "@o2s/eslint-config": "*",
         "@o2s/framework": "*",
         "@o2s/integrations.mocked": "*",
-        "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
@@ -38,5 +38,8 @@
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "@o2s/integrations.mocked-dxp": "^1.2.1"
     }
 }
