@@ -7,8 +7,8 @@ import { mapArticles } from './mappers/articles.mapper';
 
 @Injectable()
 export class SearchService extends Search.Service {
-    constructor(...services: unknown[]) {
-        super(...services);
+    constructor() {
+        super();
     }
 
     search<T>(indexName: string, _payload: Search.Model.SearchPayload): Observable<Search.Model.SearchResult<T>> {
