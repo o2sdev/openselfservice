@@ -37,8 +37,6 @@
     "dependencies": {
         "@o2s/configs.integrations": "*",
         "@o2s/ui": "*",
-        "@o2s/utils.api-harmonization": "*",
-        "@o2s/utils.frontend": "*",
         "@o2s/utils.logger": "*",
         "date-fns": "^4.1.0",
         "lucide-react": "^0.575.0",
@@ -48,6 +46,8 @@
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
@@ -59,6 +59,8 @@
     },
     "peerDependencies": {
         "@o2s/framework": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "react": "^19",

@@ -89,3 +89,5 @@ The `.env.local` file is generated automatically with all required environment v
 - [O2S Documentation](https://openselfservice.com/docs)
 - `@o2s/framework` — Core framework types and services
 - `@o2s/telemetry` — Anonymous usage telemetry
+
+Scaffolded apps should keep **`@o2s/utils.frontend`** and **`@o2s/utils.api-harmonization`** as direct dependencies in `apps/frontend` and `apps/api-harmonization`. Blocks expect these from the app (peer dependencies), not from nested installs under each block.
