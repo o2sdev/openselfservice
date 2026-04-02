@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 4.1.8
+
+### Patch Changes
+
+- 13257ce: update render block transformation by removing legacy regex handling
+
 ## 4.1.7
 
 ### Patch Changes
