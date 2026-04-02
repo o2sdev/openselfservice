@@ -76,6 +76,10 @@ export const installDependencies = async (projectDir: string, selectedIntegratio
             cwd: projectDir,
             stdio: 'inherit',
         });
+        execSync('npm dedupe', {
+            cwd: projectDir,
+            stdio: 'inherit',
+        });
         console.log('Dependencies installed successfully.');
     } catch (error) {
         console.error('Error while installing dependencies.');
