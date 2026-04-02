@@ -19,7 +19,6 @@ export const ALWAYS_REMOVE_DIRS: string[] = [
     'packages/blocks',
     'packages/framework',
     'packages/integrations',
-    'packages/modules',
     'packages/utils',
     'packages/cli',
     'packages/telemetry',

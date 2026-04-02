@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.checkout-shipping-address",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "private": false,
     "license": "MIT",
     "description": "Checkout step for recipient details, shipping address, delivery method, and cart summary preview.",
@@ -23,8 +23,6 @@
     "dependencies": {
         "@o2s/utils.logger": "*",
         "@o2s/ui": "*",
-        "@o2s/utils.api-harmonization": "*",
-        "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*",
         "formik": "^2.4.9",
         "yup": "^1.7.1"
@@ -35,6 +33,8 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "@o2s/vitest-config": "*",
         "@storybook/nextjs-vite": "^10.2.19",
         "concurrently": "^9.2.1",
@@ -51,6 +51,8 @@
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "@o2s/framework": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "next": "^16.0.5",

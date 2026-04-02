@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.ticket-summary",
-    "version": "1.6.1",
+    "version": "1.6.2",
     "private": false,
     "license": "MIT",
     "description": "Displays a dynamic TicketSummary showing ticket counts grouped by status.",
@@ -38,8 +38,6 @@
     "dependencies": {
         "@o2s/utils.logger": "*",
         "@o2s/ui": "*",
-        "@o2s/utils.api-harmonization": "*",
-        "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
@@ -47,6 +45,8 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "@o2s/vitest-config": "*",
         "@storybook/nextjs-vite": "^10.2.19",
         "concurrently": "^9.2.1",
@@ -62,6 +62,8 @@
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "@o2s/framework": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "next": "^16.0.5",

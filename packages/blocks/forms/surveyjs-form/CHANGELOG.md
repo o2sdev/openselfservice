@@ -1,5 +1,16 @@
 # @o2s/blocks.surveyjs-form
 
+## 1.6.2
+
+### Patch Changes
+
+- 025bfb3: fix(deps): declare `@o2s/utils.frontend` and `@o2s/utils.api-harmonization` as peer dependencies in blocks and surveyjs module
+
+  Moves both shared utils from `dependencies` to `peerDependencies` (with `devDependencies` for monorepo builds) so consuming apps supply a single hoisted version and npm does not nest conflicting copies under published packages.
+
+- Updated dependencies [025bfb3]
+  - @o2s/modules.surveyjs@0.5.3
+
 ## 1.6.1
 
 ### Patch Changes

@@ -13,11 +13,41 @@ const PRIVATE_PACKAGES = [
     '@o2s/vitest-config',
 ];
 
+/**
+ * Collect the names of private modules that still exist in the scaffolded project.
+ * Public modules are removed during cleanup, so anything still present is private.
+ */
+const getPrivateModuleNames = async (projectDir: string): Promise<Set<string>> => {
+    const modulesDir = path.join(projectDir, 'packages', 'modules');
+    const names = new Set<string>();
+
+    if (!(await fs.pathExists(modulesDir))) return names;
+
+    const entries = await fs.readdir(modulesDir, { withFileTypes: true });
+
+    for (const entry of entries) {
+        if (!entry.isDirectory()) continue;
+
+        const pkgJsonPath = path.join(modulesDir, entry.name, 'package.json');
+
+        if (await fs.pathExists(pkgJsonPath)) {
+            const pkgJson = await fs.readJson(pkgJsonPath);
+            if (pkgJson.name) {
+                names.add(pkgJson.name);
+            }
+        }
+    }
+
+    return names;
+};
+
 export const transformAppsPackageJson = async (
     projectDir: string,
     selectedBlockNames: string[],
     selectedIntegrationNames: string[],
 ): Promise<void> => {
+    const privateModuleNames = await getPrivateModuleNames(projectDir);
+
     for (const relPath of APP_PACKAGE_JSON_PATHS) {
         const filePath = path.join(projectDir, relPath);
 
@@ -49,6 +79,13 @@ export const transformAppsPackageJson = async (
                     integrationMatch[1] &&
                     !selectedIntegrationNames.includes(integrationMatch[1])
                 ) {
+                    delete packageJson[section][depName];
+                    continue;
+                }
+
+                // Remove public (non-private) module dependencies — they are installed from npm
+                const moduleMatch = depName.match(/^@o2s\/modules\..+$/);
+                if (moduleMatch && !privateModuleNames.has(depName)) {
                     delete packageJson[section][depName];
                 }
             }

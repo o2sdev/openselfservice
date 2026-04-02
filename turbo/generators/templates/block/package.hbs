@@ -35,16 +35,15 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "@o2s/ui": "*",
-        "@o2s/utils.api-harmonization": "*",
-        "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
@@ -57,17 +56,20 @@
     },
     "o2sTemplate": [{{#each templates}}"{{this}}"{{#unless @last}}, {{/unless}}{{/each}}],
     "peerDependencies": {
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
-        "react": "^19",
-        "react-dom": "^19",
-        "tailwindcss": "^4",
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
-        "rxjs": "^7",
+        "@o2s/framework": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
         "next": "^16.0.5",
-        "next-intl": "^4.1.0"
+        "next-intl": "^4.1.0",
+        "react": "^19",
+        "react-dom": "^19",
+        "rxjs": "^7",
+        "tailwindcss": "^4"
     }
 }
