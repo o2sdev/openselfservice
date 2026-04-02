@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 4.1.6
+
+### Patch Changes
+
+- ff780e0: fix(cli): deduplicate npm dependencies during project scaffolding
+
 ## 4.1.5
 
 ### Patch Changes
