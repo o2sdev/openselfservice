@@ -40,6 +40,6 @@
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "@o2s/integrations.mocked-dxp": "^1.2.1"
+        "@o2s/integrations.mocked-dxp": "^1.2.2"
     }
 }
