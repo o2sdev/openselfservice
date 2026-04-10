@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.checkout-billing-payment",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "private": false,
     "license": "MIT",
     "description": "Checkout step for selecting a payment method with cart summary preview.",

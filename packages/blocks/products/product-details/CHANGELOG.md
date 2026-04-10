@@ -1,5 +1,11 @@
 # @o2s/blocks.product-details
 
+## 0.6.3
+
+### Patch Changes
+
+- 30ecae9: Rename server-only environment variables to drop `NEXT_PUBLIC_` prefix (`NEXT_PUBLIC_LOG_LEVEL` → `LOG_LEVEL`, `NEXT_PUBLIC_LOG_FORMAT` → `LOG_FORMAT`, `NEXT_PUBLIC_LOG_COLORS_ENABLED` → `LOG_COLORS_ENABLED`, `NEXT_PUBLIC_API_URL_INTERNAL` → `API_URL_INTERNAL`) and use `next-runtime-env` for client-side access to `NEXT_PUBLIC_API_URL`.
+
 ## 0.6.2
 
 ### Patch Changes

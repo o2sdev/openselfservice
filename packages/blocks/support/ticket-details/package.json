@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.ticket-details",
-    "version": "1.8.2",
+    "version": "1.8.3",
     "private": false,
     "license": "MIT",
     "description": "A block for displaying and managing ticket details.",

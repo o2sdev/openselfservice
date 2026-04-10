@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.checkout-summary",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "private": false,
     "license": "MIT",
     "description": "Final checkout step for reviewing cart items, addresses, totals, and placing the order.",
