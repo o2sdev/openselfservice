@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.ticket-recent",
-    "version": "1.7.2",
+    "version": "1.7.3",
     "private": false,
     "license": "MIT",
     "description": "A block displaying recent tickets and their comments.",

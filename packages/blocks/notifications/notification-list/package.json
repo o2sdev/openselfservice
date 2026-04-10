@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.notification-list",
-    "version": "1.9.2",
+    "version": "1.9.3",
     "private": false,
     "license": "MIT",
     "description": "A block displaying and managing notifications.",
