@@ -5,7 +5,7 @@ import { Models } from '@o2s/framework/modules';
 
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '@/i18n/routing';
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const SITE_URL = process.env.BASE_URL;
 type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 interface SEOProps {

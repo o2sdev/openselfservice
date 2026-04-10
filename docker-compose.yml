@@ -14,17 +14,17 @@ services:
         environment:
             ANALYZE: 'false'
 
-            NEXT_PUBLIC_LOG_LEVEL: verbose
-            NEXT_PUBLIC_LOG_COLORS_ENABLED: 'true'
-            NEXT_PUBLIC_LOG_FORMAT: text
+            LOG_LEVEL: verbose
+            LOG_COLORS_ENABLED: 'true'
+            LOG_FORMAT: text
 
             NEXT_PUBLIC_SUPPORTED_LOCALES: en,de,pl
             NEXT_PUBLIC_DEFAULT_LOCALE: en
 
-            NEXT_PUBLIC_BASE_URL: http://localhost:3000
+            BASE_URL: http://localhost:3000
 
             NEXT_PUBLIC_API_URL: http://localhost:3001/api
-            NEXT_PUBLIC_API_URL_INTERNAL: http://api-harmonization:3001/api
+            API_URL_INTERNAL: http://api-harmonization:3001/api
 
             AUTH_SECRET: yYaVHF3L70TfHqcfyR6kIE6pXHAydlN2r+o36+Vrmyc=
             AUTH_TRUST_HOST: 'true'

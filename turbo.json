@@ -10,7 +10,10 @@
         "O2S_OPENAPI_URL",
         "O2S_OPENAPI_STRICT",
         "O2S_OPENAPI_SERVER_URL",
-        "NEXT_PUBLIC_API_URL_INTERNAL"
+        "API_URL_INTERNAL",
+        "LOG_LEVEL",
+        "LOG_FORMAT",
+        "LOG_COLORS_ENABLED"
     ],
     "tasks": {
         "dev": {

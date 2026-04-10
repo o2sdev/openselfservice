@@ -67,7 +67,7 @@ export default async function LoginPage({ params }: Readonly<Props>) {
     try {
         const init = await sdk.modules.getInit(
             {
-                referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
+                referrer: headersList.get('referrer') || (process.env.BASE_URL as string),
             },
             { 'x-locale': locale },
             session?.accessToken,
