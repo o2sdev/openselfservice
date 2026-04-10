@@ -22,37 +22,36 @@ This command installs the integration package in the configs workspace, ensuring
 
 After installing the package, you need to configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Algolia instead of the default mocked integration.
 
-### Update the search integration config
+### Update the integration config
 
-Open the file `packages/configs/integrations/src/models/search.ts` and replace the import:
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
 
-**Before (using mocked integration):**
+Open this file and make the following changes:
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
-```
+1. **Add the Algolia import:**
 
-**After (using Algolia integration):**
+    ```typescript
+    import * as Algolia from '@o2s/integrations.algolia/integration';
+    ```
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.algolia/integration';
-```
+2. **Update the `search` domain assignment** in the `createIntegrationConfig` call:
 
-The complete file should look like this:
+    ```typescript
+    const result = createIntegrationConfig({
+        search: Algolia,
+        // ... other domains remain unchanged
+    });
+    ```
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.algolia/integration';
+3. **Update the matching `export import` type alias:**
 
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const SearchIntegrationConfig: ApiConfig['integrations']['search'] = Config.search!;
-
-export import Service = Integration.Search.Service;
-```
+    ```typescript
+    export import Search = Algolia.Integration.Search;
+    ```
 
 ### Verify AppConfig
 
-The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference `Search.SearchIntegrationConfig`. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
+The `AppConfig` in `apps/api-harmonization/src/app.config.ts` already imports from `@o2s/configs.integrations`. You don't need to modify this file.
 
 ## Set environment variables
 
@@ -143,7 +142,7 @@ After completing the installation and configuration steps:
 | Index not found (404)         | Verify the index name exists in your Algolia dashboard                                                                           |
 | Authorization errors          | Check that your API key has read access to the index                                                                             |
 | Missing environment variables | Ensure both `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set in your `.env` file                                                   |
-| Integration not working       | Verify that the import in `packages/configs/integrations/src/models/search.ts` points to `@o2s/integrations.algolia/integration` |
+| Integration not working       | Verify that `search` is assigned to `Algolia` in `packages/configs/integrations/src/config.ts` |
 
 ## Next steps
 

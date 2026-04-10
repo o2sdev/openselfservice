@@ -14,26 +14,37 @@ Thanks to the normalized data model, replacing an integration is completely tran
 
 ## Integration config
 
-Inside the `packages/configs/integrations/src/models` there are a number of files that represent all the framework modules of the `@o2s/framework` package. Inside each of them are local exports that define which integration is used for that module.
+All integration assignments are defined in a single file: `packages/configs/integrations/src/config.ts`. This file uses the `createIntegrationConfig` helper from `@o2s/framework/config` to map each framework domain to an integration module, with runtime validation that each integration provides the domain it's assigned to.
 
-For example, the `packages/configs/integrations/src/models/cms.ts` file that is pre-configured with a [mocked integration](../../integrations/mocked/mocked.md) looks like this:
+The default configuration, pre-configured with a [mocked integration](../../integrations/mocked/mocked.md), looks like this:
 
-```typescript title="integration config for the cms module"
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
+```typescript title="packages/configs/integrations/src/config.ts"
+import * as Mocked from '@o2s/integrations.mocked/integration';
 
-import { ApiConfig } from '@o2s/framework/modules';
+import { createIntegrationConfig } from '@o2s/framework/config';
+import type { ApiConfig } from '@o2s/framework/modules';
 
-export const CmsIntegrationConfig: ApiConfig['integrations']['cms'] = Config.cms!;
+const result = createIntegrationConfig({
+    cms: Mocked,
+    tickets: Mocked,
+    articles: Mocked,
+    notifications: Mocked,
+    // ... all other domains
+});
 
-export import Service = Integration.CMS.Service;
-export import Request = Integration.CMS.Request;
-export import Model = Integration.CMS.Model;
+export const integrations: ApiConfig['integrations'] = result.integrations;
+
+// Type exports for consumers
+export import CMS = Mocked.Integration.CMS;
+export import Tickets = Mocked.Integration.Tickets;
+export import Articles = Mocked.Integration.Articles;
+// ... all other domains
 ```
 
-These files export four things:
+This file exports two things:
 
-1. Integration config, that is then propagated to the framework modules to let them know what implementation to actually use. This is done via the `apps/api-harmonization/app.config.ts` file that does not have to be modified at all when switching integrations.
-2. A service, that is used in other blocks and modules:
+1. Integration config (`integrations`), that is propagated to the framework modules via `apps/api-harmonization/app.config.ts`. This file does not need to be modified when switching integrations.
+2. Type namespaces (Services, Requests, Models) used in blocks and modules:
 
     ```typescript title="usage of services within page.service.ts"
     import { Articles, Auth, CMS } from '@o2s/configs.integrations';
@@ -67,22 +78,35 @@ These files export four things:
 
 In order to switch an integration for a given framework module (like a CMS) all that is required is to:
 
-1. Install a new integration as a dependency of the `api-harmonization` app:
+1. Install a new integration as a dependency of the `@o2s/configs.integrations` package:
 
     ```shell
     npm install @o2s/integrations.strapi-cms --workspace=@o2s/configs.integrations
     ```
 
-2. Replace the previous import with the newly installed package in ``packages/configs/integrations/src/models/cms.ts` (or any other module):
+2. Open `packages/configs/integrations/src/config.ts` and:
+
+    a. Import the new integration module:
 
     ```typescript
-    import { Config, Integration } from '@o2s/integrations.mocked/integration';
+    import * as Strapi from '@o2s/integrations.strapi-cms/integration';
     ```
 
-    into
+    b. Change the domain assignment from `Mocked` to the new integration:
 
     ```typescript
-    import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
+    const result = createIntegrationConfig({
+        cms: Strapi,     // changed from Mocked
+        articles: Strapi, // changed from Mocked
+        // ... other domains remain unchanged
+    });
+    ```
+
+    c. Update the matching `export import` type aliases:
+
+    ```typescript
+    export import CMS = Strapi.Integration.CMS;
+    export import Articles = Strapi.Integration.Articles;
     ```
 
 Once that is done, the application will start using the new integration.

@@ -87,8 +87,8 @@ export const printSummary = (
             '  The project will NOT start until these are configured.',
         );
         addLine(
-            `  ${kleur.dim('Edit packages/configs/integrations/src/models/<module>.ts')}`,
-            '  Edit packages/configs/integrations/src/models/<module>.ts',
+            `  ${kleur.dim('Edit packages/configs/integrations/src/config.ts')}`,
+            '  Edit packages/configs/integrations/src/config.ts',
         );
     }
 
