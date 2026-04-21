@@ -135,6 +135,7 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
             component: TypographyComp,
             props: {
                 variant: baseFontSize,
+                tag: 'div',
                 className: cn('[&:not(:first-child)]:mt-6', className),
             },
         },
