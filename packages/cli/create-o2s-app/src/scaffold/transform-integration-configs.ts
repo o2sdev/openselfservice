@@ -2,7 +2,7 @@ import { ConflictResolution } from '../types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
-const CONFIGS_MODELS_PATH = 'packages/configs/integrations/src/models';
+const CONFIG_FILE_PATH = 'packages/configs/integrations/src/config.ts';
 const CONFIGS_PACKAGE_JSON_PATH = 'packages/configs/integrations/package.json';
 const MOCKED_IMPORT = `@o2s/integrations.mocked/integration`;
 
@@ -70,6 +70,14 @@ const updateConfigsPackageJson = async (
     await fs.writeJson(pkgPath, pkg, { spaces: 4 });
 };
 
+// Convert integration name to a PascalCase alias for imports (e.g. "strapi-cms" → "StrapiCms")
+const toImportAlias = (name: string): string => {
+    return name
+        .split(/[-_]/)
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+        .join('');
+};
+
 export const transformIntegrationConfigs = async (
     projectDir: string,
     selectedIntegrations: string[],
@@ -80,37 +88,79 @@ export const transformIntegrationConfigs = async (
     // Always update configs package.json to add/remove integration dependencies
     await updateConfigsPackageJson(projectDir, selectedIntegrations, integrationVersions);
 
-    const modelsDir = path.join(projectDir, CONFIGS_MODELS_PATH);
+    const configFilePath = path.join(projectDir, CONFIG_FILE_PATH);
 
-    if (!(await fs.pathExists(modelsDir))) {
+    if (!(await fs.pathExists(configFilePath))) {
         return [];
     }
 
-    // Replace mocked imports with selected integration imports
+    const content = await fs.readFile(configFilePath, 'utf-8');
+
+    // Build module → integration map
     const moduleMap = buildModuleIntegrationMap(selectedIntegrations, conflictResolutions, integrationModules);
 
-    for (const [module, integration] of moduleMap.entries()) {
-        const filePath = path.join(modelsDir, `${module}.ts`);
-
-        if (!(await fs.pathExists(filePath))) continue;
-
-        const content = await fs.readFile(filePath, 'utf-8');
-        const updatedContent = content.replaceAll(MOCKED_IMPORT, `@o2s/integrations.${integration}/integration`);
-
-        await fs.writeFile(filePath, updatedContent, 'utf-8');
+    // Collect unique non-mocked integrations that need import statements
+    const nonMockedIntegrations = new Set<string>();
+    for (const integration of moduleMap.values()) {
+        if (integration !== 'mocked') {
+            nonMockedIntegrations.add(integration);
+        }
     }
 
-    // Detect model files that still import mocked but mocked is not selected.
+    let updatedContent = content;
+
+    // Add new integration imports after the Mocked import line
+    if (nonMockedIntegrations.size > 0) {
+        const newImports = Array.from(nonMockedIntegrations)
+            .sort()
+            .map((name) => `import * as ${toImportAlias(name)} from '@o2s/integrations.${name}/integration';`)
+            .join('\n');
+
+        updatedContent = updatedContent.replace(
+            `import * as Mocked from '${MOCKED_IMPORT}';`,
+            `import * as Mocked from '${MOCKED_IMPORT}';\n${newImports}`,
+        );
+    }
+
+    // Update domain assignments and export import aliases line by line
+    const lines = updatedContent.split('\n');
+    for (const [module, integration] of moduleMap.entries()) {
+        if (integration === 'mocked') continue;
+        const alias = toImportAlias(integration);
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i] ?? '';
+
+            // Match domain assignment like "    tickets: Mocked,"
+            const domainMatch = line.match(new RegExp(`^(\\s+${module}:\\s*)Mocked(,)$`));
+            if (domainMatch) {
+                lines[i] = `${domainMatch[1]}${alias}${domainMatch[2]}`;
+                continue;
+            }
+
+            // Match export import like "export import Tickets = Mocked.Integration.Tickets;"
+            const exportMatch = line.match(/^export import (\w+) = Mocked\.Integration\.(\w+);$/);
+            if (exportMatch) {
+                const namespaceName = exportMatch[2];
+                if (namespaceName?.toLowerCase() === module.toLowerCase()) {
+                    lines[i] = `export import ${exportMatch[1]} = ${alias}.Integration.${namespaceName};`;
+                }
+            }
+        }
+    }
+    updatedContent = lines.join('\n');
+
+    await fs.writeFile(configFilePath, updatedContent, 'utf-8');
+
+    // Detect domains that still reference Mocked but mocked is not selected.
     // Skip only when 'mocked' (full) is selected — it covers all modules.
-    // 'mocked-dxp' covers only cms/articles/search, so uncovered detection runs normally.
     const uncoveredModules: string[] = [];
     if (!selectedIntegrations.includes('mocked')) {
-        const files = await fs.readdir(modelsDir);
-        for (const file of files) {
-            if (file === 'index.ts' || !file.endsWith('.ts')) continue;
-            const content = await fs.readFile(path.join(modelsDir, file), 'utf-8');
-            if (content.includes(MOCKED_IMPORT)) {
-                uncoveredModules.push(file.replace('.ts', ''));
+        const domainAssignmentRegex = /^\s+(\w+):\s*Mocked,$/gm;
+        let match;
+        while ((match = domainAssignmentRegex.exec(updatedContent)) !== null) {
+            if (match[1]) {
+                uncoveredModules.push(match[1]);
             }
         }
     }

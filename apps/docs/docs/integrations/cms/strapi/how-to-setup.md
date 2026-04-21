@@ -22,55 +22,38 @@ This command installs the integration package in the integrations config workspa
 
 After installing the package, you need to configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Strapi CMS instead of the default mocked integration.
 
-### Step 1: Update the CMS integration config
+### Step 1: Update the integration config
 
-Open the file `packages/configs/integrations/src/models/cms.ts` and replace the import:
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
 
-**Before (using mocked integration):**
+Open this file and make the following changes:
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
-```
+1. **Add the Strapi CMS import:**
 
-**After (using Strapi CMS integration):**
+    ```typescript
+    import * as Strapi from '@o2s/integrations.strapi-cms/integration';
+    ```
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
-```
+2. **Update domain assignments** in the `createIntegrationConfig` call — change `cms` (and optionally `articles`) from `Mocked` to `Strapi`:
 
-The complete file should look like this:
+    ```typescript
+    const result = createIntegrationConfig({
+        cms: Strapi,
+        articles: Strapi,  // if using articles functionality
+        // ... other domains remain unchanged
+    });
+    ```
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
+3. **Update the matching `export import` type aliases:**
 
-import { ApiConfig } from '@o2s/framework/modules';
+    ```typescript
+    export import CMS = Strapi.Integration.CMS;
+    export import Articles = Strapi.Integration.Articles;  // if using articles
+    ```
 
-export const CmsIntegrationConfig: ApiConfig['integrations']['cms'] = Config.cms!;
+### Step 2: Verify AppConfig
 
-export import Service = Integration.CMS.Service;
-export import Request = Integration.CMS.Request;
-export import Model = Integration.CMS.Model;
-```
-
-### Step 2: Update the Articles integration config (if using articles)
-
-If you plan to use articles functionality, you also need to update `packages/configs/integrations/src/models/articles.ts`:
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const ArticlesIntegrationConfig: ApiConfig['integrations']['articles'] = Config.articles!;
-
-export import Service = Integration.Articles.Service;
-export import Request = Integration.Articles.Request;
-export import Model = Integration.Articles.Model;
-```
-
-### Step 3: Verify AppConfig
-
-The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference the integration configs. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
+The `AppConfig` in `apps/api-harmonization/src/app.config.ts` already imports from `@o2s/configs.integrations`. You don't need to modify this file.
 
 ## Set env variables
 

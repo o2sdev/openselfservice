@@ -26,37 +26,36 @@ Consider managed services: [Redis Cloud](https://redis.com/cloud), [AWS ElastiCa
 
 After installing the package, you need to configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Redis Cache instead of the default mocked integration.
 
-### Step 1: Update the cache integration config
+### Step 1: Update the integration config
 
-Open the file `packages/configs/integrations/src/models/cache.ts` and replace the import:
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
 
-**Before (using mocked integration):**
+Open this file and make the following changes:
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
-```
+1. **Add the Redis import:**
 
-**After (using Redis Cache integration):**
+    ```typescript
+    import * as Redis from '@o2s/integrations.redis/integration';
+    ```
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.redis/integration';
-```
+2. **Update the `cache` domain assignment** in the `createIntegrationConfig` call:
 
-The complete file should look like this:
+    ```typescript
+    const result = createIntegrationConfig({
+        cache: Redis,
+        // ... other domains remain unchanged
+    });
+    ```
 
-```typescript
-import { Config, Integration } from '@o2s/integrations.redis/integration';
+3. **Update the matching `export import` type alias:**
 
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const CacheIntegrationConfig: ApiConfig['integrations']['cache'] = Config.cache!;
-
-export import Service = Integration.Cache.Service;
-```
+    ```typescript
+    export import Cache = Redis.Integration.Cache;
+    ```
 
 ### Step 2: Verify AppConfig
 
-The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference `Cache.CacheIntegrationConfig`. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
+The `AppConfig` in `apps/api-harmonization/src/app.config.ts` already imports from `@o2s/configs.integrations`. You don't need to modify this file.
 
 ## Configure environment variables
 
