@@ -1,5 +1,11 @@
 # @o2s/ui
 
+## 1.15.1
+
+### Patch Changes
+
+- 24fb9a9: fix(ui): use div instead of p tag in RichText paragraph override to prevent hydration errors from nested block-level elements
+
 ## 1.15.0
 
 ### Minor Changes
