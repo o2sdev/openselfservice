@@ -43,7 +43,7 @@
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.1.14",
         "@o2s/utils.logger": "*",
-        "axios": "^1.13.6",
+        "axios": "^1.15.0",
         "html-to-text": "^9.0.5",
         "rxjs": "^7.8.2"
     },
