@@ -80,7 +80,7 @@
         "input-format": "^0.3.14",
         "libphonenumber-js": "^1.12.38",
         "lucide-react": "^0.575.0",
-        "markdown-to-jsx": "9.7.0",
+        "markdown-to-jsx": "9.8.0",
         "next": "^16.1.6",
         "next-intl": "^4.8.3",
         "mitt": "^3.0.1",
