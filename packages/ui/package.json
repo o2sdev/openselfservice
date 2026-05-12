@@ -82,7 +82,7 @@
         "lucide-react": "^0.575.0",
         "markdown-to-jsx": "9.7.0",
         "next": "^16.1.6",
-        "next-intl": "^4.8.3",
+        "next-intl": "^4.9.1",
         "mitt": "^3.0.1",
         "react-day-picker": "^9.14.0",
         "react-indiana-drag-scroll": "^2.2.1",
