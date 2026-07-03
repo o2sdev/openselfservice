@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.23.0
+
+### Minor Changes
+
+- 86b4c5a: feat(cms): add `activePromoCodesTitle` label to cart and checkout summary blocks
+
 ## 1.22.0
 
 ### Minor Changes

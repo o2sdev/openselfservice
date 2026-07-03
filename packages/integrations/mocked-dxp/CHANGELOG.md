@@ -1,5 +1,13 @@
 # @o2s/integrations.mocked-dxp
 
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+    - @o2s/integrations.mocked@2.0.0
+
 ## 1.2.2
 
 ### Patch Changes

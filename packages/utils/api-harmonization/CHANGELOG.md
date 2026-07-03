@@ -1,5 +1,12 @@
 # @o2s/utils.api-harmonization
 
+## 1.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 0.3.4
 
 ### Patch Changes

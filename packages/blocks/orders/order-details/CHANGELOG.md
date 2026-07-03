@@ -1,5 +1,17 @@
 # @o2s/blocks.order-details
 
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+- Updated dependencies [24fb9a9]
+  - @o2s/framework@1.23.0
+  - @o2s/ui@2.0.0
+  - @o2s/configs.integrations@1.0.0
+  - @o2s/utils.api-harmonization@1.0.0
+  - @o2s/utils.frontend@1.0.0
+
 ## 1.7.3
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @o2s/integrations.redis
 
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 1.4.3
 
 ### Patch Changes

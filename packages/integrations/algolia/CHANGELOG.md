@@ -1,5 +1,12 @@
 # @o2s/integrations.algolia
 
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 1.6.4
 
 ### Patch Changes
