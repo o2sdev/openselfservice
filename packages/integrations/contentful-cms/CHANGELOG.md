@@ -1,5 +1,12 @@
 # @o2s/integrations.contentful-cms
 
+## 1.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 0.9.1
 
 ### Patch Changes

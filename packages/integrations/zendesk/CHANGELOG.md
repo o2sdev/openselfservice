@@ -1,5 +1,12 @@
 # @o2s/integrations.zendesk
 
+## 4.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 3.1.4
 
 ### Patch Changes

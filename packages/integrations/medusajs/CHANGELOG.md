@@ -1,5 +1,13 @@
 # @o2s/integrations.medusajs
 
+## 2.0.0
+
+### Patch Changes
+
+- 86b4c5a: fix(medusajs): map order sort fields to persisted DB columns so sorting no longer fails on non-sortable computed monetary fields
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 1.12.2
 
 ### Patch Changes

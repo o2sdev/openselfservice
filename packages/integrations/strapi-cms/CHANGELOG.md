@@ -1,5 +1,12 @@
 # @o2s/integrations.strapi-cms
 
+## 3.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 2.14.1
 
 ### Patch Changes

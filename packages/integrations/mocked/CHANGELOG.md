@@ -1,5 +1,13 @@
 # @o2s/integrations.mocked
 
+## 2.0.0
+
+### Patch Changes
+
+- 86b4c5a: feat(cms): add `activePromoCodesTitle` label to cart and checkout summary blocks
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 1.23.1
 
 ### Patch Changes
