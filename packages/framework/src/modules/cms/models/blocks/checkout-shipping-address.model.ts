@@ -42,6 +42,7 @@ export class CheckoutShippingAddressBlock extends Block.Block {
         discountLabel: string;
         shippingLabel: string;
         freeLabel: string;
+        activePromoCodesTitle?: string;
     };
     stepIndicator!: { steps: string[]; currentStep: number };
     cartPath!: string;
