@@ -2,11 +2,13 @@
 
 import { ArrowRight, IterationCw, MoreVertical } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -33,14 +35,20 @@ import { sdk } from '../sdk';
 import { OrderListPureProps } from './OrderList.types';
 
 export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToken, routing, ...component }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, usePathname, useRouter } = createNavigation(routing);
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const { labels } = useGlobalContext();
 
-    const initialFilters: Request.GetOrderListBlockQuery = {
-        id: component.id,
-        offset: 0,
-        limit: component.pagination?.limit || 5,
-    };
+    const initialFilters = React.useMemo<Request.GetOrderListBlockQuery>(
+        () => ({
+            id: component.id,
+            offset: 0,
+            limit: component.pagination?.limit || 5,
+        }),
+        [component.id, component.pagination?.limit],
+    );
 
     const initialData = component.orders.data;
 
@@ -48,10 +56,20 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
         const value = component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value;
         return value === 'grid' ? 'grid' : 'list';
     })();
+    const filterNamespace = component.id || 'order-list';
 
     const [data, setData] = useState<Model.OrderListBlock>(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const { filters, setFilters, viewMode, setViewMode, hasUrlFilters } = useUrlFilters<
+        Request.GetOrderListBlockQuery,
+        'list' | 'grid'
+    >({
+        namespace: filterNamespace,
+        initialFilters,
+        initialViewMode,
+        searchParams,
+        pathname,
+        onUrlChange: (url) => router.replace(url, { scroll: false }),
+    });
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
@@ -91,6 +109,13 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
             }
         });
     };
+
+    React.useEffect(() => {
+        if (hasUrlFilters) {
+            handleFilter(filters);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Define columns configuration outside JSX for better readability
     const columns = data.table.columns.map((column) => {

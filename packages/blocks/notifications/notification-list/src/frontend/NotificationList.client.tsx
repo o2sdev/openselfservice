@@ -2,6 +2,7 @@
 
 import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
@@ -9,6 +10,7 @@ import { Mappings } from '@o2s/utils.frontend';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -34,24 +36,40 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     routing,
     ...component
 }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, usePathname, useRouter } = createNavigation(routing);
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const { labels } = useGlobalContext();
 
-    const initialFilters: Request.GetNotificationListBlockQuery = {
-        id: component.id,
-        offset: 0,
-        limit: component.pagination?.limit || 5,
-    };
+    const initialFilters = React.useMemo<Request.GetNotificationListBlockQuery>(
+        () => ({
+            id: component.id,
+            offset: 0,
+            limit: component.pagination?.limit || 5,
+        }),
+        [component.id, component.pagination?.limit],
+    );
 
     const initialData = component.notifications.data;
 
     // Extract initial viewMode from filters if available
     const initialViewMode =
         component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+    const filterNamespace = component.id || 'notification-list';
 
     const [data, setData] = useState<Model.NotificationListBlock>(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const { filters, setFilters, viewMode, setViewMode, hasUrlFilters } = useUrlFilters<
+        Request.GetNotificationListBlockQuery,
+        'list' | 'grid'
+    >({
+        namespace: filterNamespace,
+        initialFilters,
+        initialViewMode: initialViewMode as 'list' | 'grid',
+        searchParams,
+        pathname,
+        onUrlChange: (url) => router.replace(url, { scroll: false }),
+    });
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
@@ -95,6 +113,13 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
             }
         });
     };
+
+    React.useEffect(() => {
+        if (hasUrlFilters) {
+            handleFilter(filters);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Define columns configuration outside JSX for better readability
     const columns = data.table.columns.map((column) => {

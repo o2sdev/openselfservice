@@ -3,6 +3,7 @@
 import { eventBus } from '@o2s/ui/event-bus';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useCallback, useState, useTransition } from 'react';
 
 import { Utils } from '@o2s/utils.frontend';
@@ -10,6 +11,7 @@ import { Utils } from '@o2s/utils.frontend';
 import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { DataList } from '@o2s/ui/components/Data/DataList';
@@ -23,31 +25,47 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { ToastAction } from '@o2s/ui/elements/toast';
 
-import type { Model } from '../api-harmonization/product-list.client';
+import type { Model, Request } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
-    const { Link: LinkComponent, useRouter } = createNavigation(routing);
+    const { Link: LinkComponent, usePathname, useRouter } = createNavigation(routing);
     const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const initialProducts = component.products?.data ?? [];
     const canRender = !!component.table?.columns && !!component.noResults && !!component.labels;
 
-    const initialFilters = {
-        id: component.id,
-        offset: 0,
-        limit: component.pagination?.limit || 12,
-    };
+    const initialFilters = React.useMemo<Request.GetProductListBlockQuery>(
+        () => ({
+            id: component.id,
+            offset: 0,
+            limit: component.pagination?.limit || 12,
+        }),
+        [component.id, component.pagination?.limit],
+    );
 
     const initialData = initialProducts;
 
     const initialViewMode =
         component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'grid';
+    const filterNamespace = component.id || 'product-list';
 
     const [data, setData] = useState(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'grid' | 'list'>(initialViewMode);
+    const { filters, setFilters, viewMode, setViewMode, hasUrlFilters } = useUrlFilters<
+        Request.GetProductListBlockQuery,
+        'grid' | 'list'
+    >({
+        namespace: filterNamespace,
+        initialFilters,
+        filterKeys: ['id', 'offset', 'limit', 'type', 'category', 'sort'],
+        initialViewMode: initialViewMode as 'grid' | 'list',
+        searchParams,
+        pathname,
+        onUrlChange: (url) => router.replace(url, { scroll: false }),
+    });
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
@@ -123,6 +141,13 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
             setSelectedRows(new Set());
         });
     };
+
+    React.useEffect(() => {
+        if (hasUrlFilters) {
+            handleFilter(filters);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Define table columns configuration
     const columns = (data.table?.columns ?? []).map((column) => {

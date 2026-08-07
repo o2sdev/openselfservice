@@ -3,11 +3,14 @@
 import { IntlMessageFormat } from 'intl-messageformat';
 import { Download } from 'lucide-react';
 import { useLocale } from 'next-intl';
+import { createNavigation } from 'next-intl/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useState, useTransition } from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -28,25 +31,43 @@ import { sdk } from '../sdk';
 import { InvoiceListPureProps } from './InvoiceList.types';
 
 export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+    const { usePathname, useRouter } = createNavigation(routing);
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const { labels } = useGlobalContext();
     const currentLocale = useLocale();
 
-    const initialFilters: Request.GetInvoiceListBlockQuery = {
-        id: component.id,
-        offset: 0,
-        limit: component.pagination?.limit || 5,
-        search: '',
-    };
+    const initialFilters = React.useMemo<Request.GetInvoiceListBlockQuery>(
+        () => ({
+            id: component.id,
+            offset: 0,
+            limit: component.pagination?.limit || 5,
+            search: '',
+        }),
+        [component.id, component.pagination?.limit],
+    );
 
     const initialData = component.invoices.data;
 
     // Extract initial viewMode from filters if available
     const initialViewMode =
         component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+    const filterNamespace = component.id || 'invoice-list';
 
     const [data, setData] = useState(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const { filters, setFilters, viewMode, setViewMode, hasUrlFilters } = useUrlFilters<
+        Request.GetInvoiceListBlockQuery,
+        'list' | 'grid'
+    >({
+        namespace: filterNamespace,
+        initialFilters,
+        filterKeys: ['id', 'offset', 'limit', 'dateFrom', 'dateTo', 'search'],
+        initialViewMode: initialViewMode as 'list' | 'grid',
+        searchParams,
+        pathname,
+        onUrlChange: (url) => router.replace(url, { scroll: false }),
+    });
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
@@ -85,6 +106,13 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
             }
         });
     };
+
+    React.useEffect(() => {
+        if (hasUrlFilters) {
+            handleFilter(filters);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleDownload = async (id: string) => {
         try {

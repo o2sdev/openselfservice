@@ -3,11 +3,13 @@
 import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -30,27 +32,43 @@ import { sdk } from '../sdk';
 import { Action, TicketListPureProps } from './TicketList.types';
 
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, usePathname, useRouter } = createNavigation(routing);
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const inspector = LivePreview.useInspector();
     const { labels } = useGlobalContext();
 
-    const initialFilters: Request.GetTicketListBlockQuery = {
-        id: component.id,
-        offset: 0,
-        limit: component.pagination?.limit || 5,
-        search: '',
-        priority: '',
-    };
+    const initialFilters = React.useMemo<Request.GetTicketListBlockQuery>(
+        () => ({
+            id: component.id,
+            offset: 0,
+            limit: component.pagination?.limit || 5,
+            search: '',
+            priority: '',
+        }),
+        [component.id, component.pagination?.limit],
+    );
 
     const initialData = component.tickets.data;
 
     // Extract initial viewMode from filters if available
     const initialViewMode =
         component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+    const filterNamespace = component.id || 'ticket-list';
 
     const [data, setData] = useState<Model.TicketListBlock>(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const { filters, setFilters, viewMode, setViewMode, hasUrlFilters } = useUrlFilters<
+        Request.GetTicketListBlockQuery,
+        'list' | 'grid'
+    >({
+        namespace: filterNamespace,
+        initialFilters,
+        initialViewMode: initialViewMode as 'list' | 'grid',
+        searchParams,
+        pathname,
+        onUrlChange: (url) => router.replace(url, { scroll: false }),
+    });
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
@@ -89,6 +107,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             }
         });
     };
+
+    React.useEffect(() => {
+        if (hasUrlFilters) {
+            handleFilter(filters);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const variantConfig: Array<{ variant: Action['variant']; className: string }> = [
         { variant: 'default', className: 'no-underline hover:no-underline' },
