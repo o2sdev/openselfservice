@@ -1,9 +1,9 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 
 import { Notifications } from '@o2s/framework/modules';
 
-import { mapNotification, mapNotifications } from './notifications.mapper';
+import { mapNotification, mapNotifications, markNotificationAs } from './notifications.mapper';
 import * as CustomNotifications from './notifications.model';
 import { responseDelay } from '@/utils/delay';
 
@@ -27,7 +27,9 @@ export class NotificationsService extends Notifications.Service {
         return of(mapNotifications(options)).pipe(responseDelay());
     }
 
-    markAs(_request: Notifications.Request.MarkNotificationAsRequest, _authorization?: string): Observable<void> {
-        throw new NotImplementedException('The method is not implemented');
+    markAs(request: Notifications.Request.MarkNotificationAsRequest, _authorization?: string): Observable<void> {
+        markNotificationAs(request);
+
+        return of(undefined).pipe(responseDelay());
     }
 }

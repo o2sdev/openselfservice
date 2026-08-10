@@ -13,6 +13,28 @@ export const mapNotification = (id: string, locale = 'en'): CustomNotifications.
     return notificationsMap[locale as keyof typeof notificationsMap]?.find((notification) => notification.id === id);
 };
 
+/**
+ * Updates the status of a notification in the in-memory mocks. The same notification id exists in every locale,
+ * so all locale variants are updated to keep the mocked data consistent.
+ * Returns `true` when a notification with the given id was found.
+ */
+export const markNotificationAs = (request: Notifications.Request.MarkNotificationAsRequest): boolean => {
+    const updatedAt = new Date().toISOString();
+
+    return [MOCK_NOTIFICATIONS_EN, MOCK_NOTIFICATIONS_PL, MOCK_NOTIFICATIONS_DE].reduce((found, notifications) => {
+        const notification = notifications.find((notification) => notification.id === request.id);
+
+        if (!notification) {
+            return found;
+        }
+
+        notification.status = request.status;
+        notification.updatedAt = updatedAt;
+
+        return true;
+    }, false);
+};
+
 export const mapNotifications = (
     options: Notifications.Request.GetNotificationListQuery,
 ): CustomNotifications.Notifications => {
