@@ -1,84 +1,69 @@
 import { Models } from '@o2s/utils.api-harmonization';
-import { Utils } from '@o2s/utils.frontend';
 
 import { Carts } from '@o2s/framework/modules';
-import { Sdk } from '@o2s/framework/sdk';
+import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/cart.client';
 
 const API_URL = URL;
 const CARTS_API_URL = '/carts';
 
-export const cart = (sdk: Sdk) => ({
-    blocks: {
-        getCart: (
-            query: Request.GetCartBlockQuery,
-            headers: Models.Headers.AppHeaders,
-            authorization?: string,
-        ): Promise<Model.CartBlock> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${API_URL}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization
-                        ? {
-                              Authorization: `Bearer ${authorization}`,
-                          }
-                        : {}),
-                },
-                params: query,
-            }),
-    },
-    cart: {
-        getCart: (
-            cartId: string,
-            headers: Models.Headers.AppHeaders,
-            authorization?: string,
-        ): Promise<Carts.Model.Cart> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${CARTS_API_URL}/${cartId}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-            }),
+export const cart = (sdk: Sdk) => {
+    const request = createBlockMethod(sdk);
 
-        updateCartItem: (
-            cartId: string,
-            itemId: string,
-            body: { quantity?: number; metadata?: Record<string, unknown>; locale?: string },
-            headers: Models.Headers.AppHeaders,
-            authorization?: string,
-        ): Promise<Carts.Model.Cart> =>
-            sdk.makeRequest({
-                method: 'patch',
-                url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-                data: body,
-            }),
+    return {
+        blocks: {
+            getCart: (
+                query: Request.GetCartBlockQuery,
+                headers: Models.Headers.AppHeaders,
+                authorization?: string,
+            ): Promise<Model.CartBlock> =>
+                request({
+                    url: API_URL,
+                    params: query,
+                    headers,
+                    authorization,
+                }),
+        },
+        cart: {
+            getCart: (
+                cartId: string,
+                headers: Models.Headers.AppHeaders,
+                authorization?: string,
+            ): Promise<Carts.Model.Cart> =>
+                request({
+                    url: `${CARTS_API_URL}/${cartId}`,
+                    headers,
+                    authorization,
+                }),
 
-        removeCartItem: (
-            cartId: string,
-            itemId: string,
-            headers: Models.Headers.AppHeaders,
-            authorization?: string,
-        ): Promise<Carts.Model.Cart> =>
-            sdk.makeRequest({
-                method: 'delete',
-                url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-            }),
-    },
-});
+            updateCartItem: (
+                cartId: string,
+                itemId: string,
+                body: { quantity?: number; metadata?: Record<string, unknown>; locale?: string },
+                headers: Models.Headers.AppHeaders,
+                authorization?: string,
+            ): Promise<Carts.Model.Cart> =>
+                request({
+                    method: 'patch',
+                    url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
+                    data: body,
+                    headers,
+                    authorization,
+                }),
+
+            removeCartItem: (
+                cartId: string,
+                itemId: string,
+                headers: Models.Headers.AppHeaders,
+                authorization?: string,
+            ): Promise<Carts.Model.Cart> =>
+                request({
+                    method: 'delete',
+                    url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
+                    headers,
+                    authorization,
+                }),
+        },
+    };
+};

@@ -1,34 +1,28 @@
-import { Utils } from '@o2s/utils.frontend';
-
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk } from '@o2s/framework/sdk';
+import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/service-details.client';
 import { URL } from '../api-harmonization/service-details.url';
 
 const API_URL = URL;
 
-export const serviceDetails = (sdk: Sdk) => ({
-    blocks: {
-        getServiceDetails: (
-            params: Request.GetServiceDetailsBlockParams,
-            query: Request.GetServiceDetailsBlockQuery,
-            headers: AppHeaders,
-            authorization?: string,
-        ): Promise<Model.ServiceDetailsBlock> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${API_URL}/${params.id}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization
-                        ? {
-                              Authorization: `Bearer ${authorization}`,
-                          }
-                        : {}),
-                },
-                params: query,
-            }),
-    },
-});
+export const serviceDetails = (sdk: Sdk) => {
+    const request = createBlockMethod(sdk);
+
+    return {
+        blocks: {
+            getServiceDetails: (
+                params: Request.GetServiceDetailsBlockParams,
+                query: Request.GetServiceDetailsBlockQuery,
+                headers: AppHeaders,
+                authorization?: string,
+            ): Promise<Model.ServiceDetailsBlock> =>
+                request({
+                    url: `${API_URL}/${params.id}`,
+                    params: query,
+                    headers,
+                    authorization,
+                }),
+        },
+    };
+};

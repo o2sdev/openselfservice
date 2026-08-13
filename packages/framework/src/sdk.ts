@@ -8,6 +8,15 @@ import { createInterceptors } from './interceptors';
 import { LoggerConfig } from './utils/logger';
 import { AppHeaders } from './utils/models/headers';
 
+export { BlockRequestError, createBlockMethod } from './utils/block-method';
+export type {
+    BlockRequest,
+    BlockRequestConfig,
+    BlockRequestHeaders,
+    BlockRequestMethod,
+    BlockResponseType,
+} from './utils/block-method';
+
 export interface CompatRequestConfig {
     url?: string;
     method?: string;

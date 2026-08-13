@@ -1,33 +1,27 @@
 import { AppHeaders } from '@o2s/framework/headers';
 import { Carts } from '@o2s/framework/modules';
-import { Sdk } from '@o2s/framework/sdk';
-
-import { getApiHeaders } from '../../utils/api';
+import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
 
 const CARTS_API_URL = '/carts';
 
-export const cart = (sdk: Sdk) => ({
-    cart: {
-        getCurrentCart: (headers: AppHeaders, authorization?: string): Promise<Carts.Model.Cart> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${CARTS_API_URL}/current`,
-                headers: {
-                    ...getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-            }),
+export const cart = (sdk: Sdk) => {
+    const request = createBlockMethod(sdk);
 
-        getCart: (cartId: string, headers: AppHeaders, authorization?: string): Promise<Carts.Model.Cart> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${CARTS_API_URL}/${cartId}`,
-                headers: {
-                    ...getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-            }),
-    },
-});
+    return {
+        cart: {
+            getCurrentCart: (headers: AppHeaders, authorization?: string): Promise<Carts.Model.Cart> =>
+                request({
+                    url: `${CARTS_API_URL}/current`,
+                    headers,
+                    authorization,
+                }),
+
+            getCart: (cartId: string, headers: AppHeaders, authorization?: string): Promise<Carts.Model.Cart> =>
+                request({
+                    url: `${CARTS_API_URL}/${cartId}`,
+                    headers,
+                    authorization,
+                }),
+        },
+    };
+};

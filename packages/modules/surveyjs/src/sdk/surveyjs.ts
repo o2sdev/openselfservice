@@ -1,49 +1,40 @@
-import { Utils } from '@o2s/utils.frontend';
-
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk } from '@o2s/framework/sdk';
+import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/surveyjs.client';
 
 const API_URL = URL;
 
-export const surveyjs = (sdk: Sdk) => ({
-    modules: {
-        getSurvey: (
-            params: Request.SurveyJsQuery,
-            headers: AppHeaders,
-            authorization?: string,
-        ): Promise<Model.SurveyJs> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: API_URL,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization
-                        ? {
-                              Authorization: `Bearer ${authorization}`,
-                          }
-                        : {}),
-                },
-                params: params,
-            }),
+export const surveyjs = (sdk: Sdk) => {
+    const request = createBlockMethod(sdk);
 
-        submitSurvey: (
-            params: Request.SurveyJsSubmitPayload,
-            headers: AppHeaders,
-            authorization?: string,
-        ): Promise<void> => {
-            return sdk.makeRequest({
-                method: 'post',
-                url: API_URL,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
-                },
-                data: params,
-            });
+    return {
+        modules: {
+            getSurvey: (
+                params: Request.SurveyJsQuery,
+                headers: AppHeaders,
+                authorization?: string,
+            ): Promise<Model.SurveyJs> =>
+                request({
+                    url: API_URL,
+                    params: params,
+                    headers,
+                    authorization,
+                }),
+
+            submitSurvey: (
+                params: Request.SurveyJsSubmitPayload,
+                headers: AppHeaders,
+                authorization?: string,
+            ): Promise<void> => {
+                return request({
+                    method: 'post',
+                    url: API_URL,
+                    data: params,
+                    headers,
+                    authorization,
+                });
+            },
         },
-    },
-});
+    };
+};

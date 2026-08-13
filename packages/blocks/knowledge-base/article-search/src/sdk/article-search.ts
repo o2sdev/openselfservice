@@ -1,52 +1,38 @@
-import { Utils } from '@o2s/utils.frontend';
-
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk } from '@o2s/framework/sdk';
+import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/article-search.client';
 import { URL } from '../api-harmonization/article-search.url';
 
 const API_URL = URL;
 
-export const articleSearch = (sdk: Sdk) => ({
-    blocks: {
-        getArticleSearch: (
-            query: Request.GetArticleSearchBlockQuery,
-            headers: AppHeaders,
-            authorization?: string,
-        ): Promise<Model.ArticleSearchBlock> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${API_URL}`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization
-                        ? {
-                              Authorization: `Bearer ${authorization}`,
-                          }
-                        : {}),
-                },
-                params: query,
-            }),
-        searchArticles: (
-            query: Request.SearchArticlesQuery,
-            headers: AppHeaders,
-            authorization?: string,
-        ): Promise<Model.ArticleList> =>
-            sdk.makeRequest({
-                method: 'get',
-                url: `${API_URL}/articles`,
-                headers: {
-                    ...Utils.Headers.getApiHeaders(),
-                    ...headers,
-                    ...(authorization
-                        ? {
-                              Authorization: `Bearer ${authorization}`,
-                          }
-                        : {}),
-                },
-                params: query,
-            }),
-    },
-});
+export const articleSearch = (sdk: Sdk) => {
+    const request = createBlockMethod(sdk);
+
+    return {
+        blocks: {
+            getArticleSearch: (
+                query: Request.GetArticleSearchBlockQuery,
+                headers: AppHeaders,
+                authorization?: string,
+            ): Promise<Model.ArticleSearchBlock> =>
+                request({
+                    url: API_URL,
+                    params: query,
+                    headers,
+                    authorization,
+                }),
+            searchArticles: (
+                query: Request.SearchArticlesQuery,
+                headers: AppHeaders,
+                authorization?: string,
+            ): Promise<Model.ArticleList> =>
+                request({
+                    url: `${API_URL}/articles`,
+                    params: query,
+                    headers,
+                    authorization,
+                }),
+        },
+    };
+};
