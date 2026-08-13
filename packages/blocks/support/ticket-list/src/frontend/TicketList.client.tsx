@@ -3,11 +3,13 @@
 import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useState, useTransition } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -49,45 +51,83 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
 
     const [data, setData] = useState<Model.TicketListBlock>(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
 
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const searchParamsString = searchParams.toString();
+    const urlSearchParams = useMemo(() => new URLSearchParams(searchParamsString), [searchParamsString]);
+
+    const handleUrlChange = useCallback(
+        (params: string) => {
+            router.replace(params ? `${pathname}?${params}` : pathname, { scroll: false });
+        },
+        [pathname, router],
+    );
+
+    // Multi-select filters must be restored from the URL as arrays, not strings.
+    const multiValueKeys = useMemo(
+        () =>
+            (component.filters?.items ?? [])
+                .filter((item) => 'allowMultiple' in item && item.allowMultiple)
+                .map((item) => String(item.id)),
+        [component.filters?.items],
+    );
+
+    const { filters, setFilters, resetFilters, viewMode, setViewMode, isRestoredFromUrl } = useUrlFilters({
+        initialFilters,
+        namespace: 'ticket',
+        multiValueKeys,
+        defaultViewMode: initialViewMode,
+        searchParams: urlSearchParams,
+        onUrlChange: handleUrlChange,
+    });
+
+    const fetchTickets = useCallback(
+        (query: Request.GetTicketListBlockQuery) => {
+            startTransition(async () => {
+                try {
+                    const newData = await sdk.blocks.getTicketList(query, { 'x-locale': locale }, accessToken);
+                    setData(newData);
+                    setSelectedRows(new Set());
+                } catch (_error) {
+                    toast({
+                        variant: 'destructive',
+                        title: labels.errors.requestError.title,
+                        description: labels.errors.requestError.content,
+                    });
+                }
+            });
+        },
+        [accessToken, labels.errors.requestError.content, labels.errors.requestError.title, locale],
+    );
+
+    // The block is rendered on the server with the default filters, so a URL carrying filters
+    // (a shared link, or a status box linking to a pre-filtered list) needs one refetch on mount.
+    const hasAppliedUrlFilters = useRef(false);
+
+    useEffect(() => {
+        if (!isRestoredFromUrl || hasAppliedUrlFilters.current) {
+            return;
+        }
+
+        hasAppliedUrlFilters.current = true;
+        fetchTickets(filters);
+    }, [fetchTickets, filters, isRestoredFromUrl]);
+
     const handleFilter = (data: Partial<Request.GetTicketListBlockQuery>) => {
-        startTransition(async () => {
-            try {
-                const newFilters = { ...filters, ...data };
-                const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
-                setFilters(newFilters);
-                setData(newData);
-                setSelectedRows(new Set());
-            } catch (_error) {
-                toast({
-                    variant: 'destructive',
-                    title: labels.errors.requestError.title,
-                    description: labels.errors.requestError.content,
-                });
-            }
-        });
+        const newFilters = { ...filters, ...data };
+
+        setFilters(newFilters);
+        fetchTickets(newFilters);
     };
 
     const handleReset = () => {
-        startTransition(async () => {
-            try {
-                const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
-                setFilters(initialFilters);
-                setData(newData);
-                setSelectedRows(new Set());
-            } catch (_error) {
-                toast({
-                    variant: 'destructive',
-                    title: labels.errors.requestError.title,
-                    description: labels.errors.requestError.content,
-                });
-            }
-        });
+        resetFilters();
+        fetchTickets(initialFilters);
     };
 
     const variantConfig: Array<{ variant: Action['variant']; className: string }> = [

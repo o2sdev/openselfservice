@@ -3,11 +3,13 @@
 import { IntlMessageFormat } from 'intl-messageformat';
 import { Download } from 'lucide-react';
 import { useLocale } from 'next-intl';
-import React, { useState, useTransition } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -45,45 +47,83 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
 
     const [data, setData] = useState(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<Request.GetInvoiceListBlockQuery>) => {
-        startTransition(async () => {
-            try {
-                const newFilters = { ...filters, ...data };
-                const newData = await sdk.blocks.getInvoiceList(newFilters, { 'x-locale': locale }, accessToken);
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const searchParamsString = searchParams.toString();
+    const urlSearchParams = useMemo(() => new URLSearchParams(searchParamsString), [searchParamsString]);
 
-                setFilters(newFilters);
-                setData(newData);
-            } catch (_error) {
-                toast({
-                    variant: 'destructive',
-                    title: labels.errors.requestError.title,
-                    description: labels.errors.requestError.content,
-                });
-            }
-        });
+    const handleUrlChange = useCallback(
+        (params: string) => {
+            router.replace(params ? `${pathname}?${params}` : pathname, { scroll: false });
+        },
+        [pathname, router],
+    );
+
+    // Multi-select filters must be restored from the URL as arrays, not strings.
+    const multiValueKeys = useMemo(
+        () =>
+            (component.filters?.items ?? [])
+                .filter((item) => 'allowMultiple' in item && item.allowMultiple)
+                .map((item) => String(item.id)),
+        [component.filters?.items],
+    );
+
+    const { filters, setFilters, resetFilters, viewMode, setViewMode, isRestoredFromUrl } = useUrlFilters({
+        initialFilters,
+        namespace: 'invoice',
+        multiValueKeys,
+        defaultViewMode: initialViewMode,
+        searchParams: urlSearchParams,
+        onUrlChange: handleUrlChange,
+    });
+
+    const fetchInvoices = useCallback(
+        (query: Request.GetInvoiceListBlockQuery) => {
+            startTransition(async () => {
+                try {
+                    const newData = await sdk.blocks.getInvoiceList(query, { 'x-locale': locale }, accessToken);
+
+                    setData(newData);
+                    setSelectedRows(new Set());
+                } catch (_error) {
+                    toast({
+                        variant: 'destructive',
+                        title: labels.errors.requestError.title,
+                        description: labels.errors.requestError.content,
+                    });
+                }
+            });
+        },
+        [accessToken, labels.errors.requestError.content, labels.errors.requestError.title, locale],
+    );
+
+    // The block is rendered on the server with the default filters, so a URL carrying filters
+    // (a shared link, or a status box linking to a pre-filtered list) needs one refetch on mount.
+    const hasAppliedUrlFilters = useRef(false);
+
+    useEffect(() => {
+        if (!isRestoredFromUrl || hasAppliedUrlFilters.current) {
+            return;
+        }
+
+        hasAppliedUrlFilters.current = true;
+        fetchInvoices(filters);
+    }, [fetchInvoices, filters, isRestoredFromUrl]);
+
+    const handleFilter = (data: Partial<Request.GetInvoiceListBlockQuery>) => {
+        const newFilters = { ...filters, ...data };
+
+        setFilters(newFilters);
+        fetchInvoices(newFilters);
     };
 
     const handleReset = () => {
-        startTransition(async () => {
-            try {
-                const newData = await sdk.blocks.getInvoiceList(initialFilters, { 'x-locale': locale }, accessToken);
-
-                setFilters(initialFilters);
-                setData(newData);
-                setSelectedRows(new Set());
-            } catch (_error) {
-                toast({
-                    variant: 'destructive',
-                    title: labels.errors.requestError.title,
-                    description: labels.errors.requestError.content,
-                });
-            }
-        });
+        resetFilters();
+        fetchInvoices(initialFilters);
     };
 
     const handleDownload = async (id: string) => {

@@ -3,13 +3,15 @@
 import { eventBus } from '@o2s/ui/event-bus';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useCallback, useState, useTransition } from 'react';
+import { useRouter as useNextRouter, usePathname, useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { Utils } from '@o2s/utils.frontend';
 
 import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { DataList } from '@o2s/ui/components/Data/DataList';
@@ -46,12 +48,41 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'grid';
 
     const [data, setData] = useState(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'grid' | 'list'>(initialViewMode);
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
     const [isAddingToCart, startAddToCartTransition] = useTransition();
+
+    const nextRouter = useNextRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const searchParamsString = searchParams.toString();
+    const urlSearchParams = useMemo(() => new URLSearchParams(searchParamsString), [searchParamsString]);
+
+    const handleUrlChange = useCallback(
+        (params: string) => {
+            nextRouter.replace(params ? `${pathname}?${params}` : pathname, { scroll: false });
+        },
+        [nextRouter, pathname],
+    );
+
+    // Multi-select filters must be restored from the URL as arrays, not strings.
+    const multiValueKeys = useMemo(
+        () =>
+            (component.filters?.items ?? [])
+                .filter((item) => 'allowMultiple' in item && item.allowMultiple)
+                .map((item) => String(item.id)),
+        [component.filters?.items],
+    );
+
+    const { filters, setFilters, resetFilters, viewMode, setViewMode, isRestoredFromUrl } = useUrlFilters({
+        initialFilters,
+        namespace: 'product',
+        multiValueKeys,
+        defaultViewMode: initialViewMode,
+        searchParams: urlSearchParams,
+        onUrlChange: handleUrlChange,
+    });
 
     const handleAddToCart = useCallback(
         (sku: string, currency: Models.Price.Currency, variantId?: string) => {
@@ -105,23 +136,40 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         ],
     );
 
+    const fetchProducts = useCallback(
+        (query: typeof initialFilters) => {
+            startTransition(async () => {
+                const newData = await sdk.blocks.getProductList(query, { 'x-locale': locale }, accessToken);
+                setData(newData);
+                setSelectedRows(new Set());
+            });
+        },
+        [accessToken, locale],
+    );
+
+    // The block is rendered on the server with the default filters, so a URL carrying filters
+    // (a shared link, or a category tile linking to a pre-filtered list) needs one refetch on mount.
+    const hasAppliedUrlFilters = useRef(false);
+
+    useEffect(() => {
+        if (!isRestoredFromUrl || hasAppliedUrlFilters.current) {
+            return;
+        }
+
+        hasAppliedUrlFilters.current = true;
+        fetchProducts(filters);
+    }, [fetchProducts, filters, isRestoredFromUrl]);
+
     const handleFilter = (data: Partial<typeof initialFilters>) => {
-        startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getProductList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
-            setSelectedRows(new Set());
-        });
+        const newFilters = { ...filters, ...data };
+
+        setFilters(newFilters);
+        fetchProducts(newFilters);
     };
 
     const handleReset = () => {
-        startTransition(async () => {
-            const newData = await sdk.blocks.getProductList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
-            setSelectedRows(new Set());
-        });
+        resetFilters();
+        fetchProducts(initialFilters);
     };
 
     // Define table columns configuration
