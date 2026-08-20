@@ -13,6 +13,7 @@ this package provides a full integration with [Strapi CMS](https://strapi.io/), 
 - [Supported blocks](./blocks.md) - Implementation status of all blocks available in the O2S framework
 - [Content model](./content-model.md) - Structure and organization of the Strapi content model
 - [GraphQL integration](./graphql.md) - Detailed information about GraphQL integration, code generation, and query structure
+- [Live Preview](./live-preview.md) - Edit-in-place preview via BFF-encoded Content Source Maps, setup, and usage
 
 ## Installation
 

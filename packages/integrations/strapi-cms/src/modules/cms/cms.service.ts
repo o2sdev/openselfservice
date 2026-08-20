@@ -7,15 +7,17 @@ import { Observable, catchError, concatMap, forkJoin, from, map, mergeMap, of } 
 
 import { CMS, Cache } from '@o2s/framework/modules';
 
-import { PageFragment } from '@/generated/strapi';
+import { PageFragment, PublicationStatus } from '@/generated/strapi';
 
 import { GraphqlService } from '@/modules/graphql/graphql.service';
 
-import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
+import { COMPONENT_UID } from './live-preview/constants';
+import { SourceMapContext } from './live-preview/encode-source-map';
+import { encodeArticleListBlock, mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
-import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
+import { encodeCategoryListBlock, mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapCategoryBlock } from './mappers/blocks/cms.category.mapper';
-import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { encodeFaqBlock, mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
@@ -28,7 +30,7 @@ import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.m
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapProductDetailsBlock } from './mappers/blocks/cms.product-details.mapper';
 import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
-import { mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
+import { encodeQuickLinksBlock, mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
 import { mapRecommendedProductsBlock } from './mappers/blocks/cms.recommended-products.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
@@ -36,7 +38,7 @@ import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.map
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
 import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
-import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
+import { encodeTicketListBlock, mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
@@ -47,6 +49,14 @@ import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
+
+/** Normalizes the `preview` param (may arrive as a boolean or a 'true'/'false' string). */
+function toBooleanPreview(preview?: boolean | string): boolean {
+    if (typeof preview === 'boolean') {
+        return preview;
+    }
+    return typeof preview === 'string' && preview.toLowerCase() === 'true';
+}
 
 @Injectable()
 export class CmsService extends CMS.Service {
@@ -61,26 +71,54 @@ export class CmsService extends CMS.Service {
         this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
     }
 
-    private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
-        const key = `component-${options.id}-${options.locale}`;
+    /** Source-map context for a block entry, used to self-encode Content Source Maps. */
+    private sourceCtx(options: CMS.Request.GetCmsEntryParams): SourceMapContext {
+        return {
+            documentId: options.id,
+            model: COMPONENT_UID,
+            kind: 'collectionType',
+            locale: options.locale,
+            basePath: 'content.0',
+        };
+    }
 
+    private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
+        const isPreview = toBooleanPreview(options.preview);
+
+        const fetchComponent = () =>
+            forkJoin([
+                this.graphqlService.getComponent(
+                    {
+                        id: options.id,
+                        locale: options.locale,
+                        status: isPreview ? PublicationStatus.Draft : PublicationStatus.Published,
+                    },
+                    { preview: isPreview },
+                ),
+            ]).pipe(
+                map(([component]) => {
+                    if (!component?.data.component || !component?.data.configurableTexts) {
+                        throw new NotFoundException();
+                    }
+                    return component.data;
+                }),
+            );
+
+        // Preview/draft content is never cached: it changes on every editor keystroke, and
+        // this keeps stega markers (added downstream) out of the shared published cache.
+        if (isPreview) {
+            return fetchComponent();
+        }
+
+        const key = `component-${options.id}-${options.locale}`;
         return from(this.cacheService.get(key)).pipe(
             mergeMap((cachedBlock) => {
                 if (cachedBlock) {
                     return of(parse(cachedBlock));
                 }
 
-                const component = this.graphqlService.getComponent({
-                    id: options.id,
-                    locale: options.locale,
-                });
-
-                return forkJoin([component]).pipe(
-                    map(([component]) => {
-                        if (!component?.data.component || !component?.data.configurableTexts) {
-                            throw new NotFoundException();
-                        }
-                        const data = component.data;
+                return fetchComponent().pipe(
+                    map((data) => {
                         this.cacheService.set(key, stringify(data));
                         return data;
                     }),
@@ -302,12 +340,28 @@ export class CmsService extends CMS.Service {
     getBlockConfig<T>(options: CMS.Request.GetCmsBlockConfigParams): Observable<T> {
         const key = `${options.blockType}-component-${options.id}-${options.locale}`;
         switch (options.blockType) {
-            case 'FaqBlock':
+            case 'FaqBlock': {
+                if (toBooleanPreview(options.preview)) {
+                    // Live Preview: fetch draft (uncached) and self-encode Content Source Maps
+                    // after mapping so click-to-edit works in the Strapi preview iframe.
+                    return this.getBlock(options).pipe(
+                        map(mapFaqBlock),
+                        map((block) => encodeFaqBlock(block, this.sourceCtx(options))),
+                    ) as Observable<T>;
+                }
                 return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock))) as Observable<T>;
-            case 'TicketListBlock':
+            }
+            case 'TicketListBlock': {
+                if (toBooleanPreview(options.preview)) {
+                    return this.getBlock(options).pipe(
+                        map(mapTicketListBlock),
+                        map((block) => encodeTicketListBlock(block, this.sourceCtx(options))),
+                    ) as Observable<T>;
+                }
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map(mapTicketListBlock)),
                 ) as Observable<T>;
+            }
             case 'TicketDetailsBlock':
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map(mapTicketDetailsBlock)),
@@ -394,14 +448,28 @@ export class CmsService extends CMS.Service {
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map(mapSurveyJsBlock)),
                 ) as Observable<T>;
-            case 'QuickLinksBlock':
+            case 'QuickLinksBlock': {
+                if (toBooleanPreview(options.preview)) {
+                    return this.getBlock(options).pipe(
+                        map((data) => mapQuickLinksBlock(data)),
+                        map((block) => encodeQuickLinksBlock(block, this.sourceCtx(options))),
+                    ) as Observable<T>;
+                }
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map((data) => mapQuickLinksBlock(data))),
                 ) as Observable<T>;
-            case 'ArticleListBlock':
+            }
+            case 'ArticleListBlock': {
+                if (toBooleanPreview(options.preview)) {
+                    return this.getBlock(options).pipe(
+                        map((data) => mapArticleListBlock(data, this.baseUrl)),
+                        map((block) => encodeArticleListBlock(block, this.sourceCtx(options))),
+                    ) as Observable<T>;
+                }
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map((data) => mapArticleListBlock(data, this.baseUrl))),
                 ) as Observable<T>;
+            }
             case 'ArticleSearchBlock':
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map(mapArticleSearchBlock)),
@@ -410,10 +478,17 @@ export class CmsService extends CMS.Service {
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map((data) => mapCategoryBlock(data, this.baseUrl))),
                 ) as Observable<T>;
-            case 'CategoryListBlock':
+            case 'CategoryListBlock': {
+                if (toBooleanPreview(options.preview)) {
+                    return this.getBlock(options).pipe(
+                        map((data) => mapCategoryListBlock(data, this.baseUrl)),
+                        map((block) => encodeCategoryListBlock(block, this.sourceCtx(options))),
+                    ) as Observable<T>;
+                }
                 return this.getCachedBlock(key, () =>
                     this.getBlock(options).pipe(map((data) => mapCategoryListBlock(data, this.baseUrl))),
                 ) as Observable<T>;
+            }
             default:
                 throw new NotFoundException(`Unknown block type: ${options.blockType}`);
         }

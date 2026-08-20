@@ -56,6 +56,7 @@ export const AppConfig: ApiConfig = {
 ### Optional
 
 - `CMS_STRAPI_GRAPHQL_ENDPOINT` - Custom GraphQL endpoint (defaults to `/graphql`)
+- `CMS_STRAPI_PREVIEW_TOKEN` - API token with draft `find` permission, used to read draft content for Live Preview. Only needed when the Strapi public role lacks draft `find`.
 
 ## Example .env
 
@@ -71,6 +72,16 @@ CMS_STRAPI_GRAPHQL_ENDPOINT=/graphql
 - Article and content management
 - Live preview support
 - Multi-locale content support
+
+## Dependencies
+
+### Why `@vercel/stega` (pinned to an exact version)?
+
+Live Preview encodes Content Source Maps into string fields using `@vercel/stega`. The decoder
+that Strapi's admin injects into the preview iframe imports `@vercel/stega@0.1.2` from a CDN, and
+the two must agree byte-for-byte for markers to decode. The dependency is therefore pinned to the
+exact version (`0.1.2`, no caret) rather than a semver range. Bump it only together with the
+version Strapi's preview script imports.
 
 ## Related Packages
 

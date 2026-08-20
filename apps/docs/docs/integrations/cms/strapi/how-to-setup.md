@@ -78,9 +78,10 @@ After installing the package, you need to configure environment variables that w
 
 Configure the following environment variables in your API Harmonization server:
 
-| name                | type   | description                                            | required |
-| ------------------- | ------ | ------------------------------------------------------ | -------- |
-| CMS_STRAPI_BASE_URL | string | the base URL pointing to the domain hosting Strapi CMS | yes      |
+| name                     | type   | description                                                                             | required                          |
+| ------------------------ | ------ | --------------------------------------------------------------------------------------- | --------------------------------- |
+| CMS_STRAPI_BASE_URL      | string | the base URL pointing to the domain hosting Strapi CMS                                  | yes                               |
+| CMS_STRAPI_PREVIEW_TOKEN | string | API token with draft `find` permission, used to read draft content for [Live Preview](./live-preview.md) | no (only if the public role lacks draft `find`) |
 
 You can obtain this value from your Strapi instance:
 

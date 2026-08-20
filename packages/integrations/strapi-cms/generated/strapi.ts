@@ -10549,6 +10549,7 @@ export type GetAppConfigQuery = {
 export type GetComponentQueryVariables = Exact<{
     id: Scalars['ID']['input'];
     locale: Scalars['I18NLocaleCode']['input'];
+    status?: InputMaybe<PublicationStatus>;
 }>;
 
 export type GetComponentQuery = {
@@ -12790,8 +12791,8 @@ export const GetAppConfigDocument = gql`
     ${AppConfigFragmentDoc}
 `;
 export const GetComponentDocument = gql`
-    query getComponent($id: ID!, $locale: I18NLocaleCode!) {
-        component(documentId: $id, locale: $locale) {
+    query getComponent($id: ID!, $locale: I18NLocaleCode!, $status: PublicationStatus) {
+        component(documentId: $id, locale: $locale, status: $status) {
             name
             content {
                 __typename
