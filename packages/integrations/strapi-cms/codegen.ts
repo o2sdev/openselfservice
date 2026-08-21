@@ -6,7 +6,12 @@ if (!process.env.CMS_STRAPI_BASE_URL) {
 
 const config: CodegenConfig = {
     overwrite: true,
-    schema: `${process.env.CMS_STRAPI_BASE_URL}/graphql`,
+    schema: {
+        [`${process.env.CMS_STRAPI_BASE_URL}/graphql`]: {
+            // Sanitizes Strapi's invalid `@deprecated` directive location; see codegen-loader.cjs.
+            loader: './codegen-loader.cjs',
+        },
+    },
     documents: './src/**/*.graphql',
     verbose: true,
     generates: {

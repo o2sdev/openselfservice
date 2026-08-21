@@ -2167,6 +2167,7 @@ export type MappingFiltersInput = {
 
 export type MappingInput = {
     fields?: InputMaybe<ComponentContentFieldMappingInput>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -2788,6 +2789,17 @@ export type PaginationArg = {
     start?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export enum PublicationFilter {
+    HasPublishedVersion = 'HAS_PUBLISHED_VERSION',
+    HasPublishedVersionDocument = 'HAS_PUBLISHED_VERSION_DOCUMENT',
+    Modified = 'MODIFIED',
+    NeverPublished = 'NEVER_PUBLISHED',
+    NeverPublishedDocument = 'NEVER_PUBLISHED_DOCUMENT',
+    PublishedWithoutDraft = 'PUBLISHED_WITHOUT_DRAFT',
+    PublishedWithDraft = 'PUBLISHED_WITH_DRAFT',
+    Unmodified = 'UNMODIFIED',
+}
+
 export enum PublicationStatus {
     Draft = 'DRAFT',
     Published = 'PUBLISHED',
@@ -2863,426 +2875,556 @@ export type Query = {
 };
 
 export type QueryAppConfigArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryArticleArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryArticlesArgs = {
     filters?: InputMaybe<ArticleFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryArticles_ConnectionArgs = {
     filters?: InputMaybe<ArticleFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryAuthorArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryAuthorsArgs = {
     filters?: InputMaybe<AuthorFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryAuthors_ConnectionArgs = {
     filters?: InputMaybe<AuthorFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryCategoriesArgs = {
     filters?: InputMaybe<CategoryFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryCategories_ConnectionArgs = {
     filters?: InputMaybe<CategoryFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryCategoryArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryComponentArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryComponentsArgs = {
     filters?: InputMaybe<ComponentFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryComponents_ConnectionArgs = {
     filters?: InputMaybe<ComponentFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryConfigurableTextsArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryCreateAccountPageArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryCreateNewPasswordPageArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryFilterItemArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryFilterItemsArgs = {
     filters?: InputMaybe<FilterItemFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryFilterItems_ConnectionArgs = {
     filters?: InputMaybe<FilterItemFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryFooterArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryFootersArgs = {
     filters?: InputMaybe<FooterFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryFooters_ConnectionArgs = {
     filters?: InputMaybe<FooterFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryHeaderArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryHeadersArgs = {
     filters?: InputMaybe<HeaderFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryHeaders_ConnectionArgs = {
     filters?: InputMaybe<HeaderFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryI18NLocaleArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryI18NLocalesArgs = {
     filters?: InputMaybe<I18NLocaleFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryI18NLocales_ConnectionArgs = {
     filters?: InputMaybe<I18NLocaleFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryLoginPageArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryMappingArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryMappingsArgs = {
     filters?: InputMaybe<MappingFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryMappings_ConnectionArgs = {
     filters?: InputMaybe<MappingFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryNotFoundPageArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryOrganizationListArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryPageArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryPagesArgs = {
     filters?: InputMaybe<PageFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryPages_ConnectionArgs = {
     filters?: InputMaybe<PageFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryResetPasswordPageArgs = {
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryReviewWorkflowsWorkflowArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryReviewWorkflowsWorkflowStageArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryReviewWorkflowsWorkflowStagesArgs = {
     filters?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryReviewWorkflowsWorkflowStages_ConnectionArgs = {
     filters?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryReviewWorkflowsWorkflowsArgs = {
     filters?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryReviewWorkflowsWorkflows_ConnectionArgs = {
     filters?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QuerySurveyJsFormArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QuerySurveyJsFormsArgs = {
     filters?: InputMaybe<SurveyJsFormFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QuerySurveyJsForms_ConnectionArgs = {
     filters?: InputMaybe<SurveyJsFormFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryThemeArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryThemesArgs = {
     filters?: InputMaybe<ThemeFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryThemes_ConnectionArgs = {
     filters?: InputMaybe<ThemeFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryTranslateBatchTranslateJobArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryTranslateBatchTranslateJobsArgs = {
     filters?: InputMaybe<TranslateBatchTranslateJobFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryTranslateBatchTranslateJobs_ConnectionArgs = {
     filters?: InputMaybe<TranslateBatchTranslateJobFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryTranslateUpdatedEntriesArgs = {
     filters?: InputMaybe<TranslateUpdatedEntryFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryTranslateUpdatedEntries_ConnectionArgs = {
     filters?: InputMaybe<TranslateUpdatedEntryFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryTranslateUpdatedEntryArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUploadFileArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUploadFilesArgs = {
     filters?: InputMaybe<UploadFileFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUploadFiles_ConnectionArgs = {
     filters?: InputMaybe<UploadFileFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUsersPermissionsRoleArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUsersPermissionsRolesArgs = {
     filters?: InputMaybe<UsersPermissionsRoleFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUsersPermissionsRoles_ConnectionArgs = {
     filters?: InputMaybe<UsersPermissionsRoleFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUsersPermissionsUserArgs = {
     documentId: Scalars['ID']['input'];
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUsersPermissionsUsersArgs = {
     filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryUsersPermissionsUsers_ConnectionArgs = {
     filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
+    hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
     pagination?: InputMaybe<PaginationArg>;
+    publicationFilter?: InputMaybe<PublicationFilter>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
@@ -3364,6 +3506,7 @@ export type ReviewWorkflowsWorkflowFiltersInput = {
 
 export type ReviewWorkflowsWorkflowInput = {
     contentTypes?: InputMaybe<Scalars['JSON']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     stageRequiredToPublish?: InputMaybe<Scalars['ID']['input']>;
@@ -3400,6 +3543,7 @@ export type ReviewWorkflowsWorkflowStageFiltersInput = {
 
 export type ReviewWorkflowsWorkflowStageInput = {
     color?: InputMaybe<Scalars['String']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     workflow?: InputMaybe<Scalars['ID']['input']>;
@@ -3470,6 +3614,7 @@ export type SurveyJsFormFiltersInput = {
 
 export type SurveyJsFormInput = {
     code?: InputMaybe<Scalars['String']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     postId?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     requiredRoles?: InputMaybe<ComponentSeoUserRolesInput>;
@@ -3504,6 +3649,7 @@ export type ThemeFiltersInput = {
 };
 
 export type ThemeInput = {
+    locale?: InputMaybe<Scalars['String']['input']>;
     logo?: InputMaybe<Scalars['ID']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3556,6 +3702,7 @@ export type TranslateBatchTranslateJobInput = {
     contentType?: InputMaybe<Scalars['String']['input']>;
     entityIds?: InputMaybe<Scalars['JSON']['input']>;
     failureReason?: InputMaybe<Scalars['JSON']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     progress?: InputMaybe<Scalars['Float']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     sourceLocale?: InputMaybe<Scalars['String']['input']>;
@@ -3594,6 +3741,7 @@ export type TranslateUpdatedEntryFiltersInput = {
 export type TranslateUpdatedEntryInput = {
     contentType?: InputMaybe<Scalars['String']['input']>;
     groupID?: InputMaybe<Scalars['String']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     localesWithUpdates?: InputMaybe<Scalars['JSON']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -3604,6 +3752,7 @@ export type UploadFile = {
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
     ext?: Maybe<Scalars['String']['output']>;
+    focalPoint?: Maybe<Scalars['JSON']['output']>;
     formats?: Maybe<Scalars['JSON']['output']>;
     hash: Scalars['String']['output'];
     height?: Maybe<Scalars['Int']['output']>;
@@ -3632,6 +3781,7 @@ export type UploadFileFiltersInput = {
     createdAt?: InputMaybe<DateTimeFilterInput>;
     documentId?: InputMaybe<IdFilterInput>;
     ext?: InputMaybe<StringFilterInput>;
+    focalPoint?: InputMaybe<JsonFilterInput>;
     formats?: InputMaybe<JsonFilterInput>;
     hash?: InputMaybe<StringFilterInput>;
     height?: InputMaybe<IntFilterInput>;
@@ -3784,6 +3934,7 @@ export type UsersPermissionsRoleFiltersInput = {
 
 export type UsersPermissionsRoleInput = {
     description?: InputMaybe<Scalars['String']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     permissions?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3835,11 +3986,14 @@ export type UsersPermissionsUserFiltersInput = {
 
 export type UsersPermissionsUserInput = {
     blocked?: InputMaybe<Scalars['Boolean']['input']>;
+    confirmationToken?: InputMaybe<Scalars['String']['input']>;
     confirmed?: InputMaybe<Scalars['Boolean']['input']>;
     email?: InputMaybe<Scalars['String']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
     password?: InputMaybe<Scalars['String']['input']>;
     provider?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    resetPasswordToken?: InputMaybe<Scalars['String']['input']>;
     role?: InputMaybe<Scalars['ID']['input']>;
     username?: InputMaybe<Scalars['String']['input']>;
 };
@@ -4839,6 +4993,7 @@ export type ResolversTypes = {
     PageTemplateDynamicZoneInput: ResolverTypeWrapper<Scalars['PageTemplateDynamicZoneInput']['output']>;
     Pagination: ResolverTypeWrapper<Pagination>;
     PaginationArg: PaginationArg;
+    PublicationFilter: PublicationFilter;
     PublicationStatus: PublicationStatus;
     Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
     ResetPasswordPage: ResolverTypeWrapper<
@@ -8499,6 +8654,7 @@ export type UploadFileResolvers<
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     ext?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    focalPoint?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
     formats?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
     hash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;

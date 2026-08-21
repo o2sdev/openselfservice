@@ -232,12 +232,6 @@ Other blocks render draft content in preview but are not click-to-edit (no encod
 3. Rich-text fields are wrapped as a whole, so highlight granularity depends on how the value renders.
 4. Each encoded field carries roughly 500 to 600 invisible characters, which only applies in preview mode.
 
-## Future improvements
-
-- **In-context page editing.** Render the containing page inside the component preview so a block can be edited with the rest of the page around it, instead of in isolation.
-- **Nested relations.** Encode and add per-item edit affordances for text that comes from related documents (for example categories or articles inside a list), which is currently not editable.
-- **Restore `npm run generate`.** The `status` argument is currently hand-patched into `generated/strapi.ts` because code generation fails with a pre-existing `DIRECTIVE_DEFINITION` error unrelated to this feature. The `.graphql` files remain the source of truth; fixing codegen lets the change regenerate cleanly.
-
 ## Additional resources
 
 - [Strapi Preview feature](https://docs.strapi.io/cms/features/preview)

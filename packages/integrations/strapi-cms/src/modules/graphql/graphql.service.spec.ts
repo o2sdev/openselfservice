@@ -169,4 +169,25 @@ describe('GraphqlService', () => {
         service.getComponent(componentParams as never, { preview: true });
         expect(sdkMock.getComponent).toHaveBeenCalledWith(componentParams, undefined);
     });
+
+    it('should not send the configured token on published (non-preview) requests', () => {
+        const configWithToken = {
+            get: vi.fn((key: string) => {
+                if (key === 'CMS_STRAPI_BASE_URL') {
+                    return 'https://strapi.test';
+                }
+                if (key === 'CMS_STRAPI_PREVIEW_TOKEN') {
+                    return 'preview-token';
+                }
+                return undefined;
+            }),
+        } as unknown as ConfigService;
+        const service = new GraphqlService(configWithToken);
+        const sdkMock = getSdkMock();
+        const componentParams = {} as unknown;
+
+        // Token configured but preview false → the token must NOT leak onto published requests
+        service.getComponent(componentParams as never, { preview: false });
+        expect(sdkMock.getComponent).toHaveBeenCalledWith(componentParams, undefined);
+    });
 });
