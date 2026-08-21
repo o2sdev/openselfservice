@@ -338,7 +338,13 @@ export class CmsService extends CMS.Service {
     }
 
     getBlockConfig<T>(options: CMS.Request.GetCmsBlockConfigParams): Observable<T> {
-        const key = `${options.blockType}-component-${options.id}-${options.locale}`;
+        // Namespace the cache by preview so draft content can never be served under (or read
+        // from) the published cache key. The five encoded blocks bypass this cache entirely in
+        // preview; this suffix protects the remaining blocks that are still fetched during a
+        // page preview.
+        const key = `${options.blockType}-component-${options.id}-${options.locale}${
+            toBooleanPreview(options.preview) ? '-preview' : ''
+        }`;
         switch (options.blockType) {
             case 'FaqBlock': {
                 if (toBooleanPreview(options.preview)) {

@@ -44,17 +44,23 @@ export function LivePreviewProvider({ children, enableLiveUpdates }: LivePreview
             return;
         }
 
-        const parentOrigin = env('NEXT_PUBLIC_CMS_URL');
+        // `strapiScript` is evaluated in this page, so we must know exactly which origin to
+        // trust. Fail closed: without a configured CMS origin we never wire up the handshake,
+        // so a message from an untrusted embedder can never inject a script.
+        const cmsUrl = env('NEXT_PUBLIC_CMS_URL');
+        let parentOrigin: string;
+        try {
+            parentOrigin = new URL(cmsUrl!).origin;
+        } catch {
+            return;
+        }
+
         // Strapi may re-send its script on re-handshakes; inject it only once.
         let scriptInjected = false;
 
         const handleMessage = (event: MessageEvent) => {
-            // `strapiScript` is evaluated in this page, so only trust the Strapi admin:
-            // require the message to come from our parent frame and (if configured) its origin.
-            if (event.source !== window.parent) {
-                return;
-            }
-            if (parentOrigin && event.origin !== parentOrigin) {
+            // Only trust the Strapi admin: message must come from our parent frame and its origin.
+            if (event.source !== window.parent || event.origin !== parentOrigin) {
                 return;
             }
 
@@ -77,8 +83,9 @@ export function LivePreviewProvider({ children, enableLiveUpdates }: LivePreview
         };
 
         window.addEventListener('message', handleMessage);
-        // Let Strapi know the frontend is ready to receive the preview script.
-        window.parent?.postMessage({ type: PUBLIC_EVENTS.PREVIEW_READY }, '*');
+        // Let Strapi know the frontend is ready to receive the preview script; target the
+        // trusted admin origin rather than a wildcard.
+        window.parent?.postMessage({ type: PUBLIC_EVENTS.PREVIEW_READY }, parentOrigin);
 
         return () => window.removeEventListener('message', handleMessage);
     }, [router, enableLiveUpdates]);

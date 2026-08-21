@@ -51,10 +51,10 @@ export const AppConfig: ApiConfig = {
 ### Required
 
 - `CMS_STRAPI_BASE_URL` - Your Strapi instance URL (e.g., `https://your-strapi.com`)
-- `CMS_STRAPI_API_KEY` - Strapi API key for authentication
 
 ### Optional
 
+- `CMS_STRAPI_API_KEY` - Strapi API key for authenticating requests, if your instance requires it
 - `CMS_STRAPI_GRAPHQL_ENDPOINT` - Custom GraphQL endpoint (defaults to `/graphql`)
 - `CMS_STRAPI_PREVIEW_TOKEN` - API token with draft `find` permission, used to read draft content for Live Preview. Only needed when the Strapi public role lacks draft `find`.
 

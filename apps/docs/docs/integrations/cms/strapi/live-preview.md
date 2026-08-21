@@ -141,7 +141,7 @@ import { LivePreview } from '@o2s/configs.integrations/live-preview';
 
 function App({ children }) {
     return (
-        <LivePreview.Provider locale="en" enableLiveUpdates={isDraftModeEnabled}>
+        <LivePreview.Provider enableLiveUpdates={isDraftModeEnabled}>
             {children}
         </LivePreview.Provider>
     );
@@ -154,7 +154,7 @@ In draft mode it:
 2. on `strapiScript`, injects Strapi's decoder script into `<head>`,
 3. on `strapiUpdate`, calls `router.refresh()` so saves re-render with fresh draft data.
 
-Incoming messages are validated against the parent frame and the `NEXT_PUBLIC_CMS_URL` origin before the script is injected.
+Because the injected script is evaluated in the page, `NEXT_PUBLIC_CMS_URL` is **required for preview**: incoming messages must come from the parent frame and match that origin before the script is injected. If it is not set, the provider fails closed and does not wire up the handshake at all.
 
 ### useInspector
 
@@ -173,7 +173,7 @@ In preview, the frontend must allow two things:
 
 | Variable | Where | Purpose |
 | --- | --- | --- |
-| `NEXT_PUBLIC_CMS_URL` | frontend | Strapi admin origin: trusted source of preview messages and target of the "Edit block" links |
+| `NEXT_PUBLIC_CMS_URL` | frontend | Strapi admin origin: trusted source of preview messages and target of the "Edit block" links. **Required for preview** |
 | `CMS_STRAPI_BASE_URL` | API Harmonization server | Strapi base URL for GraphQL fetches |
 | `CMS_STRAPI_PREVIEW_TOKEN` | API Harmonization server | Optional; API token for draft reads when the public role lacks `find` |
 
@@ -228,11 +228,15 @@ Other blocks render draft content in preview but are not click-to-edit (no encod
 ## Limitations
 
 1. Requires Strapi Enterprise, version 5.12 or later.
-2. Block fields are not inline-editable from a page preview, because blocks are separate documents. Use the "Edit block ↗" affordance to jump to the component
-   preview. A future enhancement could render the containing page inside the component preview for in-context editing.
-3. Text from related documents (for example categories or articles inside a list) is not encoded and has no per-item edit affordance yet.
-4. Rich-text fields are wrapped as a whole, so highlight granularity depends on how the value renders.
-5. Each encoded field carries roughly 500 to 600 invisible characters, which only applies in preview mode.
+2. Block fields are not inline-editable from a page preview, because blocks are separate documents. Use the "Edit block ↗" affordance to open the component preview, where editing works.
+3. Rich-text fields are wrapped as a whole, so highlight granularity depends on how the value renders.
+4. Each encoded field carries roughly 500 to 600 invisible characters, which only applies in preview mode.
+
+## Future improvements
+
+- **In-context page editing.** Render the containing page inside the component preview so a block can be edited with the rest of the page around it, instead of in isolation.
+- **Nested relations.** Encode and add per-item edit affordances for text that comes from related documents (for example categories or articles inside a list), which is currently not editable.
+- **Restore `npm run generate`.** The `status` argument is currently hand-patched into `generated/strapi.ts` because code generation fails with a pre-existing `DIRECTIVE_DEFINITION` error unrelated to this feature. The `.graphql` files remain the source of truth; fixing codegen lets the change regenerate cleanly.
 
 ## Additional resources
 
