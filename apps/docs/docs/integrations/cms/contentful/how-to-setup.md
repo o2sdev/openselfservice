@@ -24,32 +24,17 @@ After installing the package, you need to configure the integration in the `@o2s
 
 ### Step 1: Update the integration config
 
-All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`. Each domain has its own import alias (for example `CmsSource`), shared by both the `createIntegrationConfig` assignment and the `export import` type export, so switching a domain is a single-line change.
 
-Open this file and make the following changes:
+Point the `cms` domain's import line (and, if you use articles, the `articles` line) at Contentful:
 
-1. **Add the Contentful CMS import:**
+```typescript
+// before: import * as CmsSource from '@o2s/integrations.mocked/integration';
+import * as CmsSource from '@o2s/integrations.contentful-cms/integration';
+import * as ArticlesSource from '@o2s/integrations.contentful-cms/integration'; // if using articles functionality
+```
 
-    ```typescript
-    import * as Contentful from '@o2s/integrations.contentful-cms/integration';
-    ```
-
-2. **Update domain assignments** in the `createIntegrationConfig` call — change `cms` (and optionally `articles`) from `Mocked` to `Contentful`:
-
-    ```typescript
-    const result = createIntegrationConfig({
-        cms: Contentful,
-        articles: Contentful,  // if using articles functionality
-        // ... other domains remain unchanged
-    });
-    ```
-
-3. **Update the matching `export import` type aliases:**
-
-    ```typescript
-    export import CMS = Contentful.Integration.CMS;
-    export import Articles = Contentful.Integration.Articles;  // if using articles
-    ```
+That is all that is needed: the domain assignments in `createIntegrationConfig` and the matching `export import` type exports both reference these aliases, so they switch together. Assigning an integration to a domain it does not provide is a compile error.
 
 ### Step 2: Verify AppConfig
 

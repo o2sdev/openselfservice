@@ -14,30 +14,37 @@ Thanks to the normalized data model, replacing an integration is completely tran
 
 ## Integration config
 
-All integration assignments are defined in a single file: `packages/configs/integrations/src/config.ts`. This file uses the `createIntegrationConfig` helper from `@o2s/framework/config` to map each framework domain to an integration module, with runtime validation that each integration provides the domain it's assigned to.
+All integration assignments are defined in a single file: `packages/configs/integrations/src/config.ts`. This file uses the `createIntegrationConfig` helper from `@o2s/framework/config` to map each framework domain to an integration module, with compile-time validation that each integration provides the domain it's assigned to.
 
 The default configuration, pre-configured with a [mocked integration](../../integrations/mocked/mocked.md), looks like this:
 
 ```typescript title="packages/configs/integrations/src/config.ts"
-import * as Mocked from '@o2s/integrations.mocked/integration';
+// Each domain has its own import alias. Swapping an integration is a single-line
+// change: point the domain's import at another package, and both the assignment
+// and the type export below follow that alias automatically.
+import * as CmsSource from '@o2s/integrations.mocked/integration';
+import * as TicketsSource from '@o2s/integrations.mocked/integration';
+import * as ArticlesSource from '@o2s/integrations.mocked/integration';
+import * as NotificationsSource from '@o2s/integrations.mocked/integration';
+// ... one import per domain
 
 import { createIntegrationConfig } from '@o2s/framework/config';
 import type { ApiConfig } from '@o2s/framework/modules';
 
 const result = createIntegrationConfig({
-    cms: Mocked,
-    tickets: Mocked,
-    articles: Mocked,
-    notifications: Mocked,
+    cms: CmsSource,
+    tickets: TicketsSource,
+    articles: ArticlesSource,
+    notifications: NotificationsSource,
     // ... all other domains
 });
 
 export const integrations: ApiConfig['integrations'] = result.integrations;
 
-// Type exports for consumers
-export import CMS = Mocked.Integration.CMS;
-export import Tickets = Mocked.Integration.Tickets;
-export import Articles = Mocked.Integration.Articles;
+// Type exports for consumers — each references the same alias as its assignment above.
+export import CMS = CmsSource.Integration.CMS;
+export import Tickets = TicketsSource.Integration.Tickets;
+export import Articles = ArticlesSource.Integration.Articles;
 // ... all other domains
 ```
 
@@ -84,30 +91,14 @@ In order to switch an integration for a given framework module (like a CMS) all 
     npm install @o2s/integrations.strapi-cms --workspace=@o2s/configs.integrations
     ```
 
-2. Open `packages/configs/integrations/src/config.ts` and:
-
-    a. Import the new integration module:
+2. Open `packages/configs/integrations/src/config.ts` and point the relevant domains' import lines at the new integration. To move `cms` and `articles` to Strapi, change those two import lines:
 
     ```typescript
-    import * as Strapi from '@o2s/integrations.strapi-cms/integration';
+    import * as CmsSource from '@o2s/integrations.strapi-cms/integration';
+    import * as ArticlesSource from '@o2s/integrations.strapi-cms/integration';
     ```
 
-    b. Change the domain assignment from `Mocked` to the new integration:
-
-    ```typescript
-    const result = createIntegrationConfig({
-        cms: Strapi,     // changed from Mocked
-        articles: Strapi, // changed from Mocked
-        // ... other domains remain unchanged
-    });
-    ```
-
-    c. Update the matching `export import` type aliases:
-
-    ```typescript
-    export import CMS = Strapi.Integration.CMS;
-    export import Articles = Strapi.Integration.Articles;
-    ```
+    That is all. The `cms` and `articles` assignments in `createIntegrationConfig` and the matching `export import` type exports both reference these aliases, so they switch together and cannot fall out of sync. If you point a domain at an integration that does not provide it, the project fails to compile.
 
 Once that is done, the application will start using the new integration.
 

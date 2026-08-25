@@ -28,30 +28,16 @@ After installing the package, you need to configure the integration in the `@o2s
 
 ### Step 1: Update the integration config
 
-All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`. Each domain has its own import alias (for example `CacheSource`), shared by both the `createIntegrationConfig` assignment and the `export import` type export, so switching a domain is a single-line change.
 
-Open this file and make the following changes:
+Find the `cache` domain's import line and point it at Redis:
 
-1. **Add the Redis import:**
+```typescript
+// before: import * as CacheSource from '@o2s/integrations.mocked/integration';
+import * as CacheSource from '@o2s/integrations.redis/integration';
+```
 
-    ```typescript
-    import * as Redis from '@o2s/integrations.redis/integration';
-    ```
-
-2. **Update the `cache` domain assignment** in the `createIntegrationConfig` call:
-
-    ```typescript
-    const result = createIntegrationConfig({
-        cache: Redis,
-        // ... other domains remain unchanged
-    });
-    ```
-
-3. **Update the matching `export import` type alias:**
-
-    ```typescript
-    export import Cache = Redis.Integration.Cache;
-    ```
+That is the only change needed: the `cache: CacheSource` assignment and the `export import Cache = CacheSource.Integration.Cache` type export both follow the same alias. Assigning an integration to a domain it does not provide is a compile error.
 
 ### Step 2: Verify AppConfig
 

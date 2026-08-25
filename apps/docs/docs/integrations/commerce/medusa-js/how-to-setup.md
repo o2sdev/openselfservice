@@ -20,43 +20,21 @@ After installing the package, configure the integration in the `@o2s/configs.int
 
 ### Step 1: Update the integration config
 
-The Medusa.js integration supports multiple domains: orders, products, carts, checkout, customers, payments, and resources. All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
+The Medusa.js integration supports multiple domains: orders, products, carts, checkout, customers, payments, and resources. All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`. Each domain has its own import alias (for example `OrdersSource`), shared by both the `createIntegrationConfig` assignment and the `export import` type export, so switching a domain is a single-line change.
 
-Open this file and make the following changes:
+Point each Medusa-supported domain's import line at Medusa.js:
 
-1. **Add the Medusa.js import:**
+```typescript
+import * as OrdersSource from '@o2s/integrations.medusajs/integration';
+import * as ProductsSource from '@o2s/integrations.medusajs/integration';
+import * as CartsSource from '@o2s/integrations.medusajs/integration';
+import * as CheckoutSource from '@o2s/integrations.medusajs/integration';
+import * as CustomersSource from '@o2s/integrations.medusajs/integration'; // required for checkout address resolution
+import * as PaymentsSource from '@o2s/integrations.medusajs/integration'; // required for checkout
+import * as ResourcesSource from '@o2s/integrations.medusajs/integration'; // if using Resources module
+```
 
-    ```typescript
-    import * as Medusa from '@o2s/integrations.medusajs/integration';
-    ```
-
-2. **Update domain assignments** in the `createIntegrationConfig` call — change each Medusa-supported domain from `Mocked` to `Medusa`:
-
-    ```typescript
-    const result = createIntegrationConfig({
-        // ... other domains remain Mocked
-        orders: Medusa,
-        products: Medusa,
-        carts: Medusa,
-        checkout: Medusa,
-        customers: Medusa,   // required for checkout address resolution
-        payments: Medusa,    // required for checkout
-        resources: Medusa,   // if using Resources module
-        // ... other domains remain Mocked
-    });
-    ```
-
-3. **Update the matching `export import` type aliases:**
-
-    ```typescript
-    export import Orders = Medusa.Integration.Orders;
-    export import Products = Medusa.Integration.Products;
-    export import Carts = Medusa.Integration.Carts;
-    export import Checkout = Medusa.Integration.Checkout;
-    export import Customers = Medusa.Integration.Customers;
-    export import Payments = Medusa.Integration.Payments;
-    export import Resources = Medusa.Integration.Resources;
-    ```
+That is all that is needed: the assignments in `createIntegrationConfig` and the matching `export import` type exports both reference these aliases, so they switch together and cannot fall out of sync. Assigning an integration to a domain it does not provide is a compile error.
 
 ### Step 2: Verify AppConfig
 

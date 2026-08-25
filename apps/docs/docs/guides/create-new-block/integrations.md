@@ -246,28 +246,14 @@ Finally, the last thing is to switch the CMS integration in the API Harmonizatio
 npm install @o2s/integrations.custom-cms --workspace=@o2s/configs.integrations
 ```
 
-Now open `packages/configs/integrations/src/config.ts` and:
+Now open `packages/configs/integrations/src/config.ts` and point the `cms` domain's import line at the new integration:
 
-1. Add the new integration import:
+```typescript
+// before: import * as CmsSource from '@o2s/integrations.mocked/integration';
+import * as CmsSource from '@o2s/integrations.custom-cms/integration';
+```
 
-    ```typescript
-    import * as CustomCms from '@o2s/integrations.custom-cms/integration';
-    ```
-
-2. Update the `cms` domain assignment in the `createIntegrationConfig` call:
-
-    ```typescript
-    const result = createIntegrationConfig({
-        cms: CustomCms,
-        // ... other domains remain unchanged
-    });
-    ```
-
-3. Update the matching `export import` type alias:
-
-    ```typescript
-    export import CMS = CustomCms.Integration.CMS;
-    ```
+That is the only change needed: the `cms: CmsSource` assignment and the `export import CMS = CmsSource.Integration.CMS` type export both reference this alias, so they switch with it.
 
 ### Testing the API
 

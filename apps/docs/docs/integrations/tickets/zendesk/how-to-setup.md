@@ -24,30 +24,16 @@ After installing the package, you need to configure the integration in the `@o2s
 
 ### Step 1: Update the integration config
 
-All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`.
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`. Each domain has its own import alias (for example `TicketsSource`), shared by both the `createIntegrationConfig` assignment and the `export import` type export, so switching a domain is a single-line change.
 
-Open this file and make the following changes:
+Find the `tickets` domain's import line and point it at Zendesk:
 
-1. **Add the Zendesk import:**
+```typescript
+// before: import * as TicketsSource from '@o2s/integrations.mocked/integration';
+import * as TicketsSource from '@o2s/integrations.zendesk/integration';
+```
 
-    ```typescript
-    import * as Zendesk from '@o2s/integrations.zendesk/integration';
-    ```
-
-2. **Update the `tickets` domain assignment** in the `createIntegrationConfig` call:
-
-    ```typescript
-    const result = createIntegrationConfig({
-        tickets: Zendesk,
-        // ... other domains remain unchanged
-    });
-    ```
-
-3. **Update the matching `export import` type alias:**
-
-    ```typescript
-    export import Tickets = Zendesk.Integration.Tickets;
-    ```
+That is the only change needed: the `tickets: TicketsSource` assignment and the `export import Tickets = TicketsSource.Integration.Tickets` type export both follow the same alias. Assigning an integration to a domain it does not provide is a compile error.
 
 ### Step 2: Verify AppConfig
 
