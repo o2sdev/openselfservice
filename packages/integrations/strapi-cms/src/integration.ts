@@ -7,7 +7,7 @@ import { Service as CmsService } from './modules/cms';
 
 export * as Integration from './modules/index';
 
-export const Config: Partial<ApiConfig['integrations']> = {
+export const Config = {
     cms: {
         name: 'strapi-cms',
         service: CmsService,
@@ -18,4 +18,4 @@ export const Config: Partial<ApiConfig['integrations']> = {
         service: ArticleService,
         imports: [GraphqlModule, Cache.Module],
     },
-};
+} satisfies Partial<ApiConfig['integrations']>;

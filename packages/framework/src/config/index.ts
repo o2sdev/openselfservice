@@ -1,5 +1,5 @@
 export {
     createIntegrationConfig,
     type IntegrationConfigInput,
-    type IntegrationWithDomain,
+    type IntegrationProviding,
 } from './create-integration-config';
