@@ -13,6 +13,8 @@ import type { Models } from '@o2s/framework/modules';
 import { toast } from '@o2s/ui/hooks/use-toast';
 import { replaceUrlParams, useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { DataList } from '@o2s/ui/components/Data/DataList';
 import type { DataListColumnConfig } from '@o2s/ui/components/Data/DataList';
@@ -33,6 +35,7 @@ import { ProductListPureProps } from './ProductList.types';
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
+    const { labels: globalLabels } = useGlobalContext();
     const initialProducts = component.products?.data ?? [];
     const canRender = !!component.table?.columns && !!component.noResults && !!component.labels;
 
@@ -140,12 +143,20 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const fetchProducts = useCallback(
         (query: typeof initialFilters) => {
             startTransition(async () => {
-                const newData = await sdk.blocks.getProductList(query, { 'x-locale': locale }, accessToken);
-                setData(newData);
-                setSelectedRows(new Set());
+                try {
+                    const newData = await sdk.blocks.getProductList(query, { 'x-locale': locale }, accessToken);
+                    setData(newData);
+                    setSelectedRows(new Set());
+                } catch (_error) {
+                    toast({
+                        variant: 'destructive',
+                        title: globalLabels.errors.requestError.title,
+                        description: globalLabels.errors.requestError.content,
+                    });
+                }
             });
         },
-        [accessToken, locale],
+        [accessToken, globalLabels.errors.requestError.content, globalLabels.errors.requestError.title, locale],
     );
 
     // The block is rendered on the server with the default filters, so a URL carrying filters
