@@ -12,7 +12,14 @@ import { SurveyjsService } from './surveyjs.service';
 export class SurveyjsModule {
     static register(config: ApiConfig): DynamicModule {
         const cmsService = config.integrations.cms.service;
-        const ticketsService = config.integrations.tickets.service;
+        const ticketsService = config.integrations.tickets?.service;
+
+        // SurveyJS needs both CMS (core) and a tickets integration. Register as a no-op when
+        // `tickets` is not configured, rather than crashing dependency resolution at boot.
+        if (!ticketsService) {
+            return { module: SurveyjsModule };
+        }
+
         return {
             module: SurveyjsModule,
             imports: [LoggerModule, HttpModule],
