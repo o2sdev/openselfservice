@@ -50,10 +50,12 @@ const toNumber = (value: FilterValue | undefined): number | undefined => {
     return Number.isFinite(parsed) ? parsed : undefined;
 };
 
-const isEmptyValue = (value: FilterValue | undefined): boolean =>
+/** A filter with no value set: never written to the URL, never counted as active. */
+export const isEmptyValue = (value: FilterValue | undefined): boolean =>
     value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0);
 
-const areValuesEqual = (a: FilterValue | undefined, b: FilterValue | undefined): boolean => {
+/** Compares two filter values, multi-value ones by contents rather than by reference. */
+export const areValuesEqual = (a: FilterValue | undefined, b: FilterValue | undefined): boolean => {
     if (Array.isArray(a) || Array.isArray(b)) {
         const arrayA = Array.isArray(a) ? [...a].sort() : [];
         const arrayB = Array.isArray(b) ? [...b].sort() : [];

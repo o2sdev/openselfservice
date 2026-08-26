@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 
+import { areValuesEqual, isEmptyValue } from '@o2s/ui/hooks/use-url-filters.utils';
+
 export interface InitialFilters {
     [key: string]: string | string[] | number;
 }
@@ -12,17 +14,20 @@ type FiltersContextType = {
 
 const FiltersContext = createContext<FiltersContextType | null>(null);
 
+/** Keys describing the block rather than a user filter. */
+const EXCLUDED_KEYS = ['offset', 'limit', 'id'];
+
 const countFilters = (currentFilters: InitialFilters, initialFilters: InitialFilters): number => {
     let activeFilterCount = 0;
 
     for (const key in currentFilters) {
-        if (key === 'offset' || key === 'limit' || key === 'id') {
-            continue;
-        } else if (currentFilters[key as keyof InitialFilters] === '') {
+        const value = currentFilters[key as keyof InitialFilters];
+
+        if (EXCLUDED_KEYS.includes(key) || isEmptyValue(value)) {
             continue;
         }
 
-        if (currentFilters[key as keyof InitialFilters] !== initialFilters[key as keyof InitialFilters]) {
+        if (!areValuesEqual(value, initialFilters[key as keyof InitialFilters])) {
             activeFilterCount++;
         }
     }
