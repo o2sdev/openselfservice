@@ -3,13 +3,13 @@
 import { IntlMessageFormat } from 'intl-messageformat';
 import { Download } from 'lucide-react';
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
-import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
+import { replaceUrlParams, useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -50,17 +50,18 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
-    const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const searchParamsString = searchParams.toString();
     const urlSearchParams = useMemo(() => new URLSearchParams(searchParamsString), [searchParamsString]);
 
+    // Written with the History API, not `router.replace`: the block fetches its own data, so a
+    // filter change must not trigger an RSC navigation that re-renders the whole page.
     const handleUrlChange = useCallback(
         (params: string) => {
-            router.replace(params ? `${pathname}?${params}` : pathname, { scroll: false });
+            replaceUrlParams(pathname, params);
         },
-        [pathname, router],
+        [pathname],
     );
 
     // Multi-select filters must be restored from the URL as arrays, not strings.

@@ -3,7 +3,7 @@
 import { eventBus } from '@o2s/ui/event-bus';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
-import { useRouter as useNextRouter, usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { Utils } from '@o2s/utils.frontend';
@@ -11,7 +11,7 @@ import { Utils } from '@o2s/utils.frontend';
 import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
-import { useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
+import { replaceUrlParams, useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { DataList } from '@o2s/ui/components/Data/DataList';
@@ -53,17 +53,18 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [isPending, startTransition] = useTransition();
     const [isAddingToCart, startAddToCartTransition] = useTransition();
 
-    const nextRouter = useNextRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const searchParamsString = searchParams.toString();
     const urlSearchParams = useMemo(() => new URLSearchParams(searchParamsString), [searchParamsString]);
 
+    // Written with the History API, not `router.replace`: the block fetches its own data, so a
+    // filter change must not trigger an RSC navigation that re-renders the whole page.
     const handleUrlChange = useCallback(
         (params: string) => {
-            nextRouter.replace(params ? `${pathname}?${params}` : pathname, { scroll: false });
+            replaceUrlParams(pathname, params);
         },
-        [nextRouter, pathname],
+        [pathname],
     );
 
     // Multi-select filters must be restored from the URL as arrays, not strings.

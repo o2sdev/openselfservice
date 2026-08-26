@@ -245,3 +245,21 @@ export const deserializeParamsToFilters = <TFilters extends object>(
         hasUrlState,
     };
 };
+
+/**
+ * Writes a query string into the address bar without navigating.
+ *
+ * List blocks fetch their own data client-side, so a filter change needs nothing from the server.
+ * `router.replace` would still trigger an RSC navigation and re-render the whole route on every
+ * change, which reads as a page reload. The History API is picked up by Next.js, so
+ * `useSearchParams` stays in sync while the render stays entirely on the client.
+ */
+export const replaceUrlParams = (pathname: string, params: string): void => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
+    const { hash } = window.location;
+
+    window.history.replaceState(null, '', `${pathname}${params ? `?${params}` : ''}${hash}`);
+};

@@ -9,6 +9,8 @@ import {
     serializeFiltersToParams,
 } from './use-url-filters.utils';
 
+export { replaceUrlParams } from './use-url-filters.utils';
+
 export interface UseUrlFiltersOptions<TFilters extends object> {
     /** Block defaults. Values matching them are never written to the URL. */
     initialFilters: TFilters;
@@ -20,7 +22,7 @@ export interface UseUrlFiltersOptions<TFilters extends object> {
     multiValueKeys?: readonly string[];
     /** Query params of the current location. */
     searchParams: URLSearchParams;
-    /** Called with the next query string whenever filters change. Blocks wire this to `router.replace`. */
+    /** Called with the next query string whenever filters change. Blocks wire this to `replaceUrlParams`. */
     onUrlChange: (params: string) => void;
     /** View mode used when the URL says nothing. Omitted from the URL while it is the active one. */
     defaultViewMode?: ViewMode;
@@ -40,11 +42,11 @@ export interface UseUrlFiltersResult<TFilters extends object> {
  * Keeps list block filter state in sync with the URL query string.
  *
  * A drop-in replacement for `useState(initialFilters)`: state is seeded from the URL on mount and
- * every change is pushed back into it. Navigation is injected rather than imported, so the hook
+ * every change is pushed back into it. Writing the URL is injected rather than imported, so the hook
  * stays free of `next/navigation` and can be used (and tested) outside a Next.js tree.
  *
- * The URL is read once, on mount. Filter changes are expected to be written with `router.replace`,
- * which adds no history entries, so there is no later URL change to read back.
+ * The URL is read once, on mount. Filter changes are expected to be written with `replaceUrlParams`,
+ * which neither adds history entries nor navigates, so there is no later URL change to read back.
  */
 export const useUrlFilters = <TFilters extends object>({
     initialFilters,
