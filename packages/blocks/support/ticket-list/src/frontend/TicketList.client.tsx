@@ -69,11 +69,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         [pathname],
     );
 
-    // Multi-select filters must be restored from the URL as arrays, not strings.
+    // Toggle groups must be restored from the URL as arrays: they iterate the value, and a string
+    // would be walked character by character. A select is single-value whatever the CMS config says
+    // (it writes one string back), so handing it an array only trips React's <select> check.
     const multiValueKeys = useMemo(
         () =>
             (component.filters?.items ?? [])
-                .filter((item) => 'allowMultiple' in item && item.allowMultiple)
+                .filter((item) => item.__typename === 'FilterToggleGroup' && item.allowMultiple)
                 .map((item) => String(item.id)),
         [component.filters?.items],
     );
