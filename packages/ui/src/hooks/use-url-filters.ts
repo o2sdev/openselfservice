@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import {
     DEFAULT_EXCLUDED_KEYS,
@@ -39,6 +39,12 @@ export interface UseUrlFiltersResult<TFilters extends object> {
     isRestoredFromUrl: boolean;
 }
 
+interface UrlFiltersState<TFilters extends object> {
+    filters: TFilters;
+    viewMode: ViewMode;
+    isRestoredFromUrl: boolean;
+}
+
 /**
  * Keeps list block filter state in sync with the URL query string.
  *
@@ -58,7 +64,7 @@ export const useUrlFilters = <TFilters extends object>({
     onUrlChange,
     defaultViewMode = 'list',
 }: UseUrlFiltersOptions<TFilters>): UseUrlFiltersResult<TFilters> => {
-    const [state, setState] = useState(() => {
+    const [state, setState] = useState<UrlFiltersState<TFilters>>(() => {
         const restored = deserializeParamsToFilters(searchParams, {
             initialFilters,
             namespace,
@@ -92,26 +98,28 @@ export const useUrlFilters = <TFilters extends object>({
         [searchParams, onUrlChange, initialFilters, namespace, excludeKeys, defaultViewMode],
     );
 
-    const setFilters = useCallback(
-        (filters: TFilters) => {
-            setState((state) => ({ ...state, filters }));
-            writeUrl(filters, state.viewMode);
+    // Every change goes through `applyState`, so this ref holds the latest state even within a batch,
+    // where `state` is still the one this render closed over. Both the next state and the URL written
+    // from it are derived from the ref, so a filter change and a view mode change applied together
+    // cannot write the URL from each other's stale companion value.
+    const latestState = useRef(state);
+
+    const applyState = useCallback(
+        (change: Partial<UrlFiltersState<TFilters>>) => {
+            const next = { ...latestState.current, ...change };
+
+            latestState.current = next;
+            setState(next);
+            writeUrl(next.filters, next.viewMode);
         },
-        [state.viewMode, writeUrl],
+        [writeUrl],
     );
 
-    const resetFilters = useCallback(() => {
-        setState((state) => ({ ...state, filters: initialFilters }));
-        writeUrl(initialFilters, state.viewMode);
-    }, [initialFilters, state.viewMode, writeUrl]);
+    const setFilters = useCallback((filters: TFilters) => applyState({ filters }), [applyState]);
 
-    const setViewMode = useCallback(
-        (viewMode: ViewMode) => {
-            setState((state) => ({ ...state, viewMode }));
-            writeUrl(state.filters, viewMode);
-        },
-        [state.filters, writeUrl],
-    );
+    const resetFilters = useCallback(() => applyState({ filters: initialFilters }), [applyState, initialFilters]);
+
+    const setViewMode = useCallback((viewMode: ViewMode) => applyState({ viewMode }), [applyState]);
 
     return {
         filters: state.filters,
