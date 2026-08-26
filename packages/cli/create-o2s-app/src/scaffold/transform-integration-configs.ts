@@ -2,9 +2,38 @@ import { ConflictResolution } from '../types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
-const CONFIGS_MODELS_PATH = 'packages/configs/integrations/src/models';
+const CONFIG_FILE_PATH = 'packages/configs/integrations/src/config.ts';
 const CONFIGS_PACKAGE_JSON_PATH = 'packages/configs/integrations/package.json';
-const MOCKED_IMPORT = `@o2s/integrations.mocked/integration`;
+
+// Domains configured in packages/configs/integrations/src/config.ts, mirroring the framework's
+// DOMAIN_KEYS. Each has its own `import * as <Domain>Source ...` line that we retarget on swap.
+// (Documents is intentionally excluded — it is a namespace re-export, not a swappable domain.)
+const CONFIG_DOMAINS = [
+    'articles',
+    'auth',
+    'billingAccounts',
+    'cache',
+    'carts',
+    'checkout',
+    'cms',
+    'customers',
+    'invoices',
+    'notifications',
+    'orders',
+    'organizations',
+    'payments',
+    'products',
+    'resources',
+    'search',
+    'tickets',
+    'users',
+] as const;
+
+// Per-domain import alias used in config.ts, e.g. "tickets" → "TicketsSource", "cms" → "CmsSource".
+const domainToAlias = (domain: string): string => `${domain.charAt(0).toUpperCase()}${domain.slice(1)}Source`;
+
+const mockedPath = (): string => `@o2s/integrations.mocked/integration`;
+const integrationPath = (name: string): string => `@o2s/integrations.${name}/integration`;
 
 // Build a map from framework module name → winning integration.
 // Integrations without o2sModules entries (e.g. mocked) contribute no modules.
@@ -25,7 +54,12 @@ const buildModuleIntegrationMap = (
     }
 
     for (const resolution of conflictResolutions) {
-        moduleMap.set(resolution.module, resolution.winner);
+        // Defense-in-depth: only honor a resolution whose winner actually declares the module.
+        // The wizard already guarantees this, but a programmatic caller might not.
+        const winnerModules = integrationModules[resolution.winner] ?? [];
+        if (winnerModules.includes(resolution.module)) {
+            moduleMap.set(resolution.module, resolution.winner);
+        }
     }
 
     return moduleMap;
@@ -80,37 +114,51 @@ export const transformIntegrationConfigs = async (
     // Always update configs package.json to add/remove integration dependencies
     await updateConfigsPackageJson(projectDir, selectedIntegrations, integrationVersions);
 
-    const modelsDir = path.join(projectDir, CONFIGS_MODELS_PATH);
+    const configFilePath = path.join(projectDir, CONFIG_FILE_PATH);
 
-    if (!(await fs.pathExists(modelsDir))) {
+    if (!(await fs.pathExists(configFilePath))) {
         return [];
     }
 
-    // Replace mocked imports with selected integration imports
+    const content = await fs.readFile(configFilePath, 'utf-8');
+
+    // Build module → integration map
     const moduleMap = buildModuleIntegrationMap(selectedIntegrations, conflictResolutions, integrationModules);
 
+    // Swap a domain by retargeting the module path on its single `import * as <Domain>Source ...`
+    // line. Both the runtime map and the type re-export reference that alias, so they stay in sync.
+    const lines = content.split('\n');
     for (const [module, integration] of moduleMap.entries()) {
-        const filePath = path.join(modelsDir, `${module}.ts`);
+        if (integration === 'mocked') continue;
+        if (!(CONFIG_DOMAINS as readonly string[]).includes(module)) continue;
 
-        if (!(await fs.pathExists(filePath))) continue;
+        const alias = domainToAlias(module);
+        const importRegex = new RegExp(`^(import \\* as ${alias} from ')[^']+(';)$`);
 
-        const content = await fs.readFile(filePath, 'utf-8');
-        const updatedContent = content.replaceAll(MOCKED_IMPORT, `@o2s/integrations.${integration}/integration`);
-
-        await fs.writeFile(filePath, updatedContent, 'utf-8');
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i] ?? '';
+            if (importRegex.test(line)) {
+                lines[i] = line.replace(importRegex, `$1${integrationPath(integration)}$2`);
+                break;
+            }
+        }
     }
+    const updatedContent = lines.join('\n');
 
-    // Detect model files that still import mocked but mocked is not selected.
-    // Skip only when 'mocked' (full) is selected — it covers all modules.
-    // 'mocked-dxp' covers only cms/articles/search, so uncovered detection runs normally.
+    await fs.writeFile(configFilePath, updatedContent, 'utf-8');
+
+    // Detect domains that still resolve to Mocked while 'mocked' is not selected — those will
+    // fail to build until configured. Skip when 'mocked' (full) is selected; it covers everything.
     const uncoveredModules: string[] = [];
     if (!selectedIntegrations.includes('mocked')) {
-        const files = await fs.readdir(modelsDir);
-        for (const file of files) {
-            if (file === 'index.ts' || !file.endsWith('.ts')) continue;
-            const content = await fs.readFile(path.join(modelsDir, file), 'utf-8');
-            if (content.includes(MOCKED_IMPORT)) {
-                uncoveredModules.push(file.replace('.ts', ''));
+        for (const domain of CONFIG_DOMAINS) {
+            const alias = domainToAlias(domain);
+            const stillMockedRegex = new RegExp(
+                `^import \\* as ${alias} from '${mockedPath().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}';$`,
+                'm',
+            );
+            if (stillMockedRegex.test(updatedContent)) {
+                uncoveredModules.push(domain);
             }
         }
     }

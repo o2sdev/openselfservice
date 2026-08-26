@@ -19,6 +19,8 @@ export const warnUnconfiguredModules = (uncoveredModules: string[]): void => {
         kleur.red('These modules still reference @o2s/integrations.mocked which was not included in your project.'),
     );
     console.warn(kleur.red('The project build will fail until you configure these modules manually.'));
-    console.warn('To fix: update packages/configs/integrations/src/models/<module>.ts to use your integration.');
+    console.warn(
+        'To fix: update packages/configs/integrations/src/config.ts to assign an integration for these domains.',
+    );
     console.warn();
 };

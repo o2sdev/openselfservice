@@ -7,7 +7,7 @@ import { Service as TicketsService } from './modules/tickets';
 
 export * as Integration from './modules/index';
 
-export const Config: Partial<ApiConfig['integrations']> = {
+export const Config = {
     tickets: {
         name: 'zendesk',
         service: TicketsService,
@@ -18,4 +18,4 @@ export const Config: Partial<ApiConfig['integrations']> = {
         service: ArticlesService,
         imports: [HttpModule],
     },
-};
+} satisfies Partial<ApiConfig['integrations']>;

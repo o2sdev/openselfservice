@@ -7,10 +7,10 @@ import { Service as CmsService } from './modules/cms';
 
 export * as Integration from './modules/index';
 
-export const Config: Partial<ApiConfig['integrations']> = {
+export const Config = {
     cms: {
         name: 'contentful-cms',
         service: CmsService,
         imports: [GraphqlModule, RestDeliveryModule, Cache.Module],
     },
-};
+} satisfies Partial<ApiConfig['integrations']>;

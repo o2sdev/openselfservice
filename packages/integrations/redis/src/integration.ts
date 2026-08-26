@@ -4,9 +4,9 @@ import { Service as RedisService } from './modules/cache';
 
 export * as Integration from './modules/index';
 
-export const Config: Partial<ApiConfig['integrations']> = {
+export const Config = {
     cache: {
         name: 'redis',
         service: RedisService,
     },
-};
+} satisfies Partial<ApiConfig['integrations']>;

@@ -22,6 +22,10 @@
     },
     "type": "commonjs",
     "exports": {
+        "./config": {
+            "import": "./dist/src/config/index.js",
+            "require": "./dist/src/config/index.js"
+        },
         "./modules": {
             "import": "./dist/src/index.js",
             "require": "./dist/src/index.js"

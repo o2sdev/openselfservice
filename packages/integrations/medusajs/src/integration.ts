@@ -13,7 +13,7 @@ import { Service as ResourcesService } from './modules/resources';
 
 export * as Integration from './modules/index';
 
-export const Config: Partial<ApiConfig['integrations']> = {
+export const Config = {
     orders: {
         name: 'medusajs',
         service: OrdersService,
@@ -49,4 +49,4 @@ export const Config: Partial<ApiConfig['integrations']> = {
         service: CheckoutService,
         imports: [MedusaJsModule, Auth.Module],
     },
-};
+} satisfies Partial<ApiConfig['integrations']>;
