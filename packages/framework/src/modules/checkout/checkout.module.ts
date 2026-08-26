@@ -9,9 +9,14 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class CheckoutModule {
     static register(config: ApiConfig): DynamicModule {
-        const service = config.integrations.checkout.service;
-        const controller = config.integrations.checkout.controller || CheckoutController;
-        const imports = config.integrations.checkout.imports || [];
+        const integration = config.integrations.checkout;
+        if (!integration?.service) {
+            return { module: CheckoutModule };
+        }
+
+        const service = integration.service;
+        const controller = integration.controller || CheckoutController;
+        const imports = integration.imports || [];
 
         const provider = {
             provide: CheckoutService,

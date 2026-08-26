@@ -116,3 +116,43 @@ While this may seem a bit cumbersome, it also gives much more control over which
 
 and you want to use `Integration1` only for notifications, and `Integration2` for tickets.
 :::
+
+## Optional integrations (minimal setup)
+
+Only `cms` and `auth` are required. Every other domain is optional — you can omit it from
+`createIntegrationConfig` entirely and you do not need to fill it with a mocked integration. When a
+domain is omitted, its framework module registers as a no-op, so the application still boots.
+
+This lets you run a minimal, mocked-free setup — for example a CMS-backed portal that only needs a
+CMS and an auth integration:
+
+```typescript title="packages/configs/integrations/src/config.ts"
+import * as CmsSource from '@o2s/integrations.strapi-cms/integration';
+import * as AuthSource from '@o2s/integrations.mycompany-auth/integration';
+
+import { createIntegrationConfig } from '@o2s/framework/config';
+import type { ApiConfig } from '@o2s/framework/modules';
+
+const result = createIntegrationConfig({
+    cms: CmsSource,
+    auth: AuthSource,
+    // no other domains needed
+});
+
+export const integrations: ApiConfig['integrations'] = result.integrations;
+
+export import CMS = CmsSource.Integration.CMS;
+export import Auth = AuthSource.Integration.Auth;
+```
+
+Notes:
+
+- Only register the framework base modules and blocks for the domains you actually configure. A
+  block that injects, say, `Orders.Service` still needs the `orders` integration present.
+- `cache` is optional too. When it is omitted, a pass-through default cache is used, so integrations
+  that depend on `Cache.Service` (such as the Strapi and Contentful CMS integrations) keep working.
+  Configure a cache integration (e.g. `@o2s/integrations.redis`) when you want real caching.
+:::note
+Omitting a **required** core domain (`cms` or `auth`) is a compile-time error, and the server also
+fails fast at startup with a clear message.
+:::

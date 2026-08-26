@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Optional } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Articles, Auth, CMS } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
@@ -18,7 +18,10 @@ export class PageService {
     constructor(
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
-        private readonly articlesService: Articles.Service,
+        // `articles` is an optional integration; absent when the project omits it.
+        // Use an explicit @Inject token so the (optional, possibly-undefined) type does not erase
+        // the DI metadata Nest resolves the provider by.
+        @Optional() @Inject(Articles.Service) private readonly articlesService: Articles.Service | undefined,
         private readonly authService: Auth.Service,
     ) {
         this.SUPPORTED_LOCALES = this.config.get('SUPPORTED_LOCALES').split(',') as string[];
@@ -84,6 +87,10 @@ export class PageService {
         return forkJoin([page]).pipe(
             concatMap(([page]) => {
                 if (!page) {
+                    if (!this.articlesService) {
+                        throw new NotFoundException();
+                    }
+
                     return this.articlesService.getArticle({ slug: query.slug, locale: headers[H.Locale] }).pipe(
                         concatMap((article) => {
                             if (!article) {
@@ -118,7 +125,7 @@ export class PageService {
     };
 
     private processArticle = (article: Articles.Model.Article, query: GetPageQuery, headers: AppHeaders) => {
-        if (!article.category) {
+        if (!article.category || !this.articlesService) {
             throw new NotFoundException();
         }
 

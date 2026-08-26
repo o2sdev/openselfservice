@@ -36,34 +36,42 @@ const stubDomainConfig = (name: string) => ({ name, service: class {} });
 const fullConfig = Object.fromEntries(DOMAINS.map((d) => [d, stubDomainConfig('mocked')]));
 const FullIntegration = { Config: fullConfig } as unknown as IntegrationConfigInput[keyof IntegrationConfigInput];
 
-const inputWith = (overrides: Partial<Record<(typeof DOMAINS)[number], unknown>> = {}) =>
-    Object.fromEntries(
-        DOMAINS.map((d) => [d, d in overrides ? overrides[d] : FullIntegration]),
-    ) as unknown as IntegrationConfigInput;
+// Build an input from an explicit set of domains (each value is the full stub integration).
+const inputFrom = (domains: readonly string[]) =>
+    Object.fromEntries(domains.map((d) => [d, FullIntegration])) as unknown as IntegrationConfigInput;
 
 describe('createIntegrationConfig', () => {
-    it('assembles every domain from its assigned integration', () => {
-        const { integrations } = createIntegrationConfig(inputWith());
+    it('assembles every domain when all are provided', () => {
+        const { integrations } = createIntegrationConfig(inputFrom(DOMAINS));
 
         expect(Object.keys(integrations).sort()).toEqual([...DOMAINS].sort());
-        for (const domain of DOMAINS) {
-            expect(integrations[domain]).toBeDefined();
-            expect((integrations[domain] as { name: string }).name).toBe('mocked');
-        }
     });
 
-    it('throws when an integration does not provide its assigned domain (runtime backstop)', () => {
-        const missingTickets = { Config: { ...fullConfig, tickets: undefined } };
+    it('assembles only the provided domains — optional ones are skipped, not defaulted', () => {
+        const { integrations } = createIntegrationConfig(inputFrom(['cms', 'auth', 'tickets']));
 
-        expect(() => createIntegrationConfig(inputWith({ tickets: missingTickets }))).toThrow(/tickets/);
+        expect(Object.keys(integrations).sort()).toEqual(['auth', 'cms', 'tickets']);
+        expect(integrations.orders).toBeUndefined();
     });
 
-    it('rejects an integration whose Config is absent', () => {
-        expect(() => createIntegrationConfig(inputWith({ cms: {} }))).toThrow(/cms/);
+    it('supports a minimal core-only config (cms + auth), no mocked integration needed', () => {
+        const { integrations } = createIntegrationConfig(inputFrom(['cms', 'auth']));
+
+        expect(Object.keys(integrations).sort()).toEqual(['auth', 'cms']);
     });
 
-    // Compile-time guarantee (validated by `tsc --noEmit` during lint): an integration that
-    // provides domain D satisfies IntegrationProviding<D> but NOT IntegrationProviding<other>.
+    it('throws when a required core domain is missing', () => {
+        expect(() => createIntegrationConfig(inputFrom(['cms']))).toThrow(/auth/);
+        expect(() => createIntegrationConfig(inputFrom(['auth']))).toThrow(/cms/);
+    });
+
+    it('throws when a core integration does not actually provide its domain', () => {
+        const input = { ...inputFrom(['cms', 'auth']), cms: { Config: {} } } as unknown as IntegrationConfigInput;
+
+        expect(() => createIntegrationConfig(input)).toThrow(/cms/);
+    });
+
+    // Compile-time guarantees (validated by `tsc --noEmit` during lint).
     it('constrains domain assignment at compile time', () => {
         const ticketsOnly = {} as { Config: { tickets: NonNullable<ApiConfig['integrations']['tickets']> } };
 
@@ -73,5 +81,16 @@ describe('createIntegrationConfig', () => {
 
         expect(validAssignment).toBeDefined();
         expect(invalidAssignment).toBeDefined();
+    });
+
+    it('requires the core domains (cms + auth) at compile time', () => {
+        const core = {} as IntegrationProviding<'cms'> & IntegrationProviding<'auth'>;
+
+        const minimal: IntegrationConfigInput = { cms: core, auth: core };
+        // @ts-expect-error `auth` is a required core domain
+        const missingCore: IntegrationConfigInput = { cms: core };
+
+        expect(minimal).toBeDefined();
+        expect(missingCore).toBeDefined();
     });
 });

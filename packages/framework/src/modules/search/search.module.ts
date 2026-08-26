@@ -10,9 +10,14 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class SearchModule {
     static register(config: ApiConfig): DynamicModule {
-        const imports = config.integrations.search.imports || [];
-        const controller = config.integrations.search.controller || SearchController;
-        const service = config.integrations.search.service || SearchService;
+        const integration = config.integrations.search;
+        if (!integration?.service) {
+            return { module: SearchModule };
+        }
+
+        const imports = integration.imports || [];
+        const controller = integration.controller || SearchController;
+        const service = integration.service;
 
         const provider = {
             provide: SearchService,

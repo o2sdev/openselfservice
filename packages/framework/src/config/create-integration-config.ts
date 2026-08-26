@@ -18,11 +18,21 @@ export type IntegrationProviding<D extends DomainKey> = {
 };
 
 /**
- * Input for {@link createIntegrationConfig}: every domain maps to an integration that
- * provably provides that domain.
+ * Domains that must always be configured. `cms` backs pages and most blocks; `auth` powers the
+ * global guards. Every other domain is optional — omit it and its framework module registers as
+ * a no-op (see each module's `register`).
+ */
+type CoreDomain = 'cms' | 'auth';
+
+/**
+ * Input for {@link createIntegrationConfig}. The core domains are required; the rest are optional.
+ * Any domain that IS provided is still validated at compile time by {@link IntegrationProviding}
+ * (assigning an integration to a domain it does not implement is a type error).
  */
 export type IntegrationConfigInput = {
-    [D in DomainKey]: IntegrationProviding<D>;
+    [D in CoreDomain]: IntegrationProviding<D>;
+} & {
+    [D in Exclude<DomainKey, CoreDomain>]?: IntegrationProviding<D>;
 };
 
 const DOMAIN_KEYS = [
@@ -46,34 +56,42 @@ const DOMAIN_KEYS = [
     'users',
 ] as const satisfies readonly DomainKey[];
 
+const CORE_DOMAINS: readonly DomainKey[] = ['cms', 'auth'];
+
 /**
  * Assembles the `integrations` map consumed by `ApiConfig` from a domain-to-integration map.
  *
- * Domain validity is enforced at compile time by {@link IntegrationConfigInput} — see
- * {@link IntegrationProviding}. The runtime check below is a defense-in-depth backstop for
- * cases the types cannot cover (e.g. a config assembled dynamically or cast to `any`).
+ * The core domains (`cms`, `auth`) are required; the rest are optional and simply omitted from the
+ * resulting map when not provided. Any provided domain is validated at compile time by
+ * {@link IntegrationConfigInput} — see {@link IntegrationProviding}. The runtime checks below are a
+ * defense-in-depth backstop for cases the types cannot cover (e.g. a config cast to `any`).
  *
  * @example
+ * // Minimal, mocked-free setup — only the core domains:
  * export const { integrations } = createIntegrationConfig({
- *     cms: Mocked,
- *     tickets: Zendesk, // swap: change Mocked -> Zendesk; compile error if Zendesk lacks `tickets`
- *     articles: Mocked,
- *     // ...all 18 domains
+ *     cms: Strapi,
+ *     auth: MyAuth,
  * });
  */
 export function createIntegrationConfig<T extends IntegrationConfigInput>(
     config: T,
 ): { integrations: ApiConfig['integrations'] } {
-    // The public generic already guarantees each slot provides its domain; the loop reads the
-    // values dynamically, so it works against a loosely-typed view of the validated input.
-    const source = config as Record<DomainKey, { Config: Partial<ApiConfig['integrations']> }>;
+    // The public generic already validates each provided slot; the loop reads the values
+    // dynamically, so it works against a loosely-typed view of the (validated) input.
+    const source = config as Partial<Record<DomainKey, { Config?: Partial<ApiConfig['integrations']> }>>;
     const integrations = {} as Record<DomainKey, unknown>;
 
     for (const domain of DOMAIN_KEYS) {
         const domainConfig = source[domain]?.Config?.[domain];
+
         if (!domainConfig) {
-            throw new Error(`Integration assigned to domain "${domain}" does not provide it`);
+            // Core domains must always be present; a missing optional domain is simply skipped.
+            if (CORE_DOMAINS.includes(domain)) {
+                throw new Error(`Missing required core integration for domain "${domain}"`);
+            }
+            continue;
         }
+
         integrations[domain] = domainConfig;
     }
 
