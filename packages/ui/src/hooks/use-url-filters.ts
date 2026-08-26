@@ -6,6 +6,7 @@ import {
     DEFAULT_EXCLUDED_KEYS,
     ViewMode,
     deserializeParamsToFilters,
+    liveUrlParams,
     serializeFiltersToParams,
 } from './use-url-filters.utils';
 
@@ -20,7 +21,7 @@ export interface UseUrlFiltersOptions<TFilters extends object> {
     excludeKeys?: readonly string[];
     /** Keys of multi-select filters, so a single URL value is restored as an array rather than a string. */
     multiValueKeys?: readonly string[];
-    /** Query params of the current location. */
+    /** Query params of the current location, read on mount and used as a fallback when writing. */
     searchParams: URLSearchParams;
     /** Called with the next query string whenever filters change. Blocks wire this to `replaceUrlParams`. */
     onUrlChange: (params: string) => void;
@@ -73,10 +74,12 @@ export const useUrlFilters = <TFilters extends object>({
         };
     });
 
+    // Merged into the live query string rather than into `searchParams`, which is only a snapshot of
+    // the render this callback was created in and may already be behind the address bar.
     const writeUrl = useCallback(
         (filters: TFilters, viewMode: ViewMode) => {
             onUrlChange(
-                serializeFiltersToParams(searchParams, {
+                serializeFiltersToParams(liveUrlParams(searchParams), {
                     filters,
                     initialFilters,
                     namespace,

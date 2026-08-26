@@ -265,3 +265,15 @@ export const replaceUrlParams = (pathname: string, params: string): void => {
 
     window.history.replaceState(null, '', `${pathname}${params ? `?${params}` : ''}${hash}`);
 };
+
+/**
+ * The params a write should be merged into: the live URL in the browser, the given snapshot outside it.
+ *
+ * A render-time snapshot of the query string can already be out of date by the time a write happens —
+ * `useSearchParams` only catches up with a `replaceState` on a later render, so a write queued before
+ * that (another block's filter change, or a debounced one from this block) would merge into params
+ * that no longer exist and drop what was written in between. The address bar is the shared state, so
+ * it is read back at write time; the snapshot stays the fallback for server renders and tests.
+ */
+export const liveUrlParams = (fallback: URLSearchParams): URLSearchParams =>
+    typeof window === 'undefined' ? fallback : new URLSearchParams(window.location.search);
