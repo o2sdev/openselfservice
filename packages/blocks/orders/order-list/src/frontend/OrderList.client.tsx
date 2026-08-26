@@ -3,7 +3,7 @@
 import { ArrowRight, IterationCw, MoreVertical } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import React, { useCallback, useMemo, useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
@@ -81,7 +81,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
         [component.filters?.items],
     );
 
-    const { filters, setFilters, resetFilters, viewMode, setViewMode, isRestoredFromUrl } = useUrlFilters({
+    const { filters, setFilters, resetFilters, viewMode, setViewMode } = useUrlFilters({
         initialFilters,
         namespace: 'order',
         multiValueKeys,
@@ -109,19 +109,6 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
         },
         [accessToken, labels.errors.requestError.content, labels.errors.requestError.title, locale],
     );
-
-    // The block is rendered on the server with the default filters, so a URL carrying filters
-    // (a shared link, or a status box linking to a pre-filtered list) needs one refetch on mount.
-    const hasAppliedUrlFilters = useRef(false);
-
-    useEffect(() => {
-        if (!isRestoredFromUrl || hasAppliedUrlFilters.current) {
-            return;
-        }
-
-        hasAppliedUrlFilters.current = true;
-        fetchOrders(filters);
-    }, [fetchOrders, filters, isRestoredFromUrl]);
 
     // A filter change means a different result set, so the current page no longer applies and the list
     // goes back to the first one. `data` carries the whole form state (including the current

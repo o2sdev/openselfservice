@@ -11,6 +11,28 @@ import { GetNotificationListBlockQuery } from './notification-list.request';
 
 const H = HeaderName;
 
+const DEFAULT_LIMIT = 1;
+
+/** The page size the block renders with: an explicit query value, then the CMS config, then the default. */
+const resolveLimit = (query: GetNotificationListBlockQuery, cmsLimit?: number): number =>
+    Number(query.limit) || Number(cmsLimit) || DEFAULT_LIMIT;
+
+/**
+ * `offset` wins when given; a 1-based `page` is resolved with the page size above, which is why this
+ * lives here and not in the caller: only the API knows the CMS pagination config.
+ */
+const resolveOffset = (query: GetNotificationListBlockQuery, limit: number): number => {
+    const offset = Number(query.offset);
+
+    if (offset > 0) {
+        return offset;
+    }
+
+    const page = Number(query.page);
+
+    return page > 1 ? (page - 1) * limit : 0;
+};
+
 @Injectable()
 export class NotificationListService {
     constructor(
@@ -32,13 +54,17 @@ export class NotificationListService {
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
+                // `page` is a URL concern and is consumed here, so it never reaches the domain module.
+                const { page: _page, ...notificationQuery } = query;
+                const limit = resolveLimit(query, cms.pagination?.limit);
+
                 return this.notificationService
                     .getNotificationList(
                         {
                             ...(cms.initialFilters || {}),
-                            ...query,
-                            limit: query.limit || cms.pagination?.limit || 1,
-                            offset: query.offset || 0,
+                            ...notificationQuery,
+                            limit,
+                            offset: resolveOffset(query, limit),
                             locale: headers[H.Locale],
                         },
                         authorization,

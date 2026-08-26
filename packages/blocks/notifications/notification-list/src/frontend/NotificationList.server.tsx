@@ -1,10 +1,17 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import type { Model } from '../api-harmonization/notification-list.client';
+import { parseFiltersFromSearchParams } from '@o2s/ui/hooks/use-url-filters.utils';
+
+import type { Model, Request } from '../api-harmonization/notification-list.client';
 import { sdk } from '../sdk';
 
 import { NotificationListProps } from './NotificationList.types';
+
+/** Filter keys the block query understands, as the client writes them (`?notification_sort=…`). */
+const FILTER_KEYS = ['sort', 'type', 'status', 'priority', 'dateFrom', 'dateTo'] as const;
+
+const NAMESPACE = 'notification';
 
 export const NotificationListDynamic = dynamic(() =>
     import('./NotificationList.client').then((module) => module.NotificationListPure),
@@ -16,12 +23,17 @@ export const NotificationListServer: React.FC<NotificationListProps> = async ({
     locale,
     routing,
     hasPriority,
+    searchParams,
 }) => {
     let data: Model.NotificationListBlock;
     try {
         data = await sdk.blocks.getNotificationList(
             {
                 id,
+                ...(parseFiltersFromSearchParams(searchParams, {
+                    namespace: NAMESPACE,
+                    keys: FILTER_KEYS,
+                }) as Partial<Request.GetNotificationListBlockQuery>),
             },
             { 'x-locale': locale },
             accessToken,

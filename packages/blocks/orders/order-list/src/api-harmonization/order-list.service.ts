@@ -11,6 +11,28 @@ import { GetOrderListBlockQuery } from './order-list.request';
 
 const H = HeaderName;
 
+const DEFAULT_LIMIT = 1;
+
+/** The page size the block renders with: an explicit query value, then the CMS config, then the default. */
+const resolveLimit = (query: GetOrderListBlockQuery, cmsLimit?: number): number =>
+    Number(query.limit) || Number(cmsLimit) || DEFAULT_LIMIT;
+
+/**
+ * `offset` wins when given; a 1-based `page` is resolved with the page size above, which is why this
+ * lives here and not in the caller: only the API knows the CMS pagination config.
+ */
+const resolveOffset = (query: GetOrderListBlockQuery, limit: number): number => {
+    const offset = Number(query.offset);
+
+    if (offset > 0) {
+        return offset;
+    }
+
+    const page = Number(query.page);
+
+    return page > 1 ? (page - 1) * limit : 0;
+};
+
 @Injectable()
 export class OrderListService {
     constructor(
@@ -29,13 +51,17 @@ export class OrderListService {
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
+                // `page` is a URL concern and is consumed here, so it never reaches the domain module.
+                const { page: _page, ...orderQuery } = query;
+                const limit = resolveLimit(query, cms.pagination?.limit);
+
                 return this.orderService
                     .getOrderList(
                         {
                             ...(cms.initialFilters || {}),
-                            ...query,
-                            limit: query.limit || cms.pagination?.limit || 1,
-                            offset: query.offset || 0,
+                            ...orderQuery,
+                            limit,
+                            offset: resolveOffset(query, limit),
                             locale: headers[H.Locale],
                         },
                         authorization,

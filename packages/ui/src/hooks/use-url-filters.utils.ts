@@ -294,3 +294,65 @@ export const replaceUrlParams = (pathname: string, params: string): void => {
  */
 export const liveUrlParams = (fallback: URLSearchParams): URLSearchParams =>
     typeof window === 'undefined' ? fallback : new URLSearchParams(window.location.search);
+
+export interface ParseFiltersOptions {
+    /** Param prefix the block writes with, if any. */
+    namespace?: string;
+    /** Filter keys the block's query understands. Anything else in the URL belongs to someone else. */
+    keys: readonly string[];
+    /**
+     * Keys the block's query accepts more than one value for. Others take the first value in the URL,
+     * because a repeated param would otherwise reach an API that compares it as a single value.
+     */
+    multiValueKeys?: readonly string[];
+}
+
+/**
+ * Reads a block's filters out of the query params a server render receives, mirroring what
+ * `useUrlFilters` restores on the client so both ends fetch the same list.
+ *
+ * Without this a filtered link renders as the default list and the client has to replace it, which
+ * costs a second request and shows the wrong data first. `page` is returned as it is: turning it into
+ * an `offset` needs the page size, which only the API knows.
+ */
+export const parseFiltersFromSearchParams = (
+    searchParams: Record<string, string | string[] | undefined> = {},
+    { namespace, keys, multiValueKeys = [] }: ParseFiltersOptions,
+): Record<string, string | string[] | number> => {
+    const filters: Record<string, string | string[] | number> = {};
+
+    for (const key of keys) {
+        const value = searchParams[prefixKey(key, namespace)];
+
+        if (isEmptyValue(value)) {
+            continue;
+        }
+
+        filters[key] = Array.isArray(value) && !multiValueKeys.includes(key) ? value[0]! : value!;
+    }
+
+    const page = Number(searchParams[prefixKey(PAGE_KEY, namespace)]);
+
+    if (page > 1) {
+        filters[PAGE_KEY] = page;
+    }
+
+    return filters;
+};
+
+/**
+ * A stable string for a set of query params, for keying a server-rendered block on them.
+ *
+ * Arriving with different filters has to rebuild the block, otherwise the client keeps the state it
+ * was mounted with and shows the previous result set next to the new URL.
+ */
+export const searchParamsKey = (searchParams: Record<string, string | string[] | undefined> = {}): string =>
+    new URLSearchParams(
+        Object.entries(searchParams).flatMap(([key, value]): [string, string][] => {
+            if (value === undefined) {
+                return [];
+            }
+
+            return Array.isArray(value) ? value.map((entry): [string, string] => [key, entry]) : [[key, value]];
+        }),
+    ).toString();

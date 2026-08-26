@@ -1,19 +1,37 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import type { Model } from '../api-harmonization/order-list.client';
+import { parseFiltersFromSearchParams } from '@o2s/ui/hooks/use-url-filters.utils';
+
+import type { Model, Request } from '../api-harmonization/order-list.client';
 import { sdk } from '../sdk';
 
 import { OrderListProps } from './OrderList.types';
 
+/** Filter keys the block query understands, as the client writes them (`?order_sort=…`). */
+const FILTER_KEYS = ['sort', 'status', 'paymentStatus', 'dateFrom', 'dateTo'] as const;
+
+const NAMESPACE = 'order';
+
 export const OrderListDynamic = dynamic(() => import('./OrderList.client').then((module) => module.OrderListPure));
 
-export const OrderList: React.FC<OrderListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const OrderList: React.FC<OrderListProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+    searchParams,
+}) => {
     let data: Model.OrderListBlock;
     try {
         data = await sdk.blocks.getOrderList(
             {
                 id,
+                ...(parseFiltersFromSearchParams(searchParams, {
+                    namespace: NAMESPACE,
+                    keys: FILTER_KEYS,
+                }) as Partial<Request.GetOrderListBlockQuery>),
             },
             { 'x-locale': locale },
             accessToken,

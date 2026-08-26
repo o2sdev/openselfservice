@@ -4,7 +4,7 @@ import { IntlMessageFormat } from 'intl-messageformat';
 import { Download } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import React, { useCallback, useMemo, useState, useTransition } from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
 
@@ -75,7 +75,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         [component.filters?.items],
     );
 
-    const { filters, setFilters, resetFilters, viewMode, setViewMode, isRestoredFromUrl } = useUrlFilters({
+    const { filters, setFilters, resetFilters, viewMode, setViewMode } = useUrlFilters({
         initialFilters,
         namespace: 'invoice',
         multiValueKeys,
@@ -103,19 +103,6 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         },
         [accessToken, labels.errors.requestError.content, labels.errors.requestError.title, locale],
     );
-
-    // The block is rendered on the server with the default filters, so a URL carrying filters
-    // (a shared link, or a status box linking to a pre-filtered list) needs one refetch on mount.
-    const hasAppliedUrlFilters = useRef(false);
-
-    useEffect(() => {
-        if (!isRestoredFromUrl || hasAppliedUrlFilters.current) {
-            return;
-        }
-
-        hasAppliedUrlFilters.current = true;
-        fetchInvoices(filters);
-    }, [fetchInvoices, filters, isRestoredFromUrl]);
 
     // A filter change means a different result set, so the current page no longer applies and the list
     // goes back to the first one. `data` carries the whole form state (including the current

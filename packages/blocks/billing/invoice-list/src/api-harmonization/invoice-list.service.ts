@@ -12,6 +12,28 @@ import { GetInvoiceListBlockQuery } from './invoice-list.request';
 
 const H = HeaderName;
 
+const DEFAULT_LIMIT = 1;
+
+/** The page size the block renders with: an explicit query value, then the CMS config, then the default. */
+const resolveLimit = (query: GetInvoiceListBlockQuery, cmsLimit?: number): number =>
+    Number(query.limit) || Number(cmsLimit) || DEFAULT_LIMIT;
+
+/**
+ * `offset` wins when given; a 1-based `page` is resolved with the page size above, which is why this
+ * lives here and not in the caller: only the API knows the CMS pagination config.
+ */
+const resolveOffset = (query: GetInvoiceListBlockQuery, limit: number): number => {
+    const offset = Number(query.offset);
+
+    if (offset > 0) {
+        return offset;
+    }
+
+    const page = Number(query.page);
+
+    return page > 1 ? (page - 1) * limit : 0;
+};
+
 @Injectable()
 export class InvoiceListService {
     constructor(
@@ -30,13 +52,17 @@ export class InvoiceListService {
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
+                // `page` is a URL concern and is consumed here, so it never reaches the domain module.
+                const { page: _page, ...invoiceQuery } = query;
+                const limit = resolveLimit(query, cms.pagination?.limit);
+
                 return this.invoiceService
                     .getInvoiceList(
                         {
                             ...(cms.initialFilters || {}),
-                            ...query,
-                            limit: query.limit || cms.pagination?.limit || 1,
-                            offset: query.offset || 0,
+                            ...invoiceQuery,
+                            limit,
+                            offset: resolveOffset(query, limit),
                             dateFrom: query.dateFrom ? dayjs(query.dateFrom).toISOString() : undefined,
                             dateTo: query.dateTo ? dayjs(query.dateTo).toISOString() : undefined,
                             locale: headers[H.Locale],
