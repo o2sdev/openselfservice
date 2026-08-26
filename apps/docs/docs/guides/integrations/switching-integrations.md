@@ -146,6 +146,7 @@ export import Auth = AuthSource.Integration.Auth;
 Notes:
 
 - Only register the framework base modules and blocks for the domains you actually configure. A block that injects, say, `Orders.Service` still needs the `orders` integration present.
+- Some integrations depend on another domain. For example, the MedusaJS `resources` service also uses `products`, so if you configure MedusaJS `resources` you must configure `products` too (MedusaJS provides both). A missing dependency fails fast at startup with a clear dependency-resolution error.
 - `cache` is optional too. When it is omitted, a pass-through default cache is used, so integrations that depend on `Cache.Service` (such as the Strapi and Contentful CMS integrations) keep working. Configure a cache integration (for example `@o2s/integrations.redis`) when you want real caching.
 
 :::note

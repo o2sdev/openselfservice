@@ -71,6 +71,13 @@ describe('createIntegrationConfig', () => {
         expect(() => createIntegrationConfig(input)).toThrow(/cms/);
     });
 
+    it('throws when an optional domain is assigned an integration that does not provide it', () => {
+        // Provided but non-providing (only reachable via untyped input) must fail loudly, not skip.
+        const input = { ...inputFrom(['cms', 'auth']), orders: { Config: {} } } as unknown as IntegrationConfigInput;
+
+        expect(() => createIntegrationConfig(input)).toThrow(/orders/);
+    });
+
     // Compile-time guarantees (validated by `tsc --noEmit` during lint).
     it('constrains domain assignment at compile time', () => {
         const ticketsOnly = {} as { Config: { tickets: NonNullable<ApiConfig['integrations']['tickets']> } };

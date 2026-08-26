@@ -82,14 +82,22 @@ export function createIntegrationConfig<T extends IntegrationConfigInput>(
     const integrations = {} as Record<DomainKey, unknown>;
 
     for (const domain of DOMAIN_KEYS) {
-        const domainConfig = source[domain]?.Config?.[domain];
+        const integration = source[domain];
+        const domainConfig = integration?.Config?.[domain];
 
         if (!domainConfig) {
-            // Core domains must always be present; a missing optional domain is simply skipped.
-            if (CORE_DOMAINS.includes(domain)) {
-                throw new Error(`Missing required core integration for domain "${domain}"`);
+            if (!integration) {
+                // Domain not provided at all: required for core, skipped for optional.
+                if (CORE_DOMAINS.includes(domain)) {
+                    throw new Error(`Missing required core integration for domain "${domain}"`);
+                }
+                continue;
             }
-            continue;
+
+            // Domain was explicitly assigned an integration that does not provide it. This is a
+            // misconfiguration (the types prevent it; only reachable via dynamic/untyped input) —
+            // fail loudly rather than silently disabling the domain.
+            throw new Error(`Integration assigned to domain "${domain}" does not provide it`);
         }
 
         integrations[domain] = domainConfig;
