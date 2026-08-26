@@ -172,8 +172,18 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         fetchProducts(filters);
     }, [fetchProducts, filters, isRestoredFromUrl]);
 
+    // A filter change means a different result set, so the current page no longer applies and the list
+    // goes back to the first one. `data` carries the whole form state (including the current
+    // `offset`), which is why the reset has to come after the spread. Paging keeps its own handler.
     const handleFilter = (data: Partial<typeof initialFilters>) => {
-        const newFilters = { ...filters, ...data };
+        const newFilters = { ...filters, ...data, offset: 0 };
+
+        setFilters(newFilters);
+        fetchProducts(newFilters);
+    };
+
+    const handlePageChange = (page: number) => {
+        const newFilters = { ...filters, offset: (data.pagination?.limit ?? 0) * (page - 1) };
 
         setFilters(newFilters);
         fetchProducts(newFilters);
@@ -325,12 +335,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                         prev={data.pagination.prev}
                                         next={data.pagination.next}
                                         selectPage={data.pagination.selectPage}
-                                        onChange={(page) => {
-                                            handleFilter({
-                                                ...filters,
-                                                offset: data.pagination!.limit * (page - 1),
-                                            });
-                                        }}
+                                        onChange={handlePageChange}
                                     />
                                 )}
                             </div>
