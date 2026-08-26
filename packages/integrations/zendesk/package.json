@@ -48,7 +48,7 @@
         "rxjs": "^7.8.2"
     },
     "devDependencies": {
-        "@hey-api/openapi-ts": "^0.93.0",
+        "@hey-api/openapi-ts": "^0.99.0",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
