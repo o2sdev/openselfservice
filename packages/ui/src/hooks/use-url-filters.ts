@@ -21,6 +21,11 @@ export interface UseUrlFiltersOptions<TFilters extends object> {
     excludeKeys?: readonly string[];
     /** Keys of multi-select filters, so a single URL value is restored as an array rather than a string. */
     multiValueKeys?: readonly string[];
+    /**
+     * Filter keys the block owns beyond `initialFilters`, e.g. the CMS-driven ones. Required instead of
+     * a `namespace` for a block that wants plain, shareable params (`?category=tools`).
+     */
+    filterKeys?: readonly string[];
     /** Query params of the current location, read on mount and used as a fallback when writing. */
     searchParams: URLSearchParams;
     /** Called with the next query string whenever filters change. Blocks wire this to `replaceUrlParams`. */
@@ -60,6 +65,7 @@ export const useUrlFilters = <TFilters extends object>({
     namespace,
     excludeKeys = DEFAULT_EXCLUDED_KEYS,
     multiValueKeys,
+    filterKeys,
     searchParams,
     onUrlChange,
     defaultViewMode = 'list',
@@ -70,6 +76,7 @@ export const useUrlFilters = <TFilters extends object>({
             namespace,
             excludeKeys,
             multiValueKeys,
+            filterKeys,
             defaultViewMode,
         });
 
@@ -90,12 +97,13 @@ export const useUrlFilters = <TFilters extends object>({
                     initialFilters,
                     namespace,
                     excludeKeys,
+                    filterKeys,
                     viewMode,
                     defaultViewMode,
                 }),
             );
         },
-        [searchParams, onUrlChange, initialFilters, namespace, excludeKeys, defaultViewMode],
+        [searchParams, onUrlChange, initialFilters, namespace, excludeKeys, filterKeys, defaultViewMode],
     );
 
     // Every change goes through `applyState`, so this ref holds the latest state even within a batch,

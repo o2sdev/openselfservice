@@ -146,3 +146,43 @@ router.push({ pathname }, { locale });
 :::tip
 Check the [Internationalization chapter](./internationalization.md) to for more information about how routing integrates with different locales.
 :::
+
+## Query params and list filters
+
+List blocks keep their filter state in the URL, so a filtered view can be shared, bookmarked and
+linked to. The `useUrlFilters` hook in `@o2s/ui` reads the query string once on mount and writes every
+later change back with the History API, which updates the address bar without a navigation — the block
+fetches its own data client-side, so nothing needs to be re-rendered on the server for a filter click.
+
+Two param conventions exist, and a block picks one:
+
+```
+?ticket_status=OPEN&ticket_page=2   // namespaced: several list blocks can share a page
+?category=TOOLS&page=2              // plain: linkable and indexable, one such list per page
+```
+
+A namespaced block passes `namespace`, a plain one passes `filterKeys` instead (the CMS-driven filter
+ids), because without a prefix that list is the only way to tell the block's params from anything else
+already in the query string. In both cases pagination is a 1-based `page`, the view mode is `view`, and
+only values differing from the block defaults are written, so URLs stay short.
+
+### Server rendering and SEO
+
+Filter params reach the page as `searchParams` and are passed down to the blocks through
+`renderBlocks`, so a block that opts in (`ProductListBlock` does) renders the filtered list on the
+server. That matters for anything public: a crawler — or anyone opening a shared link — gets the
+filtered page in the first response instead of the default list.
+
+Because filtering can produce endless near-duplicate URLs, `generateSeo` decides what may be indexed:
+
+| URL                               | Canonical                  | Robots            |
+| --------------------------------- | -------------------------- | ----------------- |
+| `/products`                       | `/products`                | `index, follow`   |
+| `/products?category=TOOLS`        | `/products?category=TOOLS` | `index, follow`   |
+| `/products?category=TOOLS&page=3` | `/products`                | `noindex, follow` |
+| `/products?sort=price_asc`        | `/products`                | `noindex, follow` |
+
+One value of one whitelisted facet (`INDEXABLE_FILTERS` in `apps/frontend/src/utils/seo.ts`) still
+describes a page worth indexing; sorting, deep pages and facet combinations are variants of it and
+canonicalise back. Facet values are also rendered as real links by the list block, since a crawler
+follows `<a href>` but never operates a select.

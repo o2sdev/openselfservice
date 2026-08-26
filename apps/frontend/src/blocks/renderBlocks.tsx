@@ -63,7 +63,11 @@ type BlockProps = Models.BlockProps.FullBlockProps<typeof routing> & {
 
 type BlockRenderer = (blockProps: BlockProps) => React.ReactNode;
 
-export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
+export const renderBlocks = async (
+    blocks: CMS.Model.Page.SlotBlock[],
+    slug: string[],
+    searchParams?: Models.BlockProps.BlockSearchParams,
+) => {
     const session = await auth();
     const locale = await getLocale();
     const { isEnabled: isDraftModeEnabled } = await draftMode();
@@ -82,6 +86,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             routing: routing,
             hasPriority,
             isDraftModeEnabled: isDraftModeEnabled,
+            searchParams,
         };
 
         return (

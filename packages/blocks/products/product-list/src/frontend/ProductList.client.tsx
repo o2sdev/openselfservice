@@ -3,8 +3,9 @@
 import { eventBus } from '@o2s/ui/event-bus';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
+import NextLink from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import React, { useCallback, useMemo, useState, useTransition } from 'react';
 
 import { Utils } from '@o2s/utils.frontend';
 
@@ -26,11 +27,19 @@ import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { ToastAction } from '@o2s/ui/elements/toast';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';
+
+/**
+ * Filters whose single-value URL is worth crawling and indexing, and which therefore get real links
+ * rather than only a form control — a bot follows `<a href>`, it does not operate a select. Kept in
+ * step with the indexable filters the page metadata canonicalises to.
+ */
+const SEO_FACETS = ['category'];
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
@@ -70,19 +79,31 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         [pathname],
     );
 
-    // Multi-select filters must be restored from the URL as arrays, not strings.
+    // Toggle groups must be restored from the URL as arrays: they iterate the value, and a string
+    // would be walked character by character. A select is single-value whatever the CMS config says
+    // (it writes one string back), so handing it an array only trips React's <select> check.
     const multiValueKeys = useMemo(
         () =>
             (component.filters?.items ?? [])
-                .filter((item) => 'allowMultiple' in item && item.allowMultiple)
+                .filter((item) => item.__typename === 'FilterToggleGroup' && item.allowMultiple)
                 .map((item) => String(item.id)),
         [component.filters?.items],
     );
 
-    const { filters, setFilters, resetFilters, viewMode, setViewMode, isRestoredFromUrl } = useUrlFilters({
+    // The CMS-driven filter keys. They stand in for a namespace: this list is public and indexed, so
+    // its URLs stay plain (`?category=tools`) and linkable rather than prefixed per block.
+    const filterKeys = useMemo(
+        () =>
+            (component.filters?.items ?? [])
+                .filter((item) => item.__typename !== 'FilterViewModeToggle')
+                .map((item) => String(item.id)),
+        [component.filters?.items],
+    );
+
+    const { filters, setFilters, resetFilters, viewMode, setViewMode } = useUrlFilters({
         initialFilters,
-        namespace: 'product',
         multiValueKeys,
+        filterKeys,
         defaultViewMode: initialViewMode,
         searchParams: urlSearchParams,
         onUrlChange: handleUrlChange,
@@ -159,19 +180,6 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         [accessToken, globalLabels.errors.requestError.content, globalLabels.errors.requestError.title, locale],
     );
 
-    // The block is rendered on the server with the default filters, so a URL carrying filters
-    // (a shared link, or a category tile linking to a pre-filtered list) needs one refetch on mount.
-    const hasAppliedUrlFilters = useRef(false);
-
-    useEffect(() => {
-        if (!isRestoredFromUrl || hasAppliedUrlFilters.current) {
-            return;
-        }
-
-        hasAppliedUrlFilters.current = true;
-        fetchProducts(filters);
-    }, [fetchProducts, filters, isRestoredFromUrl]);
-
     // A filter change means a different result set, so the current page no longer applies and the list
     // goes back to the first one. `data` carries the whole form state (including the current
     // `offset`), which is why the reset has to come after the spread. Paging keeps its own handler.
@@ -193,6 +201,23 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         resetFilters();
         fetchProducts(initialFilters);
     };
+
+    // Rendered on the server too, so the facet URLs are in the initial HTML for a crawler to follow.
+    const seoFacets = (data.filters?.items ?? []).filter(
+        (item): item is Extract<typeof item, { options: { value: string; label: string }[] }> =>
+            SEO_FACETS.includes(String(item.id)) && 'options' in item,
+    );
+
+    const facetHref = (key: string, value: string) => {
+        const params = new URLSearchParams(searchParamsString);
+
+        params.delete('page');
+        params.set(key, value);
+
+        return `${pathname}?${params.toString()}`;
+    };
+
+    const isFacetActive = (key: string, value: string) => searchParams.getAll(key).includes(value);
 
     // Define table columns configuration
     const columns = (data.table?.columns ?? []).map((column) => {
@@ -355,6 +380,31 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                     <Separator />
                 </div>
             )}
+
+            {seoFacets.map((facet) => (
+                <nav key={String(facet.id)} aria-label={facet.label} className="mt-8 flex flex-col gap-2">
+                    <Typography variant="small" className="text-muted-foreground">
+                        {facet.label}
+                    </Typography>
+
+                    <ul className="flex flex-wrap gap-x-4 gap-y-2">
+                        {facet.options.map((option) => (
+                            <li key={option.value}>
+                                <Button asChild variant="link" size="none" className="h-auto p-0">
+                                    <NextLink
+                                        href={facetHref(String(facet.id), option.value)}
+                                        aria-current={
+                                            isFacetActive(String(facet.id), option.value) ? 'page' : undefined
+                                        }
+                                    >
+                                        {option.label}
+                                    </NextLink>
+                                </Button>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            ))}
         </div>
     );
 };

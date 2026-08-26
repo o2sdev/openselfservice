@@ -2,7 +2,10 @@
  * Serialization helpers behind `useUrlFilters`.
  *
  * URL contract:
- * - every param is namespaced per block: `{ns}_key=value`, so several list blocks can live on one page
+ * - params are namespaced per block when a `namespace` is given: `{ns}_key=value`, so several list
+ *   blocks can live on one page; a block that wants plain, linkable params (a public, indexed list)
+ *   omits it and names its filter keys instead
+ * - `{ns}_` below therefore stands for the prefix or for nothing at all
  * - multi-value filters repeat the key: `{ns}_status=OPEN&{ns}_status=PENDING`
  * - pagination is 1-based and human readable: `{ns}_page=2` (translated to/from `offset`)
  * - view mode is `{ns}_view=grid` and is omitted while it matches the block default
@@ -70,6 +73,8 @@ export interface SerializeFiltersOptions<TFilters extends object> {
     initialFilters: TFilters;
     namespace?: string;
     excludeKeys?: readonly string[];
+    /** Filter keys the block owns beyond `initialFilters`, needed to clear them without a namespace. */
+    filterKeys?: readonly string[];
     viewMode?: ViewMode;
     defaultViewMode?: ViewMode;
 }
@@ -87,6 +92,7 @@ export const serializeFiltersToParams = <TFilters extends object>(
         initialFilters,
         namespace,
         excludeKeys = DEFAULT_EXCLUDED_KEYS,
+        filterKeys = [],
         viewMode,
         defaultViewMode = 'list',
     }: SerializeFiltersOptions<TFilters>,
@@ -104,7 +110,7 @@ export const serializeFiltersToParams = <TFilters extends object>(
         : [
               PAGE_KEY,
               VIEW_KEY,
-              ...[...Object.keys(initialFilters), ...Object.keys(filters)].filter(
+              ...[...Object.keys(initialFilters), ...Object.keys(filters), ...filterKeys].filter(
                   (key) => !excluded.has(key) && key !== OFFSET_KEY,
               ),
           ];
@@ -152,6 +158,12 @@ export interface DeserializeFiltersOptions<TFilters extends object> {
      * would otherwise iterate the string character by character.
      */
     multiValueKeys?: readonly string[];
+    /**
+     * Filter keys the block owns beyond `initialFilters` — the CMS-driven ones (`category`, `sort`, …).
+     * Without a namespace they are the only way to tell the block's params from unrelated ones, so an
+     * unprefixed URL (`?category=tools`) needs them to restore anything at all.
+     */
+    filterKeys?: readonly string[];
     defaultViewMode?: ViewMode;
 }
 
@@ -166,9 +178,9 @@ export interface DeserializeFiltersResult<TFilters extends object> {
  * Rebuilds filter state from a query string, falling back to `initialFilters` for anything absent.
  *
  * Filter keys are not limited to `initialFilters` — list blocks accumulate keys driven by the CMS
- * filter config (`status`, `sort`, `topic`, …) that have no default. Such keys are only picked up
- * when a `namespace` is given, because without a prefix there is no way to tell a block's params
- * from unrelated ones already on the page.
+ * filter config (`status`, `sort`, `topic`, …) that have no default. Such keys are picked up when a
+ * `namespace` is given, or when `filterKeys` names them: without either there is no way to tell a
+ * block's params from unrelated ones already on the page.
  */
 export const deserializeParamsToFilters = <TFilters extends object>(
     params: URLSearchParams,
@@ -177,6 +189,7 @@ export const deserializeParamsToFilters = <TFilters extends object>(
         namespace,
         excludeKeys = DEFAULT_EXCLUDED_KEYS,
         multiValueKeys = [],
+        filterKeys = [],
         defaultViewMode = 'list',
     }: DeserializeFiltersOptions<TFilters>,
 ): DeserializeFiltersResult<TFilters> => {
@@ -199,7 +212,11 @@ export const deserializeParamsToFilters = <TFilters extends object>(
             return;
         }
 
-        const isKnownKey = plainKey in initialFilters || plainKey === PAGE_KEY || plainKey === VIEW_KEY;
+        const isKnownKey =
+            plainKey in initialFilters ||
+            filterKeys.includes(plainKey) ||
+            plainKey === PAGE_KEY ||
+            plainKey === VIEW_KEY;
 
         if (!prefix && !isKnownKey) {
             return;
