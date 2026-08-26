@@ -26,6 +26,7 @@ import * as CmsSource from '@o2s/integrations.mocked/integration';
 import * as TicketsSource from '@o2s/integrations.mocked/integration';
 import * as ArticlesSource from '@o2s/integrations.mocked/integration';
 import * as NotificationsSource from '@o2s/integrations.mocked/integration';
+
 // ... one import per domain
 
 import { createIntegrationConfig } from '@o2s/framework/config';
@@ -41,7 +42,7 @@ const result = createIntegrationConfig({
 
 export const integrations: ApiConfig['integrations'] = result.integrations;
 
-// Type exports for consumers — each references the same alias as its assignment above.
+// Type exports for consumers. Each references the same alias as its assignment above.
 export import CMS = CmsSource.Integration.CMS;
 export import Tickets = TicketsSource.Integration.Tickets;
 export import Articles = ArticlesSource.Integration.Articles;
@@ -119,16 +120,13 @@ and you want to use `Integration1` only for notifications, and `Integration2` fo
 
 ## Optional integrations (minimal setup)
 
-Only `cms` and `auth` are required. Every other domain is optional — you can omit it from
-`createIntegrationConfig` entirely and you do not need to fill it with a mocked integration. When a
-domain is omitted, its framework module registers as a no-op, so the application still boots.
+Only `cms` and `auth` are required. Every other domain is optional: you can leave it out of `createIntegrationConfig` entirely, and you do not need to fill it with a mocked integration. When a domain is omitted, its framework module registers as a no-op, so the application still boots.
 
-This lets you run a minimal, mocked-free setup — for example a CMS-backed portal that only needs a
-CMS and an auth integration:
+This lets you run a minimal setup with no mocked integration. For example, a CMS-backed portal that only needs a CMS and an auth integration:
 
 ```typescript title="packages/configs/integrations/src/config.ts"
-import * as CmsSource from '@o2s/integrations.strapi-cms/integration';
 import * as AuthSource from '@o2s/integrations.mycompany-auth/integration';
+import * as CmsSource from '@o2s/integrations.strapi-cms/integration';
 
 import { createIntegrationConfig } from '@o2s/framework/config';
 import type { ApiConfig } from '@o2s/framework/modules';
@@ -147,12 +145,9 @@ export import Auth = AuthSource.Integration.Auth;
 
 Notes:
 
-- Only register the framework base modules and blocks for the domains you actually configure. A
-  block that injects, say, `Orders.Service` still needs the `orders` integration present.
-- `cache` is optional too. When it is omitted, a pass-through default cache is used, so integrations
-  that depend on `Cache.Service` (such as the Strapi and Contentful CMS integrations) keep working.
-  Configure a cache integration (e.g. `@o2s/integrations.redis`) when you want real caching.
+- Only register the framework base modules and blocks for the domains you actually configure. A block that injects, say, `Orders.Service` still needs the `orders` integration present.
+- `cache` is optional too. When it is omitted, a pass-through default cache is used, so integrations that depend on `Cache.Service` (such as the Strapi and Contentful CMS integrations) keep working. Configure a cache integration (for example `@o2s/integrations.redis`) when you want real caching.
+
 :::note
-Omitting a **required** core domain (`cms` or `auth`) is a compile-time error, and the server also
-fails fast at startup with a clear message.
+Omitting a required core domain (`cms` or `auth`) is a compile-time error, and the server also fails fast at startup with a clear message.
 :::
