@@ -66,22 +66,42 @@ describe('TicketListService', () => {
         expect(getTicketQuery()).toMatchObject({ offset: 5 });
     });
 
-    it('keeps the first page for page 1 and for a bogus page', async () => {
+    it('keeps the first page for page 1 and for any page that is not a whole one', async () => {
         await call({ id: 'ticket-list-1', page: 1 });
 
         expect(getTicketQuery()).toMatchObject({ offset: 0 });
 
-        vi.mocked(ticketService.getTicketList).mockClear();
+        for (const page of ['nonsense' as unknown as number, 2.5, Infinity, Number.MAX_VALUE]) {
+            vi.mocked(ticketService.getTicketList).mockClear();
 
-        await call({ id: 'ticket-list-1', page: 'nonsense' as unknown as number });
+            await call({ id: 'ticket-list-1', page });
 
-        expect(getTicketQuery()).toMatchObject({ offset: 0 });
+            expect(getTicketQuery(), `page ${page}`).toMatchObject({ offset: 0 });
+        }
     });
 
     it('prefers an explicit offset over page', async () => {
         await call({ id: 'ticket-list-1', offset: 7, page: 3 });
 
         expect(getTicketQuery()).toMatchObject({ offset: 7 });
+    });
+
+    it('prefers an explicit offset of 0 over page', async () => {
+        await call({ id: 'ticket-list-1', offset: 0, page: 3 });
+
+        expect(getTicketQuery()).toMatchObject({ offset: 0 });
+    });
+
+    it('falls back to page when the offset is not a usable one', async () => {
+        await call({ id: 'ticket-list-1', offset: '' as unknown as number, page: 3 });
+
+        expect(getTicketQuery()).toMatchObject({ offset: 10 });
+
+        vi.mocked(ticketService.getTicketList).mockClear();
+
+        await call({ id: 'ticket-list-1', offset: -5, page: 3 });
+
+        expect(getTicketQuery()).toMatchObject({ offset: 10 });
     });
 
     it('does not leak page into the tickets query', async () => {

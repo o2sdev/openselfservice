@@ -66,22 +66,42 @@ describe('NotificationListService', () => {
         expect(getDomainQuery()).toMatchObject({ offset: 5 });
     });
 
-    it('keeps the first page for page 1 and for a bogus page', async () => {
+    it('keeps the first page for page 1 and for any page that is not a whole one', async () => {
         await call({ id: 'notification-list-1', page: 1 });
 
         expect(getDomainQuery()).toMatchObject({ offset: 0 });
 
-        vi.mocked(domainService.getNotificationList).mockClear();
+        for (const page of ['nonsense' as unknown as number, 2.5, Infinity, Number.MAX_VALUE]) {
+            vi.mocked(domainService.getNotificationList).mockClear();
 
-        await call({ id: 'notification-list-1', page: 'nonsense' as unknown as number });
+            await call({ id: 'notification-list-1', page });
 
-        expect(getDomainQuery()).toMatchObject({ offset: 0 });
+            expect(getDomainQuery(), `page ${page}`).toMatchObject({ offset: 0 });
+        }
     });
 
     it('prefers an explicit offset over page', async () => {
         await call({ id: 'notification-list-1', offset: 7, page: 3 });
 
         expect(getDomainQuery()).toMatchObject({ offset: 7 });
+    });
+
+    it('prefers an explicit offset of 0 over page', async () => {
+        await call({ id: 'notification-list-1', offset: 0, page: 3 });
+
+        expect(getDomainQuery()).toMatchObject({ offset: 0 });
+    });
+
+    it('falls back to page when the offset is not a usable one', async () => {
+        await call({ id: 'notification-list-1', offset: '' as unknown as number, page: 3 });
+
+        expect(getDomainQuery()).toMatchObject({ offset: 10 });
+
+        vi.mocked(domainService.getNotificationList).mockClear();
+
+        await call({ id: 'notification-list-1', offset: -5, page: 3 });
+
+        expect(getDomainQuery()).toMatchObject({ offset: 10 });
     });
 
     it('does not leak page into the domain query', async () => {

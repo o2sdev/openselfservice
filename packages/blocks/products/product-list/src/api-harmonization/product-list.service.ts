@@ -20,19 +20,26 @@ const resolveLimit = (query: GetProductListBlockQuery, cmsLimit?: number): numbe
     Number(query.limit) || Number(cmsLimit) || DEFAULT_LIMIT;
 
 /**
- * `offset` wins when given; a 1-based `page` is resolved with the page size above, which is why this
- * lives here and not in the caller: only the API knows the CMS pagination config.
+ * `offset` wins whenever it is given, `0` included; otherwise a 1-based `page` is resolved with the
+ * page size above, which is why this lives here and not in the caller: only the API knows the CMS
+ * pagination config.
  */
 const resolveOffset = (query: GetProductListBlockQuery, limit: number): number => {
+    // Supplied rather than positive: a caller asking for the first page as `offset=0` means it, and a
+    // `page` further down the query string must not override it. A value that is not a usable offset
+    // (empty, not a number, negative) is treated as absent, so `page` still gets its turn.
     const offset = Number(query.offset);
+    const hasOffset = query.offset !== undefined && String(query.offset).trim() !== '';
 
-    if (offset > 0) {
+    if (hasOffset && Number.isFinite(offset) && offset >= 0) {
         return offset;
     }
 
+    // Only a whole number of pages resolves; a fraction or `Infinity` would become an offset no
+    // backend can use, and asking for the first page is the safe reading of an unusable value.
     const page = Number(query.page);
 
-    return page > 1 ? (page - 1) * limit : 0;
+    return Number.isSafeInteger(page) && page > 1 ? (page - 1) * limit : 0;
 };
 
 @Injectable()

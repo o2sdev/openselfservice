@@ -39,9 +39,14 @@ export const filtersToPage = (offset = 0, limit = 0): number => {
     return Math.floor(offset / limit) + 1;
 };
 
-/** Converts a 1-based page number back into an `offset`. */
+/**
+ * Converts a 1-based page number back into an `offset`.
+ *
+ * Only a whole number of pages resolves: a fraction or `Infinity` from a hand-written URL would become
+ * an offset that no backend can use, and the first page is the safe reading of an unusable value.
+ */
 export const pageToOffset = (page: number, limit = 0): number => {
-    if (limit <= 0 || page <= 1) {
+    if (limit <= 0 || !Number.isSafeInteger(page) || page <= 1) {
         return 0;
     }
 
@@ -331,9 +336,12 @@ export const parseFiltersFromSearchParams = (
         filters[key] = Array.isArray(value) && !multiValueKeys.includes(key) ? value[0]! : value!;
     }
 
+    // A page is a whole number of pages past the first one. Anything else in the URL — a fraction,
+    // `Infinity`, something too large to be exact — would travel on as a nonsense `offset`, so it is
+    // dropped and the block renders the first page.
     const page = Number(searchParams[prefixKey(PAGE_KEY, namespace)]);
 
-    if (page > 1) {
+    if (Number.isSafeInteger(page) && page > 1) {
         filters[PAGE_KEY] = page;
     }
 

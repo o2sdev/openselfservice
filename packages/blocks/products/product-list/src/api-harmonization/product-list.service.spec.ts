@@ -74,22 +74,22 @@ describe('ProductListService', () => {
         expect(getProductQuery()).toMatchObject({ offset: 5 });
     });
 
-    it('keeps the first page for page 1 and for a bogus page', async () => {
+    it('keeps the first page for page 1 and for any page that is not a whole one', async () => {
         await new Promise((resolve) =>
             service.getProductListBlock({ id: 'product-list-1', page: 1 }, HEADERS).subscribe(resolve),
         );
 
         expect(getProductQuery()).toMatchObject({ offset: 0 });
 
-        vi.mocked(productsService.getProductList).mockClear();
+        for (const page of ['nonsense' as unknown as number, 2.5, Infinity, Number.MAX_VALUE]) {
+            vi.mocked(productsService.getProductList).mockClear();
 
-        await new Promise((resolve) =>
-            service
-                .getProductListBlock({ id: 'product-list-1', page: 'nonsense' as unknown as number }, HEADERS)
-                .subscribe(resolve),
-        );
+            await new Promise((resolve) =>
+                service.getProductListBlock({ id: 'product-list-1', page }, HEADERS).subscribe(resolve),
+            );
 
-        expect(getProductQuery()).toMatchObject({ offset: 0 });
+            expect(getProductQuery(), `page ${page}`).toMatchObject({ offset: 0 });
+        }
     });
 
     it('prefers an explicit offset over page', async () => {
@@ -98,6 +98,32 @@ describe('ProductListService', () => {
         );
 
         expect(getProductQuery()).toMatchObject({ offset: 7 });
+    });
+
+    it('prefers an explicit offset of 0 over page', async () => {
+        await new Promise((resolve) =>
+            service.getProductListBlock({ id: 'product-list-1', offset: 0, page: 3 }, HEADERS).subscribe(resolve),
+        );
+
+        expect(getProductQuery()).toMatchObject({ offset: 0 });
+    });
+
+    it('falls back to page when the offset is not a usable one', async () => {
+        await new Promise((resolve) =>
+            service
+                .getProductListBlock({ id: 'product-list-1', offset: '' as unknown as number, page: 3 }, HEADERS)
+                .subscribe(resolve),
+        );
+
+        expect(getProductQuery()).toMatchObject({ offset: 10 });
+
+        vi.mocked(productsService.getProductList).mockClear();
+
+        await new Promise((resolve) =>
+            service.getProductListBlock({ id: 'product-list-1', offset: -5, page: 3 }, HEADERS).subscribe(resolve),
+        );
+
+        expect(getProductQuery()).toMatchObject({ offset: 10 });
     });
 
     it('does not leak page into the products query', async () => {
