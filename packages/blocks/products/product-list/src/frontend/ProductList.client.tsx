@@ -45,7 +45,6 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
     const { labels: globalLabels } = useGlobalContext();
-    const initialProducts = component.products?.data ?? [];
     const canRender = !!component.table?.columns && !!component.noResults && !!component.labels;
 
     const initialFilters = {
@@ -53,8 +52,6 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         offset: 0,
         limit: component.pagination?.limit || 12,
     };
-
-    const initialData = initialProducts;
 
     const initialViewMode =
         component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'grid';
@@ -263,123 +260,115 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
 
     return (
         <div className="w-full">
-            {initialData.length > 0 ? (
-                <div className="flex flex-col gap-6">
-                    <FiltersSection
-                        title={data.subtitle}
-                        initialFilters={initialFilters}
-                        filters={
-                            data.filters
-                                ? {
-                                      ...data.filters,
-                                      items: data.filters.items.map((item) => {
-                                          if (item.__typename === 'FilterViewModeToggle') {
-                                              return {
-                                                  ...item,
-                                                  value: viewMode,
-                                                  onChange: setViewMode,
-                                              };
-                                          }
-                                          return item;
-                                      }),
-                                  }
-                                : undefined
-                        }
-                        initialValues={filters}
-                        onSubmit={handleFilter}
-                        onReset={handleReset}
-                        variant="inline"
-                        labels={{
-                            clickToSelect: data.labels.clickToSelect,
-                            showMoreFilters: data.labels.showMoreFilters,
-                            hideMoreFilters: data.labels.hideMoreFilters,
-                            noActiveFilters: data.labels.noActiveFilters,
-                        }}
-                    />
+            <div className="flex flex-col gap-6">
+                <FiltersSection
+                    title={data.subtitle}
+                    initialFilters={initialFilters}
+                    filters={
+                        data.filters
+                            ? {
+                                  ...data.filters,
+                                  items: data.filters.items.map((item) => {
+                                      if (item.__typename === 'FilterViewModeToggle') {
+                                          return {
+                                              ...item,
+                                              value: viewMode,
+                                              onChange: setViewMode,
+                                          };
+                                      }
+                                      return item;
+                                  }),
+                              }
+                            : undefined
+                    }
+                    initialValues={filters}
+                    onSubmit={handleFilter}
+                    onReset={handleReset}
+                    variant="inline"
+                    labels={{
+                        clickToSelect: data.labels.clickToSelect,
+                        showMoreFilters: data.labels.showMoreFilters,
+                        hideMoreFilters: data.labels.hideMoreFilters,
+                        noActiveFilters: data.labels.noActiveFilters,
+                    }}
+                />
 
-                    <LoadingOverlay isActive={isPending}>
-                        {data.products?.data?.length ? (
-                            <div className="flex flex-col gap-6">
-                                {viewMode === 'list' ? (
-                                    <div className="w-full overflow-x-auto">
-                                        <DataList
-                                            data={data.products?.data ?? []}
-                                            columns={columns}
-                                            actions={actions}
-                                            getRowKey={(item) => item.id}
-                                            enableRowSelection={component.enableRowSelection}
-                                            selectedRows={selectedRows}
-                                            onSelectionChange={setSelectedRows}
-                                        />
-                                    </div>
-                                ) : (
-                                    <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                                        {(data.products?.data ?? []).map((product) => (
-                                            <li key={product.id}>
-                                                <ProductCard
-                                                    key={product.id}
-                                                    title={product.name}
-                                                    tags={product.tags as ProductCardBadge[]}
-                                                    description={product.shortDescription || product.description}
-                                                    image={product.image}
-                                                    price={product.price}
-                                                    link={product.detailsUrl}
-                                                    action={
-                                                        data.labels.addToCartLabel ? (
-                                                            <Button
-                                                                variant="secondary"
-                                                                size="sm"
-                                                                disabled={isAddingToCart}
-                                                                onClick={() =>
-                                                                    handleAddToCart(
-                                                                        product.sku,
-                                                                        product.price.currency,
-                                                                        product.variantId,
-                                                                    )
-                                                                }
-                                                            >
-                                                                <ShoppingCart className="h-4 w-4 mr-2" />
-                                                                {data.labels.addToCartLabel}
-                                                            </Button>
-                                                        ) : undefined
-                                                    }
-                                                    LinkComponent={LinkComponent}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-
-                                {data.pagination && (
-                                    <Pagination
-                                        disabled={isPending}
-                                        total={data.products?.total ?? 0}
-                                        offset={filters.offset || 0}
-                                        limit={data.pagination.limit}
-                                        legend={data.pagination.legend}
-                                        prev={data.pagination.prev}
-                                        next={data.pagination.next}
-                                        selectPage={data.pagination.selectPage}
-                                        onChange={handlePageChange}
+                <LoadingOverlay isActive={isPending}>
+                    {data.products?.data?.length ? (
+                        <div className="flex flex-col gap-6">
+                            {viewMode === 'list' ? (
+                                <div className="w-full overflow-x-auto">
+                                    <DataList
+                                        data={data.products?.data ?? []}
+                                        columns={columns}
+                                        actions={actions}
+                                        getRowKey={(item) => item.id}
+                                        enableRowSelection={component.enableRowSelection}
+                                        selectedRows={selectedRows}
+                                        onSelectionChange={setSelectedRows}
                                     />
-                                )}
-                            </div>
-                        ) : (
-                            <div className="w-full flex flex-col gap-12 mt-6">
-                                <NoResults title={data.noResults.title} description={data.noResults.description} />
+                                </div>
+                            ) : (
+                                <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                                    {(data.products?.data ?? []).map((product) => (
+                                        <li key={product.id}>
+                                            <ProductCard
+                                                key={product.id}
+                                                title={product.name}
+                                                tags={product.tags as ProductCardBadge[]}
+                                                description={product.shortDescription || product.description}
+                                                image={product.image}
+                                                price={product.price}
+                                                link={product.detailsUrl}
+                                                action={
+                                                    data.labels.addToCartLabel ? (
+                                                        <Button
+                                                            variant="secondary"
+                                                            size="sm"
+                                                            disabled={isAddingToCart}
+                                                            onClick={() =>
+                                                                handleAddToCart(
+                                                                    product.sku,
+                                                                    product.price.currency,
+                                                                    product.variantId,
+                                                                )
+                                                            }
+                                                        >
+                                                            <ShoppingCart className="h-4 w-4 mr-2" />
+                                                            {data.labels.addToCartLabel}
+                                                        </Button>
+                                                    ) : undefined
+                                                }
+                                                LinkComponent={LinkComponent}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
 
-                                <Separator />
-                            </div>
-                        )}
-                    </LoadingOverlay>
-                </div>
-            ) : (
-                <div className="w-full flex flex-col gap-12 mt-6">
-                    <NoResults title={data.noResults.title} description={data.noResults.description} />
+                            {data.pagination && (
+                                <Pagination
+                                    disabled={isPending}
+                                    total={data.products?.total ?? 0}
+                                    offset={filters.offset || 0}
+                                    limit={data.pagination.limit}
+                                    legend={data.pagination.legend}
+                                    prev={data.pagination.prev}
+                                    next={data.pagination.next}
+                                    selectPage={data.pagination.selectPage}
+                                    onChange={handlePageChange}
+                                />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="w-full flex flex-col gap-12 mt-6">
+                            <NoResults title={data.noResults.title} description={data.noResults.description} />
 
-                    <Separator />
-                </div>
-            )}
+                            <Separator />
+                        </div>
+                    )}
+                </LoadingOverlay>
+            </div>
 
             {seoFacets.map((facet) => (
                 <nav key={String(facet.id)} aria-label={facet.label} className="mt-8 flex flex-col gap-2">

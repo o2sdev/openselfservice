@@ -17,6 +17,7 @@ export const Category: React.FC<CategoryProps> = async ({
     routing,
     renderBlocks,
     hasPriority,
+    searchParams,
 }) => {
     let data: Model.CategoryBlock;
     try {
@@ -39,7 +40,14 @@ export const Category: React.FC<CategoryProps> = async ({
             accessToken={accessToken}
             locale={locale}
             routing={routing}
-            blocks={<CategoryBlocks renderBlocks={renderBlocks} components={data.components} slug={slug} />}
+            blocks={
+                <CategoryBlocks
+                    renderBlocks={renderBlocks}
+                    components={data.components}
+                    slug={slug}
+                    searchParams={searchParams}
+                />
+            }
             renderBlocks={renderBlocks}
             hasPriority={hasPriority}
         />

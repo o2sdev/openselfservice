@@ -14,6 +14,7 @@ export const CategoryRenderer: React.FC<CategoryRendererProps> = ({
     routing,
     renderBlocks,
     hasPriority,
+    searchParams,
 }) => {
     const locale = useLocale();
 
@@ -46,6 +47,7 @@ export const CategoryRenderer: React.FC<CategoryRendererProps> = ({
                 routing={routing}
                 renderBlocks={renderBlocks}
                 hasPriority={hasPriority}
+                searchParams={searchParams}
             />
         </Suspense>
     );

@@ -24,6 +24,8 @@ export type CategoryRendererProps = Omit<CategoryProps, ''>;
 export interface CategoryBlocksProps {
     components?: CMS.Model.CategoryBlock.CategoryBlock['components'];
     slug: string[];
+    /** Passed on to the nested blocks, so a list block inside a category still sees the URL filters. */
+    searchParams?: Models.BlockProps.BlockSearchParams;
     renderBlocks: (
         blocks: CMS.Model.Page.SlotBlock[],
         slug: string[],

@@ -44,8 +44,6 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         priority: '',
     };
 
-    const initialData = component.tickets.data;
-
     // Extract initial viewMode from filters if available
     const initialViewMode =
         component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
@@ -208,114 +206,106 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
     return (
         <div className="w-full">
-            {initialData.length > 0 ? (
-                <div className="flex flex-col gap-6">
-                    <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
-                        <Typography variant="h2" asChild>
-                            <h2 {...inspector(meta, 'title')}>{data.title}</h2>
-                        </Typography>
+            <div className="flex flex-col gap-6">
+                <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
+                    <Typography variant="h2" asChild>
+                        <h2 {...inspector(meta, 'title')}>{data.title}</h2>
+                    </Typography>
 
-                        {data.forms && (
-                            <ActionList
-                                actions={actions
-                                    .filter((action) => action.label)
-                                    .map((action, index) => (
-                                        <Button
-                                            asChild
-                                            variant={action.variant}
-                                            key={`${action.label}-${index}`}
-                                            className={action.className}
-                                        >
-                                            <LinkComponent href={action.url}>
-                                                {action.icon && <DynamicIcon name={action.icon} size={16} />}
-                                                {action.label}
-                                            </LinkComponent>
-                                        </Button>
-                                    ))}
-                                showMoreLabel={data.labels.showMore}
+                    {data.forms && (
+                        <ActionList
+                            actions={actions
+                                .filter((action) => action.label)
+                                .map((action, index) => (
+                                    <Button
+                                        asChild
+                                        variant={action.variant}
+                                        key={`${action.label}-${index}`}
+                                        className={action.className}
+                                    >
+                                        <LinkComponent href={action.url}>
+                                            {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                            {action.label}
+                                        </LinkComponent>
+                                    </Button>
+                                ))}
+                            showMoreLabel={data.labels.showMore}
+                        />
+                    )}
+                </div>
+
+                <Separator />
+
+                <FiltersSection
+                    title={data.subtitle}
+                    initialFilters={initialFilters}
+                    filters={
+                        data.filters
+                            ? {
+                                  ...data.filters,
+                                  items: data.filters.items.map((item) => {
+                                      if (item.__typename === 'FilterViewModeToggle') {
+                                          return {
+                                              ...item,
+                                              value: viewMode,
+                                              onChange: setViewMode,
+                                          };
+                                      }
+                                      return item;
+                                  }),
+                              }
+                            : undefined
+                    }
+                    initialValues={filters}
+                    onSubmit={handleFilter}
+                    onReset={handleReset}
+                    variant="inline"
+                    labels={{
+                        clickToSelect: data.labels.clickToSelect,
+                        showMoreFilters: data.labels.showMoreFilters,
+                        hideMoreFilters: data.labels.hideMoreFilters,
+                        noActiveFilters: data.labels.noActiveFilters,
+                    }}
+                />
+
+                <LoadingOverlay isActive={isPending}>
+                    {data.tickets.data.length ? (
+                        <div className="flex flex-col gap-6">
+                            <DataView
+                                viewMode={viewMode}
+                                data={data.tickets.data}
+                                columns={columns}
+                                actions={tableActions}
+                                cardHeaderSlots={data.cardHeaderSlots}
+                                enableRowSelection={component.enableRowSelection}
+                                selectedRows={selectedRows}
+                                onSelectionChange={setSelectedRows}
+                                getRowKey={(item) => item.id}
                             />
-                        )}
-                    </div>
 
-                    <Separator />
-
-                    <FiltersSection
-                        title={data.subtitle}
-                        initialFilters={initialFilters}
-                        filters={
-                            data.filters
-                                ? {
-                                      ...data.filters,
-                                      items: data.filters.items.map((item) => {
-                                          if (item.__typename === 'FilterViewModeToggle') {
-                                              return {
-                                                  ...item,
-                                                  value: viewMode,
-                                                  onChange: setViewMode,
-                                              };
-                                          }
-                                          return item;
-                                      }),
-                                  }
-                                : undefined
-                        }
-                        initialValues={filters}
-                        onSubmit={handleFilter}
-                        onReset={handleReset}
-                        variant="inline"
-                        labels={{
-                            clickToSelect: data.labels.clickToSelect,
-                            showMoreFilters: data.labels.showMoreFilters,
-                            hideMoreFilters: data.labels.hideMoreFilters,
-                            noActiveFilters: data.labels.noActiveFilters,
-                        }}
-                    />
-
-                    <LoadingOverlay isActive={isPending}>
-                        {data.tickets.data.length ? (
-                            <div className="flex flex-col gap-6">
-                                <DataView
-                                    viewMode={viewMode}
-                                    data={data.tickets.data}
-                                    columns={columns}
-                                    actions={tableActions}
-                                    cardHeaderSlots={data.cardHeaderSlots}
-                                    enableRowSelection={component.enableRowSelection}
-                                    selectedRows={selectedRows}
-                                    onSelectionChange={setSelectedRows}
-                                    getRowKey={(item) => item.id}
+                            {data.pagination && (
+                                <Pagination
+                                    disabled={isPending}
+                                    total={data.tickets.total}
+                                    offset={filters.offset || 0}
+                                    limit={data.pagination.limit}
+                                    legend={data.pagination.legend}
+                                    prev={data.pagination.prev}
+                                    next={data.pagination.next}
+                                    selectPage={data.pagination.selectPage}
+                                    onChange={handlePageChange}
                                 />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="w-full flex flex-col gap-12 mt-6">
+                            <NoResults title={data.noResults.title} description={data.noResults.description} />
 
-                                {data.pagination && (
-                                    <Pagination
-                                        disabled={isPending}
-                                        total={data.tickets.total}
-                                        offset={filters.offset || 0}
-                                        limit={data.pagination.limit}
-                                        legend={data.pagination.legend}
-                                        prev={data.pagination.prev}
-                                        next={data.pagination.next}
-                                        selectPage={data.pagination.selectPage}
-                                        onChange={handlePageChange}
-                                    />
-                                )}
-                            </div>
-                        ) : (
-                            <div className="w-full flex flex-col gap-12 mt-6">
-                                <NoResults title={data.noResults.title} description={data.noResults.description} />
-
-                                <Separator />
-                            </div>
-                        )}
-                    </LoadingOverlay>
-                </div>
-            ) : (
-                <div className="w-full flex flex-col gap-12 mt-6">
-                    <NoResults title={data.noResults.title} description={data.noResults.description} />
-
-                    <Separator />
-                </div>
-            )}
+                            <Separator />
+                        </div>
+                    )}
+                </LoadingOverlay>
+            </div>
         </div>
     );
 };

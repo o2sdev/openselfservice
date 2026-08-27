@@ -44,8 +44,6 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
         limit: component.pagination?.limit || 5,
     };
 
-    const initialData = component.orders.data;
-
     const initialViewMode: 'list' | 'grid' = (() => {
         const value = component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value;
         return value === 'grid' ? 'grid' : 'list';
@@ -215,78 +213,70 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
 
     return (
         <div className="w-full">
-            {initialData.length > 0 ? (
-                <div className="flex flex-col gap-6">
-                    <FiltersSection
-                        title={data.subtitle}
-                        initialFilters={initialFilters}
-                        filters={
-                            data.filters
-                                ? {
-                                      ...data.filters,
-                                      items: data.filters.items.map((item) => {
-                                          if (item.__typename === 'FilterViewModeToggle') {
-                                              return {
-                                                  ...item,
-                                                  value: viewMode,
-                                                  onChange: setViewMode,
-                                              };
-                                          }
-                                          return item;
-                                      }),
-                                  }
-                                : undefined
-                        }
-                        initialValues={filters}
-                        onSubmit={handleFilter}
-                        onReset={handleReset}
-                    />
+            <div className="flex flex-col gap-6">
+                <FiltersSection
+                    title={data.subtitle}
+                    initialFilters={initialFilters}
+                    filters={
+                        data.filters
+                            ? {
+                                  ...data.filters,
+                                  items: data.filters.items.map((item) => {
+                                      if (item.__typename === 'FilterViewModeToggle') {
+                                          return {
+                                              ...item,
+                                              value: viewMode,
+                                              onChange: setViewMode,
+                                          };
+                                      }
+                                      return item;
+                                  }),
+                              }
+                            : undefined
+                    }
+                    initialValues={filters}
+                    onSubmit={handleFilter}
+                    onReset={handleReset}
+                />
 
-                    <LoadingOverlay isActive={isPending}>
-                        {data.orders.data.length ? (
-                            <div className="flex flex-col gap-6">
-                                <DataView
-                                    viewMode={viewMode}
-                                    data={data.orders.data}
-                                    columns={columns}
-                                    actions={actions}
-                                    cardHeaderSlots={data.cardHeaderSlots}
-                                    enableRowSelection={component.enableRowSelection}
-                                    selectedRows={selectedRows}
-                                    onSelectionChange={setSelectedRows}
-                                    getRowKey={(item) => item.id.value}
+                <LoadingOverlay isActive={isPending}>
+                    {data.orders.data.length ? (
+                        <div className="flex flex-col gap-6">
+                            <DataView
+                                viewMode={viewMode}
+                                data={data.orders.data}
+                                columns={columns}
+                                actions={actions}
+                                cardHeaderSlots={data.cardHeaderSlots}
+                                enableRowSelection={component.enableRowSelection}
+                                selectedRows={selectedRows}
+                                onSelectionChange={setSelectedRows}
+                                getRowKey={(item) => item.id.value}
+                            />
+
+                            {data.pagination && (
+                                <Pagination
+                                    disabled={isPending}
+                                    total={data.orders.total}
+                                    offset={filters.offset || 0}
+                                    limit={data.pagination.limit}
+                                    legend={data.pagination.legend}
+                                    prev={data.pagination.prev}
+                                    next={data.pagination.next}
+                                    selectPage={data.pagination.selectPage}
+                                    onChange={handlePageChange}
                                 />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="w-full flex flex-col gap-12 mt-6">
+                            <NoResults title={data.noResults.title} description={data.noResults.description} />
 
-                                {data.pagination && (
-                                    <Pagination
-                                        disabled={isPending}
-                                        total={data.orders.total}
-                                        offset={filters.offset || 0}
-                                        limit={data.pagination.limit}
-                                        legend={data.pagination.legend}
-                                        prev={data.pagination.prev}
-                                        next={data.pagination.next}
-                                        selectPage={data.pagination.selectPage}
-                                        onChange={handlePageChange}
-                                    />
-                                )}
-                            </div>
-                        ) : (
-                            <div className="w-full flex flex-col gap-12 mt-6">
-                                <NoResults title={data.noResults.title} description={data.noResults.description} />
-
-                                <Separator />
-                            </div>
-                        )}
-                    </LoadingOverlay>
-                </div>
-            ) : (
-                <div className="w-full flex flex-col gap-12 mt-6">
-                    <NoResults title={data.noResults.title} description={data.noResults.description} />
-
-                    <Separator />
-                </div>
-            )}
+                            <Separator />
+                        </div>
+                    )}
+                </LoadingOverlay>
+            </div>
         </div>
     );
 };
