@@ -458,27 +458,21 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 },
                 {
                     type: 'modify',
-                    path: 'apps/api-harmonization/src/app.module.ts',
+                    path: 'apps/api-harmonization/src/blocks.config.ts',
                     pattern: /(\/\/ BLOCK IMPORT)/g,
                     template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
                 },
                 {
                     type: 'modify',
-                    path: 'apps/api-harmonization/src/app.module.ts',
+                    path: 'apps/api-harmonization/src/blocks.config.ts',
                     pattern: /(\/\/ BLOCK REGISTER)/g,
-                    template: `{{pascalCase name}}.Module.register(AppConfig),\n        // BLOCK REGISTER`,
+                    template: `{{pascalCase name}},\n    // BLOCK REGISTER`,
                 },
                 {
                     type: 'modify',
-                    path: 'apps/api-harmonization/src/modules/page/page.model.ts',
-                    pattern: /(\/\/ BLOCK IMPORT)/g,
-                    template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
-                },
-                {
-                    type: 'modify',
-                    path: 'apps/api-harmonization/src/modules/page/page.model.ts',
-                    pattern: /(\/\/ BLOCK REGISTER)/g,
-                    template: `// BLOCK REGISTER\n    | {{pascalCase name}}.Model.{{pascalCase name}}Block['__typename']`,
+                    path: 'apps/api-harmonization/src/blocks.config.ts',
+                    pattern: /(\/\/ BLOCK TYPE)/g,
+                    template: `// BLOCK TYPE\n    | {{pascalCase name}}.Model.{{pascalCase name}}Block['__typename']`,
                 },
 
                 // FRONTEND
