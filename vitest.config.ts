@@ -48,7 +48,7 @@ export default defineConfig({
                 plugins: [react()],
                 test: {
                     name: 'hooks',
-                    include: ['packages/*/src/**/*.browser.spec.tsx'],
+                    include: ['packages/**/src/**/*.browser.spec.tsx'],
                     browser: {
                         enabled: true,
                         headless: true,

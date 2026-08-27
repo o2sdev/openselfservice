@@ -5,14 +5,13 @@ import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import NextLink from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useCallback, useMemo, useState, useTransition } from 'react';
+import React, { useCallback, useState, useTransition } from 'react';
 
-import { Utils } from '@o2s/utils.frontend';
+import { Hooks, Utils } from '@o2s/utils.frontend';
 
 import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
-import { replaceUrlParams, useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -53,9 +52,6 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         limit: component.pagination?.limit || 12,
     };
 
-    const initialViewMode =
-        component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'grid';
-
     const [data, setData] = useState(component);
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
@@ -64,46 +60,12 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
 
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const searchParamsString = searchParams.toString();
-    const urlSearchParams = useMemo(() => new URLSearchParams(searchParamsString), [searchParamsString]);
-
-    // Written with the History API, not `router.replace`: the block fetches its own data, so a
-    // filter change must not trigger an RSC navigation that re-renders the whole page.
-    const handleUrlChange = useCallback(
-        (params: string) => {
-            replaceUrlParams(pathname, params);
-        },
-        [pathname],
-    );
-
-    // Toggle groups must be restored from the URL as arrays: they iterate the value, and a string
-    // would be walked character by character. A select is single-value whatever the CMS config says
-    // (it writes one string back), so handing it an array only trips React's <select> check.
-    const multiValueKeys = useMemo(
-        () =>
-            (component.filters?.items ?? [])
-                .filter((item) => item.__typename === 'FilterToggleGroup' && item.allowMultiple)
-                .map((item) => String(item.id)),
-        [component.filters?.items],
-    );
-
-    // The CMS-driven filter keys. They stand in for a namespace: this list is public and indexed, so
-    // its URLs stay plain (`?category=tools`) and linkable rather than prefixed per block.
-    const filterKeys = useMemo(
-        () =>
-            (component.filters?.items ?? [])
-                .filter((item) => item.__typename !== 'FilterViewModeToggle')
-                .map((item) => String(item.id)),
-        [component.filters?.items],
-    );
-
-    const { filters, setFilters, resetFilters, viewMode, setViewMode } = useUrlFilters({
+    const { filters, setFilters, resetFilters, viewMode, setViewMode } = Hooks.useListFilters({
         initialFilters,
-        multiValueKeys,
-        filterKeys,
-        defaultViewMode: initialViewMode,
-        searchParams: urlSearchParams,
-        onUrlChange: handleUrlChange,
+        filterConfig: component.filters,
+        defaultViewMode: 'grid',
+        pathname,
+        searchParams,
     });
 
     const handleAddToCart = useCallback(
@@ -206,7 +168,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     );
 
     const facetHref = (key: string, value: string) => {
-        const params = new URLSearchParams(searchParamsString);
+        const params = new URLSearchParams(searchParams.toString());
 
         params.delete('page');
         params.set(key, value);

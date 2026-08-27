@@ -3,12 +3,11 @@
 import { ArrowRight, IterationCw, MoreVertical } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useCallback, useMemo, useState, useTransition } from 'react';
+import React, { useCallback, useState, useTransition } from 'react';
 
-import { Mappings } from '@o2s/utils.frontend';
+import { Hooks, Mappings } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
-import { replaceUrlParams, useUrlFilters } from '@o2s/ui/hooks/use-url-filters';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
@@ -44,11 +43,6 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
         limit: component.pagination?.limit || 5,
     };
 
-    const initialViewMode: 'list' | 'grid' = (() => {
-        const value = component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value;
-        return value === 'grid' ? 'grid' : 'list';
-    })();
-
     const [data, setData] = useState<Model.OrderListBlock>(component);
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
@@ -56,36 +50,12 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
 
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const searchParamsString = searchParams.toString();
-    const urlSearchParams = useMemo(() => new URLSearchParams(searchParamsString), [searchParamsString]);
-
-    // Written with the History API, not `router.replace`: the block fetches its own data, so a
-    // filter change must not trigger an RSC navigation that re-renders the whole page.
-    const handleUrlChange = useCallback(
-        (params: string) => {
-            replaceUrlParams(pathname, params);
-        },
-        [pathname],
-    );
-
-    // Toggle groups must be restored from the URL as arrays: they iterate the value, and a string
-    // would be walked character by character. A select is single-value whatever the CMS config says
-    // (it writes one string back), so handing it an array only trips React's <select> check.
-    const multiValueKeys = useMemo(
-        () =>
-            (component.filters?.items ?? [])
-                .filter((item) => item.__typename === 'FilterToggleGroup' && item.allowMultiple)
-                .map((item) => String(item.id)),
-        [component.filters?.items],
-    );
-
-    const { filters, setFilters, resetFilters, viewMode, setViewMode } = useUrlFilters({
+    const { filters, setFilters, resetFilters, viewMode, setViewMode } = Hooks.useListFilters({
         initialFilters,
         namespace: 'order',
-        multiValueKeys,
-        defaultViewMode: initialViewMode,
-        searchParams: urlSearchParams,
-        onUrlChange: handleUrlChange,
+        filterConfig: component.filters,
+        pathname,
+        searchParams,
     });
 
     const fetchOrders = useCallback(
