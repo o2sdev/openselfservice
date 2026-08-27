@@ -13,7 +13,8 @@
     "type": "module",
     "exports": {
         "./block": "./block.js",
-        "./api": "./api.js"
+        "./api": "./api.js",
+        "./ui": "./ui.js"
     },
     "scripts": {
         "collect-json-reports": "node scripts/collect-json-outputs.mjs",
