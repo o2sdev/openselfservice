@@ -38,6 +38,7 @@
     "dependencies": {
         "@o2s/configs.integrations": "*",
         "@o2s/ui": "*",
+        "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.logger": "*",
         "lucide-react": "^0.575.0",
         "string-template": "^1.0.0"

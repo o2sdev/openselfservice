@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { resolvePagination } from './pagination';
+import { DEFAULT_LIMIT, resolvePagination } from './pagination';
 
 const OPTIONS = { cmsLimit: 5, defaultLimit: 12 };
 
@@ -10,6 +10,12 @@ describe('resolvePagination', () => {
             expect(resolvePagination({ limit: 20 }, OPTIONS).limit).toBe(20);
             expect(resolvePagination({}, OPTIONS).limit).toBe(5);
             expect(resolvePagination({}, { defaultLimit: 12 }).limit).toBe(12);
+        });
+
+        it('falls back to a shared page size for a block that names none', () => {
+            expect(resolvePagination({}).limit).toBe(DEFAULT_LIMIT);
+            expect(resolvePagination({}, {}).limit).toBe(DEFAULT_LIMIT);
+            expect(DEFAULT_LIMIT).toBeGreaterThan(1);
         });
 
         it('takes a limit arriving as a query string', () => {

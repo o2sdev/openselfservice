@@ -3,16 +3,16 @@ import { CMS, Invoices } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
+import { Utils } from '@o2s/utils.api-harmonization';
+
 import { AppHeaders, HeaderName } from '@o2s/framework/headers';
-import { Auth, Models } from '@o2s/framework/modules';
+import { Auth } from '@o2s/framework/modules';
 
 import { mapInvoiceList } from './invoice-list.mapper';
 import { InvoiceListBlock } from './invoice-list.model';
 import { GetInvoiceListBlockQuery } from './invoice-list.request';
 
 const H = HeaderName;
-
-const DEFAULT_LIMIT = 1;
 
 @Injectable()
 export class InvoiceListService {
@@ -34,9 +34,8 @@ export class InvoiceListService {
             concatMap(([cms]) => {
                 // `page` is a URL concern and is consumed here, so it never reaches the domain module.
                 const { page: _page, ...invoiceQuery } = query;
-                const { limit, offset } = Models.Pagination.resolvePagination(query, {
+                const { limit, offset } = Utils.Pagination.resolvePagination(query, {
                     cmsLimit: cms.pagination?.limit,
-                    defaultLimit: DEFAULT_LIMIT,
                 });
 
                 return this.invoiceService
