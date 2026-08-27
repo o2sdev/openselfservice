@@ -18,13 +18,24 @@ export type FiltersRecord = Record<string, FilterValue | undefined>;
 
 export type ViewMode = 'list' | 'grid';
 
-/** Keys describing the block itself rather than a user filter. Never written to the URL. */
-export const DEFAULT_EXCLUDED_KEYS = ['id', 'limit'] as const;
-
 export const PAGE_KEY = 'page';
 export const VIEW_KEY = 'view';
 export const OFFSET_KEY = 'offset';
 export const LIMIT_KEY = 'limit';
+export const ID_KEY = 'id';
+
+/**
+ * Keys describing the block itself rather than a filter the user chose. They are never counted as an
+ * active filter and never become a filter param — the one list every place that has to tell the two
+ * apart works from.
+ */
+export const BLOCK_STATE_KEYS: readonly string[] = [ID_KEY, LIMIT_KEY, OFFSET_KEY];
+
+/**
+ * Of those, the keys simply left out of the URL. `offset` is missing on purpose: it is not dropped but
+ * written as the 1-based `page` instead, which is why the serialisation checks it on its own.
+ */
+export const DEFAULT_EXCLUDED_KEYS: readonly string[] = BLOCK_STATE_KEYS.filter((key) => key !== OFFSET_KEY);
 
 const VIEW_MODES: readonly ViewMode[] = ['list', 'grid'];
 
@@ -319,11 +330,15 @@ export interface ParseFiltersOptions {
  * Without this a filtered link renders as the default list and the client has to replace it, which
  * costs a second request and shows the wrong data first. `page` is returned as it is: turning it into
  * an `offset` needs the page size, which only the API knows.
+ *
+ * Call it with the block's query type — `parseFiltersFromSearchParams<GetTicketListBlockQuery>(…)` —
+ * and the result spreads straight into that query. A query string carries no types, so the values are
+ * asserted into it once here rather than at every call site.
  */
-export const parseFiltersFromSearchParams = (
+export const parseFiltersFromSearchParams = <TQuery extends { page?: number }>(
     searchParams: Record<string, string | string[] | undefined> = {},
     { namespace, keys, multiValueKeys = [] }: ParseFiltersOptions,
-): Record<string, string | string[] | number> => {
+): Partial<TQuery> => {
     const filters: Record<string, string | string[] | number> = {};
 
     for (const key of keys) {
@@ -345,7 +360,7 @@ export const parseFiltersFromSearchParams = (
         filters[PAGE_KEY] = page;
     }
 
-    return filters;
+    return filters as Partial<TQuery>;
 };
 
 /**

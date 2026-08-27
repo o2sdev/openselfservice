@@ -28,10 +28,10 @@ export const OrderList: React.FC<OrderListProps> = async ({
         data = await sdk.blocks.getOrderList(
             {
                 id,
-                ...(parseFiltersFromSearchParams(searchParams, {
+                ...parseFiltersFromSearchParams<Request.GetOrderListBlockQuery>(searchParams, {
                     namespace: NAMESPACE,
                     keys: FILTER_KEYS,
-                }) as Partial<Request.GetOrderListBlockQuery>),
+                }),
             },
             { 'x-locale': locale },
             accessToken,

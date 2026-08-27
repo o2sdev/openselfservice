@@ -1,6 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
+    BLOCK_STATE_KEYS,
+    DEFAULT_EXCLUDED_KEYS,
     areValuesEqual,
     deserializeParamsToFilters,
     filtersToPage,
@@ -28,6 +30,25 @@ interface TicketFilters {
 const INITIAL: TicketFilters = { id: 'ticket-list-1', offset: 0, limit: 5, search: '' };
 
 const params = (query: string) => new URLSearchParams(query);
+
+describe('the keys that describe a block rather than a filter', () => {
+    it('names the block state in one place', () => {
+        expect([...BLOCK_STATE_KEYS].sort()).toEqual(['id', 'limit', 'offset']);
+    });
+
+    it('leaves all of them out of the URL except the offset, which is written as a page', () => {
+        expect([...DEFAULT_EXCLUDED_KEYS].sort()).toEqual(['id', 'limit']);
+
+        const result = serializeFiltersToParams(params(''), {
+            // the page size stays the block's, so the offset means the third page of it
+            filters: { ...INITIAL, id: 'other', offset: 10 },
+            initialFilters: INITIAL,
+            namespace: 'ticket',
+        });
+
+        expect(result).toBe('ticket_page=3');
+    });
+});
 
 describe('filtersToPage / pageToOffset', () => {
     it('translates between an offset and a 1-based page', () => {
@@ -293,8 +314,16 @@ describe('deserializeParamsToFilters', () => {
 });
 
 describe('parseFiltersFromSearchParams', () => {
+    /** A block query, as the block passes its own to get a result that spreads into it. */
+    interface TicketQuery {
+        page?: number;
+        status?: string | string[];
+        topic?: string;
+        sort?: string;
+    }
+
     it('reads the keys it was given, stripping the namespace', () => {
-        const result = parseFiltersFromSearchParams(
+        const result = parseFiltersFromSearchParams<TicketQuery>(
             { ticket_status: 'OPEN', ticket_topic: 'CONTACT_US', utm_source: 'mail' },
             { namespace: 'ticket', keys: ['status', 'topic'] },
         );
@@ -303,7 +332,7 @@ describe('parseFiltersFromSearchParams', () => {
     });
 
     it('ignores params outside its key list and its namespace', () => {
-        const result = parseFiltersFromSearchParams(
+        const result = parseFiltersFromSearchParams<TicketQuery>(
             { status: 'OPEN', order_status: 'NEW' },
             { namespace: 'ticket', keys: ['status'] },
         );
@@ -315,19 +344,19 @@ describe('parseFiltersFromSearchParams', () => {
         const options = { namespace: 'ticket', keys: ['status'] };
 
         expect(
-            parseFiltersFromSearchParams(
+            parseFiltersFromSearchParams<TicketQuery>(
                 { ticket_status: ['OPEN', 'CLOSED'] },
                 { ...options, multiValueKeys: ['status'] },
             ),
         ).toEqual({ status: ['OPEN', 'CLOSED'] });
 
-        expect(parseFiltersFromSearchParams({ ticket_status: ['OPEN', 'CLOSED'] }, options)).toEqual({
+        expect(parseFiltersFromSearchParams<TicketQuery>({ ticket_status: ['OPEN', 'CLOSED'] }, options)).toEqual({
             status: 'OPEN',
         });
     });
 
     it('skips params with nothing in them', () => {
-        const result = parseFiltersFromSearchParams(
+        const result = parseFiltersFromSearchParams<TicketQuery>(
             { status: '', topic: undefined, sort: [] as unknown as string[] },
             { keys: ['status', 'topic', 'sort'] },
         );
@@ -336,15 +365,15 @@ describe('parseFiltersFromSearchParams', () => {
     });
 
     it('passes a page through for the API to resolve', () => {
-        expect(parseFiltersFromSearchParams({ page: '3' }, { keys: [] })).toEqual({ page: 3 });
-        expect(parseFiltersFromSearchParams({ ticket_page: '2' }, { namespace: 'ticket', keys: [] })).toEqual({
-            page: 2,
-        });
+        expect(parseFiltersFromSearchParams<TicketQuery>({ page: '3' }, { keys: [] })).toEqual({ page: 3 });
+        expect(
+            parseFiltersFromSearchParams<TicketQuery>({ ticket_page: '2' }, { namespace: 'ticket', keys: [] }),
+        ).toEqual({ page: 2 });
     });
 
     it('drops a page that is not a whole number past the first', () => {
         for (const page of ['1', '2.5', 'Infinity', '1e21', '-2', 'nonsense', '']) {
-            expect(parseFiltersFromSearchParams({ page }, { keys: [] }), `page ${page}`).toEqual({});
+            expect(parseFiltersFromSearchParams<TicketQuery>({ page }, { keys: [] }), `page ${page}`).toEqual({});
         }
     });
 });

@@ -30,10 +30,10 @@ export const InvoiceListServer: React.FC<InvoiceListProps> = async ({
         data = await sdk.blocks.getInvoiceList(
             {
                 id,
-                ...(parseFiltersFromSearchParams(searchParams, {
+                ...parseFiltersFromSearchParams<Request.GetInvoiceListBlockQuery>(searchParams, {
                     namespace: NAMESPACE,
                     keys: FILTER_KEYS,
-                }) as Partial<Request.GetInvoiceListBlockQuery>),
+                }),
             },
             { 'x-locale': locale },
             accessToken,

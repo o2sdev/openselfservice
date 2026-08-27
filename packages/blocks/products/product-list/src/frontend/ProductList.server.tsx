@@ -26,9 +26,9 @@ export const ProductList: React.FC<ProductListProps> = async ({ id, accessToken,
                 id,
                 // No multi-value keys: the block query takes one value per filter, so a repeated param
                 // contributes its first one. Such a URL is not indexed anyway (see the page metadata).
-                ...(parseFiltersFromSearchParams(searchParams, {
+                ...parseFiltersFromSearchParams<Request.GetProductListBlockQuery>(searchParams, {
                     keys: FILTER_KEYS,
-                }) as Partial<Request.GetProductListBlockQuery>),
+                }),
             },
             { 'x-locale': locale },
             accessToken,

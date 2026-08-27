@@ -30,10 +30,10 @@ export const NotificationListServer: React.FC<NotificationListProps> = async ({
         data = await sdk.blocks.getNotificationList(
             {
                 id,
-                ...(parseFiltersFromSearchParams(searchParams, {
+                ...parseFiltersFromSearchParams<Request.GetNotificationListBlockQuery>(searchParams, {
                     namespace: NAMESPACE,
                     keys: FILTER_KEYS,
-                }) as Partial<Request.GetNotificationListBlockQuery>),
+                }),
             },
             { 'x-locale': locale },
             accessToken,

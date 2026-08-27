@@ -33,11 +33,11 @@ export const TicketListServer: React.FC<TicketListProps> = async ({
             {
                 id,
                 preview: isDraftModeEnabled,
-                ...(parseFiltersFromSearchParams(searchParams, {
+                ...parseFiltersFromSearchParams<Request.GetTicketListBlockQuery>(searchParams, {
                     namespace: NAMESPACE,
                     keys: FILTER_KEYS,
                     multiValueKeys: MULTI_VALUE_KEYS,
-                }) as Partial<Request.GetTicketListBlockQuery>),
+                }),
             },
             { 'x-locale': locale },
             accessToken,
