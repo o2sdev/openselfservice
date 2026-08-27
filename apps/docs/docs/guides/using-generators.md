@@ -38,6 +38,12 @@ You can create a new block within the `api-harmonization` app by using `block` g
         - typings,
         - API methods,
     3. SDK part.
+6. Register the block automatically, so no manual wiring is needed:
+    - register it in the API Harmonization app (`app.module.ts` and the `page.model.ts` block union) and in the framework CMS block model,
+    - add its renderer to the frontend registry (`renderBlocks.tsx`),
+    - add `@o2s/blocks.<block-name>` to the `dependencies` of both `apps/api-harmonization` and `apps/frontend`.
+
+After the generator finishes, the only remaining step is to run `npm install` so the new workspace package is linked.
 
 ---
 
