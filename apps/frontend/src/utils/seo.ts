@@ -1,22 +1,16 @@
 import { Metadata } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { Models } from '@o2s/framework/modules';
 
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '@/i18n/routing';
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '@/i18n/locales';
 
 const SITE_URL = process.env.BASE_URL;
 type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 type SearchParams = Record<string, string | string[] | undefined>;
-
-/**
- * Filter params whose single-value form still describes a page worth indexing on its own — a category
- * listing is a page, a sort order or a deep page of one is a variant of it. Everything else (`page`,
- * `sort`, `view`, several values of one facet, several facets at once) canonicalises back and is kept
- * out of the index, so filtering cannot spray near-duplicates across the crawl budget.
- */
-const INDEXABLE_FILTERS = ['category'];
 
 interface FilterSeo {
     /** Query string to append to the canonical URL, empty when the canonical is the bare page. */
@@ -25,19 +19,32 @@ interface FilterSeo {
     noIndex: boolean;
 }
 
+const hasValue = (value: string | string[] | undefined): boolean =>
+    Array.isArray(value) ? value.length > 0 : value !== undefined && value !== '';
+
+/**
+ * Decides what a filtered variant of a page is worth to a crawler.
+ *
+ * Only the params SEO has an opinion about are looked at: one value of one indexable facet still
+ * describes a page (a category listing), while a deep page, a different order or several facets at
+ * once are variants of it. Everything else a link may carry — `utm_*`, `gclid`, a tab — is ignored, so
+ * a campaign link neither drops the canonical facet nor knocks the page out of the index.
+ */
 const getFilterSeo = (searchParams: SearchParams = {}): FilterSeo => {
-    const active = Object.entries(searchParams).filter(([, value]) => value !== undefined && value !== '');
+    const active = Object.entries(searchParams).filter(([, value]) => hasValue(value));
 
-    if (!active.length) {
-        return { canonicalQuery: '', noIndex: false };
-    }
+    const facets = active.filter(([key]) => Utils.Seo.isIndexableFilter(key));
+    const hasListingParam = active.some(([key]) => Utils.Seo.isListingParam(key));
 
-    const [key, value] = active[0]!;
-    const isSingleFacet = active.length === 1 && INDEXABLE_FILTERS.includes(key) && typeof value === 'string';
+    const [facet] = facets;
+    const [key, value] = facet ?? [];
+    const single = facets.length === 1 && typeof value === 'string';
 
     return {
-        canonicalQuery: isSingleFacet ? `?${key}=${encodeURIComponent(value as string)}` : '',
-        noIndex: !isSingleFacet,
+        // A facet keeps its canonical even next to params that are not indexable: the preferred version
+        // of a deep page or a campaign link is the facet listing itself.
+        canonicalQuery: single ? `?${key}=${encodeURIComponent(value)}` : '',
+        noIndex: hasListingParam || facets.length > 1 || (facets.length === 1 && !single),
     };
 };
 

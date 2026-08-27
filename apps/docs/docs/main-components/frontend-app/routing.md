@@ -202,14 +202,30 @@ it into an `offset` using the page size from the CMS block config. Only the API 
 
 Because filtering can produce endless near-duplicate URLs, `generateSeo` decides what may be indexed:
 
-| URL                               | Canonical                  | Robots            |
-| --------------------------------- | -------------------------- | ----------------- |
-| `/products`                       | `/products`                | `index, follow`   |
-| `/products?category=TOOLS`        | `/products?category=TOOLS` | `index, follow`   |
-| `/products?category=TOOLS&page=3` | `/products`                | `noindex, follow` |
-| `/products?sort=price_asc`        | `/products`                | `noindex, follow` |
+| URL                                        | Canonical                  | Robots            |
+| ------------------------------------------ | -------------------------- | ----------------- |
+| `/products`                                | `/products`                | `index, follow`   |
+| `/products?category=TOOLS`                 | `/products?category=TOOLS` | `index, follow`   |
+| `/products?category=TOOLS&utm_source=mail` | `/products?category=TOOLS` | `index, follow`   |
+| `/products?category=TOOLS&page=3`          | `/products?category=TOOLS` | `noindex, follow` |
+| `/products?sort=price_asc`                 | `/products`                | `noindex, follow` |
+| `/products?category=TOOLS&category=CLOUD`  | `/products`                | `noindex, follow` |
+| `/cases` — any page gated by roles         | `/cases`                   | `noindex, follow` |
 
-One value of one whitelisted facet (`INDEXABLE_FILTERS` in `apps/frontend/src/utils/seo.ts`) still
-describes a page worth indexing; sorting, deep pages and facet combinations are variants of it and
-canonicalise back. Facet values are also rendered as real links by the list block, since a crawler
-follows `<a href>` but never operates a select.
+Two lists in `@o2s/utils.frontend` drive this, and the product list block renders its facet links from
+the same ones, so the links and the canonical URLs cannot drift apart:
+
+- `Utils.Seo.INDEXABLE_FILTERS` — one value of one of these still describes a page worth indexing;
+- `Utils.Seo.LISTING_PARAMS` — these change what the list shows without deserving an entry of their
+  own, so they canonicalise back to the facet and are kept out of the index.
+
+Anything else a link carries — `utm_*`, `gclid`, a tab — is ignored by both decisions. A campaign link
+to a category therefore keeps its canonical and stays indexable, which is the whole point of keying
+this off an allowlist rather than off "the query string is not empty".
+
+Pages behind a login are never indexable, whatever their CMS entry says: the API sets `noIndex` for any
+page that declares `roles`, since only it knows the gate exists. An anonymous request to such a page is
+redirected to sign-in anyway, so this is the second lock rather than the first.
+
+Facet values are rendered as real links by the list block, since a crawler follows `<a href>` but never
+operates a select.

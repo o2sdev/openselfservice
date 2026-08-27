@@ -26,7 +26,9 @@ export const mapPage = (
                 description: page.seo.description,
                 keywords: page.seo.keywords,
                 image: page.seo.image,
-                noIndex: page.seo.noIndex,
+                // A page gated by roles is never indexable, whatever the CMS entry says: its content
+                // is not public, and only this layer knows the gate exists.
+                noIndex: page.seo.noIndex || Boolean(page.roles?.length),
                 noFollow: page.seo.noFollow,
             },
             locales,

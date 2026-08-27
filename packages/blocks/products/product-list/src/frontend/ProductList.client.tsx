@@ -33,13 +33,6 @@ import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';
 
-/**
- * Filters whose single-value URL is worth crawling and indexing, and which therefore get real links
- * rather than only a form control — a bot follows `<a href>`, it does not operate a select. Kept in
- * step with the indexable filters the page metadata canonicalises to.
- */
-const SEO_FACETS = ['category'];
-
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
@@ -162,9 +155,12 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     };
 
     // Rendered on the server too, so the facet URLs are in the initial HTML for a crawler to follow.
+    // Filters whose single-value URL is worth crawling get real links, not just a form control: a bot
+    // follows `<a href>`, it does not operate a select. The list is shared with the page metadata, so
+    // the links and the canonical URLs cannot drift apart.
     const seoFacets = (data.filters?.items ?? []).filter(
         (item): item is Extract<typeof item, { options: { value: string; label: string }[] }> =>
-            SEO_FACETS.includes(String(item.id)) && 'options' in item,
+            Utils.Seo.isIndexableFilter(String(item.id)) && 'options' in item,
     );
 
     const facetHref = (key: string, value: string) => {
