@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { Observable, of } from 'rxjs';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Observable, of, throwError } from 'rxjs';
 
 import { Notifications } from '@o2s/framework/modules';
 
@@ -28,7 +28,9 @@ export class NotificationsService extends Notifications.Service {
     }
 
     markAs(request: Notifications.Request.MarkNotificationAsRequest, _authorization?: string): Observable<void> {
-        markNotificationAs(request);
+        if (!markNotificationAs(request)) {
+            return throwError(() => new NotFoundException(`Notification with ID ${request.id} not found`));
+        }
 
         return of(undefined).pipe(responseDelay());
     }
