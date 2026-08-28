@@ -29,52 +29,9 @@ import {
     createModule,
 } from '@o2s/framework/modules';
 
-import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
-import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
-import * as Article from '@o2s/blocks.article/api-harmonization';
-import * as BentoGrid from '@o2s/blocks.bento-grid/api-harmonization';
-import * as Cart from '@o2s/blocks.cart/api-harmonization';
-import * as CategoryList from '@o2s/blocks.category-list/api-harmonization';
-import * as Category from '@o2s/blocks.category/api-harmonization';
-import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
-import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/api-harmonization';
-import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/api-harmonization';
-import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization';
-import * as CtaSection from '@o2s/blocks.cta-section/api-harmonization';
-import * as Faq from '@o2s/blocks.faq/api-harmonization';
-import * as FeatureSectionGrid from '@o2s/blocks.feature-section-grid/api-harmonization';
-import * as FeatureSection from '@o2s/blocks.feature-section/api-harmonization';
-import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
-import * as HeroSection from '@o2s/blocks.hero-section/api-harmonization';
-import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
-import * as MediaSection from '@o2s/blocks.media-section/api-harmonization';
-import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
-import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
-import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
-import * as OrderConfirmation from '@o2s/blocks.order-confirmation/api-harmonization';
-import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
-import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
-import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
-import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
-import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
-import * as PricingSection from '@o2s/blocks.pricing-section/api-harmonization';
-import * as ProductDetails from '@o2s/blocks.product-details/api-harmonization';
-import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
-import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
-import * as RecommendedProducts from '@o2s/blocks.recommended-products/api-harmonization';
-import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
-import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
-import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/api-harmonization';
-import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
-import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
-import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
-import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
-import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
-
-// BLOCK IMPORT
-
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
+import { blocks } from './blocks.config';
 import { configuration } from './config/configuration';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
 import { HealthModule } from './modules/health/health.module';
@@ -151,48 +108,7 @@ export const DocumentsBaseModule = DocumentsModule.register({
         OrganizationsModule.register(AppConfig),
         SurveyJs.Module.register(AppConfig),
 
-        TicketList.Module.register(AppConfig),
-        TicketDetails.Module.register(AppConfig),
-        NotificationList.Module.register(AppConfig),
-        NotificationDetails.Module.register(AppConfig),
-        Faq.Module.register(AppConfig),
-        InvoiceList.Module.register(AppConfig),
-        PaymentsSummary.Module.register(AppConfig),
-        PaymentsHistory.Module.register(AppConfig),
-        UserAccount.Module.register(AppConfig),
-        TicketRecent.Module.register(AppConfig),
-        ServiceList.Module.register(AppConfig),
-        ServiceDetails.Module.register(AppConfig),
-        SurveyJsForm.Module.register(AppConfig),
-        OrderList.Module.register(AppConfig),
-        OrdersSummary.Module.register(AppConfig),
-        OrderDetails.Module.register(AppConfig),
-        QuickLinks.Module.register(AppConfig),
-        Category.Module.register(AppConfig),
-        CategoryList.Module.register(AppConfig),
-        Article.Module.register(AppConfig),
-        ArticleSearch.Module.register(AppConfig),
-        FeaturedServiceList.Module.register(AppConfig),
-        ArticleList.Module.register(AppConfig),
-        ProductList.Module.register(AppConfig),
-        NotificationSummary.Module.register(AppConfig),
-        TicketSummary.Module.register(AppConfig),
-        ProductDetails.Module.register(AppConfig),
-        RecommendedProducts.Module.register(AppConfig),
-        OrderConfirmation.Module.register(AppConfig),
-        CheckoutBillingPayment.Module.register(AppConfig),
-        CheckoutCompanyData.Module.register(AppConfig),
-        CheckoutShippingAddress.Module.register(AppConfig),
-        CheckoutSummary.Module.register(AppConfig),
-        Cart.Module.register(AppConfig),
-        HeroSection.Module.register(AppConfig),
-        BentoGrid.Module.register(AppConfig),
-        FeatureSection.Module.register(AppConfig),
-        CtaSection.Module.register(AppConfig),
-        MediaSection.Module.register(AppConfig),
-        PricingSection.Module.register(AppConfig),
-        FeatureSectionGrid.Module.register(AppConfig),
-        // BLOCK REGISTER
+        ...blocks.map((block) => block.Module.register(AppConfig)),
     ],
     providers: [
         AppService,

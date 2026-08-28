@@ -1,4 +1,37 @@
 import type { PlopTypes } from '@turbo/gen';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
+/**
+ * Adds a workspace dependency to a package.json's `dependencies`, inserted alphabetically among the
+ * existing keys (in place, without reordering the rest). Returns the new file content, or the
+ * original content unchanged when the dependency is already present. Pure and idempotent.
+ */
+export function addBlockDependency(content: string, packageName: string, version = '*'): string {
+    const pkg = JSON.parse(content) as { dependencies?: Record<string, string> };
+    const deps = pkg.dependencies ?? {};
+
+    if (deps[packageName]) {
+        return content;
+    }
+
+    const next: Record<string, string> = {};
+    let inserted = false;
+    for (const [key, value] of Object.entries(deps)) {
+        if (!inserted && key > packageName) {
+            next[packageName] = version;
+            inserted = true;
+        }
+        next[key] = value;
+    }
+    if (!inserted) {
+        next[packageName] = version;
+    }
+
+    pkg.dependencies = next;
+
+    return `${JSON.stringify(pkg, null, 4)}\n`;
+}
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
     // Register custom Handlebars helper for conditional checks
@@ -425,27 +458,21 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 },
                 {
                     type: 'modify',
-                    path: 'apps/api-harmonization/src/app.module.ts',
+                    path: 'apps/api-harmonization/src/blocks.config.ts',
                     pattern: /(\/\/ BLOCK IMPORT)/g,
                     template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
                 },
                 {
                     type: 'modify',
-                    path: 'apps/api-harmonization/src/app.module.ts',
+                    path: 'apps/api-harmonization/src/blocks.config.ts',
                     pattern: /(\/\/ BLOCK REGISTER)/g,
-                    template: `{{pascalCase name}}.Module.register(AppConfig),\n        // BLOCK REGISTER`,
+                    template: `{{pascalCase name}},\n    // BLOCK REGISTER`,
                 },
                 {
                     type: 'modify',
-                    path: 'apps/api-harmonization/src/modules/page/page.model.ts',
-                    pattern: /(\/\/ BLOCK IMPORT)/g,
-                    template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
-                },
-                {
-                    type: 'modify',
-                    path: 'apps/api-harmonization/src/modules/page/page.model.ts',
-                    pattern: /(\/\/ BLOCK REGISTER)/g,
-                    template: `// BLOCK REGISTER\n    | {{pascalCase name}}.Model.{{pascalCase name}}Block['__typename']`,
+                    path: 'apps/api-harmonization/src/blocks.config.ts',
+                    pattern: /(\/\/ BLOCK TYPE)/g,
+                    template: `// BLOCK TYPE\n    | {{pascalCase name}}.Model.{{pascalCase name}}Block['__typename']`,
                 },
 
                 // FRONTEND
@@ -575,6 +602,30 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 },
             ];
 
+            // Register the block as a dependency of both apps so it resolves as a workspace package.
+            actions.push(() => {
+                const kebabBlockName = plop.getHelper('kebabCase')(String(data?.name ?? '').trim()) as string;
+                const packageName = `@o2s/blocks.${kebabBlockName}`;
+                const basePath = plop.getDestBasePath() || process.cwd();
+
+                const appPackageJsonPaths = ['apps/api-harmonization/package.json', 'apps/frontend/package.json'];
+
+                const updated: string[] = [];
+                for (const relativePath of appPackageJsonPaths) {
+                    const absolutePath = path.join(basePath, relativePath);
+                    const before = fs.readFileSync(absolutePath, 'utf8');
+                    const after = addBlockDependency(before, packageName);
+                    if (after !== before) {
+                        fs.writeFileSync(absolutePath, after);
+                        updated.push(relativePath);
+                    }
+                }
+
+                return updated.length > 0
+                    ? `Added "${packageName}": "*" to: ${updated.join(', ')}`
+                    : `"${packageName}" already present in the app package.json files`;
+            });
+
             actions.push(() => {
                 const blockName = String(data?.name ?? '').trim();
                 const blockDomain = String(data?.domain ?? '').trim();
@@ -589,11 +640,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     `  ${blockRootPath}/src/frontend/`,
                     `  ${blockRootPath}/src/sdk/`,
                     '',
+                    'The block has been registered and added to both apps automatically.',
+                    '',
                     'Next steps:',
-                    `  1. Add "${packageName}": "*" to apps/api-harmonization/package.json`,
-                    `  2. Add "${packageName}": "*" to apps/frontend/package.json`,
-                    '  3. Run: npm install',
-                    '  4. Run: npm run lint (optional sanity check)',
+                    '  1. Run: npm install',
+                    '  2. Run: npm run lint (optional sanity check)',
                 ].join('\n');
             });
 

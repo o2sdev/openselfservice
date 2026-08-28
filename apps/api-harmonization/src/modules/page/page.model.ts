@@ -2,50 +2,6 @@ import { CMS } from '@o2s/configs.integrations';
 
 import { Models } from '@o2s/framework/modules';
 
-import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
-import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
-import * as Article from '@o2s/blocks.article/api-harmonization';
-import * as BentoGrid from '@o2s/blocks.bento-grid/api-harmonization';
-import * as Cart from '@o2s/blocks.cart/api-harmonization';
-import * as CategoryList from '@o2s/blocks.category-list/api-harmonization';
-import * as Category from '@o2s/blocks.category/api-harmonization';
-import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
-import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/api-harmonization';
-import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/api-harmonization';
-import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization';
-import * as CtaSection from '@o2s/blocks.cta-section/api-harmonization';
-import * as Faq from '@o2s/blocks.faq/api-harmonization';
-import * as FeatureSectionGrid from '@o2s/blocks.feature-section-grid/api-harmonization';
-import * as FeatureSection from '@o2s/blocks.feature-section/api-harmonization';
-import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
-import * as HeroSection from '@o2s/blocks.hero-section/api-harmonization';
-import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
-import * as MediaSection from '@o2s/blocks.media-section/api-harmonization';
-import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
-import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
-import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
-import * as OrderConfirmation from '@o2s/blocks.order-confirmation/api-harmonization';
-import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
-import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
-import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
-import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
-import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
-import * as PricingSection from '@o2s/blocks.pricing-section/api-harmonization';
-import * as ProductDetails from '@o2s/blocks.product-details/api-harmonization';
-import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
-import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
-import * as RecommendedProducts from '@o2s/blocks.recommended-products/api-harmonization';
-import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
-import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
-import * as Surveyjs from '@o2s/blocks.surveyjs-form/api-harmonization';
-import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
-import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
-import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
-import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
-import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
-
-// BLOCK IMPORT
-
 export class Init {
     locales!: {
         value: string;
@@ -94,46 +50,4 @@ export class PageData {
     breadcrumbs!: Breadcrumb[];
 }
 
-export type Blocks =
-    // BLOCK REGISTER
-    | Cart.Model.CartBlock['__typename']
-    | CheckoutSummary.Model.CheckoutSummaryBlock['__typename']
-    | CheckoutShippingAddress.Model.CheckoutShippingAddressBlock['__typename']
-    | CheckoutCompanyData.Model.CheckoutCompanyDataBlock['__typename']
-    | CheckoutBillingPayment.Model.CheckoutBillingPaymentBlock['__typename']
-    | OrderConfirmation.Model.OrderConfirmationBlock['__typename']
-    | RecommendedProducts.Model.RecommendedProductsBlock['__typename']
-    | ProductDetails.Model.ProductDetailsBlock['__typename']
-    | ProductList.Model.ProductListBlock['__typename']
-    | TicketSummary.Model.TicketSummaryBlock['__typename']
-    | NotificationSummary.Model.NotificationSummaryBlock['__typename']
-    | ArticleList.Model.ArticleListBlock['__typename']
-    | Category.Model.CategoryBlock['__typename']
-    | Article.Model.ArticleBlock['__typename']
-    | ArticleSearch.Model.ArticleSearchBlock['__typename']
-    | TicketList.Model.TicketListBlock['__typename']
-    | TicketDetails.Model.TicketDetailsBlock['__typename']
-    | NotificationList.Model.NotificationListBlock['__typename']
-    | NotificationDetails.Model.NotificationDetailsBlock['__typename']
-    | Faq.Model.FaqBlock['__typename']
-    | BlockInvoiceList.Model.InvoiceListBlock['__typename']
-    | PaymentsSummary.Model.PaymentsSummaryBlock['__typename']
-    | PaymentsHistory.Model.PaymentsHistoryBlock['__typename']
-    | UserAccount.Model.UserAccountBlock['__typename']
-    | TicketRecent.Model.TicketRecentBlock['__typename']
-    | ServiceList.Model.ServiceListBlock['__typename']
-    | ServiceDetails.Model.ServiceDetailsBlock['__typename']
-    | Surveyjs.Model.SurveyjsBlock['__typename']
-    | OrderList.Model.OrderListBlock['__typename']
-    | OrdersSummary.Model.OrdersSummaryBlock['__typename']
-    | OrderDetails.Model.OrderDetailsBlock['__typename']
-    | QuickLinks.Model.QuickLinksBlock['__typename']
-    | CategoryList.Model.CategoryListBlock['__typename']
-    | FeaturedServiceList.Model.FeaturedServiceListBlock['__typename']
-    | HeroSection.Model.HeroSectionBlock['__typename']
-    | BentoGrid.Model.BentoGridBlock['__typename']
-    | FeatureSection.Model.FeatureSectionBlock['__typename']
-    | CtaSection.Model.CtaSectionBlock['__typename']
-    | MediaSection.Model.MediaSectionBlock['__typename']
-    | PricingSection.Model.PricingSectionBlock['__typename']
-    | FeatureSectionGrid.Model.FeatureSectionGridBlock['__typename'];
+export type { Blocks } from '../../blocks.config';
