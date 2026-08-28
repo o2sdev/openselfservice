@@ -14,7 +14,11 @@ export interface BlockRequestConfig {
     url: string;
     /** HTTP method, `get` by default. */
     method?: BlockRequestMethod;
-    /** Query params - serialized into the query string, with `undefined` values dropped. */
+    /**
+     * Query params - an object of key/value pairs, serialized into the query string, with `undefined`
+     * values dropped. Built-ins that keep their content out of own properties (`Date`, `Map`, `Set`,
+     * `URLSearchParams`, ...) are rejected, as they would silently serialize into an empty query.
+     */
     params?: unknown;
     /** Request body. */
     data?: unknown;
@@ -89,6 +93,8 @@ const mergeHeaders = (headers?: BlockRequestHeaders, authorization?: string): Re
     return merged;
 };
 
+const QUERY_OBJECT_TAG = '[object Object]';
+
 const serializeParams = (params: unknown): unknown => {
     if (params === undefined || params === null) {
         return undefined;
@@ -96,6 +102,12 @@ const serializeParams = (params: unknown): unknown => {
 
     if (typeof params !== 'object' || Array.isArray(params)) {
         return params;
+    }
+
+    const tag = Object.prototype.toString.call(params);
+
+    if (tag !== QUERY_OBJECT_TAG) {
+        throw new TypeError(`Query params have to be an object of key/value pairs, received ${tag}.`);
     }
 
     return Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined));
