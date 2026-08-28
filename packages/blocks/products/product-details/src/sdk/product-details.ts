@@ -1,13 +1,13 @@
 import { AppHeaders } from '@o2s/framework/headers';
 import { Carts } from '@o2s/framework/modules';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/product-details.client';
 
 const CARTS_API_URL = '/carts';
 
 export const productDetails = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {

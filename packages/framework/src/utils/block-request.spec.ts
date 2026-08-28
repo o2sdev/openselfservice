@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import type { CompatRequestConfig, Sdk } from '../sdk';
 
-import { type BlockRequestConfig, BlockRequestError, createBlockMethod } from './block-method';
+import { type BlockRequestConfig, BlockRequestError, createBlockRequest } from './block-request';
 import { HeaderName } from './models/headers';
 
 const TIMEZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -20,7 +20,7 @@ const lastConfig = (makeRequest: ReturnType<typeof createSdk>['makeRequest']): C
 const sendRequest = async (config: BlockRequestConfig) => {
     const { sdk, makeRequest } = createSdk();
 
-    await createBlockMethod(sdk)(config);
+    await createBlockRequest(sdk)(config);
 
     return lastConfig(makeRequest);
 };
@@ -29,10 +29,10 @@ const failWith = async (error: unknown, config: BlockRequestConfig = { url: '/ti
     const { sdk, makeRequest } = createSdk();
     makeRequest.mockRejectedValueOnce(error);
 
-    return createBlockMethod(sdk)<never>(config).catch((caught: unknown) => caught as BlockRequestError);
+    return createBlockRequest(sdk)<never>(config).catch((caught: unknown) => caught as BlockRequestError);
 };
 
-describe('createBlockMethod', () => {
+describe('createBlockRequest', () => {
     describe('headers', () => {
         it('should send the default API headers', async () => {
             const config = await sendRequest({ url: '/tickets' });
@@ -136,7 +136,7 @@ describe('createBlockMethod', () => {
         ])('should reject a %s instead of sending an empty query', async (tag, params) => {
             const { sdk, makeRequest } = createSdk();
 
-            await expect(createBlockMethod(sdk)({ url: '/tickets', params })).rejects.toThrow(
+            await expect(createBlockRequest(sdk)({ url: '/tickets', params })).rejects.toThrow(
                 new TypeError(`Query params have to be an object of key/value pairs, received [object ${tag}].`),
             );
             expect(makeRequest).not.toHaveBeenCalled();

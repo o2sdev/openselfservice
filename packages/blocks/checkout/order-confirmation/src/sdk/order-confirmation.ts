@@ -1,13 +1,13 @@
 import { Models } from '@o2s/utils.api-harmonization';
 
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/order-confirmation.client';
 
 const API_URL = URL;
 
 export const orderConfirmation = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {

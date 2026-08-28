@@ -1,11 +1,11 @@
 import { AppHeaders } from '@o2s/framework/headers';
 import { Carts } from '@o2s/framework/modules';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 const CARTS_API_URL = '/carts';
 
 export const cart = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         cart: {

@@ -1,5 +1,5 @@
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request } from '../api-harmonization/user-account.client';
 import { URL } from '../api-harmonization/user-account.url';
@@ -7,7 +7,7 @@ import { URL } from '../api-harmonization/user-account.url';
 const API_URL = URL;
 
 export const userAccount = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {

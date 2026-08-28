@@ -1,12 +1,12 @@
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/featured-service-list.client';
 
 const API_URL = URL;
 
 export const featuredServiceList = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {

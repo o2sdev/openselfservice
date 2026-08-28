@@ -2,12 +2,12 @@ import { Modules } from '@o2s/api-harmonization';
 import { URL } from '@o2s/api-harmonization/modules/organizations/organizations.url';
 
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 const API_URL = URL;
 
 export const organizations = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         modules: {

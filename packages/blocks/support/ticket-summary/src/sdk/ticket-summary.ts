@@ -1,12 +1,12 @@
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/ticket-summary.client';
 
 const API_URL = URL;
 
 export const ticketSummary = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {

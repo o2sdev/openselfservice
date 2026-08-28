@@ -182,16 +182,16 @@ The SDK part is a thin slice of the the [general SDK used globally](../../guides
 - internally with the block (including server and client compoennts),
 - externally by other frontend apps in cases when you'd like to completely take over the rendering, and re-use only the normalized and aggregated data.
 
-Each method of that SDK is built with the `createBlockMethod` helper, which handles the parts that are the same for every block: merging the default API headers with the ones passed by the caller and with the access token, serializing the query params, typing the response and wrapping errors:
+Each method of that SDK is built with the `createBlockRequest` helper, which handles the parts that are the same for every block: merging the default API headers with the ones passed by the caller and with the access token, serializing the query params, typing the response and wrapping errors:
 
 ```typescript
 import { AppHeaders } from '@o2s/framework/headers';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/faq.client';
 
 export const faq = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {

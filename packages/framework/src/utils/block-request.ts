@@ -50,7 +50,7 @@ interface BlockErrorResponse {
 }
 
 /**
- * Error thrown by every method created with {@link createBlockMethod}. It normalizes the various error
+ * Error thrown by every method created with {@link createBlockRequest}. It normalizes the various error
  * shapes returned by the underlying fetch client and keeps the original error available as `cause`.
  */
 export class BlockRequestError extends Error {
@@ -151,7 +151,7 @@ const toBlockRequestError = (error: unknown, method: BlockRequestMethod, url: st
  * @example
  * ```typescript
  * export const ticketList = (sdk: Sdk) => {
- *     const request = createBlockMethod(sdk);
+ *     const request = createBlockRequest(sdk);
  *
  *     return {
  *         blocks: {
@@ -171,7 +171,7 @@ const toBlockRequestError = (error: unknown, method: BlockRequestMethod, url: st
  * };
  * ```
  */
-export const createBlockMethod = (sdk: Pick<Sdk, 'makeRequest'>): BlockRequest => {
+export const createBlockRequest = (sdk: Pick<Sdk, 'makeRequest'>): BlockRequest => {
     return async <TResponse>(config: BlockRequestConfig): Promise<TResponse> => {
         const { url, method = 'get', params, data, headers, authorization, responseType } = config;
 

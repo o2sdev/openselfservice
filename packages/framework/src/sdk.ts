@@ -5,18 +5,18 @@ import { getNotification, getNotifications, markAs } from './api/notifications';
 import { createTicket, getTicket, getTickets } from './api/tickets';
 import { getCustomerForCurrentUserById, getDefaultCustomerForCurrentUser, getUser } from './api/users';
 import { createInterceptors } from './interceptors';
-import type { BlockResponseType } from './utils/block-method';
+import type { BlockResponseType } from './utils/block-request';
 import { LoggerConfig } from './utils/logger';
 import { AppHeaders } from './utils/models/headers';
 
-export { BlockRequestError, createBlockMethod } from './utils/block-method';
+export { BlockRequestError, createBlockRequest } from './utils/block-request';
 export type {
     BlockRequest,
     BlockRequestConfig,
     BlockRequestHeaders,
     BlockRequestMethod,
     BlockResponseType,
-} from './utils/block-method';
+} from './utils/block-request';
 
 export interface CompatRequestConfig {
     url?: string;

@@ -1,7 +1,7 @@
 import { Models } from '@o2s/utils.api-harmonization';
 
 import { Carts, Checkout, Payments } from '@o2s/framework/modules';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/checkout-billing-payment.client';
 
@@ -11,7 +11,7 @@ const CHECKOUT_API_URL = '/checkout';
 const PAYMENTS_API_URL = '/payments';
 
 export const checkoutBillingPayment = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {

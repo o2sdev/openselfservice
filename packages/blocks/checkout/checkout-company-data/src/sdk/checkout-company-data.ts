@@ -1,7 +1,7 @@
 import { Models } from '@o2s/utils.api-harmonization';
 
 import { Carts, Checkout } from '@o2s/framework/modules';
-import { Sdk, createBlockMethod } from '@o2s/framework/sdk';
+import { Sdk, createBlockRequest } from '@o2s/framework/sdk';
 
 import { Model, Request, URL } from '../api-harmonization/checkout-company-data.client';
 
@@ -10,7 +10,7 @@ const CARTS_API_URL = '/carts';
 const CHECKOUT_API_URL = '/checkout';
 
 export const checkoutCompanyData = (sdk: Sdk) => {
-    const request = createBlockMethod(sdk);
+    const request = createBlockRequest(sdk);
 
     return {
         blocks: {
