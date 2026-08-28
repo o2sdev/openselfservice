@@ -34,7 +34,7 @@ export const checkoutBillingPayment = (sdk: Sdk) => {
                 authorization?: string,
             ): Promise<Carts.Model.Cart> =>
                 request({
-                    url: `${CARTS_API_URL}/${cartId}`,
+                    url: `${CARTS_API_URL}/${encodeURIComponent(cartId)}`,
                     headers,
                     authorization,
                 }),
@@ -48,7 +48,7 @@ export const checkoutBillingPayment = (sdk: Sdk) => {
             ): Promise<Payments.Model.PaymentSession> =>
                 request({
                     method: 'post',
-                    url: `${CHECKOUT_API_URL}/${cartId}/payment`,
+                    url: `${CHECKOUT_API_URL}/${encodeURIComponent(cartId)}/payment`,
                     data: body,
                     headers,
                     authorization,
