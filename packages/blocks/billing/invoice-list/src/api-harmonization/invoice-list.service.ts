@@ -3,6 +3,8 @@ import { CMS, Invoices } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
+import { Utils } from '@o2s/utils.api-harmonization';
+
 import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
@@ -30,13 +32,19 @@ export class InvoiceListService {
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
+                // `page` is a URL concern and is consumed here, so it never reaches the domain module.
+                const { page: _page, ...invoiceQuery } = query;
+                const { limit, offset } = Utils.Pagination.resolvePagination(query, {
+                    cmsLimit: cms.pagination?.limit,
+                });
+
                 return this.invoiceService
                     .getInvoiceList(
                         {
                             ...(cms.initialFilters || {}),
-                            ...query,
-                            limit: query.limit || cms.pagination?.limit || 1,
-                            offset: query.offset || 0,
+                            ...invoiceQuery,
+                            limit,
+                            offset,
                             dateFrom: query.dateFrom ? dayjs(query.dateFrom).toISOString() : undefined,
                             dateTo: query.dateTo ? dayjs(query.dateTo).toISOString() : undefined,
                             locale: headers[H.Locale],

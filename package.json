@@ -11,7 +11,7 @@
         "start": "turbo start",
         "format": "turbo format",
         "lint": "turbo lint -- --max-warnings=0",
-        "test": "turbo test && vitest run --project=storybook",
+        "test": "turbo test && vitest run --project=storybook --project=hooks",
         "view-report": "turbo run view-report",
         "generate": "turbo gen",
         "generate:postman-collection": "node scripts/generate-postman-collection.mjs",
@@ -28,7 +28,8 @@
         "build-storybook": "storybook build",
         "test:storybook": "vitest --project=storybook",
         "clean": "npm exec --workspaces -- rimraf node_modules dist .next .turbo && rimraf node_modules dist .next .turbo",
-        "clean:output": "npm exec --workspaces -- rimraf dist .next .turbo && rimraf dist .next .turbo"
+        "clean:output": "npm exec --workspaces -- rimraf dist .next .turbo && rimraf dist .next .turbo",
+        "test:hooks": "vitest run --project=hooks"
     },
     "engines": {
         "node": ">=22"

@@ -36,7 +36,7 @@ export const FiltersSection = <T, S extends FormikValues>({
                 </Typography>
             )}
 
-            <FiltersContextProvider initialFilters={initialFilters}>
+            <FiltersContextProvider initialFilters={initialFilters} currentFilters={initialValues}>
                 <Filters
                     filters={filters}
                     initialValues={initialValues}

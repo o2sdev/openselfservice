@@ -2,9 +2,10 @@
 
 import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
-import React, { useState, useTransition } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import React, { useCallback, useState, useTransition } from 'react';
 
-import { Mappings } from '@o2s/utils.frontend';
+import { Hooks, Mappings } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -43,57 +44,60 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
         limit: component.pagination?.limit || 5,
     };
 
-    const initialData = component.notifications.data;
-
-    // Extract initial viewMode from filters if available
-    const initialViewMode =
-        component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
-
     const [data, setData] = useState<Model.NotificationListBlock>(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
-        startTransition(async () => {
-            try {
-                const newFilters = { ...filters, ...data };
-                const newData = await sdk.blocks.getNotificationList(newFilters, { 'x-locale': locale }, accessToken);
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const { filters, setFilters, resetFilters, viewMode, setViewMode } = Hooks.useListFilters({
+        initialFilters,
+        namespace: 'notification',
+        filterConfig: component.filters,
+        pathname,
+        searchParams,
+    });
 
-                setFilters(newFilters);
-                setData(newData);
-                setSelectedRows(new Set());
-            } catch (_error) {
-                toast({
-                    variant: 'destructive',
-                    title: labels.errors.requestError.title,
-                    description: labels.errors.requestError.content,
-                });
-            }
-        });
+    const fetchNotifications = useCallback(
+        (query: Request.GetNotificationListBlockQuery) => {
+            startTransition(async () => {
+                try {
+                    const newData = await sdk.blocks.getNotificationList(query, { 'x-locale': locale }, accessToken);
+
+                    setData(newData);
+                    setSelectedRows(new Set());
+                } catch (_error) {
+                    toast({
+                        variant: 'destructive',
+                        title: labels.errors.requestError.title,
+                        description: labels.errors.requestError.content,
+                    });
+                }
+            });
+        },
+        [accessToken, labels.errors.requestError.content, labels.errors.requestError.title, locale],
+    );
+
+    // A filter change means a different result set, so the current page no longer applies and the list
+    // goes back to the first one. `data` carries the whole form state (including the current
+    // `offset`), which is why the reset has to come after the spread. Paging keeps its own handler.
+    const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
+        const newFilters = { ...filters, ...data, offset: 0 };
+
+        setFilters(newFilters);
+        fetchNotifications(newFilters);
+    };
+
+    const handlePageChange = (page: number) => {
+        const newFilters = { ...filters, offset: (data.pagination?.limit ?? 0) * (page - 1) };
+
+        setFilters(newFilters);
+        fetchNotifications(newFilters);
     };
 
     const handleReset = () => {
-        startTransition(async () => {
-            try {
-                const newData = await sdk.blocks.getNotificationList(
-                    initialFilters,
-                    { 'x-locale': locale },
-                    accessToken,
-                );
-
-                setFilters(initialFilters);
-                setData(newData);
-                setSelectedRows(new Set());
-            } catch (_error) {
-                toast({
-                    variant: 'destructive',
-                    title: labels.errors.requestError.title,
-                    description: labels.errors.requestError.content,
-                });
-            }
-        });
+        resetFilters();
+        fetchNotifications(initialFilters);
     };
 
     // Define columns configuration outside JSX for better readability
@@ -168,83 +172,70 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
 
     return (
         <div className="w-full">
-            {initialData.length > 0 ? (
-                <div className="flex flex-col gap-6">
-                    <FiltersSection
-                        title={data.subtitle}
-                        initialFilters={initialFilters}
-                        filters={
-                            data.filters
-                                ? {
-                                      ...data.filters,
-                                      items: data.filters.items.map((item) => {
-                                          if (item.__typename === 'FilterViewModeToggle') {
-                                              return {
-                                                  ...item,
-                                                  value: viewMode,
-                                                  onChange: setViewMode,
-                                              };
-                                          }
-                                          return item;
-                                      }),
-                                  }
-                                : undefined
-                        }
-                        initialValues={filters}
-                        onSubmit={handleFilter}
-                        onReset={handleReset}
-                    />
+            <div className="flex flex-col gap-6">
+                <FiltersSection
+                    title={data.subtitle}
+                    initialFilters={initialFilters}
+                    filters={
+                        data.filters
+                            ? {
+                                  ...data.filters,
+                                  items: data.filters.items.map((item) => {
+                                      if (item.__typename === 'FilterViewModeToggle') {
+                                          return {
+                                              ...item,
+                                              value: viewMode,
+                                              onChange: setViewMode,
+                                          };
+                                      }
+                                      return item;
+                                  }),
+                              }
+                            : undefined
+                    }
+                    initialValues={filters}
+                    onSubmit={handleFilter}
+                    onReset={handleReset}
+                />
 
-                    <LoadingOverlay isActive={isPending}>
-                        {data.notifications.data.length ? (
-                            <div className="flex flex-col gap-6">
-                                <DataView
-                                    viewMode={viewMode}
-                                    data={data.notifications.data}
-                                    columns={columns}
-                                    actions={actions}
-                                    cardHeaderSlots={data.cardHeaderSlots}
-                                    enableRowSelection={component.enableRowSelection}
-                                    selectedRows={selectedRows}
-                                    onSelectionChange={setSelectedRows}
-                                    getRowKey={(item) => item.id}
+                <LoadingOverlay isActive={isPending}>
+                    {data.notifications.data.length ? (
+                        <div className="flex flex-col gap-6">
+                            <DataView
+                                viewMode={viewMode}
+                                data={data.notifications.data}
+                                columns={columns}
+                                actions={actions}
+                                cardHeaderSlots={data.cardHeaderSlots}
+                                enableRowSelection={component.enableRowSelection}
+                                selectedRows={selectedRows}
+                                onSelectionChange={setSelectedRows}
+                                getRowKey={(item) => item.id}
+                            />
+
+                            {data.pagination && (
+                                <Pagination
+                                    disabled={isPending}
+                                    total={data.notifications.total}
+                                    offset={filters.offset || 0}
+                                    limit={data.pagination.limit}
+                                    legend={data.pagination.legend}
+                                    prev={data.pagination.prev}
+                                    next={data.pagination.next}
+                                    selectPage={data.pagination.selectPage}
+                                    onChange={handlePageChange}
                                 />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="w-full flex flex-col gap-12 mt-6">
+                            <NoResults title={data.noResults.title} description={data.noResults.description} />
 
-                                {data.pagination && (
-                                    <Pagination
-                                        disabled={isPending}
-                                        total={data.notifications.total}
-                                        offset={filters.offset || 0}
-                                        limit={data.pagination.limit}
-                                        legend={data.pagination.legend}
-                                        prev={data.pagination.prev}
-                                        next={data.pagination.next}
-                                        selectPage={data.pagination.selectPage}
-                                        onChange={(page) => {
-                                            handleFilter({
-                                                ...filters,
-                                                offset: data.pagination!.limit * (page - 1),
-                                            });
-                                        }}
-                                    />
-                                )}
-                            </div>
-                        ) : (
-                            <div className="w-full flex flex-col gap-12 mt-6">
-                                <NoResults title={data.noResults.title} description={data.noResults.description} />
-
-                                <Separator />
-                            </div>
-                        )}
-                    </LoadingOverlay>
-                </div>
-            ) : (
-                <div className="w-full flex flex-col gap-12 mt-6">
-                    <NoResults title={data.noResults.title} description={data.noResults.description} />
-
-                    <Separator />
-                </div>
-            )}
+                            <Separator />
+                        </div>
+                    )}
+                </LoadingOverlay>
+            </div>
         </div>
     );
 };

@@ -3,13 +3,17 @@
 import { eventBus } from '@o2s/ui/event-bus';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
+import NextLink from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useCallback, useState, useTransition } from 'react';
 
-import { Utils } from '@o2s/utils.frontend';
+import { Hooks, Utils } from '@o2s/utils.frontend';
 
 import type { Models } from '@o2s/framework/modules';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { DataList } from '@o2s/ui/components/Data/DataList';
@@ -22,6 +26,7 @@ import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { ToastAction } from '@o2s/ui/elements/toast';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
@@ -31,7 +36,7 @@ import { ProductListPureProps } from './ProductList.types';
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
-    const initialProducts = component.products?.data ?? [];
+    const { labels: globalLabels } = useGlobalContext();
     const canRender = !!component.table?.columns && !!component.noResults && !!component.labels;
 
     const initialFilters = {
@@ -40,18 +45,21 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         limit: component.pagination?.limit || 12,
     };
 
-    const initialData = initialProducts;
-
-    const initialViewMode =
-        component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'grid';
-
     const [data, setData] = useState(component);
-    const [filters, setFilters] = useState(initialFilters);
-    const [viewMode, setViewMode] = useState<'grid' | 'list'>(initialViewMode);
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
     const [isAddingToCart, startAddToCartTransition] = useTransition();
+
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const { filters, setFilters, resetFilters, viewMode, setViewMode } = Hooks.useListFilters({
+        initialFilters,
+        filterConfig: component.filters,
+        defaultViewMode: 'grid',
+        pathname,
+        searchParams,
+    });
 
     const handleAddToCart = useCallback(
         (sku: string, currency: Models.Price.Currency, variantId?: string) => {
@@ -105,24 +113,66 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         ],
     );
 
+    const fetchProducts = useCallback(
+        (query: typeof initialFilters) => {
+            startTransition(async () => {
+                try {
+                    const newData = await sdk.blocks.getProductList(query, { 'x-locale': locale }, accessToken);
+                    setData(newData);
+                    setSelectedRows(new Set());
+                } catch (_error) {
+                    toast({
+                        variant: 'destructive',
+                        title: globalLabels.errors.requestError.title,
+                        description: globalLabels.errors.requestError.content,
+                    });
+                }
+            });
+        },
+        [accessToken, globalLabels.errors.requestError.content, globalLabels.errors.requestError.title, locale],
+    );
+
+    // A filter change means a different result set, so the current page no longer applies and the list
+    // goes back to the first one. `data` carries the whole form state (including the current
+    // `offset`), which is why the reset has to come after the spread. Paging keeps its own handler.
     const handleFilter = (data: Partial<typeof initialFilters>) => {
-        startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getProductList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
-            setSelectedRows(new Set());
-        });
+        const newFilters = { ...filters, ...data, offset: 0 };
+
+        setFilters(newFilters);
+        fetchProducts(newFilters);
+    };
+
+    const handlePageChange = (page: number) => {
+        const newFilters = { ...filters, offset: (data.pagination?.limit ?? 0) * (page - 1) };
+
+        setFilters(newFilters);
+        fetchProducts(newFilters);
     };
 
     const handleReset = () => {
-        startTransition(async () => {
-            const newData = await sdk.blocks.getProductList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
-            setSelectedRows(new Set());
-        });
+        resetFilters();
+        fetchProducts(initialFilters);
     };
+
+    // Rendered on the server too, so the facet URLs are in the initial HTML for a crawler to follow.
+    // Filters whose single-value URL is worth crawling get real links, not just a form control: a bot
+    // follows `<a href>`, it does not operate a select. The list is shared with the page metadata, so
+    // the links and the canonical URLs cannot drift apart.
+    const seoFacets = (data.filters?.items ?? []).filter(
+        (item): item is Extract<typeof item, { options: { value: string; label: string }[] }> =>
+            Utils.Seo.isIndexableFilter(String(item.id)) && 'options' in item,
+    );
+
+    const facetHref = (key: string, value: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+
+        params.delete('page');
+        params.set(key, value);
+
+        return `${pathname}?${params.toString()}`;
+    };
+
+    const isFacetActive = (key: string, value: string) => searchParams.getAll(key).includes(value);
 
     // Define table columns configuration
     const columns = (data.table?.columns ?? []).map((column) => {
@@ -168,128 +218,140 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
 
     return (
         <div className="w-full">
-            {initialData.length > 0 ? (
-                <div className="flex flex-col gap-6">
-                    <FiltersSection
-                        title={data.subtitle}
-                        initialFilters={initialFilters}
-                        filters={
-                            data.filters
-                                ? {
-                                      ...data.filters,
-                                      items: data.filters.items.map((item) => {
-                                          if (item.__typename === 'FilterViewModeToggle') {
-                                              return {
-                                                  ...item,
-                                                  value: viewMode,
-                                                  onChange: setViewMode,
-                                              };
-                                          }
-                                          return item;
-                                      }),
-                                  }
-                                : undefined
-                        }
-                        initialValues={filters}
-                        onSubmit={handleFilter}
-                        onReset={handleReset}
-                        variant="inline"
-                        labels={{
-                            clickToSelect: data.labels.clickToSelect,
-                            showMoreFilters: data.labels.showMoreFilters,
-                            hideMoreFilters: data.labels.hideMoreFilters,
-                            noActiveFilters: data.labels.noActiveFilters,
-                        }}
-                    />
+            <div className="flex flex-col gap-6">
+                <FiltersSection
+                    title={data.subtitle}
+                    initialFilters={initialFilters}
+                    filters={
+                        data.filters
+                            ? {
+                                  ...data.filters,
+                                  items: data.filters.items.map((item) => {
+                                      if (item.__typename === 'FilterViewModeToggle') {
+                                          return {
+                                              ...item,
+                                              value: viewMode,
+                                              onChange: setViewMode,
+                                          };
+                                      }
+                                      return item;
+                                  }),
+                              }
+                            : undefined
+                    }
+                    initialValues={filters}
+                    onSubmit={handleFilter}
+                    onReset={handleReset}
+                    variant="inline"
+                    labels={{
+                        clickToSelect: data.labels.clickToSelect,
+                        showMoreFilters: data.labels.showMoreFilters,
+                        hideMoreFilters: data.labels.hideMoreFilters,
+                        noActiveFilters: data.labels.noActiveFilters,
+                    }}
+                />
 
-                    <LoadingOverlay isActive={isPending}>
-                        {data.products?.data?.length ? (
-                            <div className="flex flex-col gap-6">
-                                {viewMode === 'list' ? (
-                                    <div className="w-full overflow-x-auto">
-                                        <DataList
-                                            data={data.products?.data ?? []}
-                                            columns={columns}
-                                            actions={actions}
-                                            getRowKey={(item) => item.id}
-                                            enableRowSelection={component.enableRowSelection}
-                                            selectedRows={selectedRows}
-                                            onSelectionChange={setSelectedRows}
-                                        />
-                                    </div>
-                                ) : (
-                                    <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                                        {(data.products?.data ?? []).map((product) => (
-                                            <li key={product.id}>
-                                                <ProductCard
-                                                    key={product.id}
-                                                    title={product.name}
-                                                    tags={product.tags as ProductCardBadge[]}
-                                                    description={product.shortDescription || product.description}
-                                                    image={product.image}
-                                                    price={product.price}
-                                                    link={product.detailsUrl}
-                                                    action={
-                                                        data.labels.addToCartLabel ? (
-                                                            <Button
-                                                                variant="secondary"
-                                                                size="sm"
-                                                                disabled={isAddingToCart}
-                                                                onClick={() =>
-                                                                    handleAddToCart(
-                                                                        product.sku,
-                                                                        product.price.currency,
-                                                                        product.variantId,
-                                                                    )
-                                                                }
-                                                            >
-                                                                <ShoppingCart className="h-4 w-4 mr-2" />
-                                                                {data.labels.addToCartLabel}
-                                                            </Button>
-                                                        ) : undefined
-                                                    }
-                                                    LinkComponent={LinkComponent}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-
-                                {data.pagination && (
-                                    <Pagination
-                                        disabled={isPending}
-                                        total={data.products?.total ?? 0}
-                                        offset={filters.offset || 0}
-                                        limit={data.pagination.limit}
-                                        legend={data.pagination.legend}
-                                        prev={data.pagination.prev}
-                                        next={data.pagination.next}
-                                        selectPage={data.pagination.selectPage}
-                                        onChange={(page) => {
-                                            handleFilter({
-                                                ...filters,
-                                                offset: data.pagination!.limit * (page - 1),
-                                            });
-                                        }}
+                <LoadingOverlay isActive={isPending}>
+                    {data.products?.data?.length ? (
+                        <div className="flex flex-col gap-6">
+                            {viewMode === 'list' ? (
+                                <div className="w-full overflow-x-auto">
+                                    <DataList
+                                        data={data.products?.data ?? []}
+                                        columns={columns}
+                                        actions={actions}
+                                        getRowKey={(item) => item.id}
+                                        enableRowSelection={component.enableRowSelection}
+                                        selectedRows={selectedRows}
+                                        onSelectionChange={setSelectedRows}
                                     />
-                                )}
-                            </div>
-                        ) : (
-                            <div className="w-full flex flex-col gap-12 mt-6">
-                                <NoResults title={data.noResults.title} description={data.noResults.description} />
+                                </div>
+                            ) : (
+                                <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                                    {(data.products?.data ?? []).map((product) => (
+                                        <li key={product.id}>
+                                            <ProductCard
+                                                key={product.id}
+                                                title={product.name}
+                                                tags={product.tags as ProductCardBadge[]}
+                                                description={product.shortDescription || product.description}
+                                                image={product.image}
+                                                price={product.price}
+                                                link={product.detailsUrl}
+                                                action={
+                                                    data.labels.addToCartLabel ? (
+                                                        <Button
+                                                            variant="secondary"
+                                                            size="sm"
+                                                            disabled={isAddingToCart}
+                                                            onClick={() =>
+                                                                handleAddToCart(
+                                                                    product.sku,
+                                                                    product.price.currency,
+                                                                    product.variantId,
+                                                                )
+                                                            }
+                                                        >
+                                                            <ShoppingCart className="h-4 w-4 mr-2" />
+                                                            {data.labels.addToCartLabel}
+                                                        </Button>
+                                                    ) : undefined
+                                                }
+                                                LinkComponent={LinkComponent}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
 
-                                <Separator />
-                            </div>
-                        )}
-                    </LoadingOverlay>
-                </div>
-            ) : (
-                <div className="w-full flex flex-col gap-12 mt-6">
-                    <NoResults title={data.noResults.title} description={data.noResults.description} />
+                            {data.pagination && (
+                                <Pagination
+                                    disabled={isPending}
+                                    total={data.products?.total ?? 0}
+                                    offset={filters.offset || 0}
+                                    limit={data.pagination.limit}
+                                    legend={data.pagination.legend}
+                                    prev={data.pagination.prev}
+                                    next={data.pagination.next}
+                                    selectPage={data.pagination.selectPage}
+                                    onChange={handlePageChange}
+                                />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="w-full flex flex-col gap-12 mt-6">
+                            <NoResults title={data.noResults.title} description={data.noResults.description} />
 
-                    <Separator />
-                </div>
-            )}
+                            <Separator />
+                        </div>
+                    )}
+                </LoadingOverlay>
+            </div>
+
+            {seoFacets.map((facet) => (
+                <nav key={String(facet.id)} aria-label={facet.label} className="mt-8 flex flex-col gap-2">
+                    <Typography variant="small" className="text-muted-foreground">
+                        {facet.label}
+                    </Typography>
+
+                    <ul className="flex flex-wrap gap-x-4 gap-y-2">
+                        {facet.options.map((option) => (
+                            <li key={option.value}>
+                                <Button asChild variant="link" size="none" className="h-auto p-0">
+                                    <NextLink
+                                        href={facetHref(String(facet.id), option.value)}
+                                        aria-current={
+                                            isFacetActive(String(facet.id), option.value) ? 'page' : undefined
+                                        }
+                                    >
+                                        {option.label}
+                                    </NextLink>
+                                </Button>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            ))}
         </div>
     );
 };

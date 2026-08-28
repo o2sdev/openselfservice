@@ -11,6 +11,21 @@ export const mapTicket = (id: string, locale?: string): Tickets.Model.Ticket | u
     return MOCK_TICKETS_EN.find((ticket) => ticket.id === id);
 };
 
+/**
+ * `status` is documented as one value or a repeated param, so it arrives as a string or an array.
+ * An empty array means the filter was cleared, not that nothing matches.
+ */
+const matchesStatus = (
+    status: Tickets.Model.Ticket['status'],
+    filter: Tickets.Request.GetTicketListQuery['status'],
+): boolean => {
+    if (!filter || (Array.isArray(filter) && !filter.length)) {
+        return true;
+    }
+
+    return Array.isArray(filter) ? filter.includes(status) : status === filter;
+};
+
 export const mapTickets = (options: Tickets.Request.GetTicketListQuery): Tickets.Model.Tickets => {
     const { offset = 0, limit = 10, locale } = options;
     let ticketsSource = MOCK_TICKETS_EN;
@@ -24,7 +39,7 @@ export const mapTickets = (options: Tickets.Request.GetTicketListQuery): Tickets
         (item) =>
             (!options.topic || item.topic === options.topic) &&
             (!options.type || item.type === options.type) &&
-            (!options.status || item.status === options.status) &&
+            matchesStatus(item.status, options.status) &&
             (!options.dateFrom || new Date(item.createdAt) >= new Date(options.dateFrom)) &&
             (!options.dateTo || new Date(item.createdAt) <= new Date(options.dateTo)) &&
             (!options.dateFrom || new Date(item.updatedAt) >= new Date(options.dateFrom)) &&

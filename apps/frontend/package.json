@@ -10,6 +10,7 @@
         "postbuild": "shx cp -r public .next/standalone/apps/frontend && shx cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
         "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
+        "test": "vitest run",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen web-component"
     },
@@ -89,6 +90,7 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/vitest-config": "*",
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "@turbo/gen": "^2.8.11",
@@ -106,7 +108,8 @@
         "shx": "^0.4.0",
         "tailwindcss": "^4.2.1",
         "tsx": "^4.21.0",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "vite-tsconfig-paths": "^6.1.1"
     },
     "overrides": {
         "@types/react": "19.2.14",

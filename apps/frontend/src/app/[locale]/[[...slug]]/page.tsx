@@ -32,11 +32,14 @@ interface Props {
         locale: string;
         slug: Array<string>;
     }>;
+    /** Filter state of URL-driven blocks, so a filtered link renders filtered on the server. */
+    searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
     const session = await auth();
     const { locale, slug } = await params;
+    const query = await searchParams;
 
     const finalSlug = slug ? `/${slug.join('/')}` : '/';
 
@@ -65,17 +68,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             noFollow: meta.seo.noFollow,
             translations: meta.locales,
             alternates: data?.alternativeUrls,
+            searchParams: query,
         });
     } catch (_error) {
         notFound();
     }
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
     const headersList = await headers();
     const session = await auth();
 
     const { locale, slug } = await params;
+    const query = await searchParams;
 
     const init = await sdk.modules.getInit(
         {
@@ -148,7 +153,7 @@ export default async function Page({ params }: Props) {
                                         )}
                                     </div>
 
-                                    <PageTemplate slug={slug} data={data} />
+                                    <PageTemplate slug={slug} data={data} searchParams={query} />
                                 </main>
                             </div>
                         </div>

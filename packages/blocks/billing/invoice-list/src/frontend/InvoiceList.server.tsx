@@ -1,10 +1,17 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import type { Model } from '../api-harmonization/invoice-list.client';
+import { parseFiltersFromSearchParams } from '@o2s/ui/hooks/use-url-filters.utils';
+
+import type { Model, Request } from '../api-harmonization/invoice-list.client';
 import { sdk } from '../sdk';
 
 import { InvoiceListProps } from './InvoiceList.types';
+
+/** Filter keys the block query understands, as the client writes them (`?invoice_sort=…`). */
+const FILTER_KEYS = ['search', 'sort', 'type', 'paymentStatus', 'dateFrom', 'dateTo'] as const;
+
+const NAMESPACE = 'invoice';
 
 export const InvoiceListDynamic = dynamic(() =>
     import('./InvoiceList.client').then((module) => module.InvoiceListPure),
@@ -16,12 +23,17 @@ export const InvoiceListServer: React.FC<InvoiceListProps> = async ({
     locale,
     routing,
     hasPriority,
+    searchParams,
 }) => {
     let data: Model.InvoiceListBlock;
     try {
         data = await sdk.blocks.getInvoiceList(
             {
                 id,
+                ...parseFiltersFromSearchParams<Request.GetInvoiceListBlockQuery>(searchParams, {
+                    namespace: NAMESPACE,
+                    keys: FILTER_KEYS,
+                }),
             },
             { 'x-locale': locale },
             accessToken,

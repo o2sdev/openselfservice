@@ -7,6 +7,8 @@ import reactStringReplace from 'react-string-replace';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { BLOCK_STATE_KEYS } from '@o2s/ui/hooks/use-url-filters.utils';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
@@ -18,7 +20,8 @@ import { FilterLabels, FiltersProps } from './Filters.types';
 import { useFiltersContext } from './FiltersContext';
 
 const SUPPORTED_FILTER_TYPES = ['FilterToggleGroup', 'FilterSelect', 'FilterText', 'FilterViewModeToggle'] as const;
-const SKIP_FILTER_KEYS = ['offset', 'limit', 'id', 'viewMode'] as const;
+/** The block's own state plus the view toggle, which is a display choice rather than a filter. */
+const SKIP_FILTER_KEYS: readonly string[] = [...BLOCK_STATE_KEYS, 'viewMode'];
 
 function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     let leadingItem: Models.Filters.FilterItem<T> | undefined;
@@ -89,7 +92,7 @@ function getActiveFilterBadges<T, S extends FormikValues>(
     const badges: ActiveFilterBadge[] = [];
 
     for (const key in values) {
-        if (SKIP_FILTER_KEYS.includes(key as (typeof SKIP_FILTER_KEYS)[number])) {
+        if (SKIP_FILTER_KEYS.includes(key)) {
             continue;
         }
 
