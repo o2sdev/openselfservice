@@ -18,7 +18,7 @@ export const cart = (sdk: Sdk) => {
 
             getCart: (cartId: string, headers: AppHeaders, authorization?: string): Promise<Carts.Model.Cart> =>
                 request({
-                    url: `${CARTS_API_URL}/${cartId}`,
+                    url: `${CARTS_API_URL}/${encodeURIComponent(cartId)}`,
                     headers,
                     authorization,
                 }),

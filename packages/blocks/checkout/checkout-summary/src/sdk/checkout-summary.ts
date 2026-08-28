@@ -32,7 +32,7 @@ export const checkoutSummary = (sdk: Sdk) => {
                 authorization?: string,
             ): Promise<Checkout.Model.CheckoutSummary> =>
                 request({
-                    url: `${CHECKOUT_API_URL}/${cartId}/summary`,
+                    url: `${CHECKOUT_API_URL}/${encodeURIComponent(cartId)}/summary`,
                     headers,
                     authorization,
                 }),
@@ -44,7 +44,7 @@ export const checkoutSummary = (sdk: Sdk) => {
             ): Promise<Checkout.Model.PlaceOrderResponse> =>
                 request({
                     method: 'post',
-                    url: `${CHECKOUT_API_URL}/${cartId}/place-order`,
+                    url: `${CHECKOUT_API_URL}/${encodeURIComponent(cartId)}/place-order`,
                     data: body,
                     headers,
                     authorization,

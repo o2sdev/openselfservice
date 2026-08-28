@@ -24,7 +24,7 @@ export const invoiceList = (sdk: Sdk) => {
                 }),
             getInvoicePdf: (id: string, headers: AppHeaders, authorization?: string): Promise<Blob> =>
                 request({
-                    url: `${API_URL}/${id}/pdf`,
+                    url: `${API_URL}/${encodeURIComponent(id)}/pdf`,
                     responseType: 'blob',
                     headers,
                     authorization,

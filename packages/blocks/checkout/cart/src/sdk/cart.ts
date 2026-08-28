@@ -32,7 +32,7 @@ export const cart = (sdk: Sdk) => {
                 authorization?: string,
             ): Promise<Carts.Model.Cart> =>
                 request({
-                    url: `${CARTS_API_URL}/${cartId}`,
+                    url: `${CARTS_API_URL}/${encodeURIComponent(cartId)}`,
                     headers,
                     authorization,
                 }),
@@ -46,7 +46,7 @@ export const cart = (sdk: Sdk) => {
             ): Promise<Carts.Model.Cart> =>
                 request({
                     method: 'patch',
-                    url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
+                    url: `${CARTS_API_URL}/${encodeURIComponent(cartId)}/items/${encodeURIComponent(itemId)}`,
                     data: body,
                     headers,
                     authorization,
@@ -60,7 +60,7 @@ export const cart = (sdk: Sdk) => {
             ): Promise<Carts.Model.Cart> =>
                 request({
                     method: 'delete',
-                    url: `${CARTS_API_URL}/${cartId}/items/${itemId}`,
+                    url: `${CARTS_API_URL}/${encodeURIComponent(cartId)}/items/${encodeURIComponent(itemId)}`,
                     headers,
                     authorization,
                 }),

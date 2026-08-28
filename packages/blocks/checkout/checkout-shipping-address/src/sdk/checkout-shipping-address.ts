@@ -33,7 +33,7 @@ export const checkoutShippingAddress = (sdk: Sdk) => {
                 authorization?: string,
             ): Promise<Carts.Model.Cart> =>
                 request({
-                    url: `${CARTS_API_URL}/${cartId}`,
+                    url: `${CARTS_API_URL}/${encodeURIComponent(cartId)}`,
                     headers,
                     authorization,
                 }),
@@ -47,7 +47,7 @@ export const checkoutShippingAddress = (sdk: Sdk) => {
             ): Promise<Carts.Model.Cart> =>
                 request({
                     method: 'post',
-                    url: `${CHECKOUT_API_URL}/${cartId}/addresses`,
+                    url: `${CHECKOUT_API_URL}/${encodeURIComponent(cartId)}/addresses`,
                     data: body,
                     headers,
                     authorization,
@@ -60,7 +60,7 @@ export const checkoutShippingAddress = (sdk: Sdk) => {
             ): Promise<Carts.Model.Cart> =>
                 request({
                     method: 'post',
-                    url: `${CHECKOUT_API_URL}/${cartId}/shipping-method`,
+                    url: `${CHECKOUT_API_URL}/${encodeURIComponent(cartId)}/shipping-method`,
                     data: body,
                     headers,
                     authorization,
@@ -71,7 +71,7 @@ export const checkoutShippingAddress = (sdk: Sdk) => {
                 authorization?: string,
             ): Promise<Checkout.Model.ShippingOptions> =>
                 request({
-                    url: `${CHECKOUT_API_URL}/${cartId}/shipping-options`,
+                    url: `${CHECKOUT_API_URL}/${encodeURIComponent(cartId)}/shipping-options`,
                     headers,
                     authorization,
                 }),
