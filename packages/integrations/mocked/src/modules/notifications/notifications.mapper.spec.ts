@@ -3,12 +3,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { STATUS_TTL, mapNotification, mapNotifications, markNotificationAs } from './notifications.mapper';
 
 const ID = 'NOT-123-456';
+const DAY = 24 * 60 * 60 * 1000;
 
 // snapshotted before any test mutates the shared mocks, so that a missing rollback cannot make an assertion pass
 const PRISTINE = {
     status: mapNotification(ID)!.status,
     updatedAt: mapNotification(ID)!.updatedAt,
+    createdAt: mapNotification(ID)!.createdAt,
 };
+
+const iso = (time: number) => new Date(time).toISOString();
 
 const statusOf = (locale = 'en') => mapNotification(ID, locale)?.status;
 
@@ -98,5 +102,42 @@ describe('markNotificationAs', () => {
         vi.advanceTimersByTime(STATUS_TTL + 1);
 
         expect(statusOf()).toBe('UNVIEWED');
+    });
+});
+
+describe('mapNotifications', () => {
+    const listed = (options: { dateFrom?: string; dateTo?: string }) =>
+        mapNotifications({ limit: 100, ...options }).data.find((notification) => notification.id === ID);
+
+    beforeEach(() => {
+        vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+        vi.advanceTimersByTime(STATUS_TTL + 1);
+        mapNotification(ID);
+        vi.useRealTimers();
+    });
+
+    it('should keep a notification whose date is inside the range', () => {
+        const createdAt = new Date(PRISTINE.createdAt).getTime();
+
+        expect(listed({ dateFrom: iso(createdAt - DAY), dateTo: iso(createdAt + DAY) })).toBeDefined();
+    });
+
+    it('should drop a notification whose date is outside the range', () => {
+        const createdAt = new Date(PRISTINE.createdAt).getTime();
+
+        expect(listed({ dateFrom: iso(createdAt + DAY), dateTo: iso(createdAt + 2 * DAY) })).toBeUndefined();
+    });
+
+    it('should keep a notification marked as viewed after the range it was created in', () => {
+        const createdAt = new Date(PRISTINE.createdAt).getTime();
+        const range = { dateFrom: iso(createdAt - DAY), dateTo: iso(createdAt + DAY) };
+
+        vi.setSystemTime(createdAt + 5 * DAY);
+        markNotificationAs({ id: ID, status: 'VIEWED' });
+
+        expect(listed(range)).toMatchObject({ status: 'VIEWED' });
     });
 });

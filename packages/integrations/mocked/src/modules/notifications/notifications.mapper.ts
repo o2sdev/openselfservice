@@ -96,10 +96,10 @@ export const mapNotifications = (
             (!options.type || notification.type === options.type) &&
             (!options.priority || notification.priority === options.priority) &&
             (!options.status || notification.status === options.status) &&
+            // the date range is about when the notification arrived, so `updatedAt` is deliberately left out
+            // of it - marking one as viewed would otherwise drop it out of a list filtered by a past range
             (!options.dateFrom || new Date(notification.createdAt) >= new Date(options.dateFrom)) &&
-            (!options.dateTo || new Date(notification.createdAt) <= new Date(options.dateTo)) &&
-            (!options.dateFrom || new Date(notification.updatedAt) >= new Date(options.dateFrom)) &&
-            (!options.dateTo || new Date(notification.updatedAt) <= new Date(options.dateTo)),
+            (!options.dateTo || new Date(notification.createdAt) <= new Date(options.dateTo)),
     );
 
     if (options.sort) {
