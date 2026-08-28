@@ -78,7 +78,7 @@ const mergeHeaders = (headers?: BlockRequestHeaders, authorization?: string): Re
 
     for (const [name, value] of Object.entries(headers || {})) {
         if (value !== undefined) {
-            merged[name] = value;
+            merged[name.toLowerCase()] = value;
         }
     }
 
