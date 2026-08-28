@@ -3,16 +3,19 @@ import { Notifications } from '@o2s/framework/modules';
 import { MOCK_NOTIFICATIONS_DE, MOCK_NOTIFICATIONS_EN, MOCK_NOTIFICATIONS_PL } from './notifications.mocks';
 import * as CustomNotifications from './notifications.model';
 
+/** The mocked notifications of every locale. The same notification id exists in each of them. */
+const NOTIFICATIONS_BY_LOCALE = {
+    en: MOCK_NOTIFICATIONS_EN,
+    pl: MOCK_NOTIFICATIONS_PL,
+    de: MOCK_NOTIFICATIONS_DE,
+};
+
+type NotificationsLocale = keyof typeof NOTIFICATIONS_BY_LOCALE;
+
 export const mapNotification = (id: string, locale = 'en'): CustomNotifications.Notification | undefined => {
     restoreExpiredStatuses();
 
-    const notificationsMap = {
-        en: MOCK_NOTIFICATIONS_EN,
-        pl: MOCK_NOTIFICATIONS_PL,
-        de: MOCK_NOTIFICATIONS_DE,
-    };
-
-    return notificationsMap[locale as keyof typeof notificationsMap]?.find((notification) => notification.id === id);
+    return NOTIFICATIONS_BY_LOCALE[locale as NotificationsLocale]?.find((notification) => notification.id === id);
 };
 
 /**
@@ -56,7 +59,7 @@ export const markNotificationAs = (request: Notifications.Request.MarkNotificati
     const updatedAt = new Date().toISOString();
     const expiresAt = Date.now() + STATUS_TTL;
 
-    return [MOCK_NOTIFICATIONS_EN, MOCK_NOTIFICATIONS_PL, MOCK_NOTIFICATIONS_DE].reduce((found, notifications) => {
+    return Object.values(NOTIFICATIONS_BY_LOCALE).reduce((found, notifications) => {
         const notification = notifications.find((notification) => notification.id === request.id);
 
         if (!notification) {
@@ -86,12 +89,7 @@ export const mapNotifications = (
     const { offset = 0, limit = 10, locale = 'en' } = options;
 
     // Get notifications for the specified locale or fallback to English
-    const notificationsMap = {
-        en: MOCK_NOTIFICATIONS_EN,
-        pl: MOCK_NOTIFICATIONS_PL,
-        de: MOCK_NOTIFICATIONS_DE,
-    };
-    const localeNotifications = notificationsMap[locale as keyof typeof notificationsMap] || MOCK_NOTIFICATIONS_EN;
+    const localeNotifications = NOTIFICATIONS_BY_LOCALE[locale as NotificationsLocale] || MOCK_NOTIFICATIONS_EN;
 
     let filteredNotifications = localeNotifications.filter(
         (notification) =>
