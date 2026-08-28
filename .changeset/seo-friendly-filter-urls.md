@@ -9,7 +9,7 @@ feat(frontend): server-rendered, indexable URLs for list filters
 
 Filter params reached the browser only: a page always rendered with the default filters and the client
 replaced them afterwards, so `/products?category=TOOLS` served the full catalogue to anyone opening the
-link — a crawler included — and every filtered variant canonicalised to the bare page.
+link (a crawler included) and every filtered variant canonicalised to the bare page.
 
 `searchParams` now travel from the page through `renderBlocks` into the blocks (`BlockSearchParams` on
 `BaseBlockProps`), and the product list resolves them into its query server-side. The block query takes
