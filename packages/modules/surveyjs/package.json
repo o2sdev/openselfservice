@@ -40,8 +40,8 @@
         "@o2s/utils.logger": "*",
         "date-fns": "^4.1.0",
         "lucide-react": "^0.575.0",
-        "survey-core": "^2.5.12",
-        "survey-react-ui": "^2.5.12"
+        "survey-core": "~2.5.40",
+        "survey-react-ui": "~2.5.40"
     },
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
@@ -51,10 +51,10 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "^9.2.1",
-        "eslint": "^9.39.4",
-        "prettier": "^3.8.1",
-        "tsc-alias": "^1.8.16",
+        "concurrently": "~9.2.4",
+        "eslint": "~9.39.5",
+        "prettier": "~3.8.5",
+        "tsc-alias": "~1.8.17",
         "typescript": "^5.9.3"
     },
     "peerDependencies": {

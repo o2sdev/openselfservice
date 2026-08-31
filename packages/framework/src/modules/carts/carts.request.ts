@@ -138,8 +138,8 @@ export class UpdateCartItemParams {
 /** Request body for updating a cart item. */
 export class UpdateCartItemBody {
     /** Updated item quantity. */
-    @ApiPropertyOptional({ description: 'Updated item quantity.' })
-    quantity?: number;
+    @ApiProperty({ description: 'Updated item quantity.' })
+    quantity!: number;
     /** Integration-specific item metadata payload. */
     @ApiPropertyOptional({ description: 'Integration-specific item metadata payload.', additionalProperties: true })
     metadata?: Record<string, unknown>;

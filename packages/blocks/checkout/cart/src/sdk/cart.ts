@@ -50,7 +50,7 @@ export const cart = (sdk: Sdk) => ({
         updateCartItem: (
             cartId: string,
             itemId: string,
-            body: { quantity?: number; metadata?: Record<string, unknown>; locale?: string },
+            body: { quantity: number; metadata?: Record<string, unknown>; locale?: string },
             headers: Models.Headers.AppHeaders,
             authorization?: string,
         ): Promise<Carts.Model.Cart> =>

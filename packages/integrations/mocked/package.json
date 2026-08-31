@@ -52,17 +52,17 @@
         "seed": "tsx prisma/seed.ts"
     },
     "dependencies": {
-        "@auth/prisma-adapter": "^2.11.1",
+        "@auth/prisma-adapter": "~2.11.3",
         "@o2s/modules.documents": "*",
         "@o2s/utils.logger": "*",
-        "@prisma/client": "^6.19.2",
+        "@prisma/client": "~6.19.3",
         "bcryptjs": "^3.0.3",
         "dotenv-cli": "^11.0.0",
         "jsonwebtoken": "^9.0.3",
-        "prisma": "^6.19.2"
+        "prisma": "~6.19.3"
     },
     "devDependencies": {
-        "@auth/core": "^0.41.1",
+        "@auth/core": "~0.41.3",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
@@ -70,13 +70,13 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "@types/jsonwebtoken": "^9.0.10",
-        "concurrently": "^9.2.1",
-        "eslint": "^9.39.4",
+        "concurrently": "~9.2.4",
+        "eslint": "~9.39.5",
         "express": "5.2.1",
-        "prettier": "^3.8.1",
+        "prettier": "~3.8.5",
         "shx": "^0.4.0",
-        "tsc-alias": "^1.8.16",
-        "tsx": "^4.21.0",
+        "tsc-alias": "~1.8.17",
+        "tsx": "~4.21.1",
         "typescript": "^5.9.3",
         "vitest": "^4.0.18"
     },
