@@ -83,7 +83,7 @@
         "libphonenumber-js": "^1.13.12",
         "lucide-react": "^0.577.0",
         "markdown-to-jsx": "9.10.2",
-        "next": "^16.3.3",
+        "next": "^16.3.4",
         "next-intl": "^4.14.1",
         "mitt": "^3.0.1",
         "react-day-picker": "^9.14.0",
