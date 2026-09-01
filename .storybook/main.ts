@@ -6,7 +6,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,6 +42,12 @@ const config: StorybookConfig = {
     },
     typescript: {
         reactDocgen: 'react-docgen-typescript',
+        reactDocgenTypescriptOptions: {
+            // Build the docgen TS program from a tsconfig that includes the UI + block sources so
+            // react-docgen-typescript can read their prop types (otherwise every component is skipped
+            // as "not included in the active TypeScript project").
+            tsconfigPath: path.resolve(__dirname, './tsconfig.json'),
+        },
     },
     env: (config) => ({
         ...config,
@@ -54,7 +59,6 @@ const config: StorybookConfig = {
                 react({
                     jsxRuntime: 'automatic',
                 }),
-                tsconfigPaths(),
                 svgr({
                     // Same behavior as @svgr/webpack
                     svgrOptions: {
@@ -86,6 +90,7 @@ const config: StorybookConfig = {
                 ],
             },
             resolve: {
+                tsconfigPaths: true,
                 conditions: ['import', 'module', 'browser', 'default'],
                 alias: {
                     '@o2s/configs.integrations/live-preview': path.resolve(__dirname, './mocks/live-preview.mock.ts'),
