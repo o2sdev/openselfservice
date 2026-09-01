@@ -58,7 +58,7 @@
         "prettier": "^3.9.6",
         "tsc-alias": "^1.9.3",
         "typescript": "^5.9.3",
-        "vite": "^7.3.6",
+        "vite": "^8.2.2",
         "vitest": "^4.1.11"
     },
     "peerDependencies": {
