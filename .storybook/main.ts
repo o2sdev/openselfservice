@@ -73,6 +73,7 @@ const config: StorybookConfig = {
             },
             optimizeDeps: {
                 include: [
+                    '@o2s/framework/headers',
                     '@o2s/framework/modules',
                     '@o2s/framework/sdk',
                     'storybook/test',
@@ -91,6 +92,7 @@ const config: StorybookConfig = {
                     '@o2s/configs.integrations/live-preview': path.resolve(__dirname, './mocks/live-preview.mock.ts'),
                     '@o2s/framework/sdk': path.resolve(__dirname, '../packages/framework/src/sdk.ts'),
                     '@o2s/framework/modules': path.resolve(__dirname, '../packages/framework/src/index.ts'),
+                    '@o2s/framework/headers': path.resolve(__dirname, '../packages/framework/src/headers.ts'),
                     '@o2s/ui': path.resolve(__dirname, '../packages/ui/src'),
                     '@o2s/ui/components': path.resolve(__dirname, '../packages/ui/src/components'),
                     '@o2s/utils.api-harmonization': path.resolve(__dirname, './mocks/utils.api-harmonization.mock.ts'),

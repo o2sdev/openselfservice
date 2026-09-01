@@ -5,8 +5,18 @@ import { getNotification, getNotifications, markAs } from './api/notifications';
 import { createTicket, getTicket, getTickets } from './api/tickets';
 import { getCustomerForCurrentUserById, getDefaultCustomerForCurrentUser, getUser } from './api/users';
 import { createInterceptors } from './interceptors';
+import type { BlockResponseType } from './utils/block-request';
 import { LoggerConfig } from './utils/logger';
 import { AppHeaders } from './utils/models/headers';
+
+export { BlockRequestError, createBlockRequest } from './utils/block-request';
+export type {
+    BlockRequest,
+    BlockRequestConfig,
+    BlockRequestHeaders,
+    BlockRequestMethod,
+    BlockResponseType,
+} from './utils/block-request';
 
 export interface CompatRequestConfig {
     url?: string;
@@ -14,6 +24,7 @@ export interface CompatRequestConfig {
     headers?: Partial<AppHeaders> & Record<string, string>;
     params?: unknown;
     data?: unknown;
+    responseType?: BlockResponseType;
     [key: string]: unknown;
 }
 
@@ -86,6 +97,10 @@ export const getSdk = ({ apiUrl, logger }: SdkConfig): Sdk => {
 
         if (config.headers) {
             fetchOptions.headers = config.headers as FetchOptions['headers'];
+        }
+
+        if (config.responseType) {
+            fetchOptions.responseType = config.responseType;
         }
 
         const url = config.url || '';
