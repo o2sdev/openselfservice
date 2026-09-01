@@ -94,7 +94,7 @@
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "@turbo/gen": "^2.10.12",
-        "@types/node": "^24.13.3",
+        "@types/node": "^26.4.0",
         "@types/react": "19.2.18",
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "19.2.5",
