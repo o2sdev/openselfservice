@@ -2,7 +2,7 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
 import path from 'node:path';
-import { defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
 const dirname = import.meta.dirname;
 
@@ -13,6 +13,9 @@ export default defineConfig({
             enabled: true,
             provider: 'v8',
             reporter: ['text-summary', 'html', 'json-summary', 'json'],
+            // JSON modules (e.g. the i18n message catalogs imported by .storybook/preview) aren't
+            // instrumentable source; the v8 provider's rolldown pass errors trying to parse them.
+            exclude: [...coverageConfigDefaults.exclude, '**/*.json'],
         },
         projects: [
             {
@@ -36,7 +39,6 @@ export default defineConfig({
                             },
                         ],
                     },
-                    setupFiles: ['.storybook/vitest.setup.ts'],
                 },
             },
             {
