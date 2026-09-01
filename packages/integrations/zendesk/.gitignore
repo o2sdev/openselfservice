@@ -6,6 +6,7 @@
 
 # Generated OpenAPI files
 /scripts/oas/oas.yaml
+/scripts/oas/help-center-oas.yaml
 /generated/
 
 # Logs
