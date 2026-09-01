@@ -39,7 +39,7 @@
         "@o2s/ui": "*",
         "@o2s/utils.logger": "*",
         "date-fns": "^4.4.0",
-        "lucide-react": "^0.577.0",
+        "lucide-react": "^1.38.0",
         "survey-core": "^2.5.40",
         "survey-react-ui": "^2.5.40"
     },

@@ -35,7 +35,7 @@
         "boxen": "^8.0.1",
         "is-docker": "^4.0.0",
         "ts-node": "^10.9.2",
-        "uuid": "^13.0.2"
+        "uuid": "^14.0.2"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
