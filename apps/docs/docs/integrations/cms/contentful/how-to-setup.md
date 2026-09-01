@@ -31,7 +31,9 @@ Point the `cms` domain's import line (and, if you use articles, the `articles` l
 ```typescript
 // before: import * as CmsSource from '@o2s/integrations.mocked/integration';
 import * as CmsSource from '@o2s/integrations.contentful-cms/integration';
-import * as ArticlesSource from '@o2s/integrations.contentful-cms/integration'; // if using articles functionality
+import * as ArticlesSource from '@o2s/integrations.contentful-cms/integration';
+
+// if using articles functionality
 ```
 
 That is all that is needed: the domain assignments in `createIntegrationConfig` and the matching `export import` type exports both reference these aliases, so they switch together. Assigning an integration to a domain it does not provide is a compile error.

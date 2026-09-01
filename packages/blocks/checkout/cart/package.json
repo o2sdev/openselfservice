@@ -26,7 +26,7 @@
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
-        "@nestjs/testing": "~11.1.29",
+        "@nestjs/testing": "^11.2.3",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
@@ -34,14 +34,14 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/vitest-config": "*",
-        "@storybook/nextjs-vite": "^10.2.19",
-        "concurrently": "~9.2.4",
+        "@storybook/nextjs-vite": "^10.5.10",
+        "concurrently": "^9.2.4",
         "dotenv-cli": "^11.0.0",
-        "eslint": "~9.39.5",
-        "prettier": "^3.6.2",
-        "tsc-alias": "~1.8.17",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.2",
         "typescript": "^5.9.3",
-        "vitest": "^4.0.18"
+        "vitest": "^4.1.11"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4.0.1",

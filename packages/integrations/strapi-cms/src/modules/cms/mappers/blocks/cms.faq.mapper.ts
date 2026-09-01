@@ -19,12 +19,10 @@ export const mapFaqBlock = (data: GetComponentQuery): CMS.Model.FaqBlock.FaqBloc
                 id: component.id,
                 title: component.title,
                 subtitle: component.subtitle,
-                items: component.items?.map(
-                    (item): CMS.Model.FaqBlock.FaqItem => ({
-                        title: item.title,
-                        content: item.description,
-                    }),
-                ),
+                items: component.items?.map((item): CMS.Model.FaqBlock.FaqItem => ({
+                    title: item.title,
+                    content: item.description,
+                })),
                 banner: {
                     title: component.banner?.title,
                     description: component.banner?.description,

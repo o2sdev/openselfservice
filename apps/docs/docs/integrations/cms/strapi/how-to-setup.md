@@ -31,7 +31,9 @@ Point the `cms` domain's import line (and, if you use articles, the `articles` l
 ```typescript
 // before: import * as CmsSource from '@o2s/integrations.mocked/integration';
 import * as CmsSource from '@o2s/integrations.strapi-cms/integration';
-import * as ArticlesSource from '@o2s/integrations.strapi-cms/integration'; // if using articles functionality
+import * as ArticlesSource from '@o2s/integrations.strapi-cms/integration';
+
+// if using articles functionality
 ```
 
 That is all that is needed: the domain assignments in `createIntegrationConfig` and the matching `export import` type exports both reference these aliases, so they switch together. Assigning an integration to a domain it does not provide is a compile error.
@@ -46,10 +48,10 @@ After installing the package, you need to configure environment variables that w
 
 Configure the following environment variables in your API Harmonization server:
 
-| name                     | type   | description                                                                             | required                          |
-| ------------------------ | ------ | --------------------------------------------------------------------------------------- | --------------------------------- |
-| CMS_STRAPI_BASE_URL      | string | the base URL pointing to the domain hosting Strapi CMS                                  | yes                               |
-| CMS_STRAPI_API_KEY       | string | API key for authenticating requests to Strapi, if your instance requires it             | no                                |
+| name                     | type   | description                                                                                              | required                                        |
+| ------------------------ | ------ | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| CMS_STRAPI_BASE_URL      | string | the base URL pointing to the domain hosting Strapi CMS                                                   | yes                                             |
+| CMS_STRAPI_API_KEY       | string | API key for authenticating requests to Strapi, if your instance requires it                              | no                                              |
 | CMS_STRAPI_PREVIEW_TOKEN | string | API token with draft `find` permission, used to read draft content for [Live Preview](./live-preview.md) | no (only if the public role lacks draft `find`) |
 
 You can obtain this value from your Strapi instance:

@@ -33,18 +33,18 @@
     "dependencies": {
         "@o2s/ui": "*",
         "class-variance-authority": "^0.7.1",
-        "react": "~19.2.8"
+        "react": "^19.2.8"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "~9.2.4",
-        "eslint": "~9.39.5",
-        "prettier": "~3.8.5",
+        "concurrently": "^9.2.4",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
         "react-string-replace": "^2.0.1",
-        "tsc-alias": "~1.8.17",
+        "tsc-alias": "^1.9.2",
         "typescript": "^5.9.3"
     },
     "peerDependencies": {

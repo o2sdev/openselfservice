@@ -36,7 +36,7 @@
     },
     "dependencies": {
         "@o2s/utils.logger": "*",
-        "algoliasearch": "^5.49.2"
+        "algoliasearch": "^5.57.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
@@ -44,12 +44,12 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "concurrently": "~9.2.4",
-        "eslint": "~9.39.5",
-        "prettier": "~3.8.5",
-        "tsc-alias": "~1.8.17",
+        "concurrently": "^9.2.4",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.2",
         "typescript": "^5.9.3",
-        "vitest": "^4.0.18"
+        "vitest": "^4.1.11"
     },
     "peerDependencies": {
         "@o2s/framework": "*",

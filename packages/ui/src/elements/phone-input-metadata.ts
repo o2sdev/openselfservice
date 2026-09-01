@@ -168,4 +168,4 @@ export const phoneInputMetadata = {
             ],
         ],
     },
-} as MetadataJson;
+} as unknown as MetadataJson;

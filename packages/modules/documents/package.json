@@ -40,11 +40,11 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "concurrently": "^9.1.2",
-        "eslint": "^9.24.0",
-        "prettier": "^3.5.3",
-        "tsc-alias": "~1.8.17",
-        "typescript": "^5.8.3"
+        "concurrently": "^9.2.4",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.2",
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4",

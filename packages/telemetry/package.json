@@ -35,7 +35,7 @@
         "boxen": "^8.0.1",
         "is-docker": "^4.0.0",
         "ts-node": "^10.9.2",
-        "uuid": "~13.0.2"
+        "uuid": "^13.0.2"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
@@ -43,9 +43,9 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@types/configstore": "^6.0.2",
-        "eslint": "~9.39.5",
-        "prettier": "~3.8.5",
-        "tsc-alias": "~1.8.17",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.2",
         "typescript": "^5.9.3"
     }
 }

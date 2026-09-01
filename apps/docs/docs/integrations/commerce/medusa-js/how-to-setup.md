@@ -29,9 +29,13 @@ import * as OrdersSource from '@o2s/integrations.medusajs/integration';
 import * as ProductsSource from '@o2s/integrations.medusajs/integration';
 import * as CartsSource from '@o2s/integrations.medusajs/integration';
 import * as CheckoutSource from '@o2s/integrations.medusajs/integration';
-import * as CustomersSource from '@o2s/integrations.medusajs/integration'; // required for checkout address resolution
-import * as PaymentsSource from '@o2s/integrations.medusajs/integration'; // required for checkout
-import * as ResourcesSource from '@o2s/integrations.medusajs/integration'; // if using Resources module
+import * as CustomersSource from '@o2s/integrations.medusajs/integration';
+// required for checkout address resolution
+import * as PaymentsSource from '@o2s/integrations.medusajs/integration';
+// required for checkout
+import * as ResourcesSource from '@o2s/integrations.medusajs/integration';
+
+// if using Resources module
 ```
 
 That is all that is needed: the assignments in `createIntegrationConfig` and the matching `export import` type exports both reference these aliases, so they switch together and cannot fall out of sync. Assigning an integration to a domain it does not provide is a compile error.

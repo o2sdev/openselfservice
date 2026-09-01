@@ -27,11 +27,11 @@ treats it exactly like native content.
 
 This mechanism differs from Contentful:
 
-| | Contentful | Strapi |
-| --- | --- | --- |
-| Field identity | Separate `meta` object, read as `data-*` attributes via `useInspector` | Encoded in-band inside the string values (stega) |
-| Where it's produced | `meta` built in the mapper | Marker encoded on the API Harmonization server, after mapping |
-| Frontend `useInspector` | Emits inspector attributes | No-op (identity travels in the string) |
+|                         | Contentful                                                             | Strapi                                                        |
+| ----------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Field identity          | Separate `meta` object, read as `data-*` attributes via `useInspector` | Encoded in-band inside the string values (stega)              |
+| Where it's produced     | `meta` built in the mapper                                             | Marker encoded on the API Harmonization server, after mapping |
+| Frontend `useInspector` | Emits inspector attributes                                             | No-op (identity travels in the string)                        |
 
 ## How it works
 
@@ -50,7 +50,12 @@ Encoding happens after the mapper and after any cache read, so transformations c
 ```typescript
 import { vercelStegaCombine } from '@vercel/stega';
 
-export const encodeField = (text: string, ctx: SourceMapContext, path: string, type: StrapiFieldType = 'string'): string => {
+export const encodeField = (
+    text: string,
+    ctx: SourceMapContext,
+    path: string,
+    type: StrapiFieldType = 'string',
+): string => {
     const strapiSource = new URLSearchParams();
     strapiSource.set('documentId', ctx.documentId); // owning entry (the component)
     strapiSource.set('type', type); // 'string', 'richtext', etc.
@@ -66,7 +71,10 @@ Each block's mapper exports an `encode<Block>(block, ctx)` next to its `map<Bloc
 example, the FAQ encoder:
 
 ```typescript
-export const encodeFaqBlock = (block: CMS.Model.FaqBlock.FaqBlock, ctx: SourceMapContext): CMS.Model.FaqBlock.FaqBlock => {
+export const encodeFaqBlock = (
+    block: CMS.Model.FaqBlock.FaqBlock,
+    ctx: SourceMapContext,
+): CMS.Model.FaqBlock.FaqBlock => {
     const enc = createFieldEncoder(ctx);
     return {
         ...block,
@@ -78,7 +86,11 @@ export const encodeFaqBlock = (block: CMS.Model.FaqBlock.FaqBlock, ctx: SourceMa
             content: enc(item.content, `items.${i}.description`, 'richtext'), // model `content` maps to Strapi `description`
         })),
         banner: block.banner
-            ? { ...block.banner, title: enc(block.banner.title, 'banner.title'), description: enc(block.banner.description, 'banner.description', 'richtext') }
+            ? {
+                  ...block.banner,
+                  title: enc(block.banner.title, 'banner.title'),
+                  description: enc(block.banner.description, 'banner.description', 'richtext'),
+              }
             : block.banner,
     };
 };
@@ -140,11 +152,7 @@ frontend already does this in the root layout):
 import { LivePreview } from '@o2s/configs.integrations/live-preview';
 
 function App({ children }) {
-    return (
-        <LivePreview.Provider enableLiveUpdates={isDraftModeEnabled}>
-            {children}
-        </LivePreview.Provider>
-    );
+    return <LivePreview.Provider enableLiveUpdates={isDraftModeEnabled}>{children}</LivePreview.Provider>;
 }
 ```
 
@@ -171,11 +179,11 @@ In preview, the frontend must allow two things:
 
 ### Environment variables (frontend / API Harmonization server)
 
-| Variable | Where | Purpose |
-| --- | --- | --- |
-| `NEXT_PUBLIC_CMS_URL` | frontend | Strapi admin origin: trusted source of preview messages and target of the "Edit block" links. **Required for preview** |
-| `CMS_STRAPI_BASE_URL` | API Harmonization server | Strapi base URL for GraphQL fetches |
-| `CMS_STRAPI_PREVIEW_TOKEN` | API Harmonization server | Optional; API token for draft reads when the public role lacks `find` |
+| Variable                   | Where                    | Purpose                                                                                                                |
+| -------------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_CMS_URL`      | frontend                 | Strapi admin origin: trusted source of preview messages and target of the "Edit block" links. **Required for preview** |
+| `CMS_STRAPI_BASE_URL`      | API Harmonization server | Strapi base URL for GraphQL fetches                                                                                    |
+| `CMS_STRAPI_PREVIEW_TOKEN` | API Harmonization server | Optional; API token for draft reads when the public role lacks `find`                                                  |
 
 ## Strapi configuration
 
@@ -215,13 +223,13 @@ regardless of who produced it.
 
 Edit-in-place is enabled for the same blocks as the Contentful integration:
 
-| Block | Encoded fields |
-| --- | --- |
-| FAQ | `title`, `subtitle`, `items[].title`, `items[].content`, `banner.title`, `banner.description` |
-| QuickLinks | `title`, `description`, `items[].label` |
-| TicketList | `title`, `subtitle`, `noResults.title`, `noResults.description` |
-| CategoryList | `title`, `description` |
-| ArticleList | `title`, `description` |
+| Block        | Encoded fields                                                                                |
+| ------------ | --------------------------------------------------------------------------------------------- |
+| FAQ          | `title`, `subtitle`, `items[].title`, `items[].content`, `banner.title`, `banner.description` |
+| QuickLinks   | `title`, `description`, `items[].label`                                                       |
+| TicketList   | `title`, `subtitle`, `noResults.title`, `noResults.description`                               |
+| CategoryList | `title`, `description`                                                                        |
+| ArticleList  | `title`, `description`                                                                        |
 
 Other blocks render draft content in preview but are not click-to-edit (no encoder).
 

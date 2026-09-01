@@ -49,12 +49,12 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/vitest-config": "*",
-        "@storybook/nextjs-vite": "^10.2.19",
-        "concurrently": "~9.2.4",
+        "@storybook/nextjs-vite": "^10.5.10",
+        "concurrently": "^9.2.4",
         "dotenv-cli": "^11.0.0",
-        "eslint": "~9.39.5",
-        "prettier": "~3.8.5",
-        "tsc-alias": "~1.8.17",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.2",
         "typescript": "^5.9.3"
     },
     "peerDependencies": {
