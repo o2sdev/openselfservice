@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/nextjs-vite';
 import tailwindcss from '@tailwindcss/postcss';
 import react from '@vitejs/plugin-react';
 import * as dotenv from 'dotenv';
+import { imageConfigDefault } from 'next/dist/shared/lib/image-config.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mergeConfig } from 'vite';
@@ -24,7 +25,6 @@ dotenv.config({
 const config: StorybookConfig = {
     stories: [
         './Introduction.mdx',
-        '../apps/frontend/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
         '../packages/blocks/**/src/frontend/**/*.stories.@(js|jsx|mjs|ts|tsx)',
         '../packages/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     ],
@@ -72,7 +72,14 @@ const config: StorybookConfig = {
             ],
             define: {
                 process: {
-                    env: env,
+                    env: {
+                        ...env,
+                        // next/image reads its config from __NEXT_IMAGE_OPTS, which @storybook/nextjs-vite
+                        // never defines - so it falls back to Next's default qualities ([75]) and warns on
+                        // stories using other values. Inject the default config with the quality levels our
+                        // stories actually use.
+                        __NEXT_IMAGE_OPTS: { ...imageConfigDefault, qualities: [50, 75, 90] },
+                    },
                 },
             },
             optimizeDeps: {
