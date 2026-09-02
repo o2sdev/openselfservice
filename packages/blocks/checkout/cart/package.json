@@ -26,7 +26,7 @@
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
-        "@nestjs/testing": "^11.2.3",
+        "@nestjs/testing": "^12.0.1",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
@@ -44,10 +44,10 @@
         "vitest": "^4.1.11"
     },
     "peerDependencies": {
-        "@nestjs/axios": "^4.0.1",
-        "@nestjs/common": "^11.0.16",
-        "@nestjs/config": "^4.0.2",
-        "@nestjs/core": "^11",
+        "@nestjs/axios": "^12.0.0",
+        "@nestjs/common": "^12.0.0",
+        "@nestjs/config": "^12.0.0",
+        "@nestjs/core": "^12.0.0",
         "@o2s/framework": "*",
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
