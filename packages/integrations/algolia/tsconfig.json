@@ -4,6 +4,7 @@
         "paths": {
             "@/*": ["./src/*"]
         },
+        "rootDir": "./src",
         "outDir": "./dist"
     },
     "include": ["src"],

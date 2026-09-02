@@ -77,7 +77,7 @@
         "shx": "^0.4.0",
         "tsc-alias": "^1.9.3",
         "tsx": "^4.23.13",
-        "typescript": "^5.9.3",
+        "typescript": "^6.0.3",
         "vitest": "^4.1.11"
     },
     "peerDependencies": {

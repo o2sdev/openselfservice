@@ -4,6 +4,8 @@
     "compilerOptions": {
         "baseUrl": ".",
         "types": ["docusaurus-plugin-sass"],
+        "ignoreDeprecations": "6.0",
+        "strict": false,
 
     },
     "exclude": [".docusaurus", "build"]

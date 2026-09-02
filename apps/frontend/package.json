@@ -108,7 +108,7 @@
         "shx": "^0.4.0",
         "tailwindcss": "^4.3.3",
         "tsx": "^4.23.13",
-        "typescript": "^5.9.3"
+        "typescript": "^6.0.3"
     },
     "overrides": {
         "@types/react": "19.2.18",

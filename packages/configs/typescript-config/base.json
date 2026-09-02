@@ -15,7 +15,9 @@
         "skipLibCheck": true,
         "strict": true,
         "target": "ES2022",
-        "jsx": "preserve"
+        "jsx": "preserve",
+        "types": ["node"],
+        "ignoreDeprecations": "6.0"
     },
     "exclude": ["node_modules", "dist"]
 }

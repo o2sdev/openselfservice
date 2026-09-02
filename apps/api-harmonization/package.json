@@ -94,8 +94,8 @@
         "xmlbuilder2": "^4.0.3"
     },
     "devDependencies": {
-        "@nestjs/cli": "^11.0.24",
-        "@nestjs/schematics": "^11.1.0",
+        "@nestjs/cli": "^12.0.0",
+        "@nestjs/schematics": "^12.0.0",
         "@nestjs/testing": "^12.0.1",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
@@ -129,7 +129,7 @@
         "ts-loader": "^9.6.2",
         "ts-node": "^10.9.2",
         "tsconfig-paths": "^4.2.0",
-        "typescript": "^5.9.3",
+        "typescript": "^6.0.3",
         "vitest": "^4.1.11"
     }
 }

@@ -2,6 +2,7 @@
     "extends": "@o2s/typescript-config/base.json",
     "compilerOptions": {
         "paths": {},
+        "rootDir": "./src",
         "outDir": "./dist"
     },
     "include": ["src"],
