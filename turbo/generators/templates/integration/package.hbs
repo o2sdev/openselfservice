@@ -26,7 +26,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "build": "tsc7 --preserveWatchOutput && tsc-alias",
         "test": "vitest run",
         "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
@@ -41,18 +41,18 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "concurrently": "^9.1.2",
-        "eslint": "^9.24.0",
-        "prettier": "^3.5.3",
-        "tsc-alias": "^1.8.15",
-        "typescript": "^5.8.3"
+        "concurrently": "^10.0.5",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.3",
+        "typescript": "^6.0.3"
     },
     "o2sTemplate": [{{#each templates}}"{{this}}"{{#unless @last}}, {{/unless}}{{/each}}],
     "peerDependencies": {
-        "@nestjs/axios": "^4",
-        "@nestjs/common": "^11",
-        "@nestjs/config": "^4.0.2",
-        "@nestjs/core": "^11",
+        "@nestjs/axios": "^12.0.0",
+        "@nestjs/common": "^12.0.0",
+        "@nestjs/config": "^12.0.0",
+        "@nestjs/core": "^12.0.0",
         "rxjs": "^7"
     }
 }
