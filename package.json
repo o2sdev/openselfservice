@@ -27,8 +27,8 @@
         "prebuild-storybook": "turbo build -F=!{./apps/*} -F=!{./packages/cli/*}",
         "build-storybook": "storybook build",
         "test:storybook": "vitest --project=storybook",
-        "clean": "npm exec --workspaces -- rimraf node_modules dist .next .turbo && rimraf node_modules dist .next .turbo",
-        "clean:output": "npm exec --workspaces -- rimraf dist .next .turbo && rimraf dist .next .turbo",
+        "clean": "npm exec --workspaces -- rimraf --glob node_modules dist .next .turbo \"*.tsbuildinfo\" && rimraf --glob node_modules dist .next .turbo \"*.tsbuildinfo\"",
+        "clean:output": "npm exec --workspaces -- rimraf --glob dist .next .turbo \"*.tsbuildinfo\" && rimraf --glob dist .next .turbo \"*.tsbuildinfo\"",
         "test:hooks": "vitest run --project=hooks"
     },
     "engines": {
