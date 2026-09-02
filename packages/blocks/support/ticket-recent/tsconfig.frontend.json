@@ -8,8 +8,7 @@
         "composite": true,
         "declaration": true,
         "declarationMap": true,
-        "noEmit": false,        "jsx": "react",
-        "baseUrl": "./src/frontend"
+        "noEmit": false,        "jsx": "react"
     },
     "include": [
         "src/frontend",

@@ -2,11 +2,13 @@
     // This file is not used in compilation. It is here just for a nice editor experience.
     "extends": "@docusaurus/tsconfig",
     "compilerOptions": {
+        // Docusaurus builds this app (not the native TS compiler), and its @site/* path alias
+        // resolves against this baseUrl - so baseUrl stays; ignoreDeprecations silences the TS 6
+        // deprecation warning from the `tsc --noEmit` lint.
         "baseUrl": ".",
         "types": ["docusaurus-plugin-sass"],
-        "ignoreDeprecations": "6.0",
         "strict": false,
-
+        "ignoreDeprecations": "6.0"
     },
     "exclude": [".docusaurus", "build"]
 }

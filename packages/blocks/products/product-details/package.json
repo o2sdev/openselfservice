@@ -30,7 +30,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
+        "build": "tsc7 --build tsconfig.json --preserveWatchOutput && tsc-alias",
         "test": "vitest run",
         "test:watch": "vitest",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",

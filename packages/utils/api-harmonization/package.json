@@ -26,7 +26,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "build": "tsc7 --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "test": "vitest run",
         "format": "prettier --write \"src/**/*.{ts,tsx}\""

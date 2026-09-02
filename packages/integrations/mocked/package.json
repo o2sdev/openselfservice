@@ -40,7 +40,7 @@
     "scripts": {
         "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
         "postinstall": "npx prisma generate",
-        "build": "dotenv -e .env.local -- prisma migrate deploy && tsc --preserveWatchOutput && tsc-alias",
+        "build": "dotenv -e .env.local -- prisma migrate deploy && tsc7 --preserveWatchOutput && tsc-alias",
         "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",
         "test": "vitest run",
         "lint": "tsc --noEmit && eslint . --max-warnings=0",

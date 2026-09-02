@@ -1,0 +1,9 @@
+{
+    "name": "@o2s/tsc7",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "bin": {
+        "tsc7": "./tsc7.mjs"
+    }
+}
