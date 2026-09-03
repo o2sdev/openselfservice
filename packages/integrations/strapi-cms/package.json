@@ -40,7 +40,7 @@
     },
     "dependencies": {
         "@o2s/utils.logger": "*",
-        "@vercel/stega": "0.1.2",
+        "@vercel/stega": "1.1.0",
         "flatted": "^3.4.4",
         "graphql": "16.14.2",
         "graphql-request": "7.4.0",
