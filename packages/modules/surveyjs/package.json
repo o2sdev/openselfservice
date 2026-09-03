@@ -40,8 +40,8 @@
         "@o2s/utils.logger": "*",
         "date-fns": "^4.4.0",
         "lucide-react": "^1.39.0",
-        "survey-core": "^2.5.40",
-        "survey-react-ui": "^2.5.40"
+        "survey-core": "^3.0.2",
+        "survey-react-ui": "^3.0.2"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
