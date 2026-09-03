@@ -43,7 +43,7 @@
         "docusaurus-plugin-openapi-docs": "^5.2.0",
         "docusaurus-plugin-sass": "^0.2.6",
         "docusaurus-theme-openapi-docs": "^5.2.0",
-        "framer-motion": "^13.1.1",
+        "framer-motion": "^13.2.0",
         "path-browserify": "^1.0.1",
         "prism-react-renderer": "^2.4.1",
         "react": "^19.2.8",
@@ -53,7 +53,7 @@
     },
     "devDependencies": {
         "@docusaurus/module-type-aliases": "^3.10.2",
-        "@redocly/cli": "^2.49.0",
+        "@redocly/cli": "^2.51.1",
         "@docusaurus/tsconfig": "^3.10.2",
         "@docusaurus/types": "^3.10.2",
         "@o2s/eslint-config": "*",
@@ -63,7 +63,7 @@
         "@tailwindcss/postcss": "^4.3.3",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "autoprefixer": "^10.5.4",
-        "postcss": "^8.5.26",
+        "postcss": "^8.5.27",
         "prettier": "^3.9.6",
         "tailwindcss": "^4.3.3",
         "typescript": "6.0.3"

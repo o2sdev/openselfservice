@@ -36,7 +36,7 @@
         "concurrently": "^10.0.5",
         "eslint": "^9.39.5",
         "prettier": "^3.9.6",
-        "tsc-alias": "^1.9.3",
+        "tsc-alias": "^1.9.4",
         "typescript": "^6.0.3"
     }
 }

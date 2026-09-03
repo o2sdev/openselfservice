@@ -112,7 +112,7 @@
         "@types/jest": "^30.0.0",
         "@types/jsonwebtoken": "^9.0.10",
         "@types/multer": "^2.2.0",
-        "@types/node": "^26.4.0",
+        "@types/node": "^26.4.1",
         "@types/string-template": "^1.0.7",
         "@types/supertest": "^7.2.1",
         "@typescript-eslint/eslint-plugin": "^8.69.0",

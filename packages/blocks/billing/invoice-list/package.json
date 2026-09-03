@@ -42,7 +42,7 @@
         "@o2s/utils.logger": "*",
         "express": "^5.2.1",
         "intl-messageformat": "^11.2.14",
-        "lucide-react": "^1.38.0"
+        "lucide-react": "^1.39.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
@@ -53,12 +53,12 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/vitest-config": "*",
-        "@storybook/nextjs-vite": "^10.5.10",
+        "@storybook/nextjs-vite": "^10.6.0",
         "concurrently": "^10.0.5",
         "dotenv-cli": "^11.0.0",
         "eslint": "^9.39.5",
         "prettier": "^3.9.6",
-        "tsc-alias": "^1.9.3",
+        "tsc-alias": "^1.9.4",
         "typescript": "^6.0.3",
         "vitest": "^4.1.11"
     },

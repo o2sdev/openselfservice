@@ -39,7 +39,7 @@
         "@o2s/ui": "*",
         "@o2s/utils.logger": "*",
         "date-fns": "^4.4.0",
-        "lucide-react": "^1.38.0",
+        "lucide-react": "^1.39.0",
         "survey-core": "^2.5.40",
         "survey-react-ui": "^2.5.40"
     },
@@ -55,7 +55,7 @@
         "dotenv-cli": "^11.0.0",
         "eslint": "^9.39.5",
         "prettier": "^3.9.6",
-        "tsc-alias": "^1.9.3",
+        "tsc-alias": "^1.9.4",
         "typescript": "^6.0.3"
     },
     "peerDependencies": {

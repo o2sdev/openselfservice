@@ -76,7 +76,7 @@
         "express": "5.2.1",
         "prettier": "^3.9.6",
         "shx": "^0.4.0",
-        "tsc-alias": "^1.9.3",
+        "tsc-alias": "^1.9.4",
         "tsx": "^4.23.13",
         "typescript": "^6.0.3",
         "vitest": "^4.1.11"
