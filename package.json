@@ -15,6 +15,8 @@
         "view-report": "turbo run view-report",
         "generate": "turbo gen",
         "generate:postman-collection": "node scripts/generate-postman-collection.mjs",
+        "lockfile:fix": "node scripts/fix-lockfile-platforms.mjs",
+        "lockfile:check": "node scripts/fix-lockfile-platforms.mjs --check",
         "eject-block": "ts-node ./scripts/cli.ts eject-block",
         "docs": "turbo start --filter=@o2s/docs",
         "changeset": "changeset",
