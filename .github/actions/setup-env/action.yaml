@@ -15,6 +15,17 @@ runs:
               node-version: 24
               cache: 'npm'
 
+        # Node 24 bundles npm 11; install the exact npm pinned in package.json's
+        # `packageManager` field so CI runs the same npm as local development.
+        - name: Use the pinned npm version
+          shell: bash
+          run: |
+              PM=$(node -p "require('$GITHUB_WORKSPACE/package.json').packageManager")
+              NPM_VER=${PM#npm@}
+              NPM_VER=${NPM_VER%%+*}
+              npm install -g "npm@${NPM_VER}"
+              echo "npm is now $(npm --version)"
+
         - name: Restore install outputs from cache
           id: cache-install
           uses: actions/cache/restore@v5

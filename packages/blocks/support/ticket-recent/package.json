@@ -39,7 +39,7 @@
         "@o2s/configs.integrations": "*",
         "@o2s/ui": "*",
         "@o2s/utils.logger": "*",
-        "lucide-react": "^1.39.0",
+        "lucide-react": "^1.40.0",
         "string-template": "^1.0.0"
     },
     "devDependencies": {

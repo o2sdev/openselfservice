@@ -41,7 +41,7 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.logger": "*",
         "class-variance-authority": "^0.7.1",
-        "lucide-react": "^1.39.0",
+        "lucide-react": "^1.40.0",
         "string-template": "^1.0.0"
     },
     "devDependencies": {

@@ -34,9 +34,9 @@
         "test:hooks": "vitest run --project=hooks"
     },
     "engines": {
-        "node": ">=22"
+        "node": ">=24.15.0"
     },
-    "packageManager": "npm@11.19.1",
+    "packageManager": "npm@12.0.2",
     "workspaces": [
         "apps/*",
         "packages/*",
@@ -87,7 +87,7 @@
         "vitest": "^4.1.11"
     },
     "dependencies": {
-        "@changesets/cli": "^3.0.1",
+        "@changesets/cli": "^3.0.2",
         "@types/prompts": "^2.4.9",
         "cli-progress": "^3.12.0",
         "commander": "^15.0.0",
@@ -97,5 +97,14 @@
     "overrides": {
         "@swc/core": "1.16.1",
         "webpack": "5.104.1"
+    },
+    "allowScripts": {
+        "postman-code-generators": true,
+        "prisma": true,
+        "esbuild": true,
+        "unrs-resolver": true,
+        "@prisma/engines": true,
+        "@prisma/client": true,
+        "@swc/core": true
     }
 }
