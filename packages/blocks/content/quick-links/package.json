@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.quick-links",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "private": false,
     "license": "MIT",
     "description": "A block displaying quick links to important pages or resources.",

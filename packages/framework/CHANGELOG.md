@@ -1,5 +1,73 @@
 # @o2s/framework
 
+## 1.24.0
+
+### Minor Changes
+
+- 010ae15: Refactored integration configuration by consolidating the 18 individual model files into a single typed `config.ts` backed by a `createIntegrationConfig` helper. Each domain now maps to an integration through a per-domain import alias shared by both the runtime map and its type re-export, so swapping an integration is a single-line change that cannot desync value and types.
+
+    Integration `Config` objects are now declared with `satisfies Partial<ApiConfig['integrations']>` (instead of a type annotation), which lets `createIntegrationConfig` validate domain bindings **at compile time** — assigning an integration to a domain it does not provide is now a type error rather than a runtime crash. The runtime check remains as a defense-in-depth backstop.
+
+- 457b243: feat(framework): add `createBlockRequest` helper for block SDK methods
+
+    Adds `createBlockRequest` to `@o2s/framework/sdk`. It creates the request function used by the methods of a block (or module) SDK and takes care of the boilerplate that was previously copy-pasted into every method: merging the default API headers with the caller's headers and the access token, serializing query params, typing the response and wrapping failures into a `BlockRequestError` (which exposes `status`, `data` and the original error as `cause`).
+
+    `getApiHeaders` is now provided by `@o2s/framework/headers` and re-exported by `@o2s/utils.frontend` (`Utils.Headers.getApiHeaders`), so the default headers are defined in a single place. All block SDKs, the SurveyJS module SDK and the block generator template use the new helper.
+
+- dfc3fbb: Make non-core `ApiConfig` integration slots optional. Only `cms` and `auth` are required now; every other domain (tickets, orders, carts, checkout, payments, products, customers, invoices, billingAccounts, resources, organizations, users, notifications, articles, search, cache) can be omitted.
+
+    When a domain is omitted, its framework module registers as a no-op instead of crashing, so a project can run a minimal setup (for example a CMS-backed portal) without importing `@o2s/integrations.mocked` to fill unused slots. `createIntegrationConfig` now accepts a partial map (core domains still required) and skips absent domains. A new `DefaultCacheService` is used as a pass-through fallback when no `cache` integration is configured (caching disabled, logged at startup), so services that depend on `Cache.Service` (e.g. the Strapi/Contentful CMS integrations) keep working. The `page` service treats `articles` as optional, and the SurveyJS module registers as a no-op when `tickets` is not configured.
+
+    This also fixes a latent bug in the search module, which previously fell back to the abstract `SearchService` (which cannot be instantiated) when no search service was configured; it now registers as a no-op instead.
+
+    Migration: this is backward compatible for the standard, module-based usage — existing configs that provide all domains keep working unchanged. Custom code that reads an integration slot directly (e.g. `config.integrations.orders.service`) may now need optional chaining, since non-core slots are typed as possibly `undefined`.
+
+- ee42afd: feat(frontend): server-rendered, indexable URLs for list filters
+
+    Filter params reached the browser only: a page always rendered with the default filters and the client
+    replaced them afterwards, so `/products?category=TOOLS` served the full catalogue to anyone opening the
+    link (a crawler included) and every filtered variant canonicalised to the bare page.
+
+    `searchParams` now travel from the page through `renderBlocks` into the blocks (`BlockSearchParams` on
+    `BaseBlockProps`), and the product list resolves them into its query server-side. The block query takes
+    a 1-based `page` and turns it into an `offset` with the page size from the CMS config, which only the
+    API knows. With the server rendering the filtered state, the client's mount refetch is gone, so a
+    shared link costs one request instead of two.
+
+    Its params also lost the `product_` prefix: `useUrlFilters` accepts `filterKeys` in place of a
+    `namespace`, which is what a public, indexed list needs to have plain, linkable URLs. Facet values are
+    rendered as real links next to the filter controls, because a crawler follows `<a href>` and does not
+    operate a select, and `generateSeo` keeps the index clean: one value of one whitelisted facet is
+    self-canonical and indexable, while sorting, deep pages and facet combinations canonicalise back and
+    are marked `noindex, follow`.
+
+    Multi-value restore from the URL is now limited to toggle groups. A select writes a single string back
+    whatever `allowMultiple` says, so restoring an array into one only tripped React's `<select>` check.
+
+- ee42afd: refactor(framework): one pagination resolver for the list blocks
+
+    Every list block carried its own copy of the same two helpers, turning a query's `limit`, `offset` and `page` into the window to fetch. `Utils.Pagination.resolvePagination` in `@o2s/utils.api-harmonization` replaces all five: it takes the pagination a URL can carry (`Models.Pagination.PaginatedQuery`, structurally satisfied by any block query, so a block no longer types the helper with its own class) plus the page size to fall back on, and returns the `limit` and `offset` to use. The query shape stays a model in `@o2s/framework`, while the resolving lives with the other API-side helpers.
+
+    `PaginatedQuery` is kept apart from `PaginationQuery`, which the domain modules extend: `page` is consumed by the block API and never reaches them, so advertising it in their contracts would promise integrations something they never receive.
+
+    Two behaviours change with the move. A page size counts only as a whole number of rows above zero, so `?limit=-5` falls back to the CMS config instead of travelling on as a negative limit; the unit tests for the new helper are what surfaced it.
+
+    And the fallback page size is no longer a single row. Four of the five blocks fell back to `limit: 1` when neither the query nor the CMS config named one. That fallback was inherited, and reachable, because `pagination` is optional in the CMS block models, so an entry without it rendered a one-row list. `Utils.Pagination.DEFAULT_LIMIT` (10) is the shared fallback now; the product list keeps its own 12, which matches its three-column grid.
+
+### Patch Changes
+
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- Updated dependencies [1a520c8]
+    - @o2s/utils.logger@1.2.4
+
 ## 1.23.0
 
 ### Minor Changes

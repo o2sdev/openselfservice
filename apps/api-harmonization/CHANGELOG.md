@@ -1,5 +1,105 @@
 # @o2s/api-harmonization
 
+## 1.21.0
+
+### Minor Changes
+
+- 010ae15: Refactored integration configuration by consolidating the 18 individual model files into a single typed `config.ts` backed by a `createIntegrationConfig` helper. Each domain now maps to an integration through a per-domain import alias shared by both the runtime map and its type re-export, so swapping an integration is a single-line change that cannot desync value and types.
+
+    Integration `Config` objects are now declared with `satisfies Partial<ApiConfig['integrations']>` (instead of a type annotation), which lets `createIntegrationConfig` validate domain bindings **at compile time** — assigning an integration to a domain it does not provide is now a type error rather than a runtime crash. The runtime check remains as a defense-in-depth backstop.
+
+### Patch Changes
+
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- dfc3fbb: Make non-core `ApiConfig` integration slots optional. Only `cms` and `auth` are required now; every other domain (tickets, orders, carts, checkout, payments, products, customers, invoices, billingAccounts, resources, organizations, users, notifications, articles, search, cache) can be omitted.
+
+    When a domain is omitted, its framework module registers as a no-op instead of crashing, so a project can run a minimal setup (for example a CMS-backed portal) without importing `@o2s/integrations.mocked` to fill unused slots. `createIntegrationConfig` now accepts a partial map (core domains still required) and skips absent domains. A new `DefaultCacheService` is used as a pass-through fallback when no `cache` integration is configured (caching disabled, logged at startup), so services that depend on `Cache.Service` (e.g. the Strapi/Contentful CMS integrations) keep working. The `page` service treats `articles` as optional, and the SurveyJS module registers as a no-op when `tickets` is not configured.
+
+    This also fixes a latent bug in the search module, which previously fell back to the abstract `SearchService` (which cannot be instantiated) when no search service was configured; it now registers as a no-op instead.
+
+    Migration: this is backward compatible for the standard, module-based usage — existing configs that provide all domains keep working unchanged. Custom code that reads an integration slot directly (e.g. `config.integrations.orders.service`) may now need optional chaining, since non-core slots are typed as possibly `undefined`.
+
+- Updated dependencies [010ae15]
+- Updated dependencies [457b243]
+- Updated dependencies [3f1c980]
+- Updated dependencies [1a520c8]
+- Updated dependencies [02401b2]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [692ecf4]
+- Updated dependencies [c4aa242]
+- Updated dependencies [c4aa242]
+- Updated dependencies [dfc3fbb]
+- Updated dependencies [ee42afd]
+- Updated dependencies [b775189]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [3f1c980]
+- Updated dependencies [ee42afd]
+- Updated dependencies [3f1c980]
+    - @o2s/configs.integrations@1.1.0
+    - @o2s/framework@1.24.0
+    - @o2s/integrations.mocked@2.0.1
+    - @o2s/utils.frontend@1.1.0
+    - @o2s/modules.surveyjs@1.1.0
+    - @o2s/blocks.article@2.0.1
+    - @o2s/blocks.article-list@2.0.1
+    - @o2s/blocks.article-search@2.0.1
+    - @o2s/blocks.bento-grid@1.0.1
+    - @o2s/blocks.cart@1.0.1
+    - @o2s/blocks.category@2.0.1
+    - @o2s/blocks.category-list@2.0.1
+    - @o2s/blocks.checkout-billing-payment@1.0.1
+    - @o2s/blocks.checkout-company-data@1.0.1
+    - @o2s/blocks.checkout-shipping-address@1.0.1
+    - @o2s/blocks.checkout-summary@1.0.1
+    - @o2s/blocks.cta-section@1.0.1
+    - @o2s/blocks.document-list@1.0.1
+    - @o2s/blocks.faq@2.0.1
+    - @o2s/blocks.feature-section@1.0.1
+    - @o2s/blocks.feature-section-grid@1.0.1
+    - @o2s/blocks.featured-service-list@2.0.1
+    - @o2s/blocks.hero-section@1.0.1
+    - @o2s/blocks.invoice-list@2.1.0
+    - @o2s/blocks.media-section@1.0.1
+    - @o2s/blocks.notification-details@2.0.1
+    - @o2s/blocks.notification-list@2.1.0
+    - @o2s/blocks.notification-summary@2.0.1
+    - @o2s/blocks.order-confirmation@1.0.1
+    - @o2s/blocks.order-details@2.0.1
+    - @o2s/blocks.order-list@2.1.0
+    - @o2s/blocks.orders-summary@2.0.1
+    - @o2s/blocks.payments-history@2.0.1
+    - @o2s/blocks.payments-summary@2.0.1
+    - @o2s/blocks.pricing-section@1.0.1
+    - @o2s/blocks.product-details@1.0.1
+    - @o2s/blocks.product-list@1.1.0
+    - @o2s/blocks.quick-links@2.0.1
+    - @o2s/blocks.recommended-products@1.0.1
+    - @o2s/blocks.service-details@2.0.1
+    - @o2s/blocks.service-list@2.0.1
+    - @o2s/blocks.surveyjs-form@2.0.1
+    - @o2s/blocks.ticket-details@2.0.1
+    - @o2s/blocks.ticket-list@2.1.0
+    - @o2s/blocks.ticket-recent@2.0.1
+    - @o2s/blocks.ticket-summary@2.0.1
+    - @o2s/blocks.user-account@2.0.1
+    - @o2s/telemetry@1.2.3
+    - @o2s/utils.api-harmonization@1.1.0
+    - @o2s/utils.logger@1.2.4
+
 ## 1.20.0
 
 ### Minor Changes
