@@ -96,7 +96,7 @@
     },
     "overrides": {
         "@swc/core": "1.16.1",
-        "webpack": "5.104.1"
+        "webpack": "5.110.3"
     },
     "allowScripts": {
         "postman-code-generators": true,
