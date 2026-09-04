@@ -20,14 +20,12 @@ export const mapSurveyJS = (data: SurveyJSLibraryJsonSchema): SurveyJs => {
     return {
         schema: {
             ...data,
-            pages: data.pages?.map(
-                (page): Page => ({
-                    ...page,
-                    renderAs: `page-o2s`,
-                    // @ts-expect-error no way to determine a single type based on types generated from json schema
-                    elements: page.elements?.map((element) => mapData(element)),
-                }),
-            ),
+            pages: data.pages?.map((page): Page => ({
+                ...page,
+                renderAs: `page-o2s`,
+                // @ts-expect-error no way to determine a single type based on types generated from json schema
+                elements: page.elements?.map((element) => mapData(element)),
+            })),
         },
     };
 };

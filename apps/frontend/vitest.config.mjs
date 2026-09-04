@@ -1,13 +1,12 @@
 import { config } from '@o2s/vitest-config/ui';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig, mergeConfig } from 'vitest/config';
 
 export default mergeConfig(
     config,
     defineConfig({
-        // `@/` imports resolve through the app's tsconfig paths, and the metadata helpers read the site
-        // URL from the environment at import time.
-        plugins: [tsconfigPaths()],
+        // `@/` imports resolve through the app's tsconfig paths (Vite 8 native resolution), and the
+        // metadata helpers read the site URL from the environment at import time.
+        resolve: { tsconfigPaths: true },
         test: {
             name: 'frontend',
             env: {

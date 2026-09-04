@@ -121,13 +121,13 @@ After completing the installation and configuration steps:
 
 ## Troubleshooting
 
-| Problem                       | Solution                                                                                                                         |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Module not found              | Verify the package is installed: `npm list @o2s/integrations.algolia`                                                            |
-| Cannot connect to Algolia     | Check `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set correctly                                                                   |
-| Index not found (404)         | Verify the index name exists in your Algolia dashboard                                                                           |
-| Authorization errors          | Check that your API key has read access to the index                                                                             |
-| Missing environment variables | Ensure both `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set in your `.env` file                                                   |
+| Problem                       | Solution                                                                                       |
+| ----------------------------- | ---------------------------------------------------------------------------------------------- |
+| Module not found              | Verify the package is installed: `npm list @o2s/integrations.algolia`                          |
+| Cannot connect to Algolia     | Check `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set correctly                                 |
+| Index not found (404)         | Verify the index name exists in your Algolia dashboard                                         |
+| Authorization errors          | Check that your API key has read access to the index                                           |
+| Missing environment variables | Ensure both `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set in your `.env` file                 |
 | Integration not working       | Verify that `search` is assigned to `Algolia` in `packages/configs/integrations/src/config.ts` |
 
 ## Next steps

@@ -10,11 +10,7 @@ export class Filters<T> {
 }
 
 export type FilterItem<T> =
-    | FilterSelect<T>
-    | FilterDateRange<T>
-    | FilterToggleGroup<T>
-    | FilterText<T>
-    | FilterViewModeToggle;
+    FilterSelect<T> | FilterDateRange<T> | FilterToggleGroup<T> | FilterText<T> | FilterViewModeToggle;
 
 export class Filter<T> {
     id!: keyof T;

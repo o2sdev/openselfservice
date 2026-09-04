@@ -128,6 +128,8 @@ export const DocumentsBaseModule = DocumentsModule.register({
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(ContextHeadersMiddleware).forRoutes('*');
+        // Express 5 / path-to-regexp 8 requires a named wildcard; '*' alone is rejected
+        // (Nest's LegacyRouteConverter would rewrite it to this and log a warning).
+        consumer.apply(ContextHeadersMiddleware).forRoutes('{*path}');
     }
 }

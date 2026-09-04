@@ -29,8 +29,8 @@ const createSurveyModel = async (
     locale: string,
     onComplete: (data: Model.SurveyResult) => void,
 ) => {
-    const SurveyJsModel = await import('./lib').then((module) => module.SurveyJsModel);
-    const survey = new SurveyJsModel(schema);
+    const lib = await import('./lib');
+    const survey = new lib.SurveyJsModel(schema);
 
     survey.loadingHtml = '';
     survey.locale = locale;
@@ -78,6 +78,8 @@ const createSurveyModel = async (
     });
 
     survey.onComplete.add((model) => onComplete(model.data));
+
+    lib.applyO2sNavigationButtons(survey);
 
     return survey;
 };

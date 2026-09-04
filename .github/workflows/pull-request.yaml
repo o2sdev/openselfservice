@@ -97,6 +97,26 @@ jobs:
               with:
                   base-sha: ${{ github.event.pull_request.base.sha }}
 
+    lockfile-check:
+        needs: skip-duplicate-check
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 1
+
+            # Guards against npm/cli#4828: a lockfile written on one OS drops the
+            # other platforms' native binaries, which then breaks `npm ci` here on
+            # Linux. The check reads only package-lock.json (no install needed).
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 24
+
+            - name: Verify lockfile is cross-platform complete
+              run: node scripts/fix-lockfile-platforms.mjs --check
+
     build:
         needs: skip-duplicate-check
         if: needs.skip-duplicate-check.outputs.should_skip != 'true'

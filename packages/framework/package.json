@@ -43,7 +43,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "build": "tsc7 --preserveWatchOutput && tsc-alias",
         "test": "vitest run",
         "lint": "tsc --noEmit && eslint . --ignore-pattern .eslintrc.js --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
@@ -51,37 +51,37 @@
     },
     "dependencies": {
         "@o2s/utils.logger": "*",
-        "class-validator": "^0.14.1",
+        "class-validator": "^0.15.1",
         "logform": "2.7.0",
         "ofetch": "^1.5.1",
-        "qs": "^6.15.0",
+        "qs": "^6.16.0",
         "winston": "^3.19.0"
     },
     "devDependencies": {
-        "@nestjs/swagger": "^11.2.0",
+        "@nestjs/swagger": "^12.0.1",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "@turbo/gen": "^2.8.11",
+        "@turbo/gen": "^2.10.12",
         "@types/express": "^5.0.6",
-        "@types/qs": "^6.14.0",
-        "concurrently": "^9.2.1",
-        "eslint": "^9.39.4",
+        "@types/qs": "^6.15.1",
+        "concurrently": "^10.0.5",
+        "eslint": "^9.39.5",
         "express": "5.2.1",
         "jsonwebtoken": "^9.0.3",
-        "prettier": "^3.8.1",
-        "tsc-alias": "^1.8.16",
-        "typescript": "^5.9.3",
-        "vitest": "^4.0.18"
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.4",
+        "typescript": "^6.0.3",
+        "vitest": "^4.1.11"
     },
     "peerDependencies": {
-        "@nestjs/axios": "^4.0.1",
-        "@nestjs/common": "^11.0.16",
-        "@nestjs/config": "^4.0.2",
-        "@nestjs/core": "^11",
-        "@nestjs/swagger": "^11.2.0",
+        "@nestjs/axios": "^12.0.0",
+        "@nestjs/common": "^12.0.0",
+        "@nestjs/config": "^12.0.0",
+        "@nestjs/core": "^12.0.0",
+        "@nestjs/swagger": "^12.0.0",
         "rxjs": "^7"
     }
 }

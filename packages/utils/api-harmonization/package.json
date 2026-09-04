@@ -26,22 +26,23 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "build": "tsc7 --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "test": "vitest run",
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
+        "@o2s/framework": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "concurrently": "^9.2.1",
-        "eslint": "^9.39.4",
-        "prettier": "^3.8.1",
-        "tsc-alias": "^1.8.16",
-        "typescript": "^5.9.3"
+        "concurrently": "^10.0.5",
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "tsc-alias": "^1.9.4",
+        "typescript": "^6.0.3"
     },
     "peerDependencies": {
         "@o2s/framework": "*",

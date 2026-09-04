@@ -27,7 +27,7 @@
     },
     "scripts": {
         "create-o2s-app": "ts-node ./src/index.ts",
-        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "build": "tsc7 --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
@@ -35,11 +35,11 @@
         "@o2s/telemetry": "^1.2.2",
         "@types/prompts": "^2.4.9",
         "cli-progress": "^3.12.0",
-        "commander": "^14.0.3",
-        "fs-extra": "^11.3.4",
-        "kleur": "^3.0.3",
+        "commander": "^15.0.0",
+        "fs-extra": "^11.4.0",
+        "kleur": "^4.1.5",
         "prompts": "^2.4.2",
-        "simple-git": "^3.32.3",
+        "simple-git": "^3.36.0",
         "ts-node": "^10.9.2"
     },
     "devDependencies": {
@@ -49,8 +49,8 @@
         "@o2s/typescript-config": "*",
         "@types/cli-progress": "^3.11.6",
         "@types/fs-extra": "^11.0.4",
-        "eslint": "^9.39.4",
-        "prettier": "^3.8.1",
-        "typescript": "^5.9.3"
+        "eslint": "^9.39.5",
+        "prettier": "^3.9.6",
+        "typescript": "^6.0.3"
     }
 }
