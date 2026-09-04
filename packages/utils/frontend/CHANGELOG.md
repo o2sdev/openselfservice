@@ -1,5 +1,57 @@
 # @o2s/utils.frontend
 
+## 1.1.0
+
+### Minor Changes
+
+- ee42afd: fix(frontend): decide indexing from a filter allowlist, not from any param
+
+    The page metadata treated every query param as a filter, so a link carrying `utm_source`, `gclid` or any other unrelated param dropped the page out of the index, and `?category=TOOLS&utm_source=x` lost its `?category=TOOLS` canonical as well. A campaign link to a category page was therefore worth nothing to a crawler.
+
+    Two allowlists in `@o2s/utils.frontend` now drive the decision: `Utils.Seo.INDEXABLE_FILTERS` for facets whose single value still describes a page, and `Utils.Seo.LISTING_PARAMS` for the params that change a listing without deserving an index entry. Anything outside both is ignored, and a facet keeps its canonical next to them, including next to a deep page, which now canonicalises to the facet listing rather than to the bare page.
+
+    The product list block renders its facet links from the same `INDEXABLE_FILTERS`, so the links and the canonical URLs can no longer drift apart; they were two lists kept in step by a comment.
+
+- ee42afd: refactor(utils.frontend): one hook for wiring a list block to the URL
+
+    Each list block repeated the same forty lines around `useUrlFilters`, which is deliberately framework-agnostic and therefore takes its inputs from the caller: the params snapshot, the History API writer, and the multi-value keys, filter keys and starting view mode derived from the block's CMS filter config.
+
+    `Hooks.useListFilters` does all of it, so a block passes its defaults, its namespace and its filter config. Only the two values that come from `next/navigation` stay with the block, which keeps this package free of a dependency on Next. A block with a namespace gets prefixed params; one without gets plain, linkable ones and its filter keys are derived, so the two conventions need no extra flag.
+
+### Patch Changes
+
+- 457b243: feat(framework): add `createBlockRequest` helper for block SDK methods
+
+    Adds `createBlockRequest` to `@o2s/framework/sdk`. It creates the request function used by the methods of a block (or module) SDK and takes care of the boilerplate that was previously copy-pasted into every method: merging the default API headers with the caller's headers and the access token, serializing query params, typing the response and wrapping failures into a `BlockRequestError` (which exposes `status`, `data` and the original error as `cause`).
+
+    `getApiHeaders` is now provided by `@o2s/framework/headers` and re-exported by `@o2s/utils.frontend` (`Utils.Headers.getApiHeaders`), so the default headers are defined in a single place. All block SDKs, the SurveyJS module SDK and the block generator template use the new helper.
+
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- Updated dependencies [010ae15]
+- Updated dependencies [457b243]
+- Updated dependencies [1a520c8]
+- Updated dependencies [02401b2]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [dfc3fbb]
+- Updated dependencies [b775189]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+    - @o2s/framework@1.24.0
+    - @o2s/ui@2.1.0
+
 ## 1.0.0
 
 ### Patch Changes

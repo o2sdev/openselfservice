@@ -1,16 +1,58 @@
 # @o2s/blocks.featured-service-list
 
+## 2.0.1
+
+### Patch Changes
+
+- 457b243: feat(framework): add `createBlockRequest` helper for block SDK methods
+
+    Adds `createBlockRequest` to `@o2s/framework/sdk`. It creates the request function used by the methods of a block (or module) SDK and takes care of the boilerplate that was previously copy-pasted into every method: merging the default API headers with the caller's headers and the access token, serializing query params, typing the response and wrapping failures into a `BlockRequestError` (which exposes `status`, `data` and the original error as `cause`).
+
+    `getApiHeaders` is now provided by `@o2s/framework/headers` and re-exported by `@o2s/utils.frontend` (`Utils.Headers.getApiHeaders`), so the default headers are defined in a single place. All block SDKs, the SurveyJS module SDK and the block generator template use the new helper.
+
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- Updated dependencies [010ae15]
+- Updated dependencies [457b243]
+- Updated dependencies [1a520c8]
+- Updated dependencies [02401b2]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [dfc3fbb]
+- Updated dependencies [b775189]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+    - @o2s/configs.integrations@1.1.0
+    - @o2s/framework@1.24.0
+    - @o2s/utils.frontend@1.1.0
+    - @o2s/ui@2.1.0
+    - @o2s/utils.api-harmonization@1.1.0
+    - @o2s/utils.logger@1.2.4
+
 ## 2.0.0
 
 ### Patch Changes
 
 - Updated dependencies [86b4c5a]
 - Updated dependencies [24fb9a9]
-  - @o2s/framework@1.23.0
-  - @o2s/ui@2.0.0
-  - @o2s/configs.integrations@1.0.0
-  - @o2s/utils.api-harmonization@1.0.0
-  - @o2s/utils.frontend@1.0.0
+    - @o2s/framework@1.23.0
+    - @o2s/ui@2.0.0
+    - @o2s/configs.integrations@1.0.0
+    - @o2s/utils.api-harmonization@1.0.0
+    - @o2s/utils.frontend@1.0.0
 
 ## 1.6.3
 
@@ -24,7 +66,7 @@
 
 - 025bfb3: fix(deps): declare `@o2s/utils.frontend` and `@o2s/utils.api-harmonization` as peer dependencies in blocks and surveyjs module
 
-  Moves both shared utils from `dependencies` to `peerDependencies` (with `devDependencies` for monorepo builds) so consuming apps supply a single hoisted version and npm does not nest conflicting copies under published packages.
+    Moves both shared utils from `dependencies` to `peerDependencies` (with `devDependencies` for monorepo builds) so consuming apps supply a single hoisted version and npm does not nest conflicting copies under published packages.
 
 ## 1.6.1
 
@@ -32,13 +74,13 @@
 
 - 31df3a8: fix(deps): move @o2s/framework to peerDependencies in all published packages
 
-  `@o2s/framework` was listed in `dependencies` of blocks, integrations, modules, and utils packages. When installed from npm with mismatched versions across the dependency tree, npm would create nested copies of `@o2s/framework` with different class references. This caused NestJS to fail resolving DI tokens (e.g. `SearchService`) because injected class instances came from a different `@o2s/framework` copy than the one registered in the application module.
+    `@o2s/framework` was listed in `dependencies` of blocks, integrations, modules, and utils packages. When installed from npm with mismatched versions across the dependency tree, npm would create nested copies of `@o2s/framework` with different class references. This caused NestJS to fail resolving DI tokens (e.g. `SearchService`) because injected class instances came from a different `@o2s/framework` copy than the one registered in the application module.
 
-  Moved `@o2s/framework` to `peerDependencies` across all affected packages so that the consuming application always provides a single shared copy. Also moved `@o2s/integrations.mocked` to `peerDependencies` in `@o2s/integrations.mocked-dxp`.
+    Moved `@o2s/framework` to `peerDependencies` across all affected packages so that the consuming application always provides a single shared copy. Also moved `@o2s/integrations.mocked` to `peerDependencies` in `@o2s/integrations.mocked-dxp`.
 
 - Updated dependencies [31df3a8]
-  - @o2s/utils.api-harmonization@0.3.4
-  - @o2s/utils.frontend@0.6.1
+    - @o2s/utils.api-harmonization@0.3.4
+    - @o2s/utils.frontend@0.6.1
 
 ## 1.6.0
 
@@ -51,7 +93,7 @@
 - Updated dependencies [7d99d13]
 - Updated dependencies [7d99d13]
 - Updated dependencies [6edc9ca]
-  - @o2s/framework@1.22.0
+    - @o2s/framework@1.22.0
 
 ## 1.5.1
 
@@ -59,24 +101,24 @@
 
 - 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
 
-  Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
 
-  Key dependency categories added:
-  - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
-  - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
-  - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
-  - `vite` for vitest configs in integrations
-  - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
 
 - Updated dependencies [e8cdde6]
 - Updated dependencies [0aaac5b]
 - Updated dependencies [0aaac5b]
 - Updated dependencies [7ac16b0]
 - Updated dependencies [0aaac5b]
-  - @o2s/ui@1.14.0
-  - @o2s/utils.frontend@0.5.2
-  - @o2s/configs.integrations@0.7.0
-  - @o2s/framework@1.21.0
+    - @o2s/ui@1.14.0
+    - @o2s/utils.frontend@0.5.2
+    - @o2s/configs.integrations@0.7.0
+    - @o2s/framework@1.21.0
 
 ## 1.5.0
 
@@ -96,7 +138,7 @@
 - fab2aea: refactor: group Storybook stories by domain and rename UI component directories to PascalCase
 - Updated dependencies [a7bb35c]
 - Updated dependencies [fab2aea]
-  - @o2s/ui@1.13.1
+    - @o2s/ui@1.13.1
 
 ## 1.4.2
 
@@ -104,19 +146,19 @@
 
 - fadbc63: Extract shared block prop types into framework models and migrate block frontend props to the common `BlockWith*` helpers.
 
-  This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
+    This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
 
 - 338cb01: fix(api-harmonization): align typed header usage across services and generated SDK/controller contracts
 - 338cb01: Refactor header access to use `HeaderName` constants instead of literal header keys across framework controllers, block harmonization services, and mocked auth guards.
 
-  This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
+    This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
 
 - Updated dependencies [fadbc63]
 - Updated dependencies [338cb01]
 - Updated dependencies [338cb01]
 - Updated dependencies [338cb01]
-  - @o2s/framework@1.20.1
-  - @o2s/utils.api-harmonization@0.3.3
+    - @o2s/framework@1.20.1
+    - @o2s/utils.api-harmonization@0.3.3
 
 ## 1.4.1
 
@@ -129,11 +171,11 @@
 - Updated dependencies [daf592e]
 - Updated dependencies [375cd90]
 - Updated dependencies [98b2e68]
-  - @o2s/framework@1.20.0
-  - @o2s/utils.api-harmonization@0.3.2
-  - @o2s/utils.frontend@0.5.1
-  - @o2s/utils.logger@1.2.3
-  - @o2s/ui@1.13.0
+    - @o2s/framework@1.20.0
+    - @o2s/utils.api-harmonization@0.3.2
+    - @o2s/utils.frontend@0.5.1
+    - @o2s/utils.logger@1.2.3
+    - @o2s/ui@1.13.0
 
 ## 1.4.0
 
@@ -160,12 +202,12 @@
 - Updated dependencies [8c01be4]
 - Updated dependencies [ea200fc]
 - Updated dependencies [cc2e932]
-  - @o2s/framework@1.18.0
-  - @o2s/utils.api-harmonization@0.3.1
-  - @o2s/utils.frontend@0.4.1
-  - @o2s/utils.logger@1.2.2
-  - @o2s/configs.integrations@0.6.0
-  - @o2s/ui@1.11.0
+    - @o2s/framework@1.18.0
+    - @o2s/utils.api-harmonization@0.3.1
+    - @o2s/utils.frontend@0.4.1
+    - @o2s/utils.logger@1.2.2
+    - @o2s/configs.integrations@0.6.0
+    - @o2s/ui@1.11.0
 
 ## 1.3.0
 
@@ -173,29 +215,29 @@
 
 - 72391c1: ### Authorization & PBAC Implementation
 
-  This release introduces a comprehensive Policy-Based Access Control system interlaced with Role-Based Access Control.
+    This release introduces a comprehensive Policy-Based Access Control system interlaced with Role-Based Access Control.
 
-  #### Framework & Core
-  - **`@o2s/framework` (AuthService)**: Enhanced with abstract permission logic (`getPermissions`, `hasPermission`), role checks (`hasRole`, `requireRoles`), and action batching (`canPerformActions`).
-  - **`@o2s/api-harmonization`**: Implemented global `RolesGuard` and `PermissionsGuard` in `AppModule`.
-  - **`@o2s/utils.api-harmonization`**: Added `extractUserRolesFromJwt` to unify role extraction from different JWT claims.
+    #### Framework & Core
+    - **`@o2s/framework` (AuthService)**: Enhanced with abstract permission logic (`getPermissions`, `hasPermission`), role checks (`hasRole`, `requireRoles`), and action batching (`canPerformActions`).
+    - **`@o2s/api-harmonization`**: Implemented global `RolesGuard` and `PermissionsGuard` in `AppModule`.
+    - **`@o2s/utils.api-harmonization`**: Added `extractUserRolesFromJwt` to unify role extraction from different JWT claims.
 
-  #### Features
-  - **Decorators**: New `@Auth.Decorators.Permissions({ resource, actions })` for securing controllers.
-  - **Data Filtering**: Mappers (e.g., `page.mapper.ts`) now filter UI elements (header/footer navigation) based on user roles.
+    #### Features
+    - **Decorators**: New `@Auth.Decorators.Permissions({ resource, actions })` for securing controllers.
+    - **Data Filtering**: Mappers (e.g., `page.mapper.ts`) now filter UI elements (header/footer navigation) based on user roles.
 
-  This provides granular control over resource access and UI visibility based on user roles and permissions.
+    This provides granular control over resource access and UI visibility based on user roles and permissions.
 
 ### Patch Changes
 
 - Updated dependencies [1a5a22d]
 - Updated dependencies [72391c1]
-  - @o2s/framework@1.16.0
-  - @o2s/utils.api-harmonization@0.3.0
-  - @o2s/configs.integrations@0.4.0
-  - @o2s/ui@1.9.0
-  - @o2s/utils.frontend@0.4.0
-  - @o2s/utils.logger@1.2.0
+    - @o2s/framework@1.16.0
+    - @o2s/utils.api-harmonization@0.3.0
+    - @o2s/configs.integrations@0.4.0
+    - @o2s/ui@1.9.0
+    - @o2s/utils.frontend@0.4.0
+    - @o2s/utils.logger@1.2.0
 
 ## 1.2.0
 
@@ -215,11 +257,11 @@
 - Updated dependencies [d197b89]
 - Updated dependencies [cd483b7]
 - Updated dependencies [d197b89]
-  - @o2s/ui@1.8.0
-  - @o2s/utils.api-harmonization@0.2.0
-  - @o2s/configs.integrations@0.3.0
-  - @o2s/utils.frontend@0.3.0
-  - @o2s/framework@1.15.0
+    - @o2s/ui@1.8.0
+    - @o2s/utils.api-harmonization@0.2.0
+    - @o2s/configs.integrations@0.3.0
+    - @o2s/utils.frontend@0.3.0
+    - @o2s/framework@1.15.0
 
 ## 1.1.2
 
@@ -229,12 +271,12 @@
 - Updated dependencies [221dc2c]
 - Updated dependencies [db5b381]
 - Updated dependencies [c2d9438]
-  - @o2s/utils.api-harmonization@0.1.3
-  - @o2s/configs.integrations@0.2.1
-  - @o2s/utils.frontend@0.2.1
-  - @o2s/utils.logger@1.1.3
-  - @o2s/ui@1.7.0
-  - @o2s/framework@1.14.0
+    - @o2s/utils.api-harmonization@0.1.3
+    - @o2s/configs.integrations@0.2.1
+    - @o2s/utils.frontend@0.2.1
+    - @o2s/utils.logger@1.1.3
+    - @o2s/ui@1.7.0
+    - @o2s/framework@1.14.0
 
 ## 1.1.1
 
@@ -247,12 +289,12 @@
 - Updated dependencies [2c780d5]
 - Updated dependencies [0354126]
 - Updated dependencies [1653b74]
-  - @o2s/framework@1.13.0
-  - @o2s/configs.integrations@0.2.0
-  - @o2s/ui@1.6.0
-  - @o2s/utils.frontend@0.2.0
-  - @o2s/utils.api-harmonization@0.1.2
-  - @o2s/utils.logger@1.1.2
+    - @o2s/framework@1.13.0
+    - @o2s/configs.integrations@0.2.0
+    - @o2s/ui@1.6.0
+    - @o2s/utils.frontend@0.2.0
+    - @o2s/utils.api-harmonization@0.1.2
+    - @o2s/utils.logger@1.1.2
 
 ## 1.1.0
 
@@ -265,7 +307,7 @@
 
 - Updated dependencies [9ad8658]
 - Updated dependencies [9ad8658]
-  - @o2s/ui@1.4.0
+    - @o2s/ui@1.4.0
 
 ## 1.0.0
 
@@ -276,8 +318,8 @@
 ### Patch Changes
 
 - Updated dependencies [2421fb2]
-  - @o2s/utils.api-harmonization@0.1.0
-  - @o2s/configs.integrations@0.1.0
-  - @o2s/utils.frontend@0.1.0
-  - @o2s/framework@1.11.0
-  - @o2s/ui@1.3.0
+    - @o2s/utils.api-harmonization@0.1.0
+    - @o2s/configs.integrations@0.1.0
+    - @o2s/utils.frontend@0.1.0
+    - @o2s/framework@1.11.0
+    - @o2s/ui@1.3.0

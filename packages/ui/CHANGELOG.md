@@ -1,5 +1,89 @@
 # @o2s/ui
 
+## 2.1.0
+
+### Minor Changes
+
+- ee42afd: feat(blocks): render list filters from the URL on the server
+
+    Opening a filtered list link rendered the unfiltered list first and let the client replace it, so the page showed the wrong data until the second request landed. The ticket, order, invoice and notification lists now resolve the query params into their own query on the server, and each block query takes a 1-based `page` that the API turns into an `offset` with the page size from the CMS config. With the server rendering the filtered state, the client's refetch on mount is gone: a filtered link costs one request instead of two.
+
+    The parsing lives in `@o2s/ui` as `parseFiltersFromSearchParams`, next to the hook that writes those params, so both ends of the URL contract stay in one place; the product list uses it too, and `searchParamsKey` keys each block on the params it was rendered for. Multi-value filters are named per block, because whether a filter accepts more than one value is part of the API contract: the tickets module takes repeated `status` values, the others take one value per filter.
+
+    The mocked tickets integration now honours that array form, which its own contract documents ("use a single value or repeat the query parameter for multiple"): it compared the filter as a single string, so any multi-status selection returned nothing.
+
+- b775189: Upgrade `react-day-picker` to v10. The custom `Calendar` (`@o2s/ui`) drops the `caption` classNames slot removed in v10 — styling is unchanged, as it is already covered by `month_caption` and `caption_label` — along with the now-obsolete `captionClassName` prop. The surveyjs date-picker question uses `autoFocus` in place of the removed `initialFocus` prop.
+- ee42afd: feat(frontend): server-rendered, indexable URLs for list filters
+
+    Filter params reached the browser only: a page always rendered with the default filters and the client
+    replaced them afterwards, so `/products?category=TOOLS` served the full catalogue to anyone opening the
+    link (a crawler included) and every filtered variant canonicalised to the bare page.
+
+    `searchParams` now travel from the page through `renderBlocks` into the blocks (`BlockSearchParams` on
+    `BaseBlockProps`), and the product list resolves them into its query server-side. The block query takes
+    a 1-based `page` and turns it into an `offset` with the page size from the CMS config, which only the
+    API knows. With the server rendering the filtered state, the client's mount refetch is gone, so a
+    shared link costs one request instead of two.
+
+    Its params also lost the `product_` prefix: `useUrlFilters` accepts `filterKeys` in place of a
+    `namespace`, which is what a public, indexed list needs to have plain, linkable URLs. Facet values are
+    rendered as real links next to the filter controls, because a crawler follows `<a href>` and does not
+    operate a select, and `generateSeo` keeps the index clean: one value of one whitelisted facet is
+    self-canonical and indexable, while sorting, deep pages and facet combinations canonicalise back and
+    are marked `noindex, follow`.
+
+    Multi-value restore from the URL is now limited to toggle groups. A select writes a single string back
+    whatever `allowMultiple` says, so restoring an array into one only tripped React's `<select>` check.
+
+- ee42afd: feat(ui): bidirectional URL query params sync for list block filters
+
+    List block filter state is now kept in the URL, so filtered views can be shared, bookmarked and linked
+    to from elsewhere in the application.
+
+    New `useUrlFilters` hook (plus `use-url-filters.utils` serialization helpers) in `@o2s/ui`, replacing
+    `useState(initialFilters)` in the ticket, order, invoice, product and notification list blocks.
+    Params are namespaced per block (`?ticket_status=OPEN`), multi-value filters repeat the key,
+    pagination is written as a 1-based `{ns}_page`, view mode as `{ns}_view`, and only values differing
+    from the block defaults end up in the URL. Filter changes are written with the History API
+    (`replaceUrlParams`), so they add no history entries and trigger no navigation. The list refetches
+    its own data client-side instead of the whole route being re-rendered on the server. The hook takes
+    `searchParams` and `onUrlChange` as arguments instead of importing `next/navigation`, which keeps
+    `@o2s/ui` framework-agnostic.
+
+    Blocks that do not use the hook are unaffected.
+
+### Patch Changes
+
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- 02401b2: Routine dependency maintenance (patch/minor, no code changes): `@medusajs/js-sdk` & `@medusajs/types` to 2.20.1, `survey-core` & `survey-react-ui` to 3.0.3, `lucide-react` to 1.40, `sass` to 1.104, `docusaurus-plugin-sass` to 0.2.7.
+- ee42afd: fix(ui): count multi-value list filters correctly in the filters drawer, so clearing every option no longer leaves the "remove filters" counter at one and equal selections are compared by contents instead of by reference
+- ee42afd: refactor(ui): one list of the keys that describe a block rather than a filter
+
+    The same idea was written out three times, and the lists had drifted: the active-filter counter skipped `offset`, `limit` and `id`, the filter badges skipped those plus `viewMode`, and the URL serialisation skipped only `id` and `limit` while checking `offset` separately.
+
+    `BLOCK_STATE_KEYS` in `use-url-filters.utils` is now the single list, and the other two are derived from it: `DEFAULT_EXCLUDED_KEYS` drops the offset, because it is not left out of the URL but written as the 1-based `page`, and the badges add the view toggle, which is a display choice rather than a filter. The difference that used to be an accident is now one `filter` call with the reason next to it.
+
+    `parseFiltersFromSearchParams` is also generic over the block's query now, so it returns `Partial<TQuery>` and the five server components no longer cast its result. A query string carries no types, so the assertion happens once inside the helper instead of at every call site, and each call names the query it is building.
+
+- ee42afd: fix(ui): derive list filter URL writes from the next state, so a filter change and a view mode change applied in one batch no longer write the URL from each other's stale value
+- ee42afd: fix(ui): merge list filter URL writes into the live query string, so a write queued before `useSearchParams` catches up (another block's filter change, or a debounced one) no longer drops the params written in between
+- Updated dependencies [010ae15]
+- Updated dependencies [457b243]
+- Updated dependencies [1a520c8]
+- Updated dependencies [dfc3fbb]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+    - @o2s/configs.integrations@1.1.0
+    - @o2s/framework@1.24.0
+
 ## 2.0.0
 
 ### Patch Changes

@@ -1,16 +1,115 @@
 # @o2s/blocks.ticket-list
 
+## 2.1.0
+
+### Minor Changes
+
+- ee42afd: feat(blocks): render list filters from the URL on the server
+
+    Opening a filtered list link rendered the unfiltered list first and let the client replace it, so the page showed the wrong data until the second request landed. The ticket, order, invoice and notification lists now resolve the query params into their own query on the server, and each block query takes a 1-based `page` that the API turns into an `offset` with the page size from the CMS config. With the server rendering the filtered state, the client's refetch on mount is gone: a filtered link costs one request instead of two.
+
+    The parsing lives in `@o2s/ui` as `parseFiltersFromSearchParams`, next to the hook that writes those params, so both ends of the URL contract stay in one place; the product list uses it too, and `searchParamsKey` keys each block on the params it was rendered for. Multi-value filters are named per block, because whether a filter accepts more than one value is part of the API contract: the tickets module takes repeated `status` values, the others take one value per filter.
+
+    The mocked tickets integration now honours that array form, which its own contract documents ("use a single value or repeat the query parameter for multiple"): it compared the filter as a single string, so any multi-status selection returned nothing.
+
+- ee42afd: feat(ui): bidirectional URL query params sync for list block filters
+
+    List block filter state is now kept in the URL, so filtered views can be shared, bookmarked and linked
+    to from elsewhere in the application.
+
+    New `useUrlFilters` hook (plus `use-url-filters.utils` serialization helpers) in `@o2s/ui`, replacing
+    `useState(initialFilters)` in the ticket, order, invoice, product and notification list blocks.
+    Params are namespaced per block (`?ticket_status=OPEN`), multi-value filters repeat the key,
+    pagination is written as a 1-based `{ns}_page`, view mode as `{ns}_view`, and only values differing
+    from the block defaults end up in the URL. Filter changes are written with the History API
+    (`replaceUrlParams`), so they add no history entries and trigger no navigation. The list refetches
+    its own data client-side instead of the whole route being re-rendered on the server. The hook takes
+    `searchParams` and `onUrlChange` as arguments instead of importing `next/navigation`, which keeps
+    `@o2s/ui` framework-agnostic.
+
+    Blocks that do not use the hook are unaffected.
+
+### Patch Changes
+
+- 457b243: feat(framework): add `createBlockRequest` helper for block SDK methods
+
+    Adds `createBlockRequest` to `@o2s/framework/sdk`. It creates the request function used by the methods of a block (or module) SDK and takes care of the boilerplate that was previously copy-pasted into every method: merging the default API headers with the caller's headers and the access token, serializing query params, typing the response and wrapping failures into a `BlockRequestError` (which exposes `status`, `data` and the original error as `cause`).
+
+    `getApiHeaders` is now provided by `@o2s/framework/headers` and re-exported by `@o2s/utils.frontend` (`Utils.Headers.getApiHeaders`), so the default headers are defined in a single place. All block SDKs, the SurveyJS module SDK and the block generator template use the new helper.
+
+- 3f1c980: chore(deps): update dependencies
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- 02401b2: Routine dependency maintenance (patch/minor, no code changes): `@medusajs/js-sdk` & `@medusajs/types` to 2.20.1, `survey-core` & `survey-react-ui` to 3.0.3, `lucide-react` to 1.40, `sass` to 1.104, `docusaurus-plugin-sass` to 0.2.7.
+- ee42afd: fix(blocks): reset list block pagination when filters change, so filtering from page 2 or later no longer lands on a page of the new result set that the user never asked for (often an empty one)
+- ee42afd: fix(blocks): restore select filters from the URL as single values, so opening a shared link no longer hands an array to a single-value select and trips React's `<select>` check
+- ee42afd: refactor(ui): one list of the keys that describe a block rather than a filter
+
+    The same idea was written out three times, and the lists had drifted: the active-filter counter skipped `offset`, `limit` and `id`, the filter badges skipped those plus `viewMode`, and the URL serialisation skipped only `id` and `limit` while checking `offset` separately.
+
+    `BLOCK_STATE_KEYS` in `use-url-filters.utils` is now the single list, and the other two are derived from it: `DEFAULT_EXCLUDED_KEYS` drops the offset, because it is not left out of the URL but written as the 1-based `page`, and the badges add the view toggle, which is a display choice rather than a filter. The difference that used to be an accident is now one `filter` call with the reason next to it.
+
+    `parseFiltersFromSearchParams` is also generic over the block's query now, so it returns `Partial<TQuery>` and the five server components no longer cast its result. A query string carries no types, so the assertion happens once inside the helper instead of at every call site, and each call names the query it is building.
+
+- ee42afd: refactor(utils.frontend): one hook for wiring a list block to the URL
+
+    Each list block repeated the same forty lines around `useUrlFilters`, which is deliberately framework-agnostic and therefore takes its inputs from the caller: the params snapshot, the History API writer, and the multi-value keys, filter keys and starting view mode derived from the block's CMS filter config.
+
+    `Hooks.useListFilters` does all of it, so a block passes its defaults, its namespace and its filter config. Only the two values that come from `next/navigation` stay with the block, which keeps this package free of a dependency on Next. A block with a namespace gets prefixed params; one without gets plain, linkable ones and its filter keys are derived, so the two conventions need no extra flag.
+
+- ee42afd: refactor(framework): one pagination resolver for the list blocks
+
+    Every list block carried its own copy of the same two helpers, turning a query's `limit`, `offset` and `page` into the window to fetch. `Utils.Pagination.resolvePagination` in `@o2s/utils.api-harmonization` replaces all five: it takes the pagination a URL can carry (`Models.Pagination.PaginatedQuery`, structurally satisfied by any block query, so a block no longer types the helper with its own class) plus the page size to fall back on, and returns the `limit` and `offset` to use. The query shape stays a model in `@o2s/framework`, while the resolving lives with the other API-side helpers.
+
+    `PaginatedQuery` is kept apart from `PaginationQuery`, which the domain modules extend: `page` is consumed by the block API and never reaches them, so advertising it in their contracts would promise integrations something they never receive.
+
+    Two behaviours change with the move. A page size counts only as a whole number of rows above zero, so `?limit=-5` falls back to the CMS config instead of travelling on as a negative limit; the unit tests for the new helper are what surfaced it.
+
+    And the fallback page size is no longer a single row. Four of the five blocks fell back to `limit: 1` when neither the query nor the CMS config named one. That fallback was inherited, and reachable, because `pagination` is optional in the CMS block models, so an entry without it rendered a one-row list. `Utils.Pagination.DEFAULT_LIMIT` (10) is the shared fallback now; the product list keeps its own 12, which matches its three-column grid.
+
+- 3f1c980: chore(deps): update dependencies
+- 3f1c980: chore(deps): update dependencies
+- Updated dependencies [010ae15]
+- Updated dependencies [457b243]
+- Updated dependencies [1a520c8]
+- Updated dependencies [02401b2]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [dfc3fbb]
+- Updated dependencies [b775189]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+    - @o2s/configs.integrations@1.1.0
+    - @o2s/framework@1.24.0
+    - @o2s/utils.frontend@1.1.0
+    - @o2s/ui@2.1.0
+    - @o2s/utils.api-harmonization@1.1.0
+    - @o2s/utils.logger@1.2.4
+
 ## 2.0.0
 
 ### Patch Changes
 
 - Updated dependencies [86b4c5a]
 - Updated dependencies [24fb9a9]
-  - @o2s/framework@1.23.0
-  - @o2s/ui@2.0.0
-  - @o2s/configs.integrations@1.0.0
-  - @o2s/utils.api-harmonization@1.0.0
-  - @o2s/utils.frontend@1.0.0
+    - @o2s/framework@1.23.0
+    - @o2s/ui@2.0.0
+    - @o2s/configs.integrations@1.0.0
+    - @o2s/utils.api-harmonization@1.0.0
+    - @o2s/utils.frontend@1.0.0
 
 ## 1.10.3
 
@@ -24,7 +123,7 @@
 
 - 025bfb3: fix(deps): declare `@o2s/utils.frontend` and `@o2s/utils.api-harmonization` as peer dependencies in blocks and surveyjs module
 
-  Moves both shared utils from `dependencies` to `peerDependencies` (with `devDependencies` for monorepo builds) so consuming apps supply a single hoisted version and npm does not nest conflicting copies under published packages.
+    Moves both shared utils from `dependencies` to `peerDependencies` (with `devDependencies` for monorepo builds) so consuming apps supply a single hoisted version and npm does not nest conflicting copies under published packages.
 
 ## 1.10.1
 
@@ -32,13 +131,13 @@
 
 - 31df3a8: fix(deps): move @o2s/framework to peerDependencies in all published packages
 
-  `@o2s/framework` was listed in `dependencies` of blocks, integrations, modules, and utils packages. When installed from npm with mismatched versions across the dependency tree, npm would create nested copies of `@o2s/framework` with different class references. This caused NestJS to fail resolving DI tokens (e.g. `SearchService`) because injected class instances came from a different `@o2s/framework` copy than the one registered in the application module.
+    `@o2s/framework` was listed in `dependencies` of blocks, integrations, modules, and utils packages. When installed from npm with mismatched versions across the dependency tree, npm would create nested copies of `@o2s/framework` with different class references. This caused NestJS to fail resolving DI tokens (e.g. `SearchService`) because injected class instances came from a different `@o2s/framework` copy than the one registered in the application module.
 
-  Moved `@o2s/framework` to `peerDependencies` across all affected packages so that the consuming application always provides a single shared copy. Also moved `@o2s/integrations.mocked` to `peerDependencies` in `@o2s/integrations.mocked-dxp`.
+    Moved `@o2s/framework` to `peerDependencies` across all affected packages so that the consuming application always provides a single shared copy. Also moved `@o2s/integrations.mocked` to `peerDependencies` in `@o2s/integrations.mocked-dxp`.
 
 - Updated dependencies [31df3a8]
-  - @o2s/utils.api-harmonization@0.3.4
-  - @o2s/utils.frontend@0.6.1
+    - @o2s/utils.api-harmonization@0.3.4
+    - @o2s/utils.frontend@0.6.1
 
 ## 1.10.0
 
@@ -51,7 +150,7 @@
 - Updated dependencies [7d99d13]
 - Updated dependencies [7d99d13]
 - Updated dependencies [6edc9ca]
-  - @o2s/framework@1.22.0
+    - @o2s/framework@1.22.0
 
 ## 1.9.0
 
@@ -63,24 +162,24 @@
 
 - 0aaac5b: fix: add missing dependency declarations for turbo boundaries compliance
 
-  Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
+    Declare previously undeclared imports as explicit dependencies across 55 packages. This resolves all `turbo boundaries` violations where packages imported modules not listed in their `package.json`.
 
-  Key dependency categories added:
-  - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
-  - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
-  - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
-  - `vite` for vitest configs in integrations
-  - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
+    Key dependency categories added:
+    - `@storybook/nextjs-vite`, `@storybook/react`, `storybook` for story files
+    - `vitest`, `@nestjs/testing`, `@o2s/vitest-config` for test files
+    - `lucide-react`, `dayjs`, `string-template`, `class-variance-authority` for runtime code
+    - `vite` for vitest configs in integrations
+    - `@o2s/api-harmonization`, `@auth/core`, `@docusaurus/*` for app-level imports
 
 - Updated dependencies [e8cdde6]
 - Updated dependencies [0aaac5b]
 - Updated dependencies [0aaac5b]
 - Updated dependencies [7ac16b0]
 - Updated dependencies [0aaac5b]
-  - @o2s/ui@1.14.0
-  - @o2s/utils.frontend@0.5.2
-  - @o2s/configs.integrations@0.7.0
-  - @o2s/framework@1.21.0
+    - @o2s/ui@1.14.0
+    - @o2s/utils.frontend@0.5.2
+    - @o2s/configs.integrations@0.7.0
+    - @o2s/framework@1.21.0
 
 ## 1.8.0
 
@@ -100,7 +199,7 @@
 - fab2aea: refactor: group Storybook stories by domain and rename UI component directories to PascalCase
 - Updated dependencies [a7bb35c]
 - Updated dependencies [fab2aea]
-  - @o2s/ui@1.13.1
+    - @o2s/ui@1.13.1
 
 ## 1.7.2
 
@@ -108,23 +207,23 @@
 
 - fadbc63: Extract shared block prop types into framework models and migrate block frontend props to the common `BlockWith*` helpers.
 
-  This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
+    This removes duplicated `slug`, `userId`, and `isDraftModeEnabled` definitions and keeps renderer props aligned across blocks.
 
 - fadbc63: Align renderer prop types with runtime usage across blocks.
 
-  Restore missing `isDraftModeEnabled` and `userId` coverage in renderer prop contracts and rename the misnamed notification details renderer prop type for consistency.
+    Restore missing `isDraftModeEnabled` and `userId` coverage in renderer prop contracts and rename the misnamed notification details renderer prop type for consistency.
 
 - 338cb01: fix(api-harmonization): align typed header usage across services and generated SDK/controller contracts
 - 338cb01: Refactor header access to use `HeaderName` constants instead of literal header keys across framework controllers, block harmonization services, and mocked auth guards.
 
-  This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
+    This unifies header handling, reduces string-key typos, and aligns modules with the typed headers approach exposed by `@o2s/framework/headers`.
 
 - Updated dependencies [fadbc63]
 - Updated dependencies [338cb01]
 - Updated dependencies [338cb01]
 - Updated dependencies [338cb01]
-  - @o2s/framework@1.20.1
-  - @o2s/utils.api-harmonization@0.3.3
+    - @o2s/framework@1.20.1
+    - @o2s/utils.api-harmonization@0.3.3
 
 ## 1.7.1
 
@@ -137,11 +236,11 @@
 - Updated dependencies [daf592e]
 - Updated dependencies [375cd90]
 - Updated dependencies [98b2e68]
-  - @o2s/framework@1.20.0
-  - @o2s/utils.api-harmonization@0.3.2
-  - @o2s/utils.frontend@0.5.1
-  - @o2s/utils.logger@1.2.3
-  - @o2s/ui@1.13.0
+    - @o2s/framework@1.20.0
+    - @o2s/utils.api-harmonization@0.3.2
+    - @o2s/utils.frontend@0.5.1
+    - @o2s/utils.logger@1.2.3
+    - @o2s/ui@1.13.0
 
 ## 1.7.0
 
@@ -168,12 +267,12 @@
 - Updated dependencies [8c01be4]
 - Updated dependencies [ea200fc]
 - Updated dependencies [cc2e932]
-  - @o2s/framework@1.18.0
-  - @o2s/utils.api-harmonization@0.3.1
-  - @o2s/utils.frontend@0.4.1
-  - @o2s/utils.logger@1.2.2
-  - @o2s/configs.integrations@0.6.0
-  - @o2s/ui@1.11.0
+    - @o2s/framework@1.18.0
+    - @o2s/utils.api-harmonization@0.3.1
+    - @o2s/utils.frontend@0.4.1
+    - @o2s/utils.logger@1.2.2
+    - @o2s/configs.integrations@0.6.0
+    - @o2s/ui@1.11.0
 
 ## 1.6.0
 
@@ -182,29 +281,29 @@
 - 1a5a22d: Added ticket creation functionality to the Zendesk integration. Users can now create tickets via POST /tickets with attachments and custom fields. Added custom field mapping from Survey.js format to Zendesk custom fields via new zendesk-field.mapper. Updated table columns on TicketList component to display: ticket type (topic), status, and last updated date. Added display of custom field values from ticket properties on TicketDetails. Updated mapper mocks in cms
 - 72391c1: ### Authorization & PBAC Implementation
 
-  This release introduces a comprehensive Policy-Based Access Control system interlaced with Role-Based Access Control.
+    This release introduces a comprehensive Policy-Based Access Control system interlaced with Role-Based Access Control.
 
-  #### Framework & Core
-  - **`@o2s/framework` (AuthService)**: Enhanced with abstract permission logic (`getPermissions`, `hasPermission`), role checks (`hasRole`, `requireRoles`), and action batching (`canPerformActions`).
-  - **`@o2s/api-harmonization`**: Implemented global `RolesGuard` and `PermissionsGuard` in `AppModule`.
-  - **`@o2s/utils.api-harmonization`**: Added `extractUserRolesFromJwt` to unify role extraction from different JWT claims.
+    #### Framework & Core
+    - **`@o2s/framework` (AuthService)**: Enhanced with abstract permission logic (`getPermissions`, `hasPermission`), role checks (`hasRole`, `requireRoles`), and action batching (`canPerformActions`).
+    - **`@o2s/api-harmonization`**: Implemented global `RolesGuard` and `PermissionsGuard` in `AppModule`.
+    - **`@o2s/utils.api-harmonization`**: Added `extractUserRolesFromJwt` to unify role extraction from different JWT claims.
 
-  #### Features
-  - **Decorators**: New `@Auth.Decorators.Permissions({ resource, actions })` for securing controllers.
-  - **Data Filtering**: Mappers (e.g., `page.mapper.ts`) now filter UI elements (header/footer navigation) based on user roles.
+    #### Features
+    - **Decorators**: New `@Auth.Decorators.Permissions({ resource, actions })` for securing controllers.
+    - **Data Filtering**: Mappers (e.g., `page.mapper.ts`) now filter UI elements (header/footer navigation) based on user roles.
 
-  This provides granular control over resource access and UI visibility based on user roles and permissions.
+    This provides granular control over resource access and UI visibility based on user roles and permissions.
 
 ### Patch Changes
 
 - Updated dependencies [1a5a22d]
 - Updated dependencies [72391c1]
-  - @o2s/framework@1.16.0
-  - @o2s/utils.api-harmonization@0.3.0
-  - @o2s/configs.integrations@0.4.0
-  - @o2s/ui@1.9.0
-  - @o2s/utils.frontend@0.4.0
-  - @o2s/utils.logger@1.2.0
+    - @o2s/framework@1.16.0
+    - @o2s/utils.api-harmonization@0.3.0
+    - @o2s/configs.integrations@0.4.0
+    - @o2s/ui@1.9.0
+    - @o2s/utils.frontend@0.4.0
+    - @o2s/utils.logger@1.2.0
 
 ## 1.5.0
 
@@ -213,8 +312,8 @@
 - e11b23a: resolving linter errors
 - 79b7c87: add inline filters variant with expandable sections
 - cd483b7: - add MoreActionsMenu component and refactor ActionList
-  - migrate OrderDetails and TicketList to unified ActionList API
-  - improve breadcrumbs visibility and card border styling
+    - migrate OrderDetails and TicketList to unified ActionList API
+    - improve breadcrumbs visibility and card border styling
 
 ### Patch Changes
 
@@ -228,11 +327,11 @@
 - Updated dependencies [d197b89]
 - Updated dependencies [cd483b7]
 - Updated dependencies [d197b89]
-  - @o2s/ui@1.8.0
-  - @o2s/utils.api-harmonization@0.2.0
-  - @o2s/configs.integrations@0.3.0
-  - @o2s/utils.frontend@0.3.0
-  - @o2s/framework@1.15.0
+    - @o2s/ui@1.8.0
+    - @o2s/utils.api-harmonization@0.2.0
+    - @o2s/configs.integrations@0.3.0
+    - @o2s/utils.frontend@0.3.0
+    - @o2s/framework@1.15.0
 
 ## 1.4.0
 
@@ -248,12 +347,12 @@
 - Updated dependencies [221dc2c]
 - Updated dependencies [db5b381]
 - Updated dependencies [c2d9438]
-  - @o2s/utils.api-harmonization@0.1.3
-  - @o2s/configs.integrations@0.2.1
-  - @o2s/utils.frontend@0.2.1
-  - @o2s/utils.logger@1.1.3
-  - @o2s/ui@1.7.0
-  - @o2s/framework@1.14.0
+    - @o2s/utils.api-harmonization@0.1.3
+    - @o2s/configs.integrations@0.2.1
+    - @o2s/utils.frontend@0.2.1
+    - @o2s/utils.logger@1.1.3
+    - @o2s/ui@1.7.0
+    - @o2s/framework@1.14.0
 
 ## 1.3.0
 
@@ -272,12 +371,12 @@
 - Updated dependencies [2c780d5]
 - Updated dependencies [0354126]
 - Updated dependencies [1653b74]
-  - @o2s/framework@1.13.0
-  - @o2s/configs.integrations@0.2.0
-  - @o2s/ui@1.6.0
-  - @o2s/utils.frontend@0.2.0
-  - @o2s/utils.api-harmonization@0.1.2
-  - @o2s/utils.logger@1.1.2
+    - @o2s/framework@1.13.0
+    - @o2s/configs.integrations@0.2.0
+    - @o2s/ui@1.6.0
+    - @o2s/utils.frontend@0.2.0
+    - @o2s/utils.api-harmonization@0.1.2
+    - @o2s/utils.logger@1.1.2
 
 ## 1.2.0
 
@@ -296,10 +395,10 @@
 - Updated dependencies [b519464]
 - Updated dependencies [b1c47e8]
 - Updated dependencies [3da2e69]
-  - @o2s/framework@1.12.0
-  - @o2s/ui@1.5.0
-  - @o2s/utils.logger@1.1.1
-  - @o2s/configs.integrations@0.1.1
+    - @o2s/framework@1.12.0
+    - @o2s/ui@1.5.0
+    - @o2s/utils.logger@1.1.1
+    - @o2s/configs.integrations@0.1.1
 
 ## 1.1.0
 
@@ -312,7 +411,7 @@
 
 - Updated dependencies [9ad8658]
 - Updated dependencies [9ad8658]
-  - @o2s/ui@1.4.0
+    - @o2s/ui@1.4.0
 
 ## 1.0.0
 
@@ -323,8 +422,8 @@
 ### Patch Changes
 
 - Updated dependencies [2421fb2]
-  - @o2s/utils.api-harmonization@0.1.0
-  - @o2s/configs.integrations@0.1.0
-  - @o2s/utils.frontend@0.1.0
-  - @o2s/framework@1.11.0
-  - @o2s/ui@1.3.0
+    - @o2s/utils.api-harmonization@0.1.0
+    - @o2s/configs.integrations@0.1.0
+    - @o2s/utils.frontend@0.1.0
+    - @o2s/framework@1.11.0
+    - @o2s/ui@1.3.0

@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "private": false,
     "license": "MIT",
     "description": "Mocked integration for O2S development and testing, providing in-memory data with Prisma.",

@@ -1,5 +1,53 @@
 # @o2s/integrations.mocked
 
+## 2.0.1
+
+### Patch Changes
+
+- 010ae15: Refactored integration configuration by consolidating the 18 individual model files into a single typed `config.ts` backed by a `createIntegrationConfig` helper. Each domain now maps to an integration through a per-domain import alias shared by both the runtime map and its type re-export, so swapping an integration is a single-line change that cannot desync value and types.
+
+    Integration `Config` objects are now declared with `satisfies Partial<ApiConfig['integrations']>` (instead of a type annotation), which lets `createIntegrationConfig` validate domain bindings **at compile time** — assigning an integration to a domain it does not provide is now a type error rather than a runtime crash. The runtime check remains as a defense-in-depth backstop.
+
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- ee42afd: feat(blocks): render list filters from the URL on the server
+
+    Opening a filtered list link rendered the unfiltered list first and let the client replace it, so the page showed the wrong data until the second request landed. The ticket, order, invoice and notification lists now resolve the query params into their own query on the server, and each block query takes a 1-based `page` that the API turns into an `offset` with the page size from the CMS config. With the server rendering the filtered state, the client's refetch on mount is gone: a filtered link costs one request instead of two.
+
+    The parsing lives in `@o2s/ui` as `parseFiltersFromSearchParams`, next to the hook that writes those params, so both ends of the URL contract stay in one place; the product list uses it too, and `searchParamsKey` keys each block on the params it was rendered for. Multi-value filters are named per block, because whether a filter accepts more than one value is part of the API contract: the tickets module takes repeated `status` values, the others take one value per filter.
+
+    The mocked tickets integration now honours that array form, which its own contract documents ("use a single value or repeat the query parameter for multiple"): it compared the filter as a single string, so any multi-status selection returned nothing.
+
+- 692ecf4: Add a no-op `BlockEditAffordance` export to the live-preview module so the interface stays consistent across CMS integrations (used by the Strapi integration's page-level Live Preview).
+- c4aa242: fix(integrations.mocked): implement `markAs` in the mocked Notifications service
+
+    Opening an unviewed notification triggered an automatic mark-as-read request, which failed with
+    `NotImplementedException` and surfaced a "Something went wrong" toast on the notification details screen.
+    The mocked service now updates the notification status in the in-memory mocks (for every locale) and
+    completes successfully. An id that matches no notification is reported as a `404`, the way the other mocked
+    services report unknown ids.
+
+- c4aa242: fix(integrations.mocked): roll a marked notification back to its original status after 5 minutes
+
+    Marking a notification as viewed mutates the in-memory mocks, which are shared by everyone hitting the same instance, so the change used to stick until the app was restarted. Each change is now kept for `STATUS_TTL` (5 minutes) and then rolled back, so that marking a notification can be tried again on a running demo.
+
+- Updated dependencies [010ae15]
+- Updated dependencies [457b243]
+- Updated dependencies [1a520c8]
+- Updated dependencies [dfc3fbb]
+- Updated dependencies [ee42afd]
+- Updated dependencies [ee42afd]
+    - @o2s/framework@1.24.0
+    - @o2s/modules.documents@0.0.2
+    - @o2s/utils.logger@1.2.4
+
 ## 2.0.0
 
 ### Patch Changes
