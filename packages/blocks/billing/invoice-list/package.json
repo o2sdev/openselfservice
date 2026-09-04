@@ -42,7 +42,7 @@
         "@o2s/utils.logger": "*",
         "express": "^5.2.1",
         "intl-messageformat": "^11.2.14",
-        "lucide-react": "^1.40.0"
+        "lucide-react": "^1.41.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",

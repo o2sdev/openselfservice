@@ -40,7 +40,7 @@
         "@o2s/configs.integrations": "*",
         "@o2s/ui": "*",
         "@o2s/utils.logger": "*",
-        "lucide-react": "^1.40.0"
+        "lucide-react": "^1.41.0"
     },
     "devDependencies": {
         "@nestjs/testing": "^12.0.1",
