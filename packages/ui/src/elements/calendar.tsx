@@ -28,7 +28,6 @@ export type CalendarProps = DayPickerProps & {
     weekdaysClassName?: string;
     weekdayClassName?: string;
     monthClassName?: string;
-    captionClassName?: string;
     captionLabelClassName?: string;
     buttonNextClassName?: string;
     buttonPreviousClassName?: string;
@@ -89,7 +88,6 @@ function Calendar({
     const _weekdaysClassName = cn('flex flex-row', props.weekdaysClassName);
     const _weekdayClassName = cn('w-8 text-sm font-normal text-muted-foreground', props.weekdayClassName);
     const _monthClassName = cn('w-full', props.monthClassName);
-    const _captionClassName = cn('relative flex items-center justify-center pt-1', props.captionClassName);
     const _captionLabelClassName = cn('truncate text-sm font-medium', props.captionLabelClassName);
     const buttonNavClassName = baseVariant({
         variant: 'outline',
@@ -139,7 +137,6 @@ function Calendar({
                 weekdays: _weekdaysClassName,
                 weekday: _weekdayClassName,
                 month: _monthClassName,
-                caption: _captionClassName,
                 caption_label: _captionLabelClassName,
                 button_next: _buttonNextClassName,
                 button_previous: _buttonPreviousClassName,
