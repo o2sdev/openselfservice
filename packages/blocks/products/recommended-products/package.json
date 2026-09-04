@@ -57,7 +57,7 @@
         "eslint": "^9.39.5",
         "prettier": "^3.9.6",
         "tsc-alias": "^1.9.4",
-        "typescript": "^6.0.3",
+        "typescript": "^7.0.2",
         "vitest": "^4.1.11"
     },
     "peerDependencies": {
