@@ -40,7 +40,7 @@
         "@o2s/ui": "*",
         "@o2s/utils.logger": "*",
         "dayjs": "^1.11.23",
-        "lucide-react": "^1.39.0"
+        "lucide-react": "^1.40.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
