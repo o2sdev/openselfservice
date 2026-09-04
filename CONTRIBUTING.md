@@ -104,6 +104,7 @@ Then, go to **[GitHub](https://github.com/o2sdev/openselfservice)** and open a *
 ### Dependencies
 
 - If your change **adds, updates or removes a dependency**, run `npm run lockfile:fix` afterwards so `package-lock.json` keeps the native binaries for every OS (Windows/macOS/Linux). A pre-commit hook does this automatically, and CI fails any PR whose lockfile is missing platform binaries. This works around [npm/cli#4828](https://github.com/npm/cli/issues/4828), where `npm install` records only the current OS's binaries.
+- We use **npm 12**, which blocks dependencies' install scripts by default. If you add a dependency whose `postinstall`/`preinstall` is genuinely needed (it generates code or fetches a required binary), approve it with `npm install-scripts approve <pkg>` and commit the resulting `allowScripts` entry in `package.json`. Redundant scripts (a binary already delivered via optional platform packages) and telemetry-only scripts can stay blocked.
 
 ---
 
