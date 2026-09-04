@@ -42,8 +42,8 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@medusajs/js-sdk": "^2.20.0",
-        "@medusajs/types": "^2.20.0",
+        "@medusajs/js-sdk": "^2.20.1",
+        "@medusajs/types": "^2.20.1",
         "@o2s/utils.logger": "*",
         "slugify": "^1.6.9"
     },
