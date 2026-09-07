@@ -95,7 +95,7 @@
         "unzipper": "^0.12.5"
     },
     "overrides": {
-        "@swc/core": "1.16.1"
+        "@swc/core": "1.16.2"
     },
     "allowScripts": {
         "postman-code-generators": true,
