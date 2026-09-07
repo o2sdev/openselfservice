@@ -58,6 +58,7 @@ storybook-static
 AGENTS.md
 CLAUDE.md
 agent-os
+.mcp.json
 
 # Generated files
 O2S-API.postman_collection.json
