@@ -46,7 +46,7 @@
         "prettier": "^3.9.6",
         "react-string-replace": "^2.0.1",
         "tsc-alias": "^1.9.4",
-        "typescript": "^6.0.3"
+        "typescript": "^7.0.2"
     },
     "peerDependencies": {
         "@o2s/framework": "*",
