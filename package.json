@@ -63,8 +63,8 @@
         "@types/prompts": "^2.4.9",
         "@types/unzipper": "^0.10.11",
         "@vitejs/plugin-react": "^6.1.1",
-        "@vitest/browser-playwright": "^4.1.11",
-        "@vitest/coverage-v8": "^4.1.11",
+        "@vitest/browser-playwright": "^5.0.0",
+        "@vitest/coverage-v8": "^5.0.0",
         "dotenv": "^17.4.2",
         "fs-extra": "^11.4.0",
         "husky": "^9.1.7",
@@ -84,7 +84,7 @@
         "unplugin-swc": "^1.5.11",
         "vite": "^8.2.2",
         "vite-plugin-svgr": "^5.2.0",
-        "vitest": "^4.1.11"
+        "vitest": "^5.0.0"
     },
     "dependencies": {
         "@changesets/cli": "^3.0.2",
