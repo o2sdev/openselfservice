@@ -1,135 +1,28 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { notificationListPage } from './notification-list.page';
 import { Roles } from '@/utils/roles';
 
-export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
+export const notificationDetailsPage = CMS.Pages.definePage({
     id: '6',
-    slug: '/notifications/(.+)',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Notification Details',
-        description: 'Notification Details',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
+    parent: notificationListPage,
     roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
-    parent: {
-        slug: '/notifications',
-        seo: {
-            title: 'Notifications',
+    locales: {
+        en: { slug: '/notifications/:id', seo: { title: 'Notification Details', description: 'Notification Details' } },
+        pl: { slug: '/powiadomienia/:id', seo: { title: 'Powiadomienia', description: 'Powiadomienia' } },
+        de: {
+            slug: '/benachrichtigungen/:id',
+            seo: { title: 'Benachrichtigung Details', description: 'Benachrichtigung Details' },
         },
     },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
-                {
-                    __typename: 'NotificationDetailsBlock',
-                    id: 'notification-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
-                },
+                { __typename: 'NotificationDetailsBlock', id: 'notification-details-1' },
+                { __typename: 'FaqBlock', id: 'faq-1' },
             ],
         },
     },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
-    id: '6',
-    slug: '/benachrichtigungen/(.+)',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Benachrichtigung Details',
-        description: 'Benachrichtigung Details',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
-    hasOwnTitle: true,
-    parent: {
-        slug: '/benachrichtigungen',
-        seo: {
-            title: 'Benachrichtigungen',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationDetailsBlock',
-                    id: 'notification-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
-    id: '6',
-    slug: '/powiadomienia/(.+)',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Powiadomienia',
-        description: 'Powiadomienia',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
-    hasOwnTitle: true,
-    parent: {
-        slug: '/powiadomienia',
-        seo: {
-            title: 'Powiadomienia',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationDetailsBlock',
-                    id: 'notification-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
+});
