@@ -9,7 +9,7 @@ import type { BlockResponseType } from './utils/block-request';
 import { LoggerConfig } from './utils/logger';
 import { AppHeaders } from './utils/models/headers';
 
-export { BlockRequestError, createBlockRequest } from './utils/block-request';
+export { ApiRequestError, BlockRequestError, createBlockRequest } from './utils/block-request';
 export type {
     BlockRequest,
     BlockRequestConfig,
