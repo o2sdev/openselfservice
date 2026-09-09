@@ -155,8 +155,8 @@ describe('getAlternativePages', () => {
     it('should return the localized slugs of a details page', () => {
         expect(getAlternativePages('3', '/cases/123', 'en').map(identify)).toEqual([
             { id: '3', locale: 'en', slug: '/cases/123', title: 'Ticket Details' },
-            { id: '3', locale: 'pl', slug: '/zgloszenia/123', title: 'Zgłoszenia' },
-            { id: '3', locale: 'de', slug: '/faelle/123', title: 'Fälle' },
+            { id: '3', locale: 'pl', slug: '/zgloszenia/123', title: 'Szczegóły zgłoszenia' },
+            { id: '3', locale: 'de', slug: '/faelle/123', title: 'Anfragedetails' },
         ]);
     });
 

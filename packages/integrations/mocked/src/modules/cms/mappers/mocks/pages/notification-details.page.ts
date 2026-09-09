@@ -10,10 +10,13 @@ export const notificationDetailsPage = CMS.Pages.definePage({
     hasOwnTitle: true,
     locales: {
         en: { slug: '/notifications/:id', seo: { title: 'Notification Details', description: 'Notification Details' } },
-        pl: { slug: '/powiadomienia/:id', seo: { title: 'Powiadomienia', description: 'Powiadomienia' } },
+        pl: {
+            slug: '/powiadomienia/:id',
+            seo: { title: 'Szczegóły powiadomienia', description: 'Szczegóły powiadomienia' },
+        },
         de: {
             slug: '/benachrichtigungen/:id',
-            seo: { title: 'Benachrichtigung Details', description: 'Benachrichtigung Details' },
+            seo: { title: 'Benachrichtigungsdetails', description: 'Benachrichtigungsdetails' },
         },
     },
     template: {

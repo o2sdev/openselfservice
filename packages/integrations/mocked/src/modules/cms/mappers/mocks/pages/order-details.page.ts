@@ -10,8 +10,8 @@ export const orderDetailsPage = CMS.Pages.definePage({
     hasOwnTitle: true,
     locales: {
         en: { slug: '/orders/:id', seo: { title: 'Order Details', description: 'Order Details' } },
-        pl: { slug: '/zamowienia/:id', seo: { title: 'Zamówienia', description: 'Zamówienia' } },
-        de: { slug: '/bestellungen/:id', seo: { title: 'Bestellungen', description: 'Bestellungen' } },
+        pl: { slug: '/zamowienia/:id', seo: { title: 'Szczegóły zamówienia', description: 'Szczegóły zamówienia' } },
+        de: { slug: '/bestellungen/:id', seo: { title: 'Bestelldetails', description: 'Bestelldetails' } },
     },
     template: {
         __typename: 'OneColumnTemplate',

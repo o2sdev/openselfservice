@@ -12,7 +12,7 @@ export const warrantyAndRepairPage = CMS.Pages.definePage({
             seo: { title: 'Gwarancja i Naprawa', description: 'Gwarancja i Naprawa' },
         },
         de: {
-            slug: '/hilfe-und-support/garantie-und-reparaturt',
+            slug: '/hilfe-und-support/garantie-und-reparatur',
             seo: { title: 'Garantie & Reparatur', description: 'Garantie & Reparatur' },
         },
     },

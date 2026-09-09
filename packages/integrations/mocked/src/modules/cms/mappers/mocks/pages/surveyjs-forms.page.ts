@@ -19,7 +19,7 @@ export const complaintFormPage = CMS.Pages.definePage({
         en: { slug: '/submit-complaint', seo: { title: 'Submit a complaint', description: 'Submit a complaint' } },
         pl: { slug: '/wyslij-reklamacje', seo: { title: 'Wyslij reklamacje', description: 'Wyslij reklamacje' } },
         de: {
-            slug: '/einreichen-reklamacji',
+            slug: '/beschwerde-einreichen',
             seo: { title: 'Beschwerdeformular einreichen', description: 'Beschwerdeformular einreichen' },
         },
     },

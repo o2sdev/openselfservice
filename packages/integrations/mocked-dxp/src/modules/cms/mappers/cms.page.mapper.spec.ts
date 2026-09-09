@@ -54,7 +54,7 @@ describe('mapPage', () => {
                 id: 'personal-accounts-savings-account-1',
                 locale: 'de',
                 slug: '/personlich/konten/sparen-konto',
-                title: 'Sparen Konto',
+                title: 'Sparkonto',
             },
         ]);
     });

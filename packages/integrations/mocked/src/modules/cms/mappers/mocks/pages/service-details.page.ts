@@ -10,8 +10,11 @@ export const serviceDetailsPage = CMS.Pages.definePage({
     hasOwnTitle: true,
     locales: {
         en: { slug: '/services/:id', seo: { title: 'Service Details', description: 'Service Details' } },
-        pl: { slug: '/uslugi/:id', seo: { title: 'Usługi', description: 'Usługi' } },
-        de: { slug: '/dienstleistungen/:id', seo: { title: 'Dienstleistungen', description: 'Dienstleistungen' } },
+        pl: { slug: '/uslugi/:id', seo: { title: 'Szczegóły usługi', description: 'Szczegóły usługi' } },
+        de: {
+            slug: '/dienstleistungen/:id',
+            seo: { title: 'Dienstleistungsdetails', description: 'Dienstleistungsdetails' },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',

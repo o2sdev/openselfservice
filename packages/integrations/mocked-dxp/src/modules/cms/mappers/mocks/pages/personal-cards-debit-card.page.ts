@@ -9,8 +9,8 @@ export const personalCardsDebitCardPage = CMS.Pages.definePage({
     theme: 'personal',
     locales: {
         en: { slug: '/personal/cards/debit-card', seo: { title: 'Debit Card' } },
-        pl: { slug: '/indywidualny/karty/karta-debetowa', seo: { title: 'Debit Card' } },
-        de: { slug: '/personlich/karten/debit-karte', seo: { title: 'Debit Card' } },
+        pl: { slug: '/indywidualny/karty/karta-debetowa', seo: { title: 'Karta debetowa' } },
+        de: { slug: '/personlich/karten/debit-karte', seo: { title: 'Debitkarte' } },
     },
     template: {
         __typename: 'OneColumnTemplate',

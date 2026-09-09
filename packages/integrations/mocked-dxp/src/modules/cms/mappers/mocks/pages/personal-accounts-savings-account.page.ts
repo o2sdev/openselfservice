@@ -10,7 +10,7 @@ export const personalAccountsSavingsAccountPage = CMS.Pages.definePage({
     locales: {
         en: { slug: '/personal/accounts/savings-account', seo: { title: 'Savings Account' } },
         pl: { slug: '/indywidualny/konta/konto-oszczednosciowe', seo: { title: 'Konto Oszczędnościowe' } },
-        de: { slug: '/personlich/konten/sparen-konto', seo: { title: 'Sparen Konto' } },
+        de: { slug: '/personlich/konten/sparen-konto', seo: { title: 'Sparkonto' } },
     },
     template: {
         __typename: 'OneColumnTemplate',

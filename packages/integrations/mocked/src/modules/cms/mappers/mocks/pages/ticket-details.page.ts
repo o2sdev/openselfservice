@@ -10,8 +10,8 @@ export const ticketDetailsPage = CMS.Pages.definePage({
     hasOwnTitle: true,
     locales: {
         en: { slug: '/cases/:id', seo: { title: 'Ticket Details', description: 'Ticket Details' } },
-        pl: { slug: '/zgloszenia/:id', seo: { title: 'Zgłoszenia', description: 'Zgłoszenia' } },
-        de: { slug: '/faelle/:id', seo: { title: 'Fälle', description: 'Fälle' } },
+        pl: { slug: '/zgloszenia/:id', seo: { title: 'Szczegóły zgłoszenia', description: 'Szczegóły zgłoszenia' } },
+        de: { slug: '/faelle/:id', seo: { title: 'Anfragedetails', description: 'Anfragedetails' } },
     },
     template: {
         __typename: 'OneColumnTemplate',
