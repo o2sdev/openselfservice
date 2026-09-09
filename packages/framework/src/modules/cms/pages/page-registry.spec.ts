@@ -123,6 +123,43 @@ describe('definePage', () => {
         ).toThrow(/missing the locale\(s\) pl/);
     });
 
+    it('should reject a parent whose slug needs a param the page does not declare', () => {
+        // the breadcrumb renders the parent slug out of the params of the page, so a param only
+        // the parent declares would show up in the breadcrumb as `:caseId`
+        const comments = page({
+            id: 'comments',
+            parent: ticketDetails,
+            locales: {
+                en: { slug: '/cases/:id/comments/:comment', seo: { title: 'Comments' } },
+                pl: { slug: '/zgloszenia/:id/komentarze/:comment', seo: { title: 'Komentarze' } },
+                de: { slug: '/faelle/:id/kommentare/:comment', seo: { title: 'Kommentare' } },
+            },
+        });
+
+        expect(comments.routes[0]?.params).toEqual(['id', 'comment']);
+
+        const renamed = page({
+            id: 'renamed',
+            locales: {
+                en: { slug: '/cases/:caseId', seo: { title: 'Renamed' } },
+                pl: { slug: '/zgloszenia/:caseId', seo: { title: 'Renamed' } },
+                de: { slug: '/faelle/:caseId', seo: { title: 'Renamed' } },
+            },
+        });
+
+        expect(() =>
+            page({
+                id: 'x',
+                parent: renamed,
+                locales: {
+                    en: { slug: '/cases/:id/comments', seo: { title: 'Comments' } },
+                    pl: { slug: '/zgloszenia/:id/komentarze', seo: { title: 'Komentarze' } },
+                    de: { slug: '/faelle/:id/kommentare', seo: { title: 'Kommentare' } },
+                },
+            }),
+        ).toThrow(/its parent "renamed" needs the param\(s\) caseId, which this page does not declare/);
+    });
+
     it('should reject a parent chain deeper than the model allows', () => {
         const first = page({ id: 'p1', locales: { en: { slug: '/a', seo: { title: 'A' } } } });
         const second = page({ id: 'p2', parent: first, locales: { en: { slug: '/a/b', seo: { title: 'B' } } } });

@@ -179,6 +179,8 @@ const compileRoute = (id: string, locale: string, slug: string): PageRoute => {
 
 const validateParents = (definition: PageDefinitionInput, routes: readonly PageRoute[]) => {
     const locales = routes.map((route) => route.locale);
+    // every locale declares the same params, which is checked before the parents are
+    const params = routes[0]?.params ?? [];
     const seen = new Set<PageDefinitionInput>([definition]);
 
     let ancestor = definition.parent;
@@ -198,6 +200,20 @@ const validateParents = (definition: PageDefinitionInput, routes: readonly PageR
             throw definitionError(
                 definition.id,
                 `its parent "${ancestor.id}" is missing the locale(s) ${missing.join(', ')}`,
+            );
+        }
+
+        // the breadcrumb renders the slug of the ancestor out of the params of this page, so an
+        // ancestor param this page does not declare would end up in the breadcrumb as `:param`
+        const unresolved = [...new Set(ancestor.routes.flatMap((route) => route.params))].filter(
+            (param) => !params.includes(param),
+        );
+
+        if (unresolved.length) {
+            throw definitionError(
+                definition.id,
+                `its parent "${ancestor.id}" needs the param(s) ${unresolved.join(', ')}, ` +
+                    `which this page does not declare`,
             );
         }
 
