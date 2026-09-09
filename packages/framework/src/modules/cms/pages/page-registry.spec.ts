@@ -408,6 +408,23 @@ describe('themes', () => {
     });
 });
 
+describe('params named after a property of Object.prototype', () => {
+    const proto = page({ id: 'proto', locales: { en: { slug: '/a/:__proto__', seo: { title: 'A' } } } });
+    const ctor = page({ id: 'ctor', locales: { en: { slug: '/b/:constructor', seo: { title: 'B' } } } });
+    const exotic = createPageRegistry([proto, ctor]);
+
+    it('should fill in a param named __proto__ like any other', () => {
+        const match = exotic.matchPage('/a/value', 'en');
+
+        expect(match?.page.slug).toBe('/a/value');
+        expect(match?.params.__proto__).toBe('value');
+    });
+
+    it('should keep the placeholder of a param named constructor when there is no value', () => {
+        expect(exotic.getAllPages('en').map((found) => found.slug)).toEqual(['/a/:__proto__', '/b/:constructor']);
+    });
+});
+
 describe('matchPage', () => {
     it('should expose the params next to the page instead of hiding them in the slug', () => {
         const match = registry.matchPage('/cases/T-1', 'en');

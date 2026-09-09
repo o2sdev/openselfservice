@@ -268,9 +268,15 @@ const renderSlug = (route: PageRoute, params: Record<string, string>) => {
         return '/';
     }
 
-    const segments = route.segments.map((segment) =>
-        'literal' in segment ? segment.literal : (params[segment.param] ?? `:${segment.param}`),
-    );
+    const segments = route.segments.map((segment) => {
+        if ('literal' in segment) {
+            return segment.literal;
+        }
+
+        // read own properties only: a param named after one of `Object.prototype` (`constructor`,
+        // `toString`) would otherwise render as whatever the prototype carries under that name
+        return Object.hasOwn(params, segment.param) ? params[segment.param]! : `:${segment.param}`;
+    });
 
     return `/${segments.join('/')}`;
 };
@@ -286,7 +292,9 @@ const matchRoute = (route: PageRoute, slug: string): Record<string, string> | un
         return undefined;
     }
 
-    const params: Record<string, string> = {};
+    // a null prototype, so that a param named `__proto__` lands as an own property instead of
+    // going through the setter of `Object.prototype` and being dropped
+    const params: Record<string, string> = Object.create(null);
 
     for (let index = 0; index < route.segments.length; index++) {
         const segment = route.segments[index]!;
