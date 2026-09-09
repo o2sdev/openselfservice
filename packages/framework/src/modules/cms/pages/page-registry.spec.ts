@@ -48,14 +48,14 @@ const ticketArchive = page({
     locales: { en: { slug: '/cases/archive', seo: { title: 'Archive' } } },
 });
 
-const archiveOfCase = page({
-    id: 'archive-of-case',
-    locales: { en: { slug: '/cases/:id/archive', seo: { title: 'Archive of a case' } } },
+const noteSummary = page({
+    id: 'note-summary',
+    locales: { en: { slug: '/cases/:id/notes/summary', seo: { title: 'Summary of the notes' } } },
 });
 
-const caseOfArchive = page({
-    id: 'case-of-archive',
-    locales: { en: { slug: '/cases/archive/:section', seo: { title: 'Section of the archive' } } },
+const archiveSection = page({
+    id: 'archive-section',
+    locales: { en: { slug: '/cases/archive/:section/:page', seo: { title: 'Page of an archive section' } } },
 });
 
 const registry = createPageRegistry([dashboard, ticketList, ticketDetails, ticketArchive]);
@@ -201,7 +201,7 @@ describe('createPageRegistry', () => {
         const other = page({ id: 'other', locales: { en: { slug: '/cases', seo: { title: 'Other' } } } });
 
         expect(() => createPageRegistry([ticketList, other])).toThrow(
-            /"\/cases" \(en\) of "other" collides with "\/cases" of "2"/,
+            /"\/cases" \(en\) of "other" can match the same paths as "\/cases" of "2"/,
         );
     });
 
@@ -210,8 +210,33 @@ describe('createPageRegistry', () => {
         const other = page({ id: 'other', locales: { en: { slug: '/cases/:number', seo: { title: 'Other' } } } });
 
         expect(() => createPageRegistry([ticketDetails, other])).toThrow(
-            /"\/cases\/:number" \(en\) of "other" collides with "\/cases\/:id" of "3"/,
+            /"\/cases\/:number" \(en\) of "other" can match the same paths as "\/cases\/:id" of "3"/,
         );
+    });
+
+    it('should reject two routes that overlap with nothing to tell them apart', () => {
+        // `/cases/:id/archive` and `/cases/archive/:section` both match `/cases/archive/archive`
+        // and spell out as much of the path as each other, so only the declaration order would
+        // decide which page answers it
+        const archiveOfCase = page({
+            id: 'archive-of-case',
+            locales: { en: { slug: '/cases/:id/archive', seo: { title: 'Archive of a case' } } },
+        });
+        const caseOfArchive = page({
+            id: 'case-of-archive',
+            locales: { en: { slug: '/cases/archive/:section', seo: { title: 'Section of the archive' } } },
+        });
+
+        expect(() => createPageRegistry([archiveOfCase, caseOfArchive])).toThrow(
+            /"\/cases\/archive\/:section" \(en\) of "case-of-archive" can match the same paths as/,
+        );
+    });
+
+    it('should accept two routes that overlap when one of them is more specific', () => {
+        // `/cases/archive` spells out a segment `/cases/:id` leaves open, and the static route is
+        // the one that answers it
+        expect(registry.mapPage('/cases/archive', 'en')?.id).toBe('4');
+        expect(registry.mapPage('/cases/T-1', 'en')?.id).toBe('3');
     });
 });
 
@@ -259,19 +284,20 @@ describe('mapPage', () => {
     });
 
     it.each([
-        ['the archive route first', [archiveOfCase, caseOfArchive]],
-        ['the case route first', [caseOfArchive, archiveOfCase]],
-    ])('should resolve two routes that overlap by the earliest literal, declared with %s', (_, definitions) => {
-        // `/cases/:id/archive` and `/cases/archive/:section` both match `/cases/archive/archive`,
-        // and the one that spells out the earlier segment answers it whichever came first
+        ['the summary route first', [noteSummary, archiveSection]],
+        ['the section route first', [archiveSection, noteSummary]],
+    ])('should resolve two overlapping routes by their earliest literal, declared with %s', (_, definitions) => {
+        // `/cases/:id/notes/summary` and `/cases/archive/:section/:page` both match
+        // `/cases/archive/notes/summary`, and the one that spells out the earlier segment answers
+        // it whichever came first — even though the other one has more literals overall
         const overlapping = createPageRegistry(definitions);
 
-        expect(overlapping.matchPage('/cases/archive/archive', 'en')).toMatchObject({
-            definition: { id: 'case-of-archive' },
-            params: { section: 'archive' },
+        expect(overlapping.matchPage('/cases/archive/notes/summary', 'en')).toMatchObject({
+            definition: { id: 'archive-section' },
+            params: { section: 'notes', page: 'summary' },
         });
-        expect(overlapping.matchPage('/cases/T-1/archive', 'en')).toMatchObject({
-            definition: { id: 'archive-of-case' },
+        expect(overlapping.matchPage('/cases/T-1/notes/summary', 'en')).toMatchObject({
+            definition: { id: 'note-summary' },
             params: { id: 'T-1' },
         });
     });

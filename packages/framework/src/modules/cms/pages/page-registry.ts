@@ -316,10 +316,10 @@ interface Candidate {
 }
 
 /**
- * Two dynamic routes can both match one pathname without being the same route: `/cases/:id/archive`
- * and `/cases/archive/:section` both match `/cases/archive/archive`. Whichever spells out the
- * earliest segment is the more specific one and is tried first, so which page answers such a
- * pathname follows from the routes themselves rather than from the order they were declared in.
+ * Two routes can both match one pathname without being the same route: `/cases/:id/notes/summary`
+ * and `/cases/archive/:section/:page` both match `/cases/archive/notes/summary`. Whichever spells
+ * out the earliest segment is the more specific one and is tried first, so which page answers such
+ * a pathname follows from the routes themselves rather than from the order they were declared in.
  */
 const bySpecificity = (left: Candidate, right: Candidate) => {
     const segments = Math.min(left.route.segments.length, right.route.segments.length);
@@ -336,12 +336,22 @@ const bySpecificity = (left: Candidate, right: Candidate) => {
     return left.route.params.length - right.route.params.length;
 };
 
+const literalCount = (route: PageRoute) => route.segments.filter((segment) => 'literal' in segment).length;
+
 /**
- * What a route actually matches, param names left out: `/cases/:id` and `/cases/:number` are one
- * and the same route, and two pages claiming it would make the answer depend on declaration order.
+ * Whether two routes can match one and the same pathname: they span the same number of segments and
+ * no position insists on two different literals, a param matching whatever sits opposite it. Two
+ * such routes are a modelling mistake once neither of them is the more specific one — `/cases/:id`
+ * against `/cases/:number`, or `/cases/:id/archive` against `/cases/archive/:section` — because
+ * then only the order they were declared in decides which page answers the pathname they share.
  */
-const shapeOf = (route: PageRoute) =>
-    route.segments.map((segment) => ('literal' in segment ? segment.literal : '*')).join('/');
+const routesIntersect = (left: PageRoute, right: PageRoute) =>
+    left.segments.length === right.segments.length &&
+    left.segments.every((segment, index) => {
+        const other = right.segments[index]!;
+
+        return !('literal' in segment) || !('literal' in other) || segment.literal === other.literal;
+    });
 
 /**
  * Builds the `getPage` / `getPages` / `getAlternativePages` trio out of page definitions, so that
@@ -356,7 +366,7 @@ export const createPageRegistry = (
     const byId = new Map<string, PageDefinition>();
     const staticByLocale = new Map<string, Map<string, Candidate>>();
     const dynamicByLocale = new Map<string, Candidate[]>();
-    const shapesByLocale = new Map<string, Map<string, Candidate>>();
+    const declaredByLocale = new Map<string, Candidate[]>();
     const locales: string[] = [];
 
     definitions.forEach((definition) => {
@@ -372,18 +382,21 @@ export const createPageRegistry = (
             }
 
             const candidate = { definition, route };
-            const shapes = shapesByLocale.get(route.locale) ?? new Map<string, Candidate>();
-            const conflict = shapes.get(shapeOf(route));
+            const declared = declaredByLocale.get(route.locale) ?? [];
+            const conflict = declared.find(
+                (existing) =>
+                    routesIntersect(existing.route, route) && literalCount(existing.route) === literalCount(route),
+            );
 
             if (conflict) {
                 throw new Error(
-                    `createPageRegistry: "${route.pattern}" (${route.locale}) of "${definition.id}" collides ` +
-                        `with "${conflict.route.pattern}" of "${conflict.definition.id}"`,
+                    `createPageRegistry: "${route.pattern}" (${route.locale}) of "${definition.id}" can match ` +
+                        `the same paths as "${conflict.route.pattern}" of "${conflict.definition.id}", ` +
+                        `and neither of them is more specific`,
                 );
             }
 
-            shapes.set(shapeOf(route), candidate);
-            shapesByLocale.set(route.locale, shapes);
+            declaredByLocale.set(route.locale, [...declared, candidate]);
 
             if (isDynamic(route)) {
                 dynamicByLocale.set(route.locale, [...(dynamicByLocale.get(route.locale) ?? []), candidate]);
