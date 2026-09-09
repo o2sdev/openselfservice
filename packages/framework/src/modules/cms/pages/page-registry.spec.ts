@@ -48,6 +48,16 @@ const ticketArchive = page({
     locales: { en: { slug: '/cases/archive', seo: { title: 'Archive' } } },
 });
 
+const archiveOfCase = page({
+    id: 'archive-of-case',
+    locales: { en: { slug: '/cases/:id/archive', seo: { title: 'Archive of a case' } } },
+});
+
+const caseOfArchive = page({
+    id: 'case-of-archive',
+    locales: { en: { slug: '/cases/archive/:section', seo: { title: 'Section of the archive' } } },
+});
+
 const registry = createPageRegistry([dashboard, ticketList, ticketDetails, ticketArchive]);
 
 const identify = (found: { id: string; locale: string; slug: string; seo: { title: string } } | undefined) =>
@@ -245,6 +255,24 @@ describe('mapPage', () => {
             locale: 'en',
             slug: '/cases/archive',
             title: 'Archive',
+        });
+    });
+
+    it.each([
+        ['the archive route first', [archiveOfCase, caseOfArchive]],
+        ['the case route first', [caseOfArchive, archiveOfCase]],
+    ])('should resolve two routes that overlap by the earliest literal, declared with %s', (_, definitions) => {
+        // `/cases/:id/archive` and `/cases/archive/:section` both match `/cases/archive/archive`,
+        // and the one that spells out the earlier segment answers it whichever came first
+        const overlapping = createPageRegistry(definitions);
+
+        expect(overlapping.matchPage('/cases/archive/archive', 'en')).toMatchObject({
+            definition: { id: 'case-of-archive' },
+            params: { section: 'archive' },
+        });
+        expect(overlapping.matchPage('/cases/T-1/archive', 'en')).toMatchObject({
+            definition: { id: 'archive-of-case' },
+            params: { id: 'T-1' },
         });
     });
 

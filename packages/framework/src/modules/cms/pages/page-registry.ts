@@ -315,12 +315,25 @@ interface Candidate {
     route: PageRoute;
 }
 
-/** A route with more literal segments is more specific, so it is tried first. */
+/**
+ * Two dynamic routes can both match one pathname without being the same route: `/cases/:id/archive`
+ * and `/cases/archive/:section` both match `/cases/archive/archive`. Whichever spells out the
+ * earliest segment is the more specific one and is tried first, so which page answers such a
+ * pathname follows from the routes themselves rather than from the order they were declared in.
+ */
 const bySpecificity = (left: Candidate, right: Candidate) => {
-    const literals = (candidate: Candidate) =>
-        candidate.route.segments.filter((segment) => 'literal' in segment).length;
+    const segments = Math.min(left.route.segments.length, right.route.segments.length);
 
-    return literals(right) - literals(left) || left.route.params.length - right.route.params.length;
+    for (let index = 0; index < segments; index++) {
+        const leftLiteral = 'literal' in left.route.segments[index]!;
+        const rightLiteral = 'literal' in right.route.segments[index]!;
+
+        if (leftLiteral !== rightLiteral) {
+            return leftLiteral ? -1 : 1;
+        }
+    }
+
+    return left.route.params.length - right.route.params.length;
 };
 
 /**
