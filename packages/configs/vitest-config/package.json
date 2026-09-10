@@ -27,7 +27,7 @@
         "glob": "^13.0.6",
         "nyc": "^18.0.0",
         "open-cli": "^9.0.0",
-        "unplugin-swc": "^1.5.11",
+        "unplugin-swc": "^1.6.0",
         "vitest": "^4.1.11"
     }
 }
