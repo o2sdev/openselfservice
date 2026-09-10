@@ -20,19 +20,22 @@
         "url": "https://github.com/o2sdev/openselfservice/issues"
     },
     "exports": {
-        ".": "./dist/index.js"
+        ".": "./dist/index.js",
+        "./sdk": "./dist/sdk.js"
     },
     "files": [
         "dist"
     ],
     "scripts": {
         "build": "tsc7 --preserveWatchOutput && tsc-alias",
+        "test": "vitest run",
         "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
         "@o2s/ui": "*",
         "class-variance-authority": "^0.7.1",
+        "next-runtime-env": "^3.3.0",
         "react": "^19.2.8"
     },
     "devDependencies": {
@@ -41,6 +44,7 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/vitest-config": "*",
         "concurrently": "^10.0.5",
         "eslint": "^9.39.5",
         "prettier": "^3.9.6",
