@@ -10,6 +10,8 @@ import { LoggerConfig } from './utils/logger';
 import { AppHeaders } from './utils/models/headers';
 
 export { BlockRequestError, createBlockRequest } from './utils/block-request';
+export { toLoggerConfig } from './utils/logger';
+export type { LogFormat, LogLevel, LoggerConfig, RawLoggerConfig } from './utils/logger';
 export type {
     BlockRequest,
     BlockRequestConfig,

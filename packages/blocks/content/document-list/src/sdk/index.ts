@@ -1,27 +1,11 @@
-// this unused import is necessary for TypeScript to properly resolve API methods
-import { env } from 'next-runtime-env';
+import { getSharedSdk } from '@o2s/utils.frontend/sdk';
 
-import { extendSdk, getSdk } from '@o2s/framework/sdk';
+import { type Sdk, extendSdk } from '@o2s/framework/sdk';
 
 import { documentList } from './document-list';
 
-const API_URL =
-    (typeof window === 'undefined' ? process.env.API_URL_INTERNAL : env('NEXT_PUBLIC_API_URL')) ||
-    env('NEXT_PUBLIC_API_URL');
+const internalSdk = getSharedSdk();
 
-const internalSdk = getSdk({
-    apiUrl: API_URL!,
-    logger: {
-        // @ts-expect-error missing types
-        level: process.env.LOG_LEVEL,
-        // @ts-expect-error missing types
-        format: process.env.LOG_FORMAT,
-        colorsEnabled: process.env.LOG_COLORS_ENABLED === 'true',
-    },
-});
-
-export const sdk = extendSdk(internalSdk, {
-    blocks: {
-        getDocumentList: documentList(internalSdk).blocks.getDocumentList,
-    },
-});
+// the type is spelled out because the emitted declaration cannot name the types that the
+// methods of the factory pull in from other packages (TS2883)
+export const sdk: Sdk & ReturnType<typeof documentList> = extendSdk(internalSdk, documentList(internalSdk));
