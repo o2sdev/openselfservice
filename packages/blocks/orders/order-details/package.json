@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.order-details",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "private": false,
     "license": "MIT",
     "description": "A block displaying details for a specific order, including items, status, and history.",
