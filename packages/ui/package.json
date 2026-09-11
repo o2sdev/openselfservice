@@ -1,6 +1,6 @@
 {
     "name": "@o2s/ui",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "private": true,
     "license": "MIT",
     "description": "Shared UI component library for O2S blocks, built on Radix UI and Tailwind CSS.",
