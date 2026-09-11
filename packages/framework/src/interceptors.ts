@@ -1,23 +1,31 @@
-import { FetchContext, FetchError, FetchResponse } from 'ofetch';
+import { FetchContext, FetchResponse } from 'ofetch';
 
+import { toApiRequestError } from './utils/api-request-error';
 import { ErrorType, LoggerConfig, LoggerService, RequestConfig, ResponseType } from './utils/logger';
-
-const parseError = (error: Error | FetchError) => {
-    if (error instanceof FetchError && error.response) {
-        return Promise.reject({
-            status: error.response.status || error.statusCode,
-            message: error.message,
-            data: error.response._data,
-        });
-    }
-    return Promise.reject(error);
-};
 
 export interface InterceptorsConfig {
     logger?: LoggerConfig;
 }
 
 export type FetchHookType<T> = (context: T) => Promise<void> | void;
+
+const getRequestUrl = (request: FetchContext['request'], baseURL?: string): string => {
+    const requestUrl = typeof request === 'string' ? request : request.url;
+
+    if (!baseURL) {
+        return requestUrl;
+    }
+
+    const normalizedBaseURL = baseURL.endsWith('/') ? baseURL.slice(0, -1) : baseURL;
+
+    if (requestUrl !== normalizedBaseURL && !requestUrl.startsWith(`${normalizedBaseURL}/`)) {
+        return requestUrl;
+    }
+
+    const relativeUrl = requestUrl.slice(normalizedBaseURL.length);
+
+    return relativeUrl ? (relativeUrl.startsWith('/') ? relativeUrl : `/${relativeUrl}`) : '/';
+};
 
 export interface FetchInterceptors {
     onRequest: FetchHookType<FetchContext>;
@@ -65,6 +73,7 @@ export const createInterceptors = ({ logger }: InterceptorsConfig): FetchInterce
 
     const onRequestError: FetchInterceptors['onRequestError'] = (context) => {
         const { request, options, error } = context;
+        const requestUrl = getRequestUrl(request, options.baseURL);
 
         const errorObject: ErrorType = {
             name: error.name,
@@ -79,11 +88,12 @@ export const createInterceptors = ({ logger }: InterceptorsConfig): FetchInterce
         };
 
         loggerService.apiRequestError(errorObject);
-        return parseError(error);
+        return Promise.reject(toApiRequestError(error, options.method || 'GET', requestUrl));
     };
 
     const onResponseError: FetchInterceptors['onResponseError'] = (context) => {
         const { request, options, response } = context;
+        const requestUrl = getRequestUrl(request, options.baseURL);
 
         const errorObject: ErrorType = {
             name: 'ResponseError',
@@ -110,7 +120,7 @@ export const createInterceptors = ({ logger }: InterceptorsConfig): FetchInterce
         };
 
         loggerService.apiResponseError(errorObject);
-        return parseError(errorObject);
+        return Promise.reject(toApiRequestError(errorObject, options.method || 'GET', requestUrl));
     };
 
     return {

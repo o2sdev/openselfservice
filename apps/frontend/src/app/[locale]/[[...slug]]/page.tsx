@@ -4,6 +4,8 @@ import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import React from 'react';
 
+import { ApiRequestError } from '@o2s/framework/sdk';
+
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
 import { AppSpinner } from '@o2s/ui/components/Feedback/AppSpinner';
@@ -166,21 +168,11 @@ export default async function Page({ params, searchParams }: Props) {
             </body>
         );
     } catch (error) {
-        if (
-            // @ts-expect-error TODO add proper error type detection
-            (error && 'status' in error && error.status === 404) ||
-            // @ts-expect-error TODO add proper error type detection
-            (error && 'response' in error && 'status' in error.response && error.response.status === 404)
-        ) {
+        if (error instanceof ApiRequestError && error.status === 404) {
             notFound();
         }
 
-        if (
-            // @ts-expect-error TODO add proper error type detection
-            (error && 'status' in error && error.status === 401) ||
-            // @ts-expect-error TODO add proper error type detection
-            (error && 'response' in error && 'status' in error.response && error.response.status === 401)
-        ) {
+        if (error instanceof ApiRequestError && error.status === 401) {
             if (!session?.user) {
                 return await signIn();
             } else {

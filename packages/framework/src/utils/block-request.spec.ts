@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import type { CompatRequestConfig, Sdk } from '../sdk';
 
-import { type BlockRequestConfig, BlockRequestError, createBlockRequest } from './block-request';
+import { ApiRequestError, type BlockRequestConfig, BlockRequestError, createBlockRequest } from './block-request';
 import { HeaderName } from './models/headers';
 
 const TIMEZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -148,8 +148,13 @@ describe('createBlockRequest', () => {
             const error = await failWith({ status: 404, message: 'Not Found' });
 
             expect(error).toBeInstanceOf(BlockRequestError);
+            expect(error).toBeInstanceOf(ApiRequestError);
             expect(error.status).toBe(404);
             expect(error.message).toBe('[GET /tickets] 404 Not Found');
+        });
+
+        it('should keep the deprecated block error export as an alias', () => {
+            expect(BlockRequestError).toBe(ApiRequestError);
         });
 
         it('should take the status of an error that calls it statusCode', async () => {
@@ -188,8 +193,17 @@ describe('createBlockRequest', () => {
             expect((await failWith(cause)).cause).toBe(cause);
         });
 
+        it('should use the backstop for response parsing failures', async () => {
+            const cause = new SyntaxError('Unexpected token');
+            const error = await failWith(cause);
+
+            expect(error).toBeInstanceOf(ApiRequestError);
+            expect(error.message).toBe('[GET /tickets] Unexpected token');
+            expect(error.cause).toBe(cause);
+        });
+
         it('should not wrap an error that is already a BlockRequestError', async () => {
-            const original = new BlockRequestError('[GET /tickets] 404 Not Found', {
+            const original = new ApiRequestError('[GET /tickets] 404 Not Found', {
                 method: 'get',
                 url: '/tickets',
                 status: 404,

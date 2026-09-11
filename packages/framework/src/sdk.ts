@@ -5,11 +5,12 @@ import { getNotification, getNotifications, markAs } from './api/notifications';
 import { createTicket, getTicket, getTickets } from './api/tickets';
 import { getCustomerForCurrentUserById, getDefaultCustomerForCurrentUser, getUser } from './api/users';
 import { createInterceptors } from './interceptors';
+import { toApiRequestError } from './utils/api-request-error';
 import type { BlockResponseType } from './utils/block-request';
 import { LoggerConfig } from './utils/logger';
 import { AppHeaders } from './utils/models/headers';
 
-export { BlockRequestError, createBlockRequest } from './utils/block-request';
+export { ApiRequestError, BlockRequestError, createBlockRequest } from './utils/block-request';
 export type {
     BlockRequest,
     BlockRequestConfig,
@@ -104,7 +105,10 @@ export const getSdk = ({ apiUrl, logger }: SdkConfig): Sdk => {
         }
 
         const url = config.url || '';
-        return ofetchInstance(url, fetchOptions) as Promise<T>;
+
+        return ofetchInstance(url, fetchOptions).catch((error: unknown) => {
+            throw toApiRequestError(error, config.method || 'GET', url);
+        }) as Promise<T>;
     };
 
     // Define API method groups here
