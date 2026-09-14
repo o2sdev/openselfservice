@@ -23,7 +23,7 @@
 '@o2s/blocks.notification-list': patch
 '@o2s/blocks.notification-summary': patch
 '@o2s/blocks.order-confirmation': patch
-'@o2s/blocks.order-details': patch
+'@o2s/blocks.order-details': minor
 '@o2s/blocks.order-list': patch
 '@o2s/blocks.orders-summary': patch
 '@o2s/blocks.payments-history': patch

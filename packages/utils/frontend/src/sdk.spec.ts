@@ -60,6 +60,16 @@ describe('getSharedSdk', () => {
         expect(lastConfig().apiUrl).toBe('https://public.example');
     });
 
+    it('should say so instead of memoizing an instance without a url', async () => {
+        delete process.env.API_URL_INTERNAL;
+        publicEnv = {};
+
+        const getSharedSdk = await importSharedSdk();
+
+        expect(() => getSharedSdk()).toThrow(/API url is not configured/);
+        expect(getSdk).not.toHaveBeenCalled();
+    });
+
     it('should fall back to the public url when there is no internal one', async () => {
         delete process.env.API_URL_INTERNAL;
 

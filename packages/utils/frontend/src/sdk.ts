@@ -10,6 +10,22 @@ const resolveApiUrl = () =>
     (typeof window === 'undefined' ? process.env.API_URL_INTERNAL : env('NEXT_PUBLIC_API_URL')) ||
     env('NEXT_PUBLIC_API_URL');
 
+/**
+ * One instance serves every block, so a missing url would be memoized once and inherited by all of
+ * them; saying so outright beats every request failing against `undefined/...` later on.
+ */
+const requireApiUrl = () => {
+    const apiUrl = resolveApiUrl();
+
+    if (!apiUrl) {
+        throw new Error(
+            'The API url is not configured: set API_URL_INTERNAL for the server or NEXT_PUBLIC_API_URL for the browser.',
+        );
+    }
+
+    return apiUrl;
+};
+
 let shared: Sdk | undefined;
 
 /**
@@ -27,7 +43,7 @@ let shared: Sdk | undefined;
  */
 export const getSharedSdk = (): Sdk =>
     (shared ??= getSdk({
-        apiUrl: resolveApiUrl()!,
+        apiUrl: requireApiUrl(),
         logger: toLoggerConfig({
             level: process.env.LOG_LEVEL,
             format: process.env.LOG_FORMAT,
