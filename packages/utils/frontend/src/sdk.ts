@@ -10,22 +10,6 @@ const resolveApiUrl = () =>
     (typeof window === 'undefined' ? process.env.API_URL_INTERNAL : env('NEXT_PUBLIC_API_URL')) ||
     env('NEXT_PUBLIC_API_URL');
 
-/**
- * One instance serves every block, so a missing url would be memoized once and inherited by all of
- * them; saying so outright beats every request failing against `undefined/...` later on.
- */
-const requireApiUrl = () => {
-    const apiUrl = resolveApiUrl();
-
-    if (!apiUrl) {
-        throw new Error(
-            'The API url is not configured: set API_URL_INTERNAL for the server or NEXT_PUBLIC_API_URL for the browser.',
-        );
-    }
-
-    return apiUrl;
-};
-
 let shared: Sdk | undefined;
 
 /**
@@ -41,12 +25,28 @@ let shared: Sdk | undefined;
  * export const blockSdk = extendSdk(sdk, ticketList(sdk));
  * ```
  */
-export const getSharedSdk = (): Sdk =>
-    (shared ??= getSdk({
-        apiUrl: requireApiUrl(),
+export const getSharedSdk = (): Sdk => {
+    if (shared) {
+        return shared;
+    }
+
+    const apiUrl = resolveApiUrl();
+    const sdk = getSdk({
+        apiUrl: apiUrl!,
         logger: toLoggerConfig({
             level: process.env.LOG_LEVEL,
             format: process.env.LOG_FORMAT,
             colorsEnabled: process.env.LOG_COLORS_ENABLED,
         }),
-    }));
+    });
+
+    // `next build` collects the pages with no runtime environment, which is what `next-runtime-env`
+    // exists for, so a url can legitimately be missing here. One instance serves every block, so
+    // caching that miss would hand all of them a client built against `undefined` with no second
+    // chance to resolve it; leaving it uncached lets the next call pick the url up.
+    if (apiUrl) {
+        shared = sdk;
+    }
+
+    return sdk;
+};

@@ -60,14 +60,26 @@ describe('getSharedSdk', () => {
         expect(lastConfig().apiUrl).toBe('https://public.example');
     });
 
-    it('should say so instead of memoizing an instance without a url', async () => {
+    it('should not hold on to an instance built without a url', async () => {
+        // `next build` runs with no runtime environment, so the url can be missing at that point;
+        // caching it then would hand every block a client pointing at `undefined` for good
         delete process.env.API_URL_INTERNAL;
         publicEnv = {};
 
         const getSharedSdk = await importSharedSdk();
 
-        expect(() => getSharedSdk()).toThrow(/API url is not configured/);
-        expect(getSdk).not.toHaveBeenCalled();
+        getSharedSdk();
+        expect(lastConfig().apiUrl).toBeUndefined();
+
+        publicEnv = { NEXT_PUBLIC_API_URL: 'https://public.example' };
+        vi.stubGlobal('window', {});
+
+        getSharedSdk();
+        expect(lastConfig().apiUrl).toBe('https://public.example');
+
+        // and from then on it is the memoized one
+        expect(getSharedSdk()).toBe(getSharedSdk());
+        expect(getSdk).toHaveBeenCalledTimes(2);
     });
 
     it('should fall back to the public url when there is no internal one', async () => {
