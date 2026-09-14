@@ -58,7 +58,7 @@
         "eslint": "^9.39.5",
         "prettier": "^3.9.6",
         "react-hook-form": "^7.87.0",
-        "tsc-alias": "^1.9.4",
+        "tsc-alias": "^1.9.5",
         "typescript": "^6.0.3",
         "vitest": "^4.1.11"
     },
