@@ -353,17 +353,23 @@ This follows the same pattern as core services — imports come from `@o2s/confi
 To call your custom module's endpoints from the frontend, use `extendSdk()`:
 
 ```typescript
-import { extendSdk, getSdk } from '@o2s/framework/sdk';
+import { getSharedSdk } from '@o2s/utils.frontend/sdk';
 
-const baseSdk = getSdk({ apiUrl: '/api' });
+import { extendSdk } from '@o2s/framework/sdk';
+
+const baseSdk = getSharedSdk();
 
 const sdk = extendSdk(baseSdk, {
     documents: {
-        getList: (query) => baseSdk.makeRequest('/documents', { params: query }),
-        getById: (id) => baseSdk.makeRequest(`/documents/${id}`),
+        getList: (query) => baseSdk.makeRequest({ url: '/documents', params: query }),
+        getById: (id) => baseSdk.makeRequest({ url: `/documents/${id}` }),
     },
 });
 ```
+
+`getSharedSdk()` hands out the instance every block and module of the frontend shares — one client
+configured from the environment, instead of one per package. `extendSdk` copies the instance it
+extends, so the methods you add stay yours.
 
 ## Working example
 

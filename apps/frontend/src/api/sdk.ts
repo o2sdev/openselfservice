@@ -1,10 +1,8 @@
-// this unused import is necessary for TypeScript to properly resolve API methods
-import { env } from 'next-runtime-env';
+import { getSharedSdk } from '@o2s/utils.frontend/sdk';
 
-// this unused import is necessary for TypeScript to properly resolve API methods
 import { AppHeaders } from '@o2s/framework/headers';
 import { Carts } from '@o2s/framework/modules';
-import { extendSdk, getSdk } from '@o2s/framework/sdk';
+import { extendSdk } from '@o2s/framework/sdk';
 
 import { Notifications } from '@o2s/integrations.mocked/sdk';
 
@@ -14,20 +12,7 @@ import { notFoundPage } from '@/api/modules/not-found-page';
 import { organizations } from '@/api/modules/organizations';
 import { page } from '@/api/modules/page';
 
-const API_URL =
-    (typeof window === 'undefined' ? process.env.API_URL_INTERNAL : env('NEXT_PUBLIC_API_URL')) ||
-    env('NEXT_PUBLIC_API_URL');
-
-const internalSdk = getSdk({
-    apiUrl: API_URL!,
-    logger: {
-        // @ts-expect-error missing types
-        level: process.env.LOG_LEVEL,
-        // @ts-expect-error missing types
-        format: process.env.LOG_FORMAT,
-        colorsEnabled: process.env.LOG_COLORS_ENABLED === 'true',
-    },
-});
+const internalSdk = getSharedSdk();
 
 const getCurrentCart: (headers: AppHeaders, authorization?: string) => Promise<Carts.Model.Cart> = (
     headers,

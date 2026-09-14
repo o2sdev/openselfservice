@@ -1,37 +1,11 @@
-// these unused imports are necessary for TypeScript to properly resolve API methods
-import { env } from 'next-runtime-env';
+import { getSharedSdk } from '@o2s/utils.frontend/sdk';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Models } from '@o2s/utils.api-harmonization';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Carts } from '@o2s/framework/modules';
-import { extendSdk, getSdk } from '@o2s/framework/sdk';
+import { type Sdk, extendSdk } from '@o2s/framework/sdk';
 
 import { cart } from './cart';
 
-const API_URL =
-    (typeof window === 'undefined' ? process.env.API_URL_INTERNAL : env('NEXT_PUBLIC_API_URL')) ||
-    env('NEXT_PUBLIC_API_URL');
+const internalSdk = getSharedSdk();
 
-const internalSdk = getSdk({
-    apiUrl: API_URL!,
-    logger: {
-        // @ts-expect-error missing types
-        level: process.env.LOG_LEVEL,
-        // @ts-expect-error missing types
-        format: process.env.LOG_FORMAT,
-        colorsEnabled: process.env.LOG_COLORS_ENABLED === 'true',
-    },
-});
-
-export const sdk = extendSdk(internalSdk, {
-    blocks: {
-        getCart: cart(internalSdk).blocks.getCart,
-    },
-    cart: {
-        getCart: cart(internalSdk).cart.getCart,
-        updateCartItem: cart(internalSdk).cart.updateCartItem,
-        removeCartItem: cart(internalSdk).cart.removeCartItem,
-    },
-});
+// the type is spelled out because the emitted declaration cannot name the types that the
+// methods of the factory pull in from other packages (TS2883)
+export const sdk: Sdk & ReturnType<typeof cart> = extendSdk(internalSdk, cart(internalSdk));

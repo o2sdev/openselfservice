@@ -30,6 +30,26 @@ If you're using the provided frontend application, this will be already pre-conf
 
 :::
 
+:::tip
+Inside the frontend packages — the blocks, the modules and the application itself — reach for
+`getSharedSdk()` from `@o2s/utils.frontend/sdk` rather than calling `getSdk()` again. It resolves
+the API url and the logger settings from the environment and hands out one instance for all of
+them, which is what every block builds its own methods on:
+
+```typescript
+import { getSharedSdk } from '@o2s/utils.frontend/sdk';
+
+import { extendSdk } from '@o2s/framework/sdk';
+
+import { ticketList } from './ticket-list';
+
+const internalSdk = getSharedSdk();
+
+export const sdk = extendSdk(internalSdk, ticketList(internalSdk));
+```
+
+:::
+
 ## Using the SDK
 
 Once the SDK is initialized, you can import and use it in other files and components:
