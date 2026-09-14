@@ -1,646 +1,113 @@
 import { CMS } from '@o2s/framework/modules';
 
-// Warranty & Repair category pages
-export const PAGE_WARRANTY_AND_REPAIR_EN: CMS.Model.Page.Page = {
+export const warrantyAndRepairPage = CMS.Pages.definePage({
     id: 'warranty-and-repair',
-    slug: '/help-and-support/warranty-and-repair',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Warranty & Repair',
-        description: 'Warranty & Repair',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
+    locales: {
+        en: {
+            slug: '/help-and-support/warranty-and-repair',
+            seo: { title: 'Warranty & Repair', description: 'Warranty & Repair' },
+        },
+        pl: {
+            slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa',
+            seo: { title: 'Gwarancja i Naprawa', description: 'Gwarancja i Naprawa' },
+        },
+        de: {
+            slug: '/hilfe-und-support/garantie-und-reparatur',
+            seo: { title: 'Garantie & Reparatur', description: 'Garantie & Reparatur' },
         },
     },
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
+    template: { __typename: 'OneColumnTemplate', slots: { main: [{ __typename: 'CategoryBlock', id: 'category-1' }] } },
+});
 
-export const PAGE_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
-    id: 'warranty-and-repair',
-    slug: '/hilfe-und-support/garantie-und-reparaturt',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Garantie & Reparatur',
-        description: 'Garantie & Reparatur',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_WARRANTY_AND_REPAIR_PL: CMS.Model.Page.Page = {
-    id: 'warranty-and-repair',
-    slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Gwarancja i Naprawa',
-        description: 'Gwarancja i Naprawa',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-// Maintenance category pages
-export const PAGE_MAINTENANCE_EN: CMS.Model.Page.Page = {
+export const maintenancePage = CMS.Pages.definePage({
     id: 'maintenance',
-    slug: '/help-and-support/maintenance',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Maintenance',
-        description: 'Maintenance',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
+    locales: {
+        en: { slug: '/help-and-support/maintenance', seo: { title: 'Maintenance', description: 'Maintenance' } },
+        pl: { slug: '/pomoc-i-wsparcie/konserwacja', seo: { title: 'Konserwacja', description: 'Konserwacja' } },
+        de: { slug: '/hilfe-und-support/wartung', seo: { title: 'Wartung', description: 'Wartung' } },
     },
+    template: { __typename: 'OneColumnTemplate', slots: { main: [{ __typename: 'CategoryBlock', id: 'category-2' }] } },
+});
 
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-2',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_MAINTENANCE_DE: CMS.Model.Page.Page = {
-    id: 'maintenance',
-    slug: '/hilfe-und-support/wartung',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Wartung',
-        description: 'Wartung',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-2',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_MAINTENANCE_PL: CMS.Model.Page.Page = {
-    id: 'maintenance',
-    slug: '/pomoc-i-wsparcie/konserwacja',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Konserwacja',
-        description: 'Konserwacja',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-2',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-// Safety category pages
-export const PAGE_SAFETY_EN: CMS.Model.Page.Page = {
+export const safetyPage = CMS.Pages.definePage({
     id: 'safety',
-    slug: '/help-and-support/safety',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Safety',
-        description: 'Safety',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
+    locales: {
+        en: { slug: '/help-and-support/safety', seo: { title: 'Safety', description: 'Safety' } },
+        pl: {
+            slug: '/pomoc-i-wsparcie/bezpieczenstwo',
+            seo: { title: 'Bezpieczeństwo', description: 'Bezpieczeństwo' },
         },
+        de: { slug: '/hilfe-und-support/sicherheit', seo: { title: 'Sicherheit', description: 'Sicherheit' } },
     },
+    template: { __typename: 'OneColumnTemplate', slots: { main: [{ __typename: 'CategoryBlock', id: 'category-3' }] } },
+});
 
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-3',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_SAFETY_DE: CMS.Model.Page.Page = {
-    id: 'safety',
-    slug: '/hilfe-und-support/sicherheit',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Sicherheit',
-        description: 'Sicherheit',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-3',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_SAFETY_PL: CMS.Model.Page.Page = {
-    id: 'safety',
-    slug: '/pomoc-i-wsparcie/bezpieczenstwo',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Bezpieczeństwo',
-        description: 'Bezpieczeństwo',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-3',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-// Accessories category pages
-export const PAGE_ACCESSORIES_EN: CMS.Model.Page.Page = {
+export const accessoriesPage = CMS.Pages.definePage({
     id: 'accessories',
-    slug: '/help-and-support/accessories',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Accessories',
-        description: 'Accessories',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
+    locales: {
+        en: { slug: '/help-and-support/accessories', seo: { title: 'Accessories', description: 'Accessories' } },
+        pl: { slug: '/pomoc-i-wsparcie/akcesoria', seo: { title: 'Akcesoria', description: 'Akcesoria' } },
+        de: { slug: '/hilfe-und-support/zubehoer', seo: { title: 'Zubehör', description: 'Zubehör' } },
     },
+    template: { __typename: 'OneColumnTemplate', slots: { main: [{ __typename: 'CategoryBlock', id: 'category-4' }] } },
+});
 
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-4',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_ACCESSORIES_DE: CMS.Model.Page.Page = {
-    id: 'accessories',
-    slug: '/hilfe-und-support/zubehoer',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Zubehör',
-        description: 'Zubehör',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-4',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_ACCESSORIES_PL: CMS.Model.Page.Page = {
-    id: 'accessories',
-    slug: '/pomoc-i-wsparcie/akcesoria',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Akcesoria',
-        description: 'Akcesoria',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-4',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-// Troubleshooting category pages
-export const PAGE_TROUBLESHOOTING_EN: CMS.Model.Page.Page = {
+export const troubleshootingPage = CMS.Pages.definePage({
     id: 'troubleshooting',
-    slug: '/help-and-support/troubleshooting',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Troubleshooting',
-        description: 'Troubleshooting',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
+    locales: {
+        en: {
+            slug: '/help-and-support/troubleshooting',
+            seo: { title: 'Troubleshooting', description: 'Troubleshooting' },
+        },
+        pl: {
+            slug: '/pomoc-i-wsparcie/rozwiązywanie-problemów',
+            seo: { title: 'Rozwiązywanie problemów', description: 'Rozwiązywanie problemów' },
+        },
+        de: {
+            slug: '/hilfe-und-support/fehlerbehebung',
+            seo: { title: 'Fehlerbehebung', description: 'Fehlerbehebung' },
         },
     },
+    template: { __typename: 'OneColumnTemplate', slots: { main: [{ __typename: 'CategoryBlock', id: 'category-5' }] } },
+});
 
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-5',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_TROUBLESHOOTING_DE: CMS.Model.Page.Page = {
-    id: 'troubleshooting',
-    slug: '/hilfe-und-support/fehlerbehebung',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Fehlerbehebung',
-        description: 'Fehlerbehebung',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-5',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_TROUBLESHOOTING_PL: CMS.Model.Page.Page = {
-    id: 'troubleshooting',
-    slug: '/pomoc-i-wsparcie/rozwiązywanie-problemów',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Rozwiązywanie problemów',
-        description: 'Rozwiązywanie problemów',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'CategoryBlock',
-                    id: 'category-5',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-// Zendesk category pages (slug and block id match Zendesk API)
-const ZENDESK_CATEGORY_PAGE_BASE = {
-    hasOwnTitle: false,
-    updatedAt: '2025-01-01',
-    createdAt: '2025-01-01',
-};
-
-export const PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN: CMS.Model.Page.Page = {
-    ...ZENDESK_CATEGORY_PAGE_BASE,
+export const zendeskWarrantyAndRepairPage = CMS.Pages.definePage({
     id: '33553543097245',
-    slug: '/help-and-support/33553543097245-Warranty-and-Repair',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Warranty & Repair',
-        description: 'Warranty & Repair',
-        keywords: [],
-        image: { url: 'https://picsum.photos/150', width: 150, height: 150, alt: 'Placeholder' },
+    locales: {
+        en: {
+            slug: '/help-and-support/33553543097245-Warranty-and-Repair',
+            seo: { title: 'Warranty & Repair', description: 'Warranty & Repair' },
+        },
+        pl: {
+            slug: '/pomoc-i-wsparcie/33553543097245-Gwarancja-i-Naprawa',
+            seo: { title: 'Gwarancja i Naprawa', description: 'Gwarancja i Naprawa' },
+        },
+        de: {
+            slug: '/hilfe-und-support/33553543097245-Garantie-und-Reparatur',
+            seo: { title: 'Garantie & Reparatur', description: 'Garantie & Reparatur' },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
-        slots: {
-            main: [{ __typename: 'CategoryBlock', id: '33553543097245' }],
-        },
+        slots: { main: [{ __typename: 'CategoryBlock', id: '33553543097245' }] },
     },
-};
+});
 
-export const PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
-    ...ZENDESK_CATEGORY_PAGE_BASE,
-    id: '33553543097245',
-    slug: '/hilfe-und-support/33553543097245-Garantie-und-Reparatur',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Garantie & Reparatur',
-        description: 'Garantie & Reparatur',
-        keywords: [],
-        image: { url: 'https://picsum.photos/150', width: 150, height: 150, alt: 'Placeholder' },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [{ __typename: 'CategoryBlock', id: '33553543097245' }],
-        },
-    },
-};
-
-export const PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL: CMS.Model.Page.Page = {
-    ...ZENDESK_CATEGORY_PAGE_BASE,
-    id: '33553543097245',
-    slug: '/pomoc-i-wsparcie/33553543097245-Gwarancja-i-Naprawa',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Gwarancja i Naprawa',
-        description: 'Gwarancja i Naprawa',
-        keywords: [],
-        image: { url: 'https://picsum.photos/150', width: 150, height: 150, alt: 'Placeholder' },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [{ __typename: 'CategoryBlock', id: '33553543097245' }],
-        },
-    },
-};
-
-export const PAGE_ZENDESK_MAINTENANCE_EN: CMS.Model.Page.Page = {
-    ...ZENDESK_CATEGORY_PAGE_BASE,
+export const zendeskMaintenancePage = CMS.Pages.definePage({
     id: '31170054759453',
-    slug: '/help-and-support/31170054759453-Maintenance',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Maintenance',
-        description: 'Maintenance',
-        keywords: [],
-        image: { url: 'https://picsum.photos/150', width: 150, height: 150, alt: 'Placeholder' },
+    locales: {
+        en: {
+            slug: '/help-and-support/31170054759453-Maintenance',
+            seo: { title: 'Maintenance', description: 'Maintenance' },
+        },
+        pl: {
+            slug: '/pomoc-i-wsparcie/31170054759453-Konserwacja',
+            seo: { title: 'Konserwacja', description: 'Konserwacja' },
+        },
+        de: { slug: '/hilfe-und-support/31170054759453-Wartung', seo: { title: 'Wartung', description: 'Wartung' } },
     },
     template: {
         __typename: 'OneColumnTemplate',
-        slots: {
-            main: [{ __typename: 'CategoryBlock', id: '31170054759453' }],
-        },
+        slots: { main: [{ __typename: 'CategoryBlock', id: '31170054759453' }] },
     },
-};
-
-export const PAGE_ZENDESK_MAINTENANCE_DE: CMS.Model.Page.Page = {
-    ...ZENDESK_CATEGORY_PAGE_BASE,
-    id: '31170054759453',
-    slug: '/hilfe-und-support/31170054759453-Wartung',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Wartung',
-        description: 'Wartung',
-        keywords: [],
-        image: { url: 'https://picsum.photos/150', width: 150, height: 150, alt: 'Placeholder' },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [{ __typename: 'CategoryBlock', id: '31170054759453' }],
-        },
-    },
-};
-
-export const PAGE_ZENDESK_MAINTENANCE_PL: CMS.Model.Page.Page = {
-    ...ZENDESK_CATEGORY_PAGE_BASE,
-    id: '31170054759453',
-    slug: '/pomoc-i-wsparcie/31170054759453-Konserwacja',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Konserwacja',
-        description: 'Konserwacja',
-        keywords: [],
-        image: { url: 'https://picsum.photos/150', width: 150, height: 150, alt: 'Placeholder' },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [{ __typename: 'CategoryBlock', id: '31170054759453' }],
-        },
-    },
-};
+});
