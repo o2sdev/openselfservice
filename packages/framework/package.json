@@ -64,7 +64,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "@turbo/gen": "^2.10.12",
+        "@turbo/gen": "^2.10.13",
         "@types/express": "^5.0.6",
         "@types/qs": "^6.15.1",
         "concurrently": "^10.0.5",
