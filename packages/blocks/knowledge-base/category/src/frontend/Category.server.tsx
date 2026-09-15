@@ -10,6 +10,7 @@ import { CategoryBlocks } from './CategoryBlocks';
 export const CategoryDynamic = dynamic(() => import('./Category.client').then((module) => module.CategoryPure));
 
 export const Category: React.FC<CategoryProps> = async ({
+    isDraftModeEnabled,
     id,
     slug,
     accessToken,
@@ -23,6 +24,7 @@ export const Category: React.FC<CategoryProps> = async ({
     try {
         data = await sdk.blocks.getCategory(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

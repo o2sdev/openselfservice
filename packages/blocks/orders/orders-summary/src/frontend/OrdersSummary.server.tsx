@@ -13,6 +13,7 @@ export const OrdersSummaryDynamic = dynamic(() =>
 );
 
 export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -23,6 +24,7 @@ export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({
     try {
         data = await sdk.blocks.getOrdersSummary(
             {
+                preview: isDraftModeEnabled,
                 id,
                 dateFrom: dayjs().subtract(6, 'months').toISOString(),
                 dateTo: dayjs().toISOString(),

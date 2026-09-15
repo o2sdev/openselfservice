@@ -16,6 +16,7 @@ const NAMESPACE = 'order';
 export const OrderListDynamic = dynamic(() => import('./OrderList.client').then((module) => module.OrderListPure));
 
 export const OrderList: React.FC<OrderListProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -27,6 +28,7 @@ export const OrderList: React.FC<OrderListProps> = async ({
     try {
         data = await sdk.blocks.getOrderList(
             {
+                preview: isDraftModeEnabled,
                 id,
                 ...parseFiltersFromSearchParams<Request.GetOrderListBlockQuery>(searchParams, {
                     namespace: NAMESPACE,

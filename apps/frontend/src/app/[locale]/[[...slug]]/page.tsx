@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { headers } from 'next/headers';
+import { draftMode, headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import React from 'react';
 
@@ -42,11 +42,13 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     const query = await searchParams;
 
     const finalSlug = slug ? `/${slug.join('/')}` : '/';
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     try {
         const { data, meta } = await sdk.modules.getPage(
             {
                 slug: finalSlug,
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             session?.accessToken,
@@ -78,6 +80,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function Page({ params, searchParams }: Props) {
     const headersList = await headers();
     const session = await auth();
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     const { locale, slug } = await params;
     const query = await searchParams;
@@ -85,6 +88,7 @@ export default async function Page({ params, searchParams }: Props) {
     const init = await sdk.modules.getInit(
         {
             referrer: headersList.get('referrer') || (process.env.BASE_URL as string),
+            preview: isDraftModeEnabled,
         },
         { 'x-locale': locale },
         session?.accessToken,
@@ -96,6 +100,7 @@ export default async function Page({ params, searchParams }: Props) {
         const { data, meta } = await sdk.modules.getPage(
             {
                 slug: slug ? `/${slug.join('/')}` : '/',
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             session?.accessToken,

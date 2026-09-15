@@ -11,6 +11,7 @@ export const NotificationDetailsDynamic = dynamic(() =>
 );
 
 export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
+    isDraftModeEnabled,
     id,
     notificationId,
     accessToken,
@@ -22,6 +23,7 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
     try {
         data = await sdk.blocks.getNotificationDetails(
             {
+                preview: isDraftModeEnabled,
                 id: notificationId,
             },
             {

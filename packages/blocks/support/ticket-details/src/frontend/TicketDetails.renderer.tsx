@@ -8,6 +8,7 @@ import { TicketDetails } from './TicketDetails.server';
 import { TicketDetailsRendererProps } from './TicketDetails.types';
 
 export const TicketDetailsRenderer: React.FC<TicketDetailsRendererProps> = ({
+    isDraftModeEnabled,
     slug,
     id,
     accessToken,
@@ -34,6 +35,7 @@ export const TicketDetailsRenderer: React.FC<TicketDetailsRendererProps> = ({
         >
             <TicketDetails
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 ticketId={slug[1]}
                 accessToken={accessToken}
                 locale={locale}

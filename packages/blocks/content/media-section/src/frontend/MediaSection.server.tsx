@@ -10,11 +10,18 @@ export const MediaSectionDynamic = dynamic(() =>
     import('./MediaSection.client').then((module) => module.MediaSectionPure),
 );
 
-export const MediaSection: React.FC<MediaSectionProps> = async ({ id, accessToken, locale, routing }) => {
+export const MediaSection: React.FC<MediaSectionProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.MediaSectionBlock;
     try {
         data = await sdk.blocks.getMediaSection(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

@@ -6,7 +6,12 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { BentoGrid } from './BentoGrid.server';
 import { BentoGridRendererProps } from './BentoGrid.types';
 
-export const BentoGridRenderer: React.FC<BentoGridRendererProps> = ({ id, accessToken, routing }) => {
+export const BentoGridRenderer: React.FC<BentoGridRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (
@@ -23,7 +28,13 @@ export const BentoGridRenderer: React.FC<BentoGridRendererProps> = ({ id, access
                 </div>
             }
         >
-            <BentoGrid id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <BentoGrid
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

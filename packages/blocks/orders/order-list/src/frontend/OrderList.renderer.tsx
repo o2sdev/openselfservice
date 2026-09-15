@@ -8,7 +8,14 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { OrderList } from './OrderList.server';
 import { OrderListRendererProps } from './OrderList.types';
 
-export const Renderer: React.FC<OrderListRendererProps> = ({ id, accessToken, routing, hasPriority, searchParams }) => {
+export const Renderer: React.FC<OrderListRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+    searchParams,
+}) => {
     const locale = useLocale();
 
     // Keyed on the params, so arriving with different filters rebuilds the block from the server data
@@ -19,6 +26,7 @@ export const Renderer: React.FC<OrderListRendererProps> = ({ id, accessToken, ro
         <Suspense key={`${id}?${filterKey}`} fallback={<Loading bars={[15, 17]} />}>
             <OrderList
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

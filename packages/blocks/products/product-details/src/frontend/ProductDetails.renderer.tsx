@@ -7,6 +7,7 @@ import { ProductDetails } from './ProductDetails.server';
 import { ProductDetailsRendererProps } from './ProductDetails.types';
 
 export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
+    isDraftModeEnabled,
     id,
     slug,
     accessToken,
@@ -41,6 +42,7 @@ export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
         >
             <ProductDetails
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 productId={slug[1]}
                 variantSlug={slug[2]}
                 accessToken={accessToken}

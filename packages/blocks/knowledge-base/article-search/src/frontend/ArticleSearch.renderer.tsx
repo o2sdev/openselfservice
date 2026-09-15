@@ -8,6 +8,7 @@ import { ArticleSearch } from './ArticleSearch.server';
 import { ArticleSearchRendererProps } from './ArticleSearch.types';
 
 export const ArticleSearchRenderer: React.FC<ArticleSearchRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -25,6 +26,7 @@ export const ArticleSearchRenderer: React.FC<ArticleSearchRendererProps> = ({
         >
             <ArticleSearch
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

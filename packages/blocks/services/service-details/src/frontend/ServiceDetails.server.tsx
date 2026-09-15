@@ -11,6 +11,7 @@ export const ServiceDetailsDynamic = dynamic(() =>
 );
 
 export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
+    isDraftModeEnabled,
     id,
     serviceId,
     accessToken,
@@ -22,6 +23,7 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
     try {
         data = await sdk.blocks.getServiceDetails(
             {
+                preview: isDraftModeEnabled,
                 id: serviceId,
             },
             {

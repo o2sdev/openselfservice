@@ -2,6 +2,7 @@ import { CMS } from '@o2s/framework/modules';
 
 export class GetOrderDetailsBlockQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
     id!: string;
+    preview?: boolean;
     limit?: number;
     offset?: number;
     sort?: string;
@@ -9,6 +10,7 @@ export class GetOrderDetailsBlockQuery implements Omit<CMS.Request.GetCmsEntryPa
 
 export class GetOrderDetailsBlockParams implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
     id!: string;
+    preview?: boolean;
 }
 
 export class GetOrderItemsQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {

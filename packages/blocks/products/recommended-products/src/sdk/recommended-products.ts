@@ -12,7 +12,7 @@ export const recommendedProducts = (sdk: Sdk) => {
     return {
         blocks: {
             getRecommendedProducts: (
-                params: { id: string },
+                params: { id: string; preview?: boolean },
                 query?: Omit<Request.GetRecommendedProductsBlockQuery, 'id'>,
                 headers?: AppHeaders,
                 authorization?: string,

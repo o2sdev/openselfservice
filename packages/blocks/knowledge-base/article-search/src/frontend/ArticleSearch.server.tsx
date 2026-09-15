@@ -11,6 +11,7 @@ export const ArticleSearchDynamic = dynamic(() =>
 );
 
 export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -21,6 +22,7 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
     try {
         data = await sdk.blocks.getArticleSearch(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

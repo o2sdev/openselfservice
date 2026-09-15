@@ -21,12 +21,14 @@ export class GetCategoryListQuery extends PaginationQuery {
     };
 }
 
-/** Parameters for fetching a single article: slug, locale. */
+/** Parameters for fetching a single article: slug, locale, optional draft preview. */
 export class GetArticleParams {
     @ApiProperty({ description: 'Article slug identifier.' })
     slug!: string;
     @ApiProperty({ description: 'Locale code used to localize the response, for example `pl` or `en`.' })
     locale!: string;
+    @ApiPropertyOptional({ description: 'When true, returns draft (unpublished) content for CMS preview.' })
+    preview?: boolean;
 }
 
 /** Query for article list: locale, pagination, optional ids, category, dateFrom, dateTo, sortBy, sortOrder. */

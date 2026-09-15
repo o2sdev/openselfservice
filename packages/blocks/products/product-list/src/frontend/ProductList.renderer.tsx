@@ -8,7 +8,13 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { ProductList } from './ProductList.server';
 import { ProductListRendererProps } from './ProductList.types';
 
-export const ProductListRenderer: React.FC<ProductListRendererProps> = ({ id, accessToken, routing, searchParams }) => {
+export const ProductListRenderer: React.FC<ProductListRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+    searchParams,
+}) => {
     const locale = useLocale();
 
     // Keyed on the params, so arriving with different filters rebuilds the block from the server data
@@ -26,6 +32,7 @@ export const ProductListRenderer: React.FC<ProductListRendererProps> = ({ id, ac
         >
             <ProductList
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

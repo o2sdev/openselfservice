@@ -10,11 +10,18 @@ export const CheckoutCompanyDataDynamic = dynamic(() =>
     import('./CheckoutCompanyData.client').then((module) => module.CheckoutCompanyDataPure),
 );
 
-export const CheckoutCompanyData: React.FC<CheckoutCompanyDataProps> = async ({ id, accessToken, locale, routing }) => {
+export const CheckoutCompanyData: React.FC<CheckoutCompanyDataProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.CheckoutCompanyDataBlock;
     try {
         data = await sdk.blocks.getCheckoutCompanyData(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

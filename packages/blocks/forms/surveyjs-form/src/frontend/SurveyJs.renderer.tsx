@@ -7,7 +7,13 @@ import { Container } from '@o2s/ui/components/Layout/Container';
 import { SurveyJsServer } from './SurveyJs.server';
 import { SurveyJsFormRendererProps } from './SurveyJs.types';
 
-export const SurveyJsRenderer: React.FC<SurveyJsFormRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
+export const SurveyJsRenderer: React.FC<SurveyJsFormRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
@@ -24,6 +30,7 @@ export const SurveyJsRenderer: React.FC<SurveyJsFormRendererProps> = ({ id, acce
         >
             <SurveyJsServer
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

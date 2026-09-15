@@ -7,6 +7,7 @@ import { CheckoutCompanyData } from './CheckoutCompanyData.server';
 import { CheckoutCompanyDataRendererProps } from './CheckoutCompanyData.types';
 
 export const CheckoutCompanyDataRenderer: React.FC<CheckoutCompanyDataRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -30,7 +31,13 @@ export const CheckoutCompanyDataRenderer: React.FC<CheckoutCompanyDataRendererPr
                 </div>
             }
         >
-            <CheckoutCompanyData id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <CheckoutCompanyData
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

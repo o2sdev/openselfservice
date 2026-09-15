@@ -11,6 +11,7 @@ export const CheckoutShippingAddressDynamic = dynamic(() =>
 );
 
 export const CheckoutShippingAddress: React.FC<CheckoutShippingAddressProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -20,6 +21,7 @@ export const CheckoutShippingAddress: React.FC<CheckoutShippingAddressProps> = a
     try {
         data = await sdk.blocks.getCheckoutShippingAddress(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

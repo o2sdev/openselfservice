@@ -11,6 +11,7 @@ export const UserAccountDynamic = dynamic(() =>
 );
 
 export const UserAccount: React.FC<UserAccountProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -27,6 +28,7 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
     try {
         data = await sdk.blocks.getUserAccount(
             {
+                preview: isDraftModeEnabled,
                 id,
                 userId,
             },

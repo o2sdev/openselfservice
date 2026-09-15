@@ -6,7 +6,12 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { MediaSection } from './MediaSection.server';
 import { MediaSectionRendererProps } from './MediaSection.types';
 
-export const MediaSectionRenderer: React.FC<MediaSectionRendererProps> = ({ id, accessToken, routing }) => {
+export const MediaSectionRenderer: React.FC<MediaSectionRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (
@@ -19,7 +24,13 @@ export const MediaSectionRenderer: React.FC<MediaSectionRendererProps> = ({ id, 
                 </div>
             }
         >
-            <MediaSection id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <MediaSection
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

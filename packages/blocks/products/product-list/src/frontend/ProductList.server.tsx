@@ -18,11 +18,19 @@ export const ProductListDynamic = dynamic(() =>
     import('./ProductList.client').then((module) => module.ProductListPure),
 );
 
-export const ProductList: React.FC<ProductListProps> = async ({ id, accessToken, locale, routing, searchParams }) => {
+export const ProductList: React.FC<ProductListProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+    searchParams,
+}) => {
     let data: Model.ProductListBlock;
     try {
         data = await sdk.blocks.getProductList(
             {
+                preview: isDraftModeEnabled,
                 id,
                 // No multi-value keys: the block query takes one value per filter, so a repeated param
                 // contributes its first one. Such a URL is not indexed anyway (see the page metadata).

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getLocale } from 'next-intl/server';
-import { headers } from 'next/headers';
+import { draftMode, headers } from 'next/headers';
 import React from 'react';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
@@ -48,20 +48,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NotFound() {
     const headersList = await headers();
     const session = await auth();
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     const locale = await getLocale();
 
     const init = await sdk.modules.getInit(
         {
             referrer: headersList.get('referrer') || (process.env.BASE_URL as string),
+            preview: isDraftModeEnabled,
         },
         { 'x-locale': locale },
         session?.accessToken,
     );
 
-    const data = await sdk.modules.getNotFoundPage({
-        'x-locale': locale,
-    });
+    const data = await sdk.modules.getNotFoundPage(
+        {
+            'x-locale': locale,
+        },
+        undefined,
+        isDraftModeEnabled,
+    );
 
     return (
         <body>

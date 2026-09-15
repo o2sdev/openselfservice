@@ -8,6 +8,7 @@ import { ServiceDetails } from './ServiceDetails.server';
 import { ServiceDetailsRendererProps } from './ServiceDetails.types';
 
 export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({
+    isDraftModeEnabled,
     slug,
     id,
     accessToken,
@@ -39,6 +40,7 @@ export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({
         >
             <ServiceDetails
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 serviceId={slug[1]}
                 accessToken={accessToken}
                 locale={locale}

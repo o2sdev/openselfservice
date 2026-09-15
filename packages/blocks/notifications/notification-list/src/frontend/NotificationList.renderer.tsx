@@ -9,6 +9,7 @@ import { NotificationListServer } from './NotificationList.server';
 import { NotificationListRendererProps } from './NotificationList.types';
 
 export const NotificationListRenderer: React.FC<NotificationListRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -33,6 +34,7 @@ export const NotificationListRenderer: React.FC<NotificationListRendererProps> =
         >
             <NotificationListServer
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

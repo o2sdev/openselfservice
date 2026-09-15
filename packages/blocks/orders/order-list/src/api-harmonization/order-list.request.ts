@@ -4,6 +4,7 @@ export class GetOrderListBlockQuery
     implements Omit<CMS.Request.GetCmsEntryParams, 'locale'>, Orders.Request.GetOrderListQuery
 {
     id!: string;
+    preview?: boolean;
     offset?: number;
     limit?: number;
     /**
