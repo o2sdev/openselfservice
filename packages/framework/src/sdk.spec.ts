@@ -86,13 +86,28 @@ describe('extendSdk', () => {
         expect(Object.keys(sdk.notifications).sort()).toEqual(['getNotification', 'getNotifications', 'markAs']);
     });
 
-    it('should type the result as both sides at once', () => {
+    it('should type the result as the added group next to the built-in ones', () => {
         const extended = extendSdk(baseSdk(), { blocks: { getTicketList: () => 'list' } });
 
-        // checked by `tsc`, not at runtime: both the added group and the built-in ones are there
-        const blocks: () => string = extended.blocks.getTicketList;
+        // checked by `tsc`, not at runtime
+        const added: () => string = extended.blocks.getTicketList;
         const builtIn: typeof extended.notifications.markAs = extended.notifications.markAs;
 
-        expect([blocks, builtIn].every((method) => typeof method === 'function')).toBe(true);
+        expect([added, builtIn].every((method) => typeof method === 'function')).toBe(true);
+    });
+
+    it('should type a replaced method as its replacement rather than as both signatures', () => {
+        const extended = extendSdk(baseSdk(), { makeRequest: () => 'not a promise' });
+        const inGroup = extendSdk(baseSdk(), { notifications: { markAs: () => 'mine' } });
+
+        const replaced: string = extended.makeRequest();
+        const replacedInGroup: string = inGroup.notifications.markAs();
+
+        // @ts-expect-error the override replaced makeRequest, so its old signature is gone
+        expect(() => extended.makeRequest({ url: '/' })).toBeDefined();
+        // @ts-expect-error and the same for a method replaced inside a merged group
+        expect(() => inGroup.notifications.markAs({ id: '1', status: 'VIEWED' }, 'token')).toBeDefined();
+
+        expect([replaced, replacedInGroup]).toEqual(['not a promise', 'mine']);
     });
 });

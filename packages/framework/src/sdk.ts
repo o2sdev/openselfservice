@@ -162,8 +162,24 @@ export const getSdk = ({ apiUrl, logger }: SdkConfig): Sdk => {
     };
 };
 
-const isMethodGroup = (value: unknown): value is Record<string, unknown> =>
+type MethodGroup = Record<string, unknown>;
+
+const isMethodGroup = (value: unknown): value is MethodGroup =>
     typeof value === 'object' && value !== null && !Array.isArray(value);
+
+/**
+ * What {@link extendSdk} leaves behind, spelled out so the type says what the merge does: a method
+ * the extension replaces is typed as the replacement alone, not as both signatures at once.
+ */
+export type ExtendedSdk<BaseSdk, CustomMethods> = Omit<BaseSdk, keyof CustomMethods> & {
+    [Group in keyof CustomMethods]: Group extends keyof BaseSdk
+        ? BaseSdk[Group] extends MethodGroup
+            ? CustomMethods[Group] extends MethodGroup
+                ? Omit<BaseSdk[Group], keyof CustomMethods[Group]> & CustomMethods[Group]
+                : CustomMethods[Group]
+            : CustomMethods[Group]
+        : CustomMethods[Group];
+};
 
 /**
  * Adds method groups to an SDK and returns a copy, leaving the instance it extends alone, so what
@@ -176,12 +192,13 @@ const isMethodGroup = (value: unknown): value is Record<string, unknown> =>
  * those methods, since it is an intersection of both sides.
  *
  * The SDK being extended keeps its own type, so extending an extended SDK adds to what is already
- * there instead of hiding it.
+ * there instead of hiding it, and a replaced method is typed as its replacement rather than as both
+ * signatures at once.
  */
 export const extendSdk = <BaseSdk extends Sdk, CustomMethods extends Partial<Record<string, unknown>>>(
     sdk: BaseSdk,
     overrides: CustomMethods,
-): BaseSdk & CustomMethods => {
+): ExtendedSdk<BaseSdk, CustomMethods> => {
     const extended = { ...sdk } as Record<string, unknown>;
 
     Object.entries(overrides).forEach(([group, methods]) => {
@@ -190,5 +207,5 @@ export const extendSdk = <BaseSdk extends Sdk, CustomMethods extends Partial<Rec
         extended[group] = isMethodGroup(existing) && isMethodGroup(methods) ? { ...existing, ...methods } : methods;
     });
 
-    return extended as BaseSdk & CustomMethods;
+    return extended as ExtendedSdk<BaseSdk, CustomMethods>;
 };
