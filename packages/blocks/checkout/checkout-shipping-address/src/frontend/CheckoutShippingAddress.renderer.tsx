@@ -7,6 +7,7 @@ import { CheckoutShippingAddress } from './CheckoutShippingAddress.server';
 import { CheckoutShippingAddressRendererProps } from './CheckoutShippingAddress.types';
 
 export const CheckoutShippingAddressRenderer: React.FC<CheckoutShippingAddressRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -30,7 +31,13 @@ export const CheckoutShippingAddressRenderer: React.FC<CheckoutShippingAddressRe
                 </div>
             }
         >
-            <CheckoutShippingAddress id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <CheckoutShippingAddress
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

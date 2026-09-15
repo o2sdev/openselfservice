@@ -16,6 +16,17 @@ export type CmsEntriesData = Record<string, unknown>;
 export abstract class CmsService {
     protected constructor(..._services: unknown[]) {}
 
+    /**
+     * Drops every cache entry this service has written, so published content
+     * changes become visible without waiting for TTLs. Called by the cache
+     * purge endpoint, which the CMS notifies on publish (e.g. via an
+     * afterChange hook). Integrations without a read-through cache keep this
+     * default no-op. Returns the number of entries dropped.
+     */
+    purgeCache(): Promise<number> {
+        return Promise.resolve(0);
+    }
+
     /** Fetches app-level configuration (branding, feature flags, etc.). */
     abstract getAppConfig(options: CMS.Request.GetCmsAppConfigParams): Observable<CMS.Model.AppConfig.AppConfig>;
 

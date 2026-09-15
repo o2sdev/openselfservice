@@ -6,7 +6,12 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { CheckoutSummary } from './CheckoutSummary.server';
 import { CheckoutSummaryRendererProps } from './CheckoutSummary.types';
 
-export const CheckoutSummaryRenderer: React.FC<CheckoutSummaryRendererProps> = ({ id, accessToken, routing }) => {
+export const CheckoutSummaryRenderer: React.FC<CheckoutSummaryRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (
@@ -26,7 +31,13 @@ export const CheckoutSummaryRenderer: React.FC<CheckoutSummaryRendererProps> = (
                 </div>
             }
         >
-            <CheckoutSummary id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <CheckoutSummary
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

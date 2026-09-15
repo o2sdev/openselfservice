@@ -8,6 +8,7 @@ import { DocumentList } from './DocumentList.server';
 import { DocumentListRendererProps } from './DocumentList.types';
 
 export const DocumentListRenderer: React.FC<DocumentListRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -29,6 +30,7 @@ export const DocumentListRenderer: React.FC<DocumentListRendererProps> = ({
         >
             <DocumentList
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

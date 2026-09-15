@@ -23,6 +23,7 @@ export class UserAccountService {
         const authorization = headers[H.Authorization];
         const cms = this.cmsService.getBlockConfig<CMS.Model.UserAccountBlock.UserAccountBlock>({
             id: query.id,
+            preview: query.preview,
             locale: headers[H.Locale],
             blockType: 'UserAccountBlock',
         });

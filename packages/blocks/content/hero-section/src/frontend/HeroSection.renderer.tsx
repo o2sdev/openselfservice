@@ -6,7 +6,13 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { HeroSection } from './HeroSection.server';
 import { HeroSectionRendererProps } from './HeroSection.types';
 
-export const HeroSectionRenderer: React.FC<HeroSectionRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
+export const HeroSectionRenderer: React.FC<HeroSectionRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
@@ -21,6 +27,7 @@ export const HeroSectionRenderer: React.FC<HeroSectionRendererProps> = ({ id, ac
         >
             <HeroSection
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

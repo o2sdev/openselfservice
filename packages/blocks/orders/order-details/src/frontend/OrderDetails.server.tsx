@@ -12,6 +12,7 @@ export const OrderDetailsDynamic = dynamic(() =>
 );
 
 export const OrderDetails: React.FC<OrderDetailsProps> = async ({
+    isDraftModeEnabled,
     id,
     orderId,
     accessToken,
@@ -23,6 +24,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = async ({
     try {
         data = await sdk.blocks.getOrderDetails(
             {
+                preview: isDraftModeEnabled,
                 id: orderId,
             },
             {

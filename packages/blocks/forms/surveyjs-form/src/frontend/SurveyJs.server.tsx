@@ -9,6 +9,7 @@ import { SurveyJsFormProps } from './SurveyJs.types';
 export const SurveyJsDynamic = dynamic(() => import('./SurveyJs.client').then((module) => module.SurveyJsPure));
 
 export const SurveyJsServer: React.FC<SurveyJsFormProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -19,6 +20,7 @@ export const SurveyJsServer: React.FC<SurveyJsFormProps> = async ({
     try {
         data = await sdk.blocks.getSurveyjsBlock(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

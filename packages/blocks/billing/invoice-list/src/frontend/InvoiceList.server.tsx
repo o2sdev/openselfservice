@@ -18,6 +18,7 @@ export const InvoiceListDynamic = dynamic(() =>
 );
 
 export const InvoiceListServer: React.FC<InvoiceListProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -29,6 +30,7 @@ export const InvoiceListServer: React.FC<InvoiceListProps> = async ({
     try {
         data = await sdk.blocks.getInvoiceList(
             {
+                preview: isDraftModeEnabled,
                 id,
                 ...parseFiltersFromSearchParams<Request.GetInvoiceListBlockQuery>(searchParams, {
                     namespace: NAMESPACE,

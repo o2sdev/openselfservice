@@ -10,11 +10,19 @@ export const TicketRecentDynamic = dynamic(() =>
     import('./TicketRecent.client').then((module) => module.TicketRecentPure),
 );
 
-export const TicketRecent: React.FC<TicketRecentProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const TicketRecent: React.FC<TicketRecentProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     let data: Model.TicketRecentBlock;
     try {
         data = await sdk.blocks.getTicketRecent(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

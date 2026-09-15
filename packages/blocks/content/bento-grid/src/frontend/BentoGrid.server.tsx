@@ -8,11 +8,12 @@ import { BentoGridProps } from './BentoGrid.types';
 
 export const BentoGridDynamic = dynamic(() => import('./BentoGrid.client').then((module) => module.BentoGridPure));
 
-export const BentoGrid: React.FC<BentoGridProps> = async ({ id, accessToken, locale, routing }) => {
+export const BentoGrid: React.FC<BentoGridProps> = async ({ isDraftModeEnabled, id, accessToken, locale, routing }) => {
     let data: Model.BentoGridBlock;
     try {
         data = await sdk.blocks.getBentoGrid(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

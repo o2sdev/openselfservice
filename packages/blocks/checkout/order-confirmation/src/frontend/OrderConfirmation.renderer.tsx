@@ -8,6 +8,7 @@ import { OrderConfirmation } from './OrderConfirmation.server';
 import { OrderConfirmationRendererProps } from './OrderConfirmation.types';
 
 export const OrderConfirmationRenderer: React.FC<OrderConfirmationRendererProps> = ({
+    isDraftModeEnabled,
     slug,
     id,
     accessToken,
@@ -34,7 +35,14 @@ export const OrderConfirmationRenderer: React.FC<OrderConfirmationRendererProps>
                 </div>
             }
         >
-            <OrderConfirmation id={id} orderId={orderId} accessToken={accessToken} locale={locale} routing={routing} />
+            <OrderConfirmation
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                orderId={orderId}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

@@ -7,7 +7,14 @@ import { Container } from '@o2s/ui/components/Layout/Container';
 import { Article } from './Article.server';
 import { ArticleRendererProps } from './Article.types';
 
-export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, accessToken, routing, hasPriority }) => {
+export const ArticleRenderer: React.FC<ArticleRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    slug,
+    accessToken,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
@@ -24,6 +31,7 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, acce
         >
             <Article
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 slug={`/${slug.join('/')}`}
                 accessToken={accessToken}
                 locale={locale}

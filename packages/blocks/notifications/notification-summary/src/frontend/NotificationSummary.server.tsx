@@ -10,11 +10,18 @@ export const NotificationSummaryDynamic = dynamic(() =>
     import('./NotificationSummary.client').then((module) => module.NotificationSummaryPure),
 );
 
-export const NotificationSummary: React.FC<NotificationSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const NotificationSummary: React.FC<NotificationSummaryProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.NotificationSummaryBlock;
     try {
         data = await sdk.blocks.getNotificationSummary(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

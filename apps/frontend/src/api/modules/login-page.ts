@@ -11,10 +11,11 @@ export const loginPage = (sdk: Sdk) => {
 
     return {
         modules: {
-            getLoginPage: (headers: AppHeaders): Promise<Modules.LoginPage.Model.LoginPage> =>
+            getLoginPage: (headers: AppHeaders, preview?: boolean): Promise<Modules.LoginPage.Model.LoginPage> =>
                 request({
                     url: API_URL,
                     headers,
+                    params: preview ? { preview } : undefined,
                 }),
         },
     };

@@ -10,11 +10,19 @@ export const ServiceListDynamic = dynamic(() =>
     import('./ServiceList.client').then((module) => module.ServiceListPure),
 );
 
-export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const ServiceList: React.FC<ServiceListProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     let data: Model.ServiceListBlock;
     try {
         data = await sdk.blocks.getServiceList(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

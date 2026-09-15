@@ -9,6 +9,7 @@ import { InvoiceListServer } from './InvoiceList.server';
 import { InvoiceListRendererProps } from './InvoiceList.types';
 
 export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -33,6 +34,7 @@ export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({
         >
             <InvoiceListServer
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

@@ -11,6 +11,7 @@ export const ProductDetailsDynamic = dynamic(() =>
 );
 
 export const ProductDetails: React.FC<ProductDetailsProps> = async ({
+    isDraftModeEnabled,
     id,
     productId,
     variantSlug,
@@ -22,7 +23,11 @@ export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     let data: Model.ProductDetailsBlock;
     try {
         data = await sdk.blocks.getProductDetails(
-            { id: productId, variantSlug },
+            {
+                preview: isDraftModeEnabled,
+                id: productId,
+                variantSlug,
+            },
             { id, locale },
             { 'x-locale': locale },
         );

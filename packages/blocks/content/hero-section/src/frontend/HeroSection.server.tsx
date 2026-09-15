@@ -10,11 +10,19 @@ export const HeroSectionDynamic = dynamic(() =>
     import('./HeroSection.client').then((module) => module.HeroSectionPure),
 );
 
-export const HeroSection: React.FC<HeroSectionProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const HeroSection: React.FC<HeroSectionProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     let data: Model.HeroSectionBlock;
     try {
         data = await sdk.blocks.getHeroSection(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

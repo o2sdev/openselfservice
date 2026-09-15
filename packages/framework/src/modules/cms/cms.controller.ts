@@ -1,5 +1,16 @@
-import { Controller, Get, NotFoundException, Query, UseInterceptors } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+    Controller,
+    ForbiddenException,
+    Get,
+    Headers,
+    HttpCode,
+    NotFoundException,
+    Post,
+    Query,
+    UseInterceptors,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { ApiExcludeEndpoint, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { of, switchMap, throwError } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
@@ -18,7 +29,38 @@ import { CmsService } from './cms.service';
 @UseInterceptors(LoggerService)
 @ApiTags('cms')
 export class CmsController {
-    constructor(protected readonly cms: CmsService) {}
+    constructor(
+        protected readonly cms: CmsService,
+        protected readonly config: ConfigService,
+    ) {}
+
+    /**
+     * Publish webhook: drops whatever the CMS integration has cached, so published
+     * content is visible without waiting for TTLs. Called by the CMS from whatever
+     * hook it offers, not by the frontend.
+     *
+     * Lives on this controller because the only thing it touches is {@link CmsService}
+     * - it purges the CMS integration's own read-through cache, not the shared
+     * `Cache.Service` store. Integrations that do not cache inherit the contract's
+     * no-op and return 0.
+     *
+     * Guarded by a shared secret and closed by default: with `CMS_CACHE_PURGE_SECRET`
+     * unset the endpoint always refuses, so simply having it mounted exposes nothing.
+     * An integration that needs different behaviour (stronger auth, selective
+     * invalidation) overrides this controller via `integrations.cms.controller`.
+     */
+    @Post('/purge-cache')
+    @HttpCode(200)
+    @ApiExcludeEndpoint()
+    async purgeCache(@Headers('x-purge-secret') secret: string | undefined) {
+        const expected = this.config.get<string>('CMS_CACHE_PURGE_SECRET');
+        if (!expected || secret !== expected) {
+            throw new ForbiddenException();
+        }
+
+        const purged = await this.cms.purgeCache();
+        return { purged };
+    }
 
     @Get('/get-entry')
     @ApiOperation({ summary: 'Get CMS entry' })

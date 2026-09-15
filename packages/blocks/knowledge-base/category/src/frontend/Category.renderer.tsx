@@ -8,6 +8,7 @@ import { Category } from './Category.server';
 import { CategoryRendererProps } from './Category.types';
 
 export const CategoryRenderer: React.FC<CategoryRendererProps> = ({
+    isDraftModeEnabled,
     slug,
     id,
     accessToken,
@@ -41,6 +42,7 @@ export const CategoryRenderer: React.FC<CategoryRendererProps> = ({
         >
             <Category
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 slug={slug}
                 accessToken={accessToken}
                 locale={locale}

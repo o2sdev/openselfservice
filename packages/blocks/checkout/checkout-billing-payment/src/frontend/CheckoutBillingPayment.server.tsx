@@ -11,6 +11,7 @@ export const CheckoutBillingPaymentDynamic = dynamic(() =>
 );
 
 export const CheckoutBillingPayment: React.FC<CheckoutBillingPaymentProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -20,6 +21,7 @@ export const CheckoutBillingPayment: React.FC<CheckoutBillingPaymentProps> = asy
     try {
         data = await sdk.blocks.getCheckoutBillingPayment(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

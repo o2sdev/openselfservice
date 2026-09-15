@@ -52,36 +52,40 @@ export class PageService {
     getInit(query: GetInitQuery, headers: AppHeaders): Observable<Init> {
         const userRoles = this.authService.getRoles(headers[H.Authorization]);
 
-        return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers[H.Locale] }).pipe(
-            switchMap((appConfig) => {
-                const header = this.cmsService.getHeader({
-                    id: appConfig.header || '',
-                    locale: headers[H.Locale],
-                });
+        return this.cmsService
+            .getAppConfig({ referrer: query.referrer, locale: headers[H.Locale], preview: query.preview })
+            .pipe(
+                switchMap((appConfig) => {
+                    const header = this.cmsService.getHeader({
+                        id: appConfig.header || '',
+                        locale: headers[H.Locale],
+                        preview: query.preview,
+                    });
 
-                const footer = this.cmsService.getFooter({
-                    id: appConfig.footer || '',
-                    locale: headers[H.Locale],
-                });
+                    const footer = this.cmsService.getFooter({
+                        id: appConfig.footer || '',
+                        locale: headers[H.Locale],
+                        preview: query.preview,
+                    });
 
-                return forkJoin([header, footer]).pipe(
-                    map(([header, footer]) => {
-                        return mapInit(
-                            appConfig.locales,
-                            header,
-                            footer,
-                            appConfig.labels,
-                            appConfig.themes,
-                            userRoles,
-                        );
-                    }),
-                );
-            }),
-        );
+                    return forkJoin([header, footer]).pipe(
+                        map(([header, footer]) => {
+                            return mapInit(
+                                appConfig.locales,
+                                header,
+                                footer,
+                                appConfig.labels,
+                                appConfig.themes,
+                                userRoles,
+                            );
+                        }),
+                    );
+                }),
+            );
     }
 
     getPage(query: GetPageQuery, headers: AppHeaders): Observable<Page | NotFound> {
-        const page = this.cmsService.getPage({ slug: query.slug, locale: headers[H.Locale] });
+        const page = this.cmsService.getPage({ slug: query.slug, locale: headers[H.Locale], preview: query.preview });
         const userRoles = this.authService.getRoles(headers[H.Authorization]);
 
         return forkJoin([page]).pipe(
@@ -91,17 +95,19 @@ export class PageService {
                         throw new NotFoundException();
                     }
 
-                    return this.articlesService.getArticle({ slug: query.slug, locale: headers[H.Locale] }).pipe(
-                        concatMap((article) => {
-                            if (!article) {
-                                throw new NotFoundException();
-                            }
+                    return this.articlesService
+                        .getArticle({ slug: query.slug, locale: headers[H.Locale], preview: query.preview })
+                        .pipe(
+                            concatMap((article) => {
+                                if (!article) {
+                                    throw new NotFoundException();
+                                }
 
-                            Auth.Service.requireRoles(article.roles, userRoles);
+                                Auth.Service.requireRoles(article.roles, userRoles);
 
-                            return this.processArticle(article, query, headers);
-                        }),
-                    );
+                                return this.processArticle(article, query, headers);
+                            }),
+                        );
                 }
 
                 Auth.Service.requireRoles(page.roles, userRoles);

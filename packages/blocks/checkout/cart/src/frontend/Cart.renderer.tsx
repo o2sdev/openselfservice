@@ -6,7 +6,13 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { Cart } from './Cart.server';
 import { CartRendererProps } from './Cart.types';
 
-export const CartRenderer: React.FC<CartRendererProps> = ({ id, accessToken, routing, hasPriority = false }) => {
+export const CartRenderer: React.FC<CartRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+    hasPriority = false,
+}) => {
     const locale = useLocale();
 
     return (
@@ -26,7 +32,14 @@ export const CartRenderer: React.FC<CartRendererProps> = ({ id, accessToken, rou
                 </div>
             }
         >
-            <Cart id={id} accessToken={accessToken} locale={locale} routing={routing} hasPriority={hasPriority} />
+            <Cart
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

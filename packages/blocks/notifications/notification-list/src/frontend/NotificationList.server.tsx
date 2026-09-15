@@ -18,6 +18,7 @@ export const NotificationListDynamic = dynamic(() =>
 );
 
 export const NotificationListServer: React.FC<NotificationListProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -29,6 +30,7 @@ export const NotificationListServer: React.FC<NotificationListProps> = async ({
     try {
         data = await sdk.blocks.getNotificationList(
             {
+                preview: isDraftModeEnabled,
                 id,
                 ...parseFiltersFromSearchParams<Request.GetNotificationListBlockQuery>(searchParams, {
                     namespace: NAMESPACE,

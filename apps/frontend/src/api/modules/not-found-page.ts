@@ -14,11 +14,13 @@ export const notFoundPage = (sdk: Sdk) => {
             getNotFoundPage: (
                 headers: AppHeaders,
                 authorization?: string,
+                preview?: boolean,
             ): Promise<Modules.NotFoundPage.Model.NotFoundPage> => {
                 return request({
                     url: API_URL,
                     headers,
                     authorization,
+                    params: preview ? { preview } : undefined,
                 });
             },
         },

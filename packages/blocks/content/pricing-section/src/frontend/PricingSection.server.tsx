@@ -11,6 +11,7 @@ export const PricingSectionDynamic = dynamic(() =>
 );
 
 export const PricingSection: React.FC<PricingSectionProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -21,6 +22,7 @@ export const PricingSection: React.FC<PricingSectionProps> = async ({
     try {
         data = await sdk.blocks.getPricingSection(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

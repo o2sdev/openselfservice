@@ -8,6 +8,7 @@ import { UserAccount } from './UserAccount.server';
 import { UserAccountRendererProps } from './UserAccount.types';
 
 export const UserAccountRenderer: React.FC<UserAccountRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -32,6 +33,7 @@ export const UserAccountRenderer: React.FC<UserAccountRendererProps> = ({
         >
             <UserAccount
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

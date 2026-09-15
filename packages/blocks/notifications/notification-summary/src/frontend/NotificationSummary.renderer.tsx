@@ -7,6 +7,7 @@ import { NotificationSummary } from './NotificationSummary.server';
 import { NotificationSummaryRendererProps } from './NotificationSummary.types';
 
 export const NotificationSummaryRenderer: React.FC<NotificationSummaryRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -25,7 +26,13 @@ export const NotificationSummaryRenderer: React.FC<NotificationSummaryRendererPr
                 </>
             }
         >
-            <NotificationSummary id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <NotificationSummary
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

@@ -4,6 +4,7 @@ export class GetProductListBlockQuery
     implements Omit<CMS.Request.GetCmsEntryParams, 'locale'>, Products.Request.GetProductListQuery
 {
     id!: string;
+    preview?: boolean;
     offset?: number;
     limit?: number;
     /**

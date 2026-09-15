@@ -8,11 +8,18 @@ import { CtaSectionProps } from './CtaSection.types';
 
 export const CtaSectionDynamic = dynamic(() => import('./CtaSection.client').then((module) => module.CtaSectionPure));
 
-export const CtaSection: React.FC<CtaSectionProps> = async ({ id, accessToken, locale, routing }) => {
+export const CtaSection: React.FC<CtaSectionProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.CtaSectionBlock;
     try {
         data = await sdk.blocks.getCtaSection(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },
