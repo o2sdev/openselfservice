@@ -76,7 +76,15 @@ export interface Sdk {
     };
 }
 
-// The primary SDK factory function
+/**
+ * Builds the HTTP client the SDK is made of, together with the method groups the framework ships
+ * itself: `tickets`, `notifications`, `invoices` and `users`. Everything a block or a module serves
+ * is added on top with {@link extendSdk}.
+ *
+ * Inside the frontend packages, take the instance from `@o2s/utils.frontend/sdk` rather than
+ * calling this again: it resolves the API url and the logger settings from the environment and
+ * hands out one client for all of them.
+ */
 export const getSdk = ({ apiUrl, logger }: SdkConfig): Sdk => {
     const { onRequest, onRequestError, onResponse, onResponseError } = createInterceptors({
         logger,
@@ -154,13 +162,33 @@ export const getSdk = ({ apiUrl, logger }: SdkConfig): Sdk => {
     };
 };
 
-// Extending the SDK while maintaining type safety
-export const extendSdk = <CustomMethods extends Partial<Record<string, unknown>>>(
-    sdk: ReturnType<typeof getSdk>,
+const isMethodGroup = (value: unknown): value is Record<string, unknown> =>
+    typeof value === 'object' && value !== null && !Array.isArray(value);
+
+/**
+ * Adds method groups to an SDK and returns a copy, leaving the instance it extends alone, so what
+ * one caller adds stays invisible to the others.
+ *
+ * A group the SDK already has is merged rather than replaced, one level deep: passing
+ * `{ notifications: { mine } }` keeps the `notifications` methods that were already there and adds
+ * `mine` next to them, and a method of the same name replaces the one below it. Without that,
+ * naming an existing group would drop everything it held while the returned type went on promising
+ * those methods, since it is an intersection of both sides.
+ *
+ * The SDK being extended keeps its own type, so extending an extended SDK adds to what is already
+ * there instead of hiding it.
+ */
+export const extendSdk = <BaseSdk extends Sdk, CustomMethods extends Partial<Record<string, unknown>>>(
+    sdk: BaseSdk,
     overrides: CustomMethods,
-): typeof sdk & CustomMethods => {
-    return {
-        ...sdk,
-        ...overrides,
-    };
+): BaseSdk & CustomMethods => {
+    const extended = { ...sdk } as Record<string, unknown>;
+
+    Object.entries(overrides).forEach(([group, methods]) => {
+        const existing = extended[group];
+
+        extended[group] = isMethodGroup(existing) && isMethodGroup(methods) ? { ...existing, ...methods } : methods;
+    });
+
+    return extended as BaseSdk & CustomMethods;
 };

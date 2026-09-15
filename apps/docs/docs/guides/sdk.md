@@ -88,6 +88,10 @@ export const sdk = extendSdk(internalSdk, {
 });
 ```
 
+A group the SDK already has, such as `notifications` above, is merged rather than replaced: the
+methods that were already there stay, the new ones land next to them, and a method of the same name
+replaces the one below it. Extending an SDK that was already extended adds to it the same way.
+
 where `Notifications.extend()` is a custom method specified within and integration that extends `notifications` module:
 
 ```typescript

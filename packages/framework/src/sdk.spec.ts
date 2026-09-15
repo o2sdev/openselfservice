@@ -1,7 +1,7 @@
 import type { FetchOptions } from 'ofetch';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getSdk } from './sdk';
+import { extendSdk, getSdk } from './sdk';
 
 const ofetchInstance = vi.fn(async (_url: string, _options?: FetchOptions) => ({}));
 
@@ -30,5 +30,69 @@ describe('makeRequest', () => {
         await sdk.makeRequest({ url: '/invoices' });
 
         expect(lastOptions()).not.toHaveProperty('responseType');
+    });
+});
+
+describe('extendSdk', () => {
+    const baseSdk = () => getSdk({ apiUrl: 'https://api.example.com' });
+
+    it('should add a group the SDK does not have yet', () => {
+        const extended = extendSdk(baseSdk(), { blocks: { getTicketList: () => 'list' } });
+
+        expect(extended.blocks.getTicketList()).toBe('list');
+        expect(typeof extended.makeRequest).toBe('function');
+    });
+
+    it('should keep the methods of a group it is given again', () => {
+        // naming an existing group used to drop everything it held, while the returned type went on
+        // promising those methods, because it is an intersection of both sides
+        const extended = extendSdk(baseSdk(), { notifications: { someNewEndpoint: () => 'custom' } });
+
+        expect(Object.keys(extended.notifications).sort()).toEqual([
+            'getNotification',
+            'getNotifications',
+            'markAs',
+            'someNewEndpoint',
+        ]);
+        expect(typeof extended.notifications.getNotifications).toBe('function');
+    });
+
+    it('should let a method of the same name win over the one below it', () => {
+        const extended = extendSdk(baseSdk(), { notifications: { markAs: () => 'mine' } });
+
+        expect(extended.notifications.markAs()).toBe('mine');
+        expect(typeof extended.notifications.getNotifications).toBe('function');
+    });
+
+    it('should compose, so that two extensions of one group both survive', () => {
+        const extended = extendSdk(extendSdk(baseSdk(), { blocks: { a: () => 'a' } }), { blocks: { b: () => 'b' } });
+
+        expect(extended.blocks.a()).toBe('a');
+        expect(extended.blocks.b()).toBe('b');
+    });
+
+    it('should replace a member that is not a group of methods', () => {
+        const makeRequest = () => Promise.resolve('mine' as never);
+        const extended = extendSdk(baseSdk(), { makeRequest });
+
+        expect(extended.makeRequest).toBe(makeRequest);
+    });
+
+    it('should leave the SDK it extends alone', () => {
+        const sdk = baseSdk();
+
+        extendSdk(sdk, { notifications: { someNewEndpoint: () => 'custom' } });
+
+        expect(Object.keys(sdk.notifications).sort()).toEqual(['getNotification', 'getNotifications', 'markAs']);
+    });
+
+    it('should type the result as both sides at once', () => {
+        const extended = extendSdk(baseSdk(), { blocks: { getTicketList: () => 'list' } });
+
+        // checked by `tsc`, not at runtime: both the added group and the built-in ones are there
+        const blocks: () => string = extended.blocks.getTicketList;
+        const builtIn: typeof extended.notifications.markAs = extended.notifications.markAs;
+
+        expect([blocks, builtIn].every((method) => typeof method === 'function')).toBe(true);
     });
 });
