@@ -42,7 +42,7 @@
         "@storybook/react": "^10.6.0",
         "@tailwindcss/postcss": "^4.3.3",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-        "@turbo/gen": "^2.10.12",
+        "@turbo/gen": "^2.10.13",
         "@types/eslint": "^9.6.1",
         "@types/node": "^26.5.1",
         "@types/throttle-debounce": "^5.0.2",
