@@ -41,7 +41,7 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.logger": "*",
         "express": "^5.2.1",
-        "intl-messageformat": "^11.2.14",
+        "intl-messageformat": "^11.2.15",
         "lucide-react": "^1.42.0"
     },
     "devDependencies": {
