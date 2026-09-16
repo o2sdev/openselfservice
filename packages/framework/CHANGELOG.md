@@ -1,5 +1,119 @@
 # @o2s/framework
 
+## 1.24.0
+
+### Minor Changes
+
+- 010ae15: Refactored integration configuration by consolidating the 18 individual model files into a single typed `config.ts` backed by a `createIntegrationConfig` helper. Each domain now maps to an integration through a per-domain import alias shared by both the runtime map and its type re-export, so swapping an integration is a single-line change that cannot desync value and types.
+
+    Integration `Config` objects are now declared with `satisfies Partial<ApiConfig['integrations']>` (instead of a type annotation), which lets `createIntegrationConfig` validate domain bindings **at compile time** — assigning an integration to a domain it does not provide is now a type error rather than a runtime crash. The runtime check remains as a defense-in-depth backstop.
+
+- f8591c1: Threaded the CMS `preview` flag through every block so draft content actually renders in draft
+  mode. Previously only 5 of ~42 blocks passed it - the rest always fetched published content, so CMS
+  live preview (and any draft-mode view) showed stale data for most of the page.
+
+    Per block, the flag now survives all four hops: the renderer forwards `isDraftModeEnabled` (added
+    to the framework's `BaseBlockProps` - `renderBlocks` already passed it to every block), the server
+    component sends `preview` on its block fetch, the request DTO declares it, and the API
+    Harmonization service forwards it to `CmsService.getBlockConfig`.
+
+- c8a58ad: feat(framework): add a declarative page registry and move the mocked integrations onto it
+
+    Adds `CMS.Pages.definePage` and `CMS.Pages.createPageRegistry` to `@o2s/framework/modules`. A page is declared once, with one entry per locale (its localized slug and SEO), and the registry derives the whole `CmsService` page trio from that single declaration: `getPage` (`mapPage`), `getPages` (`getAllPages`) and `getAlternativePages`. Integrations that serve pages without a CMS no longer keep three hand-written lists of the same pages, which is what let them drift apart.
+
+    Dynamic routes are declared as `/cases/:id` instead of a regex kept in the slug field: the registry matches a slug segment by segment, prefers a static route over a dynamic one, exposes the extracted params through `matchPage` and fills them back into the slug of the page it returns. `definePage` validates a definition up front and rejects the mistakes that used to be silent — a slug without a leading slash, a translated slug that drops a param the other locales declare, a breadcrumb parent that does not cover every locale of its child, two pages that can match the same path with neither being more specific, or two pages sharing an id.
+
+    `@o2s/integrations.mocked` and `@o2s/integrations.mocked-dxp` now declare their pages this way, which cuts their page mocks from 9880 to 1673 lines and their page mappers from 973 to 203. Every page of `@o2s/integrations.mocked` comes back field for field as before; in both integrations the derived lists fix what the hand-kept ones had lost:
+
+    - pages that `getPage` served but the page list had forgotten now reach the sitemap and the hreflang alternates (`/help-and-support` and `/help-and-support/troubleshooting` in `mocked`, 10 of the 22 pages in `mocked-dxp`);
+    - alternates are emitted per locale instead of being resolved through the requested one, so a page whose slug is not localized (`/`) no longer advertises one locale three times;
+    - pages with a dynamic slug are left out of the page list, so the sitemap stops publishing `/cases/(.+)` as a URL;
+    - a slug deeper than its route (`/cases/a/b`) is no longer answered with `/cases/b`, and a request is answered with the slug it asked about instead of the one of the requested locale;
+    - breadcrumbs come from the page they point at, which corrects the copies that had drifted in `mocked-dxp` (`Geschäftlich` vs `Geschäft`, `Personlich` vs `Persönlich`, `Konten` in a Polish breadcrumb) and gives `/personal/accounts` the breadcrumb it declared in English only;
+    - the home page of `mocked-dxp` gets an id of its own (`home-1`): it shared `personal-1` with `/personal`, so the two pages were grouped as one in the sitemap and advertised each other as localized alternates.
+
+- 457b243: feat(framework): add `createBlockRequest` helper for block SDK methods
+
+    Adds `createBlockRequest` to `@o2s/framework/sdk`. It creates the request function used by the methods of a block (or module) SDK and takes care of the boilerplate that was previously copy-pasted into every method: merging the default API headers with the caller's headers and the access token, serializing query params, typing the response and wrapping failures into a `BlockRequestError` (which exposes `status`, `data` and the original error as `cause`).
+
+    `getApiHeaders` is now provided by `@o2s/framework/headers` and re-exported by `@o2s/utils.frontend` (`Utils.Headers.getApiHeaders`), so the default headers are defined in a single place. All block SDKs, the SurveyJS module SDK and the block generator template use the new helper.
+
+- 92c0bf8: fix(framework): merge SDK method groups instead of replacing them
+
+    `extendSdk` spread the groups it was given over the SDK, so naming a group that was already there dropped everything it held. The frontend application hits this today: it passes a `notifications` group of its own, which leaves `sdk.notifications` with that one method and without `getNotifications`, `getNotification` and `markAs`. The returned type never showed it, being an intersection of both sides, so the compiler kept promising methods that were no longer there at runtime.
+
+    A group the SDK already has is now merged one level deep: the methods that were there stay, the new ones land next to them, and a method of the same name replaces the one below it. Anything that is not a group of methods, `makeRequest` for instance, is replaced as before.
+
+    The return type says all of this now, instead of intersecting both sides and hoping they agree. `extendSdk` keeps the type of the SDK it extends rather than narrowing it to `Sdk`, so extending an already extended SDK no longer hides what the first extension added, and a method the extension replaces is typed as the replacement alone rather than as both signatures at once, which used to let a call written against the old signature compile against a value that no longer had it. The type itself is exported as `ExtendedSdk`.
+
+    `getSdk` and `extendSdk` now say in their doc comments what they build and how the merge behaves.
+
+- dfc3fbb: Make non-core `ApiConfig` integration slots optional. Only `cms` and `auth` are required now; every other domain (tickets, orders, carts, checkout, payments, products, customers, invoices, billingAccounts, resources, organizations, users, notifications, articles, search, cache) can be omitted.
+
+    When a domain is omitted, its framework module registers as a no-op instead of crashing, so a project can run a minimal setup (for example a CMS-backed portal) without importing `@o2s/integrations.mocked` to fill unused slots. `createIntegrationConfig` now accepts a partial map (core domains still required) and skips absent domains. A new `DefaultCacheService` is used as a pass-through fallback when no `cache` integration is configured (caching disabled, logged at startup), so services that depend on `Cache.Service` (e.g. the Strapi/Contentful CMS integrations) keep working. The `page` service treats `articles` as optional, and the SurveyJS module registers as a no-op when `tickets` is not configured.
+
+    This also fixes a latent bug in the search module, which previously fell back to the abstract `SearchService` (which cannot be instantiated) when no search service was configured; it now registers as a no-op instead.
+
+    Migration: this is backward compatible for the standard, module-based usage — existing configs that provide all domains keep working unchanged. Custom code that reads an integration slot directly (e.g. `config.integrations.orders.service`) may now need optional chaining, since non-core slots are typed as possibly `undefined`.
+
+- ee42afd: feat(frontend): server-rendered, indexable URLs for list filters
+
+    Filter params reached the browser only: a page always rendered with the default filters and the client
+    replaced them afterwards, so `/products?category=TOOLS` served the full catalogue to anyone opening the
+    link (a crawler included) and every filtered variant canonicalised to the bare page.
+
+    `searchParams` now travel from the page through `renderBlocks` into the blocks (`BlockSearchParams` on
+    `BaseBlockProps`), and the product list resolves them into its query server-side. The block query takes
+    a 1-based `page` and turns it into an `offset` with the page size from the CMS config, which only the
+    API knows. With the server rendering the filtered state, the client's mount refetch is gone, so a
+    shared link costs one request instead of two.
+
+    Its params also lost the `product_` prefix: `useUrlFilters` accepts `filterKeys` in place of a
+    `namespace`, which is what a public, indexed list needs to have plain, linkable URLs. Facet values are
+    rendered as real links next to the filter controls, because a crawler follows `<a href>` and does not
+    operate a select, and `generateSeo` keeps the index clean: one value of one whitelisted facet is
+    self-canonical and indexable, while sorting, deep pages and facet combinations canonicalise back and
+    are marked `noindex, follow`.
+
+    Multi-value restore from the URL is now limited to toggle groups. A select writes a single string back
+    whatever `allowMultiple` says, so restoring an array into one only tripped React's `<select>` check.
+
+- 270355f: feat(utils.frontend): add the shared SDK instance the blocks can build on
+
+    Adds `getSharedSdk` to `@o2s/utils.frontend/sdk`: the API url resolution (internal while rendering on the server, the runtime public url in the browser) and the logger settings now live in one place, and the SDK behind them is built on first use and reused — per process on the server, per bundle in the browser. Each of the 42 blocks used to repeat that setup and end up with an `ofetch` client and a logger of its own; they are migrated onto the shared instance in the same release, each reduced to `extendSdk(sdk, <block>(sdk))`. `extendSdk` copies the instance it extends, so what one block adds to it stays invisible to the others.
+
+    To make that possible without an `@ts-expect-error` per environment variable, `@o2s/framework/sdk` now exports `toLoggerConfig` along with the `LoggerConfig`, `LogLevel` and `LogFormat` types. It turns raw environment values into a logger config and leaves out a level or a format the logger does not know, so a typo in `LOG_LEVEL` falls back to the default instead of reaching winston.
+
+- ee42afd: refactor(framework): one pagination resolver for the list blocks
+
+    Every list block carried its own copy of the same two helpers, turning a query's `limit`, `offset` and `page` into the window to fetch. `Utils.Pagination.resolvePagination` in `@o2s/utils.api-harmonization` replaces all five: it takes the pagination a URL can carry (`Models.Pagination.PaginatedQuery`, structurally satisfied by any block query, so a block no longer types the helper with its own class) plus the page size to fall back on, and returns the `limit` and `offset` to use. The query shape stays a model in `@o2s/framework`, while the resolving lives with the other API-side helpers.
+
+    `PaginatedQuery` is kept apart from `PaginationQuery`, which the domain modules extend: `page` is consumed by the block API and never reaches them, so advertising it in their contracts would promise integrations something they never receive.
+
+    Two behaviours change with the move. A page size counts only as a whole number of rows above zero, so `?limit=-5` falls back to the CMS config instead of travelling on as a negative limit; the unit tests for the new helper are what surfaced it.
+
+    And the fallback page size is no longer a single row. Four of the five blocks fell back to `limit: 1` when neither the query nor the CMS config named one. That fallback was inherited, and reachable, because `pagination` is optional in the CMS block models, so an entry without it rendered a one-row list. `Utils.Pagination.DEFAULT_LIMIT` (10) is the shared fallback now; the product list keeps its own 12, which matches its three-column grid.
+
+### Patch Changes
+
+- cb50455: chore(deps): update dependencies
+- 681d153: chore(deps): update dependencies
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- cb50455: chore(deps): update dependencies
+- Updated dependencies [cb50455]
+- Updated dependencies [681d153]
+- Updated dependencies [1a520c8]
+- Updated dependencies [cb50455]
+    - @o2s/utils.logger@1.2.4
+
 ## 1.23.0
 
 ### Minor Changes
