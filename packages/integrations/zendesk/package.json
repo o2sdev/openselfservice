@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.zendesk",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "private": false,
     "license": "MIT",
     "description": "Zendesk integration for O2S, providing ticket management and support functionality.",
