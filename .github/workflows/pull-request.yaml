@@ -81,10 +81,13 @@ jobs:
 
     check-changeset:
         needs: [skip-duplicate-check, changed-packages]
+        # Renovate PRs get a changeset generated for them by create-renovate-changeset,
+        # and the changesets release PR consumes changesets instead of adding one.
         if: |
             needs.skip-duplicate-check.outputs.should_skip != 'true' &&
             needs.changed-packages.outputs.requires_changeset == 'true' &&
-            github.event.pull_request.user.login != 'renovate[bot]'
+            github.event.pull_request.user.login != 'renovate[bot]' &&
+            !startsWith(github.event.pull_request.head.ref, 'changeset-release/')
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
