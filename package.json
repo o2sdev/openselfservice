@@ -70,7 +70,7 @@
         "husky": "^9.1.7",
         "lint-staged": "^17.5.1",
         "msw": "^2.15.0",
-        "msw-storybook-addon": "^3.0.0",
+        "msw-storybook-addon": "^3.0.3",
         "npm-check-updates": "^23.1.0",
         "playwright": "^1.63.0",
         "prettier": "^3.9.6",
