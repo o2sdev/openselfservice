@@ -44,6 +44,9 @@ CLAUDE.md
 # Local history
 .lh
 
+# Local Node version pin (fnm/nvm) - personal, not a project convention
+.nvmrc
+
 # Storybook
 *storybook.log
 storybook-static
