@@ -65,14 +65,16 @@ export function mapTicketToModel(
     if (ticket.custom_fields) {
         ticket.custom_fields.forEach((field) => {
             if (field.value !== null && field.value !== undefined) {
-                const fieldKey = getFieldKeyById(field.id!);
+                // The generated OAS types allow untyped entries (`{ [key: string]: unknown }`), so narrow the id explicitly
+                const fieldId = Number(field.id);
+                const fieldKey = getFieldKeyById(fieldId);
 
                 // Skip 'topic' field as it's already set as top-level property from custom_fields
                 // to avoid duplicate/conflicting entries
                 if (fieldKey && fieldKey.toLowerCase() !== 'topic') {
                     // For CONTACT_US form: show consent fields even if false
                     // For other forms: skip boolean fields with false value (unchecked checkboxes)
-                    const isConsentField = consentFieldIds.includes(field.id!);
+                    const isConsentField = consentFieldIds.includes(fieldId);
                     if (typeof field.value === 'boolean' && field.value === false) {
                         if (!isContactUsForm || !isConsentField) {
                             return;
