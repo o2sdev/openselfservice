@@ -1,5 +1,19 @@
 # @o2s/blocks.payments-summary
 
+## 2.0.2
+
+### Patch Changes
+
+- 44b9dee: chore(deps): update dependencies
+- 44b9dee: chore(deps): update Storybook to 10.6.5 for Next.js 16.4 compatibility
+
+    Next.js 16.4 changed `useRouter()` to read `parentRenderTree.data.bfcacheId` from `LayoutRouterContext`. The router mock in `@storybook/nextjs-vite` 10.6.0 provides only the older context fields, so every story wrapped in `RedirectBoundary` crashed with `Cannot read properties of undefined (reading 'data')`. Storybook 10.6.5 adds the new field to its mock. Only devDependencies change, so published runtime code is unaffected.
+
+- Updated dependencies [44b9dee]
+- Updated dependencies [559855c]
+    - @o2s/ui@2.1.1
+    - @o2s/framework@1.24.1
+
 ## 2.0.1
 
 ### Patch Changes
