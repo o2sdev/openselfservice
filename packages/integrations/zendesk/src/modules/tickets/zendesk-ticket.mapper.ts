@@ -30,7 +30,7 @@ export function mapTicketToModel(
 
     let topic: string | undefined;
     if (topicFieldId && ticket.custom_fields) {
-        const topicField = ticket.custom_fields.find((field) => field.id === topicFieldId);
+        const topicField = ticket.custom_fields.find((field) => Number(field.id) === topicFieldId);
         if (topicField?.value) {
             topic = String(topicField.value).toUpperCase();
         }
@@ -64,15 +64,16 @@ export function mapTicketToModel(
     // Map custom fields to properties using readable names from ZendeskFieldMapper
     if (ticket.custom_fields) {
         ticket.custom_fields.forEach((field) => {
-            if (field.value !== null && field.value !== undefined) {
-                const fieldKey = getFieldKeyById(field.id!);
+            const fieldId = Number(field.id);
+            if (field.value !== null && field.value !== undefined && !Number.isNaN(fieldId)) {
+                const fieldKey = getFieldKeyById(fieldId);
 
                 // Skip 'topic' field as it's already set as top-level property from custom_fields
                 // to avoid duplicate/conflicting entries
                 if (fieldKey && fieldKey.toLowerCase() !== 'topic') {
                     // For CONTACT_US form: show consent fields even if false
                     // For other forms: skip boolean fields with false value (unchecked checkboxes)
-                    const isConsentField = consentFieldIds.includes(field.id!);
+                    const isConsentField = consentFieldIds.includes(fieldId);
                     if (typeof field.value === 'boolean' && field.value === false) {
                         if (!isContactUsForm || !isConsentField) {
                             return;
