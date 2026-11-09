@@ -30,7 +30,7 @@ export function mapTicketToModel(
 
     let topic: string | undefined;
     if (topicFieldId && ticket.custom_fields) {
-        const topicField = ticket.custom_fields.find((field) => field.id === topicFieldId);
+        const topicField = ticket.custom_fields.find((field) => Number(field.id) === topicFieldId);
         if (topicField?.value) {
             topic = String(topicField.value).toUpperCase();
         }
