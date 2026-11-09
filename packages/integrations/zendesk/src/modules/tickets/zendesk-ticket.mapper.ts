@@ -64,8 +64,9 @@ export function mapTicketToModel(
     // Map custom fields to properties using readable names from ZendeskFieldMapper
     if (ticket.custom_fields) {
         ticket.custom_fields.forEach((field) => {
-            const fieldId = Number(field.id);
-            if (field.value !== null && field.value !== undefined && !Number.isNaN(fieldId)) {
+            if (field.value !== null && field.value !== undefined) {
+                // The generated OAS types allow untyped entries (`{ [key: string]: unknown }`), so narrow the id explicitly
+                const fieldId = Number(field.id);
                 const fieldKey = getFieldKeyById(fieldId);
 
                 // Skip 'topic' field as it's already set as top-level property from custom_fields
