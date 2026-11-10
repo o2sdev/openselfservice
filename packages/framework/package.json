@@ -54,7 +54,7 @@
         "class-validator": "^0.15.1",
         "logform": "2.7.0",
         "ofetch": "^1.5.1",
-        "qs": "^6.16.0",
+        "qs": "^6.17.1",
         "winston": "^3.19.0"
     },
     "devDependencies": {
