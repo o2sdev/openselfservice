@@ -67,7 +67,7 @@
         "@turbo/gen": "^2.10.13",
         "@types/express": "^5.0.6",
         "@types/qs": "^6.15.1",
-        "concurrently": "^10.0.5",
+        "concurrently": "^10.0.7",
         "eslint": "^9.39.5",
         "express": "5.2.1",
         "jsonwebtoken": "^9.0.3",

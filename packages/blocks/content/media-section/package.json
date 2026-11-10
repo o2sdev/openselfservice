@@ -49,7 +49,7 @@
         "@o2s/utils.frontend": "*",
         "@o2s/vitest-config": "*",
         "@storybook/nextjs-vite": "^10.6.5",
-        "concurrently": "^10.0.5",
+        "concurrently": "^10.0.7",
         "dotenv-cli": "^11.0.0",
         "eslint": "^9.39.5",
         "prettier": "^3.9.6",
