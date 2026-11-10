@@ -1,5 +1,15 @@
 # @o2s/integrations.strapi-cms
 
+## 3.1.2
+
+### Patch Changes
+
+- 4ba0cb7: chore(deps): update dependencies
+- 4ba0cb7: chore(deps): update dependencies
+- 4ba0cb7: chore(deps): update dependencies
+- Updated dependencies [559855c]
+    - @o2s/framework@1.24.1
+
 ## 3.1.1
 
 ### Patch Changes

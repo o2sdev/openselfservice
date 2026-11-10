@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.24.1
+
+### Patch Changes
+
+- 559855c: chore(deps): update dependencies
+
 ## 1.24.0
 
 ### Minor Changes
