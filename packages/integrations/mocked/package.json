@@ -71,7 +71,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "@types/jsonwebtoken": "^9.0.10",
-        "concurrently": "^10.0.5",
+        "concurrently": "^10.0.7",
         "eslint": "^9.39.5",
         "express": "5.2.1",
         "prettier": "^3.9.6",
