@@ -1,5 +1,18 @@
 # create-o2s-app
 
+## 4.1.10
+
+### Patch Changes
+
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+
 ## 4.1.9
 
 ### Patch Changes
