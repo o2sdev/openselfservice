@@ -39,7 +39,7 @@
         "@o2s/ui": "*",
         "@o2s/utils.logger": "*",
         "date-fns": "^4.4.0",
-        "lucide-react": "^1.42.0",
+        "lucide-react": "^1.76.0",
         "survey-core": "^3.0.3",
         "survey-react-ui": "^3.0.3"
     },
@@ -52,10 +52,10 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "concurrently": "^10.0.7",
-        "dotenv-cli": "^11.0.0",
+        "dotenv-cli": "^11.1.0",
         "eslint": "^9.39.5",
         "prettier": "^3.10.1",
-        "tsc-alias": "^1.9.5",
+        "tsc-alias": "^1.9.10",
         "typescript": "^6.0.3"
     },
     "peerDependencies": {

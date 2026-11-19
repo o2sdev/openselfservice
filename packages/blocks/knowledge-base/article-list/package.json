@@ -52,11 +52,11 @@
         "@o2s/vitest-config": "*",
         "@storybook/nextjs-vite": "^10.6.7",
         "concurrently": "^10.0.7",
-        "dotenv-cli": "^11.0.0",
+        "dotenv-cli": "^11.1.0",
         "eslint": "^9.39.5",
         "prettier": "^3.10.1",
         "storybook": "^10.6.7",
-        "tsc-alias": "^1.9.5",
+        "tsc-alias": "^1.9.10",
         "typescript": "^6.0.3",
         "vitest": "^4.1.11"
     },

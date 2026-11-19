@@ -57,7 +57,7 @@
         "@o2s/utils.logger": "*",
         "@prisma/client": "^6.19.3",
         "bcryptjs": "^3.0.3",
-        "dotenv-cli": "^11.0.0",
+        "dotenv-cli": "^11.1.0",
         "jsonwebtoken": "^9.0.3",
         "prisma": "^6.19.3"
     },
@@ -76,8 +76,8 @@
         "express": "5.2.1",
         "prettier": "^3.10.1",
         "shx": "^0.4.0",
-        "tsc-alias": "^1.9.5",
-        "tsx": "^4.23.13",
+        "tsc-alias": "^1.9.10",
+        "tsx": "^4.23.15",
         "typescript": "^6.0.3",
         "vitest": "^4.1.11"
     },

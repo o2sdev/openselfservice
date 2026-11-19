@@ -59,8 +59,8 @@
         "concurrently": "^10.0.7",
         "eslint": "^9.39.5",
         "prettier": "^3.10.1",
-        "tsc-alias": "^1.9.5",
-        "tsx": "^4.23.13",
+        "tsc-alias": "^1.9.10",
+        "tsx": "^4.23.15",
         "typescript": "^6.0.3",
         "vitest": "^4.1.11"
     },
