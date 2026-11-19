@@ -74,7 +74,7 @@
         "concurrently": "^10.0.5",
         "eslint": "^9.39.5",
         "express": "5.2.1",
-        "prettier": "^3.9.6",
+        "prettier": "^3.10.1",
         "shx": "^0.4.0",
         "tsc-alias": "^1.9.5",
         "tsx": "^4.23.13",

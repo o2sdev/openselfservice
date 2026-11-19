@@ -73,7 +73,7 @@
         "msw-storybook-addon": "^3.0.3",
         "npm-check-updates": "^23.1.1",
         "playwright": "^1.63.0",
-        "prettier": "^3.9.6",
+        "prettier": "^3.10.1",
         "rimraf": "^6.1.4",
         "simple-git": "^4.1.0",
         "storybook": "^10.6.7",
