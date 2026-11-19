@@ -42,7 +42,7 @@
         "@o2s/utils.logger": "*",
         "@vercel/stega": "1.1.0",
         "flatted": "^3.4.4",
-        "graphql": "16.14.2",
+        "graphql": "16.15.0",
         "graphql-request": "7.4.0",
         "graphql-tag": "2.12.7"
     },
@@ -60,7 +60,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "concurrently": "^10.0.5",
+        "concurrently": "^10.0.7",
         "eslint": "^9.39.5",
         "prettier": "^3.10.1",
         "tsc-alias": "^1.9.5",
