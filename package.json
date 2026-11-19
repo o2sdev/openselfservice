@@ -51,7 +51,7 @@
     "devDependencies": {
         "@commitlint/cli": "^21.2.4",
         "@commitlint/config-conventional": "^21.2.4",
-        "@playwright/test": "^1.63.0",
+        "@playwright/test": "^1.65.1",
         "@storybook/addon-a11y": "^10.6.7",
         "@storybook/addon-docs": "^10.6.7",
         "@storybook/addon-themes": "^10.6.7",
@@ -72,7 +72,7 @@
         "msw": "^2.15.0",
         "msw-storybook-addon": "^3.0.3",
         "npm-check-updates": "^23.1.1",
-        "playwright": "^1.63.0",
+        "playwright": "^1.65.1",
         "prettier": "^3.10.1",
         "rimraf": "^6.1.4",
         "simple-git": "^4.1.0",
