@@ -1,5 +1,23 @@
 # create-o2s-app
 
+## 4.1.10
+
+### Patch Changes
+
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 78f7a66: chore(deps): update storybook to 10.6.7, vite to 8.3.8, turbo to 2.11.13, @vitejs/plugin-react to 6.3.0, commander to 15.1.0, simple-git to 4.1.0, fs-extra to 11.4.1
+- 5905e9d: chore(deps): update dependencies
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+    - @o2s/telemetry@1.2.4
+
 ## 4.1.9
 
 ### Patch Changes

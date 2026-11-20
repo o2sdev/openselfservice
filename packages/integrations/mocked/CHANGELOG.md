@@ -1,5 +1,21 @@
 # @o2s/integrations.mocked
 
+## 2.1.2
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update concurrently to 10.0.7, graphql to 16.15.0, markdown-to-jsx to 9.10.6, libphonenumber-js to 1.13.17
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [559855c]
+    - @o2s/framework@1.24.1
+    - @o2s/modules.documents@0.0.3
+    - @o2s/utils.logger@1.2.5
+
 ## 2.1.1
 
 ### Patch Changes
