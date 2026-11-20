@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
-import { headers } from 'next/headers';
+import { draftMode, headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
@@ -63,17 +63,18 @@ export default async function LoginPage({ params }: Readonly<Props>) {
     const headersList = await headers();
     const session = await auth();
     const { locale, callbackUrl } = await params;
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     try {
         const init = await sdk.modules.getInit(
             {
-                referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
+                referrer: headersList.get('referrer') || (process.env.BASE_URL as string),
             },
             { 'x-locale': locale },
             session?.accessToken,
         );
 
-        const { data } = await sdk.modules.getLoginPage({ 'x-locale': locale });
+        const { data } = await sdk.modules.getLoginPage({ 'x-locale': locale }, isDraftModeEnabled);
 
         if (!data) {
             notFound();

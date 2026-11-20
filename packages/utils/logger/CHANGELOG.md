@@ -1,5 +1,30 @@
 # @o2s/utils.logger
 
+## 1.2.5
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update concurrently to 10.0.7, graphql to 16.15.0, markdown-to-jsx to 9.10.6, libphonenumber-js to 1.13.17
+- 78f7a66: chore(deps): update prettier to 3.10.1
+
+## 1.2.4
+
+### Patch Changes
+
+- cb50455: chore(deps): update dependencies
+- 681d153: chore(deps): update dependencies
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- cb50455: chore(deps): update dependencies
+
 ## 1.2.3
 
 ### Patch Changes

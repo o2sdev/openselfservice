@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { FileText, Github, Twitter } from 'lucide-react';
+import { Code, FileText, MessageCircle } from 'lucide-react';
 
 import {
     NavigationMenu,
@@ -66,13 +66,13 @@ export const Default: Story = {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuLink href="https://github.com" className={navigationMenuTriggerStyle()}>
-                        <Github className="mr-2 h-4 w-4" />
+                        <Code className="mr-2 h-4 w-4" />
                         GitHub
                     </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuLink href="https://twitter.com" className={navigationMenuTriggerStyle()}>
-                        <Twitter className="mr-2 h-4 w-4" />
+                        <MessageCircle className="mr-2 h-4 w-4" />
                         Twitter
                     </NavigationMenuLink>
                 </NavigationMenuItem>

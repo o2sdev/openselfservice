@@ -7,6 +7,7 @@ import { PaymentsSummary } from './PaymentsSummary.server';
 import { PaymentsSummaryRendererProps } from './PaymentsSummary.types';
 
 export const PaymentsSummaryRenderer: React.FC<PaymentsSummaryRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -18,6 +19,7 @@ export const PaymentsSummaryRenderer: React.FC<PaymentsSummaryRendererProps> = (
         <Suspense key={id} fallback={<Loading bars={10} />}>
             <PaymentsSummary
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

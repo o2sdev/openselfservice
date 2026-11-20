@@ -212,12 +212,10 @@ export const mapFaqBlock = ({
                 id: data.sys.id,
                 title: data.title,
                 subtitle: data.subtitle,
-                items: data.itemsCollection?.items.map(
-                    (item): CMS.Model.FaqBlock.FaqItem => ({
-                        title: item.title!,
-                        content: item.content!,
-                    }),
-                ),
+                items: data.itemsCollection?.items.map((item): CMS.Model.FaqBlock.FaqItem => ({
+                    title: item.title!,
+                    content: item.content!,
+                })),
                 meta: isPreview
                     ? {
                           __id: data.sys.id,

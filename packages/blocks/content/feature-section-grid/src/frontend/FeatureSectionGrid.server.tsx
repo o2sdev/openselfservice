@@ -10,11 +10,18 @@ export const FeatureSectionGridDynamic = dynamic(() =>
     import('./FeatureSectionGrid.client').then((module) => module.FeatureSectionGridPure),
 );
 
-export const FeatureSectionGrid: React.FC<FeatureSectionGridProps> = async ({ id, accessToken, locale, routing }) => {
+export const FeatureSectionGrid: React.FC<FeatureSectionGridProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.FeatureSectionGridBlock;
     try {
         data = await sdk.blocks.getFeatureSectionGrid(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

@@ -10,11 +10,18 @@ export const TicketSummaryDynamic = dynamic(() =>
     import('./TicketSummary.client').then((module) => module.TicketSummaryPure),
 );
 
-export const TicketSummary: React.FC<TicketSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const TicketSummary: React.FC<TicketSummaryProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.TicketSummaryBlock;
     try {
         data = await sdk.blocks.getTicketSummary(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

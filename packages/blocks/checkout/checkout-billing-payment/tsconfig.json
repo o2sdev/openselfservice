@@ -7,8 +7,7 @@
         "emitDecoratorMetadata": true,
         "composite": true,
         "declaration": true,
-        "declarationMap": true,
-        "baseUrl": "./src",
+        "declarationMap": true
     },
     "references": [
         { "path": "./tsconfig.frontend.json" },

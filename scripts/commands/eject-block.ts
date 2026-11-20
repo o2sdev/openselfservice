@@ -4,7 +4,7 @@ import { execSync } from 'node:child_process';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import prompts, { PromptObject } from 'prompts';
-import simpleGit from 'simple-git';
+import { simpleGit } from 'simple-git';
 
 // Constants
 const PROJECT_PREFIX = 'o2s';

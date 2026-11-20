@@ -1,5 +1,5 @@
 import { URL } from '.';
-import { Controller, Get, Headers } from '@nestjs/common';
+import { Controller, Get, Headers, Query } from '@nestjs/common';
 
 import { AppHeaders } from '@o2s/framework/headers';
 
@@ -10,7 +10,7 @@ export class NotFoundPageController {
     constructor(protected readonly service: NotFoundPageService) {}
 
     @Get()
-    getNotFoundPage(@Headers() headers: AppHeaders) {
-        return this.service.getNotFoundPage(headers);
+    getNotFoundPage(@Headers() headers: AppHeaders, @Query('preview') preview?: boolean) {
+        return this.service.getNotFoundPage(headers, preview);
     }
 }

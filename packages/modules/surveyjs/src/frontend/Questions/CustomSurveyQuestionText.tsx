@@ -87,7 +87,7 @@ const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props
                         <Calendar
                             mode="single"
                             selected={question.value ? new Date(question.value) : undefined}
-                            initialFocus
+                            autoFocus
                             id={question.inputId}
                             onSelect={(value) => {
                                 // eslint-disable-next-line react-hooks/immutability

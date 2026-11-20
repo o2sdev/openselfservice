@@ -7,6 +7,7 @@ import { PricingSection } from './PricingSection.server';
 import { PricingSectionRendererProps } from './PricingSection.types';
 
 export const PricingSectionRenderer: React.FC<PricingSectionRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -30,6 +31,7 @@ export const PricingSectionRenderer: React.FC<PricingSectionRendererProps> = ({
         >
             <PricingSection
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

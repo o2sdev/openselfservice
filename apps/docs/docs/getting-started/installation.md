@@ -72,3 +72,17 @@ npm install
 :::info
 Cloning the repository is a more advanced way of starting with O2S, and is suggested only when you need to modify the core functionalities of the framework.
 :::
+
+### Updating dependencies
+
+O2S is developed on Windows, macOS and Linux, while CI runs on Linux. A few dependencies ship their compiled native code as separate per-platform packages (for example `@tailwindcss/oxide`), and npm has a [long-standing bug](https://github.com/npm/cli/issues/4828) where `npm install` records in the lockfile only the binaries for the OS it ran on and prunes the rest. A lockfile written that way installs fine on the machine that created it but breaks `npm ci` on other platforms — including CI.
+
+Day-to-day work is unaffected: `npm ci`, building, running and testing never rewrite `package-lock.json`. This only matters when you **change a dependency** — `npm install <pkg>`, or an edit to any `package.json`. After doing so, restore the full cross-platform set of native binaries:
+
+```shell
+npm run lockfile:fix
+```
+
+:::tip
+This runs automatically on commit (via a pre-commit hook), and CI rejects any pull request whose lockfile is missing platform binaries — so you normally don't have to think about it. You can run it manually at any time, and verify the current state with `npm run lockfile:check`.
+:::

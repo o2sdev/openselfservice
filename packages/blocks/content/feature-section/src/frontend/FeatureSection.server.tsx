@@ -10,11 +10,18 @@ export const FeatureSectionDynamic = dynamic(() =>
     import('./FeatureSection.client').then((module) => module.FeatureSectionPure),
 );
 
-export const FeatureSection: React.FC<FeatureSectionProps> = async ({ id, accessToken, locale, routing }) => {
+export const FeatureSection: React.FC<FeatureSectionProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.FeatureSectionBlock;
     try {
         data = await sdk.blocks.getFeatureSection(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

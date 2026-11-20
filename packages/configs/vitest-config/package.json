@@ -1,6 +1,6 @@
 {
     "name": "@o2s/vitest-config",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "private": true,
     "license": "MIT",
     "description": "Shared Vitest configuration for O2S packages, supporting block and API test configurations.",
@@ -13,7 +13,8 @@
     "type": "module",
     "exports": {
         "./block": "./block.js",
-        "./api": "./api.js"
+        "./api": "./api.js",
+        "./ui": "./ui.js"
     },
     "scripts": {
         "collect-json-reports": "node scripts/collect-json-outputs.mjs",
@@ -25,8 +26,8 @@
     "devDependencies": {
         "glob": "^13.0.6",
         "nyc": "^18.0.0",
-        "open-cli": "^8.0.0",
-        "unplugin-swc": "^1.5.9",
-        "vitest": "^4.0.18"
+        "open-cli": "^9.0.0",
+        "unplugin-swc": "^2.0.0",
+        "vitest": "^4.1.11"
     }
 }

@@ -11,6 +11,7 @@ export const TicketDetailsDynamic = dynamic(() =>
 );
 
 export const TicketDetails: React.FC<TicketDetailsProps> = async ({
+    isDraftModeEnabled,
     id,
     ticketId,
     accessToken,
@@ -22,6 +23,7 @@ export const TicketDetails: React.FC<TicketDetailsProps> = async ({
     try {
         data = await sdk.blocks.getTicketDetails(
             {
+                preview: isDraftModeEnabled,
                 id: ticketId,
             },
             {

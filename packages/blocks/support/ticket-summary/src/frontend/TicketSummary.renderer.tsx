@@ -6,7 +6,12 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { TicketSummary } from './TicketSummary.server';
 import { TicketSummaryRendererProps } from './TicketSummary.types';
 
-export const TicketSummaryRenderer: React.FC<TicketSummaryRendererProps> = ({ id, accessToken, routing }) => {
+export const TicketSummaryRenderer: React.FC<TicketSummaryRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (
@@ -21,7 +26,13 @@ export const TicketSummaryRenderer: React.FC<TicketSummaryRendererProps> = ({ id
                 </>
             }
         >
-            <TicketSummary id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <TicketSummary
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

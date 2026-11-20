@@ -1,34 +1,11 @@
-// these unused imports are necessary for TypeScript to properly resolve API methods
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Models } from '@o2s/utils.api-harmonization';
+import { getSharedSdk } from '@o2s/utils.frontend/sdk';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Checkout } from '@o2s/framework/modules';
-import { extendSdk, getSdk } from '@o2s/framework/sdk';
+import { type Sdk, extendSdk } from '@o2s/framework/sdk';
 
 import { checkoutSummary } from './checkout-summary';
 
-const API_URL =
-    (typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL) ||
-    process.env.NEXT_PUBLIC_API_URL;
+const internalSdk = getSharedSdk();
 
-const internalSdk = getSdk({
-    apiUrl: API_URL!,
-    logger: {
-        // @ts-expect-error missing types
-        level: process.env.NEXT_PUBLIC_LOG_LEVEL,
-        // @ts-expect-error missing types
-        format: process.env.NEXT_PUBLIC_LOG_FORMAT,
-        colorsEnabled: process.env.NEXT_PUBLIC_LOG_COLORS_ENABLED === 'true',
-    },
-});
-
-export const sdk = extendSdk(internalSdk, {
-    blocks: {
-        getCheckoutSummary: checkoutSummary(internalSdk).blocks.getCheckoutSummary,
-    },
-    checkout: {
-        getCheckoutSummary: checkoutSummary(internalSdk).checkout.getCheckoutSummary,
-        placeOrder: checkoutSummary(internalSdk).checkout.placeOrder,
-    },
-});
+// the type is spelled out because the emitted declaration cannot name the types that the
+// methods of the factory pull in from other packages (TS2883)
+export const sdk: Sdk & ReturnType<typeof checkoutSummary> = extendSdk(internalSdk, checkoutSummary(internalSdk));

@@ -27,8 +27,8 @@ This document provides an overview of features supported by the Strapi CMS integ
 | [Organization List](#organization-list)       | ✅     | Multi-organization support                                                 |
 | [Login Page](#login-page)                     | ✅     | Customizable login page content                                            |
 | [Not Found Page](#not-found-page)             | ✅     | Customizable 404 page content                                              |
-| [Live Preview](#live-preview)                 | ❌     | Not supported                                                              |
-| [Live Updates](#live-updates)                 | ❌     | Not supported                                                              |
+| [Live Preview](#live-preview)                 | ✅     | Edit-in-place via self-encoded Content Source Maps (Strapi EE 5.12+)       |
+| [Live Updates](#live-updates)                 | ✅     | Preview reflects edits live and refreshes on save                          |
 
 ## Feature details
 
@@ -189,10 +189,15 @@ Customizable 404 page content is supported via:
 
 ### Live Preview {#live-preview}
 
-Live Preview is not supported in the Strapi integration. Unlike the Contentful integration, Strapi does not provide native Live Preview capabilities. The
-`LivePreviewProvider` and `useInspector` hook exist in the codebase as no-op placeholders to maintain API compatibility with other CMS integrations.
+Live Preview is supported using Strapi's [Preview feature](https://docs.strapi.io/cms/features/preview) (Strapi Enterprise, ≥ 5.12). Editors open a page or
+component inside the Strapi admin preview iframe and see draft content rendered by the real frontend, with click-to-edit on supported blocks.
+
+Because content is fetched over GraphQL and normalized on the API harmonization layer, the integration cannot rely on Strapi's native (REST-only) source-map
+encoder. Instead it **encodes Content Source Maps itself on the API Harmonization server**, after mapping, producing markers byte-identical to Strapi's own. See the
+[Live Preview](./live-preview.md) page for the full approach, the page-vs-component editing model, and setup.
 
 ### Live Updates {#live-updates}
 
-Live updates are currently not supported. The integration does not provide real-time content synchronization when content is updated in Strapi. Content changes
-require a page refresh or cache invalidation to be visible.
+Live updates are supported within the preview iframe: while an editor types in the side editor the preview reflects the change immediately, and on save the
+frontend refreshes (via Strapi's `strapiUpdate` message → `router.refresh()`). Outside the preview iframe, content changes still require cache invalidation to
+be visible. See [Live Preview](./live-preview.md).

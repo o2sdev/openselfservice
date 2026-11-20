@@ -13,8 +13,8 @@ const H = HeaderName;
 export class NotFoundPageService {
     constructor(private readonly cmsService: CMS.Service) {}
 
-    getNotFoundPage(headers: AppHeaders): Observable<NotFoundPage> {
-        return this.cmsService.getNotFoundPage({ locale: headers[H.Locale] }).pipe(
+    getNotFoundPage(headers: AppHeaders, preview?: boolean): Observable<NotFoundPage> {
+        return this.cmsService.getNotFoundPage({ locale: headers[H.Locale], preview }).pipe(
             map((notFoundPage) => {
                 if (!notFoundPage) {
                     throw new NotFoundException();

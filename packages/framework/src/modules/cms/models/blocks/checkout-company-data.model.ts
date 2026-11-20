@@ -46,6 +46,7 @@ export class CheckoutCompanyDataBlock extends Block.Block {
         discountLabel: string;
         shippingLabel: string;
         freeLabel: string;
+        activePromoCodesTitle?: string;
     };
     stepIndicator!: { steps: string[]; currentStep: number };
     billingInfoNote?: { icon?: string; text: string };

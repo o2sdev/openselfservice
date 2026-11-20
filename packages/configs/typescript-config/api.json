@@ -10,6 +10,17 @@
         "incremental": true,
         "strictNullChecks": true,
         "noImplicitAny": true,
+        // Compile JSX rather than inheriting base.json's "preserve".
+        //
+        // "preserve" leaves JSX in place and emits .jsx, which is what a bundler
+        // wants but not what these packages are. They are published as CJS and
+        // consumed through barrels that `require('./Component')` - and Node's
+        // CJS resolution inside node_modules only tries .js/.json/.node, so a
+        // .jsx sibling is unresolvable. It works in this repo only because our
+        // own apps import the workspace source instead of dist; every external
+        // npm consumer gets "Module not found". Affects the live-preview
+        // components in the mocked, strapi-cms and contentful-cms integrations.
+        "jsx": "react-jsx",
         "strictBindCallApply": false,
         "forceConsistentCasingInFileNames": false,
         "noFallthroughCasesInSwitch": false

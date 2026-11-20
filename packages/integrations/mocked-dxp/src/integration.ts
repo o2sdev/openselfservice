@@ -6,7 +6,7 @@ import { Service as SearchService } from './modules/search';
 
 export * as Integration from './modules/index';
 
-export const Config: Partial<ApiConfig['integrations']> = {
+export const Config = {
     cms: {
         name: 'mocked-dxp',
         service: CmsService,
@@ -21,4 +21,4 @@ export const Config: Partial<ApiConfig['integrations']> = {
         name: 'mocked-dxp',
         service: SearchService,
     },
-};
+} satisfies Partial<ApiConfig['integrations']>;

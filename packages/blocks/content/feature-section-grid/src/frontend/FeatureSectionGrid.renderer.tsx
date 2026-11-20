@@ -6,7 +6,12 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { FeatureSectionGrid } from './FeatureSectionGrid.server';
 import { FeatureSectionGridRendererProps } from './FeatureSectionGrid.types';
 
-export const FeatureSectionGridRenderer: React.FC<FeatureSectionGridRendererProps> = ({ id, accessToken, routing }) => {
+export const FeatureSectionGridRenderer: React.FC<FeatureSectionGridRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (
@@ -26,7 +31,13 @@ export const FeatureSectionGridRenderer: React.FC<FeatureSectionGridRendererProp
                 </div>
             }
         >
-            <FeatureSectionGrid id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <FeatureSectionGrid
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

@@ -34,10 +34,6 @@ RUN npm dedupe
 
 ENV NODE_ENV production
 
-# Public environment variables are bundled at build time
-# https://nextjs.org/docs/app/guides/environment-variables#bundling-environment-variables-for-the-browser
-ENV NEXT_PUBLIC_API_URL http://localhost:3001/api
-
 RUN npm run build
 
 FROM base AS runner

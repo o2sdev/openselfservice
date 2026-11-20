@@ -7,6 +7,7 @@ import { OrdersSummary } from './OrdersSummary.server';
 import { OrdersSummaryRendererProps } from './OrdersSummary.types';
 
 export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -34,6 +35,7 @@ export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({
         >
             <OrdersSummary
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

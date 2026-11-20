@@ -1,5 +1,70 @@
 # @o2s/integrations.zendesk
 
+## 4.0.2
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update concurrently to 10.0.7, graphql to 16.15.0, markdown-to-jsx to 9.10.6, libphonenumber-js to 1.13.17
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- 44b9dee: fix(integrations.zendesk): narrow custom field ids before mapping them
+
+    The Zendesk types are generated at install time from the live OpenAPI spec, and the current spec widens ticket `custom_fields` to `TicketFieldValueInput | { [key: string]: unknown }`. For the untyped branch `field.id` is `unknown`, so the non-null assertion narrows it to `{}` and the calls to `getFieldKeyById` and `consentFieldIds.includes` no longer compile. Any fresh install failed to build the package.
+
+    The ticket mapper now reads the id once with `Number(field.id)` and passes that number on. Nothing changes at runtime: Zendesk still returns numeric ids, which is what the assertion assumed before.
+
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [559855c]
+    - @o2s/framework@1.24.1
+    - @o2s/utils.logger@1.2.5
+
+## 4.0.1
+
+### Patch Changes
+
+- 010ae15: Refactored integration configuration by consolidating the 18 individual model files into a single typed `config.ts` backed by a `createIntegrationConfig` helper. Each domain now maps to an integration through a per-domain import alias shared by both the runtime map and its type re-export, so swapping an integration is a single-line change that cannot desync value and types.
+
+    Integration `Config` objects are now declared with `satisfies Partial<ApiConfig['integrations']>` (instead of a type annotation), which lets `createIntegrationConfig` validate domain bindings **at compile time** — assigning an integration to a domain it does not provide is now a type error rather than a runtime crash. The runtime check remains as a defense-in-depth backstop.
+
+- cb50455: chore(deps): update dependencies
+- 681d153: chore(deps): update dependencies
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- cb50455: chore(deps): update dependencies
+- 51fce27: chore(deps): update dependencies
+- Updated dependencies [010ae15]
+- Updated dependencies [f8591c1]
+- Updated dependencies [cb50455]
+- Updated dependencies [c8a58ad]
+- Updated dependencies [681d153]
+- Updated dependencies [457b243]
+- Updated dependencies [1a520c8]
+- Updated dependencies [92c0bf8]
+- Updated dependencies [cb50455]
+- Updated dependencies [dfc3fbb]
+- Updated dependencies [ee42afd]
+- Updated dependencies [270355f]
+- Updated dependencies [ee42afd]
+    - @o2s/framework@1.24.0
+    - @o2s/utils.logger@1.2.4
+
+## 4.0.0
+
+### Patch Changes
+
+- Updated dependencies [86b4c5a]
+    - @o2s/framework@1.23.0
+
 ## 3.1.4
 
 ### Patch Changes

@@ -129,11 +129,65 @@ describe('GraphqlService', () => {
         expect(sdkMock.getNotFoundPage).toHaveBeenCalledWith(notFoundPageParams);
         expect(sdkMock.getHeader).toHaveBeenCalledWith(headerParams);
         expect(sdkMock.getFooter).toHaveBeenCalledWith(footerParams);
-        expect(sdkMock.getComponent).toHaveBeenCalledWith(componentParams);
+        expect(sdkMock.getComponent).toHaveBeenCalledWith(componentParams, undefined);
         expect(sdkMock.getOrganizationList).toHaveBeenCalledWith(organizationListParams);
         expect(sdkMock.getSurvey).toHaveBeenCalledWith(surveyParams);
         expect(sdkMock.getCategories).toHaveBeenCalledWith(categoriesParams);
         expect(sdkMock.getArticle).toHaveBeenCalledWith(articleParams);
         expect(sdkMock.getArticles).toHaveBeenCalledWith(articlesParams);
+    });
+
+    it('should send a bearer token to getComponent in preview mode when configured', () => {
+        const configWithToken = {
+            get: vi.fn((key: string) => {
+                if (key === 'CMS_STRAPI_BASE_URL') {
+                    return 'https://strapi.test';
+                }
+                if (key === 'CMS_STRAPI_PREVIEW_TOKEN') {
+                    return 'preview-token';
+                }
+                return undefined;
+            }),
+        } as unknown as ConfigService;
+        const service = new GraphqlService(configWithToken);
+        const sdkMock = getSdkMock();
+        const componentParams = {} as unknown;
+
+        service.getComponent(componentParams as never, { preview: true });
+
+        expect(sdkMock.getComponent).toHaveBeenCalledWith(componentParams, {
+            Authorization: 'Bearer preview-token',
+        });
+    });
+
+    it('should not send a token to getComponent when not previewing or not configured', () => {
+        const service = new GraphqlService(configService);
+        const sdkMock = getSdkMock();
+        const componentParams = {} as unknown;
+
+        // No token configured, preview true → no headers
+        service.getComponent(componentParams as never, { preview: true });
+        expect(sdkMock.getComponent).toHaveBeenCalledWith(componentParams, undefined);
+    });
+
+    it('should not send the configured token on published (non-preview) requests', () => {
+        const configWithToken = {
+            get: vi.fn((key: string) => {
+                if (key === 'CMS_STRAPI_BASE_URL') {
+                    return 'https://strapi.test';
+                }
+                if (key === 'CMS_STRAPI_PREVIEW_TOKEN') {
+                    return 'preview-token';
+                }
+                return undefined;
+            }),
+        } as unknown as ConfigService;
+        const service = new GraphqlService(configWithToken);
+        const sdkMock = getSdkMock();
+        const componentParams = {} as unknown;
+
+        // Token configured but preview false → the token must NOT leak onto published requests
+        service.getComponent(componentParams as never, { preview: false });
+        expect(sdkMock.getComponent).toHaveBeenCalledWith(componentParams, undefined);
     });
 });

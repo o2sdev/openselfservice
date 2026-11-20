@@ -3,7 +3,7 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/nextjs-vite';
 import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
 import { createRouter } from '@storybook/nextjs-vite/router.mock';
-import { initialize, mswLoader } from 'msw-storybook-addon';
+import { mswLoader } from 'msw-storybook-addon/csf3';
 import { NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
@@ -21,8 +21,6 @@ import '../apps/frontend/src/styles/global.css';
 
 import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
 import { cartAndCheckoutHandlers } from './mocks/handlers/cart-handlers';
-
-initialize();
 
 createRouter({});
 createNavigation({});
@@ -53,7 +51,7 @@ const ReadmeDocsPage = () => {
 };
 
 const preview: Preview = {
-    loaders: [mswLoader as () => void | Record<string, unknown> | Promise<void | Record<string, unknown>>],
+    loaders: [mswLoader()],
     parameters: {
         msw: {
             handlers: cartAndCheckoutHandlers,

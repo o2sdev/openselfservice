@@ -4,6 +4,7 @@ import { CMS } from '@o2s/framework/modules';
 
 import { GetComponentQuery } from '@/generated/strapi';
 
+import { SourceMapContext, createFieldEncoder } from '../../live-preview/encode-source-map';
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
 import { mapLink } from '../cms.link.mapper';
@@ -45,4 +46,30 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
     }
 
     throw new NotFoundException();
+};
+
+/**
+ * Live Preview: encode Content Source Maps into the normalized TicketList block.
+ * Same-document text only: block `title`/`subtitle` and the embedded `noResults` banner
+ * (`content.0.noResults.*`). Column/field labels, `labels` (from the separate
+ * configurable-texts document) and `detailsUrl` are intentionally not encoded.
+ */
+export const encodeTicketListBlock = (
+    block: CMS.Model.TicketListBlock.TicketListBlock,
+    ctx: SourceMapContext,
+): CMS.Model.TicketListBlock.TicketListBlock => {
+    const enc = createFieldEncoder(ctx);
+
+    return {
+        ...block,
+        title: enc(block.title, 'title'),
+        subtitle: enc(block.subtitle, 'subtitle'),
+        noResults: block.noResults
+            ? {
+                  ...block.noResults,
+                  title: enc(block.noResults.title, 'noResults.title'),
+                  description: enc(block.noResults.description, 'noResults.description', 'richtext'),
+              }
+            : block.noResults,
+    };
 };

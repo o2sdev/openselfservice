@@ -8,11 +8,19 @@ import { CartProps } from './Cart.types';
 
 export const CartDynamic = dynamic(() => import('./Cart.client').then((module) => module.CartPure));
 
-export const Cart: React.FC<CartProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const Cart: React.FC<CartProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     let data: Model.CartBlock;
     try {
         data = await sdk.blocks.getCart(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

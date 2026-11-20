@@ -147,7 +147,7 @@ Publishes npm packages to the registry using Changesets.
 
 **Required Secrets:**
 
-- `NPM_TOKEN`: npm authentication token
+- none for npm: packages are published via [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC, `id-token: write`)
 - `GITHUB_TOKEN`: GitHub token (automatically provided)
 - `TURBO_TOKEN`: Turborepo token (optional)
 
@@ -283,7 +283,8 @@ Unified action for deploying to Vercel (supports both production and preview env
 ### Package publishing issues
 
 - Ensure Changesets are properly configured in the repository
-- Verify `NPM_TOKEN` has publish permissions
+- Verify each package has a trusted publisher on npmjs.com pointing at `o2sdev/openselfservice` and `release.yaml` (`npm trust list <package>`), and that its `package.json` `repository.url` matches the repo
+- New packages need a first manual publish, then `npm trust github <package> --file release.yaml --repo o2sdev/openselfservice --allow-publish`
 - Check that package versions follow semantic versioning
 
 ## Related Documentation

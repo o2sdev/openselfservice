@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CMS, Notifications } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
+import { Utils } from '@o2s/utils.api-harmonization';
+
 import { AppHeaders, HeaderName } from '@o2s/framework/headers';
 import { Auth } from '@o2s/framework/modules';
 
@@ -32,13 +34,19 @@ export class NotificationListService {
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
+                // `page` is a URL concern and is consumed here, so it never reaches the domain module.
+                const { page: _page, ...notificationQuery } = query;
+                const { limit, offset } = Utils.Pagination.resolvePagination(query, {
+                    cmsLimit: cms.pagination?.limit,
+                });
+
                 return this.notificationService
                     .getNotificationList(
                         {
                             ...(cms.initialFilters || {}),
-                            ...query,
-                            limit: query.limit || cms.pagination?.limit || 1,
-                            offset: query.offset || 0,
+                            ...notificationQuery,
+                            limit,
+                            offset,
                             locale: headers[H.Locale],
                         },
                         authorization,

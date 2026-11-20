@@ -8,6 +8,7 @@ import { RecommendedProducts } from './RecommendedProducts.server';
 import { RecommendedProductsRendererProps } from './RecommendedProducts.types';
 
 export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererProps> = ({
+    isDraftModeEnabled,
     id,
     excludeProductId,
     accessToken,
@@ -28,6 +29,7 @@ export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererPr
         >
             <RecommendedProducts
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 excludeProductId={excludeProductId}
                 accessToken={accessToken}
                 locale={locale}

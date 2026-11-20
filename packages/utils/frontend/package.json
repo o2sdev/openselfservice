@@ -1,6 +1,6 @@
 {
     "name": "@o2s/utils.frontend",
-    "version": "0.6.1",
+    "version": "1.1.1",
     "description": "Utility functions for O2S frontend applications.",
     "private": false,
     "license": "MIT",
@@ -20,32 +20,37 @@
         "url": "https://github.com/o2sdev/openselfservice/issues"
     },
     "exports": {
-        ".": "./dist/index.js"
+        ".": "./dist/index.js",
+        "./sdk": "./dist/sdk.js"
     },
     "files": [
         "dist"
     ],
     "scripts": {
-        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "build": "tsc7 --preserveWatchOutput && tsc-alias",
+        "test": "vitest run",
         "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
         "@o2s/ui": "*",
         "class-variance-authority": "^0.7.1",
-        "react": "^19.2.4"
+        "next-runtime-env": "^3.3.0",
+        "react": "^19.2.8"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
+        "@o2s/framework": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "^9.2.1",
-        "eslint": "^9.39.4",
-        "prettier": "^3.8.1",
+        "@o2s/vitest-config": "*",
+        "concurrently": "^10.0.7",
+        "eslint": "^9.39.5",
+        "prettier": "^3.10.1",
         "react-string-replace": "^2.0.1",
-        "tsc-alias": "^1.8.16",
-        "typescript": "^5.9.3"
+        "tsc-alias": "^1.9.10",
+        "typescript": "^6.0.3"
     },
     "peerDependencies": {
         "@o2s/framework": "*",

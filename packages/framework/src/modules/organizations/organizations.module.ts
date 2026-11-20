@@ -10,15 +10,20 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class OrganizationsModule {
     static register(config: ApiConfig): DynamicModule {
-        const service = config.integrations.organizations.service;
-        const controller = config.integrations.organizations.controller || OrganizationController;
-        const imports = config.integrations.organizations.imports || [];
+        const integration = config.integrations.organizations;
+        if (!integration?.service) {
+            return { module: OrganizationsModule };
+        }
+
+        const service = integration.service;
+        const controller = integration.controller || OrganizationController;
+        const imports = integration.imports || [];
 
         const provider = {
             provide: OrganizationService,
             useClass: service as Type,
         };
-        const providers = config.integrations.organizations.providers || [];
+        const providers = integration.providers || [];
 
         return {
             module: OrganizationsModule,

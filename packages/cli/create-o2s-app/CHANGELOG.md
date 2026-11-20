@@ -1,5 +1,48 @@
 # create-o2s-app
 
+## 4.1.10
+
+### Patch Changes
+
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 78f7a66: chore(deps): update storybook to 10.6.7, vite to 8.3.8, turbo to 2.11.13, @vitejs/plugin-react to 6.3.0, commander to 15.1.0, simple-git to 4.1.0, fs-extra to 11.4.1
+- 5905e9d: chore(deps): update dependencies
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- 5905e9d: chore(deps): update dependencies
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+    - @o2s/telemetry@1.2.4
+
+## 4.1.9
+
+### Patch Changes
+
+- 1a520c8: chore: dependency update pass
+
+    Update dependencies across the monorepo. Highlights: NestJS 12 (Express 5),
+    TypeScript 6 for type-checking/lint with native TypeScript 7 compiling the
+    package builds, Vite 8, Docusaurus 3.10, Storybook 10.6, @medusajs 2.20,
+    redis 6, surveyjs (core + react-ui) 3, and assorted minor/patch bumps. No
+    public package API changed; peer ranges were bumped to match (notably
+    @nestjs/* to ^12).
+
+- Updated dependencies [cb50455]
+- Updated dependencies [681d153]
+- Updated dependencies [1a520c8]
+- Updated dependencies [cb50455]
+    - @o2s/telemetry@1.2.3
+
+## 4.1.8
+
+### Patch Changes
+
+- 13257ce: update render block transformation by removing legacy regex handling
+
 ## 4.1.7
 
 ### Patch Changes

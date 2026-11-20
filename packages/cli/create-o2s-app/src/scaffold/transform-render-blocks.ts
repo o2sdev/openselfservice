@@ -6,11 +6,8 @@ const FILE_PATH = 'apps/frontend/src/blocks/renderBlocks.tsx';
 // Regex matches: import * as Alias from '@o2s/blocks.<name>/frontend';
 const BLOCK_IMPORT_REGEX = /^import \* as (\w+) from '@o2s\/blocks\.([^/]+)\/frontend';$/;
 
-// Regex matches:         case 'SomeBlock':
-const CASE_LINE_REGEX = /^\s+case '(\w+)':\s*$/;
-
-// Regex matches:             return <Alias.Renderer (handles extra props like onSignOut, renderBlocks)
-const RETURN_RENDERER_REGEX = /^\s+return <(\w+)\.Renderer/;
+// Regex matches:     SomeBlock: (blockProps) => <Alias.Renderer ...
+const REGISTRY_ENTRY_REGEX = /^\s+\w+:\s*\(blockProps\)\s*=>\s*<(\w+)\.Renderer/;
 
 export const transformRenderBlocks = async (projectDir: string, selectedBlockNames: string[]): Promise<void> => {
     const filePath = path.join(projectDir, FILE_PATH);
@@ -39,16 +36,10 @@ export const transformRenderBlocks = async (projectDir: string, selectedBlockNam
 
     if (aliasesToRemove.size === 0) return;
 
-    // Process line by line — switch case/return pairs must be removed together
+    // Process line by line
     const result: string[] = [];
-    let skipNext = false;
 
     for (let i = 0; i < lines.length; i++) {
-        if (skipNext) {
-            skipNext = false;
-            continue;
-        }
-
         const line = lines[i];
         if (line === undefined) continue;
 
@@ -58,18 +49,10 @@ export const transformRenderBlocks = async (projectDir: string, selectedBlockNam
             continue;
         }
 
-        // Detect switch case line and peek at the return line below it
-        const caseMatch = line.match(CASE_LINE_REGEX);
-        if (caseMatch && i + 1 < lines.length) {
-            const nextLine = lines[i + 1];
-            if (nextLine !== undefined) {
-                const returnMatch = nextLine.match(RETURN_RENDERER_REGEX);
-                if (returnMatch && returnMatch[1] && aliasesToRemove.has(returnMatch[1])) {
-                    // Skip both the case line (current) and the return line (next)
-                    skipNext = true;
-                    continue;
-                }
-            }
+        // Remove BLOCK_REGISTRY entries for unselected blocks
+        const registryMatch = line.match(REGISTRY_ENTRY_REGEX);
+        if (registryMatch && registryMatch[1] && aliasesToRemove.has(registryMatch[1])) {
+            continue;
         }
 
         result.push(line);

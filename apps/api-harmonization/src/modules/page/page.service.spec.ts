@@ -107,7 +107,9 @@ describe('PageService', () => {
             };
             const mockCategory = { id: 'cat-1', title: 'Test Category' };
 
-            vi.spyOn(cmsService, 'getPage').mockReturnValue(of(undefined));
+            vi.spyOn(cmsService, 'getPage').mockReturnValue(
+                of(undefined) as unknown as ReturnType<typeof cmsService.getPage>,
+            );
             vi.spyOn(articlesService, 'getArticle').mockReturnValue(
                 of(mockArticle as unknown as Articles.Model.Article),
             );
@@ -125,7 +127,9 @@ describe('PageService', () => {
         });
 
         it('should throw NotFoundException when neither page nor article exists', async () => {
-            vi.spyOn(cmsService, 'getPage').mockReturnValue(of(undefined));
+            vi.spyOn(cmsService, 'getPage').mockReturnValue(
+                of(undefined) as unknown as ReturnType<typeof cmsService.getPage>,
+            );
             vi.spyOn(articlesService, 'getArticle').mockReturnValue(of(undefined));
 
             await expect(firstValueFrom(service.getPage(mockQuery, mockHeaders))).rejects.toThrow(NotFoundException);

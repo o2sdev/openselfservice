@@ -10,6 +10,7 @@ import { CategoryBlocks } from './CategoryBlocks';
 export const CategoryDynamic = dynamic(() => import('./Category.client').then((module) => module.CategoryPure));
 
 export const Category: React.FC<CategoryProps> = async ({
+    isDraftModeEnabled,
     id,
     slug,
     accessToken,
@@ -17,11 +18,13 @@ export const Category: React.FC<CategoryProps> = async ({
     routing,
     renderBlocks,
     hasPriority,
+    searchParams,
 }) => {
     let data: Model.CategoryBlock;
     try {
         data = await sdk.blocks.getCategory(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },
@@ -39,7 +42,14 @@ export const Category: React.FC<CategoryProps> = async ({
             accessToken={accessToken}
             locale={locale}
             routing={routing}
-            blocks={<CategoryBlocks renderBlocks={renderBlocks} components={data.components} slug={slug} />}
+            blocks={
+                <CategoryBlocks
+                    renderBlocks={renderBlocks}
+                    components={data.components}
+                    slug={slug}
+                    searchParams={searchParams}
+                />
+            }
             renderBlocks={renderBlocks}
             hasPriority={hasPriority}
         />

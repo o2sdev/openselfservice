@@ -10,11 +10,19 @@ export const DocumentListDynamic = dynamic(() =>
     import('./DocumentList.client').then((module) => module.DocumentListPure),
 );
 
-export const DocumentList: React.FC<DocumentListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const DocumentList: React.FC<DocumentListProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     let data: Model.DocumentListBlock;
     try {
         data = await sdk.blocks.getDocumentList(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

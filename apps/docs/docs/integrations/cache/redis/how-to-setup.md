@@ -26,37 +26,22 @@ Consider managed services: [Redis Cloud](https://redis.com/cloud), [AWS ElastiCa
 
 After installing the package, you need to configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Redis Cache instead of the default mocked integration.
 
-### Step 1: Update the cache integration config
+### Step 1: Update the integration config
 
-Open the file `packages/configs/integrations/src/models/cache.ts` and replace the import:
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`. Each domain has its own import alias (for example `CacheSource`), shared by both the `createIntegrationConfig` assignment and the `export import` type export, so switching a domain is a single-line change.
 
-**Before (using mocked integration):**
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
-```
-
-**After (using Redis Cache integration):**
+Find the `cache` domain's import line and point it at Redis:
 
 ```typescript
-import { Config, Integration } from '@o2s/integrations.redis/integration';
+// before: import * as CacheSource from '@o2s/integrations.mocked/integration';
+import * as CacheSource from '@o2s/integrations.redis/integration';
 ```
 
-The complete file should look like this:
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.redis/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const CacheIntegrationConfig: ApiConfig['integrations']['cache'] = Config.cache!;
-
-export import Service = Integration.Cache.Service;
-```
+That is the only change needed: the `cache: CacheSource` assignment and the `export import Cache = CacheSource.Integration.Cache` type export both follow the same alias. Assigning an integration to a domain it does not provide is a compile error.
 
 ### Step 2: Verify AppConfig
 
-The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference `Cache.CacheIntegrationConfig`. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
+The `AppConfig` in `apps/api-harmonization/src/app.config.ts` already imports from `@o2s/configs.integrations`. You don't need to modify this file.
 
 ## Configure environment variables
 

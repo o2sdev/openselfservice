@@ -233,15 +233,7 @@ export type Matrixdropdownbase = Matrixbase & {
     placeholder?: string;
     keyDuplicationError?: string;
     cellType?:
-        | 'dropdown'
-        | 'checkbox'
-        | 'radiogroup'
-        | 'tagbox'
-        | 'text'
-        | 'comment'
-        | 'boolean'
-        | 'expression'
-        | 'rating';
+        'dropdown' | 'checkbox' | 'radiogroup' | 'tagbox' | 'text' | 'comment' | 'boolean' | 'expression' | 'rating';
     columnColCount?: 0 | 1 | 2 | 3 | 4;
     columnMinWidth?: string;
     allowAdaptiveActions?: boolean;

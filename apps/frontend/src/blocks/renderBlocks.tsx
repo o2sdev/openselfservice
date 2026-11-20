@@ -42,6 +42,7 @@ import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 // BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
@@ -63,7 +64,11 @@ type BlockProps = Models.BlockProps.FullBlockProps<typeof routing> & {
 
 type BlockRenderer = (blockProps: BlockProps) => React.ReactNode;
 
-export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
+export const renderBlocks = async (
+    blocks: CMS.Model.Page.SlotBlock[],
+    slug: string[],
+    searchParams?: Models.BlockProps.BlockSearchParams,
+) => {
     const session = await auth();
     const locale = await getLocale();
     const { isEnabled: isDraftModeEnabled } = await draftMode();
@@ -82,6 +87,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             routing: routing,
             hasPriority,
             isDraftModeEnabled: isDraftModeEnabled,
+            searchParams,
         };
 
         return (
@@ -92,7 +98,14 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                 theme={block.layout?.theme}
                 key={block.id}
             >
-                {renderBlock(block.__typename, blockProps)}
+                {isDraftModeEnabled ? (
+                    <div className="relative">
+                        {renderBlock(block.__typename, blockProps)}
+                        <LivePreview.BlockEditAffordance documentId={block.id} locale={locale} />
+                    </div>
+                ) : (
+                    renderBlock(block.__typename, blockProps)
+                )}
             </Container>
         );
     });

@@ -35,7 +35,7 @@ async function hasExistingSnapshot() {
 }
 
 function resolveApiServerUrl() {
-    const explicitServerUrl = process.env.NEXT_PUBLIC_API_URL_INTERNAL ?? process.env.O2S_OPENAPI_SERVER_URL;
+    const explicitServerUrl = process.env.API_URL_INTERNAL ?? process.env.O2S_OPENAPI_SERVER_URL;
     if (explicitServerUrl) {
         return explicitServerUrl.replace(/\/+$/, '').replace(/\/api$/, '');
     }
@@ -74,7 +74,7 @@ function filterFrameworkOnly(document) {
     const serverUrl = resolveApiServerUrl();
 
     // A single `{baseUrl}` variable → in Try it out the UI shows a text field (not only a select).
-    // The default is taken from O2S_OPENAPI_SERVER_URL / NEXT_PUBLIC_API_URL_INTERNAL, or from the origin of O2S_OPENAPI_URL.
+    // The default is taken from O2S_OPENAPI_SERVER_URL / API_URL_INTERNAL, or from the origin of O2S_OPENAPI_URL.
     return {
         ...document,
         info: {

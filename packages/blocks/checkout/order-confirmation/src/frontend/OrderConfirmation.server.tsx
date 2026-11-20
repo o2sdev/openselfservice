@@ -23,6 +23,7 @@ function getErrorMessage(err: unknown): string | undefined {
 }
 
 export const OrderConfirmation: React.FC<OrderConfirmationProps> = async ({
+    isDraftModeEnabled,
     id,
     orderId,
     accessToken,
@@ -33,6 +34,7 @@ export const OrderConfirmation: React.FC<OrderConfirmationProps> = async ({
     try {
         data = await sdk.blocks.getOrderConfirmation(
             {
+                preview: isDraftModeEnabled,
                 id,
                 orderId,
             },

@@ -25,10 +25,20 @@ import {
 export class GraphqlService {
     private readonly client: GraphQLClient;
     private readonly sdk: Sdk;
+    private readonly previewToken?: string;
 
     constructor(private readonly config: ConfigService) {
         this.client = new GraphQLClient(this.config.get('CMS_STRAPI_BASE_URL') + '/graphql');
         this.sdk = getSdk(this.client);
+        this.previewToken = this.config.get('CMS_STRAPI_PREVIEW_TOKEN');
+    }
+
+    /**
+     * Request headers for reading draft content in preview mode. Strapi requires an
+     * authenticated token with `find` permission on drafts; returns undefined otherwise.
+     */
+    private previewHeaders(preview?: boolean): Record<string, string> | undefined {
+        return preview && this.previewToken ? { Authorization: `Bearer ${this.previewToken}` } : undefined;
     }
 
     public getAppConfig(params: GetAppConfigQueryVariables) {
@@ -63,8 +73,8 @@ export class GraphqlService {
         return this.sdk.getFooter(params);
     }
 
-    public getComponent(params: GetComponentQueryVariables) {
-        return this.sdk.getComponent(params);
+    public getComponent(params: GetComponentQueryVariables, options?: { preview?: boolean }) {
+        return this.sdk.getComponent(params, this.previewHeaders(options?.preview));
     }
 
     public getOrganizationList(params: GetOrganizationListQueryVariables) {

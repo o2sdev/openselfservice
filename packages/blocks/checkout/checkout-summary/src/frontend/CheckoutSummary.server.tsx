@@ -10,11 +10,18 @@ export const CheckoutSummaryDynamic = dynamic(() =>
     import('./CheckoutSummary.client').then((module) => module.CheckoutSummaryPure),
 );
 
-export const CheckoutSummary: React.FC<CheckoutSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const CheckoutSummary: React.FC<CheckoutSummaryProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.CheckoutSummaryBlock;
     try {
         data = await sdk.blocks.getCheckoutSummary(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

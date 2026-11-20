@@ -1,5 +1,11 @@
 # @o2s/vitest-config
 
+## 1.1.2
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update unplugin-swc to 2.0.0
+
 ## 1.1.1
 
 ### Patch Changes

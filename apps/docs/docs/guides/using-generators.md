@@ -21,7 +21,7 @@ at the root level of the project, after which you will be asked which generator 
 You can create a new block within the `api-harmonization` app by using `block` generator. It will:
 
 1. Ask you for the block name.
-2. Ask you for the block domain (`content`, `marketing`, `services`, `commerce`, `billing`, `support`, `notifications`, `account`, `navigation`, `forms`).
+2. Ask you for the block domain (`content`, `knowledge-base`, `services`, `orders`, `products`, `checkout`, `billing`, `support`, `notifications`, `account`, `forms`).
 3. Ask which project templates should include this block (`o2s`, `dxp`, or leave empty for custom-only). This sets the `o2sTemplate` field in `package.json`, used by the `create-o2s-app` CLI wizard to determine which blocks belong to each template.
 4. Create a new package in the `packages/blocks/<domain>/<block-name>` directory.
 5. Inside this new folder, it will create all the necessary files that compose a block:
@@ -38,6 +38,12 @@ You can create a new block within the `api-harmonization` app by using `block` g
         - typings,
         - API methods,
     3. SDK part.
+6. Register the block automatically, so no manual wiring is needed:
+    - add it to the API Harmonization block config (`apps/api-harmonization/src/blocks.config.ts` — the module array and the `Blocks` union) and to the framework CMS block model,
+    - add its renderer to the frontend registry (`renderBlocks.tsx`),
+    - add `@o2s/blocks.<block-name>` to the `dependencies` of both `apps/api-harmonization` and `apps/frontend`.
+
+After the generator finishes, the only remaining step is to run `npm install` so the new workspace package is linked.
 
 ---
 

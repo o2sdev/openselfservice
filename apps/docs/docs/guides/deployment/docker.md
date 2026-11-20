@@ -34,11 +34,11 @@ This will:
 The `docker-compose.yml` includes sane defaults. Adjust as needed (especially external API keys).
 
 - Frontend (Next.js):
-    - `NEXT_PUBLIC_BASE_URL` (e.g. `http://localhost:3000`)
+    - `BASE_URL` (e.g. `http://localhost:3000`)
     - `NEXT_PUBLIC_API_URL` (public API URL, e.g. `http://localhost:3001/api`)
-    - `NEXT_PUBLIC_API_URL_INTERNAL` (internal container URL, e.g. `http://api-harmonization:3001/api`)
+    - `API_URL_INTERNAL` (internal container URL, e.g. `http://api-harmonization:3001/api`)
     - `NEXT_PUBLIC_DEFAULT_LOCALE`, `NEXT_PUBLIC_SUPPORTED_LOCALES`
-    - Optional logging: `NEXT_PUBLIC_LOG_LEVEL`, `NEXT_PUBLIC_LOG_FORMAT`, `NEXT_PUBLIC_LOG_COLORS_ENABLED`
+    - Optional logging: `LOG_LEVEL`, `LOG_FORMAT`, `LOG_COLORS_ENABLED`
     - Auth (optional): `AUTH_SECRET`, `AUTH_TRUST_HOST`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_DATABASE_URL`, `AUTH_DEFAULT_USER_ROLE`
 
 - API (NestJS):
@@ -70,9 +70,9 @@ docker build -t o2s-frontend -f apps/frontend/Dockerfile .
 docker build -t o2s-api -f apps/api-harmonization/Dockerfile .
 
 docker run --rm -p 3000:3000 --network app_network \
-  -e NEXT_PUBLIC_BASE_URL=http://localhost:3000 \
+  -e BASE_URL=http://localhost:3000 \
   -e NEXT_PUBLIC_API_URL=http://localhost:3001/api \
-  -e NEXT_PUBLIC_API_URL_INTERNAL=http://api-harmonization:3001/api \
+  -e API_URL_INTERNAL=http://api-harmonization:3001/api \
   o2s-frontend
 
 docker run --rm -p 3001:3001 --network app_network \

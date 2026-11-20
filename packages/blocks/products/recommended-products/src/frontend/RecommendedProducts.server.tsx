@@ -11,6 +11,7 @@ export const RecommendedProductsDynamic = dynamic(() =>
 );
 
 export const RecommendedProducts: React.FC<RecommendedProductsProps> = async ({
+    isDraftModeEnabled,
     id,
     excludeProductId,
     accessToken,
@@ -20,7 +21,10 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = async ({
     let data: Model.RecommendedProductsBlock;
     try {
         data = await sdk.blocks.getRecommendedProducts(
-            { id },
+            {
+                preview: isDraftModeEnabled,
+                id,
+            },
             {
                 excludeProductId,
             },

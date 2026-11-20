@@ -8,6 +8,7 @@ import { NotificationDetails } from './NotificationDetails.server';
 import { NotificationDetailsRendererProps } from './NotificationDetails.types';
 
 export const NotificationDetailsRenderer: React.FC<NotificationDetailsRendererProps> = ({
+    isDraftModeEnabled,
     slug,
     id,
     accessToken,
@@ -34,6 +35,7 @@ export const NotificationDetailsRenderer: React.FC<NotificationDetailsRendererPr
         >
             <NotificationDetails
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 notificationId={slug[1]}
                 accessToken={accessToken}
                 locale={locale}

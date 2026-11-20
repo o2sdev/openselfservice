@@ -8,12 +8,14 @@ import { Category } from './Category.server';
 import { CategoryRendererProps } from './Category.types';
 
 export const CategoryRenderer: React.FC<CategoryRendererProps> = ({
+    isDraftModeEnabled,
     slug,
     id,
     accessToken,
     routing,
     renderBlocks,
     hasPriority,
+    searchParams,
 }) => {
     const locale = useLocale();
 
@@ -40,12 +42,14 @@ export const CategoryRenderer: React.FC<CategoryRendererProps> = ({
         >
             <Category
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 slug={slug}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}
                 renderBlocks={renderBlocks}
                 hasPriority={hasPriority}
+                searchParams={searchParams}
             />
         </Suspense>
     );

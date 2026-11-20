@@ -6,7 +6,13 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { ServiceList } from './ServiceList.server';
 import { ServiceListRendererProps } from './ServiceList.types';
 
-export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
+export const Renderer: React.FC<ServiceListRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
@@ -24,6 +30,7 @@ export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, 
         >
             <ServiceList
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

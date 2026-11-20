@@ -1,5 +1,12 @@
 # @o2s/eslint-config
 
+## 1.1.3
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update storybook to 10.6.7, vite to 8.3.8, turbo to 2.11.13, @vitejs/plugin-react to 6.3.0, commander to 15.1.0, simple-git to 4.1.0, fs-extra to 11.4.1
+
 ## 1.1.2
 
 ### Patch Changes

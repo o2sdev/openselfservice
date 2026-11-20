@@ -7,7 +7,11 @@ import { CMS } from '@o2s/framework/modules';
 import type { Model } from '../api-harmonization/category.client';
 
 export interface CategoryProps extends Models.BlockProps.BlockWithSlugProps<ReturnType<typeof defineRouting>> {
-    renderBlocks: (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => React.ReactNode;
+    renderBlocks: (
+        blocks: CMS.Model.Page.SlotBlock[],
+        slug: string[],
+        searchParams?: Models.BlockProps.BlockSearchParams,
+    ) => React.ReactNode;
 }
 
 export type CategoryPureProps = CategoryProps &
@@ -18,7 +22,15 @@ export type CategoryPureProps = CategoryProps &
 export type CategoryRendererProps = Omit<CategoryProps, ''>;
 
 export interface CategoryBlocksProps {
+    /** True when Next.js draft mode is on (CMS preview). */
+    isDraftModeEnabled?: boolean;
     components?: CMS.Model.CategoryBlock.CategoryBlock['components'];
     slug: string[];
-    renderBlocks: (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => React.ReactNode;
+    /** Passed on to the nested blocks, so a list block inside a category still sees the URL filters. */
+    searchParams?: Models.BlockProps.BlockSearchParams;
+    renderBlocks: (
+        blocks: CMS.Model.Page.SlotBlock[],
+        slug: string[],
+        searchParams?: Models.BlockProps.BlockSearchParams,
+    ) => React.ReactNode;
 }

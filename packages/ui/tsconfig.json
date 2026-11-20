@@ -3,7 +3,6 @@
     "compilerOptions": {
         "outDir": "dist",
         "rootDir": "src",
-        "baseUrl": "./",
         "paths": {
             "@o2s/ui/*": ["./src/*"],
             "@o2s/ui/elements/*": ["./src/elements/*"],
