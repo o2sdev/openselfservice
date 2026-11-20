@@ -170,6 +170,7 @@ jobs:
 
             - name: Test
               uses: ./.github/actions/test
+              timeout-minutes: 30
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   fetch-depth: '0'
