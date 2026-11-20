@@ -1,5 +1,12 @@
 # @o2s/telemetry
 
+## 1.2.4
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update prettier to 3.10.1
+
 ## 1.2.3
 
 ### Patch Changes

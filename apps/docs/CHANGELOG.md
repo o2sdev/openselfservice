@@ -1,5 +1,21 @@
 # @o2s/docs
 
+## 2.3.1
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [44b9dee]
+- Updated dependencies [559855c]
+    - @o2s/framework@1.24.1
+    - @o2s/ui@2.1.1
+    - @o2s/utils.logger@1.2.5
+
 ## 2.3.0
 
 ### Minor Changes

@@ -1,5 +1,24 @@
 # @o2s/integrations.strapi-cms
 
+## 3.1.2
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update concurrently to 10.0.7, graphql to 16.15.0, markdown-to-jsx to 9.10.6, libphonenumber-js to 1.13.17
+- 78f7a66: chore(deps): update storybook to 10.6.7, vite to 8.3.8, turbo to 2.11.13, @vitejs/plugin-react to 6.3.0, commander to 15.1.0, simple-git to 4.1.0, fs-extra to 11.4.1
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- 4ba0cb7: chore(deps): update dependencies
+- 4ba0cb7: chore(deps): update dependencies
+- 4ba0cb7: chore(deps): update dependencies
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [559855c]
+    - @o2s/framework@1.24.1
+    - @o2s/utils.logger@1.2.5
+
 ## 3.1.1
 
 ### Patch Changes

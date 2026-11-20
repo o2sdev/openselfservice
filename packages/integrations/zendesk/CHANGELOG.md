@@ -1,5 +1,26 @@
 # @o2s/integrations.zendesk
 
+## 4.0.2
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update concurrently to 10.0.7, graphql to 16.15.0, markdown-to-jsx to 9.10.6, libphonenumber-js to 1.13.17
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- 44b9dee: fix(integrations.zendesk): narrow custom field ids before mapping them
+
+    The Zendesk types are generated at install time from the live OpenAPI spec, and the current spec widens ticket `custom_fields` to `TicketFieldValueInput | { [key: string]: unknown }`. For the untyped branch `field.id` is `unknown`, so the non-null assertion narrows it to `{}` and the calls to `getFieldKeyById` and `consentFieldIds.includes` no longer compile. Any fresh install failed to build the package.
+
+    The ticket mapper now reads the id once with `Number(field.id)` and passes that number on. Nothing changes at runtime: Zendesk still returns numeric ids, which is what the assertion assumed before.
+
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [559855c]
+    - @o2s/framework@1.24.1
+    - @o2s/utils.logger@1.2.5
+
 ## 4.0.1
 
 ### Patch Changes
