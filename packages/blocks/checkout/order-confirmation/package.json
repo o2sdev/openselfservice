@@ -4,6 +4,11 @@
     "private": false,
     "license": "MIT",
     "description": "Order confirmation page displaying order details, addresses, and totals after successful purchase.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/checkout/order-confirmation"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

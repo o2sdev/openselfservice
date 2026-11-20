@@ -7,6 +7,7 @@ permissions:
     contents: write
     packages: write
     pull-requests: write
+    id-token: write # npm trusted publishing (OIDC)
 
 env:
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -100,15 +101,8 @@ jobs:
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Configure npm registry
-              run: |
-                  cat << EOF > "$HOME/.npmrc"
-                  @o2s:registry=https://registry.npmjs.org
-                  //registry.npmjs.org/:_authToken=$NPM_TOKEN
-                  EOF
-              env:
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+            # No NPM_TOKEN: packages are published via npm trusted publishing (OIDC),
+            # changesets/action detects the id-token permission and lets npm handle auth.
             - name: Create Release Pull Request or Publish to npm
               id: changesets
               uses: changesets/action@v1
@@ -117,4 +111,3 @@ jobs:
                   commit: 'feat(changeset): version packages'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

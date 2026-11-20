@@ -4,6 +4,11 @@
     "private": false,
     "license": "MIT",
     "description": "Checkout step for selecting a payment method with cart summary preview.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/checkout/checkout-billing-payment"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
