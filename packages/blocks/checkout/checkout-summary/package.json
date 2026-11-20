@@ -35,7 +35,7 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/vitest-config": "*",
-        "@storybook/nextjs-vite": "^10.6.7",
+        "@storybook/nextjs-vite": "^10.6.8",
         "concurrently": "^10.0.7",
         "dotenv-cli": "^11.1.0",
         "eslint": "^9.39.5",
