@@ -37,7 +37,8 @@ runs:
 
         - name: Install Playwright Browsers
           shell: bash
-          run: npx playwright install --with-deps
+          # Tests only run in Chromium (vitest.config.mjs), so skip Firefox/WebKit and their system deps
+          run: npx playwright install --with-deps chromium
           env:
               CI: true
 
