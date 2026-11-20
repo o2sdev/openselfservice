@@ -45,11 +45,11 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
-        "concurrently": "^10.0.5",
+        "concurrently": "^10.0.7",
         "eslint": "^9.39.5",
-        "prettier": "^3.9.6",
+        "prettier": "^3.10.1",
         "react-string-replace": "^2.0.1",
-        "tsc-alias": "^1.9.5",
+        "tsc-alias": "^1.9.10",
         "typescript": "^6.0.3"
     },
     "peerDependencies": {
