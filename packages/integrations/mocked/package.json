@@ -79,7 +79,7 @@
         "tsc-alias": "^1.9.10",
         "tsx": "^4.23.15",
         "typescript": "^6.0.3",
-        "vitest": "^4.1.11"
+        "vitest": "^4.1.12"
     },
     "peerDependencies": {
         "@o2s/framework": "*",
