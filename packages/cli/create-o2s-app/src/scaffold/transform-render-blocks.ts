@@ -23,8 +23,11 @@ const removeImportsOrphanedByRemovedEntries = (lines: string[], removedEntries: 
     const candidates = new Set(removedEntries.flatMap((entry) => entry.match(IDENTIFIER_REGEX) ?? []));
     if (candidates.size === 0) return lines;
 
-    const body = lines.filter((line) => !NAMED_IMPORT_REGEX.test(line)).join('\n');
-    const isUsed = (identifier: string) => new RegExp(`\\b${identifier.replace(/\$/g, '\\$')}\\b`).test(body);
+    // Identifiers still referenced outside the named imports (no dynamic RegExp needed)
+    const usedIdentifiers = new Set(
+        lines.filter((line) => !NAMED_IMPORT_REGEX.test(line)).flatMap((line) => line.match(IDENTIFIER_REGEX) ?? []),
+    );
+    const isUsed = (identifier: string) => usedIdentifiers.has(identifier);
 
     const result: string[] = [];
     // Set when an import line is dropped right after a blank line, so the blank line that
