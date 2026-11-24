@@ -9,6 +9,67 @@ const BLOCK_IMPORT_REGEX = /^import \* as (\w+) from '@o2s\/blocks\.([^/]+)\/fro
 // Regex matches:     SomeBlock: (blockProps) => <Alias.Renderer ...
 const REGISTRY_ENTRY_REGEX = /^\s+\w+:\s*\(blockProps\)\s*=>\s*<(\w+)\.Renderer/;
 
+// Regex matches a single-line named import: import { a, b as c } from '...';
+const NAMED_IMPORT_REGEX = /^import \{([^}]+)\} from '([^']+)';$/;
+
+const IDENTIFIER_REGEX = /\b[A-Za-z_$][\w$]*\b/g;
+
+/**
+ * Removes named imports that were only used by the removed registry entries
+ * (e.g. `onSignOut`, passed only to the user-account block), so the generated
+ * file passes `no-unused-vars`. Imports unrelated to removed entries are left untouched.
+ */
+const removeImportsOrphanedByRemovedEntries = (lines: string[], removedEntries: string[]): string[] => {
+    const candidates = new Set(removedEntries.flatMap((entry) => entry.match(IDENTIFIER_REGEX) ?? []));
+    if (candidates.size === 0) return lines;
+
+    const body = lines.filter((line) => !NAMED_IMPORT_REGEX.test(line)).join('\n');
+    const isUsed = (identifier: string) => new RegExp(`\\b${identifier.replace(/\$/g, '\\$')}\\b`).test(body);
+
+    const result: string[] = [];
+    // Set when an import line is dropped right after a blank line, so the blank line that
+    // separated it from the next import group is dropped too (no double blank lines).
+    let skipNextBlankLine = false;
+
+    for (const line of lines) {
+        const match = line.match(NAMED_IMPORT_REGEX);
+        if (!match || !match[1]) {
+            if (skipNextBlankLine && line.trim() === '') {
+                skipNextBlankLine = false;
+                continue;
+            }
+            skipNextBlankLine = false;
+            result.push(line);
+            continue;
+        }
+
+        skipNextBlankLine = false;
+
+        const specifiers = match[1]
+            .split(',')
+            .map((specifier) => specifier.trim())
+            .filter(Boolean);
+        const kept = specifiers.filter((specifier) => {
+            const local =
+                specifier
+                    .split(/\s+as\s+/)
+                    .pop()
+                    ?.trim() ?? specifier;
+            return !candidates.has(local) || isUsed(local);
+        });
+
+        if (kept.length === specifiers.length) {
+            result.push(line);
+        } else if (kept.length > 0) {
+            result.push(`import { ${kept.join(', ')} } from '${match[2]}';`);
+        } else {
+            skipNextBlankLine = result.length === 0 || result[result.length - 1]?.trim() === '';
+        }
+    }
+
+    return result;
+};
+
 export const transformRenderBlocks = async (projectDir: string, selectedBlockNames: string[]): Promise<void> => {
     const filePath = path.join(projectDir, FILE_PATH);
 
@@ -38,6 +99,7 @@ export const transformRenderBlocks = async (projectDir: string, selectedBlockNam
 
     // Process line by line
     const result: string[] = [];
+    const removedEntries: string[] = [];
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
@@ -52,11 +114,12 @@ export const transformRenderBlocks = async (projectDir: string, selectedBlockNam
         // Remove BLOCK_REGISTRY entries for unselected blocks
         const registryMatch = line.match(REGISTRY_ENTRY_REGEX);
         if (registryMatch && registryMatch[1] && aliasesToRemove.has(registryMatch[1])) {
+            removedEntries.push(line);
             continue;
         }
 
         result.push(line);
     }
 
-    await fs.writeFile(filePath, result.join('\n'), 'utf-8');
+    await fs.writeFile(filePath, removeImportsOrphanedByRemovedEntries(result, removedEntries).join('\n'), 'utf-8');
 };
