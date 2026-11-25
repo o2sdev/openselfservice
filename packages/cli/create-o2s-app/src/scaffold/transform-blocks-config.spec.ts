@@ -2,7 +2,7 @@ import { transformBlocksConfig } from './transform-blocks-config';
 import * as fs from 'fs-extra';
 import * as os from 'os';
 import * as path from 'path';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const FILE_PATH = 'apps/api-harmonization/src/blocks.config.ts';
 
@@ -152,6 +152,39 @@ export const blocks = [
         const result = await readConfig();
         expect(result).toContain('const unrelated = {\n    HeroSection,\n};');
         expect(result).toContain('export const blocks = [\n    Faq,\n];');
+    });
+
+    it('keeps the union valid without the `// BLOCK TYPE` marker when all blocks are removed', async () => {
+        await writeConfig(BLOCKS_CONFIG.replace('    // BLOCK TYPE\n', ''));
+
+        await transformBlocksConfig(projectDir, []);
+
+        expect(await readConfig()).toContain('export type Blocks =\n    | never;\n');
+    });
+
+    it('does not add a semicolon to an empty union that had none', async () => {
+        await writeConfig(
+            BLOCKS_CONFIG.replace(
+                "    | HeroSection.Model.HeroSectionBlock['__typename'];",
+                "    | HeroSection.Model.HeroSectionBlock['__typename']",
+            ),
+        );
+
+        await transformBlocksConfig(projectDir, []);
+
+        expect(await readConfig()).toContain('    // BLOCK TYPE\n    | never\n');
+    });
+
+    it('warns when the `Blocks` union cannot be found after removing all its members', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+        await writeConfig(
+            BLOCKS_CONFIG.replace('export type Blocks =\n    // BLOCK TYPE\n', 'export type Blocks = // union\n'),
+        );
+
+        await transformBlocksConfig(projectDir, []);
+
+        expect(warn).toHaveBeenCalledWith(expect.stringContaining('apps/api-harmonization/src/blocks.config.ts'));
+        warn.mockRestore();
     });
 
     it('handles a type-annotated blocks array', async () => {

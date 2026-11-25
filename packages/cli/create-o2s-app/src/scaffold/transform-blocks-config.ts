@@ -1,5 +1,6 @@
 import { getAliasesToRemove } from './get-aliases-to-remove';
 import * as fs from 'fs-extra';
+import kleur from 'kleur';
 import * as path from 'path';
 
 const FILE_PATH = 'apps/api-harmonization/src/blocks.config.ts';
@@ -19,6 +20,9 @@ const BLOCK_ENTRY_REGEX = /^\s+(\w+),\s*$/;
 
 // Regex matches:     | Alias.Model.SomeTypenameBlock['__typename']
 const UNION_TYPE_REGEX = /^\s+\| (\w+)\.Model\.\w+\['__typename'\]/;
+
+// Regex matches the start of the union: export type Blocks =
+const BLOCKS_TYPE_REGEX = /^export type Blocks\s*=\s*$/;
 
 /**
  * Removes unselected blocks from `blocks.config.ts`, the single place where the API harmonization
@@ -43,6 +47,7 @@ export const transformBlocksConfig = async (projectDir: string, selectedBlockNam
     let removedUnionTerminator = false;
     let unionMemberCount = 0;
     let typeMarkerIndex = -1;
+    let blocksTypeIndex = -1;
 
     for (const line of lines) {
         if (BLOCKS_ARRAY_START_REGEX.test(line)) {
@@ -80,18 +85,28 @@ export const transformBlocksConfig = async (projectDir: string, selectedBlockNam
         }
 
         if (line.includes('// BLOCK TYPE')) typeMarkerIndex = result.length;
+        if (BLOCKS_TYPE_REGEX.test(line)) blocksTypeIndex = result.length;
 
         result.push(line);
     }
 
-    if (removedUnionTerminator) {
-        if (lastKeptUnionIndex >= 0) {
-            // Move the terminating `;` to the last remaining member of the union.
-            result[lastKeptUnionIndex] = `${result[lastKeptUnionIndex]?.trimEnd()};`;
-        } else if (unionMemberCount > 0 && typeMarkerIndex >= 0) {
-            // Every block was removed: keep the union valid so the generator can still add blocks.
-            result.splice(typeMarkerIndex + 1, 0, '    | never;');
+    if (unionMemberCount > 0 && lastKeptUnionIndex < 0) {
+        // Every block was removed: keep the union valid so the generator can still add blocks.
+        // Insert after the generator marker, or right after `export type Blocks =` without it.
+        const insertAfter = typeMarkerIndex >= 0 ? typeMarkerIndex : blocksTypeIndex;
+
+        if (insertAfter >= 0) {
+            result.splice(insertAfter + 1, 0, `    | never${removedUnionTerminator ? ';' : ''}`);
+        } else {
+            console.warn(
+                kleur.yellow(
+                    `Warning: could not find the \`Blocks\` union in ${FILE_PATH}; it is left without members and the project will not build until you fix it.`,
+                ),
+            );
         }
+    } else if (removedUnionTerminator && lastKeptUnionIndex >= 0) {
+        // Move the terminating `;` to the last remaining member of the union.
+        result[lastKeptUnionIndex] = `${result[lastKeptUnionIndex]?.trimEnd()};`;
     }
 
     await fs.writeFile(filePath, result.join('\n'), 'utf-8');
