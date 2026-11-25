@@ -154,6 +154,27 @@ export const blocks = [
         expect(result).toContain('export const blocks = [\n    Faq,\n];');
     });
 
+    it('handles a type-annotated blocks array', async () => {
+        await writeConfig(BLOCKS_CONFIG.replace('export const blocks = [', 'export const blocks: BlockModule[] = ['));
+
+        await transformBlocksConfig(projectDir, ['faq']);
+
+        expect(await readConfig()).toContain(
+            'export const blocks: BlockModule[] = [\n    Faq,\n    // BLOCK REGISTER\n];',
+        );
+    });
+
+    it('handles a blocks array declared `as const`', async () => {
+        await writeConfig(BLOCKS_CONFIG.replace('    // BLOCK REGISTER\n];', '    // BLOCK REGISTER\n] as const;'));
+
+        await transformBlocksConfig(projectDir, ['faq']);
+
+        const result = await readConfig();
+        expect(result).toContain('export const blocks = [\n    Faq,\n    // BLOCK REGISTER\n] as const;');
+        // the union after the array is still processed
+        expect(result).toContain("    | Faq.Model.FaqBlock['__typename'];\n");
+    });
+
     it('does nothing when blocks.config.ts does not exist', async () => {
         await expect(transformBlocksConfig(projectDir, ['faq'])).resolves.toBeUndefined();
         expect(await fs.pathExists(path.join(projectDir, FILE_PATH))).toBe(false);

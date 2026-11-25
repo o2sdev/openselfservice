@@ -7,11 +7,12 @@ const FILE_PATH = 'apps/api-harmonization/src/blocks.config.ts';
 // Regex matches: import * as Alias from '@o2s/blocks.<name>/api-harmonization';
 const BLOCK_IMPORT_REGEX = /^import \* as (\w+) from '@o2s\/blocks\.([^/]+)\/api-harmonization';$/;
 
-// Regex matches the start of the block registry: export const blocks = [
-const BLOCKS_ARRAY_START_REGEX = /^export const blocks = \[\s*$/;
+// Regex matches the start of the block registry, with an optional type annotation:
+// export const blocks = [   /   export const blocks: BlockModule[] = [
+const BLOCKS_ARRAY_START_REGEX = /^export const blocks\s*(?::[^=]+)?=\s*\[\s*$/;
 
-// Regex matches the end of the block registry: ];
-const BLOCKS_ARRAY_END_REGEX = /^\];?\s*$/;
+// Regex matches the end of the block registry: ];   /   ] as const;
+const BLOCKS_ARRAY_END_REGEX = /^\](?:\s+as\s+const)?;?\s*$/;
 
 // Regex matches an entry of the block registry:     Alias,
 const BLOCK_ENTRY_REGEX = /^\s+(\w+),\s*$/;
