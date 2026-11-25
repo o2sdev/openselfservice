@@ -100,7 +100,10 @@ export const transformRenderBlocks = async (projectDir: string, selectedBlockNam
             continue;
         }
 
-        // Remove BLOCK_REGISTRY entries for unselected blocks
+        // Remove BLOCK_REGISTRY entries for unselected blocks.
+        // Assumes every entry fits on a single line (true today). If prettier ever wraps an entry,
+        // identifiers on the following lines (e.g. `onSignOut={onSignOut}`) are not collected here;
+        // the real-file tests in transform-real-files.spec.ts would then fail.
         const registryMatch = line.match(REGISTRY_ENTRY_REGEX);
         if (registryMatch && registryMatch[1] && aliasesToRemove.has(registryMatch[1])) {
             removedEntries.push(line);
