@@ -104,6 +104,8 @@
         "unrs-resolver": true,
         "@prisma/engines": true,
         "@prisma/client": true,
-        "@swc/core": true
+        "@swc/core": true,
+        "@o2s/integrations.mocked": true,
+        "@o2s/telemetry": true
     }
 }

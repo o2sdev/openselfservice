@@ -1,6 +1,6 @@
 {
     "name": "create-o2s-app",
-    "version": "4.1.10",
+    "version": "4.1.11",
     "private": false,
     "license": "MIT",
     "description": "CLI tool to scaffold new O2S applications with Next.js and NestJS setup.",
@@ -29,6 +29,7 @@
         "create-o2s-app": "ts-node ./src/index.ts",
         "build": "tsc7 --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings=0",
+        "test": "vitest run",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -47,6 +48,7 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/vitest-config": "*",
         "@types/cli-progress": "^3.11.6",
         "@types/fs-extra": "^11.0.4",
         "eslint": "^9.39.5",
