@@ -13,8 +13,8 @@ const H = HeaderName;
 export class LoginPageService {
     constructor(private readonly cmsService: CMS.Service) {}
 
-    getLoginPage(headers: AppHeaders): Observable<LoginPage> {
-        const loginPage = this.cmsService.getLoginPage({ locale: headers[H.Locale] });
+    getLoginPage(headers: AppHeaders, preview?: boolean): Observable<LoginPage> {
+        const loginPage = this.cmsService.getLoginPage({ locale: headers[H.Locale], preview });
 
         return forkJoin([loginPage]).pipe(
             map(([loginPage]) => {

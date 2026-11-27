@@ -14,6 +14,9 @@ node_modules
 # Testing
 coverage
 
+# failure screenshots from vitest browser-mode runs
+__screenshots__
+
 # Turbo
 .turbo
 
@@ -51,6 +54,7 @@ storybook-static
 AGENTS.md
 CLAUDE.md
 agent-os
+.mcp.json
 
 # Generated files
 O2S-API.postman_collection.json

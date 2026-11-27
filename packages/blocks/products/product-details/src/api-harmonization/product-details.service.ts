@@ -27,6 +27,7 @@ export class ProductDetailsService {
 
         const cms = this.cmsService.getBlockConfig<CMS.Model.ProductDetailsBlock.ProductDetailsBlock>({
             id: query.id,
+            preview: query.preview,
             locale,
             blockType: 'ProductDetailsBlock',
         });

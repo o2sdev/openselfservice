@@ -82,6 +82,9 @@ async function bootstrap() {
         'api-harmonization',
         'integrations',
         Object.entries(AppConfig.integrations).reduce((prev, [module, integration]) => {
+            if (!integration) {
+                return prev;
+            }
             return {
                 ...prev,
                 [module]: integration.name,

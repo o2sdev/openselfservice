@@ -11,6 +11,7 @@ export const FeaturedServiceListDynamic = dynamic(() =>
 );
 
 export const FeaturedServiceList: React.FC<FeaturedServiceListProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -21,6 +22,7 @@ export const FeaturedServiceList: React.FC<FeaturedServiceListProps> = async ({
     try {
         data = await sdk.blocks.getFeaturedServiceList(
             {
+                preview: isDraftModeEnabled,
                 id,
             },
             { 'x-locale': locale },

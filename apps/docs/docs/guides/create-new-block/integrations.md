@@ -243,20 +243,17 @@ getPage(options: CMS.Request.GetCmsPageParams) {
 Finally, the last thing is to switch the CMS integration in the API Harmonization server. Firstly, let's install it:
 
 ```shell
-npm install @o2s/integrations.custom-cms --workspace=@o2s/api-harmonization
+npm install @o2s/integrations.custom-cms --workspace=@o2s/configs.integrations
 ```
 
-Now we can replace the package within the `apps/api-harmonization/src/models/cms.ts` file:
+Now open `packages/configs/integrations/src/config.ts` and point the `cms` domain's import line at the new integration:
 
 ```typescript
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
+// before: import * as CmsSource from '@o2s/integrations.mocked/integration';
+import * as CmsSource from '@o2s/integrations.custom-cms/integration';
 ```
 
-with
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.custom-cms/integration';
-```
+That is the only change needed: the `cms: CmsSource` assignment and the `export import CMS = CmsSource.Integration.CMS` type export both reference this alias, so they switch with it.
 
 ### Testing the API
 

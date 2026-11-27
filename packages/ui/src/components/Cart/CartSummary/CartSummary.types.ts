@@ -10,9 +10,7 @@ export interface CartSummaryPromotion {
 }
 
 export type CartSummaryButtonAction =
-    | { type: 'link'; url: string }
-    | { type: 'submit'; form?: string }
-    | { type: 'click'; onClick: () => void };
+    { type: 'link'; url: string } | { type: 'submit'; form?: string } | { type: 'click'; onClick: () => void };
 
 export interface CartSummaryButton {
     label: string;

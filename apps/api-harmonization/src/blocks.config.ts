@@ -1,0 +1,145 @@
+import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
+import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
+import * as Article from '@o2s/blocks.article/api-harmonization';
+import * as BentoGrid from '@o2s/blocks.bento-grid/api-harmonization';
+import * as Cart from '@o2s/blocks.cart/api-harmonization';
+import * as CategoryList from '@o2s/blocks.category-list/api-harmonization';
+import * as Category from '@o2s/blocks.category/api-harmonization';
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
+import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/api-harmonization';
+import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/api-harmonization';
+import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization';
+import * as CtaSection from '@o2s/blocks.cta-section/api-harmonization';
+import * as Faq from '@o2s/blocks.faq/api-harmonization';
+import * as FeatureSectionGrid from '@o2s/blocks.feature-section-grid/api-harmonization';
+import * as FeatureSection from '@o2s/blocks.feature-section/api-harmonization';
+import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
+import * as HeroSection from '@o2s/blocks.hero-section/api-harmonization';
+import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
+import * as MediaSection from '@o2s/blocks.media-section/api-harmonization';
+import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
+import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
+import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/api-harmonization';
+import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
+import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
+import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
+import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
+import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
+import * as PricingSection from '@o2s/blocks.pricing-section/api-harmonization';
+import * as ProductDetails from '@o2s/blocks.product-details/api-harmonization';
+import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
+import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
+import * as RecommendedProducts from '@o2s/blocks.recommended-products/api-harmonization';
+import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
+import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
+import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/api-harmonization';
+import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
+import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
+import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
+import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
+import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
+
+// BLOCK IMPORT
+
+/**
+ * Central registry of the blocks used by this app.
+ *
+ * To add a block:
+ *   1. `npm install` the block package (adds it to package.json),
+ *   2. add it to the `blocks` array below (its NestJS module is registered automatically in
+ *      `app.module.ts`),
+ *   3. add its `__typename` to the `Blocks` union below (the frontend renderer registry is checked
+ *      against this union at compile time).
+ *
+ * Both edits live in this one file. The block generator (`npm run generate`) does all of this for
+ * blocks scaffolded in this repo.
+ */
+export const blocks = [
+    Article,
+    ArticleList,
+    ArticleSearch,
+    BentoGrid,
+    Cart,
+    Category,
+    CategoryList,
+    CheckoutBillingPayment,
+    CheckoutCompanyData,
+    CheckoutShippingAddress,
+    CheckoutSummary,
+    CtaSection,
+    Faq,
+    FeatureSection,
+    FeatureSectionGrid,
+    FeaturedServiceList,
+    HeroSection,
+    InvoiceList,
+    MediaSection,
+    NotificationDetails,
+    NotificationList,
+    NotificationSummary,
+    OrderConfirmation,
+    OrderDetails,
+    OrderList,
+    OrdersSummary,
+    PaymentsHistory,
+    PaymentsSummary,
+    PricingSection,
+    ProductDetails,
+    ProductList,
+    QuickLinks,
+    RecommendedProducts,
+    ServiceDetails,
+    ServiceList,
+    SurveyJsForm,
+    TicketDetails,
+    TicketList,
+    TicketRecent,
+    TicketSummary,
+    UserAccount,
+    // BLOCK REGISTER
+];
+
+export type Blocks =
+    // BLOCK TYPE
+    | Article.Model.ArticleBlock['__typename']
+    | ArticleList.Model.ArticleListBlock['__typename']
+    | ArticleSearch.Model.ArticleSearchBlock['__typename']
+    | BentoGrid.Model.BentoGridBlock['__typename']
+    | Cart.Model.CartBlock['__typename']
+    | Category.Model.CategoryBlock['__typename']
+    | CategoryList.Model.CategoryListBlock['__typename']
+    | CheckoutBillingPayment.Model.CheckoutBillingPaymentBlock['__typename']
+    | CheckoutCompanyData.Model.CheckoutCompanyDataBlock['__typename']
+    | CheckoutShippingAddress.Model.CheckoutShippingAddressBlock['__typename']
+    | CheckoutSummary.Model.CheckoutSummaryBlock['__typename']
+    | CtaSection.Model.CtaSectionBlock['__typename']
+    | Faq.Model.FaqBlock['__typename']
+    | FeatureSection.Model.FeatureSectionBlock['__typename']
+    | FeatureSectionGrid.Model.FeatureSectionGridBlock['__typename']
+    | FeaturedServiceList.Model.FeaturedServiceListBlock['__typename']
+    | HeroSection.Model.HeroSectionBlock['__typename']
+    | InvoiceList.Model.InvoiceListBlock['__typename']
+    | MediaSection.Model.MediaSectionBlock['__typename']
+    | NotificationDetails.Model.NotificationDetailsBlock['__typename']
+    | NotificationList.Model.NotificationListBlock['__typename']
+    | NotificationSummary.Model.NotificationSummaryBlock['__typename']
+    | OrderConfirmation.Model.OrderConfirmationBlock['__typename']
+    | OrderDetails.Model.OrderDetailsBlock['__typename']
+    | OrderList.Model.OrderListBlock['__typename']
+    | OrdersSummary.Model.OrdersSummaryBlock['__typename']
+    | PaymentsHistory.Model.PaymentsHistoryBlock['__typename']
+    | PaymentsSummary.Model.PaymentsSummaryBlock['__typename']
+    | PricingSection.Model.PricingSectionBlock['__typename']
+    | ProductDetails.Model.ProductDetailsBlock['__typename']
+    | ProductList.Model.ProductListBlock['__typename']
+    | QuickLinks.Model.QuickLinksBlock['__typename']
+    | RecommendedProducts.Model.RecommendedProductsBlock['__typename']
+    | ServiceDetails.Model.ServiceDetailsBlock['__typename']
+    | ServiceList.Model.ServiceListBlock['__typename']
+    | SurveyJsForm.Model.SurveyjsBlock['__typename']
+    | TicketDetails.Model.TicketDetailsBlock['__typename']
+    | TicketList.Model.TicketListBlock['__typename']
+    | TicketRecent.Model.TicketRecentBlock['__typename']
+    | TicketSummary.Model.TicketSummaryBlock['__typename']
+    | UserAccount.Model.UserAccountBlock['__typename'];

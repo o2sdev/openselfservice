@@ -1,5 +1,70 @@
 # @o2s/frontend
 
+## 1.19.1
+
+### Patch Changes
+
+- 78f7a66: chore(deps): update next to 16.4.6, radix-ui, lucide-react, tailwindcss, typescript-eslint, tooling and minor library updates
+- 78f7a66: chore(deps): update concurrently to 10.0.7, graphql to 16.15.0, markdown-to-jsx to 9.10.6, libphonenumber-js to 1.13.17
+- 78f7a66: chore(deps): update storybook to 10.6.7, vite to 8.3.8, turbo to 2.11.13, @vitejs/plugin-react to 6.3.0, commander to 15.1.0, simple-git to 4.1.0, fs-extra to 11.4.1
+- 78f7a66: chore(deps): update prettier to 3.10.1
+- Updated dependencies [44b9dee]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [78f7a66]
+- Updated dependencies [44b9dee]
+- Updated dependencies [559855c]
+    - @o2s/blocks.user-account@2.0.2
+    - @o2s/blocks.invoice-list@2.1.1
+    - @o2s/blocks.payments-history@2.0.2
+    - @o2s/blocks.payments-summary@2.0.2
+    - @o2s/blocks.cart@1.0.2
+    - @o2s/blocks.checkout-billing-payment@1.0.2
+    - @o2s/blocks.checkout-company-data@1.0.2
+    - @o2s/blocks.checkout-shipping-address@1.0.2
+    - @o2s/blocks.checkout-summary@1.0.2
+    - @o2s/blocks.order-confirmation@1.0.2
+    - @o2s/blocks.bento-grid@1.0.2
+    - @o2s/blocks.cta-section@1.0.2
+    - @o2s/blocks.document-list@1.0.2
+    - @o2s/blocks.faq@2.0.2
+    - @o2s/blocks.feature-section-grid@1.0.2
+    - @o2s/blocks.feature-section@1.0.2
+    - @o2s/blocks.hero-section@1.0.2
+    - @o2s/blocks.media-section@1.0.2
+    - @o2s/blocks.pricing-section@1.0.2
+    - @o2s/blocks.quick-links@2.0.2
+    - @o2s/blocks.surveyjs-form@2.0.2
+    - @o2s/blocks.article-list@2.0.2
+    - @o2s/blocks.article-search@2.0.2
+    - @o2s/blocks.article@2.0.2
+    - @o2s/blocks.category-list@2.0.2
+    - @o2s/blocks.category@2.0.2
+    - @o2s/blocks.notification-details@2.0.2
+    - @o2s/blocks.notification-list@2.1.1
+    - @o2s/blocks.notification-summary@2.0.2
+    - @o2s/blocks.order-details@2.1.1
+    - @o2s/blocks.order-list@2.1.1
+    - @o2s/blocks.orders-summary@2.0.2
+    - @o2s/blocks.product-details@1.0.2
+    - @o2s/blocks.product-list@1.1.1
+    - @o2s/blocks.recommended-products@1.0.2
+    - @o2s/blocks.featured-service-list@2.0.2
+    - @o2s/blocks.service-details@2.0.2
+    - @o2s/blocks.service-list@2.0.2
+    - @o2s/blocks.ticket-details@2.0.2
+    - @o2s/blocks.ticket-list@2.1.1
+    - @o2s/blocks.ticket-recent@2.0.2
+    - @o2s/blocks.ticket-summary@2.0.2
+    - @o2s/api-harmonization@1.21.1
+    - @o2s/configs.integrations@1.1.1
+    - @o2s/framework@1.24.1
+    - @o2s/integrations.mocked@2.1.2
+    - @o2s/ui@2.1.1
+    - @o2s/utils.api-harmonization@1.1.1
+    - @o2s/utils.frontend@1.1.1
+
 ## 1.19.0
 
 ### Minor Changes

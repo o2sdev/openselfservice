@@ -93,6 +93,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
         discountLabel: 'Discount',
         shippingLabel: 'Shipping',
         freeLabel: 'Free',
+        activePromoCodesTitle: 'Active discount codes',
     },
     stepIndicator: {
         steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
@@ -198,6 +199,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
         discountLabel: 'Rabatt',
         shippingLabel: 'Versand',
         freeLabel: 'Kostenlos',
+        activePromoCodesTitle: 'Aktive Rabattcodes',
     },
     stepIndicator: {
         steps: ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung'],
@@ -303,6 +305,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
         discountLabel: 'Rabat',
         shippingLabel: 'Dostawa',
         freeLabel: 'Gratis',
+        activePromoCodesTitle: 'Aktywne kody rabatowe',
     },
     stepIndicator: {
         steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],

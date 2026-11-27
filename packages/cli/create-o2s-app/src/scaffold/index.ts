@@ -6,10 +6,12 @@ import { cleanPackageLock, installDependencies } from './install';
 import { warnUnconfiguredModules } from './transform-app-config';
 import { transformAppModule } from './transform-app-module';
 import { transformAppsPackageJson } from './transform-apps-package-json';
+import { transformBlocksConfig } from './transform-blocks-config';
 import { transformIntegrationConfigs } from './transform-integration-configs';
 import { transformRootPackageJson } from './transform-package-json';
 import { transformPageModel } from './transform-page-model';
 import { transformRenderBlocks } from './transform-render-blocks';
+import { transformStorybookConfig } from './transform-storybook-config';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -71,9 +73,11 @@ export const scaffold = async (
     console.log('Configuring project for selected blocks...');
     await Promise.all([
         transformAppModule(targetDir, selectedBlocks),
+        transformBlocksConfig(targetDir, selectedBlocks),
         transformRenderBlocks(targetDir, selectedBlocks),
         transformPageModel(targetDir, selectedBlocks),
         transformAppsPackageJson(targetDir, selectedBlocks, selectedIntegrations),
+        transformStorybookConfig(targetDir),
     ]);
 
     // Step 5: Clean up root package.json (remove workspace entries for deleted dirs)

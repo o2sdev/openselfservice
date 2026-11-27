@@ -5,6 +5,7 @@
             "@/*": ["./src/*"],
             "@/generated/*": ["./generated/*"]
         },
+        "rootDir": ".",
         "outDir": "./dist"
     },
     "include": ["src"],

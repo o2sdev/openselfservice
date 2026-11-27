@@ -49,6 +49,27 @@ export interface LoggerConfig {
     colorsEnabled?: boolean;
 }
 
+/** A logger config as it arrives from the environment, where every value is a string at best. */
+export interface RawLoggerConfig {
+    level?: string;
+    format?: string;
+    colorsEnabled?: string;
+}
+
+const LOG_LEVELS: readonly string[] = ['info', 'error', 'debug', 'verbose'] satisfies LogLevel[];
+const LOG_FORMATS: readonly string[] = ['text', 'json'] satisfies LogFormat[];
+
+/**
+ * Turns raw environment values into a logger config. A level or a format the logger does not know
+ * is left out instead of being passed on, so that a typo in `LOG_LEVEL` falls back to the default
+ * rather than reaching winston. Colors stay off unless they are asked for explicitly.
+ */
+export const toLoggerConfig = ({ level, format, colorsEnabled }: RawLoggerConfig): LoggerConfig => ({
+    level: level && LOG_LEVELS.includes(level) ? (level as LogLevel) : undefined,
+    format: format && LOG_FORMATS.includes(format) ? (format as LogFormat) : undefined,
+    colorsEnabled: colorsEnabled === 'true',
+});
+
 export interface RequestConfig {
     url?: string;
     baseURL?: string;

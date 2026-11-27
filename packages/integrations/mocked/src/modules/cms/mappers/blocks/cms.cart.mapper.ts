@@ -27,6 +27,7 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
         discountLabel: 'Discount',
         shippingLabel: 'Shipping',
         freeLabel: 'Free',
+        activePromoCodesTitle: 'Active discount codes',
     },
     checkoutButton: {
         label: 'Proceed to checkout',
@@ -74,6 +75,7 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
         discountLabel: 'Rabatt',
         shippingLabel: 'Versand',
         freeLabel: 'Kostenlos',
+        activePromoCodesTitle: 'Aktive Rabattcodes',
     },
     checkoutButton: {
         label: 'Zur Kasse',
@@ -121,6 +123,7 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
         discountLabel: 'Rabat',
         shippingLabel: 'Dostawa',
         freeLabel: 'Gratis',
+        activePromoCodesTitle: 'Aktywne kody rabatowe',
     },
     checkoutButton: {
         label: 'Przejdź do kasy',

@@ -6,7 +6,12 @@ import { Loading } from '@o2s/ui/components/Feedback/Loading';
 import { FeatureSection } from './FeatureSection.server';
 import { FeatureSectionRendererProps } from './FeatureSection.types';
 
-export const FeatureSectionRenderer: React.FC<FeatureSectionRendererProps> = ({ id, accessToken, routing }) => {
+export const FeatureSectionRenderer: React.FC<FeatureSectionRendererProps> = ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (
@@ -19,7 +24,13 @@ export const FeatureSectionRenderer: React.FC<FeatureSectionRendererProps> = ({ 
                 </div>
             }
         >
-            <FeatureSection id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <FeatureSection
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

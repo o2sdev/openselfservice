@@ -12,24 +12,27 @@ import { ApiConfig } from '@/api-config';
 @Module({})
 export class ResourceModule {
     static register(config: ApiConfig): DynamicModule {
-        const service = config.integrations.resources.service;
-        const productService = config.integrations.products.service;
-        const controller = config.integrations.resources.controller || ResourceController;
-        const imports = config.integrations.resources.imports || [];
+        const integration = config.integrations.resources;
+        if (!integration?.service) {
+            return { module: ResourceModule };
+        }
+
+        const service = integration.service;
+        const productService = config.integrations.products?.service;
+        const controller = integration.controller || ResourceController;
+        const imports = integration.imports || [];
 
         const provider = {
             provide: ResourceService,
             useClass: service as Type,
         };
 
-        const productProvider = {
-            provide: ProductService,
-            useClass: productService as Type,
-        };
+        // Only re-provide ProductService when a `products` integration is configured.
+        const productProviders = productService ? [{ provide: ProductService, useClass: productService as Type }] : [];
 
         return {
             module: ResourceModule,
-            providers: [provider, productProvider],
+            providers: [provider, ...productProviders],
             imports: [HttpModule, ...imports],
             controllers: [controller],
             exports: [provider],

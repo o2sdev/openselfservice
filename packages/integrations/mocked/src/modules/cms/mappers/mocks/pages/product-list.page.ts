@@ -1,103 +1,21 @@
 import { CMS } from '@o2s/framework/modules';
 
-export const PAGE_PRODUCT_LIST_EN: CMS.Model.Page.Page = {
+export const productListPage = CMS.Pages.definePage({
     id: '20',
-    slug: '/products',
-    locale: 'en',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Products in Catalog',
-        description: 'Browse our product catalog',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
+    roles: [],
+    locales: {
+        en: { slug: '/products', seo: { title: 'Products in Catalog', description: 'Browse our product catalog' } },
+        pl: {
+            slug: '/produkty',
+            seo: { title: 'Katalog produktów', description: 'Przeglądaj nasz katalog produktów' },
+        },
+        de: {
+            slug: '/produkte',
+            seo: { title: 'Produkte im Katalog', description: 'Durchsuchen Sie unseren Produktkatalog' },
         },
     },
-    roles: [],
-    hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ProductListBlock',
-                    id: 'product-list-1',
-                },
-            ],
-        },
+        slots: { main: [{ __typename: 'ProductListBlock', id: 'product-list-1' }] },
     },
-};
-
-export const PAGE_PRODUCT_LIST_DE: CMS.Model.Page.Page = {
-    id: '20',
-    slug: '/produkte',
-    locale: 'de',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Produkte im Katalog',
-        description: 'Durchsuchen Sie unseren Produktkatalog',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-    roles: [],
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ProductListBlock',
-                    id: 'product-list-1',
-                },
-            ],
-        },
-    },
-};
-
-export const PAGE_PRODUCT_LIST_PL: CMS.Model.Page.Page = {
-    id: '20',
-    slug: '/produkty',
-    locale: 'pl',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Katalog produktów',
-        description: 'Przeglądaj nasz katalog produktów',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alt: 'Placeholder',
-        },
-    },
-    roles: [],
-    hasOwnTitle: false,
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ProductListBlock',
-                    id: 'product-list-1',
-                },
-            ],
-        },
-    },
-};
+});

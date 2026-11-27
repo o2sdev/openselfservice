@@ -10,11 +10,18 @@ export const PaymentsHistoryDynamic = dynamic(() =>
     import('./PaymentsHistory.client').then((module) => module.PaymentsHistoryPure),
 );
 
-export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, accessToken, locale, hasPriority }) => {
+export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({
+    isDraftModeEnabled,
+    id,
+    accessToken,
+    locale,
+    hasPriority,
+}) => {
     let data: Model.PaymentsHistoryBlock;
     try {
         data = await sdk.blocks.getPaymentsHistory(
             {
+                preview: isDraftModeEnabled,
                 id,
                 offset: 0,
                 limit: 1000,

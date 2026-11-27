@@ -1,7 +1,6 @@
 {
     "extends": "@o2s/typescript-config/frontend.json",
     "compilerOptions": {
-        "baseUrl": "./",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "paths": {

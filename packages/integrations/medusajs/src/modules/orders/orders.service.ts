@@ -103,7 +103,7 @@ export class OrdersService extends Orders.Service {
             limit: query.limit,
             offset: query.offset,
             status: query.status ? this.getMedusaStatus(query.status) : undefined,
-            order: query.sort ? query.sort : undefined,
+            order: query.sort ? this.mapSort(query.sort) : undefined,
             fields: this.additionalOrderListFields,
         };
 
@@ -113,6 +113,28 @@ export class OrdersService extends Orders.Service {
                 return handleHttpError(error);
             }),
         );
+    }
+
+    // Only persisted DB columns can be used for sorting — computed monetary fields
+    // (total, subtotal, shipping_total, etc.) are not sortable in MedusaJS.
+    private readonly sortFieldMap: Record<string, string> = {
+        id: 'id',
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+        status: 'status',
+    };
+
+    private mapSort(sort: string): string | undefined {
+        const lastUnderscore = sort.lastIndexOf('_');
+        if (lastUnderscore === -1) return undefined;
+
+        const field = sort.substring(0, lastUnderscore);
+        const direction = sort.substring(lastUnderscore + 1);
+
+        const medusaField = this.sortFieldMap[field];
+        if (!medusaField) return undefined;
+
+        return direction === 'DESC' ? `-${medusaField}` : medusaField;
     }
 
     private getMedusaStatus(status: string): OrderStatus | undefined {

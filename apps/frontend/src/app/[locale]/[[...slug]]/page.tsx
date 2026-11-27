@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { headers } from 'next/headers';
+import { draftMode, headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import React from 'react';
 
@@ -32,18 +32,23 @@ interface Props {
         locale: string;
         slug: Array<string>;
     }>;
+    /** Filter state of URL-driven blocks, so a filtered link renders filtered on the server. */
+    searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
     const session = await auth();
     const { locale, slug } = await params;
+    const query = await searchParams;
 
     const finalSlug = slug ? `/${slug.join('/')}` : '/';
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     try {
         const { data, meta } = await sdk.modules.getPage(
             {
                 slug: finalSlug,
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             session?.accessToken,
@@ -65,21 +70,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             noFollow: meta.seo.noFollow,
             translations: meta.locales,
             alternates: data?.alternativeUrls,
+            searchParams: query,
         });
     } catch (_error) {
         notFound();
     }
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
     const headersList = await headers();
     const session = await auth();
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     const { locale, slug } = await params;
+    const query = await searchParams;
 
     const init = await sdk.modules.getInit(
         {
-            referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
+            referrer: headersList.get('referrer') || (process.env.BASE_URL as string),
+            preview: isDraftModeEnabled,
         },
         { 'x-locale': locale },
         session?.accessToken,
@@ -91,6 +100,7 @@ export default async function Page({ params }: Props) {
         const { data, meta } = await sdk.modules.getPage(
             {
                 slug: slug ? `/${slug.join('/')}` : '/',
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             session?.accessToken,
@@ -148,7 +158,7 @@ export default async function Page({ params }: Props) {
                                         )}
                                     </div>
 
-                                    <PageTemplate slug={slug} data={data} />
+                                    <PageTemplate slug={slug} data={data} searchParams={query} />
                                 </main>
                             </div>
                         </div>

@@ -1,573 +1,100 @@
 import { CMS } from '@o2s/framework/modules';
 
-import { PAGE_CART_DE, PAGE_CART_EN, PAGE_CART_PL } from './mocks/pages/cart.page';
+import { cartPage } from './mocks/pages/cart.page';
 import {
-    PAGE_ACCESSORIES_DE,
-    PAGE_ACCESSORIES_EN,
-    PAGE_ACCESSORIES_PL,
-    PAGE_MAINTENANCE_DE,
-    PAGE_MAINTENANCE_EN,
-    PAGE_MAINTENANCE_PL,
-    PAGE_SAFETY_DE,
-    PAGE_SAFETY_EN,
-    PAGE_SAFETY_PL,
-    PAGE_TROUBLESHOOTING_DE,
-    PAGE_TROUBLESHOOTING_EN,
-    PAGE_TROUBLESHOOTING_PL,
-    PAGE_WARRANTY_AND_REPAIR_DE,
-    PAGE_WARRANTY_AND_REPAIR_EN,
-    PAGE_WARRANTY_AND_REPAIR_PL,
-    PAGE_ZENDESK_MAINTENANCE_DE,
-    PAGE_ZENDESK_MAINTENANCE_EN,
-    PAGE_ZENDESK_MAINTENANCE_PL,
-    PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE,
-    PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
-    PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
+    accessoriesPage,
+    maintenancePage,
+    safetyPage,
+    troubleshootingPage,
+    warrantyAndRepairPage,
+    zendeskMaintenancePage,
+    zendeskWarrantyAndRepairPage,
 } from './mocks/pages/category.page';
 import {
-    PAGE_CHECKOUT_BILLING_PAYMENT_DE,
-    PAGE_CHECKOUT_BILLING_PAYMENT_EN,
-    PAGE_CHECKOUT_BILLING_PAYMENT_PL,
-    PAGE_CHECKOUT_COMPANY_DATA_DE,
-    PAGE_CHECKOUT_COMPANY_DATA_EN,
-    PAGE_CHECKOUT_COMPANY_DATA_PL,
-    PAGE_CHECKOUT_SHIPPING_ADDRESS_DE,
-    PAGE_CHECKOUT_SHIPPING_ADDRESS_EN,
-    PAGE_CHECKOUT_SHIPPING_ADDRESS_PL,
-    PAGE_CHECKOUT_SUMMARY_DE,
-    PAGE_CHECKOUT_SUMMARY_EN,
-    PAGE_CHECKOUT_SUMMARY_PL,
+    checkoutBillingPaymentPage,
+    checkoutCompanyDataPage,
+    checkoutShippingAddressPage,
+    checkoutSummaryPage,
 } from './mocks/pages/checkout.page';
-import { PAGE_DASHBOARD_DE, PAGE_DASHBOARD_EN, PAGE_DASHBOARD_PL } from './mocks/pages/dashboard.page';
-import { PAGE_INVOICE_LIST_DE, PAGE_INVOICE_LIST_EN, PAGE_INVOICE_LIST_PL } from './mocks/pages/invoice-list.page';
-import {
-    PAGE_HELP_AND_SUPPORT_DE,
-    PAGE_HELP_AND_SUPPORT_EN,
-    PAGE_HELP_AND_SUPPORT_PL,
-} from './mocks/pages/knowledge-base.page';
-import {
-    PAGE_NOTIFICATION_DETAILS_DE,
-    PAGE_NOTIFICATION_DETAILS_EN,
-    PAGE_NOTIFICATION_DETAILS_PL,
-} from './mocks/pages/notification-details.page';
-import {
-    PAGE_NOTIFICATION_LIST_DE,
-    PAGE_NOTIFICATION_LIST_EN,
-    PAGE_NOTIFICATION_LIST_PL,
-} from './mocks/pages/notification-list.page';
-import {
-    PAGE_ORDER_CONFIRMATION_DE,
-    PAGE_ORDER_CONFIRMATION_EN,
-    PAGE_ORDER_CONFIRMATION_PL,
-} from './mocks/pages/order-confirmation.page';
-import { PAGE_ORDER_DETAILS_DE, PAGE_ORDER_DETAILS_EN, PAGE_ORDER_DETAILS_PL } from './mocks/pages/order-details.page';
-import { PAGE_ORDER_LIST_DE, PAGE_ORDER_LIST_EN, PAGE_ORDER_LIST_PL } from './mocks/pages/order-list.page';
-import {
-    PAGE_PRODUCT_DETAILS_DE,
-    PAGE_PRODUCT_DETAILS_EN,
-    PAGE_PRODUCT_DETAILS_PL,
-} from './mocks/pages/product-details.page';
-import { PAGE_PRODUCT_LIST_DE, PAGE_PRODUCT_LIST_EN, PAGE_PRODUCT_LIST_PL } from './mocks/pages/product-list.page';
-import {
-    PAGE_SERVICE_DETAILS_DE,
-    PAGE_SERVICE_DETAILS_EN,
-    PAGE_SERVICE_DETAILS_PL,
-} from './mocks/pages/service-details.page';
-import { PAGE_SERVICE_LIST_DE, PAGE_SERVICE_LIST_EN, PAGE_SERVICE_LIST_PL } from './mocks/pages/service-list.page';
-import {
-    PAGE_COMPLAINT_FORM_DE,
-    PAGE_COMPLAINT_FORM_EN,
-    PAGE_COMPLAINT_FORM_PL,
-    PAGE_CONTACT_US_DE,
-    PAGE_CONTACT_US_EN,
-    PAGE_CONTACT_US_PL,
-    PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
-    PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
-    PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
-} from './mocks/pages/surveyjs-forms.page';
-import {
-    PAGE_TICKET_DETAILS_DE,
-    PAGE_TICKET_DETAILS_EN,
-    PAGE_TICKET_DETAILS_PL,
-} from './mocks/pages/ticket-details.page';
-import { PAGE_TICKET_LIST_DE, PAGE_TICKET_LIST_EN, PAGE_TICKET_LIST_PL } from './mocks/pages/ticket-list.page';
-import { PAGE_USER_ACCOUNT_DE, PAGE_USER_ACCOUNT_EN, PAGE_USER_ACCOUNT_PL } from './mocks/pages/user-account.page';
+import { dashboardPage } from './mocks/pages/dashboard.page';
+import { invoiceListPage } from './mocks/pages/invoice-list.page';
+import { helpAndSupportPage } from './mocks/pages/knowledge-base.page';
+import { notificationDetailsPage } from './mocks/pages/notification-details.page';
+import { notificationListPage } from './mocks/pages/notification-list.page';
+import { orderConfirmationPage } from './mocks/pages/order-confirmation.page';
+import { orderDetailsPage } from './mocks/pages/order-details.page';
+import { orderListPage } from './mocks/pages/order-list.page';
+import { productDetailsPage } from './mocks/pages/product-details.page';
+import { productListPage } from './mocks/pages/product-list.page';
+import { serviceDetailsPage } from './mocks/pages/service-details.page';
+import { serviceListPage } from './mocks/pages/service-list.page';
+import { complaintFormPage, contactUsPage, requestDeviceMaintenancePage } from './mocks/pages/surveyjs-forms.page';
+import { ticketDetailsPage } from './mocks/pages/ticket-details.page';
+import { ticketListPage } from './mocks/pages/ticket-list.page';
+import { userAccountPage } from './mocks/pages/user-account.page';
 
-export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
-    switch (slug) {
-        case '/':
-            return locale === 'pl' ? PAGE_DASHBOARD_PL : locale === 'de' ? PAGE_DASHBOARD_DE : PAGE_DASHBOARD_EN;
+/**
+ * Every page this integration serves. Each one is declared once, with an entry per locale, and the
+ * registry derives the routing, the page list and the localized alternates from those declarations,
+ * so the three cannot list different pages.
+ */
+export const pages = CMS.Pages.createPageRegistry(
+    [
+        dashboardPage,
+        ticketListPage,
+        ticketDetailsPage,
+        notificationListPage,
+        notificationDetailsPage,
+        invoiceListPage,
+        userAccountPage,
+        serviceListPage,
+        serviceDetailsPage,
+        productListPage,
+        productDetailsPage,
+        contactUsPage,
+        complaintFormPage,
+        requestDeviceMaintenancePage,
+        orderListPage,
+        orderDetailsPage,
+        cartPage,
+        checkoutCompanyDataPage,
+        checkoutShippingAddressPage,
+        checkoutBillingPaymentPage,
+        checkoutSummaryPage,
+        orderConfirmationPage,
+        helpAndSupportPage,
+        warrantyAndRepairPage,
+        maintenancePage,
+        safetyPage,
+        accessoriesPage,
+        troubleshootingPage,
+        zendeskWarrantyAndRepairPage,
+        zendeskMaintenancePage,
+    ],
+    {
+        defaults: {
+            createdAt: '2025-01-01',
+            updatedAt: '2025-01-01',
+            seo: {
+                noIndex: false,
+                noFollow: false,
+                keywords: [],
+                image: {
+                    url: 'https://picsum.photos/150',
+                    width: 150,
+                    height: 150,
+                    alt: 'Placeholder',
+                },
+            },
+        },
+    },
+);
 
-        case '/zgloszenia':
-            return PAGE_TICKET_LIST_PL;
+export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => pages.mapPage(slug, locale);
 
-        case '/faelle':
-            return PAGE_TICKET_LIST_DE;
+// the pages with a dynamic slug are left out: their pattern is not a URL, and this list feeds the sitemap
+export const getAllPages = (locale: string): CMS.Model.Page.Page[] =>
+    pages.getAllPages(locale, { includeDynamic: false });
 
-        case '/cases':
-            return PAGE_TICKET_LIST_EN;
-
-        case slug.match(/\/cases\/.+/)?.[0]:
-            return {
-                ...PAGE_TICKET_DETAILS_EN,
-                slug: `/cases/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/faelle\/.+/)?.[0]:
-            return {
-                ...PAGE_TICKET_DETAILS_DE,
-                slug: `/faelle/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/zgloszenia\/.+/)?.[0]:
-            return {
-                ...PAGE_TICKET_DETAILS_PL,
-                slug: `/zgloszenia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-
-        case '/notifications':
-            return PAGE_NOTIFICATION_LIST_EN;
-        case '/benachrichtigungen':
-            return PAGE_NOTIFICATION_LIST_DE;
-        case '/powiadomienia':
-            return PAGE_NOTIFICATION_LIST_PL;
-
-        case slug.match(/\/notifications\/.+/)?.[0]:
-            return {
-                ...PAGE_NOTIFICATION_DETAILS_EN,
-                slug: `/notifications/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-
-        case slug.match(/\/benachrichtigungen\/.+/)?.[0]:
-            return {
-                ...PAGE_NOTIFICATION_DETAILS_DE,
-                slug: `/benachrichtigungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/powiadomienia\/.+/)?.[0]:
-            return {
-                ...PAGE_NOTIFICATION_DETAILS_PL,
-                slug: `/powiadomienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-
-        case '/invoices':
-            return PAGE_INVOICE_LIST_EN;
-        case '/rechnungen':
-            return PAGE_INVOICE_LIST_DE;
-        case '/rachunki':
-            return PAGE_INVOICE_LIST_PL;
-
-        case '/user-account':
-            return PAGE_USER_ACCOUNT_EN;
-        case '/benutzerkonto':
-            return PAGE_USER_ACCOUNT_DE;
-        case '/konto-uzytkownika':
-            return PAGE_USER_ACCOUNT_PL;
-
-        case '/services':
-            return PAGE_SERVICE_LIST_EN;
-        case '/dienstleistungen':
-            return PAGE_SERVICE_LIST_DE;
-        case '/uslugi':
-            return PAGE_SERVICE_LIST_PL;
-
-        case '/products':
-            return PAGE_PRODUCT_LIST_EN;
-        case '/produkte':
-            return PAGE_PRODUCT_LIST_DE;
-        case '/produkty':
-            return PAGE_PRODUCT_LIST_PL;
-
-        case slug.match(/\/products\/.+/)?.[0]:
-            return {
-                ...PAGE_PRODUCT_DETAILS_EN,
-                slug: `/products/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/produkte\/.+/)?.[0]:
-            return {
-                ...PAGE_PRODUCT_DETAILS_DE,
-                slug: `/produkte/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/produkty\/.+/)?.[0]:
-            return {
-                ...PAGE_PRODUCT_DETAILS_PL,
-                slug: `/produkty/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-
-        case slug.match(/\/services\/.+/)?.[0]:
-            return {
-                ...PAGE_SERVICE_DETAILS_EN,
-                slug: `/services/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/dienstleistungen\/.+/)?.[0]:
-            return {
-                ...PAGE_SERVICE_DETAILS_DE,
-                slug: `/dienstleistungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/uslugi\/.+/)?.[0]:
-            return {
-                ...PAGE_SERVICE_DETAILS_PL,
-                slug: `/uslugi/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case '/orders':
-            return PAGE_ORDER_LIST_EN;
-        case '/bestellungen':
-            return PAGE_ORDER_LIST_DE;
-        case '/zamowienia':
-            return PAGE_ORDER_LIST_PL;
-
-        case slug.match(/\/orders\/.+/)?.[0]:
-            return {
-                ...PAGE_ORDER_DETAILS_EN,
-                slug: `/orders/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/bestellungen\/.+/)?.[0]:
-            return {
-                ...PAGE_ORDER_DETAILS_DE,
-                slug: `/bestellungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/zamowienia\/.+/)?.[0]:
-            return {
-                ...PAGE_ORDER_DETAILS_PL,
-                slug: `/zamowienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-
-        case '/cart':
-            return PAGE_CART_EN;
-        case '/warenkorb':
-            return PAGE_CART_DE;
-        case '/koszyk':
-            return PAGE_CART_PL;
-
-        case '/checkout/company-data':
-            return PAGE_CHECKOUT_COMPANY_DATA_EN;
-        case '/kasse/firmendaten':
-            return PAGE_CHECKOUT_COMPANY_DATA_DE;
-        case '/zamowienie/dane-firmy':
-            return PAGE_CHECKOUT_COMPANY_DATA_PL;
-
-        case '/checkout/shipping-address':
-            return PAGE_CHECKOUT_SHIPPING_ADDRESS_EN;
-        case '/kasse/lieferadresse':
-            return PAGE_CHECKOUT_SHIPPING_ADDRESS_DE;
-        case '/zamowienie/adres-dostawy':
-            return PAGE_CHECKOUT_SHIPPING_ADDRESS_PL;
-
-        case '/checkout/billing-payment':
-            return PAGE_CHECKOUT_BILLING_PAYMENT_EN;
-        case '/kasse/rechnung-zahlung':
-            return PAGE_CHECKOUT_BILLING_PAYMENT_DE;
-        case '/zamowienie/platnosc':
-            return PAGE_CHECKOUT_BILLING_PAYMENT_PL;
-
-        case '/checkout/summary':
-            return PAGE_CHECKOUT_SUMMARY_EN;
-        case '/kasse/zusammenfassung':
-            return PAGE_CHECKOUT_SUMMARY_DE;
-        case '/zamowienie/podsumowanie':
-            return PAGE_CHECKOUT_SUMMARY_PL;
-
-        case slug.match(/\/order-confirmation\/.+/)?.[0]:
-        case slug.match(/\/potwierdzenie-zamowienia\/.+/)?.[0]:
-        case slug.match(/\/bestellbestaetigung\/.+/)?.[0]: {
-            const orderId = slug.match(/(.+)\/(.+)/)?.[2] ?? '';
-            const page =
-                locale === 'pl'
-                    ? PAGE_ORDER_CONFIRMATION_PL
-                    : locale === 'de'
-                      ? PAGE_ORDER_CONFIRMATION_DE
-                      : PAGE_ORDER_CONFIRMATION_EN;
-            const pathPrefix =
-                locale === 'pl'
-                    ? '/potwierdzenie-zamowienia'
-                    : locale === 'de'
-                      ? '/bestellbestaetigung'
-                      : '/order-confirmation';
-            return { ...page, slug: `${pathPrefix}/${orderId}`, updatedAt: '2025-01-01' };
-        }
-
-        case '/contact-us':
-            return PAGE_CONTACT_US_EN;
-        case '/kontaktiere-uns':
-            return PAGE_CONTACT_US_DE;
-        case '/skontaktuj-sie-z-nami':
-            return PAGE_CONTACT_US_PL;
-
-        case '/submit-complaint':
-            return PAGE_COMPLAINT_FORM_EN;
-        case '/einreichen-reklamacji':
-            return PAGE_COMPLAINT_FORM_DE;
-        case '/wyslij-reklamacje':
-            return PAGE_COMPLAINT_FORM_PL;
-
-        case '/request-device-maintenance':
-            return PAGE_REQUEST_DEVICE_MAINTENANCE_EN;
-        case '/geratewartungsanfrage':
-            return PAGE_REQUEST_DEVICE_MAINTENANCE_DE;
-        case '/zglos-naprawe-urzadzenia':
-            return PAGE_REQUEST_DEVICE_MAINTENANCE_PL;
-
-        case '/help-and-support':
-            return PAGE_HELP_AND_SUPPORT_EN;
-        case '/hilfe-und-support':
-            return PAGE_HELP_AND_SUPPORT_DE;
-        case '/pomoc-i-wsparcie':
-            return PAGE_HELP_AND_SUPPORT_PL;
-
-        case '/help-and-support/warranty-and-repair':
-            return PAGE_WARRANTY_AND_REPAIR_EN;
-        case '/hilfe-und-support/garantie-und-reparaturt':
-            return PAGE_WARRANTY_AND_REPAIR_DE;
-        case '/pomoc-i-wsparcie/gwarancja-i-naprawa':
-            return PAGE_WARRANTY_AND_REPAIR_PL;
-
-        case '/help-and-support/maintenance':
-            return PAGE_MAINTENANCE_EN;
-        case '/hilfe-und-support/wartung':
-            return PAGE_MAINTENANCE_DE;
-        case '/pomoc-i-wsparcie/konserwacja':
-            return PAGE_MAINTENANCE_PL;
-
-        case '/help-and-support/safety':
-            return PAGE_SAFETY_EN;
-        case '/hilfe-und-support/sicherheit':
-            return PAGE_SAFETY_DE;
-        case '/pomoc-i-wsparcie/bezpieczenstwo':
-            return PAGE_SAFETY_PL;
-
-        case '/help-and-support/accessories':
-            return PAGE_ACCESSORIES_EN;
-        case '/hilfe-und-support/zubehoer':
-            return PAGE_ACCESSORIES_DE;
-        case '/pomoc-i-wsparcie/akcesoria':
-            return PAGE_ACCESSORIES_PL;
-
-        case '/help-and-support/troubleshooting':
-            return PAGE_TROUBLESHOOTING_EN;
-        case '/hilfe-und-support/fehlerbehebung':
-            return PAGE_TROUBLESHOOTING_DE;
-        case '/pomoc-i-wsparcie/rozwiązywanie-problemów':
-            return PAGE_TROUBLESHOOTING_PL;
-
-        case '/help-and-support/33553543097245-Warranty-and-Repair':
-            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN;
-        case '/help-and-support/31170054759453-Maintenance':
-            return PAGE_ZENDESK_MAINTENANCE_EN;
-        case '/hilfe-und-support/33553543097245-Garantie-und-Reparatur':
-            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE;
-        case '/hilfe-und-support/31170054759453-Wartung':
-            return PAGE_ZENDESK_MAINTENANCE_DE;
-        case '/pomoc-i-wsparcie/33553543097245-Gwarancja-i-Naprawa':
-            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL;
-        case '/pomoc-i-wsparcie/31170054759453-Konserwacja':
-            return PAGE_ZENDESK_MAINTENANCE_PL;
-        default:
-            return undefined;
-    }
-};
-
-export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
-    switch (locale) {
-        case 'pl':
-            return [
-                PAGE_DASHBOARD_PL,
-                PAGE_TICKET_LIST_PL,
-                PAGE_TICKET_DETAILS_PL,
-                PAGE_NOTIFICATION_LIST_PL,
-                PAGE_NOTIFICATION_DETAILS_PL,
-                PAGE_INVOICE_LIST_PL,
-                PAGE_USER_ACCOUNT_PL,
-                PAGE_SERVICE_LIST_PL,
-                PAGE_SERVICE_DETAILS_PL,
-                PAGE_PRODUCT_LIST_PL,
-                PAGE_PRODUCT_DETAILS_PL,
-                PAGE_CONTACT_US_PL,
-                PAGE_COMPLAINT_FORM_PL,
-                PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
-                PAGE_ORDER_LIST_PL,
-                PAGE_ORDER_DETAILS_PL,
-                PAGE_CART_PL,
-                PAGE_CHECKOUT_COMPANY_DATA_PL,
-                PAGE_CHECKOUT_SHIPPING_ADDRESS_PL,
-                PAGE_CHECKOUT_BILLING_PAYMENT_PL,
-                PAGE_CHECKOUT_SUMMARY_PL,
-                PAGE_ORDER_CONFIRMATION_PL,
-                PAGE_WARRANTY_AND_REPAIR_PL,
-                PAGE_MAINTENANCE_PL,
-                PAGE_SAFETY_PL,
-                PAGE_ACCESSORIES_PL,
-                PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
-                PAGE_ZENDESK_MAINTENANCE_PL,
-            ];
-        case 'de':
-            return [
-                PAGE_DASHBOARD_DE,
-                PAGE_TICKET_LIST_DE,
-                PAGE_TICKET_DETAILS_DE,
-                PAGE_NOTIFICATION_LIST_DE,
-                PAGE_NOTIFICATION_DETAILS_DE,
-                PAGE_INVOICE_LIST_DE,
-                PAGE_USER_ACCOUNT_DE,
-                PAGE_SERVICE_LIST_DE,
-                PAGE_SERVICE_DETAILS_DE,
-                PAGE_PRODUCT_LIST_DE,
-                PAGE_PRODUCT_DETAILS_DE,
-                PAGE_CONTACT_US_DE,
-                PAGE_COMPLAINT_FORM_DE,
-                PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
-                PAGE_ORDER_LIST_DE,
-                PAGE_ORDER_DETAILS_DE,
-                PAGE_CART_DE,
-                PAGE_CHECKOUT_COMPANY_DATA_DE,
-                PAGE_CHECKOUT_SHIPPING_ADDRESS_DE,
-                PAGE_CHECKOUT_BILLING_PAYMENT_DE,
-                PAGE_CHECKOUT_SUMMARY_DE,
-                PAGE_ORDER_CONFIRMATION_DE,
-                PAGE_WARRANTY_AND_REPAIR_DE,
-                PAGE_MAINTENANCE_DE,
-                PAGE_SAFETY_DE,
-                PAGE_ACCESSORIES_DE,
-                PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE,
-                PAGE_ZENDESK_MAINTENANCE_DE,
-            ];
-        case 'en':
-            return [
-                PAGE_DASHBOARD_EN,
-                PAGE_TICKET_LIST_EN,
-                PAGE_TICKET_DETAILS_EN,
-                PAGE_NOTIFICATION_LIST_EN,
-                PAGE_NOTIFICATION_DETAILS_EN,
-                PAGE_INVOICE_LIST_EN,
-                PAGE_USER_ACCOUNT_EN,
-                PAGE_SERVICE_LIST_EN,
-                PAGE_SERVICE_DETAILS_EN,
-                PAGE_PRODUCT_LIST_EN,
-                PAGE_PRODUCT_DETAILS_EN,
-                PAGE_CONTACT_US_EN,
-                PAGE_COMPLAINT_FORM_EN,
-                PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
-                PAGE_ORDER_LIST_EN,
-                PAGE_ORDER_DETAILS_EN,
-                PAGE_CART_EN,
-                PAGE_CHECKOUT_COMPANY_DATA_EN,
-                PAGE_CHECKOUT_SHIPPING_ADDRESS_EN,
-                PAGE_CHECKOUT_BILLING_PAYMENT_EN,
-                PAGE_CHECKOUT_SUMMARY_EN,
-                PAGE_ORDER_CONFIRMATION_EN,
-                PAGE_WARRANTY_AND_REPAIR_EN,
-                PAGE_MAINTENANCE_EN,
-                PAGE_SAFETY_EN,
-                PAGE_ACCESSORIES_EN,
-                PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
-                PAGE_ZENDESK_MAINTENANCE_EN,
-            ];
-        default:
-            return [];
-    }
-};
-
-export const getAlternativePages = (id: string, slug: string, locale: string): CMS.Model.Page.Page[] => {
-    return [
-        PAGE_DASHBOARD_PL,
-        PAGE_TICKET_LIST_PL,
-        PAGE_TICKET_DETAILS_PL,
-        PAGE_NOTIFICATION_LIST_PL,
-        PAGE_NOTIFICATION_DETAILS_PL,
-        PAGE_INVOICE_LIST_PL,
-        PAGE_USER_ACCOUNT_PL,
-        PAGE_SERVICE_LIST_PL,
-        PAGE_PRODUCT_LIST_PL,
-        PAGE_DASHBOARD_DE,
-        PAGE_TICKET_LIST_DE,
-        PAGE_TICKET_DETAILS_DE,
-        PAGE_NOTIFICATION_LIST_DE,
-        PAGE_NOTIFICATION_DETAILS_DE,
-        PAGE_INVOICE_LIST_DE,
-        PAGE_USER_ACCOUNT_DE,
-        PAGE_SERVICE_LIST_DE,
-        PAGE_PRODUCT_LIST_DE,
-        PAGE_DASHBOARD_EN,
-        PAGE_TICKET_LIST_EN,
-        PAGE_TICKET_DETAILS_EN,
-        PAGE_NOTIFICATION_LIST_EN,
-        PAGE_NOTIFICATION_DETAILS_EN,
-        PAGE_INVOICE_LIST_EN,
-        PAGE_USER_ACCOUNT_EN,
-        PAGE_SERVICE_LIST_EN,
-        PAGE_PRODUCT_LIST_EN,
-        PAGE_SERVICE_DETAILS_EN,
-        PAGE_SERVICE_DETAILS_DE,
-        PAGE_SERVICE_DETAILS_PL,
-        PAGE_CONTACT_US_EN,
-        PAGE_CONTACT_US_DE,
-        PAGE_CONTACT_US_PL,
-        PAGE_COMPLAINT_FORM_EN,
-        PAGE_COMPLAINT_FORM_DE,
-        PAGE_COMPLAINT_FORM_PL,
-        PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
-        PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
-        PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
-        PAGE_ORDER_LIST_EN,
-        PAGE_ORDER_LIST_DE,
-        PAGE_ORDER_LIST_PL,
-        PAGE_ORDER_DETAILS_EN,
-        PAGE_ORDER_DETAILS_DE,
-        PAGE_ORDER_DETAILS_PL,
-        PAGE_CART_EN,
-        PAGE_CART_DE,
-        PAGE_CART_PL,
-        PAGE_CHECKOUT_COMPANY_DATA_EN,
-        PAGE_CHECKOUT_COMPANY_DATA_DE,
-        PAGE_CHECKOUT_COMPANY_DATA_PL,
-        PAGE_CHECKOUT_SHIPPING_ADDRESS_EN,
-        PAGE_CHECKOUT_SHIPPING_ADDRESS_DE,
-        PAGE_CHECKOUT_SHIPPING_ADDRESS_PL,
-        PAGE_CHECKOUT_BILLING_PAYMENT_EN,
-        PAGE_CHECKOUT_BILLING_PAYMENT_DE,
-        PAGE_CHECKOUT_BILLING_PAYMENT_PL,
-        PAGE_CHECKOUT_SUMMARY_EN,
-        PAGE_CHECKOUT_SUMMARY_DE,
-        PAGE_CHECKOUT_SUMMARY_PL,
-        PAGE_ORDER_CONFIRMATION_EN,
-        PAGE_ORDER_CONFIRMATION_DE,
-        PAGE_ORDER_CONFIRMATION_PL,
-        PAGE_WARRANTY_AND_REPAIR_EN,
-        PAGE_WARRANTY_AND_REPAIR_DE,
-        PAGE_WARRANTY_AND_REPAIR_PL,
-        PAGE_MAINTENANCE_EN,
-        PAGE_MAINTENANCE_DE,
-        PAGE_MAINTENANCE_PL,
-        PAGE_SAFETY_EN,
-        PAGE_SAFETY_DE,
-        PAGE_SAFETY_PL,
-        PAGE_ACCESSORIES_EN,
-        PAGE_ACCESSORIES_DE,
-        PAGE_ACCESSORIES_PL,
-        PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
-        PAGE_ZENDESK_MAINTENANCE_EN,
-        PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE,
-        PAGE_ZENDESK_MAINTENANCE_DE,
-        PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
-        PAGE_ZENDESK_MAINTENANCE_PL,
-    ]
-        .filter((page) => page.id === id)
-        .map((page) => mapPage(page.slug, locale)!)
-        .map((page) => {
-            return {
-                ...page,
-                slug: page.slug.replace('(.+)', slug.match(/(.+)\/(.+)/)?.[2] || ''),
-            };
-        });
-};
+export const getAlternativePages = (id: string, slug: string, locale: string): CMS.Model.Page.Page[] =>
+    pages.getAlternativePages(id, slug, locale);

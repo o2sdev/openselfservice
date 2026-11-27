@@ -26,6 +26,7 @@ export class CartBlock extends Block.Block {
         discountLabel?: string;
         shippingLabel?: string;
         freeLabel?: string;
+        activePromoCodesTitle?: string;
     };
     checkoutButton?: {
         label: string;

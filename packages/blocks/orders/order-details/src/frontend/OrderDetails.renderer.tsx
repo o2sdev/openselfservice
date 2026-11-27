@@ -7,6 +7,7 @@ import { OrderDetails } from './OrderDetails.server';
 import { OrderDetailsRendererProps } from './OrderDetails.types';
 
 export const OrderDetailsRenderer: React.FC<OrderDetailsRendererProps> = ({
+    isDraftModeEnabled,
     slug,
     id,
     accessToken,
@@ -47,6 +48,7 @@ export const OrderDetailsRenderer: React.FC<OrderDetailsRendererProps> = ({
         >
             <OrderDetails
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 orderId={slug[1]}
                 accessToken={accessToken}
                 locale={locale}

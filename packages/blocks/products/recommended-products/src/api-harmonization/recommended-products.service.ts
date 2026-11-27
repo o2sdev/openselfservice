@@ -25,6 +25,7 @@ export class RecommendedProductsService {
         const locale = headers[H.Locale] || 'en';
         const cmsBlock$ = this.cmsService.getBlockConfig<CMS.Model.RecommendedProductsBlock.RecommendedProductsBlock>({
             id: query.id,
+            preview: query.preview,
             locale,
             blockType: 'RecommendedProductsBlock',
         });

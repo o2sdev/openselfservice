@@ -19,7 +19,11 @@ export class ArticleService {
 
     getArticleBlock(query: GetArticleBlockQuery, headers: AppHeaders): Observable<ArticleBlock> {
         const cms = this.cmsService.getAppConfig({ locale: headers[H.Locale] });
-        const article = this.articlesService.getArticle({ slug: query.slug, locale: headers[H.Locale] });
+        const article = this.articlesService.getArticle({
+            slug: query.slug,
+            locale: headers[H.Locale],
+            preview: query.preview,
+        });
 
         return forkJoin([cms, article]).pipe(
             map(([cms, article]) => {

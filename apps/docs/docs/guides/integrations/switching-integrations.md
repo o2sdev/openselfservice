@@ -14,26 +14,45 @@ Thanks to the normalized data model, replacing an integration is completely tran
 
 ## Integration config
 
-Inside the `packages/configs/integrations/src/models` there are a number of files that represent all the framework modules of the `@o2s/framework` package. Inside each of them are local exports that define which integration is used for that module.
+All integration assignments are defined in a single file: `packages/configs/integrations/src/config.ts`. This file uses the `createIntegrationConfig` helper from `@o2s/framework/config` to map each framework domain to an integration module, with compile-time validation that each integration provides the domain it's assigned to.
 
-For example, the `packages/configs/integrations/src/models/cms.ts` file that is pre-configured with a [mocked integration](../../integrations/mocked/mocked.md) looks like this:
+The default configuration, pre-configured with a [mocked integration](../../integrations/mocked/mocked.md), looks like this:
 
-```typescript title="integration config for the cms module"
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
+```typescript title="packages/configs/integrations/src/config.ts"
+// Each domain has its own import alias. Swapping an integration is a single-line
+// change: point the domain's import at another package, and both the assignment
+// and the type export below follow that alias automatically.
+import * as CmsSource from '@o2s/integrations.mocked/integration';
+import * as TicketsSource from '@o2s/integrations.mocked/integration';
+import * as ArticlesSource from '@o2s/integrations.mocked/integration';
+import * as NotificationsSource from '@o2s/integrations.mocked/integration';
 
-import { ApiConfig } from '@o2s/framework/modules';
+// ... one import per domain
 
-export const CmsIntegrationConfig: ApiConfig['integrations']['cms'] = Config.cms!;
+import { createIntegrationConfig } from '@o2s/framework/config';
+import type { ApiConfig } from '@o2s/framework/modules';
 
-export import Service = Integration.CMS.Service;
-export import Request = Integration.CMS.Request;
-export import Model = Integration.CMS.Model;
+const result = createIntegrationConfig({
+    cms: CmsSource,
+    tickets: TicketsSource,
+    articles: ArticlesSource,
+    notifications: NotificationsSource,
+    // ... all other domains
+});
+
+export const integrations: ApiConfig['integrations'] = result.integrations;
+
+// Type exports for consumers. Each references the same alias as its assignment above.
+export import CMS = CmsSource.Integration.CMS;
+export import Tickets = TicketsSource.Integration.Tickets;
+export import Articles = ArticlesSource.Integration.Articles;
+// ... all other domains
 ```
 
-These files export four things:
+This file exports two things:
 
-1. Integration config, that is then propagated to the framework modules to let them know what implementation to actually use. This is done via the `apps/api-harmonization/app.config.ts` file that does not have to be modified at all when switching integrations.
-2. A service, that is used in other blocks and modules:
+1. Integration config (`integrations`), that is propagated to the framework modules via `apps/api-harmonization/app.config.ts`. This file does not need to be modified when switching integrations.
+2. Type namespaces (Services, Requests, Models) used in blocks and modules:
 
     ```typescript title="usage of services within page.service.ts"
     import { Articles, Auth, CMS } from '@o2s/configs.integrations';
@@ -67,23 +86,20 @@ These files export four things:
 
 In order to switch an integration for a given framework module (like a CMS) all that is required is to:
 
-1. Install a new integration as a dependency of the `api-harmonization` app:
+1. Install a new integration as a dependency of the `@o2s/configs.integrations` package:
 
     ```shell
     npm install @o2s/integrations.strapi-cms --workspace=@o2s/configs.integrations
     ```
 
-2. Replace the previous import with the newly installed package in ``packages/configs/integrations/src/models/cms.ts` (or any other module):
+2. Open `packages/configs/integrations/src/config.ts` and point the relevant domains' import lines at the new integration. To move `cms` and `articles` to Strapi, change those two import lines:
 
     ```typescript
-    import { Config, Integration } from '@o2s/integrations.mocked/integration';
+    import * as CmsSource from '@o2s/integrations.strapi-cms/integration';
+    import * as ArticlesSource from '@o2s/integrations.strapi-cms/integration';
     ```
 
-    into
-
-    ```typescript
-    import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
-    ```
+    That is all. The `cms` and `articles` assignments in `createIntegrationConfig` and the matching `export import` type exports both reference these aliases, so they switch together and cannot fall out of sync. If you point a domain at an integration that does not provide it, the project fails to compile.
 
 Once that is done, the application will start using the new integration.
 
@@ -100,4 +116,39 @@ While this may seem a bit cumbersome, it also gives much more control over which
 2. `Integration2` handles only tickets,
 
 and you want to use `Integration1` only for notifications, and `Integration2` for tickets.
+:::
+
+## Optional integrations (minimal setup)
+
+Only `cms` and `auth` are required. Every other domain is optional: you can leave it out of `createIntegrationConfig` entirely, and you do not need to fill it with a mocked integration. When a domain is omitted, its framework module registers as a no-op, so the application still boots.
+
+This lets you run a minimal setup with no mocked integration. For example, a CMS-backed portal that only needs a CMS and an auth integration:
+
+```typescript title="packages/configs/integrations/src/config.ts"
+import * as AuthSource from '@o2s/integrations.mycompany-auth/integration';
+import * as CmsSource from '@o2s/integrations.strapi-cms/integration';
+
+import { createIntegrationConfig } from '@o2s/framework/config';
+import type { ApiConfig } from '@o2s/framework/modules';
+
+const result = createIntegrationConfig({
+    cms: CmsSource,
+    auth: AuthSource,
+    // no other domains needed
+});
+
+export const integrations: ApiConfig['integrations'] = result.integrations;
+
+export import CMS = CmsSource.Integration.CMS;
+export import Auth = AuthSource.Integration.Auth;
+```
+
+Notes:
+
+- Only register the framework base modules and blocks for the domains you actually configure. A block that injects, say, `Orders.Service` still needs the `orders` integration present.
+- Some integrations depend on another domain. For example, the MedusaJS `resources` service also uses `products`, so if you configure MedusaJS `resources` you must configure `products` too (MedusaJS provides both). A missing dependency fails fast at startup with a clear dependency-resolution error.
+- `cache` is optional too. When it is omitted, a pass-through default cache is used, so integrations that depend on `Cache.Service` (such as the Strapi and Contentful CMS integrations) keep working. Configure a cache integration (for example `@o2s/integrations.redis`) when you want real caching.
+
+:::note
+Omitting a required core domain (`cms` or `auth`) is a compile-time error, and the server also fails fast at startup with a clear message.
 :::

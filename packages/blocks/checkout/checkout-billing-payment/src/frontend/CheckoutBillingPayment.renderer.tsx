@@ -7,6 +7,7 @@ import { CheckoutBillingPayment } from './CheckoutBillingPayment.server';
 import { CheckoutBillingPaymentRendererProps } from './CheckoutBillingPayment.types';
 
 export const CheckoutBillingPaymentRenderer: React.FC<CheckoutBillingPaymentRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -30,7 +31,13 @@ export const CheckoutBillingPaymentRenderer: React.FC<CheckoutBillingPaymentRend
                 </div>
             }
         >
-            <CheckoutBillingPayment id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <CheckoutBillingPayment
+                id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

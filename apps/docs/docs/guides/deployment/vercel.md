@@ -20,11 +20,11 @@ This section covers deploying the Next.js `frontend` app to Vercel. The NestJS A
 
 Add these variables in Project Settings → Environment Variables for Preview and Production:
 
-- `NEXT_PUBLIC_BASE_URL` → your Vercel domain, e.g. `https://your-app.vercel.app`
+- `BASE_URL` → your Vercel domain, e.g. `https://your-app.vercel.app`
 - `NEXT_PUBLIC_API_URL` → your public API URL, e.g. `https://api.your-domain.com/api`
-- `NEXT_PUBLIC_API_URL_INTERNAL` → optional, for SSR-to-API traffic inside your network; for Vercel, use the same as `NEXT_PUBLIC_API_URL` unless you route via private networking
+- `API_URL_INTERNAL` → optional, for SSR-to-API traffic inside your network; for Vercel, use the same as `NEXT_PUBLIC_API_URL` unless you route via private networking
 - `NEXT_PUBLIC_DEFAULT_LOCALE`, `NEXT_PUBLIC_SUPPORTED_LOCALES`
-- Optional logging: `NEXT_PUBLIC_LOG_LEVEL`, `NEXT_PUBLIC_LOG_FORMAT`, `NEXT_PUBLIC_LOG_COLORS_ENABLED`
+- Optional logging: `LOG_LEVEL`, `LOG_FORMAT`, `LOG_COLORS_ENABLED`
 - Auth (optional): `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_SECRET`, `AUTH_DEFAULT_USER_ROLE`
 
 ## Notes
@@ -37,6 +37,6 @@ Add these variables in Project Settings → Environment Variables for Preview an
 
 After the first deployment:
 
-1. Visit the Vercel URL (`NEXT_PUBLIC_BASE_URL`) and confirm app loads.
+1. Visit the Vercel URL (`BASE_URL`) and confirm app loads.
 2. Verify client→API requests target `NEXT_PUBLIC_API_URL` and succeed (200s).
 3. Confirm i18n defaults via `NEXT_PUBLIC_DEFAULT_LOCALE` and `NEXT_PUBLIC_SUPPORTED_LOCALES`.

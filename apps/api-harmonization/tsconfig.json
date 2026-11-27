@@ -2,9 +2,13 @@
     "extends": "@o2s/typescript-config/api.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "baseUrl": "./",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        // SWC (nest build) requires an explicit baseUrl on Windows; this app builds with SWC,
+        // not the native TS compiler, so baseUrl stays here (ignoreDeprecations silences the
+        // TS 6 deprecation warning emitted by the `tsc --noEmit` lint).
+        "baseUrl": "./",
+        "ignoreDeprecations": "6.0",
         "paths": {
             "@o2s/api-harmonization/models/*": ["./src/models/*"],
             "@o2s/api-harmonization/blocks": ["./src/blocks"],

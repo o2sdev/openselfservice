@@ -7,6 +7,7 @@ import { TicketRecent } from './TicketRecent.server';
 import { TicketRecentRendererProps } from './TicketRecent.types';
 
 export const TicketRecentRenderer: React.FC<TicketRecentRendererProps> = ({
+    isDraftModeEnabled,
     id,
     accessToken,
     routing,
@@ -26,6 +27,7 @@ export const TicketRecentRenderer: React.FC<TicketRecentRendererProps> = ({
         >
             <TicketRecent
                 id={id}
+                isDraftModeEnabled={isDraftModeEnabled}
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}

@@ -1,0 +1,12 @@
+{
+    "extends": "@o2s/typescript-config/base.json",
+    "compilerOptions": {
+        "jsx": "preserve",
+        "noEmit": true
+    },
+    "include": [
+        "./**/*",
+        "../packages/ui/src/**/*",
+        "../packages/blocks/**/src/**/*"
+    ]
+}

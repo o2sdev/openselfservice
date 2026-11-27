@@ -1,25 +1,11 @@
-// this unused import is necessary for TypeScript to properly resolve API methods
-import { extendSdk, getSdk } from '@o2s/framework/sdk';
+import { getSharedSdk } from '@o2s/utils.frontend/sdk';
+
+import { type Sdk, extendSdk } from '@o2s/framework/sdk';
 
 import { bentoGrid } from './bento-grid';
 
-const API_URL =
-    (typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL) ||
-    process.env.NEXT_PUBLIC_API_URL;
+const internalSdk = getSharedSdk();
 
-const internalSdk = getSdk({
-    apiUrl: API_URL!,
-    logger: {
-        // @ts-expect-error missing types
-        level: process.env.NEXT_PUBLIC_LOG_LEVEL,
-        // @ts-expect-error missing types
-        format: process.env.NEXT_PUBLIC_LOG_FORMAT,
-        colorsEnabled: process.env.NEXT_PUBLIC_LOG_COLORS_ENABLED === 'true',
-    },
-});
-
-export const sdk = extendSdk(internalSdk, {
-    blocks: {
-        getBentoGrid: bentoGrid(internalSdk).blocks.getBentoGrid,
-    },
-});
+// the type is spelled out because the emitted declaration cannot name the types that the
+// methods of the factory pull in from other packages (TS2883)
+export const sdk: Sdk & ReturnType<typeof bentoGrid> = extendSdk(internalSdk, bentoGrid(internalSdk));

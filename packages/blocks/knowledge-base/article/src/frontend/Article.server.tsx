@@ -8,11 +8,19 @@ import { ArticleProps } from './Article.types';
 
 export const ArticleDynamic = dynamic(() => import('./Article.client').then((module) => module.ArticlePure));
 
-export const Article: React.FC<ArticleProps> = async ({ slug, accessToken, locale, routing, hasPriority }) => {
+export const Article: React.FC<ArticleProps> = async ({
+    isDraftModeEnabled,
+    slug,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     let data: Model.ArticleBlock;
     try {
         data = await sdk.blocks.getArticle(
             {
+                preview: isDraftModeEnabled,
                 slug,
             },
             { 'x-locale': locale },

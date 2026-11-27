@@ -14,9 +14,7 @@ export type SurveyState = {
 };
 
 export type SurveyAction =
-    | { type: 'LOAD' }
-    | { type: 'ERROR'; payload: string }
-    | { type: 'SET_MODEL'; payload: Model };
+    { type: 'LOAD' } | { type: 'ERROR'; payload: string } | { type: 'SET_MODEL'; payload: Model };
 
 export interface ErrorLabels {
     title: string;

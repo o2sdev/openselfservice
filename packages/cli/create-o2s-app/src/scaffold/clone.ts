@@ -3,7 +3,7 @@ import cliProgress from 'cli-progress';
 import * as fs from 'fs-extra';
 import * as os from 'os';
 import * as path from 'path';
-import simpleGit from 'simple-git';
+import { simpleGit } from 'simple-git';
 
 export const cloneRepository = async (): Promise<string> => {
     const tempDir = path.join(os.tmpdir(), `openselfservice-${Date.now()}`);

@@ -43,7 +43,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ breadcrumbs, LinkCompo
                             </BreadcrumbSeparator>
                         </React.Fragment>
                     ) : (
-                        <BreadcrumbItem key={item.slug}>
+                        <BreadcrumbItem key={`${item.slug ?? 'page'}-${index}`}>
                             <BreadcrumbPage>{item.label}</BreadcrumbPage>
                         </BreadcrumbItem>
                     ),

@@ -11,6 +11,7 @@ export const PaymentsSummaryDynamic = dynamic(() =>
 );
 
 export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({
+    isDraftModeEnabled,
     id,
     accessToken,
     locale,
@@ -21,6 +22,7 @@ export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({
     try {
         data = await sdk.blocks.getPaymentsSummary(
             {
+                preview: isDraftModeEnabled,
                 id,
                 limit: 1000,
                 offset: 0,

@@ -4,6 +4,8 @@ import { CMS } from '@o2s/framework/modules';
 
 import { GetComponentQuery } from '@/generated/strapi';
 
+import { SourceMapContext, createFieldEncoder } from '../../live-preview/encode-source-map';
+
 export const mapArticleListBlock = (
     data: GetComponentQuery,
     _baseUrl: string,
@@ -34,4 +36,22 @@ export const mapArticleListBlock = (
     }
 
     throw new NotFoundException();
+};
+
+/**
+ * Live Preview: encode Content Source Maps into the normalized ArticleList block.
+ * Only the block's own same-document text (`title`, `description`). The `category`/`pages`/
+ * `parent` relations and the resolved article list are cross-document, so not encoded here.
+ */
+export const encodeArticleListBlock = (
+    block: CMS.Model.ArticleListBlock.ArticleListBlock,
+    ctx: SourceMapContext,
+): CMS.Model.ArticleListBlock.ArticleListBlock => {
+    const enc = createFieldEncoder(ctx);
+
+    return {
+        ...block,
+        title: enc(block.title, 'title'),
+        description: enc(block.description, 'description', 'richtext'),
+    };
 };

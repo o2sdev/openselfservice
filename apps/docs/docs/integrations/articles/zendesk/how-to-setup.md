@@ -22,39 +22,22 @@ This command installs the integration package in the configs workspace, ensuring
 
 After installing the package, you need to configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Zendesk instead of the default mocked integration.
 
-### Step 1: Update the articles integration config
+### Step 1: Update the integration config
 
-Open the file `packages/configs/integrations/src/models/articles.ts` and replace the import:
+All integration assignments are configured in a single file: `packages/configs/integrations/src/config.ts`. Each domain has its own import alias (for example `ArticlesSource`), shared by both the `createIntegrationConfig` assignment and the `export import` type export, so switching a domain is a single-line change.
 
-**Before (using mocked integration):**
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
-```
-
-**After (using Zendesk integration):**
+Find the `articles` domain's import line and point it at Zendesk:
 
 ```typescript
-import { Config, Integration } from '@o2s/integrations.zendesk/integration';
+// before: import * as ArticlesSource from '@o2s/integrations.mocked/integration';
+import * as ArticlesSource from '@o2s/integrations.zendesk/integration';
 ```
 
-The complete file should look like this:
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.zendesk/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const ArticlesIntegrationConfig: ApiConfig['integrations']['articles'] = Config.articles!;
-
-export import Service = Integration.Articles.Service;
-export import Request = Integration.Articles.Request;
-export import Model = Integration.Articles.Model;
-```
+That is the only change needed: the `articles: ArticlesSource` assignment and the `export import Articles = ArticlesSource.Integration.Articles` type export both follow the same alias. Assigning an integration to a domain it does not provide is a compile error.
 
 ### Step 2: Verify AppConfig
 
-The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference `Articles.ArticlesIntegrationConfig`. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
+The `AppConfig` in `apps/api-harmonization/src/app.config.ts` already imports from `@o2s/configs.integrations`. You don't need to modify this file.
 
 ## Set environment variables
 

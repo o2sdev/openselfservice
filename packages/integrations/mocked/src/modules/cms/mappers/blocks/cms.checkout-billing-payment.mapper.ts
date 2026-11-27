@@ -28,6 +28,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_EN: CMS.Model.CheckoutBillingPaymentBlock.Ch
         discountLabel: 'Discount',
         shippingLabel: 'Shipping',
         freeLabel: 'Free',
+        activePromoCodesTitle: 'Active discount codes',
     },
     stepIndicator: {
         steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
@@ -65,6 +66,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_DE: CMS.Model.CheckoutBillingPaymentBlock.Ch
         discountLabel: 'Rabatt',
         shippingLabel: 'Versand',
         freeLabel: 'Kostenlos',
+        activePromoCodesTitle: 'Aktive Rabattcodes',
     },
     stepIndicator: {
         steps: ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung'],
@@ -102,6 +104,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_PL: CMS.Model.CheckoutBillingPaymentBlock.Ch
         discountLabel: 'Rabat',
         shippingLabel: 'Dostawa',
         freeLabel: 'Gratis',
+        activePromoCodesTitle: 'Aktywne kody rabatowe',
     },
     stepIndicator: {
         steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],

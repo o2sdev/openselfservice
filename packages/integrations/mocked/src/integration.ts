@@ -21,7 +21,7 @@ import { Service as UserService } from './modules/users';
 
 export * as Integration from './modules/index';
 
-export const Config: Partial<ApiConfig['integrations']> = {
+export const Config = {
     cms: {
         name: 'mocked',
         service: CmsService,
@@ -100,4 +100,4 @@ export const Config: Partial<ApiConfig['integrations']> = {
         name: 'mocked',
         service: AuthService,
     },
-};
+} satisfies Partial<ApiConfig['integrations']>;

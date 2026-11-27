@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Optional } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Articles, Auth, CMS } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
@@ -18,7 +18,10 @@ export class PageService {
     constructor(
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
-        private readonly articlesService: Articles.Service,
+        // `articles` is an optional integration; absent when the project omits it.
+        // Use an explicit @Inject token so the (optional, possibly-undefined) type does not erase
+        // the DI metadata Nest resolves the provider by.
+        @Optional() @Inject(Articles.Service) private readonly articlesService: Articles.Service | undefined,
         private readonly authService: Auth.Service,
     ) {
         this.SUPPORTED_LOCALES = this.config.get('SUPPORTED_LOCALES').split(',') as string[];
@@ -49,52 +52,62 @@ export class PageService {
     getInit(query: GetInitQuery, headers: AppHeaders): Observable<Init> {
         const userRoles = this.authService.getRoles(headers[H.Authorization]);
 
-        return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers[H.Locale] }).pipe(
-            switchMap((appConfig) => {
-                const header = this.cmsService.getHeader({
-                    id: appConfig.header || '',
-                    locale: headers[H.Locale],
-                });
+        return this.cmsService
+            .getAppConfig({ referrer: query.referrer, locale: headers[H.Locale], preview: query.preview })
+            .pipe(
+                switchMap((appConfig) => {
+                    const header = this.cmsService.getHeader({
+                        id: appConfig.header || '',
+                        locale: headers[H.Locale],
+                        preview: query.preview,
+                    });
 
-                const footer = this.cmsService.getFooter({
-                    id: appConfig.footer || '',
-                    locale: headers[H.Locale],
-                });
+                    const footer = this.cmsService.getFooter({
+                        id: appConfig.footer || '',
+                        locale: headers[H.Locale],
+                        preview: query.preview,
+                    });
 
-                return forkJoin([header, footer]).pipe(
-                    map(([header, footer]) => {
-                        return mapInit(
-                            appConfig.locales,
-                            header,
-                            footer,
-                            appConfig.labels,
-                            appConfig.themes,
-                            userRoles,
-                        );
-                    }),
-                );
-            }),
-        );
+                    return forkJoin([header, footer]).pipe(
+                        map(([header, footer]) => {
+                            return mapInit(
+                                appConfig.locales,
+                                header,
+                                footer,
+                                appConfig.labels,
+                                appConfig.themes,
+                                userRoles,
+                            );
+                        }),
+                    );
+                }),
+            );
     }
 
     getPage(query: GetPageQuery, headers: AppHeaders): Observable<Page | NotFound> {
-        const page = this.cmsService.getPage({ slug: query.slug, locale: headers[H.Locale] });
+        const page = this.cmsService.getPage({ slug: query.slug, locale: headers[H.Locale], preview: query.preview });
         const userRoles = this.authService.getRoles(headers[H.Authorization]);
 
         return forkJoin([page]).pipe(
             concatMap(([page]) => {
                 if (!page) {
-                    return this.articlesService.getArticle({ slug: query.slug, locale: headers[H.Locale] }).pipe(
-                        concatMap((article) => {
-                            if (!article) {
-                                throw new NotFoundException();
-                            }
+                    if (!this.articlesService) {
+                        throw new NotFoundException();
+                    }
 
-                            Auth.Service.requireRoles(article.roles, userRoles);
+                    return this.articlesService
+                        .getArticle({ slug: query.slug, locale: headers[H.Locale], preview: query.preview })
+                        .pipe(
+                            concatMap((article) => {
+                                if (!article) {
+                                    throw new NotFoundException();
+                                }
 
-                            return this.processArticle(article, query, headers);
-                        }),
-                    );
+                                Auth.Service.requireRoles(article.roles, userRoles);
+
+                                return this.processArticle(article, query, headers);
+                            }),
+                        );
                 }
 
                 Auth.Service.requireRoles(page.roles, userRoles);
@@ -118,7 +131,7 @@ export class PageService {
     };
 
     private processArticle = (article: Articles.Model.Article, query: GetPageQuery, headers: AppHeaders) => {
-        if (!article.category) {
+        if (!article.category || !this.articlesService) {
             throw new NotFoundException();
         }
 

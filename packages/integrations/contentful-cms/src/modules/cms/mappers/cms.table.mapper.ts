@@ -9,12 +9,10 @@ export const mapTable = <T>(component?: TableFragment): Models.DataTable.DataTab
 
     return {
         columns:
-            component.columnsCollection?.items.map(
-                (column, index): Models.DataTable.DataTableColumn<T> => ({
-                    id: (column.field || String(index)) as keyof T,
-                    title: column.title || '',
-                }),
-            ) || [],
+            component.columnsCollection?.items.map((column, index): Models.DataTable.DataTableColumn<T> => ({
+                id: (column.field || String(index)) as keyof T,
+                title: column.title || '',
+            })) || [],
         actions: component.actionsTitle
             ? {
                   title: component.actionsTitle,
